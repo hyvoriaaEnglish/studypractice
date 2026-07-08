@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reading 5 - Behavioral Psychology</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>
+        Reading 5 - Behavioral Psychology: How Rewards Shape Human Actions
+      </h1>
+
+      <div class="passage">
+        <h2>Behavioral Psychology: How Rewards Shape Human Actions</h2>
+
+        <p>
+          Behavioral psychology is a branch of psychology that focuses on
+          observable actions rather than internal thoughts or emotions.
+          According to behaviorists, human behavior is largely influenced by
+          interactions with the environment. One of the central principles of
+          behavioral psychology is reinforcement. When a behavior is followed by
+          a reward, individuals are more likely to repeat that behavior in the
+          future. For example, students who receive praise for performing well
+          in school may become more motivated to study.
+        </p>
+
+        <p>
+          However, rewards do not always produce the desired outcome.
+          Researchers have found that excessive external rewards can sometimes
+          reduce intrinsic motivation—the internal desire to perform an activity
+          for its own sake. If individuals become overly dependent on rewards,
+          they may lose interest in the activity once the incentives are
+          removed. Consequently, psychologists argue that while rewards can be
+          effective in modifying behavior, they should be used carefully and in
+          combination with strategies that foster genuine interest and long-term
+          engagement.
+        </p>
+      </div>
+
+      <div id="quiz"></div>
+    </div>
+
+    <script>
+      const questions = [
+        {
+          q: "1. What is the main idea of the passage?",
+          a: [
+            "Human behavior is determined entirely by emotions.",
+            "Rewards always improve performance.",
+            "Behavioral psychology examines how rewards influence behavior, but rewards can also have limitations.",
+            "Students study only because of praise.",
+          ],
+          correct: 2,
+        },
+
+        {
+          q: "2. According to the passage, what is reinforcement?",
+          a: [
+            "The process of analyzing emotions.",
+            "The tendency for a behavior to be repeated after being rewarded.",
+            "A method of eliminating bad habits.",
+            "A psychological disorder.",
+          ],
+          correct: 1,
+        },
+
+        {
+          q: "3. The word 'observable' in paragraph 1 is closest in meaning to:",
+          a: [
+            "measurable or visible",
+            "emotional",
+            "unpredictable",
+            "controversial",
+          ],
+          correct: 0,
+        },
+
+        {
+          q: "4. What can be inferred about students who receive praise for good performance?",
+          a: [
+            "They will always achieve perfect grades.",
+            "Praise may increase their motivation to continue studying.",
+            "They are motivated only by money.",
+            "They are less interested in learning.",
+          ],
+          correct: 1,
+        },
+
+        {
+          q: "5. What does 'that behavior' in paragraph 1 refer to?",
+          a: [
+            "Receiving praise",
+            "Interacting with the environment",
+            "The behavior that was rewarded",
+            "Studying psychology",
+          ],
+          correct: 2,
+        },
+
+        {
+          q: "6. The word 'intrinsic' is closest in meaning to:",
+          a: ["external", "natural and internal", "financial", "temporary"],
+          correct: 1,
+        },
+
+        {
+          q: "7. Why does the author discuss intrinsic motivation?",
+          a: [
+            "To challenge the entire field of behavioral psychology.",
+            "To demonstrate a potential drawback of relying too heavily on rewards.",
+            "To prove that rewards never work.",
+            "To explain why people dislike incentives.",
+          ],
+          correct: 1,
+        },
+
+        {
+          q: "8. What is the primary function of the second paragraph?",
+          a: [
+            "To provide an example of reinforcement.",
+            "To explain why behavioral psychology is incorrect.",
+            "To discuss the limitations of external rewards.",
+            "To describe a famous psychological experiment.",
+          ],
+          correct: 2,
+        },
+
+        {
+          q: "9. Which statement would the author most likely agree with?",
+          a: [
+            "Rewards should never be used in education.",
+            "Internal motivation is irrelevant to long-term success.",
+            "Effective behavior change often requires more than simply offering rewards.",
+            "People are motivated in exactly the same way.",
+          ],
+          correct: 2,
+        },
+
+        {
+          q: "10. Which of the following best summarizes the passage?",
+          a: [
+            "Behavioral psychology focuses on emotions rather than actions.",
+            "Rewards can strengthen behavior, but overreliance on them may undermine intrinsic motivation.",
+            "Students perform well only when they are praised.",
+            "Psychologists disagree about whether behavior can be influenced.",
+          ],
+          correct: 1,
+        },
+      ];
+
+      const quiz = document.getElementById("quiz");
+
+      questions.forEach((item, index) => {
+        let html = `<div class="question">
+<h3>${item.q}</h3>`;
+
+        item.a.forEach((choice, i) => {
+          const letter = ["A", "B", "C", "D"][i];
+
+          html += `
+<button class="option"
+onclick="check(this,${i === item.correct},'ans${index}')">
+${letter}. ${choice}
+</button>
+`;
+        });
+
+        html += `
+<div id="ans${index}" class="answer"></div>
+</div>
+<hr>
+`;
+
+        quiz.innerHTML += html;
+      });
+
+      function check(button, correct, id) {
+        let buttons = button.parentElement.querySelectorAll(".option");
+
+        buttons.forEach((btn) => (btn.disabled = true));
+
+        if (correct) {
+          button.classList.add("correct");
+          document.getElementById(id).innerHTML = "✅ Correct!";
+        } else {
+          button.classList.add("wrong");
+          document.getElementById(id).innerHTML =
+            "❌ Wrong! The correct answer is highlighted.";
+
+          buttons.forEach((btn) => {
+            if (btn.getAttribute("onclick").includes("true")) {
+              btn.classList.add("correct");
+            }
+          });
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Reading 10 - Existential Crisis</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>
+        Reading 10 - Existential Crisis: When People Lose Their Sense of
+        Direction
+      </h1>
+
+      <div
+        class="passage"
+        style="background: #f3e5f5; border-left: 6px solid #8e24aa"
+      >
+        <h2>Existential Crisis: When People Lose Their Sense of Direction</h2>
+
+        <p>
+          An existential crisis is a period during which individuals question
+          the meaning, purpose, or value of their lives. It often occurs during
+          major life transitions, such as entering adulthood, changing careers,
+          or experiencing significant personal loss. During these periods,
+          people may feel uncertain about their goals, identity, or future.
+          Although such feelings can be distressing, psychologists suggest that
+          existential crises are a natural part of human development and
+          self-reflection.
+        </p>
+
+        <p>
+          While an existential crisis may initially create anxiety and
+          confusion, it can also lead to personal growth. By confronting
+          difficult questions about their values and aspirations, individuals
+          may gain a deeper understanding of themselves and develop a clearer
+          sense of purpose. However, if feelings of hopelessness or detachment
+          persist for an extended period, professional support may be
+          beneficial. Consequently, many psychologists view existential crises
+          not merely as periods of suffering but as opportunities for
+          transformation and self-discovery.
+        </p>
+      </div>
+
+      <div id="quiz"></div>
+    </div>
+
+    <script>
+      const questions = [
+        {
+          q: "1. What is the main purpose of the passage?",
+          a: [
+            "To explain why people should avoid major life changes.",
+            "To describe existential crises and their potential effects on personal development.",
+            "To argue that anxiety is always harmful.",
+            "To compare different psychological disorders.",
+          ],
+          correct: 1,
+        },
+
+        {
+          q: "2. According to the passage, when might an existential crisis occur?",
+          a: [
+            "Only after traumatic events.",
+            "Exclusively during old age.",
+            "During significant life transitions.",
+            "Only among people with mental illnesses.",
+          ],
+          correct: 2,
+        },
+
+        {
+          q: "3. The word 'distressing' in paragraph 1 is closest in meaning to:",
+          a: [
+            "comforting",
+            "confusing and upsetting",
+            "beneficial",
+            "predictable",
+          ],
+          correct: 1,
+        },
+
+        {
+          q: "4. What can be inferred about existential crises from the passage?",
+          a: [
+            "They are necessarily signs of psychological disorders.",
+            "They may play a role in personal development.",
+            "They can be completely avoided through planning.",
+            "They affect only young adults.",
+          ],
+          correct: 1,
+        },
+
+        {
+          q: "5. Which detail best supports the idea that existential crises can have positive outcomes?",
+          a: [
+            "People may feel uncertain about their goals, identity, or future.",
+            "It often occurs during major life transitions.",
+            "Individuals may gain a deeper understanding of themselves and develop a clearer sense of purpose.",
+            "Professional support may be beneficial.",
+          ],
+          correct: 2,
+        },
+
+        {
+          q: "6. Why does the author mention professional support in the second paragraph?",
+          a: [
+            "To suggest that all existential crises require therapy.",
+            "To acknowledge that prolonged distress may need additional assistance.",
+            "To criticize self-reflection.",
+            "To define hopelessness.",
+          ],
+          correct: 1,
+        },
+
+        {
+          q: "7. What is the primary function of the second paragraph?",
+          a: [
+            "To explain the causes of existential crises.",
+            "To discuss both the challenges and potential benefits of existential crises.",
+            "To compare existential crises with depression.",
+            "To provide historical examples.",
+          ],
+          correct: 1,
+        },
+
+        {
+          q: "8. Which statement would the author most likely agree with?",
+          a: [
+            "Feelings of uncertainty should be ignored.",
+            "Personal growth often occurs without discomfort.",
+            "Questioning one's purpose can sometimes lead to greater self-understanding.",
+            "Existential crises are purely negative experiences.",
+          ],
+          correct: 2,
+        },
+
+        {
+          q: "9. Which scenario best illustrates an existential crisis as described in the passage?",
+          a: [
+            "A student forgets to complete a homework assignment.",
+            "An employee receives a promotion and immediately feels satisfied.",
+            "A university graduate begins questioning whether the career path they chose aligns with their values and long-term goals.",
+            "A traveler misses a flight and becomes frustrated.",
+          ],
+          correct: 2,
+        },
+
+        {
+          q: "10. Which of the following best summarizes the passage?",
+          a: [
+            "Existential crises are psychological disorders that should always be treated professionally.",
+            "Existential crises involve questioning life's meaning and, although challenging, may contribute to self-discovery and personal growth.",
+            "Anxiety is the primary cause of existential crises.",
+            "Most people experience existential crises only once in their lives.",
+          ],
+          correct: 1,
+        },
+      ];
+      const quiz = document.getElementById("quiz");
+
+      questions.forEach((item, index) => {
+        let html = `<div class="question">
+<h3>${item.q}</h3>`;
+
+        item.a.forEach((choice, i) => {
+          const letter = ["A", "B", "C", "D"][i];
+
+          html += `
+<button class="option"
+onclick="check(this,${i === item.correct},'ans${index}')">
+${letter}. ${choice}
+</button>
+`;
+        });
+
+        html += `
+<div id="ans${index}" class="answer"></div>
+</div>
+<hr>
+`;
+
+        quiz.innerHTML += html;
+      });
+
+      function check(button, correct, id) {
+        let buttons = button.parentElement.querySelectorAll(".option");
+
+        buttons.forEach((btn) => (btn.disabled = true));
+
+        if (correct) {
+          button.classList.add("correct");
+
+          document.getElementById(id).innerHTML = "✅ Correct!";
+        } else {
+          button.classList.add("wrong");
+
+          document.getElementById(id).innerHTML =
+            "❌ Wrong! The correct answer is highlighted.";
+
+          buttons.forEach((btn) => {
+            if (btn.getAttribute("onclick").includes("true")) {
+              btn.classList.add("correct");
+            }
+          });
+        }
+      }
+    </script>
+  </body>
+</html>

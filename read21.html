@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Reading 21 - The Psychology of Achieving a Long-Awaited Dream</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Reading 21 - The Psychology of Achieving a Long-Awaited Dream</h1>
+
+      <div
+        class="passage"
+        style="background: #fff3e0; border-left: 6px solid #ff7043"
+      >
+        <h2>The Psychology of Achieving a Long-Awaited Dream</h2>
+
+        <p>
+          Achieving a long-awaited dream often triggers a complex mixture of
+          emotions. While happiness is usually the most obvious response,
+          individuals may also experience relief, gratitude, pride, and even
+          disbelief. Psychologists suggest that this emotional intensity occurs
+          because the achievement represents the culmination of years of effort,
+          sacrifice, and anticipation. The greater the challenges encountered
+          along the journey, the more meaningful the accomplishment tends to
+          feel.
+        </p>
+
+        <p>
+          Interestingly, the emotional high associated with success is often
+          temporary. After the initial excitement subsides, people gradually
+          adapt to their new circumstances, a phenomenon known as hedonic
+          adaptation. As a result, they may begin seeking new goals and
+          aspirations. This process highlights an important aspect of human
+          nature: satisfaction is derived not only from reaching a destination
+          but also from the pursuit itself. Consequently, achieving a dream can
+          serve as both an endpoint and a catalyst for further personal growth.
+        </p>
+      </div>
+
+      <div id="quiz"></div>
+    </div>
+
+    <script>
+      const questions = [
+        {
+          q: "1. What is the main idea of the passage?",
+          a: [
+            "Success guarantees lifelong happiness.",
+            "Achieving a dream can produce various emotions and inspire future goals.",
+            "Most people feel disappointed after achieving their dreams.",
+            "Psychologists discourage people from pursuing ambitious goals.",
+          ],
+          correct: 1,
+        },
+
+        {
+          q: '2. The word "culmination" in paragraph 1 is closest in meaning to:',
+          a: ["Beginning", "Failure", "Peak result", "Obstacle"],
+          correct: 2,
+        },
+
+        {
+          q: "3. According to the passage, why does achieving a dream often feel meaningful?",
+          a: [
+            "Because dreams are usually easy to accomplish.",
+            "Because people receive financial rewards.",
+            "Because it reflects years of effort and sacrifice.",
+            "Because psychologists encourage it.",
+          ],
+          correct: 2,
+        },
+
+        {
+          q: '4. What does the term "hedonic adaptation" refer to?',
+          a: [
+            "The tendency to avoid challenges.",
+            "The process of becoming accustomed to success or new circumstances.",
+            "The ability to predict future achievements.",
+            "The desire to help others achieve their dreams.",
+          ],
+          correct: 1,
+        },
+
+        {
+          q: "5. Which of the following is TRUE according to the passage?",
+          a: [
+            "The excitement of success lasts forever.",
+            "Achieving a dream always marks the end of personal growth.",
+            "People often set new goals after reaching old ones.",
+            "Gratitude is rarely felt after success.",
+          ],
+          correct: 2,
+        },
+
+        {
+          q: '6. The phrase "this process" in paragraph 2 refers to:',
+          a: [
+            "Achieving a long-awaited dream.",
+            "Experiencing gratitude after success.",
+            "Adapting to new circumstances and seeking new goals.",
+            "Overcoming obstacles through perseverance.",
+          ],
+          correct: 2,
+        },
+
+        {
+          q: "7. According to the passage, emotional intensity following success is largely attributable to:",
+          a: [
+            "External recognition from others.",
+            "The contrast between anticipation and fulfillment.",
+            "Financial rewards associated with achievement.",
+            "An individual's natural optimism.",
+          ],
+          correct: 1,
+        },
+
+        {
+          q: "8. Which of the following best captures the central paradox presented in the passage?",
+          a: [
+            "Success is both rewarding and exhausting.",
+            "People desire dreams that are difficult to achieve.",
+            "Achieving a goal satisfies a desire while simultaneously generating new ones.",
+            "Hard work often leads to unexpected outcomes.",
+          ],
+          correct: 2,
+        },
+
+        {
+          q: "9. The passage implies that if a person never set new goals after achieving a dream, they might:",
+          a: [
+            "Experience a reduced sense of purpose.",
+            "Become more emotionally resilient.",
+            "Appreciate success more deeply.",
+            "Avoid hedonic adaptation altogether.",
+          ],
+          correct: 0,
+        },
+
+        {
+          q: "10. The author's discussion of hedonic adaptation serves mainly to illustrate that:",
+          a: [
+            "Human emotions are unpredictable.",
+            "Achievement has little value in the long run.",
+            "People eventually normalize positive changes in their lives.",
+            "Ambition is a learned behavior.",
+          ],
+          correct: 2,
+        },
+      ];
+      const quiz = document.getElementById("quiz");
+
+      questions.forEach((item, index) => {
+        let html = `<div class="question">
+<h3>${item.q}</h3>`;
+
+        item.a.forEach((choice, i) => {
+          const letter = ["A", "B", "C", "D"][i];
+
+          html += `
+<button class="option"
+onclick="check(this,${i === item.correct},'ans${index}')">
+${letter}. ${choice}
+</button>
+`;
+        });
+
+        html += `
+<div id="ans${index}" class="answer"></div>
+</div>
+<hr>
+`;
+
+        quiz.innerHTML += html;
+      });
+
+      function check(button, correct, id) {
+        let buttons = button.parentElement.querySelectorAll(".option");
+
+        buttons.forEach((btn) => (btn.disabled = true));
+
+        if (correct) {
+          button.classList.add("correct");
+
+          document.getElementById(id).innerHTML = "✅ Correct!";
+        } else {
+          button.classList.add("wrong");
+
+          document.getElementById(id).innerHTML =
+            "❌ Wrong! The correct answer is highlighted.";
+
+          buttons.forEach((btn) => {
+            if (btn.getAttribute("onclick").includes("true")) {
+              btn.classList.add("correct");
+            }
+          });
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Reading 15 - Water</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Reading 15 - Water</h1>
+
+      <div
+        class="passage"
+        style="background: #e8f5e9; border-left: 6px solid #43a047"
+      >
+        <h2>Water</h2>
+
+        <p>
+          Water is an indispensable resource that <b>1. ____</b> both ecological
+          stability and human civilization. Beyond sustaining life, it
+          facilitates agricultural productivity, industrial development, and
+          public health. Its availability has historically influenced patterns
+          of settlement, economic growth, and social progress,
+          <b>2. ____</b> its profound significance in shaping human societies.
+        </p>
+
+        <p>
+          Despite its fundamental importance, access <b>3. ____</b> clean and
+          reliable water supplies remains uneven across the globe. Rapid
+          urbanization, environmental degradation, and climate change have
+          intensified concerns <b>4. ____</b> water scarcity and resource
+          management. <b>5. ____</b>, policymakers and environmentalists
+          advocate sustainable conservation strategies to safeguard this finite
+          resource and ensure its long-term availability for future generations.
+        </p>
+      </div>
+
+      <div id="quiz"></div>
+    </div>
+
+    <script>
+      const questions = [
+        {
+          q: "1.",
+          a: ["underpins", "underestimates", "understates", "coerces"],
+          correct: 0,
+        },
+
+        {
+          q: "2.",
+          a: [
+            "highlighted",
+            "that highlighted",
+            "highlighting",
+            "which highlighting",
+          ],
+          correct: 2,
+        },
+
+        {
+          q: "3.",
+          a: ["with", "to", "for", "of"],
+          correct: 1,
+        },
+
+        {
+          q: "4.",
+          a: ["regarding", "in term of", "in respect", "to"],
+          correct: 0,
+        },
+
+        {
+          q: "5.",
+          a: ["Consequently", "As result", "Thereby", "Thus"],
+          correct: 0,
+        },
+      ];
+      const quiz = document.getElementById("quiz");
+
+      questions.forEach((item, index) => {
+        let html = `<div class="question">
+<h3>${item.q}</h3>`;
+
+        item.a.forEach((choice, i) => {
+          const letter = ["A", "B", "C", "D"][i];
+
+          html += `
+<button class="option"
+onclick="check(this,${i === item.correct},'ans${index}')">
+${letter}. ${choice}
+</button>
+`;
+        });
+
+        html += `
+<div id="ans${index}" class="answer"></div>
+</div>
+<hr>
+`;
+
+        quiz.innerHTML += html;
+      });
+
+      function check(button, correct, id) {
+        let buttons = button.parentElement.querySelectorAll(".option");
+
+        buttons.forEach((btn) => (btn.disabled = true));
+
+        if (correct) {
+          button.classList.add("correct");
+
+          document.getElementById(id).innerHTML = "✅ Correct!";
+        } else {
+          button.classList.add("wrong");
+
+          document.getElementById(id).innerHTML =
+            "❌ Wrong! The correct answer is highlighted.";
+
+          buttons.forEach((btn) => {
+            if (btn.getAttribute("onclick").includes("true")) {
+              btn.classList.add("correct");
+            }
+          });
+        }
+      }
+    </script>
+  </body>
+</html>

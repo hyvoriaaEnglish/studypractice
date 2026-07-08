@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Reading 16 - Pajamas</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Reading 16 - Pajamas: Comfort Beyond Sleep</h1>
+
+      <div
+        class="passage"
+        style="background: #fffde7; border-left: 6px solid #fbc02d"
+      >
+        <h2>Pajamas: Comfort Beyond Sleep</h2>
+
+        <p>
+          Pajamas are garments specifically <b>1. ____</b> to provide comfort
+          during sleep and relaxation. Typically made from soft, breathable
+          fabrics, they help <b>2. ____</b> body temperature and enhance sleep
+          quality. In recent years, pajamas <b>3. ____</b> beyond their
+          practical function, becoming a popular element of fashion and
+          self-expression. Many people now choose designs that reflect their
+          personality, preferences, or lifestyle.
+        </p>
+
+        <p>
+          <b>4. ____</b> modern lifestyles become increasingly demanding,
+          comfort has gained greater significance in everyday clothing choices.
+          Consequently, pajamas are no longer viewed merely
+          <b>5. ____</b> sleepwear but as symbols of relaxation, well-being, and
+          personal comfort.
+        </p>
+      </div>
+
+      <div id="quiz"></div>
+    </div>
+
+    <script>
+      const questions = [
+        {
+          q: "1.",
+          a: ["designed", "designing", "that designed", "which designs"],
+          correct: 0,
+        },
+
+        {
+          q: "2.",
+          a: ["operate", "regulate", "saturate", "separate"],
+          correct: 1,
+        },
+
+        {
+          q: "3.",
+          a: ["evolved", "have evolved", "evolve", "has evolved"],
+          correct: 1,
+        },
+
+        {
+          q: "4.",
+          a: ["Albeit", "As", "Although", "Notwithstanding"],
+          correct: 1,
+        },
+
+        {
+          q: "5.",
+          a: ["as", "for", "of", "with"],
+          correct: 0,
+        },
+      ];
+      const quiz = document.getElementById("quiz");
+
+      questions.forEach((item, index) => {
+        let html = `<div class="question">
+<h3>${item.q}</h3>`;
+
+        item.a.forEach((choice, i) => {
+          const letter = ["A", "B", "C", "D"][i];
+
+          html += `
+<button class="option"
+onclick="check(this,${i === item.correct},'ans${index}')">
+${letter}. ${choice}
+</button>
+`;
+        });
+
+        html += `
+<div id="ans${index}" class="answer"></div>
+</div>
+<hr>
+`;
+
+        quiz.innerHTML += html;
+      });
+
+      function check(button, correct, id) {
+        let buttons = button.parentElement.querySelectorAll(".option");
+
+        buttons.forEach((btn) => (btn.disabled = true));
+
+        if (correct) {
+          button.classList.add("correct");
+
+          document.getElementById(id).innerHTML = "✅ Correct!";
+        } else {
+          button.classList.add("wrong");
+
+          document.getElementById(id).innerHTML =
+            "❌ Wrong! The correct answer is highlighted.";
+
+          buttons.forEach((btn) => {
+            if (btn.getAttribute("onclick").includes("true")) {
+              btn.classList.add("correct");
+            }
+          });
+        }
+      }
+    </script>
+  </body>
+</html>

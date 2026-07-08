@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Reading 19 - Light Refraction</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Reading 19 - Light Refraction</h1>
+
+      <div
+        class="passage"
+        style="background: #e8f5e9; border-left: 6px solid #26a69a"
+      >
+        <h2>Light Refraction</h2>
+
+        <p>
+          Light refraction is a phenomenon that occurs when light travels from
+          one medium to <b>1. ____</b> with a different density, such as from
+          air into water or glass. Because light moves at different speeds in
+          different materials, its <b>2. ____</b> changes as it crosses the
+          boundary between them. This bending of light is known as refraction.
+        </p>
+
+        <p>
+          A common example can be observed when a pencil is partially
+          <b>3. ____</b> in a glass of water. The pencil appears bent or broken
+          at the water's surface, even though it remains perfectly straight.
+          This optical illusion occurs because the light reflected from the
+          submerged part of the pencil is refracted before <b>4. ____</b> our
+          eyes.
+        </p>
+
+        <p>
+          Refraction is not <b>5. ____</b> a curious phenomenon; it has numerous
+          practical applications. It enables lenses to focus light, making
+          devices such as cameras, microscopes, telescopes, and eyeglasses
+          possible. <b>6. ____</b> refraction, many scientific discoveries and
+          modern technologies would not have been achievable. Consequently,
+          understanding how light behaves when it moves through different media
+          is essential in both physics and everyday life.
+        </p>
+      </div>
+
+      <div id="quiz"></div>
+    </div>
+
+    <script>
+      const questions = [
+        {
+          q: "1.",
+          a: ["others", "another", "the other", "other"],
+          correct: 1,
+        },
+
+        {
+          q: "2.",
+          a: ["direction", "regulation", "path", "way"],
+          correct: 0,
+        },
+
+        {
+          q: "3.",
+          a: ["emerged", "immerged", "submerged", "re-emerged"],
+          correct: 2,
+        },
+
+        {
+          q: "4.",
+          a: ["having reached", "reached", "being reached", "reaching"],
+          correct: 3,
+        },
+
+        {
+          q: "5.",
+          a: ["sheer", "merely", "completely", "solely"],
+          correct: 1,
+        },
+
+        {
+          q: "6.",
+          a: ["with", "without", "within", "albeit"],
+          correct: 1,
+        },
+      ];
+      const quiz = document.getElementById("quiz");
+
+      questions.forEach((item, index) => {
+        let html = `<div class="question">
+<h3>${item.q}</h3>`;
+
+        item.a.forEach((choice, i) => {
+          const letter = ["A", "B", "C", "D"][i];
+
+          html += `
+<button class="option"
+onclick="check(this,${i === item.correct},'ans${index}')">
+${letter}. ${choice}
+</button>
+`;
+        });
+
+        html += `
+<div id="ans${index}" class="answer"></div>
+</div>
+<hr>
+`;
+
+        quiz.innerHTML += html;
+      });
+
+      function check(button, correct, id) {
+        let buttons = button.parentElement.querySelectorAll(".option");
+
+        buttons.forEach((btn) => (btn.disabled = true));
+
+        if (correct) {
+          button.classList.add("correct");
+
+          document.getElementById(id).innerHTML = "✅ Correct!";
+        } else {
+          button.classList.add("wrong");
+
+          document.getElementById(id).innerHTML =
+            "❌ Wrong! The correct answer is highlighted.";
+
+          buttons.forEach((btn) => {
+            if (btn.getAttribute("onclick").includes("true")) {
+              btn.classList.add("correct");
+            }
+          });
+        }
+      }
+    </script>
+  </body>
+</html>

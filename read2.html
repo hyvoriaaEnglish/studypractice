@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reading 3 - The Stock Market</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Reading 3 - The Stock Market</h1>
+
+      <div class="passage">
+        <h2>The Stock Market</h2>
+
+        <p>
+          The stock market is a financial marketplace where investors buy and
+          sell shares of publicly traded companies. By purchasing a stock, an
+          investor acquires partial ownership of a company and may benefit from
+          its future growth. Stock prices fluctuate continuously due to factors
+          such as corporate earnings, economic conditions, investor sentiment,
+          and global events. As a result, the stock market is often regarded as
+          an indicator of economic health and business confidence.
+        </p>
+
+        <p>
+          While the stock market offers opportunities for substantial returns,
+          it also involves significant risks. Prices can rise rapidly during
+          periods of optimism but may decline sharply during economic downturns
+          or financial crises. Consequently, many experts emphasize the
+          importance of diversification, long-term investing, and careful risk
+          management. Despite its volatility, the stock market remains one of
+          the most influential mechanisms for wealth creation and capital
+          allocation in modern economies.
+        </p>
+      </div>
+
+      <div id="quiz"></div>
+    </div>
+
+    <script>
+      const questions = [
+        {
+          q: "1. What is the main purpose of the passage?",
+          a: [
+            "To explain how companies issue stocks.",
+            "To discuss the functions, benefits, and risks of the stock market.",
+            "To encourage readers to invest in stocks.",
+            "To compare stocks with bonds.",
+          ],
+          correct: 1,
+        },
+
+        {
+          q: "2. According to the passage, what does purchasing a stock represent?",
+          a: [
+            "Lending money to a government.",
+            "Acquiring partial ownership of a company.",
+            "Controlling a company's management.",
+            "Receiving guaranteed profits.",
+          ],
+          correct: 1,
+        },
+
+        {
+          q: "3. The word 'fluctuate' is closest in meaning to:",
+          a: [
+            "stabilize",
+            "increase permanently",
+            "vary unpredictably",
+            "disappear",
+          ],
+          correct: 2,
+        },
+
+        {
+          q: "4. What can be inferred from the passage about stock prices?",
+          a: [
+            "They are determined solely by company profits.",
+            "They are influenced by multiple interconnected factors.",
+            "They rarely change once a company becomes successful.",
+            "They always reflect a company's true value.",
+          ],
+          correct: 1,
+        },
+
+        {
+          q: "5. Why does the author mention economic downturns and financial crises?",
+          a: [
+            "To illustrate the risks associated with stock market investing.",
+            "To argue that investing is unwise.",
+            "To explain how governments regulate markets.",
+            "To predict future market crashes.",
+          ],
+          correct: 0,
+        },
+
+        {
+          q: "6. The word 'volatility' most nearly means:",
+          a: [
+            "stability",
+            "profitability",
+            "unpredictability in price movements",
+            "government intervention",
+          ],
+          correct: 2,
+        },
+
+        {
+          q: "7. What is the primary function of the second paragraph?",
+          a: [
+            "To describe how stocks are traded.",
+            "To explain the risks and investment principles associated with the stock market.",
+            "To define economic growth.",
+            "To compare different investment strategies.",
+          ],
+          correct: 1,
+        },
+
+        {
+          q: "8. Which statement would the author most likely agree with?",
+          a: [
+            "High returns can be achieved without risk.",
+            "Investors should focus only on short-term price movements.",
+            "Successful investing often requires patience and risk management.",
+            "Stock market performance is irrelevant to the economy.",
+          ],
+          correct: 2,
+        },
+
+        {
+          q: "9. Which assumption underlies the author's recommendation of diversification?",
+          a: [
+            "Investors can accurately predict market movements.",
+            "Different investments do not always perform identically under the same conditions.",
+            "All stocks eventually increase in value.",
+            "Economic crises can be completely avoided.",
+          ],
+          correct: 1,
+        },
+
+        {
+          q: "10. Which of the following best summarizes the passage?",
+          a: [
+            "The stock market guarantees wealth for disciplined investors.",
+            "The stock market enables investment and wealth creation but involves risks that require careful management.",
+            "Stock prices are determined exclusively by company earnings.",
+            "Financial crises are the primary force shaping stock markets.",
+          ],
+          correct: 1,
+        },
+      ];
+
+      const quiz = document.getElementById("quiz");
+
+      questions.forEach((item, index) => {
+        let html = `
+<div class="question">
+
+<h3>${item.q}</h3>
+`;
+
+        item.a.forEach((choice, i) => {
+          let letter = ["A", "B", "C", "D"][i];
+
+          html += `
+<button class="option"
+onclick="check(this,${i === item.correct},'ans${index}')">
+
+${letter}. ${choice}
+
+</button>
+`;
+        });
+
+        html += `
+<div id="ans${index}" class="answer"></div>
+
+</div>
+
+<hr>
+`;
+
+        quiz.innerHTML += html;
+      });
+
+      function check(button, correct, id) {
+        let buttons = button.parentElement.querySelectorAll(".option");
+
+        buttons.forEach((btn) => (btn.disabled = true));
+
+        if (correct) {
+          button.classList.add("correct");
+
+          document.getElementById(id).innerHTML = "✅ Correct!";
+        } else {
+          button.classList.add("wrong");
+
+          document.getElementById(id).innerHTML =
+            "❌ Wrong! The correct answer is highlighted.";
+
+          buttons.forEach((btn) => {
+            if (btn.getAttribute("onclick").includes("true")) {
+              btn.classList.add("correct");
+            }
+          });
+        }
+      }
+    </script>
+  </body>
+</html>

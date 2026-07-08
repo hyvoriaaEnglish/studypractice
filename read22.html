@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Reading 22 - Jealousy: A Complex Human Emotion</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Reading 22 - Jealousy: A Complex Human Emotion</h1>
+
+      <div
+        class="passage"
+        style="background: #e0f7fa; border-left: 6px solid #00acc1"
+      >
+        <h2>Jealousy: A Complex Human Emotion</h2>
+
+        <p>
+          Jealousy is a powerful emotion that arises when individuals perceive a
+          threat to something they value, such as a relationship, achievement,
+          or social status. Although jealousy is often viewed negatively,
+          psychologists argue that it is a natural emotional response that has
+          evolved to help people protect important bonds and resources. In
+          moderate amounts, jealousy can motivate individuals to reflect on
+          their relationships and address underlying insecurities. However,
+          excessive jealousy may lead to anxiety, mistrust, and conflict.
+        </p>
+
+        <p>
+          The rise of social media has intensified feelings of jealousy for many
+          people. Platforms that encourage users to share carefully curated
+          images of their lives can create unrealistic standards of success,
+          beauty, and happiness. As a result, individuals may compare themselves
+          to others and feel inadequate when their own lives do not seem to
+          measure up. Researchers have found that frequent social comparison is
+          associated with lower self-esteem and reduced life satisfaction.
+        </p>
+
+        <p>
+          Despite its negative consequences, jealousy can also serve as a source
+          of self-awareness. By examining the reasons behind their jealousy,
+          individuals may gain valuable insights into their personal desires,
+          fears, and priorities. Rather than suppressing the emotion entirely,
+          psychologists often recommend acknowledging it and responding in a
+          constructive manner. In this way, jealousy can become an opportunity
+          for personal growth rather than a source of emotional distress.
+        </p>
+      </div>
+
+      <div id="quiz"></div>
+    </div>
+
+    <script>
+      const questions = [
+        {
+          q: "1. What is the main purpose of the passage?",
+          a: [
+            "To explain the causes, effects, and potential benefits of jealousy.",
+            "To argue that jealousy should always be avoided.",
+            "To demonstrate that social media is harmful to society.",
+            "To compare jealousy with other emotions.",
+          ],
+          correct: 0,
+        },
+
+        {
+          q: '2. The word "curated" in paragraph 2 is closest in meaning to:',
+          a: ["hidden", "carefully selected", "exaggerated", "spontaneous"],
+          correct: 1,
+        },
+
+        {
+          q: "3. According to the passage, moderate jealousy may:",
+          a: [
+            "destroy relationships.",
+            "eliminate insecurity.",
+            "encourage self-reflection.",
+            "reduce social comparison.",
+          ],
+          correct: 2,
+        },
+
+        {
+          q: "4. Which of the following is mentioned as a consequence of excessive jealousy?",
+          a: [
+            "Increased confidence.",
+            "Greater creativity.",
+            "Improved communication.",
+            "Mistrust and conflict.",
+          ],
+          correct: 3,
+        },
+
+        {
+          q: "5. The author suggests that social media may contribute to jealousy because it:",
+          a: [
+            "exposes users to unrealistic portrayals of others' lives.",
+            "limits communication between individuals.",
+            "prevents people from expressing emotions.",
+            "encourages users to avoid comparisons.",
+          ],
+          correct: 0,
+        },
+
+        {
+          q: "6. Which statement can be inferred from the passage?",
+          a: [
+            "Jealousy is entirely harmful and should be suppressed.",
+            "People who feel jealous are usually unsuccessful.",
+            "Understanding the source of jealousy may promote personal development.",
+            "Social media is the primary cause of jealousy.",
+          ],
+          correct: 2,
+        },
+
+        {
+          q: '7. The word "acknowledging" in paragraph 3 is closest in meaning to:',
+          a: ["ignoring", "recognizing", "defending", "overcoming"],
+          correct: 1,
+        },
+
+        {
+          q: "8. Which of the following best describes the author's attitude toward jealousy?",
+          a: [
+            "Entirely critical.",
+            "Strongly supportive.",
+            "Balanced and analytical.",
+            "Indifferent.",
+          ],
+          correct: 2,
+        },
+
+        {
+          q: '9. What does the pronoun "it" in the final paragraph refer to?',
+          a: [
+            "personal growth",
+            "emotional distress",
+            "jealousy",
+            "self-awareness",
+          ],
+          correct: 2,
+        },
+
+        {
+          q: "10. Which of the following best summarizes the passage?",
+          a: [
+            "Jealousy is a destructive emotion caused mainly by social media.",
+            "Jealousy is a natural emotion that can have both harmful and beneficial effects depending on how it is managed.",
+            "Social comparison should be completely avoided.",
+            "Personal growth is impossible without jealousy.",
+          ],
+          correct: 1,
+        },
+      ];
+      const quiz = document.getElementById("quiz");
+
+      questions.forEach((item, index) => {
+        let html = `<div class="question">
+<h3>${item.q}</h3>`;
+
+        item.a.forEach((choice, i) => {
+          const letter = ["A", "B", "C", "D"][i];
+
+          html += `
+<button class="option"
+onclick="check(this,${i === item.correct},'ans${index}')">
+${letter}. ${choice}
+</button>
+`;
+        });
+
+        html += `
+<div id="ans${index}" class="answer"></div>
+</div>
+<hr>
+`;
+
+        quiz.innerHTML += html;
+      });
+
+      function check(button, correct, id) {
+        let buttons = button.parentElement.querySelectorAll(".option");
+
+        buttons.forEach((btn) => (btn.disabled = true));
+
+        if (correct) {
+          button.classList.add("correct");
+
+          document.getElementById(id).innerHTML = "✅ Correct!";
+        } else {
+          button.classList.add("wrong");
+
+          document.getElementById(id).innerHTML =
+            "❌ Wrong! The correct answer is highlighted.";
+
+          buttons.forEach((btn) => {
+            if (btn.getAttribute("onclick").includes("true")) {
+              btn.classList.add("correct");
+            }
+          });
+        }
+      }
+    </script>
+  </body>
+</html>

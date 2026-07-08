@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Reading 13 - Beauty Standards</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Reading 13 - Beauty Standards</h1>
+
+      <div
+        class="passage"
+        style="background: #e0f7fa; border-left: 6px solid #00acc1"
+      >
+        <h2>Beauty Standards</h2>
+
+        <p>
+          Beauty standards are socially <b>1. ____</b> ideals that define what
+          is considered physically attractive within a particular culture or
+          era. In contemporary society, these ideals are often
+          <b>2. ____</b> through social media, advertising, and popular culture,
+          where carefully curated images can shape public perceptions of beauty.
+          <b>3. ____</b>, individuals may feel pressured to conform
+          <b>4. ____</b> unrealistic expectations in pursuit of social
+          acceptance or validation.
+        </p>
+
+        <p>
+          Although beauty standards can influence fashion and self-presentation,
+          they have also been criticized <b>5. ____</b> promoting narrow and
+          exclusionary definitions of attractiveness. Such ideals may contribute
+          to body dissatisfaction, diminished self-esteem, and unhealthy
+          comparisons. Consequently, many scholars and psychologists advocate a
+          more inclusive understanding of beauty that <b>6. ____</b> diversity,
+          authenticity, and individual well-being rather than rigid aesthetic
+          norms.
+        </p>
+      </div>
+
+      <div id="quiz"></div>
+    </div>
+
+    <script>
+      const questions = [
+        {
+          q: "1.",
+          a: ["constructing", "constructed", "being constructed", "construct"],
+          correct: 1,
+        },
+
+        {
+          q: "2.",
+          a: ["disseminated", "dismissed", "covered", "dispelled"],
+          correct: 0,
+        },
+
+        {
+          q: "3.",
+          a: ["However", "Rather", "Furthermore", "As a result"],
+          correct: 3,
+        },
+
+        {
+          q: "4.",
+          a: ["to", "with", "as", "to as"],
+          correct: 0,
+        },
+
+        {
+          q: "5.",
+          a: ["to", "for", "as", "with"],
+          correct: 1,
+        },
+
+        {
+          q: "6.",
+          a: ["emphasize", "emphasizes", "emphasized", "emphasizing"],
+          correct: 1,
+        },
+      ];
+      const quiz = document.getElementById("quiz");
+
+      questions.forEach((item, index) => {
+        let html = `<div class="question">
+<h3>${item.q}</h3>`;
+
+        item.a.forEach((choice, i) => {
+          const letter = ["A", "B", "C", "D"][i];
+
+          html += `
+<button class="option"
+onclick="check(this,${i === item.correct},'ans${index}')">
+${letter}. ${choice}
+</button>
+`;
+        });
+
+        html += `
+<div id="ans${index}" class="answer"></div>
+</div>
+<hr>
+`;
+
+        quiz.innerHTML += html;
+      });
+
+      function check(button, correct, id) {
+        let buttons = button.parentElement.querySelectorAll(".option");
+
+        buttons.forEach((btn) => (btn.disabled = true));
+
+        if (correct) {
+          button.classList.add("correct");
+
+          document.getElementById(id).innerHTML = "✅ Correct!";
+        } else {
+          button.classList.add("wrong");
+
+          document.getElementById(id).innerHTML =
+            "❌ Wrong! The correct answer is highlighted.";
+
+          buttons.forEach((btn) => {
+            if (btn.getAttribute("onclick").includes("true")) {
+              btn.classList.add("correct");
+            }
+          });
+        }
+      }
+    </script>
+  </body>
+</html>

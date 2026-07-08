@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reading 4 - Dinosaurs</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Reading 4 - Dinosaurs: Rulers of the Ancient World</h1>
+
+      <div class="passage">
+        <h2>Dinosaurs: Rulers of the Ancient World</h2>
+
+        <p>
+          Dinosaurs were a diverse group of reptiles that dominated the Earth
+          for more than 160 million years. They first appeared during the
+          Triassic Period, approximately 230 million years ago, and evolved into
+          a wide variety of species. Some dinosaurs, such as
+          <b>Tyrannosaurus rex</b>, were powerful predators, while others,
+          including <b>Triceratops</b> and <b>Brachiosaurus</b>, were
+          herbivores. Their remarkable adaptations allowed them to thrive in
+          numerous environments across the planet.
+        </p>
+
+        <p>
+          Despite their long period of success, most dinosaurs became extinct
+          around 66 million years ago. The prevailing scientific theory suggests
+          that a massive asteroid struck the Earth, triggering dramatic
+          environmental changes. Dust and debris released into the atmosphere
+          likely blocked sunlight, disrupted food chains, and caused widespread
+          extinction. Although non-avian dinosaurs disappeared, scientists
+          believe that modern birds evolved from certain dinosaur species.
+          Consequently, dinosaurs continue to fascinate researchers and provide
+          valuable insights into the history of life on Earth.
+        </p>
+      </div>
+
+      <div id="quiz"></div>
+    </div>
+
+    <script>
+      const questions = [
+        {
+          q: "1. What is the primary purpose of the passage?",
+          a: [
+            "To explain why all reptiles became extinct.",
+            "To discuss the evolution, dominance, and extinction of dinosaurs.",
+            "To compare dinosaurs with modern birds.",
+            "To describe the lifestyle of Tyrannosaurus rex.",
+          ],
+          correct: 1,
+        },
+
+        {
+          q: "2. According to the passage, when did dinosaurs first appear?",
+          a: [
+            "About 66 million years ago",
+            "About 160 million years ago",
+            "About 230 million years ago",
+            "About 500 million years ago",
+          ],
+          correct: 2,
+        },
+
+        {
+          q: "3. The word 'dominated' in paragraph 1 is closest in meaning to:",
+          a: ["ruled over", "avoided", "discovered", "explored"],
+          correct: 0,
+        },
+
+        {
+          q: "4. What can be inferred about dinosaurs from the first paragraph?",
+          a: [
+            "They all lived in the same type of environment.",
+            "Their diversity contributed to their long-term success.",
+            "They were exclusively carnivorous.",
+            "They evolved from birds.",
+          ],
+          correct: 1,
+        },
+
+        {
+          q: "5. What does the word 'their' in the phrase 'their remarkable adaptations' refer to?",
+          a: ["environments", "reptiles", "dinosaurs", "species"],
+          correct: 2,
+        },
+
+        {
+          q: "6. Why does the author mention dust and debris blocking sunlight?",
+          a: [
+            "To explain a possible mechanism behind dinosaur extinction.",
+            "To describe the climate of the Triassic Period.",
+            "To compare dinosaurs with modern animals.",
+            "To challenge the asteroid-impact theory.",
+          ],
+          correct: 0,
+        },
+
+        {
+          q: "7. The word 'prevailing' is closest in meaning to:",
+          a: ["outdated", "controversial", "widely accepted", "unrealistic"],
+          correct: 2,
+        },
+
+        {
+          q: "8. What is the main function of the second paragraph?",
+          a: [
+            "To describe dinosaur habitats.",
+            "To explain the extinction of dinosaurs and their connection to modern birds.",
+            "To compare different dinosaur species.",
+            "To discuss fossil discoveries.",
+          ],
+          correct: 1,
+        },
+
+        {
+          q: "9. Which statement would the author most likely agree with?",
+          a: [
+            "The extinction of dinosaurs remains completely unexplained.",
+            "Modern birds may provide clues about dinosaur evolution.",
+            "Dinosaurs were less successful than modern mammals.",
+            "All dinosaur species disappeared without descendants.",
+          ],
+          correct: 1,
+        },
+
+        {
+          q: "10. Which assumption underlies the asteroid-impact theory described in the passage?",
+          a: [
+            "Environmental changes can affect the survival of entire species.",
+            "Dinosaurs were unable to reproduce successfully.",
+            "Asteroids strike Earth every few thousand years.",
+            "Herbivores are more vulnerable than carnivores.",
+          ],
+          correct: 0,
+        },
+      ];
+
+      const quiz = document.getElementById("quiz");
+
+      questions.forEach((item, index) => {
+        let html = `<div class="question">
+<h3>${item.q}</h3>`;
+
+        item.a.forEach((choice, i) => {
+          let letter = ["A", "B", "C", "D"][i];
+
+          html += `
+<button class="option"
+onclick="check(this,${i === item.correct},'ans${index}')">
+${letter}. ${choice}
+</button>
+`;
+        });
+
+        html += `
+<div id="ans${index}" class="answer"></div>
+</div>
+<hr>
+`;
+
+        quiz.innerHTML += html;
+      });
+
+      function check(button, correct, id) {
+        let buttons = button.parentElement.querySelectorAll(".option");
+
+        buttons.forEach((btn) => (btn.disabled = true));
+
+        if (correct) {
+          button.classList.add("correct");
+          document.getElementById(id).innerHTML = "✅ Correct!";
+        } else {
+          button.classList.add("wrong");
+          document.getElementById(id).innerHTML =
+            "❌ Wrong! The correct answer is highlighted.";
+
+          buttons.forEach((btn) => {
+            if (btn.getAttribute("onclick").includes("true")) {
+              btn.classList.add("correct");
+            }
+          });
+        }
+      }
+    </script>
+  </body>
+</html>

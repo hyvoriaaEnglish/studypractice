@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vocabulary Quiz 1</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Vocabulary Quiz 1</h1>
+
+      <div
+        class="passage"
+        style="background: #fff8e1; border-left: 6px solid #ff9800"
+      >
+        <h2>Choose the correct answer.</h2>
+        <p>
+          Select the best option (A, B, C, or D) for each question, then click
+          <b>Submit</b> to check your score.
+        </p>
+      </div>
+
+      <div id="quiz"></div>
+
+      <button onclick="checkAnswers()">Submit</button>
+
+      <h2 id="result"></h2>
+    </div>
+
+    <script>
+      const questions = [
+        {
+          q: "1. His personal problems seem to have been ________ him from his work lately.",
+          a: ["disrupting", "disturbing", "distracting", "dispersing"],
+          correct: 2,
+        },
+
+        {
+          q: "2. He was a very ________ man; one day he would be happy, the next miserable.",
+          a: ["uncontrollable", "uneven", "temperamental", "dispirited"],
+          correct: 2,
+        },
+
+        {
+          q: "3. This cloth ________ very thin.",
+          a: ["touches", "holds", "feels", "handles"],
+          correct: 2,
+        },
+
+        {
+          q: "4. After all this time, John should take the bull by the horns and ask Mary to marry him.",
+          a: ["continue", "be secretive", "buy a bull", "be determined"],
+          correct: 3,
+        },
+
+        {
+          q: "5. I've had a ________ of misfortune.",
+          a: ["success", "continuation", "repetition", "succession"],
+          correct: 3,
+        },
+
+        {
+          q: "6. The music aroused an ________ feeling of homesickness in him.",
+          a: ["intense", "intentional", "intensive", "intended"],
+          correct: 0,
+        },
+
+        {
+          q: "7. What are the main ________ of this illness?",
+          a: ["traces", "symptoms", "emblems", "tokens"],
+          correct: 1,
+        },
+
+        {
+          q: "8. After accident the injured cyclist was in great ________.",
+          a: ["agony", "pain", "suffering", "hurt"],
+          correct: 0,
+        },
+
+        {
+          q: "9. Although we argued with him for a long time, he stood his ground.",
+          a: [
+            "changed his decision",
+            "felt sorry for us",
+            "refused to change his decision",
+            "wanted to continue",
+          ],
+          correct: 2,
+        },
+
+        {
+          q: "10. He said, '________ while the iron is hot.'",
+          a: ["Strike", "Beat", "Hit", "Pound"],
+          correct: 0,
+        },
+
+        {
+          q: "11. Everything looks very positive for the company, ________ the current investors do not default on their agreements.",
+          a: ["assuming that", "whether", "whereas", "as if"],
+          correct: 0,
+        },
+
+        {
+          q: "12. ________ as the injured cat was so weak.",
+          a: [
+            "Afterwards / dying",
+            "Death / X",
+            "Soon / death",
+            "Then / to die",
+          ],
+          correct: 3,
+        },
+
+        {
+          q: "13. Probably no man had more effect on the daily lives of most people in the United States ________.",
+          a: [
+            "as Henry Ford...",
+            "rather than Henry Ford...",
+            "than did Henry Ford...",
+            "more than Henry Ford...",
+          ],
+          correct: 2,
+        },
+
+        {
+          q: "14. The picking of the fruit, ________, takes about a week.",
+          a: [
+            "whose work they receive no money",
+            "as they receive no money for that work",
+            "for which work they receive no money",
+            "they receive no money for it",
+          ],
+          correct: 2,
+        },
+
+        {
+          q: "15. It was not until they sent me the invitation ________ how meaningful I was to them.",
+          a: [
+            "that I realized",
+            "I realized",
+            "did I realize",
+            "had I realized",
+          ],
+          correct: 0,
+        },
+
+        {
+          q: "16. I would rather ________ my holiday in Egypt than in Turkey.",
+          a: ["take", "had taken", "to have taken", "have taken"],
+          correct: 0,
+        },
+
+        {
+          q: "17. ________ that we decided to cancel the polo match.",
+          a: [
+            "Such was a weather",
+            "Such terrible weather was it",
+            "So terrible a weather was it",
+            "The weather was such",
+          ],
+          correct: 3,
+        },
+
+        {
+          q: "18. Why didn't you tell me you needed help? I ________.",
+          a: [
+            "must have helped",
+            "could have helped",
+            "could help",
+            "was able to help",
+          ],
+          correct: 1,
+        },
+
+        {
+          q: "19. ________, he remained optimistic.",
+          a: [
+            "Though badly wounded he was",
+            "Badly wounded as he was",
+            "As he was badly wounded",
+            "As badly wounded he was",
+          ],
+          correct: 1,
+        },
+
+        {
+          q: "20. Mark Twain began his career on a newspaper and ________ to be a journalist.",
+          a: [
+            "long considering himself",
+            "himself long considered",
+            "long considered himself",
+            "was long himself considered",
+          ],
+          correct: 2,
+        },
+
+        {
+          q: "21. A new computer has been produced, which will _______ all previous models.",
+          a: ["overdo", "supersede", "excel", "overwhelm"],
+          correct: 1,
+        },
+
+        {
+          q: "22. Most teenagers go through a rebellious _______ for a few years.",
+          a: ["stint", "span", "duration", "phase"],
+          correct: 3,
+        },
+
+        {
+          q: "23. The match _______ in the darkness.",
+          a: ["glared", "flared", "glowed", "gleamed"],
+          correct: 1,
+        },
+
+        {
+          q: "24. The use of vitamin _______ and herbs has become increasingly popular.",
+          a: ["components", "materials", "ingredients", "supplements"],
+          correct: 3,
+        },
+
+        {
+          q: "25. As a matter of _______, we have six security guards on the premises.",
+          a: ["wisdom", "prudence", "foresight", "acumen"],
+          correct: 1,
+        },
+
+        {
+          q: "26. She marched into the shop, as bold as _______, and demanded her money back.",
+          a: ["bass", "grass", "brass", "glass"],
+          correct: 2,
+        },
+
+        {
+          q: "27. All his hard work ________ in great success.",
+          a: ["accounted", "culminated", "merged", "succumbed"],
+          correct: 1,
+        },
+
+        {
+          q: "28. She's certainly a ________ writer.",
+          a: ["fruitful", "prolific", "fertile", "successful"],
+          correct: 1,
+        },
+
+        {
+          q: "29. The contemporary dialogue struck a slightly ________ note.",
+          a: ["disembodied", "discordant", "dismissive", "disconcerting"],
+          correct: 1,
+        },
+
+        {
+          q: "30. We decided to celebrate by going out and painting the town ________.",
+          a: ["red", "purple", "gold", "brown"],
+          correct: 0,
+        },
+      ];
+
+      const quiz = document.getElementById("quiz");
+
+      questions.forEach((item, index) => {
+        let html = `<div class="question">
+<p><b>${item.q}</b></p>`;
+
+        item.a.forEach((choice, i) => {
+          html += `
+<label>
+<input type="radio" name="q${index}" value="${i}">
+${String.fromCharCode(65 + i)}. ${choice}
+</label><br>`;
+        });
+
+        html += "</div>";
+
+        quiz.innerHTML += html;
+      });
+
+      function checkAnswers() {
+        let score = 0;
+
+        questions.forEach((q, index) => {
+          const ans = document.querySelector(`input[name="q${index}"]:checked`);
+
+          if (ans && Number(ans.value) === q.correct) {
+            score++;
+          }
+        });
+
+        document.getElementById("result").innerHTML =
+          `You got <b>${score}/${questions.length}</b> correct!`;
+      }
+    </script>
+  </body>
+</html>

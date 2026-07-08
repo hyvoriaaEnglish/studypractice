@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Reading 14 - Resilience</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Reading 14 - Resilience</h1>
+
+      <div
+        class="passage"
+        style="background: #fff3e0; border-left: 6px solid #fb8c00"
+      >
+        <h2>Resilience</h2>
+
+        <p>
+          Resilience is the capacity to <b>1. ____</b> and recover in the face
+          of adversity, setbacks, or significant challenges.
+          <b>2. ____</b> avoiding difficulties, resilient individuals are able
+          to persevere through them while maintaining a sense of purpose and
+          optimism. This quality enables people to cope effectively
+          <b>3. ____</b> uncertainty and continue pursuing their goals despite
+          obstacles.
+        </p>
+
+        <p>
+          Although resilience is often associated with innate strength,
+          psychologists argue that it can be developed through experience,
+          self-reflection, and supportive relationships. In
+          <b>4. ____</b> increasingly unpredictable world, resilience is widely
+          regarded as a crucial attribute that <b>5. ____</b> personal growth,
+          emotional well-being, and long-term success.
+        </p>
+      </div>
+
+      <div id="quiz"></div>
+    </div>
+
+    <script>
+      const questions = [
+        {
+          q: "1.",
+          a: ["adapt", "abduct", "abuse", "revive"],
+          correct: 0,
+        },
+
+        {
+          q: "2.",
+          a: ["instead", "except for", "rather than", "apart from"],
+          correct: 2,
+        },
+
+        {
+          q: "3.",
+          a: ["for", "to", "with", "as"],
+          correct: 2,
+        },
+
+        {
+          q: "4.",
+          a: ["an", "a", "the", "no article"],
+          correct: 1,
+        },
+
+        {
+          q: "5.",
+          a: ["compromise", "foster", "diminish", "impair"],
+          correct: 1,
+        },
+      ];
+      const quiz = document.getElementById("quiz");
+
+      questions.forEach((item, index) => {
+        let html = `<div class="question">
+<h3>${item.q}</h3>`;
+
+        item.a.forEach((choice, i) => {
+          const letter = ["A", "B", "C", "D"][i];
+
+          html += `
+<button class="option"
+onclick="check(this,${i === item.correct},'ans${index}')">
+${letter}. ${choice}
+</button>
+`;
+        });
+
+        html += `
+<div id="ans${index}" class="answer"></div>
+</div>
+<hr>
+`;
+
+        quiz.innerHTML += html;
+      });
+
+      function check(button, correct, id) {
+        let buttons = button.parentElement.querySelectorAll(".option");
+
+        buttons.forEach((btn) => (btn.disabled = true));
+
+        if (correct) {
+          button.classList.add("correct");
+
+          document.getElementById(id).innerHTML = "✅ Correct!";
+        } else {
+          button.classList.add("wrong");
+
+          document.getElementById(id).innerHTML =
+            "❌ Wrong! The correct answer is highlighted.";
+
+          buttons.forEach((btn) => {
+            if (btn.getAttribute("onclick").includes("true")) {
+              btn.classList.add("correct");
+            }
+          });
+        }
+      }
+    </script>
+  </body>
+</html>

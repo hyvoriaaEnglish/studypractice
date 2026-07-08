@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>English Quiz 31-65</title>
+    <style>
+      body {
+        font-family: Arial;
+        max-width: 900px;
+        margin: auto;
+        padding: 20px;
+        background: #f5f5f5;
+      }
+      .question {
+        background: white;
+        margin: 15px 0;
+        padding: 15px;
+        border-radius: 8px;
+      }
+      .result {
+        font-weight: bold;
+        margin-top: 10px;
+      }
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        margin-top: 20px;
+      }
+      .correct {
+        color: green;
+      }
+      .wrong {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Quiz 31-65</h1>
+
+    <div id="quiz"></div>
+
+    <button onclick="checkAnswers()">Check Answers</button>
+
+    <h2 id="score"></h2>
+
+    <script>
+      const questions = [
+        {
+          q: "31. Not being able to find my phone number is a pretty ________ excuse for not contacting me.",
+          options: ["A. fragile", "B. frail", "C. feeble", "D. faint"],
+          answer: 2,
+        },
+
+        {
+          q: "32. The new airport was constructed in the ________ of fierce opposition from environmentalists.",
+          options: ["A. face", "B. teeth", "C. tooth and nail", "D. fangs"],
+          answer: 0,
+        },
+
+        {
+          q: "33. According to the ________ of the contract...",
+          options: ["A. laws", "B. rules", "C. terms", "D. details"],
+          answer: 2,
+        },
+
+        {
+          q: "34. She wasn’t allowed into the country, ________ because her parents aren’t in order.",
+          options: [
+            "A. subsequently",
+            "B. presumably",
+            "C. admittedly",
+            "D. paradoxically",
+          ],
+          answer: 1,
+        },
+
+        {
+          q: "35. Both of the jobs I’ve been offered are fantastic opportunities – I’m in such ________!",
+          options: [
+            "A. a dwelling",
+            "B. a grudge",
+            "C. an array",
+            "D. a quandary",
+          ],
+          answer: 3,
+        },
+
+        {
+          q: "36. The Red Cross is ________ an international aid organization.",
+          options: [
+            "A. intriguingly",
+            "B. intrusively",
+            "C. intrinsically",
+            "D. intrepidly",
+          ],
+          answer: 2,
+        },
+
+        {
+          q: "37. I should sail _____ the exam.",
+          options: ["A. through", "B. toward", "C. forward", "D. about"],
+          answer: 0,
+        },
+
+        {
+          q: "38. Dave didn't understand what Miss Smith was getting _____ so he asked her to explain it again",
+          options: ["A. on", "B. in", "C. at", "D. to"],
+          answer: 2,
+        },
+
+        {
+          q: "39. I was taken _____",
+          options: ["A. out", "B. along", "C. aback", "D. up"],
+          answer: 2,
+        },
+
+        {
+          q: "40. I would like to _____ a request.",
+          options: [
+            "A. put in for",
+            "B. put up with",
+            "C. put out",
+            "D. go out to",
+          ],
+          answer: 0,
+        },
+
+        {
+          q: "41. She managed to _____",
+          options: [
+            "A. laugh at it",
+            "B. laugh on it",
+            "C. laugh it off",
+            "D. laugh it out",
+          ],
+          answer: 2,
+        },
+
+        {
+          q: "42. My boss is biased _____ me, which explains why I'll never get promoted if I stay with this company.",
+          options: ["A. aback", "B. against", "C. forward", "D. through"],
+          answer: 1,
+        },
+
+        {
+          q: "43. She has a real aptitude _____ photographing. Her photographs are so impressive.",
+          options: ["A. after", "B. of", "C. with", "D. for"],
+          answer: 3,
+        },
+
+        {
+          q: "44. We are _____ very good terms _____ our neighbor.",
+          options: ["A. in/of", "B. in/with", "C. on/of", "D. on/with"],
+          answer: 3,
+        },
+
+        {
+          q: "45. Old Mr. Brown's condition looks very serious and it is doubtful if he will _____ .",
+          options: [
+            "A. pull through",
+            "B. pull up",
+            "C. pull back",
+            "D. pull out",
+          ],
+          answer: 0,
+        },
+
+        {
+          q: "46. Despite all the interruptions, he _____ with his work.",
+          options: [
+            "A. stuck at",
+            "B. held on",
+            "C. hung out",
+            "D. pressed on",
+          ],
+          answer: 3,
+        },
+
+        {
+          q: "47. I'm a ________ sleeper - the slightest noise wakes me up.",
+          options: ["A. swallow", "B. short", "C. sound", "D. light"],
+          answer: 3,
+        },
+
+        {
+          q: "48. The uphill stages of the race will really sort the ________ from ________.",
+          options: [
+            "A. sheep/the goats",
+            "B. chalks/cheese",
+            "C. lions/rabbits",
+            "D. dogs/cats",
+          ],
+          answer: 0,
+        },
+
+        {
+          q: "49. Instead of defending traditional values, the church frequently seems ________ and irresolute.",
+          options: [
+            "A. far-fetched",
+            "B. strong-willed",
+            "C. weak-kneed",
+            "D. long-awaited",
+          ],
+          answer: 2,
+        },
+
+        {
+          q: "50. Could you work on Saturday, ________?",
+          options: [
+            "A. if it isn't necessary",
+            "B. should the need arise",
+            "C. if the need rises",
+            "D. should the need rise",
+          ],
+          answer: 1,
+        },
+
+        {
+          q: "51. Do you think England will win?",
+          options: [
+            "A. I doubt so",
+            "B. I doubt it",
+            "C. I don't doubt",
+            "D. No, I doubt",
+          ],
+          answer: 1,
+        },
+
+        {
+          q: "52. The city ________ to recommend it.",
+          options: [
+            "A. has little",
+            "B. doesn't have",
+            "C. hasn't got",
+            "D. isn't having",
+          ],
+          answer: 0,
+        },
+
+        {
+          q: "53. ________ to save the child from drowning, she nearly lost her own life.",
+          options: [
+            "A. Owing to attempting",
+            "B. By attempting",
+            "C. Wherefor attempting",
+            "D. In attempting",
+          ],
+          answer: 3,
+        },
+
+        {
+          q: "54. Under its new conductor, ________ an international reputation.",
+          options: [
+            "A. the orchestra has established",
+            "B. has the orchestra established",
+            "C. the orchestra has been established",
+            "D. has the orchestra been established",
+          ],
+          answer: 1,
+        },
+
+        {
+          q: "55. His handwriting is like ______.",
+          options: [
+            "A. the writing a much younger child",
+            "B. a much younger child",
+            "C. that of a much younger child",
+            "D. that a much younger child wrote it",
+          ],
+          answer: 2,
+        },
+
+        {
+          q: "56.  I like to travel but, ________, I'm very fond of my home.",
+          options: [
+            "A. then again",
+            "B. so there",
+            "C. otherwise",
+            "D. or else",
+          ],
+          answer: 0,
+        },
+
+        {
+          q: "57. I won't have those kids ________ all over my flowerbeds.",
+          options: ["A. run", "B. ran", "C. running", "D. to run"],
+          answer: 2,
+        },
+
+        {
+          q: "58. I got food ________ at that cheap little seafood restaurant.",
+          options: ["A. poison", "B. poisoned", "C. to poison", "D. poisoning"],
+          answer: 1,
+        },
+
+        {
+          q: "59. His new song caught ______ right away and entered the top ten the week after its release.",
+          options: ["A. on", "B. up", "C. off", "D. over"],
+          answer: 0,
+        },
+
+        {
+          q: "60. I'm really thirsty. I could do ______ a cup of tea.",
+          options: ["A. for", "B. at", "C. on", "D. with"],
+          answer: 3,
+        },
+
+        {
+          q: "61. To avoid an argument, she fell ______ her husband's plans.",
+          options: ["A. in for", "B. in with", "C. out of", "D. away from"],
+          answer: 1,
+        },
+
+        {
+          q: "62. I only get ______ watching TV when the children are in bed.",
+          options: ["A. out of", "B. off with", "C. round to", "D. on with"],
+          answer: 2,
+        },
+
+        {
+          q: "63. They offered to buy her a BMW but she's holding _______ a Porsche.",
+          options: ["A. out for", "B. out on", "C. back with", "D. up with"],
+          answer: 0,
+        },
+
+        {
+          q: "64. If we keep _______ the plan exactly, we're certain to succeed.",
+          options: ["A. up", "B. on", "C. to", "D. with"],
+          answer: 2,
+        },
+
+        {
+          q: "65. When they heard the fire alarm, the audience made _______ the exit.",
+          options: ["A. into", "B. up", "C. over", "D. for"],
+          answer: 3,
+        },
+      ];
+
+      const quiz = document.getElementById("quiz");
+
+      questions.forEach((item, index) => {
+        let html = `<div class="question">
+      <p><b>${item.q}</b></p>`;
+        item.options.forEach((op, i) => {
+          html += `
+      <label>
+      <input type="radio" name="q${index}" value="${i}">
+      ${op}
+      </label><br>`;
+        });
+        html += `<div id="r${index}" class="result"></div></div>`;
+        quiz.innerHTML += html;
+      });
+
+      function checkAnswers() {
+        let score = 0;
+
+        questions.forEach((item, index) => {
+          const ans = document.querySelector(`input[name=q${index}]:checked`);
+          const result = document.getElementById(`r${index}`);
+
+          if (ans) {
+            if (Number(ans.value) === item.answer) {
+              score++;
+              result.innerHTML = "<span class='correct'>✔ Correct</span>";
+            } else {
+              result.innerHTML = `<span class='wrong'>✘ Wrong. Correct answer: ${item.options[item.answer]}</span>`;
+            }
+          } else {
+            result.innerHTML = `<span class='wrong'>No answer. Correct answer: ${item.options[item.answer]}</span>`;
+          }
+        });
+
+        document.getElementById("score").innerHTML =
+          `Score: ${score}/${questions.length}`;
+      }
+    </script>
+  </body>
+</html>

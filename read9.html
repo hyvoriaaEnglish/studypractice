@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Reading 9 - Greenwashing</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>
+        Reading 9 - Greenwashing: When Sustainability Becomes a Marketing
+        Strategy
+      </h1>
+
+      <div
+        class="passage"
+        style="background: #e8f5e9; border-left: 6px solid #43a047"
+      >
+        <h2>Greenwashing: When Sustainability Becomes a Marketing Strategy</h2>
+
+        <p>
+          As environmental concerns have become increasingly prominent, many
+          companies have sought to present themselves as environmentally
+          responsible. However, not all of these claims accurately reflect a
+          company's practices. The term "greenwashing" refers to the practice of
+          misleading consumers into believing that a product, service, or
+          organization is more environmentally friendly than it actually is.
+          Companies may use vague labels such as "eco-friendly" or "natural"
+          without providing substantial evidence to support these claims. As a
+          result, consumers may struggle to distinguish genuinely sustainable
+          businesses from those merely attempting to improve their public image.
+        </p>
+
+        <p>
+          Critics argue that greenwashing can undermine environmental progress
+          by creating a false impression of sustainability. When consumers
+          believe they are supporting environmentally responsible companies,
+          they may become less likely to investigate a firm's actual impact.
+          Furthermore, businesses that genuinely invest in sustainable practices
+          may face unfair competition from companies that simply market
+          themselves as "green." Consequently, experts emphasize the importance
+          of transparency, independent certification, and stricter regulations
+          to ensure that environmental claims are both accurate and verifiable.
+        </p>
+      </div>
+
+      <div id="quiz"></div>
+    </div>
+
+    <script>
+      const questions = [
+        {
+          q: "1. What is the main purpose of the passage?",
+          a: [
+            "To promote environmentally friendly products.",
+            "To explain the concept of greenwashing and its consequences.",
+            "To criticize consumers for caring about the environment.",
+            "To compare different environmental regulations.",
+          ],
+          correct: 1,
+        },
+
+        {
+          q: "2. What can be inferred about companies that engage in greenwashing?",
+          a: [
+            "They always violate environmental laws.",
+            "They may prioritize public image over genuine sustainability.",
+            "They invest heavily in environmental protection.",
+            "They avoid making environmental claims.",
+          ],
+          correct: 1,
+        },
+
+        {
+          q: "3. The word 'prominent' in paragraph 1 is closest in meaning to:",
+          a: [
+            "controversial",
+            "insignificant",
+            "important and noticeable",
+            "temporary",
+          ],
+          correct: 2,
+        },
+
+        {
+          q: "4. Which detail best supports the idea that greenwashing can mislead consumers?",
+          a: [
+            "Environmental concerns have become increasingly prominent.",
+            "Companies have sought to present themselves as environmentally responsible.",
+            "Companies may use vague labels such as 'eco-friendly' or 'natural' without substantial evidence.",
+            "Experts emphasize the importance of regulations.",
+          ],
+          correct: 2,
+        },
+
+        {
+          q: "5. Why does the author mention labels such as 'eco-friendly' and 'natural'?",
+          a: [
+            "To provide examples of claims that may be used deceptively.",
+            "To recommend environmentally friendly products.",
+            "To define sustainability.",
+            "To criticize government policies.",
+          ],
+          correct: 0,
+        },
+
+        {
+          q: "6. What is the primary function of the second paragraph?",
+          a: [
+            "To define greenwashing.",
+            "To discuss the negative consequences of greenwashing and potential solutions.",
+            "To compare different industries.",
+            "To explain consumer behavior.",
+          ],
+          correct: 1,
+        },
+
+        {
+          q: "7. Which action would most effectively reduce the impact of greenwashing?",
+          a: [
+            "Increasing the number of environmental advertisements.",
+            "Requiring independent verification of environmental claims.",
+            "Allowing companies to define sustainability for themselves.",
+            "Reducing consumer access to environmental information.",
+          ],
+          correct: 1,
+        },
+
+        {
+          q: "8. Which of the following best summarizes the passage?",
+          a: [
+            "Greenwashing is a marketing practice that can mislead consumers and hinder genuine sustainability efforts, making transparency and verification increasingly important.",
+            "Most environmentally friendly companies engage in misleading advertising.",
+            "Consumers are responsible for environmental problems.",
+            "Governments should ban all environmental claims in advertising.",
+          ],
+          correct: 0,
+        },
+      ];
+      const quiz = document.getElementById("quiz");
+
+      questions.forEach((item, index) => {
+        let html = `<div class="question">
+<h3>${item.q}</h3>`;
+
+        item.a.forEach((choice, i) => {
+          const letter = ["A", "B", "C", "D"][i];
+
+          html += `
+<button class="option"
+onclick="check(this,${i === item.correct},'ans${index}')">
+${letter}. ${choice}
+</button>
+`;
+        });
+
+        html += `
+<div id="ans${index}" class="answer"></div>
+</div>
+<hr>
+`;
+
+        quiz.innerHTML += html;
+      });
+
+      function check(button, correct, id) {
+        let buttons = button.parentElement.querySelectorAll(".option");
+
+        buttons.forEach((btn) => (btn.disabled = true));
+
+        if (correct) {
+          button.classList.add("correct");
+          document.getElementById(id).innerHTML = "✅ Correct!";
+        } else {
+          button.classList.add("wrong");
+          document.getElementById(id).innerHTML =
+            "❌ Wrong! The correct answer is highlighted.";
+
+          buttons.forEach((btn) => {
+            if (btn.getAttribute("onclick").includes("true")) {
+              btn.classList.add("correct");
+            }
+          });
+        }
+      }
+    </script>
+  </body>
+</html>

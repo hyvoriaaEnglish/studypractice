@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reading 7 - Opportunity Cost</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Reading 7 - Opportunity Cost: The Hidden Price of Every Decision</h1>
+
+      <div class="passage">
+        <h2>Opportunity Cost: The Hidden Price of Every Decision</h2>
+
+        <p>
+          In economics, opportunity cost refers to the value of the best
+          alternative that is sacrificed when a choice is made. Because
+          resources such as time, money, and labor are limited, individuals and
+          businesses must constantly decide how to allocate them. For example, a
+          student who spends an evening watching television instead of studying
+          may forgo the opportunity to improve academic performance. Similarly,
+          a company that invests heavily in one project may lose the chance to
+          invest in another potentially profitable venture. Thus, every decision
+          carries a cost, even if no money is directly spent.
+        </p>
+
+        <p>
+          Understanding opportunity cost is essential for effective
+          decision-making. By considering what must be given up, individuals can
+          evaluate the true consequences of their choices rather than focusing
+          solely on immediate benefits. However, opportunity costs are often
+          difficult to measure because the outcomes of rejected alternatives are
+          uncertain. Nevertheless, economists argue that recognizing these
+          hidden trade-offs leads to more rational and informed decisions in
+          both personal and professional contexts.
+        </p>
+      </div>
+
+      <div id="quiz"></div>
+    </div>
+
+    <script>
+      const questions = [
+        {
+          q: "1. What is the main idea of the passage?",
+          a: [
+            "Money is the most important factor in decision-making.",
+            "Opportunity cost is a key economic concept that helps people evaluate the true consequences of their choices.",
+            "Businesses face more difficult decisions than individuals.",
+            "Opportunity costs can always be calculated precisely.",
+          ],
+          correct: 1,
+        },
+
+        {
+          q: "2. According to the passage, what is opportunity cost?",
+          a: [
+            "The amount of money spent on a decision.",
+            "The value of the best alternative that is forgone.",
+            "A financial penalty imposed by governments.",
+            "The profit earned from an investment.",
+          ],
+          correct: 1,
+        },
+
+        {
+          q: "3. The word 'allocate' in paragraph 1 is closest in meaning to:",
+          a: ["distribute", "eliminate", "estimate", "increase"],
+          correct: 0,
+        },
+
+        {
+          q: "4. What can be inferred from the example of the student in paragraph 1?",
+          a: [
+            "Watching television is always unproductive.",
+            "Every use of time involves giving up another possible activity.",
+            "Academic success depends entirely on studying.",
+            "Opportunity cost applies only to students.",
+          ],
+          correct: 1,
+        },
+
+        {
+          q: "5. What does the word 'them' in paragraph 1 refer to?",
+          a: ["decisions", "resources", "businesses", "alternatives"],
+          correct: 1,
+        },
+
+        {
+          q: "6. Why does the author provide examples involving both a student and a company?",
+          a: [
+            "To show that opportunity cost applies in a variety of situations.",
+            "To compare education and business.",
+            "To prove that students make poor decisions.",
+            "To emphasize the importance of profits.",
+          ],
+          correct: 0,
+        },
+
+        {
+          q: "7. The word 'forgo' is closest in meaning to:",
+          a: ["gain", "postpone", "give up", "discover"],
+          correct: 2,
+        },
+
+        {
+          q: "8. What is the primary function of the second paragraph?",
+          a: [
+            "To define opportunity cost.",
+            "To explain why opportunity cost is useful and difficult to evaluate.",
+            "To criticize economic theories.",
+            "To compare different types of costs.",
+          ],
+          correct: 1,
+        },
+
+        {
+          q: "9. Which scenario best illustrates the concept of opportunity cost?",
+          a: [
+            "A student receives a scholarship after earning excellent grades.",
+            "An investor loses money because of a market crash.",
+            "An entrepreneur chooses to start a business instead of accepting a stable job offer.",
+            "A company pays taxes on its profits.",
+          ],
+          correct: 2,
+        },
+
+        {
+          q: "10. Which statement would the author most likely agree with?",
+          a: [
+            "People should focus only on the benefits of a decision.",
+            "Opportunity cost is irrelevant when no money is involved.",
+            "Good decisions require consideration of both chosen and rejected alternatives.",
+            "Opportunity costs can be known with complete certainty.",
+          ],
+          correct: 2,
+        },
+      ];
+
+      const quiz = document.getElementById("quiz");
+
+      questions.forEach((item, index) => {
+        let html = `<div class="question">
+<h3>${item.q}</h3>`;
+
+        item.a.forEach((choice, i) => {
+          const letter = ["A", "B", "C", "D"][i];
+
+          html += `
+<button class="option"
+onclick="check(this,${i === item.correct},'ans${index}')">
+${letter}. ${choice}
+</button>
+`;
+        });
+
+        html += `
+<div id="ans${index}" class="answer"></div>
+</div>
+<hr>
+`;
+
+        quiz.innerHTML += html;
+      });
+
+      function check(button, correct, id) {
+        let buttons = button.parentElement.querySelectorAll(".option");
+
+        buttons.forEach((btn) => (btn.disabled = true));
+
+        if (correct) {
+          button.classList.add("correct");
+          document.getElementById(id).innerHTML = "✅ Correct!";
+        } else {
+          button.classList.add("wrong");
+          document.getElementById(id).innerHTML =
+            "❌ Wrong! The correct answer is highlighted.";
+
+          buttons.forEach((btn) => {
+            if (btn.getAttribute("onclick").includes("true")) {
+              btn.classList.add("correct");
+            }
+          });
+        }
+      }
+    </script>
+  </body>
+</html>

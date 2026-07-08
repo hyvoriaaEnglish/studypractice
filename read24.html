@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Reading 24 - Popcorn Brain</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Reading 24 - Popcorn Brain: The Cost of Constant Stimulation</h1>
+
+      <div
+        class="passage"
+        style="background: #fff8e1; border-left: 6px solid #ffb300"
+      >
+        <h2>Popcorn Brain: The Cost of Constant Stimulation</h2>
+
+        <p>
+          The term "popcorn brain" was coined to describe a mental state in
+          which the brain becomes so accustomed to rapid and continuous
+          stimulation that slower-paced activities begin to feel unrewarding. In
+          an era dominated by social media feeds, short-form videos, instant
+          messaging, and algorithm-driven content, individuals are exposed to an
+          unprecedented volume of information competing for their attention.
+          While such technologies offer convenience and entertainment, some
+          researchers argue that they may also alter the way people process
+          information and allocate cognitive resources.
+        </p>
+
+        <p>
+          One concern is that constant digital stimulation may reduce an
+          individual's tolerance for boredom. Historically, periods of boredom
+          often encouraged reflection, creativity, and problem-solving. However,
+          when every idle moment can be filled with a swipe, click, or
+          notification, opportunities for sustained thought may become
+          increasingly rare. Some studies suggest that frequent switching
+          between tasks can impair concentration and make it more difficult to
+          engage in activities requiring prolonged attention, such as reading
+          complex texts or completing demanding academic work.
+        </p>
+
+        <p>
+          Critics of the popcorn brain hypothesis caution against drawing overly
+          simplistic conclusions. They argue that technology itself is not
+          inherently detrimental; rather, the effects depend largely on how it
+          is used. Digital tools can facilitate learning, collaboration, and
+          access to knowledge when employed intentionally. Furthermore,
+          establishing a direct causal relationship between technology use and
+          declining attention spans remains challenging, as numerous social,
+          educational, and psychological factors may also influence cognitive
+          performance.
+        </p>
+
+        <p>
+          Nevertheless, the debate surrounding popcorn brain highlights a
+          broader question about the relationship between technology and human
+          cognition. If individuals become increasingly conditioned to seek
+          immediate rewards, they may find it more difficult to tolerate delayed
+          gratification or engage deeply with complex ideas. Whether popcorn
+          brain represents a genuine neurological phenomenon or merely a
+          cultural concern, it has sparked important discussions about
+          attention, self-regulation, and the long-term consequences of living
+          in a highly connected world.
+        </p>
+      </div>
+
+      <div id="quiz"></div>
+    </div>
+
+    <script>
+      const questions = [
+        {
+          q: "1. Which of the following best expresses the central argument of the passage?",
+          a: [
+            "Technology has been proven to damage the human brain.",
+            "Popcorn brain is a neurological disorder recognized by psychologists.",
+            "Constant digital stimulation may affect attention, although its impact remains debated.",
+            "Social media should be regulated to protect cognitive health.",
+          ],
+          correct: 2,
+        },
+
+        {
+          q: '2. The word "allocate" in paragraph 1 is closest in meaning to:',
+          a: ["distribute", "conceal", "preserve", "intensify"],
+          correct: 0,
+        },
+
+        {
+          q: "3. Why does the author mention boredom in paragraph 2?",
+          a: [
+            "To demonstrate that boredom has no practical value.",
+            "To challenge the assumption that technology improves productivity.",
+            "To illustrate a potential consequence of constant stimulation.",
+            "To explain why people prefer social media to reading.",
+          ],
+          correct: 2,
+        },
+
+        {
+          q: '4. The phrase "overly simplistic conclusions" most nearly suggests that some conclusions are:',
+          a: [
+            "supported by substantial evidence.",
+            "excessively narrow or lacking nuance.",
+            "difficult for ordinary people to understand.",
+            "based on neurological research.",
+          ],
+          correct: 1,
+        },
+
+        {
+          q: "5. Which of the following can be inferred from paragraph 3?",
+          a: [
+            "Researchers have definitively established that technology shortens attention spans.",
+            "Technology affects everyone in exactly the same way.",
+            "Factors other than technology may contribute to attention-related problems.",
+            "Digital tools are generally more harmful than beneficial.",
+          ],
+          correct: 2,
+        },
+
+        {
+          q: "6. The author's attitude toward the popcorn brain hypothesis can best be described as:",
+          a: [
+            "skeptical but open-minded.",
+            "entirely dismissive.",
+            "strongly supportive.",
+            "emotionally concerned.",
+          ],
+          correct: 0,
+        },
+
+        {
+          q: '7. The word "conditioned" in paragraph 4 most nearly means:',
+          a: [
+            "trained through repeated experience.",
+            "physically restricted.",
+            "medically treated.",
+            "naturally gifted.",
+          ],
+          correct: 0,
+        },
+
+        {
+          q: "8. Which statement would the author most likely agree with?",
+          a: [
+            "The dangers of technology have been greatly exaggerated.",
+            "Human cognition is influenced by a combination of factors, including technology use.",
+            "People should completely abandon digital devices.",
+            "Attention spans have declined solely because of social media.",
+          ],
+          correct: 1,
+        },
+
+        {
+          q: "9. What function does paragraph 3 serve in the overall structure of the passage?",
+          a: [
+            "It provides historical background.",
+            "It introduces evidence that fully confirms the hypothesis.",
+            "It presents a counterargument and qualifications to the claim.",
+            "It summarizes the author's final conclusion.",
+          ],
+          correct: 2,
+        },
+
+        {
+          q: "10. The passage suggests that delayed gratification is most closely associated with:",
+          a: [
+            "responding immediately to notifications.",
+            "consuming short-form content.",
+            "maintaining focus despite the absence of instant rewards.",
+            "avoiding technology altogether.",
+          ],
+          correct: 2,
+        },
+
+        {
+          q: "11. Which of the following, if true, would most strengthen the popcorn brain hypothesis?",
+          a: [
+            "Students who frequently switch between digital tasks perform significantly worse on tests requiring sustained concentration.",
+            "Many people report enjoying social media.",
+            "Digital technology has increased access to educational resources.",
+            "Attention spans vary among individuals.",
+          ],
+          correct: 0,
+        },
+
+        {
+          q: "12. Which of the following best captures the tone of the passage?",
+          a: [
+            "Alarmist and pessimistic.",
+            "Analytical and balanced.",
+            "Humorous and informal.",
+            "Passionate and persuasive.",
+          ],
+          correct: 1,
+        },
+      ];
+      const quiz = document.getElementById("quiz");
+
+      questions.forEach((item, index) => {
+        let html = `<div class="question">
+<h3>${item.q}</h3>`;
+
+        item.a.forEach((choice, i) => {
+          const letter = ["A", "B", "C", "D"][i];
+
+          html += `
+<button class="option"
+onclick="check(this,${i === item.correct},'ans${index}')">
+${letter}. ${choice}
+</button>
+`;
+        });
+
+        html += `
+<div id="ans${index}" class="answer"></div>
+</div>
+<hr>
+`;
+
+        quiz.innerHTML += html;
+      });
+
+      function check(button, correct, id) {
+        let buttons = button.parentElement.querySelectorAll(".option");
+
+        buttons.forEach((btn) => (btn.disabled = true));
+
+        if (correct) {
+          button.classList.add("correct");
+
+          document.getElementById(id).innerHTML = "✅ Correct!";
+        } else {
+          button.classList.add("wrong");
+
+          document.getElementById(id).innerHTML =
+            "❌ Wrong! The correct answer is highlighted.";
+
+          buttons.forEach((btn) => {
+            if (btn.getAttribute("onclick").includes("true")) {
+              btn.classList.add("correct");
+            }
+          });
+        }
+      }
+    </script>
+  </body>
+</html>

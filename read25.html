@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Reading 25 - The Ambivert Advantage</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Reading 25 - The Ambivert Advantage</h1>
+
+      <div
+        class="passage"
+        style="background: #f1f8e9; border-left: 6px solid #7cb342"
+      >
+        <h2>The Ambivert Advantage</h2>
+
+        <p>
+          For decades, personality psychologists have often categorized
+          individuals as either introverts or extroverts. Introverts are
+          generally described as people who gain energy from solitude and tend
+          to prefer calm environments, whereas extroverts are energized by
+          social interaction and external stimulation. However, an increasing
+          body of research suggests that many individuals do not fit neatly into
+          either category. Instead, they occupy a middle ground known as
+          ambiversion.
+        </p>
+
+        <p>
+          Ambiverts exhibit characteristics associated with both introversion
+          and extroversion, adjusting their behavior according to the demands of
+          a particular situation. For example, an ambivert may enjoy engaging in
+          lively conversations at a social gathering while also appreciating
+          periods of solitude to recharge. This behavioral flexibility has
+          attracted considerable interest among psychologists, who argue that
+          ambiverts may possess certain social advantages. Because they are
+          comfortable both speaking and listening, ambiverts are often capable
+          of adapting their communication style to different contexts and
+          personalities.
+        </p>
+
+        <p>
+          Some researchers have even proposed that ambiverts may outperform both
+          introverts and extroverts in specific professional settings. In
+          sales-related occupations, for instance, excessive extroversion can
+          sometimes lead individuals to dominate conversations, while excessive
+          introversion may discourage active engagement with clients. Ambiverts,
+          by contrast, may strike a more effective balance between persuasion
+          and attentiveness. Nevertheless, critics caution that personality
+          traits exist on a spectrum rather than within rigid categories. As a
+          result, attempting to classify individuals too narrowly may
+          oversimplify the complexity of human behavior.
+        </p>
+
+        <p>
+          The growing popularity of the ambivert concept reflects a broader
+          shift in personality psychology. Rather than viewing personality
+          traits as fixed and mutually exclusive, many contemporary researchers
+          emphasize adaptability and context. From this perspective, effective
+          social interaction depends not merely on whether someone is
+          introverted or extroverted, but on how well they adjust their behavior
+          to meet the demands of different situations. Consequently, the success
+          of ambiverts may stem less from occupying a specific position on a
+          personality scale and more from their capacity for behavioral
+          flexibility.
+        </p>
+      </div>
+
+      <div id="quiz"></div>
+    </div>
+
+    <script>
+      const questions = [
+        {
+          q: "1. What is the primary purpose of the passage?",
+          a: [
+            "To argue that extroverts are more successful than introverts.",
+            "To explain the concept of ambiversion and its potential advantages.",
+            "To criticize traditional personality theories.",
+            "To prove that personality traits can be changed completely.",
+          ],
+          correct: 1,
+        },
+
+        {
+          q: '2. The word "occupy" in paragraph 1 most nearly means:',
+          a: ["control", "replace", "inhabit", "create"],
+          correct: 2,
+        },
+
+        {
+          q: "3. According to the passage, ambiverts are distinguished primarily by their:",
+          a: [
+            "preference for social interaction over solitude.",
+            "ability to adapt their behavior to different situations.",
+            "tendency to avoid extreme emotions.",
+            "superior intellectual abilities.",
+          ],
+          correct: 1,
+        },
+
+        {
+          q: '4. The word "attentiveness" in paragraph 3 is closest in meaning to:',
+          a: [
+            "confidence",
+            "persistence",
+            "careful listening and awareness",
+            "competitiveness",
+          ],
+          correct: 2,
+        },
+
+        {
+          q: "5. Which of the following can be inferred from the passage?",
+          a: [
+            "Most people are pure introverts or pure extroverts.",
+            "Personality categories may not fully capture the complexity of human behavior.",
+            "Ambiverts always perform better in professional environments.",
+            "Introverts cannot become effective communicators.",
+          ],
+          correct: 1,
+        },
+
+        {
+          q: "6. Why does the author discuss sales-related occupations?",
+          a: [
+            "To provide evidence supporting a possible advantage of ambiversion.",
+            "To show that extroverts are ineffective employees.",
+            "To demonstrate that personality has little effect on performance.",
+            "To explain why sales jobs require advanced training.",
+          ],
+          correct: 0,
+        },
+
+        {
+          q: '7. The phrase "strike a more effective balance" in paragraph 3 suggests that ambiverts:',
+          a: [
+            "avoid interacting with difficult people.",
+            "combine multiple strengths without relying excessively on one approach.",
+            "possess greater emotional intelligence than everyone else.",
+            "perform equally well in all situations.",
+          ],
+          correct: 1,
+        },
+
+        {
+          q: "8. What function does the third paragraph serve in the overall argument?",
+          a: [
+            "It introduces a historical perspective.",
+            "It presents practical applications and limitations of the concept.",
+            "It defines key psychological terminology.",
+            "It summarizes the passage.",
+          ],
+          correct: 1,
+        },
+
+        {
+          q: "9. Which statement would the author most likely agree with?",
+          a: [
+            "Human personality should be divided into only two categories.",
+            "Behavioral flexibility may be more important than personality labels alone.",
+            "Introversion is generally less desirable than extroversion.",
+            "Personality traits are entirely determined by social environment.",
+          ],
+          correct: 1,
+        },
+
+        {
+          q: "10. The author's attitude toward the concept of ambiversion is best described as:",
+          a: [
+            "enthusiastic and uncritical.",
+            "skeptical and dismissive.",
+            "analytical and cautiously supportive.",
+            "indifferent and detached.",
+          ],
+          correct: 2,
+        },
+
+        {
+          q: "11. Which of the following would most weaken the argument that ambiverts possess unique professional advantages?",
+          a: [
+            "Evidence that highly successful salespeople are distributed across the entire introversion-extroversion spectrum.",
+            "Research showing that communication skills are important in sales.",
+            "Findings indicating that ambiverts enjoy both social interaction and solitude.",
+            "Data suggesting that some extroverts are effective listeners.",
+          ],
+          correct: 0,
+        },
+
+        {
+          q: "12. Which statement best captures the author's overall message?",
+          a: [
+            "Personality labels are useless and should be abandoned.",
+            "Ambiverts succeed because they are neither introverted nor extroverted.",
+            "Adaptability may be a key factor in effective social and professional functioning.",
+            "Professional success depends primarily on personality type.",
+          ],
+          correct: 2,
+        },
+      ];
+      const quiz = document.getElementById("quiz");
+
+      questions.forEach((item, index) => {
+        let html = `<div class="question">
+<h3>${item.q}</h3>`;
+
+        item.a.forEach((choice, i) => {
+          const letter = ["A", "B", "C", "D"][i];
+
+          html += `
+<button class="option"
+onclick="check(this,${i === item.correct},'ans${index}')">
+${letter}. ${choice}
+</button>
+`;
+        });
+
+        html += `
+<div id="ans${index}" class="answer"></div>
+</div>
+<hr>
+`;
+
+        quiz.innerHTML += html;
+      });
+
+      function check(button, correct, id) {
+        let buttons = button.parentElement.querySelectorAll(".option");
+
+        buttons.forEach((btn) => (btn.disabled = true));
+
+        if (correct) {
+          button.classList.add("correct");
+
+          document.getElementById(id).innerHTML = "✅ Correct!";
+        } else {
+          button.classList.add("wrong");
+
+          document.getElementById(id).innerHTML =
+            "❌ Wrong! The correct answer is highlighted.";
+
+          buttons.forEach((btn) => {
+            if (btn.getAttribute("onclick").includes("true")) {
+              btn.classList.add("correct");
+            }
+          });
+        }
+      }
+    </script>
+  </body>
+</html>

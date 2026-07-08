@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Reading 20 - Superhero Action Figures</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Reading 20 - Superhero Action Figures</h1>
+
+      <div
+        class="passage"
+        style="background: #ede7f6; border-left: 6px solid #5e35b1"
+      >
+        <h2>Superhero Action Figures</h2>
+
+        <p>
+          Many children and collectors are <b>1. ____</b> by superhero action
+          figures. These models are designed to <b>2. ____</b> popular
+          characters with remarkable accuracy, often featuring detailed
+          costumes, accessories, and movable joints. <b>3. ____</b>, they are
+          not only used as toys but also displayed as collectibles. Some rare
+          models can become highly valuable over time, especially if they are
+          produced in <b>4. ____</b> quantities.
+        </p>
+
+        <p>
+          The popularity of superhero figures reflects people's admiration
+          <b>5. ____</b> courage, justice, and perseverance. Collectors often
+          spend considerable time and effort searching for specific editions to
+          complete their collections. In addition, advances in manufacturing
+          technology have significantly <b>6. ____</b> the quality of these
+          models, making them more realistic than ever before. Consequently,
+          superhero action figures continue to attract enthusiasts of all ages
+          around the world.
+        </p>
+      </div>
+
+      <div id="quiz"></div>
+    </div>
+
+    <script>
+      const questions = [
+        {
+          q: "1.",
+          a: ["appalled", "fascinated", "fed up", "compelled"],
+          correct: 1,
+        },
+
+        {
+          q: "2.",
+          a: ["resemble", "differentiate", "differ", "replicate"],
+          correct: 3,
+        },
+
+        {
+          q: "3.",
+          a: ["for instance", "as a consequence", "nonetheless", "instead"],
+          correct: 1,
+        },
+
+        {
+          q: "4.",
+          a: ["infinite", "limited", "major", "vast"],
+          correct: 1,
+        },
+
+        {
+          q: "5.",
+          a: ["with", "to", "for", "of"],
+          correct: 2,
+        },
+
+        {
+          q: "6.",
+          a: ["impaired", "enriched", "diminished", "enhanced"],
+          correct: 3,
+        },
+      ];
+      const quiz = document.getElementById("quiz");
+
+      questions.forEach((item, index) => {
+        let html = `<div class="question">
+<h3>${item.q}</h3>`;
+
+        item.a.forEach((choice, i) => {
+          const letter = ["A", "B", "C", "D"][i];
+
+          html += `
+<button class="option"
+onclick="check(this,${i === item.correct},'ans${index}')">
+${letter}. ${choice}
+</button>
+`;
+        });
+
+        html += `
+<div id="ans${index}" class="answer"></div>
+</div>
+<hr>
+`;
+
+        quiz.innerHTML += html;
+      });
+
+      function check(button, correct, id) {
+        let buttons = button.parentElement.querySelectorAll(".option");
+
+        buttons.forEach((btn) => (btn.disabled = true));
+
+        if (correct) {
+          button.classList.add("correct");
+
+          document.getElementById(id).innerHTML = "✅ Correct!";
+        } else {
+          button.classList.add("wrong");
+
+          document.getElementById(id).innerHTML =
+            "❌ Wrong! The correct answer is highlighted.";
+
+          buttons.forEach((btn) => {
+            if (btn.getAttribute("onclick").includes("true")) {
+              btn.classList.add("correct");
+            }
+          });
+        }
+      }
+    </script>
+  </body>
+</html>

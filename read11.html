@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Reading 11 - Photobooths</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Reading 11 - Photobooths: Capturing Memories in a Fun Way</h1>
+
+      <div
+        class="passage"
+        style="background: #e3f2fd; border-left: 6px solid #1e88e5"
+      >
+        <h2>Photobooths: Capturing Memories in a Fun Way</h2>
+
+        <p>
+          Photobooths <b>1. ____</b> a popular feature at parties, weddings, and
+          public events. They allow people to <b>2. ____</b> instant
+          photographs, often with amusing props and customized backgrounds.
+          Unlike traditional photography, photobooths encourage
+          <b>3. ____</b> and creativity, making the experience both entertaining
+          and memorable.
+        </p>
+
+        <p>
+          In recent years, digital technology has transformed photobooths by
+          enabling users <b>4. ____</b> filters, animations, and instant sharing
+          options. <b>5. ____</b>, photobooths are no longer just a tool for
+          taking pictures; they have become a form of social interaction that
+          helps people create and preserve meaningful memories.
+        </p>
+      </div>
+
+      <div id="quiz"></div>
+    </div>
+
+    <script>
+      const questions = [
+        {
+          q: "1.",
+          a: ["becomes", "have become", "have became", "became"],
+          correct: 1,
+        },
+
+        {
+          q: "2.",
+          a: ["take", "make", "do", "bring"],
+          correct: 0,
+        },
+
+        {
+          q: "3.",
+          a: ["spontaneity", "resilience", "turbulence", "impulse"],
+          correct: 0,
+        },
+
+        {
+          q: "4.",
+          a: ["adding", "to add", "add", "to be added"],
+          correct: 1,
+        },
+
+        {
+          q: "5.",
+          a: ["Instead", "As a result", "Moreover", "Nonetheless"],
+          correct: 1,
+        },
+      ];
+      const quiz = document.getElementById("quiz");
+
+      questions.forEach((item, index) => {
+        let html = `<div class="question">
+<h3>${item.q}</h3>`;
+
+        item.a.forEach((choice, i) => {
+          const letter = ["A", "B", "C", "D"][i];
+
+          html += `
+<button class="option"
+onclick="check(this,${i === item.correct},'ans${index}')">
+${letter}. ${choice}
+</button>
+`;
+        });
+
+        html += `
+<div id="ans${index}" class="answer"></div>
+</div>
+<hr>
+`;
+
+        quiz.innerHTML += html;
+      });
+
+      function check(button, correct, id) {
+        let buttons = button.parentElement.querySelectorAll(".option");
+
+        buttons.forEach((btn) => (btn.disabled = true));
+
+        if (correct) {
+          button.classList.add("correct");
+
+          document.getElementById(id).innerHTML = "✅ Correct!";
+        } else {
+          button.classList.add("wrong");
+
+          document.getElementById(id).innerHTML =
+            "❌ Wrong! The correct answer is highlighted.";
+
+          buttons.forEach((btn) => {
+            if (btn.getAttribute("onclick").includes("true")) {
+              btn.classList.add("correct");
+            }
+          });
+        }
+      }
+    </script>
+  </body>
+</html>

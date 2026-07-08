@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Reading 23 - First Love in Adolescence</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Reading 23 - First Love in Adolescence</h1>
+
+      <div
+        class="passage"
+        style="background: #fce4ec; border-left: 6px solid #d81b60"
+      >
+        <h2>First Love in Adolescence</h2>
+
+        <p>
+          Adolescent romance, often referred to as "school-age love," is a
+          common experience during the teenage years. As young people develop
+          emotionally and socially, they become more aware of their feelings
+          toward others. These early romantic relationships are often
+          characterized by intense emotions, excitement, and curiosity. Although
+          such relationships may not always last, they frequently leave a
+          lasting impression on those who experience them.
+        </p>
+
+        <p>
+          Psychologists suggest that first love plays an important role in
+          personal development. Through romantic experiences, teenagers learn
+          valuable skills such as communication, empathy, and emotional
+          regulation. They also begin to form expectations about future
+          relationships. However, because adolescents are still developing
+          emotionally, they may struggle to cope with rejection, jealousy, or
+          heartbreak. As a result, these experiences can sometimes cause stress
+          and distraction from academic responsibilities.
+        </p>
+
+        <p>
+          Despite these challenges, many researchers argue that adolescent
+          romance should not be viewed solely as a negative influence. When
+          balanced with other aspects of life, healthy relationships can
+          contribute to emotional maturity and self-understanding. Rather than
+          preventing young people from experiencing romantic feelings, experts
+          often emphasize the importance of guidance and open communication. In
+          this way, first love can become a meaningful part of growing up rather
+          than merely a source of distraction.
+        </p>
+      </div>
+
+      <div id="quiz"></div>
+    </div>
+
+    <script>
+      const questions = [
+        {
+          q: "1. What is the main purpose of the passage?",
+          a: [
+            "To discourage teenagers from forming romantic relationships.",
+            "To explain the role of adolescent romance in personal development.",
+            "To compare teenage love with adult relationships.",
+            "To demonstrate that first love usually leads to academic failure.",
+          ],
+          correct: 1,
+        },
+
+        {
+          q: '2. The word "characterized" in paragraph 1 is closest in meaning to:',
+          a: ["ignored", "defined", "replaced", "restricted"],
+          correct: 1,
+        },
+
+        {
+          q: "3. According to the passage, first love often leaves a lasting impression because it:",
+          a: [
+            "usually results in marriage.",
+            "occurs during an important stage of emotional development.",
+            "guarantees emotional maturity.",
+            "is encouraged by schools.",
+          ],
+          correct: 1,
+        },
+
+        {
+          q: "4. Which of the following is NOT mentioned as a skill that teenagers may develop through romantic experiences?",
+          a: [
+            "Empathy",
+            "Communication",
+            "Emotional regulation",
+            "Financial management",
+          ],
+          correct: 3,
+        },
+
+        {
+          q: '5. The word "they" in paragraph 2 refers to:',
+          a: ["researchers", "psychologists", "teenagers", "relationships"],
+          correct: 2,
+        },
+
+        {
+          q: "6. What can be inferred from the passage?",
+          a: [
+            "Emotional challenges are a normal part of adolescent relationships.",
+            "Most teenage relationships have a negative impact on personal growth.",
+            "Schools should prohibit romantic relationships among students.",
+            "Teenagers are emotionally mature enough to handle all relationship problems.",
+          ],
+          correct: 0,
+        },
+
+        {
+          q: "7. The author mentions rejection, jealousy, and heartbreak primarily to:",
+          a: [
+            "criticize adolescent relationships.",
+            "illustrate some difficulties associated with first love.",
+            "prove that teenage romance is unhealthy.",
+            "explain why adults avoid relationships.",
+          ],
+          correct: 1,
+        },
+
+        {
+          q: "8. Which of the following best describes the author's attitude toward adolescent romance?",
+          a: [
+            "Strongly disapproving.",
+            "Entirely supportive.",
+            "Balanced and objective.",
+            "Uninterested.",
+          ],
+          correct: 2,
+        },
+
+        {
+          q: '9. The word "solely" in paragraph 3 is closest in meaning to:',
+          a: ["partly", "only", "occasionally", "naturally"],
+          correct: 1,
+        },
+
+        {
+          q: "10. Which statement best summarizes the passage?",
+          a: [
+            "First love is mainly a distraction that prevents academic success.",
+            "Adolescent romance is a complex experience that presents both challenges and opportunities for personal growth.",
+            "Teenagers should avoid romantic relationships until adulthood.",
+            "Emotional maturity can only be achieved through romantic experiences.",
+          ],
+          correct: 1,
+        },
+      ];
+      const quiz = document.getElementById("quiz");
+
+      questions.forEach((item, index) => {
+        let html = `<div class="question">
+<h3>${item.q}</h3>`;
+
+        item.a.forEach((choice, i) => {
+          const letter = ["A", "B", "C", "D"][i];
+
+          html += `
+<button class="option"
+onclick="check(this,${i === item.correct},'ans${index}')">
+${letter}. ${choice}
+</button>
+`;
+        });
+
+        html += `
+<div id="ans${index}" class="answer"></div>
+</div>
+<hr>
+`;
+
+        quiz.innerHTML += html;
+      });
+
+      function check(button, correct, id) {
+        let buttons = button.parentElement.querySelectorAll(".option");
+
+        buttons.forEach((btn) => (btn.disabled = true));
+
+        if (correct) {
+          button.classList.add("correct");
+
+          document.getElementById(id).innerHTML = "✅ Correct!";
+        } else {
+          button.classList.add("wrong");
+
+          document.getElementById(id).innerHTML =
+            "❌ Wrong! The correct answer is highlighted.";
+
+          buttons.forEach((btn) => {
+            if (btn.getAttribute("onclick").includes("true")) {
+              btn.classList.add("correct");
+            }
+          });
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz 66-83</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f4f4;
+        padding: 20px;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      .question {
+        background: #fff;
+        margin: 20px 0;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+      }
+
+      label {
+        display: block;
+        margin: 6px 0;
+        cursor: pointer;
+      }
+
+      .correct {
+        color: green;
+        font-weight: bold;
+      }
+
+      .wrong {
+        color: red;
+        font-weight: bold;
+      }
+
+      button {
+        padding: 12px 25px;
+        font-size: 18px;
+        margin: 30px auto;
+        display: block;
+      }
+
+      #score {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>English Quiz (66–83)</h1>
+
+    <div id="quiz"></div>
+
+    <button onclick="checkAnswers()">Check Answers</button>
+
+    <h2 id="score"></h2>
+
+    <script>
+      const questions = [
+        {
+          question: `66. The lecturer had difficulty in putting _______ his ideas.`,
+          options: ["A. across", "B. forward", "C. on", "D. through"],
+          answer: 0,
+        },
+
+        {
+          question: `67. Jane was so determined to become a model that her parents couldn't talk her _______ it.`,
+          options: [
+            "A. down to",
+            "B. round about",
+            "C. out of",
+            "D. away from",
+          ],
+          answer: 2,
+        },
+
+        {
+          question: `68. I'm trying to work _______ how this device was put together.`,
+          options: ["A. on", "B. with", "C. for", "D. out"],
+          answer: 3,
+        },
+
+        {
+          question: `69. Fighting among rebel soldiers _______ last night and a curfew has now been imposed on the city.`,
+          options: [
+            "A. enhanced",
+            "B. aggravated",
+            "C. heightened",
+            "D. intensified",
+          ],
+          answer: 3,
+        },
+
+        {
+          question: `70. "Did the principal of the school answer you yet?"<br>"No, but _______ let you know."`,
+          options: ["A. might", "B. could", "C. would", "D. should"],
+          answer: 3,
+        },
+
+        {
+          question: `71. _______ help me make this decision. I'm just so unsure of which direction to take for my future.`,
+          options: [
+            "A. I'd sooner you will",
+            "B. I wish you will",
+            "C. If only you could",
+            "D. I'd rather you",
+          ],
+          answer: 2,
+        },
+
+        {
+          question: `72. _______ we have enough money, where would you like to travel this summer?`,
+          options: [
+            "A. So that",
+            "B. Provided that",
+            "C. Despite the fact that",
+            "D. Unless",
+          ],
+          answer: 1,
+        },
+
+        {
+          question: `73. Twenty people were arrested during the demonstration, of _______ four were charged with obstruction.`,
+          options: ["A. who", "B. whom", "C. which", "D. them"],
+          answer: 1,
+        },
+
+        {
+          question: `74. She was very appreciative _________ all the support she got from her friends.`,
+          options: ["A. of", "B. for", "C. on", "D. with"],
+          answer: 0,
+        },
+        {
+          question: `75. Her latest novel is coming _________ in paperback soon.`,
+          options: ["A. across", "B. off", "C. out", "D. about"],
+          answer: 2,
+        },
+
+        {
+          question: `76. As you've arrived late, you'll have to _________ the time you have lost.`,
+          options: [
+            "A. make up to",
+            "B. do up to",
+            "C. do up for",
+            "D. make up for",
+          ],
+          answer: 3,
+        },
+
+        {
+          question: `77. Mary is jealous _________ her sister because she is much more popular.`,
+          options: ["A. on", "B. of", "C. for", "D. with"],
+          answer: 1,
+        },
+
+        {
+          question: `78. Your skirt needs taking _________; it's too large.`,
+          options: ["A. up", "B. on", "C. over", "D. in"],
+          answer: 3,
+        },
+
+        {
+          question: `79. Can you make _________ the meaning of this passage?`,
+          options: ["A. out", "B. for", "C. up", "D. into"],
+          answer: 0,
+        },
+
+        {
+          question: `80. He's such a hard man to _________ as he's always flitting from one site to another.`,
+          options: [
+            "A. pin in",
+            "B. lock in",
+            "C. narrow down",
+            "D. nail down",
+          ],
+          answer: 3,
+        },
+
+        {
+          question: `81. Don't be put _________ by his manner. He always acts that way.`,
+          options: ["A. on", "B. away", "C. off", "D. down"],
+          answer: 2,
+        },
+
+        {
+          question: `82. His proposal met _________ total opposition from the committee.`,
+          options: ["A. about", "B. by", "C. for", "D. with"],
+          answer: 3,
+        },
+
+        {
+          question: `83. You ought to stand _________ your little brother when the others tease him.`,
+          options: ["A. over with", "B. by", "C. about with", "D. up for"],
+          answer: 3,
+        },
+      ];
+
+      const quiz = document.getElementById("quiz");
+
+      questions.forEach((q, index) => {
+        let html = `<div class="question">
+<p><b>${q.question}</b></p>`;
+
+        q.options.forEach((op, i) => {
+          html += `
+<label>
+<input type="radio" name="q${index}" value="${i}">
+${op}
+</label>`;
+        });
+
+        html += `<p id="result${index}"></p></div>`;
+
+        quiz.innerHTML += html;
+      });
+      function checkAnswers() {
+        let score = 0;
+
+        questions.forEach((q, index) => {
+          const selected = document.querySelector(
+            `input[name="q${index}"]:checked`,
+          );
+          const result = document.getElementById(`result${index}`);
+
+          if (selected) {
+            if (Number(selected.value) === q.answer) {
+              score++;
+              result.innerHTML = "<span class='correct'>✔ Correct</span>";
+            } else {
+              result.innerHTML = `<span class='wrong'>✘ Wrong. Correct answer: ${q.options[q.answer]}</span>`;
+            }
+          } else {
+            result.innerHTML = `<span class='wrong'>✘ No answer. Correct answer: ${q.options[q.answer]}</span>`;
+          }
+        });
+
+        document.getElementById("score").innerHTML =
+          `Your Score: ${score} / ${questions.length}`;
+      }
+    </script>
+  </body>
+</html>

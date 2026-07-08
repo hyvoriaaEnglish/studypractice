@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Reading 18 - Success</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Reading 18 - Success</h1>
+
+      <div
+        class="passage"
+        style="background: #ffebee; border-left: 6px solid #e53935"
+      >
+        <h2>Success</h2>
+
+        <p>
+          Success is often portrayed <b>1. ____</b> the direct result of hard
+          work, but reality is rarely so straightforward. While effort is
+          essential, <b>2. ____</b> outstanding results frequently requires
+          patience, adaptability, and the willingness to learn from failure.
+          Many people <b>3. ____</b> their goals when immediate progress is not
+          visible, unaware that meaningful achievements often
+          <b>4. ____</b> after long periods of seemingly unproductive work.
+          Therefore, those who ultimately succeed are not necessarily the most
+          talented, but those who persist <b>5. ____</b> uncertainty and
+          setbacks.
+        </p>
+      </div>
+
+      <div id="quiz"></div>
+    </div>
+
+    <script>
+      const questions = [
+        {
+          q: "1.",
+          a: ["as", "to", "for", "with"],
+          correct: 0,
+        },
+
+        {
+          q: "2.",
+          a: ["achievement", "accomplishment", "achieving", "accomplished"],
+          correct: 2,
+        },
+
+        {
+          q: "3.",
+          a: ["abandon", "impair", "underestimate", "reach"],
+          correct: 0,
+        },
+
+        {
+          q: "4.",
+          a: ["submerge", "emerge", "immerge", "merge"],
+          correct: 1,
+        },
+
+        {
+          q: "5.",
+          a: ["owing to", "in spite", "notwithstanding", "inasmuch as"],
+          correct: 2,
+        },
+      ];
+      const quiz = document.getElementById("quiz");
+
+      questions.forEach((item, index) => {
+        let html = `<div class="question">
+<h3>${item.q}</h3>`;
+
+        item.a.forEach((choice, i) => {
+          const letter = ["A", "B", "C", "D"][i];
+
+          html += `
+<button class="option"
+onclick="check(this,${i === item.correct},'ans${index}')">
+${letter}. ${choice}
+</button>
+`;
+        });
+
+        html += `
+<div id="ans${index}" class="answer"></div>
+</div>
+<hr>
+`;
+
+        quiz.innerHTML += html;
+      });
+
+      function check(button, correct, id) {
+        let buttons = button.parentElement.querySelectorAll(".option");
+
+        buttons.forEach((btn) => (btn.disabled = true));
+
+        if (correct) {
+          button.classList.add("correct");
+
+          document.getElementById(id).innerHTML = "✅ Correct!";
+        } else {
+          button.classList.add("wrong");
+
+          document.getElementById(id).innerHTML =
+            "❌ Wrong! The correct answer is highlighted.";
+
+          buttons.forEach((btn) => {
+            if (btn.getAttribute("onclick").includes("true")) {
+              btn.classList.add("correct");
+            }
+          });
+        }
+      }
+    </script>
+  </body>
+</html>
