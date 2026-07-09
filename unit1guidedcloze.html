@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guided Cloze Quiz</title>
+
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f4f7fb;
+        max-width: 900px;
+        margin: auto;
+        padding: 30px;
+      }
+
+      h1 {
+        color: #0066cc;
+      }
+
+      .passage {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+        line-height: 1.8;
+      }
+
+      .question {
+        background: white;
+        margin: 18px 0;
+        padding: 18px;
+        border-radius: 10px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+      }
+
+      button {
+        padding: 12px 25px;
+        font-size: 17px;
+        background: #0066cc;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #004999;
+      }
+
+      .correct {
+        color: green;
+        font-weight: bold;
+      }
+
+      .wrong {
+        color: red;
+        font-weight: bold;
+      }
+
+      #score {
+        font-size: 24px;
+        margin-top: 25px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Guided Cloze Practice</h1>
+
+    <div class="passage">
+      <h2>Passage 1 - Community Helpers</h2>
+
+      <p>
+        Community helpers play an important role in our daily lives. They make
+        our neighborhoods safer, cleaner, and more comfortable. For example,
+        firefighters protect people from dangerous fires, while garbage
+        collectors help keep the environment clean. Without these workers, our
+        community would not <b>(1)</b> ______ properly.
+      </p>
+
+      <p>
+        Many community helpers work long hours and often face difficult
+        situations. Although their jobs can be challenging, they continue to
+        serve others because they care about the people around them. In
+        addition, they often <b>(2)</b> ______ with one another to solve
+        problems quickly and effectively.
+      </p>
+
+      <p>
+        It is also important for young people to appreciate the work of
+        community helpers. Schools sometimes invite them to give talks so that
+        students can <b>(3)</b> ______ more about different careers. These
+        activities also encourage children to respect those who make valuable
+        <b>(4)</b> ______ to society.
+      </p>
+
+      <p>
+        Everyone can support community helpers in simple ways, such as following
+        safety rules, recycling waste, and thanking them for their hard work. By
+        doing so, we can help build a stronger and more caring
+        <b>(5)</b> ______.
+      </p>
+    </div>
+
+    <div class="passage">
+      <h2>Passage 2 - Pottery Village</h2>
+
+      <p>
+        Pottery has been an important part of Vietnamese culture for hundreds of
+        years. In many traditional pottery villages, local people still use
+        techniques that have been <b>(6)</b> ______ from one generation to the
+        next. These skills help <b>(7)</b> ______ the country's cultural
+        identity and keep old traditions alive.
+      </p>
+
+      <p>
+        Every skilled <b>(8)</b> ______ spends years learning how to shape clay
+        and decorate products by hand. Although modern factories can produce
+        pottery much faster, many customers still prefer handmade items because
+        each one is <b>(9)</b> ______ and reflects the maker's creativity.
+      </p>
+
+      <p>
+        Today, many pottery villages have become popular <b>(10)</b> ______.
+        Visitors can watch local people working, make their own pottery, and buy
+        beautiful souvenirs. Tourism has also provided new opportunities for
+        local families to <b>(11)</b> ______ a living while continuing their
+        traditional craft.
+      </p>
+
+      <p>
+        However, pottery villages also face several challenges. Young people
+        sometimes leave their hometowns to look for better jobs in big cities.
+        As a result, there are fewer people to <b>(12)</b> ______ the
+        traditional skills to future generations.
+      </p>
+
+      <p>
+        To solve this problem, local governments and businesses are working
+        together to promote pottery through festivals, exhibitions, and online
+        shopping. They also encourage young people to <b>(13)</b> ______ an
+        interest in traditional crafts by offering free training courses.
+      </p>
+
+      <p>
+        Thanks to these efforts, pottery villages continue to attract both
+        domestic and international tourists. They are not only places where
+        beautiful products are made but also symbols of Vietnamese history and
+        culture that should be <b>(14)</b> ______ for many years to come. With
+        support from both local people and visitors, this valuable tradition
+        will <b>(15)</b> ______ to grow in the future.
+      </p>
+    </div>
+
+    <form id="quiz"></form>
+
+    <button onclick="checkQuiz()">Check Answers</button>
+
+    <div id="score"></div>
+
+    <script>
+      const questions = [
+        {
+          q: "1.",
+          options: ["function", "create", "invent", "appear"],
+          answer: 0,
+        },
+
+        {
+          q: "2.",
+          options: ["argue", "cooperate", "compete", "complain"],
+          answer: 1,
+        },
+
+        {
+          q: "3.",
+          options: ["find out", "look after", "give up", "run out"],
+          answer: 0,
+        },
+
+        {
+          q: "4.",
+          options: [
+            "decisions",
+            "contributions",
+            "competitions",
+            "celebrations",
+          ],
+          answer: 1,
+        },
+
+        {
+          q: "5.",
+          options: ["community", "facility", "fragrance", "tradition"],
+          answer: 0,
+        },
+
+        {
+          q: "6.",
+          options: ["passed down", "looked after", "run out of", "cut down"],
+          answer: 0,
+        },
+
+        {
+          q: "7.",
+          options: ["preserve", "destroy", "replace", "reduce"],
+          answer: 0,
+        },
+
+        {
+          q: "8.",
+          options: ["artisan", "electrician", "firefighter", "delivery person"],
+          answer: 0,
+        },
+
+        {
+          q: "9.",
+          options: ["original", "common", "ordinary", "simple"],
+          answer: 0,
+        },
+
+        {
+          q: "10.",
+          options: [
+            "tourist attractions",
+            "communities",
+            "facilities",
+            "factories",
+          ],
+          answer: 0,
+        },
+
+        {
+          q: "11.",
+          options: ["make", "bring", "take", "catch"],
+          answer: 0,
+        },
+
+        {
+          q: "12.",
+          options: ["pass down", "run out of", "get on with", "look around"],
+          answer: 0,
+        },
+
+        {
+          q: "13.",
+          options: ["develop", "waste", "avoid", "lose"],
+          answer: 0,
+        },
+
+        {
+          q: "14.",
+          options: ["preserved", "forgotten", "thrown away", "polluted"],
+          answer: 0,
+        },
+
+        {
+          q: "15.",
+          options: ["continue", "stop", "disappear", "refuse"],
+          answer: 0,
+        },
+      ];
+
+      const form = document.getElementById("quiz");
+
+      questions.forEach((q, index) => {
+        let html = `<div class="question">
+<b>${q.q}</b><br><br>`;
+
+        q.options.forEach((op, i) => {
+          html += `
+<label>
+<input type="radio" name="q${index}" value="${i}">
+${String.fromCharCode(65 + i)}. ${op}
+</label><br>
+`;
+        });
+
+        html += `<p id="r${index}"></p></div>`;
+
+        form.innerHTML += html;
+      });
+
+      function checkQuiz() {
+        event.preventDefault();
+
+        let score = 0;
+
+        questions.forEach((q, index) => {
+          const ans = document.querySelector(`input[name=q${index}]:checked`);
+          const result = document.getElementById(`r${index}`);
+
+          if (ans) {
+            if (Number(ans.value) == q.answer) {
+              score++;
+              result.innerHTML = "✅ Correct";
+              result.className = "correct";
+            } else {
+              result.innerHTML = `❌ Wrong (Correct answer: ${String.fromCharCode(65 + q.answer)})`;
+              result.className = "wrong";
+            }
+          } else {
+            result.innerHTML = `❌ No answer (Correct answer: ${String.fromCharCode(65 + q.answer)})`;
+            result.className = "wrong";
+          }
+        });
+
+        document.getElementById("score").innerHTML =
+          `Your Score: ${score}/${questions.length}`;
+
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: "smooth",
+        });
+      }
+    </script>
+  </body>
+</html>

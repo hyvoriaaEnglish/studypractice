@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>English Vocabulary Quiz</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f5f7fa;
+        padding: 30px;
+        max-width: 900px;
+        margin: auto;
+      }
+
+      h1 {
+        color: #0b5ed7;
+      }
+
+      .question {
+        background: white;
+        padding: 18px;
+        margin: 18px 0;
+        border-radius: 10px;
+        box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+      }
+
+      button {
+        padding: 12px 25px;
+        font-size: 17px;
+        background: #0b5ed7;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #084298;
+      }
+
+      .correct {
+        color: green;
+        font-weight: bold;
+      }
+
+      .wrong {
+        color: red;
+        font-weight: bold;
+      }
+
+      #score {
+        font-size: 24px;
+        margin-top: 25px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>English Vocabulary Quiz</h1>
+
+    <form id="quiz"></form>
+
+    <button onclick="checkQuiz()">Check Answers</button>
+
+    <div id="score"></div>
+
+    <script>
+      const questions = [
+        {
+          q: "1. A person who helps people in a neighborhood, such as a firefighter or a doctor, is called a ______.",
+          options: [
+            "artisan",
+            "community helper",
+            "craft village",
+            "community",
+          ],
+          answer: 1,
+        },
+
+        {
+          q: "2. My grandfather is an ______. He makes beautiful wooden furniture by hand.",
+          options: ["artisan", "community", "helper", "villager"],
+          answer: 0,
+        },
+
+        {
+          q: "3. Everyone should work together to keep the ______ clean and safe.",
+          options: ["artisan", "craft village", "community", "helper"],
+          answer: 2,
+        },
+
+        {
+          q: "4. Bat Trang is a famous ______ where people produce traditional pottery.",
+          options: [
+            "community helper",
+            "craft village",
+            "artisan",
+            "community",
+          ],
+          answer: 1,
+        },
+
+        {
+          q: "5. We should ______ the use of plastic bags to protect the environment.",
+          options: ["look after", "cut down on", "take after", "turn on"],
+          answer: 1,
+        },
+
+        {
+          q: "6. The nurse is a great ______ because she takes care of sick people every day.",
+          options: [
+            "craft village",
+            "artisan",
+            "community helper",
+            "community",
+          ],
+          answer: 2,
+        },
+
+        {
+          q: "7. Many tourists visit the ______ to buy handmade products.",
+          options: [
+            "community",
+            "community helper",
+            "artisan",
+            "craft village",
+          ],
+          answer: 3,
+        },
+
+        {
+          q: "8. The ______ taught us how to make traditional bamboo baskets.",
+          options: ["artisan", "community", "helper", "firefighter"],
+          answer: 0,
+        },
+
+        {
+          q: "9. Everyone in our ______ joined the clean-up campaign last weekend.",
+          options: ["artisan", "community", "craft village", "helper"],
+          answer: 1,
+        },
+
+        {
+          q: "10. Our school encourages students to ______ electricity by turning off lights when leaving the classroom.",
+          options: ["cut down on", "look for", "give up", "find out"],
+          answer: 0,
+        },
+
+        {
+          q: "11. A police officer is a ______ because they help keep people safe.",
+          options: [
+            "community helper",
+            "artisan",
+            "community",
+            "craft village",
+          ],
+          answer: 0,
+        },
+
+        {
+          q: "12. The young ______ spent years learning how to make silk by hand.",
+          options: [
+            "community",
+            "artisan",
+            "community helper",
+            "craft village",
+          ],
+          answer: 1,
+        },
+
+        {
+          q: "13. When the lights in our house stopped working, we called an ______ to fix the problem.",
+          options: [
+            "firefighter",
+            "electrician",
+            "garbage collector",
+            "delivery person",
+          ],
+          answer: 1,
+        },
+
+        {
+          q: "14. The ______ brought my online order to my house this morning.",
+          options: ["artisan", "delivery person", "electrician", "firefighter"],
+          answer: 1,
+        },
+
+        {
+          q: "15. Our school has excellent sports ______, including a swimming pool and a large gym.",
+          options: ["fragrance", "facilities", "function", "community"],
+          answer: 1,
+        },
+
+        {
+          q: "16. The brave ______ rescued a family from a burning building.",
+          options: [
+            "garbage collector",
+            "electrician",
+            "firefighter",
+            "delivery person",
+          ],
+          answer: 2,
+        },
+
+        {
+          q: "17. The sweet ______ of the flowers filled the entire garden.",
+          options: ["fragrance", "facilities", "function", "firefighter"],
+          answer: 0,
+        },
+
+        {
+          q: "18. One important ______ of the heart is to pump blood around the body.",
+          options: ["facility", "fragrance", "function", "delivery person"],
+          answer: 2,
+        },
+
+        {
+          q: "19. Every morning, the ______ collects rubbish from our neighborhood to keep the streets clean.",
+          options: [
+            "garbage collector",
+            "electrician",
+            "artisan",
+            "firefighter",
+          ],
+          answer: 0,
+        },
+
+        {
+          q: "20. Which sentence is correct?",
+          options: [
+            "The electrician delivers packages every day.",
+            "The fragrance repaired our broken lights.",
+            "The garbage collector helps keep the environment clean.",
+            "The facilities rescued people from the fire.",
+          ],
+          answer: 2,
+        },
+      ];
+
+      const form = document.getElementById("quiz");
+
+      questions.forEach((item, index) => {
+        let html = `<div class="question">
+<p><b>${item.q}</b></p>`;
+
+        item.options.forEach((op, i) => {
+          html += `
+<label>
+<input type="radio" name="q${index}" value="${i}">
+${String.fromCharCode(65 + i)}. ${op}
+</label><br>
+`;
+        });
+
+        html += `<p id="result${index}"></p></div>`;
+
+        form.innerHTML += html;
+      });
+
+      function checkQuiz() {
+        event.preventDefault();
+
+        let score = 0;
+
+        questions.forEach((item, index) => {
+          const ans = document.querySelector(`input[name=q${index}]:checked`);
+
+          const result = document.getElementById(`result${index}`);
+
+          if (ans) {
+            if (Number(ans.value) === item.answer) {
+              score++;
+
+              result.innerHTML = "✅ Correct";
+
+              result.className = "correct";
+            } else {
+              result.innerHTML = `❌ Wrong (Correct answer: ${String.fromCharCode(65 + item.answer)})`;
+
+              result.className = "wrong";
+            }
+          } else {
+            result.innerHTML = `❌ No answer (Correct answer: ${String.fromCharCode(65 + item.answer)})`;
+
+            result.className = "wrong";
+          }
+        });
+
+        document.getElementById("score").innerHTML =
+          `Your score: <b>${score} / ${questions.length}</b>`;
+
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: "smooth",
+        });
+      }
+    </script>
+  </body>
+</html>

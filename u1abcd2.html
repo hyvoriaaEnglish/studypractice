@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Synonyms & Sentence Transformation Quiz</title>
+
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #eef5ff;
+        padding: 30px;
+        max-width: 1000px;
+        margin: auto;
+      }
+
+      h1 {
+        text-align: center;
+        color: #1565c0;
+      }
+
+      .section {
+        background: white;
+        padding: 20px;
+        margin: 30px 0;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .question {
+        margin-bottom: 25px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .question p {
+        font-weight: bold;
+        font-size: 18px;
+      }
+
+      label {
+        display: block;
+        padding: 4px 0;
+        cursor: pointer;
+      }
+
+      button {
+        margin-top: 25px;
+        padding: 12px 30px;
+        font-size: 18px;
+        background: #1976d2;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #0d47a1;
+      }
+
+      .correct {
+        color: green;
+        font-weight: bold;
+      }
+
+      .wrong {
+        color: red;
+        font-weight: bold;
+      }
+
+      #score {
+        margin-top: 30px;
+        font-size: 25px;
+        font-weight: bold;
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Synonyms & Sentence Transformation Quiz</h1>
+
+    <form id="quiz"></form>
+
+    <button onclick="checkQuiz()">Check Answers</button>
+    <button type="button" onclick="location.reload()">Reset</button>
+
+    <div id="score"></div>
+
+    <script>
+      const questions = [
+        {
+          q: "Part A - Synonyms<br><br>1. The phrasal verb <b>get on with</b> is closest in meaning to ______.",
+          options: [
+            "argue with",
+            "have a good relationship with",
+            "avoid",
+            "depend on",
+          ],
+          answer: 1,
+        },
+
+        {
+          q: "2. The phrasal verb <b>look around</b> is closest in meaning to ______.",
+          options: ["explore", "destroy", "hide", "remember"],
+          answer: 0,
+        },
+
+        {
+          q: "3. The phrasal verb <b>run out of</b> is closest in meaning to ______.",
+          options: ["have plenty of", "use up completely", "borrow", "save"],
+          answer: 1,
+        },
+
+        {
+          q: "4. The phrasal verb <b>hand down</b> is closest in meaning to ______.",
+          options: [
+            "inherit from",
+            "give to a younger generation",
+            "throw away",
+            "buy",
+          ],
+          answer: 1,
+        },
+
+        {
+          q: "5. The phrasal verb <b>pass down</b> is closest in meaning to ______.",
+          options: [
+            "pass on to future generations",
+            "take back",
+            "keep secret",
+            "sell",
+          ],
+          answer: 0,
+        },
+
+        {
+          q: "Part B - Antonyms<br><br>6. Which is the opposite of <b>get on with</b>?",
+          options: [
+            "be friends with",
+            "cooperate with",
+            "argue with",
+            "support",
+          ],
+          answer: 2,
+        },
+
+        {
+          q: "7. Which is the opposite of <b>look around</b>?",
+          options: ["explore", "ignore", "examine", "search"],
+          answer: 1,
+        },
+
+        {
+          q: "8. Which is the opposite of <b>run out of</b>?",
+          options: ["be full of", "use up", "consume", "waste"],
+          answer: 0,
+        },
+
+        {
+          q: "9. Which is the opposite of <b>hand down</b>?",
+          options: ["pass on", "inherit", "keep for yourself", "give away"],
+          answer: 2,
+        },
+
+        {
+          q: "10. Which is the opposite of <b>pass down</b>?",
+          options: [
+            "preserve for future generations",
+            "keep from others",
+            "hand over",
+            "transfer",
+          ],
+          answer: 1,
+        },
+
+        {
+          q: "Part C - Sentence Transformation<br><br>11. Although it was raining heavily, we continued our trip.",
+          options: [
+            "We continued our trip because it was raining heavily.",
+            "In spite of the heavy rain, we continued our trip.",
+            "We cancelled our trip because of the heavy rain.",
+            "We continued our trip so that it would rain less.",
+          ],
+          answer: 1,
+        },
+
+        {
+          q: "12. Because Lan studied hard, she passed the exam.",
+          options: [
+            "Lan studied hard although she passed the exam.",
+            "Lan passed the exam because she studied hard.",
+            "Lan passed the exam despite studying hard.",
+            "Lan studied hard so that she could fail the exam.",
+          ],
+          answer: 1,
+        },
+
+        {
+          q: "13. Tom exercises every day so that he can stay healthy.",
+          options: [
+            "Tom exercises every day because he is unhealthy.",
+            "Tom exercises every day in order to stay healthy.",
+            "Tom exercises every day although he stays healthy.",
+            "Tom exercises every day because of his health.",
+          ],
+          answer: 1,
+        },
+
+        {
+          q: "14. This bag is more expensive than that one.",
+          options: [
+            "That bag is as expensive as this one.",
+            "That bag is cheaper than this bag.",
+            "This bag isn't as expensive as that one.",
+            "Both bags cost the same.",
+          ],
+          answer: 1,
+        },
+
+        {
+          q: "15. Although Mai was tired, she finished her homework.",
+          options: [
+            "Mai finished her homework despite being tired.",
+            "Mai was tired because she finished her homework.",
+            "Mai didn't finish her homework because she was tired.",
+            "Mai finished her homework so that she was tired.",
+          ],
+          answer: 0,
+        },
+
+        {
+          q: "16. Because the weather was bad, the match was cancelled.",
+          options: [
+            "The match was cancelled although the weather was bad.",
+            "The match was cancelled due to the bad weather.",
+            "The weather became bad so that the match continued.",
+            "The match was played because of the bad weather.",
+          ],
+          answer: 1,
+        },
+
+        {
+          q: "17. Nam got up early so that he wouldn't miss the bus.",
+          options: [
+            "Nam got up early in order not to miss the bus.",
+            "Nam got up early because he missed the bus.",
+            "Nam got up early although he missed the bus.",
+            "Nam got up early because the bus was late.",
+          ],
+          answer: 0,
+        },
+
+        {
+          q: "18. My sister is taller than I am.",
+          options: [
+            "I am taller than my sister.",
+            "My sister isn't as tall as I am.",
+            "I am not as tall as my sister.",
+            "My sister and I are the same height.",
+          ],
+          answer: 2,
+        },
+
+        {
+          q: "19. Although they were poor, they were very happy.",
+          options: [
+            "They were poor because they were happy.",
+            "Despite being poor, they were very happy.",
+            "They were unhappy because they were poor.",
+            "They were poor so that they could be happy.",
+          ],
+          answer: 1,
+        },
+
+        {
+          q: "20. Because Jack forgot to set his alarm, he arrived late for school.",
+          options: [
+            "Jack arrived late for school because he forgot to set his alarm.",
+            "Jack forgot to set his alarm although he arrived late.",
+            "Jack arrived late so that he forgot to set his alarm.",
+            "Jack forgot to set his alarm despite arriving late.",
+          ],
+          answer: 0,
+        },
+      ];
+
+      const form = document.getElementById("quiz");
+
+      questions.forEach((item, index) => {
+        let html = `
+<div class="section">
+<div class="question">
+<p>${item.q}</p>
+`;
+
+        item.options.forEach((op, i) => {
+          html += `
+<label>
+<input type="radio" name="q${index}" value="${i}">
+${String.fromCharCode(65 + i)}. ${op}
+</label>
+`;
+        });
+
+        html += `
+<p id="result${index}"></p>
+</div>
+</div>
+`;
+
+        form.innerHTML += html;
+      });
+      function checkQuiz() {
+        event.preventDefault();
+
+        let score = 0;
+
+        questions.forEach((item, index) => {
+          const selected = document.querySelector(
+            `input[name=q${index}]:checked`,
+          );
+
+          const result = document.getElementById(`result${index}`);
+
+          if (selected) {
+            if (Number(selected.value) === item.answer) {
+              score++;
+
+              result.innerHTML = "✅ Correct";
+
+              result.className = "correct";
+            } else {
+              result.innerHTML = `❌ Wrong. Correct answer: <b>${String.fromCharCode(65 + item.answer)}</b>`;
+
+              result.className = "wrong";
+            }
+          } else {
+            result.innerHTML = `❌ No answer. Correct answer: <b>${String.fromCharCode(65 + item.answer)}</b>`;
+
+            result.className = "wrong";
+          }
+        });
+
+        document.getElementById("score").innerHTML =
+          `🎉 Your Score: ${score} / ${questions.length}`;
+
+        window.scrollTo({
+          top: document.body.scrollHeight,
+
+          behavior: "smooth",
+        });
+      }
+    </script>
+  </body>
+</html>
