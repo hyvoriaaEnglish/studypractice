@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>English Quiz</title>
+
+    <style>
+      body {
+        font-family: Arial;
+        background: #ffeef4;
+        padding: 40px;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: auto;
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+      }
+
+      h2 {
+        color: #ff5b8f;
+      }
+
+      .question {
+        margin: 25px 0;
+      }
+
+      input {
+        width: 220px;
+        padding: 8px;
+        font-size: 16px;
+      }
+
+      .correct {
+        color: green;
+        font-weight: bold;
+      }
+
+      .wrong {
+        color: red;
+        font-weight: bold;
+      }
+
+      button {
+        margin-top: 30px;
+        padding: 12px 30px;
+        font-size: 18px;
+        background: #ff6b9d;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #ff3d80;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h2>I. Verb Forms</h2>
+
+      <div class="question">
+        26. Dave’s mother was the first person in his family
+        <input id="q26" />
+        <span id="r26"></span>
+      </div>
+
+      <div class="question">
+        27.
+        <input id="q27" />
+        of the advantages of studying overseas several times...
+        <span id="r27"></span>
+      </div>
+
+      <div class="question">
+        28. If she
+        <input id="q28" />
+        earlier about the schedule change...
+        <span id="r28"></span>
+      </div>
+
+      <div class="question">
+        29. It’s the family doctor’s recommendation that he
+        <input id="q29" />
+        up late...
+        <span id="r29"></span>
+      </div>
+
+      <div class="question">
+        30. The missing scientist is believed
+        <input id="q30" />
+        in a remote mountainous area...
+        <span id="r30"></span>
+      </div>
+
+      <h2>II. Word Forms</h2>
+
+      <div class="question">
+        31.
+        <h5>
+          The committee remained __________ despite mounting pressure from the
+          media and the public. (FLEX)
+        </h5>
+        <input id="q31" />
+        <span id="r31"></span>
+      </div>
+
+      <div class="question">
+        32.
+        <h5>
+          The program aims at people wanting to __________ or hone their
+          technique in technological field. (SKILL)
+        </h5>
+        <input id="q32" />
+        <span id="r32"></span>
+      </div>
+
+      <div class="question">
+        33.
+        <h5>
+          He is __________ polite and tries desperately to understand other
+          people’s views. (FAIL)
+        </h5>
+        <input id="q33" />
+        <span id="r33"></span>
+      </div>
+
+      <div class="question">
+        34.
+        <h5>
+          The books are printed on __________ paper so that they will last for
+          generations. (ACID)
+        </h5>
+        <input id="q34" />
+        <span id="r34"></span>
+      </div>
+
+      <div class="question">
+        35.
+        <h5>
+          When I was a child, my family couldn’t afford new clothes at Tet.
+          Therefore, I always had to wear my sister’s __________. (CAST)
+        </h5>
+        <input id="q35" />
+        <span id="r35"></span>
+      </div>
+
+      <button onclick="check()">Kiểm tra</button>
+
+      <h2 id="score"></h2>
+    </div>
+
+    <script>
+      const answers = {
+        26: "to hear",
+        27: "Convinced",
+        28: "had been informed",
+        29: "not stay",
+        30: "to have been living",
+        31: "inflexible",
+        32: "upskill",
+        33: "unfailingly",
+        34: "acid-free",
+        35: "cast-offs",
+      };
+
+      function check() {
+        let correct = 0;
+
+        for (let i = 26; i <= 35; i++) {
+          let user = document
+            .getElementById("q" + i)
+            .value.trim()
+            .toLowerCase();
+
+          let answer = answers[i].toLowerCase();
+
+          let result = document.getElementById("r" + i);
+
+          if (user == answer) {
+            result.innerHTML = " ✅ Đúng";
+            result.className = "correct";
+            correct++;
+          } else {
+            result.innerHTML = " ❌ Sai (Đáp án: " + answers[i] + ")";
+            result.className = "wrong";
+          }
+        }
+
+        document.getElementById("score").innerHTML = "Điểm: " + correct + "/10";
+      }
+    </script>
+  </body>
+</html>
