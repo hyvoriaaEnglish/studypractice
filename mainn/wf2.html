@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="quiz-container">
+      <h3>Word Formation Practice</h3>
+
+      <div class="question">
+        <p>
+          1. A _____________ (ZOO) can defend himself against a dangerous
+          animal, even if the zookeeper's negligence caused the animal's escape.
+        </p>
+        <input type="text" id="q1" />
+        <div id="r1"></div>
+      </div>
+
+      <div class="question">
+        <p>
+          2. A _____________ (BOOK) is a book that is published annually by a
+          school or other organization to give facts about the events and
+          achievements of the previous year.
+        </p>
+        <input type="text" id="q2" />
+        <div id="r2"></div>
+      </div>
+
+      <div class="question">
+        <p>
+          3. It would be unexpected, therefore, to find incisions placed across
+          the anticipated site of the sinus node, but this was a feature of some
+          autopsies of _____________ (YEAR).
+        </p>
+        <input type="text" id="q3" />
+        <div id="r3"></div>
+      </div>
+
+      <div class="question">
+        <p>
+          4. He will just agree with her. I don't want you to be just a
+          _____________ (MAN) but rather have your own views on things as well.
+        </p>
+        <input type="text" id="q4" />
+        <div id="r4"></div>
+      </div>
+
+      <div class="question">
+        <p>5. He is a _____________ (BELLY) traitor.</p>
+        <input type="text" id="q5" />
+        <div id="r5"></div>
+      </div>
+
+      <div class="question">
+        <p>
+          6. The only valid _____________ (STICK) for measuring traffic safety
+          is deaths per mile driven.
+        </p>
+        <input type="text" id="q6" />
+        <div id="r6"></div>
+      </div>
+
+      <div class="question">
+        <p>
+          7. Some commentators predict a "_____________ (YOUTH)" in the coming
+          elections.
+        </p>
+        <input type="text" id="q7" />
+        <div id="r7"></div>
+      </div>
+
+      <div class="question">
+        <p>
+          8. The scheme is for _____________ (YOUNG) between the ages of ten and
+          16.
+        </p>
+        <input type="text" id="q8" />
+        <div id="r8"></div>
+      </div>
+
+      <div class="question">
+        <p>
+          9. To perpetuate racism and _____________ (PHOBIA) through our media
+          is not only antisocial and grossly irresponsible.
+        </p>
+        <input type="text" id="q9" />
+        <div id="r9"></div>
+      </div>
+
+      <div class="question">
+        <p>
+          10. He admitted that the party had followed policies now considered
+          _____________ (WRONG).
+        </p>
+        <input type="text" id="q10" />
+        <div id="r10"></div>
+      </div>
+
+      <div class="question">
+        <p>
+          11. Many operating systems include a command to _____________ (WRITE)
+          files to make it impossible for a computer user to write information
+          onto a computer disk.
+        </p>
+        <input type="text" id="q11" />
+        <div id="r11"></div>
+      </div>
+
+      <div class="question">
+        <p>
+          12. The latter response is reinforced in us by our obligation to stand
+          in solidarity with victims of _____________ (DO) against those who
+          have wronged them.
+        </p>
+        <input type="text" id="q12" />
+        <div id="r12"></div>
+      </div>
+
+      <button onclick="checkAnswers()">Check Answers</button>
+    </div>
+
+    <script>
+      const answers = {
+        1: ["zookeeper"],
+        2: ["yearbook"],
+        3: ["yesteryear"],
+        4: ["yes-man", "yes man"],
+        5: ["yellow-bellied", "yellow bellied"],
+        6: ["yardstick"],
+        7: ["youthquake"],
+        8: ["youngsters"],
+        9: ["xenophobia"],
+        10: ["wrong-headed", "wrong headed"],
+        11: ["write-protect", "write protect"],
+        12: ["wrongdoings", "misdeeds"],
+      };
+
+      function normalize(str) {
+        return str
+          .toLowerCase()
+          .trim()
+          .replace(/\s+/g, " ")
+          .replace(/–|—/g, "-");
+      }
+
+      function checkAnswers() {
+        for (let i = 1; i <= 12; i++) {
+          const input = normalize(document.getElementById("q" + i).value);
+          const result = document.getElementById("r" + i);
+
+          let correct = false;
+
+          answers[i].forEach((ans) => {
+            if (input === normalize(ans)) correct = true;
+          });
+
+          if (correct) {
+            result.innerHTML =
+              "<span style='color:green;font-weight:bold;'>✔ Correct!</span>";
+          } else {
+            result.innerHTML =
+              "<span style='color:red;font-weight:bold;'>✘ Incorrect.</span> Correct answer: <b>" +
+              answers[i].join(" / ") +
+              "</b>";
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
