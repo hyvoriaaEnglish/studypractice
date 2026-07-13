@@ -3,112 +3,92 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>HanVerse</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap"
-      rel="stylesheet"
-    />
+    <title>Trang chủ</title>
 
     <style>
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: "Poppins", sans-serif;
+        font-family: "Segoe UI", sans-serif;
       }
 
       body {
+        background: white;
         height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        position: relative;
+      }
 
-        background-image: url("https://images.unsplash.com/photo-1707305637615-bc1a1328d584?w=1200&auto=format&fit=crop&q=80");
-        background-size: cover;
-        background-position: center;
+      /* Nền hồng */
 
+      body::before {
+        content: "";
+        position: absolute;
+        left: -180px;
+        bottom: -120px;
+        width: 900px;
+        height: 260px;
+        background: #f8c8d0;
+        transform: rotate(12deg);
+      }
+
+      /* Khối chứa */
+
+      .menu {
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        gap: 35px;
+        z-index: 2;
       }
 
-      h1 {
-        color: white;
-        font-size: 50px;
-        margin-bottom: 70px;
-        text-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-      }
+      /* Các nút */
 
-      .container {
-        display: flex;
-        gap: 180px;
-      }
-
-      .card {
-        width: 420px;
-        height: 420px;
-
-        background: rgba(255, 230, 240, 0.55);
-
-        backdrop-filter: blur(4px);
+      .btn {
+        width: 360px;
+        height: 72px;
 
         display: flex;
         justify-content: center;
         align-items: center;
-
-        border-radius: 8px;
-
-        transition: 0.35s;
-      }
-
-      .card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.18);
-      }
-
-      .card a {
-        width: 300px;
-        height: 150px;
-
-        background: #fffaf8;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        text-align: center;
 
         text-decoration: none;
-
-        color: #f67fa2;
-
-        font-size: 50px;
-
+        font-size: 26px;
         font-weight: 300;
 
         transition: 0.3s;
       }
 
-      .card:hover a {
-        background: white;
-        color: #ec5b89;
+      .btn-dark {
+        background: #211c1e;
+        color: #f2c8d0;
+      }
+
+      .btn-light {
+        background: #ece7e7;
+        color: #222;
+      }
+
+      .btn-pink {
+        background: #fdf1f3;
+        color: #ea8ca2;
+      }
+
+      .btn:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
       }
     </style>
   </head>
 
   <body>
-    <h1>Chọn chương trình học</h1>
+    <div class="menu">
+      <a href="mainn/hi.html" class="btn btn-dark"> Tiếng Anh Chuyên </a>
 
-    <div class="container">
-      <div class="card">
-        <a href="mainn/hi.html"> Tiếng Anh<br />Chuyên </a>
-      </div>
-
-      <div class="card">
-        <a href="mainn/hello.html"> Tiếng Anh<br />Đại Trà </a>
-      </div>
+      <a href="mainn/hello.html" class="btn btn-light"> Tiếng Anh Đại Trà </a>
     </div>
   </body>
 </html>
