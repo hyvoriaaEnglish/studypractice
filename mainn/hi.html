@@ -1,19 +1,233 @@
 <!doctype html>
-<html lang="en">
+<html lang="vi">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=, initial-scale=1.0" />
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Tiếng Anh Chuyên</title>
+
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+
+        background: linear-gradient(135deg, #ffd4e6, #f7c7ff);
+      }
+
+      .container {
+        width: 1100px;
+        margin: auto;
+        padding: 40px;
+      }
+
+      .back {
+        display: inline-block;
+
+        padding: 15px 40px;
+
+        border-radius: 40px;
+
+        background: #ff6f91;
+
+        color: white;
+
+        text-decoration: none;
+
+        font-size: 28px;
+
+        font-weight: bold;
+
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+
+        margin-bottom: 40px;
+      }
+
+      .grid {
+        display: grid;
+
+        grid-template-columns: repeat(4, 1fr);
+
+        gap: 35px;
+      }
+
+      .card {
+        height: 260px;
+
+        background: #ffd9e6;
+
+        border-radius: 15px;
+
+        position: relative;
+
+        transition: 0.3s;
+
+        cursor: pointer;
+
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .card:hover {
+        transform: translateY(-8px);
+      }
+
+      .title {
+        background: white;
+
+        display: inline-block;
+
+        padding: 18px 22px;
+
+        font-size: 30px;
+
+        position: absolute;
+
+        top: 40px;
+
+        left: 20px;
+
+        right: 20px;
+
+        text-align: center;
+
+        transform: rotate(-2deg);
+      }
+
+      .counter {
+        position: absolute;
+
+        bottom: 20px;
+
+        left: 20px;
+
+        right: 20px;
+
+        background: #322324;
+
+        color: white;
+
+        padding: 15px;
+
+        font-size: 24px;
+
+        text-align: center;
+      }
+
+      .card a {
+        position: absolute;
+
+        inset: 0;
+      }
+    </style>
   </head>
+
   <body>
-    <h1>Tiếng Anh Chuyên</h1>
-    <a href="/trangchu.html">Quay lại trang chủ</a><br />
-    <a href="read.html">Phần Reading</a><br />
-    <a href="mcq.html">Phần câu hỏi abcd (1-30)</a><br />
-    <a href="mcq2.html">Phần câu hỏi abcd (31-65)</a><br />
-    <a href="mcq3.html">Phần câu hỏi abcd (66-83)</a><br />
-    <a href="../wf.html">Phần WordForm và Chia động từ</a><br />
-    <a href="../vocab2.html">Phần Thành ngữ Tục ngữ</a><br />
-    <a href="wf2.html">Phần WordForm</a>
+    <div class="container">
+      <a class="back" href="/trangchu.html"> ← Quay lại trang chủ </a>
+
+      <div class="grid">
+        <div class="card">
+          <a href="read.html" onclick="increase('reading')"></a>
+
+          <div class="title">Phần Reading</div>
+
+          <div class="counter">
+            Lượt làm bài:
+            <span id="reading">0</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <a href="mcq.html" onclick="increase('mcq1')"></a>
+
+          <div class="title">Phần trắc nghiệm<br />abcd 1</div>
+
+          <div class="counter">
+            Lượt làm bài:
+            <span id="mcq1">0</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <a href="mcq2.html" onclick="increase('mcq2')"></a>
+
+          <div class="title">Phần trắc nghiệm<br />abcd 2</div>
+
+          <div class="counter">
+            Lượt làm bài:
+            <span id="mcq2">0</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <a href="mcq3.html" onclick="increase('mcq3')"></a>
+
+          <div class="title">Phần trắc nghiệm<br />abcd 3</div>
+
+          <div class="counter">
+            Lượt làm bài:
+            <span id="mcq3">0</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <a href="../wf.html" onclick="increase('wf')"></a>
+
+          <div class="title">WordForm<br />và chia động từ</div>
+
+          <div class="counter">
+            Lượt làm bài:
+            <span id="wf">0</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <a href="../vocab2.html" onclick="increase('idiom')"></a>
+
+          <div class="title">Thành Ngữ<br />Tục Ngữ</div>
+
+          <div class="counter">
+            Lượt làm bài:
+            <span id="idiom">0</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <a href="wf2.html" onclick="increase('wf2')"></a>
+
+          <div class="title">WordForm<br />(nâng cao)</div>
+
+          <div class="counter">
+            Lượt làm bài:
+            <span id="wf2">0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function increase(name) {
+        let n = localStorage.getItem(name);
+
+        if (n == null) n = 0;
+
+        n++;
+
+        localStorage.setItem(name, n);
+
+        document.getElementById(name).innerHTML = n;
+      }
+
+      window.onload = function () {
+        let ids = ["reading", "mcq1", "mcq2", "mcq3", "wf", "idiom", "wf2"];
+
+        ids.forEach(function (id) {
+          let n = localStorage.getItem(id);
+
+          if (n == null) n = 0;
+
+          document.getElementById(id).innerHTML = n;
+        });
+      };
+    </script>
   </body>
 </html>
