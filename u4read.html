@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guided Cloze Quiz</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f7fb;
+        margin: 0;
+        padding: 30px;
+      }
+
+      .container {
+        max-width: 950px;
+        margin: auto;
+      }
+
+      h1 {
+        text-align: center;
+        color: #2c3e50;
+      }
+
+      .passage {
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        line-height: 1.8;
+        margin-bottom: 30px;
+      }
+
+      .question {
+        background: white;
+        padding: 18px;
+        margin-bottom: 20px;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .option {
+        display: block;
+        padding: 12px;
+        margin: 8px 0;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+
+      .option:hover {
+        background: #eef5ff;
+      }
+
+      .correct {
+        background: #c8f7c5 !important;
+        border-color: green !important;
+      }
+
+      .wrong {
+        background: #ffd6d6 !important;
+        border-color: red !important;
+      }
+
+      .result {
+        margin-top: 10px;
+        font-weight: bold;
+      }
+
+      #scoreBox {
+        display: none;
+        background: white;
+        padding: 20px;
+        margin-top: 30px;
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Guided Cloze (B2–C1)</h1>
+
+     <div class="passage">
+
+<h2>Guided Cloze (B2–C1) – Traditions Around the World</h2>
+
+<p>
+Every country has its own customs and traditions that have been passed down from one
+<strong>(1)</strong> ______ to another.
+Some of them are <strong>(2)</strong> ______,
+dating back hundreds or even thousands of years,
+while others have developed more recently.
+Although cultures differ greatly,
+many societies share <strong>(3)</strong> ______ belief that traditions help people strengthen their sense of identity.
+</p>
+
+<p>
+In many villages, local people gather in
+<strong>(4)</strong> ______ communal house during important festivals.
+These celebrations are often held to
+<strong>(5)</strong> ______ historical events or honour respected ancestors.
+Visitors can also admire impressive
+<strong>(6)</strong> ______,
+such as temples, castles and statues,
+which remind people of their rich cultural heritage.
+</p>
+
+<p>
+Some traditions are so
+<strong>(7)</strong> ______
+that they remain almost unchanged despite modern influences.
+Governments and local organisations often work together to
+<strong>(8)</strong> ______
+these customs because they attract tourists and preserve national identity.
+</p>
+
+<p>
+Nowadays, however, life has become more
+<strong>(9)</strong> ______.
+Young people are busier than previous generations,
+and technology tends to
+<strong>(10)</strong> ______
+much of their free time.
+As a result, many families have fewer opportunities to meet
+<strong>(11)</strong> ______,
+making it harder to pass on cultural values naturally.
+</p>
+
+<p>
+Travelling abroad also allows people to
+<strong>(12)</strong> ______
+different ways of life.
+For example, visitors to Britain often enjoy trying
+<strong>(13)</strong> ______
+fish and chips from a local
+<strong>(14)</strong> ______
+shop, while tourists in Scotland may visit
+<strong>(15)</strong> ______
+ancient castle that has stood for centuries.
+</p>
+
+<p>
+Whether customs are
+<strong>(16)</strong> ______
+or secular,
+they continue to connect communities and remind people of where they come from.
+</p>
+
+</div>
+
+      <!-- Question 1 -->
+
+      <div class="question">
+        <p><b>1. ______</b></p>
+
+        <div class="option" onclick="check(this, true)">A. generation</div>
+        <div class="option" onclick="check(this, false)">B. anniversary</div>
+        <div class="option" onclick="check(this, false)">C. structure</div>
+        <div class="option" onclick="check(this, false)">D. monument</div>
+
+        <div class="result"></div>
+      </div>
+
+      <!-- Question 2 -->
+
+      <div class="question">
+        <p><b>2. ______</b></p>
+
+        <div class="option" onclick="check(this, false)">A. basic</div>
+        <div class="option" onclick="check(this, true)">B. ancient</div>
+        <div class="option" onclick="check(this, false)">C. complex</div>
+        <div class="option" onclick="check(this, false)">D. communal</div>
+
+        <div class="result"></div>
+      </div>
+
+      <!-- Question 3 -->
+
+      <div class="question">
+        <p><b>3. ______ belief</b></p>
+
+        <div class="option" onclick="check(this, true)">A. a</div>
+        <div class="option" onclick="check(this, false)">B. an</div>
+        <div class="option" onclick="check(this, false)">C. the</div>
+        <div class="option" onclick="check(this, false)">D. Ø</div>
+
+        <div class="result"></div>
+      </div>
+
+      <!-- Question 4 -->
+
+      <div class="question">
+        <p><b>4. ______ communal house</b></p>
+
+        <div class="option" onclick="check(this, false)">A. a</div>
+        <div class="option" onclick="check(this, false)">B. an</div>
+        <div class="option" onclick="check(this, true)">C. the</div>
+        <div class="option" onclick="check(this, false)">D. Ø</div>
+
+        <div class="result"></div>
+      </div>
+      <!-- Question 5 -->
+
+      <div class="question">
+        <p><b>5. ______ historical events or honour respected ancestors.</b></p>
+
+        <div class="option" onclick="check(this, false)">A. recognise</div>
+        <div class="option" onclick="check(this, true)">B. observe</div>
+        <div class="option" onclick="check(this, false)">C. occupy</div>
+        <div class="option" onclick="check(this, false)">D. found</div>
+
+        <div class="result"></div>
+      </div>
+
+      <!-- Question 6 -->
+
+      <div class="question">
+        <p><b>6. ______, such as temples, castles and statues.</b></p>
+
+        <div class="option" onclick="check(this, true)">A. monuments</div>
+        <div class="option" onclick="check(this, false)">B. generations</div>
+        <div class="option" onclick="check(this, false)">C. anniversaries</div>
+        <div class="option" onclick="check(this, false)">D. takeaways</div>
+
+        <div class="result"></div>
+      </div>
+
+      <!-- Question 7 -->
+
+      <div class="question">
+        <p><b>7. ______ that they remain almost unchanged.</b></p>
+
+        <div class="option" onclick="check(this, true)">A. deep-rooted</div>
+        <div class="option" onclick="check(this, false)">B. face-to-face</div>
+        <div class="option" onclick="check(this, false)">C. barefoot</div>
+        <div class="option" onclick="check(this, false)">D. basic</div>
+
+        <div class="result"></div>
+      </div>
+
+      <!-- Question 8 -->
+
+      <div class="question">
+        <p><b>8. ______ these customs.</b></p>
+
+        <div class="option" onclick="check(this, false)">A. occupy</div>
+        <div class="option" onclick="check(this, true)">B. promote</div>
+        <div class="option" onclick="check(this, false)">C. observe</div>
+        <div class="option" onclick="check(this, false)">D. found</div>
+
+        <div class="result"></div>
+      </div>
+      <!-- Question 9 -->
+
+      <div class="question">
+        <p><b>9. Nowadays, however, life has become more ______.</b></p>
+
+        <div class="option" onclick="check(this, false)">A. ancient</div>
+        <div class="option" onclick="check(this, false)">B. basic</div>
+        <div class="option" onclick="check(this, true)">C. complex</div>
+        <div class="option" onclick="check(this, false)">D. communal</div>
+
+        <div class="result"></div>
+      </div>
+
+      <!-- Question 10 -->
+
+      <div class="question">
+        <p><b>10. Technology tends to ______ much of their free time.</b></p>
+
+        <div class="option" onclick="check(this, false)">A. recognise</div>
+        <div class="option" onclick="check(this, true)">B. occupy</div>
+        <div class="option" onclick="check(this, false)">C. observe</div>
+        <div class="option" onclick="check(this, false)">D. promote</div>
+
+        <div class="result"></div>
+      </div>
+
+      <!-- Question 11 -->
+
+      <div class="question">
+        <p><b>11. Many families have fewer opportunities to meet ______.</b></p>
+
+        <div class="option" onclick="check(this, true)">A. face-to-face</div>
+        <div class="option" onclick="check(this, false)">B. barefoot</div>
+        <div class="option" onclick="check(this, false)">C. takeaway</div>
+        <div class="option" onclick="check(this, false)">D. religious</div>
+
+        <div class="result"></div>
+      </div>
+
+      <!-- Question 12 -->
+
+      <div class="question">
+        <p>
+          <b
+            >12. Travelling abroad also allows people to ______ different ways
+            of life.</b
+          >
+        </p>
+
+        <div class="option" onclick="check(this, false)">A. occupy</div>
+        <div class="option" onclick="check(this, true)">B. recognise</div>
+        <div class="option" onclick="check(this, false)">C. found</div>
+        <div class="option" onclick="check(this, false)">D. observe</div>
+
+        <div class="result"></div>
+      </div>
+      <!-- Question 13 -->
+
+<div class="question">
+<p><b>13. Visitors to Britain often enjoy trying ______ fish and chips.</b></p>
+
+<div class="option" onclick="check(this,false)">A. a</div>
+<div class="option" onclick="check(this,false)">B. an</div>
+<div class="option" onclick="check(this,false)">C. the</div>
+<div class="option" onclick="check(this,true)">D. Ø</div>
+
+<div class="result"></div>
+</div>
+
+<!-- Question 14 -->
+
+<div class="question">
+<p><b>14. ...from a local ______ shop.</b></p>
+
+<div class="option" onclick="check(this,true)">A. takeaway</div>
+<div class="option" onclick="check(this,false)">B. monument</div>
+<div class="option" onclick="check(this,false)">C. structure</div>
+<div class="option" onclick="check(this,false)">D. castle</div>
+
+<div class="result"></div>
+</div>
+
+<!-- Question 15 -->
+
+<div class="question">
+<p><b>15. Tourists in Scotland may visit ______ ancient castle.</b></p>
+
+<div class="option" onclick="check(this,false)">A. a</div>
+<div class="option" onclick="check(this,true)">B. an</div>
+<div class="option" onclick="check(this,false)">C. the</div>
+<div class="option" onclick="check(this,false)">D. Ø</div>
+
+<div class="result"></div>
+</div>
+
+<!-- Question 16 -->
+
+<div class="question">
+<p><b>16. Whether customs are ______ or secular...</b></p>
+
+<div class="option" onclick="check(this,true)">A. religious</div>
+<div class="option" onclick="check(this,false)">B. basic</div>
+<div class="option" onclick="check(this,false)">C. complex</div>
+<div class="option" onclick="check(this,false)">D. ancient</div>
+
+<div class="result"></div>
+</div>
+
+<div id="scoreBox"></div>
+
+</div>
+<!-- KẾT THÚC .container -->
+
+      <script>
+        let score = 0;
+        let answered = 0;
+        const total = 16;
+
+        function check(element, correct) {
+          const question = element.parentElement;
+
+          if (question.dataset.done) return;
+
+          question.dataset.done = true;
+
+          answered++;
+
+          const options = question.querySelectorAll(".option");
+          const result = question.querySelector(".result");
+
+          options.forEach((op) => {
+            op.style.pointerEvents = "none";
+
+            if (op.getAttribute("onclick").includes("true")) {
+              op.classList.add("correct");
+            }
+          });
+
+          if (correct) {
+            score++;
+            result.innerHTML = "✅ Correct!";
+            result.style.color = "green";
+          } else {
+            element.classList.remove("correct");
+            element.classList.add("wrong");
+
+            result.innerHTML = "❌ Wrong!";
+            result.style.color = "red";
+          }
+
+          if (answered === total) {
+            document.getElementById("scoreBox").style.display = "block";
+            document.getElementById("scoreBox").innerHTML =
+              `🎉 Your Score: ${score}/${total}`;
+          }
+        }
+      </script>
+    </div>
+  </body>
+</html>

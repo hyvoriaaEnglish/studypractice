@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>English Quiz</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f7fb;
+        padding: 30px;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: auto;
+      }
+
+      .question {
+        background: white;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        color: #2c3e50;
+      }
+
+      .option {
+        display: block;
+        margin: 8px 0;
+        padding: 12px;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+
+      .option:hover {
+        background: #eef5ff;
+      }
+
+      .correct {
+        background: #c8f7c5 !important;
+        border-color: green !important;
+      }
+
+      .wrong {
+        background: #ffd6d6 !important;
+        border-color: red !important;
+      }
+
+      .result {
+        margin-top: 10px;
+        font-weight: bold;
+        font-size: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Part 1. Multiple Choice</h2>
+
+      <div class="question">
+        <p><b>1. The Great Wall of China is an ______ structure.</b></p>
+
+        <div class="option" onclick="check(this, false)">A. basic</div>
+        <div class="option" onclick="check(this, true)">B. ancient</div>
+        <div class="option" onclick="check(this, false)">C. communal</div>
+        <div class="option" onclick="check(this, false)">D. barefoot</div>
+
+        <div class="result"></div>
+      </div>
+
+      <div class="question">
+        <p>
+          <b
+            >2. My grandparents celebrated their 50th wedding ______ last
+            week.</b
+          >
+        </p>
+
+        <div class="option" onclick="check(this, false)">A. generation</div>
+        <div class="option" onclick="check(this, false)">B. monument</div>
+        <div class="option" onclick="check(this, true)">C. anniversary</div>
+        <div class="option" onclick="check(this, false)">D. takeaway</div>
+
+        <div class="result"></div>
+      </div>
+
+      <div class="question">
+        <p><b>3. Children in the village often run ______ on the beach.</b></p>
+
+        <div class="option" onclick="check(this, false)">A. basic</div>
+        <div class="option" onclick="check(this, false)">B. communal</div>
+        <div class="option" onclick="check(this, true)">C. barefoot</div>
+        <div class="option" onclick="check(this, false)">D. complex</div>
+
+        <div class="result"></div>
+      </div>
+
+      <div class="question">
+        <p><b>4. The government wants to ______ local tourism.</b></p>
+
+        <div class="option" onclick="check(this, false)">A. occupy</div>
+        <div class="option" onclick="check(this, true)">B. promote</div>
+        <div class="option" onclick="check(this, false)">C. observe</div>
+        <div class="option" onclick="check(this, false)">D. recognise</div>
+
+        <div class="result"></div>
+      </div>
+
+      <div class="question">
+        <p>
+          <b>5. Buckingham Palace is not a ______, but Windsor Castle is.</b>
+        </p>
+
+        <div class="option" onclick="check(this, true)">A. castle</div>
+        <div class="option" onclick="check(this, false)">B. monument</div>
+        <div class="option" onclick="check(this, false)">C. generation</div>
+        <div class="option" onclick="check(this, false)">D. structure</div>
+
+        <div class="result"></div>
+      </div>
+
+      <div class="question">
+        <p><b>6. We usually order ______ when we are too busy to cook.</b></p>
+
+        <div class="option" onclick="check(this, false)">A. face-to-face</div>
+        <div class="option" onclick="check(this, true)">B. takeaway</div>
+        <div class="option" onclick="check(this, false)">C. communal</div>
+        <div class="option" onclick="check(this, false)">D. religious</div>
+
+        <div class="result"></div>
+      </div>
+
+      <div class="question">
+        <p>
+          <b
+            >7. Students should learn the ______ grammar rules before moving to
+            advanced lessons.</b
+          >
+        </p>
+
+        <div class="option" onclick="check(this, true)">A. basic</div>
+        <div class="option" onclick="check(this, false)">B. ancient</div>
+        <div class="option" onclick="check(this, false)">C. deep-rooted</div>
+        <div class="option" onclick="check(this, false)">D. complex</div>
+
+        <div class="result"></div>
+      </div>
+
+      <div class="question">
+        <p>
+          <b
+            >8. This tradition is ______ in our culture and has existed for
+            hundreds of years.</b
+          >
+        </p>
+
+        <div class="option" onclick="check(this, false)">A. basic</div>
+        <div class="option" onclick="check(this, false)">B. face-to-face</div>
+        <div class="option" onclick="check(this, true)">C. deep-rooted</div>
+        <div class="option" onclick="check(this, false)">D. barefoot</div>
+
+        <div class="result"></div>
+      </div>
+    </div>
+    <h2>Part 2. Fill in the blanks</h2>
+
+    <p>
+      <b>Word bank:</b>
+      ancient – communal – complex – generation – monument – observe – occupy –
+      recognise – religious – structure
+    </p>
+
+    <div class="question">
+      <p><b>9. The Eiffel Tower is a famous __________.</b></p>
+
+      <div class="option" onclick="check(this, false)">A. structure</div>
+      <div class="option" onclick="check(this, true)">B. monument</div>
+      <div class="option" onclick="check(this, false)">C. generation</div>
+      <div class="option" onclick="check(this, false)">D. communal</div>
+
+      <div class="result"></div>
+    </div>
+
+    <div class="question">
+      <p>
+        <b
+          >10. Many Vietnamese families __________ Lunar New Year every year.</b
+        >
+      </p>
+
+      <div class="option" onclick="check(this, false)">A. recognise</div>
+      <div class="option" onclick="check(this, true)">B. observe</div>
+      <div class="option" onclick="check(this, false)">C. occupy</div>
+      <div class="option" onclick="check(this, false)">D. structure</div>
+
+      <div class="result"></div>
+    </div>
+
+    <div class="question">
+      <p><b>11. This building has a unique __________.</b></p>
+
+      <div class="option" onclick="check(this, false)">A. monument</div>
+      <div class="option" onclick="check(this, true)">B. structure</div>
+      <div class="option" onclick="check(this, false)">C. generation</div>
+      <div class="option" onclick="check(this, false)">D. communal</div>
+
+      <div class="result"></div>
+    </div>
+
+    <div class="question">
+      <p><b>12. The old temple is an __________ building.</b></p>
+
+      <div class="option" onclick="check(this, true)">A. ancient</div>
+      <div class="option" onclick="check(this, false)">B. communal</div>
+      <div class="option" onclick="check(this, false)">C. complex</div>
+      <div class="option" onclick="check(this, false)">D. religious</div>
+
+      <div class="result"></div>
+    </div>
+
+    <div class="question">
+      <p><b>13. We should __________ people's achievements.</b></p>
+
+      <div class="option" onclick="check(this, true)">A. recognise</div>
+      <div class="option" onclick="check(this, false)">B. observe</div>
+      <div class="option" onclick="check(this, false)">C. occupy</div>
+      <div class="option" onclick="check(this, false)">D. structure</div>
+
+      <div class="result"></div>
+    </div>
+
+    <div class="question">
+      <p><b>14. These math problems are too __________ for me.</b></p>
+
+      <div class="option" onclick="check(this, false)">A. ancient</div>
+      <div class="option" onclick="check(this, true)">B. complex</div>
+      <div class="option" onclick="check(this, false)">C. communal</div>
+      <div class="option" onclick="check(this, false)">D. generation</div>
+
+      <div class="result"></div>
+    </div>
+
+    <div class="question">
+      <p>
+        <b
+          >15. The children gathered in the __________ house for the
+          festival.</b
+        >
+      </p>
+
+      <div class="option" onclick="check(this, false)">A. structure</div>
+      <div class="option" onclick="check(this, true)">B. communal</div>
+      <div class="option" onclick="check(this, false)">C. monument</div>
+      <div class="option" onclick="check(this, false)">D. religious</div>
+
+      <div class="result"></div>
+    </div>
+
+    <div class="question">
+      <p><b>16. Smartphones __________ much of teenagers' free time.</b></p>
+
+      <div class="option" onclick="check(this, false)">A. recognise</div>
+      <div class="option" onclick="check(this, false)">B. observe</div>
+      <div class="option" onclick="check(this, true)">C. occupy</div>
+      <div class="option" onclick="check(this, false)">D. structure</div>
+
+      <div class="result"></div>
+    </div>
+
+    <div class="question">
+      <p><b>17. Different __________ often have different opinions.</b></p>
+
+      <div class="option" onclick="check(this, true)">A. generations</div>
+      <div class="option" onclick="check(this, false)">B. monuments</div>
+      <div class="option" onclick="check(this, false)">C. structures</div>
+      <div class="option" onclick="check(this, false)">D. religions</div>
+
+      <div class="result"></div>
+    </div>
+
+    <div class="question">
+      <p><b>18. Millions of people visit __________ sites every year.</b></p>
+
+      <div class="option" onclick="check(this, true)">A. religious</div>
+      <div class="option" onclick="check(this, false)">B. ancient</div>
+      <div class="option" onclick="check(this, false)">C. communal</div>
+      <div class="option" onclick="check(this, false)">D. basic</div>
+
+      <div class="result"></div>
+    </div>
+
+    <h2>Part 3. Word Form</h2>
+
+    <div class="question">
+      <p><b>19. The company was __________ in 1998.</b></p>
+
+      <div class="option" onclick="check(this, false)">A. found</div>
+      <div class="option" onclick="check(this, true)">B. founded</div>
+      <div class="option" onclick="check(this, false)">C. founding</div>
+      <div class="option" onclick="check(this, false)">D. finds</div>
+
+      <div class="result"></div>
+    </div>
+
+    <div class="question">
+      <p>
+        <b>20. We had a __________ discussion instead of talking online.</b>
+      </p>
+
+      <div class="option" onclick="check(this, true)">A. face-to-face</div>
+      <div class="option" onclick="check(this, false)">B. deep-rooted</div>
+      <div class="option" onclick="check(this, false)">C. takeaway</div>
+      <div class="option" onclick="check(this, false)">D. communal</div>
+
+      <div class="result"></div>
+    </div>
+
+    <div class="question">
+      <p><b>21. Fish and chips is a traditional British __________.</b></p>
+
+      <div class="option" onclick="check(this, false)">A. generation</div>
+      <div class="option" onclick="check(this, false)">B. structure</div>
+      <div class="option" onclick="check(this, true)">C. dish</div>
+      <div class="option" onclick="check(this, false)">D. monument</div>
+
+      <div class="result"></div>
+    </div>
+
+    <div class="question">
+      <p><b>22. Many people buy __________ food after work.</b></p>
+
+      <div class="option" onclick="check(this, false)">A. religious</div>
+      <div class="option" onclick="check(this, true)">B. takeaway</div>
+      <div class="option" onclick="check(this, false)">C. barefoot</div>
+      <div class="option" onclick="check(this, false)">D. ancient</div>
+
+      <div class="result"></div>
+    </div>
+
+    <script>
+      function check(element, correct) {
+        const question = element.parentElement;
+
+        // Không cho chọn lại
+        if (question.dataset.done) return;
+        question.dataset.done = true;
+
+        const options = question.querySelectorAll(".option");
+        const result = question.querySelector(".result");
+
+        options.forEach((op) => (op.style.pointerEvents = "none"));
+
+        if (correct) {
+          element.classList.add("correct");
+          result.innerHTML = "✅ Correct!";
+          result.style.color = "green";
+        } else {
+          element.classList.add("wrong");
+          result.innerHTML = "❌ Wrong!";
+          result.style.color = "red";
+
+          options.forEach((op) => {
+            if (op.getAttribute("onclick").includes("true")) {
+              op.classList.add("correct");
+            }
+          });
+        }
+      }
+    </script>
+  </body>
+</html>
