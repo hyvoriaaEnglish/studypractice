@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>
+      Reading 26 - Why Football Remains the World's Most Popular Sport
+    </title>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Reading 26 - Why Football Remains the World's Most Popular Sport</h1>
+
+      <div
+        class="passage"
+        style="background: #f3e5f5; border-left: 6px solid #8e24aa"
+      >
+        <h2>Why Football Remains the World's Most Popular Sport</h2>
+
+        <p>
+          Football is often described as the world's most popular sport,
+          attracting billions of fans across different cultures and continents.
+          One reason for its global appeal is its simplicity. Unlike many sports
+          that require specialized equipment, football can be played almost
+          anywhere with minimal resources. A ball and a small open space are
+          often sufficient, making the game accessible to people from diverse
+          economic backgrounds.
+        </p>
+
+        <p>
+          Beyond accessibility, football possesses a unique ability to unite
+          communities. Major tournaments frequently generate a sense of
+          collective identity among supporters, who gather to celebrate
+          victories and endure defeats together. This shared emotional
+          experience can strengthen social bonds and foster a feeling of
+          belonging. In some cases, football has even been used as a diplomatic
+          tool to ease tensions between rival groups or nations.
+        </p>
+        <p>
+          However, the sport is not without criticism. Some observers argue that
+          excessive commercialization has transformed football from a cultural
+          activity into a highly profitable industry. The enormous transfer fees
+          paid for elite players and the growing influence of corporate sponsors
+          have raised concerns that financial interests may sometimes overshadow
+          sporting values. Critics contend that this trend risks widening the
+          gap between wealthy clubs and less affluent competitors.
+        </p>
+        <p>
+          Despite these concerns, football's popularity shows little sign of
+          declining. Advances in broadcasting technology and social media have
+          enabled fans to follow matches, players, and clubs more closely than
+          ever before. As a result, football continues to evolve while
+          maintaining the fundamental qualities that made it globally beloved in
+          the first place: accessibility, excitement, and the power to bring
+          people together.
+        </p>
+      </div>
+
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          background: #f4f6f9;
+          margin: 30px;
+        }
+
+        .question {
+          background: #fff;
+          border-radius: 10px;
+          padding: 18px;
+          margin-bottom: 25px;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .question h3 {
+          margin-top: 0;
+        }
+
+        .option {
+          display: block;
+          width: 100%;
+          text-align: left;
+          margin: 8px 0;
+          padding: 12px;
+          border: 1px solid #ccc;
+          border-radius: 6px;
+          background: white;
+          cursor: pointer;
+          font-size: 15px;
+          transition: 0.2s;
+        }
+
+        .option:hover {
+          background: #f1f1f1;
+        }
+
+        .correct {
+          background: #28a745 !important;
+          color: white;
+        }
+
+        .wrong {
+          background: #dc3545 !important;
+          color: white;
+        }
+
+        .result {
+          margin-top: 10px;
+          font-weight: bold;
+          font-size: 16px;
+        }
+
+        #score {
+          font-size: 22px;
+          font-weight: bold;
+          color: #0077cc;
+          margin-top: 30px;
+        }
+
+        #submit {
+          padding: 12px 30px;
+          background: #0077cc;
+          color: white;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          font-size: 16px;
+        }
+
+        #submit:hover {
+          background: #005fa3;
+        }
+      </style>
+
+      <script>
+        let score = 0;
+        let answered = {};
+
+        function check(btn, q, correct) {
+          if (answered[q]) return;
+
+          answered[q] = true;
+
+          let parent = btn.parentElement;
+          let buttons = parent.querySelectorAll(".option");
+
+          buttons.forEach((b) => (b.disabled = true));
+
+          if (btn.dataset.answer === correct) {
+            btn.classList.add("correct");
+            parent.querySelector(".result").innerHTML = "✅ Chính xác!";
+            score++;
+          } else {
+            btn.classList.add("wrong");
+
+            buttons.forEach((b) => {
+              if (b.dataset.answer === correct) {
+                b.classList.add("correct");
+              }
+            });
+
+            parent.querySelector(".result").innerHTML =
+              "❌ Sai! Đáp án đúng là <b>" + correct + "</b>";
+          }
+        }
+
+        function showScore() {
+          document.getElementById("score").innerHTML =
+            "🎉 Điểm của bạn: " + score + "/10";
+        }
+      </script>
+
+      <h2>Questions (C1-C2)</h2>
+
+      <!-- Question 1 -->
+      <div class="question">
+        <h3>1. What is the main purpose of the passage?</h3>
+
+        <button class="option" data-answer="A" onclick="check(this, 1, 'A')">
+          A. To explain why football has achieved worldwide popularity while
+          acknowledging certain criticisms.
+        </button>
+
+        <button class="option" data-answer="B" onclick="check(this, 1, 'A')">
+          B. To argue that football is superior to all other sports.
+        </button>
+
+        <button class="option" data-answer="C" onclick="check(this, 1, 'A')">
+          C. To criticize the commercialization of modern football.
+        </button>
+
+        <button class="option" data-answer="D" onclick="check(this, 1, 'A')">
+          D. To describe the history of football.
+        </button>
+
+        <p class="result"></p>
+      </div>
+
+      <!-- Question 2 -->
+      <div class="question">
+        <h3>2. The word "appeal" in paragraph 1 is closest in meaning to:</h3>
+
+        <button class="option" data-answer="A" onclick="check(this, 2, 'B')">
+          A. challenge
+        </button>
+
+        <button class="option" data-answer="B" onclick="check(this, 2, 'B')">
+          B. popularity
+        </button>
+
+        <button class="option" data-answer="C" onclick="check(this, 2, 'B')">
+          C. influence
+        </button>
+
+        <button class="option" data-answer="D" onclick="check(this, 2, 'B')">
+          D. criticism
+        </button>
+
+        <p class="result"></p>
+      </div>
+
+      <!-- Question 3 -->
+
+      <div class="question">
+        <h3>
+          3. According to the passage, football's accessibility is largely due
+          to:
+        </h3>
+
+        <button class="option" data-answer="A" onclick="check(this, 3, 'B')">
+          A. government support.
+        </button>
+
+        <button class="option" data-answer="B" onclick="check(this, 3, 'B')">
+          B. low equipment requirements.
+        </button>
+
+        <button class="option" data-answer="C" onclick="check(this, 3, 'B')">
+          C. professional coaching programs.
+        </button>
+
+        <button class="option" data-answer="D" onclick="check(this, 3, 'B')">
+          D. international competitions.
+        </button>
+
+        <p class="result"></p>
+      </div>
+
+      <!-- Question 4 -->
+
+      <div class="question">
+        <h3>
+          4. What does the author suggest about major football tournaments?
+        </h3>
+
+        <button class="option" data-answer="A" onclick="check(this, 4, 'B')">
+          A. They primarily benefit corporate sponsors.
+        </button>
+
+        <button class="option" data-answer="B" onclick="check(this, 4, 'B')">
+          B. They often create shared experiences among supporters.
+        </button>
+
+        <button class="option" data-answer="C" onclick="check(this, 4, 'B')">
+          C. They reduce interest in local clubs.
+        </button>
+
+        <button class="option" data-answer="D" onclick="check(this, 4, 'B')">
+          D. They are losing popularity.
+        </button>
+
+        <p class="result"></p>
+      </div>
+
+      <!-- Question 5 -->
+
+      <div class="question">
+        <h3>5. The word "affluent" in paragraph 3 is closest in meaning to:</h3>
+
+        <button class="option" data-answer="A" onclick="check(this, 5, 'C')">
+          A. successful
+        </button>
+
+        <button class="option" data-answer="B" onclick="check(this, 5, 'C')">
+          B. traditional
+        </button>
+
+        <button class="option" data-answer="C" onclick="check(this, 5, 'C')">
+          C. wealthy
+        </button>
+
+        <button class="option" data-answer="D" onclick="check(this, 5, 'C')">
+          D. competitive
+        </button>
+
+        <p class="result"></p>
+      </div>
+    </div>
+    <!-- Question 6 -->
+
+    <div class="question">
+      <h3>6. Which of the following can be inferred from the passage?</h3>
+
+      <button class="option" data-answer="A" onclick="check(this, 6, 'A')">
+        A. Football's popularity cannot be explained by a single factor.
+      </button>
+
+      <button class="option" data-answer="B" onclick="check(this, 6, 'A')">
+        B. Commercialization has completely ruined football.
+      </button>
+
+      <button class="option" data-answer="C" onclick="check(this, 6, 'A')">
+        C. Poorer clubs no longer participate in professional competitions.
+      </button>
+
+      <button class="option" data-answer="D" onclick="check(this, 6, 'A')">
+        D. Social media has reduced fan engagement.
+      </button>
+
+      <p class="result"></p>
+    </div>
+
+    <!-- Question 7 -->
+
+    <div class="question">
+      <h3>
+        7. Why does the author mention transfer fees and corporate sponsors?
+      </h3>
+
+      <button class="option" data-answer="A" onclick="check(this, 7, 'B')">
+        A. To demonstrate how football clubs generate revenue.
+      </button>
+
+      <button class="option" data-answer="B" onclick="check(this, 7, 'B')">
+        B. To provide evidence for concerns about commercialization.
+      </button>
+
+      <button class="option" data-answer="C" onclick="check(this, 7, 'B')">
+        C. To explain the rules governing professional football.
+      </button>
+
+      <button class="option" data-answer="D" onclick="check(this, 7, 'B')">
+        D. To show that football players are overpaid.
+      </button>
+
+      <p class="result"></p>
+    </div>
+
+    <!-- Question 8 -->
+
+    <div class="question">
+      <h3>8. Which statement would the author most likely agree with?</h3>
+
+      <button class="option" data-answer="A" onclick="check(this, 8, 'B')">
+        A. Commercialization is entirely beneficial for football.
+      </button>
+
+      <button class="option" data-answer="B" onclick="check(this, 8, 'B')">
+        B. Football's cultural significance extends beyond the matches
+        themselves.
+      </button>
+
+      <button class="option" data-answer="C" onclick="check(this, 8, 'B')">
+        C. Football is popular only because of modern technology.
+      </button>
+
+      <button class="option" data-answer="D" onclick="check(this, 8, 'B')">
+        D. Sporting values are no longer relevant.
+      </button>
+
+      <p class="result"></p>
+    </div>
+
+    <!-- Question 9 -->
+
+    <div class="question">
+      <h3>9. What function does paragraph 3 serve in the passage?</h3>
+
+      <button class="option" data-answer="A" onclick="check(this, 9, 'A')">
+        A. It introduces a counterargument or criticism.
+      </button>
+
+      <button class="option" data-answer="B" onclick="check(this, 9, 'A')">
+        B. It summarizes the author's conclusion.
+      </button>
+
+      <button class="option" data-answer="C" onclick="check(this, 9, 'A')">
+        C. It defines football's global appeal.
+      </button>
+
+      <button class="option" data-answer="D" onclick="check(this, 9, 'A')">
+        D. It presents historical background.
+      </button>
+
+      <p class="result"></p>
+    </div>
+
+    <!-- Question 10 -->
+
+    <div class="question">
+      <h3>10. Which of the following best summarizes the passage?</h3>
+
+      <button class="option" data-answer="A" onclick="check(this, 10, 'B')">
+        A. Football is popular mainly because of social media.
+      </button>
+
+      <button class="option" data-answer="B" onclick="check(this, 10, 'B')">
+        B. Football's global success stems from its accessibility and social
+        impact, although concerns about commercialization remain.
+      </button>
+
+      <button class="option" data-answer="C" onclick="check(this, 10, 'B')">
+        C. Wealthy clubs are responsible for football's popularity.
+      </button>
+
+      <button class="option" data-answer="D" onclick="check(this, 10, 'B')">
+        D. Football has become too commercialized to remain relevant.
+      </button>
+
+      <p class="result"></p>
+    </div>
+
+    <br />
+
+    <button id="submit" onclick="showScore()">Nộp bài</button>
+
+    <button id="submit" onclick="location.reload()">Làm lại</button>
+
+    <p id="score"></p>
+  </body>
+</html>
