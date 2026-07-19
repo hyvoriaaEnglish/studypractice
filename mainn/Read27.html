@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reading 27 - Market Segmentation in Business</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f7fb;
+        margin: 0;
+        padding: 30px;
+        line-height: 1.7;
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: auto;
+        background: white;
+        padding: 35px;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        color: #0d47a1;
+      }
+
+      .passage {
+        background: #eef5ff;
+        padding: 20px;
+        border-left: 6px solid #1976d2;
+        border-radius: 8px;
+        margin-bottom: 35px;
+      }
+
+      .question {
+        margin-bottom: 30px;
+      }
+
+      .question h3 {
+        margin-bottom: 10px;
+      }
+
+      .option {
+        display: block;
+        background: #fafafa;
+        padding: 12px;
+        margin: 8px 0;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.25s;
+      }
+
+      .option:hover {
+        background: #dfefff;
+      }
+
+      .correct {
+        background: #c8f7c5 !important;
+      }
+
+      .wrong {
+        background: #ffd4d4 !important;
+      }
+
+      .result {
+        margin-top: 10px;
+        font-weight: bold;
+      }
+
+      button {
+        padding: 15px 35px;
+        font-size: 18px;
+        border: none;
+        border-radius: 10px;
+        background: #1976d2;
+        color: white;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #125bb0;
+      }
+
+      .score {
+        font-size: 28px;
+        font-weight: bold;
+        color: #d32f2f;
+        margin-top: 30px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Reading 27</h1>
+      <h2>Market Segmentation in Business</h2>
+
+      <div class="passage">
+        <p>
+          Market segmentation is the process of dividing a broad market into
+          smaller groups of consumers who share similar characteristics, needs,
+          or purchasing behaviors. Rather than treating all customers as
+          identical, businesses identify specific segments based on factors such
+          as age, income, lifestyle, location, or interests. This approach
+          enables companies to design products and marketing strategies that
+          better address the preferences of each group. As a result, firms can
+          allocate resources more efficiently and increase the likelihood of
+          attracting potential customers.
+        </p>
+
+        <p>
+          However, effective segmentation requires more than simply grouping
+          consumers according to demographic characteristics. A segment must
+          also be measurable, accessible, substantial, and responsive to
+          marketing efforts. If a target group is too small or difficult to
+          reach, focusing on it may not be profitable. Furthermore, consumer
+          preferences can evolve over time, meaning that market segments are not
+          always stable. Consequently, businesses must continuously analyze
+          market trends and adjust their strategies to remain competitive in
+          changing environments.
+        </p>
+      </div>
+
+      <div id="quiz"></div>
+
+      <center>
+        <button onclick="showScore()">Submit</button>
+        <button onclick="location.reload()">Try Again</button>
+
+        <div class="score" id="score"></div>
+      </center>
+    </div>
+
+    <script>
+      const questions = [
+        {
+          q: "1. What is the main purpose of the passage?",
+          a: [
+            "A. To explain the concept of market segmentation and its challenges.",
+            "B. To compare different advertising platforms.",
+            "C. To argue that all customers should be treated equally.",
+            "D. To describe the history of marketing.",
+          ],
+          c: 0,
+        },
+        {
+          q: "2. The word 'broad' in paragraph 1 is closest in meaning to:",
+          a: [
+            "A. profitable",
+            "B. competitive",
+            "C. large and diverse",
+            "D. international",
+          ],
+          c: 2,
+        },
+        {
+          q: "3. According to the passage, businesses use segmentation primarily to:",
+          a: [
+            "A. reduce production costs.",
+            "B. understand and target customers more effectively.",
+            "C. eliminate competition.",
+            "D. increase product prices.",
+          ],
+          c: 1,
+        },
+        {
+          q: "4. Which of the following is NOT mentioned as a basis for segmentation?",
+          a: ["A. Income", "B. Lifestyle", "C. Location", "D. Education level"],
+          c: 3,
+        },
+        {
+          q: "5. The word 'allocate' in paragraph 1 is closest in meaning to:",
+          a: ["A. distribute", "B. obtain", "C. restrict", "D. analyze"],
+          c: 0,
+        },
+        {
+          q: "6. What can be inferred from the passage?",
+          a: [
+            "A. Market segmentation guarantees business success.",
+            "B. Segmentation is useful only for large companies.",
+            "C. Poorly chosen segments may lead to ineffective marketing efforts.",
+            "D. Consumer preferences rarely change.",
+          ],
+          c: 2,
+        },
+        {
+          q: "7. Why does the author mention that segments must be 'measurable, accessible, substantial, and responsive'?",
+          a: [
+            "A. To provide criteria for evaluating market segments.",
+            "B. To criticize current marketing practices.",
+            "C. To explain why segmentation is unnecessary.",
+            "D. To compare different customer groups.",
+          ],
+          c: 0,
+        },
+        {
+          q: "8. The word 'substantial' in paragraph 2 most nearly means:",
+          a: [
+            "A. temporary",
+            "B. large enough to be worthwhile",
+            "C. difficult to identify",
+            "D. highly profitable",
+          ],
+          c: 1,
+        },
+        {
+          q: "9. Which statement would the author most likely agree with?",
+          a: [
+            "A. Demographic data alone is always sufficient for segmentation.",
+            "B. Businesses should regularly reassess their target segments.",
+            "C. Small customer groups should never be targeted.",
+            "D. Market segments remain constant over time.",
+          ],
+          c: 1,
+        },
+        {
+          q: "10. Which of the following best summarizes the passage?",
+          a: [
+            "A. Market segmentation involves dividing consumers into groups, but successful segmentation requires careful evaluation and continuous adaptation.",
+            "B. Segmentation is an outdated marketing practice.",
+            "C. Most businesses rely exclusively on demographic segmentation.",
+            "D. Market segmentation mainly benefits multinational corporations.",
+          ],
+          c: 0,
+        },
+      ];
+
+      const quiz = document.getElementById("quiz");
+
+      questions.forEach((item, index) => {
+        let div = document.createElement("div");
+        div.className = "question";
+
+        let html = `<h3>${item.q}</h3>`;
+
+        item.a.forEach((choice, i) => {
+          html += `
+<label class="option">
+<input type="radio" name="q${index}" onclick="check(${index},${i},this)">
+${choice}
+</label>
+`;
+        });
+
+        html += `<div id="r${index}" class="result"></div>`;
+
+        div.innerHTML = html;
+
+        quiz.appendChild(div);
+      });
+
+      let answered = new Array(questions.length).fill(false);
+      let score = 0;
+
+      function check(q, choice, input) {
+        if (answered[q]) return;
+
+        answered[q] = true;
+
+        const options = document.getElementsByName("q" + q);
+
+        options.forEach((op, i) => {
+          op.disabled = true;
+
+          if (i === questions[q].c) {
+            op.parentElement.classList.add("correct");
+          }
+        });
+
+        const result = document.getElementById("r" + q);
+
+        if (choice === questions[q].c) {
+          input.parentElement.classList.add("correct");
+
+          result.innerHTML = "✅ Correct!";
+
+          result.style.color = "green";
+
+          score++;
+        } else {
+          input.parentElement.classList.add("wrong");
+
+          let letter = ["A", "B", "C", "D"];
+
+          result.innerHTML = `❌ Incorrect. Correct answer: <b>${letter[questions[q].c]}</b>`;
+
+          result.style.color = "red";
+        }
+      }
+
+      function showScore() {
+        let totalAnswered = answered.filter((x) => x).length;
+
+        if (totalAnswered < questions.length) {
+          alert("Please answer all questions first!");
+
+          return;
+        }
+
+        document.getElementById("score").innerHTML = `Your Score: ${score}/10`;
+      }
+    </script>
+  </body>
+</html>
