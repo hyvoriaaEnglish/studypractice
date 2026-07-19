@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Quiz 102-123</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f7fb;
+        padding: 30px;
+        line-height: 1.7;
+      }
+      .question {
+        background: white;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+      .option {
+        display: block;
+        margin: 8px 0;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      .option:hover {
+        background: #eef5ff;
+      }
+      .correct {
+        background: #b8f5c2 !important;
+        border-color: green;
+      }
+      .wrong {
+        background: #ffbcbc !important;
+        border-color: red;
+      }
+      .result {
+        margin-top: 10px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="quiz"></div>
+
+    <script>
+      const questions = [
+        {
+          q: "103. Bricks baked in a kiln are much harder ______ that are dried in the sun.",
+          a: ["those", "than do those", "than those", "ones"],
+          c: 2,
+        },
+        {
+          q: "104. Your ideas, ______ seem unusual to me.",
+          a: ["as hers", "like hers", "similar as hers", "different than hers"],
+          c: 1,
+        },
+        {
+          q: "105. He said that the plane had already left and that I ______ arrived an hour earlier.",
+          a: ["must have", "had to", "should have", "was supposed to"],
+          c: 2,
+        },
+        {
+          q: "106. The hotel didn't ______ my expectations.",
+          a: ["come up to", "get up to", "come down to", "get down to"],
+          c: 0,
+        },
+        {
+          q: "107. My teacher says that I should sail ______ the exam.",
+          a: ["through", "toward", "forward", "about"],
+          c: 0,
+        },
+        {
+          q: "108. Dave didn't understand what Miss Smith was getting ______.",
+          a: ["on", "in", "at", "to"],
+          c: 2,
+        },
+        {
+          q: "109. I was taken ______ when Michaela said I'd hurt her feelings.",
+          a: ["out", "along", "aback", "up"],
+          c: 2,
+        },
+        {
+          q: "110. I would like to ______ a request to see the chairman.",
+          a: ["put in for", "put up with", "put out", "go out to"],
+          c: 0,
+        },
+        {
+          q: "111. It is an embarrassing situation, but she managed to ______.",
+          a: ["laugh at it", "laugh on it", "laugh it off", "laugh it out"],
+          c: 2,
+        },
+        {
+          q: "112. My boss is biased ______ me.",
+          a: ["aback", "against", "forward", "through"],
+          c: 1,
+        },
+        {
+          q: "113. She has a real aptitude ______ photographing.",
+          a: ["after", "of", "with", "for"],
+          c: 3,
+        },
+        {
+          q: "114. We are ______ very good terms ______ our next-door neighbor.",
+          a: ["in / of", "in / with", "on / of", "on / with"],
+          c: 3,
+        },
+        {
+          q: "115. It is doubtful if he will ______.",
+          a: ["pull through", "pull up", "pull back", "pull out"],
+          c: 0,
+        },
+        {
+          q: "116. Despite all the interruptions, he ______ with his work.",
+          a: ["stuck at", "held on", "hung out", "pressed on"],
+          c: 3,
+        },
+        {
+          q: "117. Women are in a ______ in the higher ranks.",
+          a: ["rarity", "minority", "scarcity", "minimum"],
+          c: 1,
+        },
+        {
+          q: "118. Although he was under no ______ the shopkeeper replaced it free.",
+          a: ["urgency", "guarantee", "obligation", "insistence"],
+          c: 2,
+        },
+        {
+          q: "119. She has eyes like a ______.",
+          a: ["fox", "hawk", "goose", "bird"],
+          c: 1,
+        },
+        {
+          q: "120. One needs a very ______ imagination.",
+          a: ["vivid", "living", "bright", "sparkling"],
+          c: 0,
+        },
+        {
+          q: "121. This ticket ______ you to a free meal.",
+          a: ["confers", "entitles", "grants", "credits"],
+          c: 1,
+        },
+        {
+          q: "122. He was completely ______ by the thief's disguise.",
+          a: ["taken away", "taken down", "taken in", "taken through"],
+          c: 2,
+        },
+        {
+          q: "123. Scientists ______ in their opinions.",
+          a: ["differ", "differentiate", "difference", "different"],
+          c: 0,
+        },
+      ];
+
+      const quiz = document.getElementById("quiz");
+
+      questions.forEach((item, index) => {
+        const div = document.createElement("div");
+        div.className = "question";
+
+        let html = `<h3>${item.q}</h3>`;
+
+        item.a.forEach((choice, i) => {
+          html += `<div class="option" onclick="check(this,${index},${i})">${String.fromCharCode(65 + i)}. ${choice}</div>`;
+        });
+
+        html += `<div class="result" id="r${index}"></div>`;
+
+        div.innerHTML = html;
+        quiz.appendChild(div);
+      });
+
+      function check(el, q, a) {
+        const parent = el.parentElement;
+        const opts = parent.querySelectorAll(".option");
+
+        if (parent.dataset.done) return;
+
+        parent.dataset.done = true;
+
+        opts.forEach((o) => (o.style.pointerEvents = "none"));
+
+        opts[questions[q].c].classList.add("correct");
+
+        if (a === questions[q].c) {
+          document.getElementById("r" + q).innerHTML = "✅ Correct!";
+        } else {
+          el.classList.add("wrong");
+          document.getElementById("r" + q).innerHTML = "❌ Wrong!";
+        }
+      }
+    </script>
+  </body>
+</html>
