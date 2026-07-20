@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vocabulary Quiz</title>
+
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f4f7fb;
+        margin: 0;
+        padding: 30px;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: auto;
+      }
+
+      h1 {
+        text-align: center;
+        color: #2c3e50;
+      }
+
+      .question {
+        background: white;
+        margin: 20px 0;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+      }
+
+      .question p {
+        font-weight: bold;
+        font-size: 18px;
+      }
+
+      label {
+        display: block;
+        padding: 8px;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+      .correct {
+        background: #b8f5c5;
+      }
+
+      .wrong {
+        background: #ffd1d1;
+      }
+
+      .result {
+        margin-top: 10px;
+        font-weight: bold;
+      }
+
+      button {
+        padding: 15px 35px;
+        font-size: 18px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        margin: 15px;
+      }
+
+      #check {
+        background: #3498db;
+        color: white;
+      }
+
+      #reset {
+        background: #2ecc71;
+        color: white;
+      }
+
+      .score {
+        font-size: 24px;
+        text-align: center;
+        margin: 20px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Vocabulary Quiz (30 Questions)</h1>
+
+      <div id="quiz"></div>
+
+      <div style="text-align: center">
+        <button id="check">Check Answers</button>
+        <button id="reset">Reset</button>
+      </div>
+
+      <div class="score" id="score"></div>
+    </div>
+
+    <script>
+      const questions = [
+        {
+          q: "1. The students walked around the university ________ before classes started.",
+          options: ["A. coral reef", "B. campus", "C. seabed", "D. flora"],
+          answer: 1,
+        },
+
+        {
+          q: "2. The diving trip gave us an unforgettable ________.",
+          options: [
+            "A. confidence",
+            "B. trend",
+            "C. experience",
+            "D. performance",
+          ],
+          answer: 2,
+        },
+
+        {
+          q: "3. Many tourists visit Australia to see the Great Barrier ________.",
+          options: ["A. campus", "B. coral reef", "C. theme", "D. seabed"],
+          answer: 1,
+        },
+
+        {
+          q: "4. The guide encouraged us to ________ the old town on foot.",
+          options: ["A. explore", "B. perform", "C. lack", "D. embarrass"],
+          answer: 0,
+        },
+
+        {
+          q: "5. The national park is famous for its rich ________ and fauna.",
+          options: ["A. flora", "B. campus", "C. confidence", "D. trend"],
+          answer: 0,
+        },
+
+        {
+          q: "6. Some students simply ________ instead of understanding the lesson.",
+          options: [
+            "A. snorkel",
+            "B. explore",
+            "C. learn by rote",
+            "D. perform",
+          ],
+          answer: 2,
+        },
+
+        {
+          q: "7. The singer's ________ received a standing ovation.",
+          options: ["A. theme", "B. performance", "C. flora", "D. confidence"],
+          answer: 1,
+        },
+
+        {
+          q: "8. Many schools now organize ________ to teach students about nature.",
+          options: ["A. eco-tours", "B. campuses", "C. trends", "D. seabeds"],
+          answer: 0,
+        },
+
+        {
+          q: "9. The movie was so ________ that everyone laughed from beginning to end.",
+          options: [
+            "A. touching",
+            "B. embarrassing",
+            "C. amazing",
+            "D. unpleasant",
+          ],
+          answer: 2,
+        },
+
+        {
+          q: "10. I felt ________ after forgetting my teacher's name.",
+          options: [
+            "A. thrilling",
+            "B. embarrassing",
+            "C. embarrassed",
+            "D. western",
+          ],
+          answer: 2,
+        },
+
+        {
+          q: "11. Scuba divers explored the ________ of the ocean.",
+          options: ["A. campus", "B. seabed", "C. trend", "D. theme"],
+          answer: 1,
+        },
+
+        {
+          q: "12. The new fashion ________ quickly became popular among teenagers.",
+          options: ["A. trend", "B. experience", "C. flora", "D. confidence"],
+          answer: 0,
+        },
+
+        {
+          q: "13. She spoke with great ________ during the presentation.",
+          options: ["A. lack", "B. confidence", "C. performance", "D. theme"],
+          answer: 1,
+        },
+
+        {
+          q: "14. The final scene of the film was very ________ and made many people cry.",
+          options: ["A. touching", "B. western", "C. amazing", "D. unpleasant"],
+          answer: 0,
+        },
+
+        {
+          q: "15. The roller coaster ride was absolutely ________.",
+          options: [
+            "A. touching",
+            "B. thrilling",
+            "C. embarrassing",
+            "D. western",
+          ],
+          answer: 1,
+        },
+
+        {
+          q: "16. The children enjoyed ________ among colorful fish.",
+          options: [
+            "A. snorkling",
+            "B. snorkeling",
+            "C. snorkled",
+            "D. snorkels",
+          ],
+          answer: 1,
+        },
+
+        {
+          q: "17. The documentary focused on the ________ living in the rainforest.",
+          options: ["A. flora", "B. tribal dance", "C. fauna", "D. trend"],
+          answer: 2,
+        },
+
+        {
+          q: "18. The play had a historical ________.",
+          options: ["A. theme", "B. campus", "C. seabed", "D. confidence"],
+          answer: 0,
+        },
+
+        {
+          q: "19. His speech was ________ because it contained many offensive jokes.",
+          options: [
+            "A. amazing",
+            "B. unpleasant",
+            "C. memorable",
+            "D. thrilling",
+          ],
+          answer: 1,
+        },
+
+        {
+          q: "20. The trip to Japan was one of the most ________ moments of my life.",
+          options: ["A. memorable", "B. western", "C. embarrassing", "D. lack"],
+          answer: 0,
+        },
+
+        {
+          q: "21. Cowboys are often seen in ________ movies.",
+          options: ["A. touching", "B. western", "C. thrilling", "D. eco-tour"],
+          answer: 1,
+        },
+
+        {
+          q: "22. The soldiers stood in ________ rows during the parade.",
+          options: ["A. coral reef", "B. army-like", "C. theme", "D. fauna"],
+          answer: 1,
+        },
+
+        {
+          q: "23. The traditional ________ impressed all the foreign visitors.",
+          options: [
+            "A. tribal dance",
+            "B. seabed",
+            "C. trend",
+            "D. confidence",
+          ],
+          answer: 0,
+        },
+
+        {
+          q: "24. Many poor villages ________ clean drinking water.",
+          options: ["A. explore", "B. lack", "C. perform", "D. snorkel"],
+          answer: 1,
+        },
+
+        {
+          q: "25. The magician gave a ________ show that amazed the audience.",
+          options: [
+            "A. brilliant",
+            "B. unpleasant",
+            "C. western",
+            "D. army-like",
+          ],
+          answer: 0,
+        },
+
+        {
+          q: "26. The fireworks display was absolutely ________.",
+          options: ["A. amazing", "B. lack", "C. flora", "D. seabed"],
+          answer: 0,
+        },
+
+        {
+          q: "27. We joined an ________ to learn more about wildlife conservation.",
+          options: ["A. eco-tour", "B. western", "C. campus", "D. performance"],
+          answer: 0,
+        },
+
+        {
+          q: "28. The colorful fish swam around the ________.",
+          options: ["A. coral reef", "B. campus", "C. trend", "D. theme"],
+          answer: 0,
+        },
+
+        {
+          q: "29. The teacher praised Lucy for her ________ idea.",
+          options: [
+            "A. brilliant",
+            "B. army-like",
+            "C. unpleasant",
+            "D. touching",
+          ],
+          answer: 0,
+        },
+
+        {
+          q: "30. After several successful speeches, Tom became much more ________.",
+          options: [
+            "A. memorable",
+            "B. confident",
+            "C. confidence",
+            "D. thrill",
+          ],
+          answer: 1,
+        },
+      ];
+
+      const quiz = document.getElementById("quiz");
+
+      questions.forEach((item, index) => {
+        let html = `
+<div class="question">
+<p>${item.q}</p>
+`;
+
+        item.options.forEach((op, i) => {
+          html += `
+<label id="q${index}_${i}">
+<input type="radio" name="q${index}" value="${i}">
+${op}
+</label>
+`;
+        });
+
+        html += `<div class="result" id="result${index}"></div></div>`;
+
+        quiz.innerHTML += html;
+      });
+
+      document.getElementById("check").onclick = function () {
+        let score = 0;
+
+        questions.forEach((q, index) => {
+          const selected = document.querySelector(
+            `input[name=q${index}]:checked`,
+          );
+          const result = document.getElementById(`result${index}`);
+
+          for (let i = 0; i < 4; i++) {
+            document
+              .getElementById(`q${index}_${i}`)
+              .classList.remove("correct", "wrong");
+          }
+
+          if (selected) {
+            const choose = Number(selected.value);
+
+            document
+              .getElementById(`q${index}_${q.answer}`)
+              .classList.add("correct");
+
+            if (choose === q.answer) {
+              score++;
+              result.innerHTML = "✅ Correct";
+              result.style.color = "green";
+            } else {
+              document
+                .getElementById(`q${index}_${choose}`)
+                .classList.add("wrong");
+              result.innerHTML = `❌ Wrong. Correct answer: ${q.options[q.answer]}`;
+              result.style.color = "red";
+            }
+          } else {
+            document
+              .getElementById(`q${index}_${q.answer}`)
+              .classList.add("correct");
+            result.innerHTML = `❌ No answer. Correct: ${q.options[q.answer]}`;
+            result.style.color = "red";
+          }
+        });
+
+        document.getElementById("score").innerHTML =
+          `Your Score: ${score} / ${questions.length}`;
+      };
+
+      document.getElementById("reset").onclick = function () {
+        document
+          .querySelectorAll("input[type=radio]")
+          .forEach((r) => (r.checked = false));
+
+        document.querySelectorAll("label").forEach((l) => {
+          l.classList.remove("correct", "wrong");
+        });
+
+        document.querySelectorAll(".result").forEach((r) => (r.innerHTML = ""));
+
+        document.getElementById("score").innerHTML = "";
+      };
+    </script>
+  </body>
+</html>

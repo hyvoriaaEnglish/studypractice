@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guided Cloze Test</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f7fb;
+        margin: 0;
+        padding: 30px;
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: auto;
+      }
+
+      h1 {
+        text-align: center;
+        color: #2c3e50;
+      }
+
+      .reading {
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        line-height: 1.8;
+        font-size: 18px;
+        margin-bottom: 35px;
+      }
+
+      .question {
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+      }
+
+      .question p {
+        font-weight: bold;
+      }
+
+      label {
+        display: block;
+        padding: 8px;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+      .correct {
+        background: #b8f5c5;
+      }
+
+      .wrong {
+        background: #ffd1d1;
+      }
+
+      .result {
+        margin-top: 10px;
+        font-weight: bold;
+      }
+
+      button {
+        padding: 14px 30px;
+        font-size: 18px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        margin: 15px;
+      }
+
+      #check {
+        background: #3498db;
+        color: white;
+      }
+
+      #reset {
+        background: #27ae60;
+        color: white;
+      }
+
+      .score {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Guided Cloze Test (B2–C1)</h1>
+
+      <div class="reading">
+        <h2>Our Experience</h2>
+
+        <p>
+          Last summer, my classmates and I took part in an unforgettable
+          <b>(1)</b> ________ to a coastal national park. Although some of us
+          had travelled abroad before, none had ever explored a coral reef. We
+          were eager to discover the underwater world and learn more about the
+          rich <b>(2)</b> ________ and fauna found there.
+
+          <br /><br />
+
+          After arriving, our guide carefully explained the safety rules before
+          we went <b>(3)</b> ________. At first, I felt rather nervous because I
+          had never swum in deep water. However, my friends encouraged me, and I
+          gradually gained enough <b>(4)</b> ________ to enjoy the activity.
+          Looking down at the colorful fish swimming above the
+          <b>(5)</b> ________, I realized that photographs could never fully
+          capture such beauty.
+
+          <br /><br />
+
+          In the evening, we watched a traditional <b>(6)</b> ________ dance
+          performed by local people. The show was both entertaining and
+          educational because it reflected the history and beliefs of the
+          community. It was such a <b>(7)</b> ________ performance that everyone
+          gave the dancers a standing ovation.
+
+          <br /><br />
+
+          What impressed me most was that the tour focused not only
+          <b>(8)</b> ________ sightseeing but also on environmental protection.
+          We were reminded that even a small careless action could damage the
+          fragile coral reef. As a result, every visitor was expected to behave
+          <b>(9)</b> ________ and avoid disturbing wildlife.
+
+          <br /><br />
+
+          Looking back, I can honestly say that the trip was one of the most
+          <b>(10)</b> ________ experiences of my life. It inspired me to
+          appreciate nature more deeply and encouraged me to join future
+          conservation projects.
+        </p>
+      </div>
+
+      <div id="quiz"></div>
+
+      <div style="text-align: center">
+        <button id="check">Check Answers</button>
+        <button id="reset">Reset</button>
+      </div>
+
+      <div class="score" id="score"></div>
+    </div>
+
+    <script>
+      const questions = [
+        {
+          q: "1.",
+          options: ["A. eco-tour", "B. campus", "C. trend", "D. performance"],
+          answer: 0,
+        },
+
+        {
+          q: "2.",
+          options: ["A. seabed", "B. flora", "C. confidence", "D. experience"],
+          answer: 1,
+        },
+
+        {
+          q: "3.",
+          options: [
+            "A. snorkel",
+            "B. snorkeling",
+            "C. snorkeled",
+            "D. snorkeler",
+          ],
+          answer: 1,
+        },
+
+        {
+          q: "4.",
+          options: [
+            "A. confidence",
+            "B. confident",
+            "C. confidently",
+            "D. confidenceful",
+          ],
+          answer: 0,
+        },
+
+        {
+          q: "5.",
+          options: ["A. theme", "B. campus", "C. seabed", "D. performance"],
+          answer: 2,
+        },
+
+        {
+          q: "6.",
+          options: ["A. western", "B. army-like", "C. tribal", "D. memorable"],
+          answer: 2,
+        },
+
+        {
+          q: "7.",
+          options: [
+            "A. unpleasant",
+            "B. touching",
+            "C. lack",
+            "D. embarrassing",
+          ],
+          answer: 1,
+        },
+
+        {
+          q: "8.",
+          options: ["A. in", "B. on", "C. at", "D. for"],
+          answer: 1,
+        },
+
+        {
+          q: "9.",
+          options: [
+            "A. responsible",
+            "B. responsibly",
+            "C. responsibility",
+            "D. irresponsible",
+          ],
+          answer: 1,
+        },
+
+        {
+          q: "10.",
+          options: ["A. memorable", "B. memory", "C. memorably", "D. memorial"],
+          answer: 0,
+        },
+      ];
+
+      const quiz = document.getElementById("quiz");
+
+      questions.forEach((item, index) => {
+        let html = `
+<div class="question">
+<p>${item.q}</p>
+`;
+
+        item.options.forEach((op, i) => {
+          html += `
+<label id="q${index}_${i}">
+<input type="radio" name="q${index}" value="${i}">
+${op}
+</label>
+`;
+        });
+
+        html += `
+<div class="result" id="result${index}"></div>
+</div>
+`;
+
+        quiz.innerHTML += html;
+      });
+
+      document.getElementById("check").onclick = function () {
+        let score = 0;
+
+        questions.forEach((q, index) => {
+          const selected = document.querySelector(
+            `input[name=q${index}]:checked`,
+          );
+          const result = document.getElementById(`result${index}`);
+
+          for (let i = 0; i < 4; i++) {
+            document
+              .getElementById(`q${index}_${i}`)
+              .classList.remove("correct", "wrong");
+          }
+
+          if (selected) {
+            const choose = Number(selected.value);
+
+            document
+              .getElementById(`q${index}_${q.answer}`)
+              .classList.add("correct");
+
+            if (choose === q.answer) {
+              score++;
+              result.innerHTML = "✅ Correct";
+              result.style.color = "green";
+            } else {
+              document
+                .getElementById(`q${index}_${choose}`)
+                .classList.add("wrong");
+
+              result.innerHTML = `❌ Wrong. Correct answer: ${q.options[q.answer]}`;
+
+              result.style.color = "red";
+            }
+          } else {
+            document
+              .getElementById(`q${index}_${q.answer}`)
+              .classList.add("correct");
+
+            result.innerHTML = `❌ No answer. Correct answer: ${q.options[q.answer]}`;
+
+            result.style.color = "red";
+          }
+        });
+
+        document.getElementById("score").innerHTML =
+          `Your Score: ${score} / ${questions.length}`;
+      };
+
+      document.getElementById("reset").onclick = function () {
+        document
+          .querySelectorAll("input[type=radio]")
+          .forEach((r) => (r.checked = false));
+
+        document.querySelectorAll("label").forEach((l) => {
+          l.classList.remove("correct", "wrong");
+        });
+
+        document.querySelectorAll(".result").forEach((r) => (r.innerHTML = ""));
+
+        document.getElementById("score").innerHTML = "";
+      };
+    </script>
+  </body>
+</html>
