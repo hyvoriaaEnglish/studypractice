@@ -1,8 +1,95 @@
 <!doctype html>
-<html>
+<html lang="vi">
   <head>
-    <title>HanVerse</title>
-    <meta http-equiv="refresh" content="0; url=trangchu.html" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trang chủ</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", sans-serif;
+      }
+
+      body {
+        background: white;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        position: relative;
+      }
+
+      /* Nền hồng */
+
+      body::before {
+        content: "";
+        position: absolute;
+        left: -180px;
+        bottom: -120px;
+        width: 900px;
+        height: 260px;
+        background: #f8c8d0;
+        transform: rotate(12deg);
+      }
+
+      /* Khối chứa */
+
+      .menu {
+        display: flex;
+        flex-direction: column;
+        gap: 35px;
+        z-index: 2;
+      }
+
+      /* Các nút */
+
+      .btn {
+        width: 360px;
+        height: 72px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        text-decoration: none;
+        font-size: 26px;
+        font-weight: 300;
+
+        transition: 0.3s;
+      }
+
+      .btn-dark {
+        background: #211c1e;
+        color: #f2c8d0;
+      }
+
+      .btn-light {
+        background: #ece7e7;
+        color: #222;
+      }
+
+      .btn-pink {
+        background: #fdf1f3;
+        color: #ea8ca2;
+      }
+
+      .btn:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+      }
+    </style>
   </head>
-  <body></body>
+
+  <body>
+    <a href="https://s.shopee.vn/30mSiPlHXm" target="_blank"> Shopping here </a>
+    <div class="menu">
+      <a href="mainn/hi.html" class="btn btn-dark"> Tiếng Anh Chuyên </a>
+
+      <a href="mainn/hello.html" class="btn btn-light"> Tiếng Anh Đại Trà </a>
+    </div>
+  </body>
 </html>
