@@ -1,0 +1,1051 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>C1-C2 Advanced Grammar & Use of English Test</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background: #f5f7fb;
+        color: #222;
+        line-height: 1.6;
+        margin: 0;
+        padding: 30px;
+      }
+
+      .container {
+        max-width: 950px;
+        margin: auto;
+        background: white;
+        padding: 35px;
+        border-radius: 18px;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+      }
+
+      h1 {
+        text-align: center;
+        color: #2c3e50;
+        margin-bottom: 10px;
+      }
+
+      .subtitle {
+        text-align: center;
+        color: #777;
+        margin-bottom: 35px;
+      }
+
+      .question {
+        margin-bottom: 25px;
+        padding: 22px;
+        background: #fafafa;
+        border-radius: 12px;
+        border-left: 5px solid #4a6cf7;
+      }
+
+      .question h3 {
+        margin-top: 0;
+        color: #2c3e50;
+        font-size: 17px;
+      }
+
+      .options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .option {
+        padding: 12px 15px;
+        background: white;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+
+      .option:hover {
+        background: #eef2ff;
+        border-color: #4a6cf7;
+      }
+
+      .option.correct {
+        background: #d4edda;
+        border-color: #28a745;
+        color: #155724;
+        font-weight: bold;
+      }
+
+      .option.wrong {
+        background: #f8d7da;
+        border-color: #dc3545;
+        color: #721c24;
+        font-weight: bold;
+      }
+
+      .feedback {
+        margin-top: 12px;
+        font-weight: bold;
+        font-size: 16px;
+      }
+
+      .correct-answer {
+        margin-top: 5px;
+        color: #155724;
+        font-weight: normal;
+      }
+
+      .score-box {
+        margin-top: 40px;
+        padding: 25px;
+        text-align: center;
+        background: #eef2ff;
+        border-radius: 12px;
+        font-size: 24px;
+        font-weight: bold;
+        color: #2c3e50;
+      }
+
+      .result-message {
+        margin-top: 10px;
+        font-size: 17px;
+        font-weight: normal;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>🧠 C1–C2 Advanced Grammar & Use of English Test</h1>
+
+      <div class="subtitle">Choose the best answer A, B, C, or D.</div>
+
+      <!-- QUESTION 1 -->
+
+      <div class="question">
+        <h3>
+          1. Inversion – Negative Adverbial
+          <br />
+          __________ had the negotiations begun when both parties realised that
+          they were fundamentally at odds over the issue.
+        </h3>
+
+        <div class="options">
+          <div class="option" onclick="checkAnswer(this, 'A', 1)">
+            A. No sooner
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'B', 1)">
+            B. Hardly
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'C', 1)">
+            C. Scarcely
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'D', 1)">
+            D. Barely
+          </div>
+        </div>
+
+        <div class="feedback" id="feedback1"></div>
+      </div>
+
+      <!-- QUESTION 2 -->
+
+      <div class="question">
+        <h3>
+          2. Mixed Conditional
+          <br />
+          If she __________ more attentive to the warning signs at the time, she
+          __________ in such a difficult position now.
+        </h3>
+
+        <div class="options">
+          <div class="option" onclick="checkAnswer(this, 'A', 2)">
+            A. had been / wouldn't be
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'B', 2)">
+            B. were / wouldn't have been
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'C', 2)">
+            C. had been / wouldn't have been
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'D', 2)">
+            D. were / wouldn't be
+          </div>
+        </div>
+
+        <div class="feedback" id="feedback2"></div>
+      </div>
+
+      <!-- QUESTION 3 -->
+
+      <div class="question">
+        <h3>
+          3. Participle Clause – Same Subject
+          <br />
+          __________ the implications of the decision, the committee decided to
+          postpone the vote until further notice.
+        </h3>
+
+        <div class="options">
+          <div class="option" onclick="checkAnswer(this, 'A', 3)">
+            A. Having considered
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'B', 3)">
+            B. Having been considered
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'C', 3)">
+            C. Considered
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'D', 3)">
+            D. Being considered
+          </div>
+        </div>
+
+        <div class="feedback" id="feedback3"></div>
+      </div>
+
+      <!-- QUESTION 4 -->
+
+      <div class="question">
+        <h3>
+          4. Advanced Concession
+          <br />
+          __________ the considerable financial risks involved, the company
+          decided to proceed with the investment.
+        </h3>
+
+        <div class="options">
+          <div class="option" onclick="checkAnswer(this, 'A', 4)">
+            A. Albeit
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'B', 4)">
+            B. Notwithstanding
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'C', 4)">
+            C. Whereas
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'D', 4)">
+            D. Inasmuch as
+          </div>
+        </div>
+
+        <div class="feedback" id="feedback4"></div>
+      </div>
+
+      <!-- QUESTION 5 -->
+
+      <div class="question">
+        <h3>
+          5. Inversion – Only
+          <br />
+          Only after the evidence had been thoroughly examined __________ that
+          the initial hypothesis was fundamentally flawed.
+        </h3>
+
+        <div class="options">
+          <div class="option" onclick="checkAnswer(this, 'A', 5)">
+            A. the researchers realised
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'B', 5)">
+            B. did the researchers realise
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'C', 5)">
+            C. had the researchers realised
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'D', 5)">
+            D. the researchers had realised
+          </div>
+        </div>
+
+        <div class="feedback" id="feedback5"></div>
+      </div>
+
+      <!-- QUESTION 6 -->
+
+      <div class="question">
+        <h3>
+          6. Tense Shift
+          <br />
+          She told me that she __________ the report by Friday, but when I
+          contacted her a week later, she admitted that she __________ it yet.
+        </h3>
+
+        <div class="options">
+          <div class="option" onclick="checkAnswer(this, 'A', 6)">
+            A. would finish / hadn't completed
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'B', 6)">
+            B. would have finished / didn't complete
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'C', 6)">
+            C. finished / hadn't completed
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'D', 6)">
+            D. had finished / wouldn't complete
+          </div>
+        </div>
+
+        <div class="feedback" id="feedback6"></div>
+      </div>
+
+      <!-- QUESTION 7 -->
+
+      <div class="question">
+        <h3>
+          7. Advanced Linker
+          <br />
+          The proposal was rejected, __________ its apparent merits and the
+          considerable support it had initially received.
+        </h3>
+
+        <div class="options">
+          <div class="option" onclick="checkAnswer(this, 'A', 7)">
+            A. albeit
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'B', 7)">
+            B. notwithstanding
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'C', 7)">
+            C. whereas
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'D', 7)">
+            D. albeit that
+          </div>
+        </div>
+
+        <div class="feedback" id="feedback7"></div>
+      </div>
+
+      <!-- QUESTION 8 -->
+
+      <div class="question">
+        <h3>
+          8. Inversion – Conditional
+          <br />
+          __________ the government to implement the proposed reforms,
+          significant improvements could be expected within a relatively short
+          period.
+        </h3>
+
+        <div class="options">
+          <div class="option" onclick="checkAnswer(this, 'A', 8)">A. Were</div>
+
+          <div class="option" onclick="checkAnswer(this, 'B', 8)">B. Had</div>
+
+          <div class="option" onclick="checkAnswer(this, 'C', 8)">
+            C. Should
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'D', 8)">D. If</div>
+        </div>
+
+        <div class="feedback" id="feedback8"></div>
+      </div>
+
+      <!-- QUESTION 9 -->
+
+      <div class="question">
+        <h3>
+          9. Participle Clause – Same Subject
+          <br />
+          __________ by the unexpected criticism, the author reconsidered
+          several aspects of her argument.
+        </h3>
+
+        <div class="options">
+          <div class="option" onclick="checkAnswer(this, 'A', 9)">
+            A. Having taken aback
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'B', 9)">
+            B. Taken aback
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'C', 9)">
+            C. Taking aback
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'D', 9)">
+            D. Being taken aback
+          </div>
+        </div>
+
+        <div class="feedback" id="feedback9"></div>
+      </div>
+
+      <!-- QUESTION 10 -->
+
+      <div class="question">
+        <h3>
+          10. Mixed Conditional
+          <br />
+          If he __________ so impulsive when making the decision five years ago,
+          he __________ in financial difficulties today.
+        </h3>
+
+        <div class="options">
+          <div class="option" onclick="checkAnswer(this, 'A', 10)">
+            A. weren't / wouldn't have been
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'B', 10)">
+            B. hadn't been / wouldn't be
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'C', 10)">
+            C. hadn't been / wouldn't have been
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'D', 10)">
+            D. weren't / wouldn't be
+          </div>
+        </div>
+
+        <div class="feedback" id="feedback10"></div>
+      </div>
+
+      <!-- QUESTION 11 -->
+
+      <div class="question">
+        <h3>
+          11. Advanced Concession
+          <br />
+          __________ the fact that the evidence was far from conclusive, the
+          committee decided to approve the proposal.
+        </h3>
+
+        <div class="options">
+          <div class="option" onclick="checkAnswer(this, 'A', 11)">
+            A. Albeit
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'B', 11)">
+            B. Notwithstanding
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'C', 11)">
+            C. Despite
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'D', 11)">
+            D. Whereas
+          </div>
+        </div>
+
+        <div class="feedback" id="feedback11"></div>
+      </div>
+
+      <!-- QUESTION 12 -->
+
+      <div class="question">
+        <h3>
+          12. Inversion – Negative Adverbial
+          <br />
+          Under no circumstances __________ confidential information to external
+          parties.
+        </h3>
+
+        <div class="options">
+          <div class="option" onclick="checkAnswer(this, 'A', 12)">
+            A. employees should disclose
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'B', 12)">
+            B. should employees disclose
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'C', 12)">
+            C. employees disclose
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'D', 12)">
+            D. disclose employees
+          </div>
+        </div>
+
+        <div class="feedback" id="feedback12"></div>
+      </div>
+
+      <!-- QUESTION 13 -->
+
+      <div class="question">
+        <h3>
+          13. Past Unreal Conditional
+          <br />
+          Had the authorities acted sooner, the crisis __________ altogether.
+        </h3>
+
+        <div class="options">
+          <div class="option" onclick="checkAnswer(this, 'A', 13)">
+            A. might have been avoided
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'B', 13)">
+            B. might be avoided
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'C', 13)">
+            C. would avoid
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'D', 13)">
+            D. had been avoided
+          </div>
+        </div>
+
+        <div class="feedback" id="feedback13"></div>
+      </div>
+
+      <!-- QUESTION 14 -->
+
+      <div class="question">
+        <h3>
+          14. Participle Clause – Same Subject
+          <br />
+          __________ the potential consequences of the policy, the minister
+          refused to comment publicly on the matter.
+        </h3>
+
+        <div class="options">
+          <div class="option" onclick="checkAnswer(this, 'A', 14)">
+            A. Recognising
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'B', 14)">
+            B. Recognised
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'C', 14)">
+            C. Having been recognised
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'D', 14)">
+            D. Being recognised
+          </div>
+        </div>
+
+        <div class="feedback" id="feedback14"></div>
+      </div>
+
+      <!-- QUESTION 15 -->
+
+      <div class="question">
+        <h3>
+          15. Advanced Linker
+          <br />
+          The new regulations are intended to increase transparency, __________
+          potentially placing additional administrative burdens on smaller
+          organisations.
+        </h3>
+
+        <div class="options">
+          <div class="option" onclick="checkAnswer(this, 'A', 15)">
+            A. notwithstanding
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'B', 15)">
+            B. albeit
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'C', 15)">
+            C. while
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'D', 15)">
+            D. despite
+          </div>
+        </div>
+
+        <div class="feedback" id="feedback15"></div>
+      </div>
+
+      <!-- QUESTION 16 -->
+
+      <div class="question">
+        <h3>
+          16. Inversion – Not until
+          <br />
+          Not until the final results were published __________ the true extent
+          of the problem.
+        </h3>
+
+        <div class="options">
+          <div class="option" onclick="checkAnswer(this, 'A', 16)">
+            A. did the public understand
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'B', 16)">
+            B. the public understood
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'C', 16)">
+            C. had the public understood
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'D', 16)">
+            D. the public had understood
+          </div>
+        </div>
+
+        <div class="feedback" id="feedback16"></div>
+      </div>
+
+      <!-- QUESTION 17 -->
+
+      <div class="question">
+        <h3>
+          17. Mixed Conditional
+          <br />
+          If I __________ the opportunity to study abroad when I was younger, I
+          __________ a completely different career path now.
+        </h3>
+
+        <div class="options">
+          <div class="option" onclick="checkAnswer(this, 'A', 17)">
+            A. had taken / might be pursuing
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'B', 17)">
+            B. took / might have pursued
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'C', 17)">
+            C. had taken / might have pursued
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'D', 17)">
+            D. took / might be pursuing
+          </div>
+        </div>
+
+        <div class="feedback" id="feedback17"></div>
+      </div>
+
+      <!-- QUESTION 18 -->
+
+      <div class="question">
+        <h3>
+          18. Advanced Concession
+          <br />
+          __________ the considerable pressure exerted by the media, the
+          politician refused to alter her position.
+        </h3>
+
+        <div class="options">
+          <div class="option" onclick="checkAnswer(this, 'A', 18)">
+            A. Albeit
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'B', 18)">
+            B. Notwithstanding
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'C', 18)">
+            C. Whereas
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'D', 18)">
+            D. In contrast
+          </div>
+        </div>
+
+        <div class="feedback" id="feedback18"></div>
+      </div>
+
+      <!-- QUESTION 19 -->
+
+      <div class="question">
+        <h3>
+          19. Reduced Relative / Participle Clause
+          <br />
+          The documents __________ during the investigation provided crucial
+          evidence against the company.
+        </h3>
+
+        <div class="options">
+          <div class="option" onclick="checkAnswer(this, 'A', 19)">
+            A. discovering
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'B', 19)">
+            B. discovered
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'C', 19)">
+            C. having discovered
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'D', 19)">
+            D. were discovered
+          </div>
+        </div>
+
+        <div class="feedback" id="feedback19"></div>
+      </div>
+
+      <!-- QUESTION 20 -->
+
+      <div class="question">
+        <h3>
+          20. Inversion – So/Such
+          <br />
+          Such was the intensity of the debate __________ the meeting had to be
+          suspended temporarily.
+        </h3>
+
+        <div class="options">
+          <div class="option" onclick="checkAnswer(this, 'A', 20)">
+            A. which
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'B', 20)">B. that</div>
+
+          <div class="option" onclick="checkAnswer(this, 'C', 20)">C. as</div>
+
+          <div class="option" onclick="checkAnswer(this, 'D', 20)">D. than</div>
+        </div>
+
+        <div class="feedback" id="feedback20"></div>
+      </div>
+
+      <!-- QUESTION 21 -->
+
+      <div class="question">
+        <h3>
+          21. Advanced Conditional Inversion
+          <br />
+          __________ I known about the potential consequences beforehand, I
+          would never have agreed to the proposal.
+        </h3>
+
+        <div class="options">
+          <div class="option" onclick="checkAnswer(this, 'A', 21)">A. Had</div>
+
+          <div class="option" onclick="checkAnswer(this, 'B', 21)">B. Were</div>
+
+          <div class="option" onclick="checkAnswer(this, 'C', 21)">
+            C. Should
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'D', 21)">D. If</div>
+        </div>
+
+        <div class="feedback" id="feedback21"></div>
+      </div>
+
+      <!-- QUESTION 22 -->
+
+      <div class="question">
+        <h3>
+          22. Tense Shift
+          <br />
+          By the time the researchers arrived at the site, the local authorities
+          __________ the area and __________ all necessary safety precautions.
+        </h3>
+
+        <div class="options">
+          <div class="option" onclick="checkAnswer(this, 'A', 22)">
+            A. had already evacuated / taken
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'B', 22)">
+            B. already evacuated / had taken
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'C', 22)">
+            C. have already evacuated / took
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'D', 22)">
+            D. would evacuate / had taken
+          </div>
+        </div>
+
+        <div class="feedback" id="feedback22"></div>
+      </div>
+
+      <!-- QUESTION 23 -->
+
+      <div class="question">
+        <h3>
+          23. Participle Clause – Same Subject
+          <br />
+          __________ to reach a consensus after several hours of discussion, the
+          delegates agreed to reconvene the following week.
+        </h3>
+
+        <div class="options">
+          <div class="option" onclick="checkAnswer(this, 'A', 23)">
+            A. Failing
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'B', 23)">
+            B. Failed
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'C', 23)">
+            C. Having failed
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'D', 23)">
+            D. Being failed
+          </div>
+        </div>
+
+        <div class="feedback" id="feedback23"></div>
+      </div>
+
+      <!-- QUESTION 24 -->
+
+      <div class="question">
+        <h3>
+          24. Advanced Linker
+          <br />
+          __________ the fact that the experiment had produced unexpected
+          results, the researchers decided to repeat it under more controlled
+          conditions.
+        </h3>
+
+        <div class="options">
+          <div class="option" onclick="checkAnswer(this, 'A', 24)">
+            A. Albeit
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'B', 24)">
+            B. Notwithstanding
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'C', 24)">
+            C. In spite
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'D', 24)">
+            D. Regardless
+          </div>
+        </div>
+
+        <div class="feedback" id="feedback24"></div>
+      </div>
+
+      <!-- QUESTION 25 -->
+
+      <div class="question">
+        <h3>
+          25. Inversion – Barely
+          <br />
+          Barely __________ the announcement when protests began to erupt across
+          the country.
+        </h3>
+
+        <div class="options">
+          <div class="option" onclick="checkAnswer(this, 'A', 25)">
+            A. had the government made
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'B', 25)">
+            B. the government had made
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'C', 25)">
+            C. did the government make
+          </div>
+
+          <div class="option" onclick="checkAnswer(this, 'D', 25)">
+            D. the government made
+          </div>
+        </div>
+
+        <div class="feedback" id="feedback25"></div>
+      </div>
+
+      <!-- ========================= -->
+      <!-- SCORE -->
+      <!-- ========================= -->
+
+      <div class="score-box">
+        Score:
+        <span id="score">0</span>
+        / 25
+
+        <div class="result-message" id="resultMessage"></div>
+      </div>
+    </div>
+
+    <script>
+      // =====================================
+      // ANSWER KEY
+      // =====================================
+
+      const answers = {
+        1: "A",
+        2: "A",
+        3: "A",
+        4: "B",
+        5: "B",
+
+        6: "A",
+        7: "B",
+        8: "A",
+        9: "B",
+        10: "B",
+
+        11: "C",
+        12: "B",
+        13: "A",
+        14: "A",
+        15: "C",
+
+        16: "A",
+        17: "A",
+        18: "B",
+        19: "B",
+        20: "B",
+
+        21: "A",
+        22: "A",
+        23: "C",
+        24: "C",
+        25: "A",
+      };
+
+      // =====================================
+      // TRACK ANSWERED QUESTIONS
+      // =====================================
+
+      const answered = {};
+
+      // =====================================
+      // SCORE
+      // =====================================
+
+      let score = 0;
+
+      // =====================================
+      // CHECK ANSWER
+      // =====================================
+
+      function checkAnswer(element, selectedAnswer, questionNumber) {
+        // Không cho chọn lại
+        if (answered[questionNumber]) {
+          return;
+        }
+
+        // Đánh dấu câu đã trả lời
+        answered[questionNumber] = true;
+
+        // Lấy đáp án đúng
+        const correctAnswer = answers[questionNumber];
+
+        // Lấy feedback
+        const feedback = document.getElementById("feedback" + questionNumber);
+
+        // =================================
+        // CORRECT ANSWER
+        // =================================
+
+        if (selectedAnswer === correctAnswer) {
+          // Tô xanh
+          element.classList.add("correct");
+
+          // Hiện Correct
+          feedback.innerHTML = "✓ Correct!";
+
+          feedback.style.color = "#28a745";
+
+          // Cộng điểm
+          score++;
+
+          // Cập nhật điểm
+          document.getElementById("score").innerText = score;
+        }
+
+        // =================================
+        // WRONG ANSWER
+        // =================================
+        else {
+          // Tô đỏ đáp án đã chọn
+          element.classList.add("wrong");
+
+          // Hiện Incorrect
+          feedback.innerHTML =
+            "✗ Incorrect!" +
+            "<div class='correct-answer'>" +
+            "Correct answer: " +
+            correctAnswer +
+            "</div>";
+
+          feedback.style.color = "#dc3545";
+
+          // Lấy tất cả đáp án
+          const options = element.parentElement.children;
+
+          // Tìm đáp án đúng
+          for (let option of options) {
+            const optionLetter = option.innerText.trim().charAt(0);
+
+            // Tô xanh đáp án đúng
+            if (optionLetter === correctAnswer) {
+              option.classList.add("correct");
+            }
+          }
+        }
+
+        // Cập nhật nhận xét
+        updateResult();
+      }
+
+      // =====================================
+      // RESULT MESSAGE
+      // =====================================
+
+      function updateResult() {
+        const resultMessage = document.getElementById("resultMessage");
+
+        if (score === 25) {
+          resultMessage.innerText = "Outstanding! Perfect score! 🏆";
+        } else if (score >= 22) {
+          resultMessage.innerText = "Exceptional C1–C2 performance! 🎉";
+        } else if (score >= 19) {
+          resultMessage.innerText =
+            "Excellent! Your advanced grammar is very strong.";
+        } else if (score >= 16) {
+          resultMessage.innerText =
+            "Very good! Keep refining those advanced structures.";
+        } else if (score >= 13) {
+          resultMessage.innerText =
+            "Good effort! Review the structures you found difficult.";
+        } else {
+          resultMessage.innerText =
+            "Keep practising! Advanced grammar takes time to master.";
+        }
+      }
+    </script>
+  </body>
+</html>

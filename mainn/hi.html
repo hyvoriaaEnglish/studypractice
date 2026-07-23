@@ -112,7 +112,7 @@
 
   <body>
     <div class="container">
-      <a class="back" href="../trangchu.html"> ← Quay lại trang chủ </a>
+      <a class="back" href="../index.html"> ← Quay lại trang chủ </a>
 
       <div class="grid">
         <div class="card">
@@ -221,6 +221,16 @@
             <span id="wf3">0</span>
           </div>
         </div>
+        <div class="card">
+          <a href="grammar.html" onclick="increase('grammar')"></a>
+
+          <div class="title">Ngữ Pháp</div>
+
+          <div class="counter">
+            Lượt làm bài:
+            <span id="grammar">0</span>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -249,6 +259,7 @@
           "idiom",
           "wf2",
           "wf3",
+          "grammar",
         ];
 
         ids.forEach(function (id) {
