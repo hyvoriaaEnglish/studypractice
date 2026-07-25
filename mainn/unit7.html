@@ -1,0 +1,832 @@
+<!doctype html>
+
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>B1-B2 Vocabulary Practice</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f4f7fb;
+        color: #1f2937;
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: 40px auto;
+        padding: 20px;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        padding: 35px;
+        border-radius: 20px;
+        text-align: center;
+        margin-bottom: 25px;
+      }
+
+      .header h1 {
+        margin: 0 0 10px;
+        font-size: 32px;
+      }
+
+      .header p {
+        margin: 0;
+        font-size: 16px;
+      }
+
+      .section {
+        background: white;
+        padding: 25px;
+        margin-bottom: 25px;
+        border-radius: 18px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+      }
+
+      .section h2 {
+        color: #5b4bc4;
+        margin-top: 0;
+      }
+
+      .question {
+        margin: 25px 0;
+        padding: 20px;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        background: #fafbff;
+      }
+
+      .question p {
+        font-weight: bold;
+        line-height: 1.6;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        max-width: 500px;
+        padding: 12px 15px;
+        border: 2px solid #d1d5db;
+        border-radius: 8px;
+        font-size: 16px;
+        outline: none;
+      }
+
+      input[type="text"]:focus {
+        border-color: #667eea;
+      }
+
+      .options label {
+        display: block;
+        padding: 12px;
+        margin: 8px 0;
+        background: white;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+
+      .options label:hover {
+        background: #f0edff;
+      }
+
+      button {
+        border: none;
+        padding: 11px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: bold;
+        margin-top: 10px;
+      }
+
+      .check-btn {
+        background: #667eea;
+        color: white;
+      }
+
+      .check-btn:hover {
+        background: #5145cd;
+      }
+
+      .result {
+        margin-top: 10px;
+        font-weight: bold;
+        line-height: 1.6;
+      }
+
+      .correct {
+        color: #16a34a;
+      }
+
+      .wrong {
+        color: #dc2626;
+      }
+
+      .answer {
+        color: #2563eb;
+      }
+
+      .score-box {
+        position: sticky;
+        top: 10px;
+        z-index: 10;
+        background: white;
+        padding: 15px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      .reset-btn {
+        background: #ef4444;
+        color: white;
+        padding: 14px 30px;
+        font-size: 17px;
+      }
+
+      .reset-btn:hover {
+        background: #dc2626;
+      }
+
+      .finish {
+        text-align: center;
+        padding: 30px;
+      }
+      .word-bank {
+        background: #f0edff;
+        border: 2px solid #d8d0ff;
+        padding: 18px 20px;
+        border-radius: 12px;
+        margin: 20px 0 25px;
+        line-height: 1.8;
+      }
+
+      .word-bank strong {
+        display: block;
+        color: #5b4bc4;
+        font-size: 17px;
+        margin-bottom: 8px;
+      }
+
+      .word-list {
+        color: #374151;
+        font-size: 15px;
+        line-height: 2;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>📚 B1-B2 Vocabulary Practice</h1>
+        <p>51 Questions – Travel, Tourism & Environment</p>
+      </div>
+
+      <div class="score-box">Điểm: <span id="score">0</span> / 51</div>
+
+      <!-- SECTION I -->
+      <div class="word-bank">
+        <strong>📖 Word Bank:</strong>
+        <div class="word-list">
+          access · annual · biodiversity · coral · crazy about · destination ·
+          ecosystem · feature · locate · location · majestic · occur · paradise
+          · peak · permission · permit · possess · support · sustainable ·
+          travel destination · urgent
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>I. Fill in the blanks</h2>
+
+        <p><b>Điền từ thích hợp vào chỗ trống.</b></p>
+
+        <div id="fillQuestions"></div>
+      </div>
+
+      <!-- SECTION II -->
+
+      <div class="section">
+        <h2>II. Multiple Choice</h2>
+
+        <p><b>Chọn đáp án đúng.</b></p>
+
+        <div id="mcQuestions"></div>
+      </div>
+
+      <!-- SECTION III -->
+
+      <div class="section">
+        <h2>III. Word Form</h2>
+
+        <p><b>Điền dạng đúng của từ trong ngoặc.</b></p>
+
+        <div id="wordQuestions"></div>
+      </div>
+
+      <!-- SECTION IV -->
+
+      <div class="section">
+        <h2>IV. Rewrite the sentences</h2>
+
+        <p><b>Viết lại câu sao cho nghĩa không đổi.</b></p>
+
+        <div id="rewriteQuestions"></div>
+      </div>
+
+      <!-- SECTION V -->
+      <p>Dùng các từ thích hợp để hoàn thành đoạn văn.</p>
+
+      <div class="word-bank">
+        <strong>📖 Word Bank:</strong>
+        <div class="word-list">
+          biodiversity · coral · ecosystem · sustainable · urgent · destination
+          · paradise · peak
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>V. Challenge – Complete the paragraph</h2>
+
+        <p>Dùng các từ thích hợp để hoàn thành đoạn văn.</p>
+
+        <div class="question">
+          <p>
+            The small island was once considered a tropical (44)
+            <input type="text" id="q44" /> and a dream holiday (45)
+            <input type="text" id="q45" /> for visitors from around the world.
+            However, tourism reached its (46)
+            <input type="text" id="q46" /> during the summer months, putting
+            enormous pressure on the local (47) <input type="text" id="q47" />.
+            The island's famous (48) <input type="text" id="q48" /> reefs began
+            to suffer from pollution, while its rich (49)
+            <input type="text" id="q49" /> was threatened by uncontrolled
+            development. Local authorities now believe that it is (50)
+            <input type="text" id="q50" /> to introduce more (51)
+            <input type="text" id="q51" />
+            forms of tourism before the environment is permanently damaged.
+          </p>
+
+          <button class="check-btn" onclick="checkChallenge()">Kiểm tra</button>
+
+          <div id="result44" class="result"></div>
+        </div>
+      </div>
+
+      <div class="finish">
+        <button class="reset-btn" onclick="resetQuiz()">🔄 Làm lại bài</button>
+      </div>
+    </div>
+
+    <script>
+      /* =========================
+   ANSWERS
+========================= */
+
+      const answers = {
+        1: "biodiversity",
+        2: "coral",
+        3: "permission",
+        4: ["permitted", "permission"],
+        5: "located",
+        6: "location",
+        7: "crazy about",
+        8: "destination",
+        9: "paradise",
+        10: "majestic",
+        11: "ecosystem",
+        12: "feature",
+        13: "peak",
+        14: "occur",
+        15: "sustainable",
+        16: "access",
+        17: "location",
+        18: "support",
+        19: "urgent",
+        20: "possess",
+        21: "travel destination",
+
+        22: "B",
+        23: "B",
+        24: "B",
+        25: "A",
+        26: "A",
+        27: "B",
+        28: "A",
+        29: "B",
+        30: "B",
+
+        31: "biodiversity",
+        32: "destination",
+        33: "sustainable",
+        34: "features",
+        35: "location",
+        36: "ecosystem",
+        37: "urgent",
+        38: "majestic",
+
+        39: "crazy about",
+        40: "permitted to enter",
+        41: "located",
+        42: "support to",
+        43: "urgent that",
+
+        44: "paradise",
+        45: "destination",
+        46: "peak",
+        47: "ecosystem",
+        48: "coral",
+        49: "biodiversity",
+        50: "urgent",
+        51: "sustainable",
+      };
+
+      /* =========================
+   QUESTIONS 1-21
+========================= */
+
+      const fillData = [
+        [
+          1,
+          "The island is famous for its rich marine ________, including hundreds of species of fish and plants.",
+        ],
+        [
+          2,
+          "The Great Barrier Reef is one of the world's most famous ________ reef systems.",
+        ],
+        [3, "We need to ask for ________ before entering the protected area."],
+        [
+          4,
+          "Tourists are not ________ to camp on the beach without official ________.",
+        ],
+        [
+          5,
+          "The hotel is ________ the centre of the city, making it easy for tourists to get around.",
+        ],
+        [
+          6,
+          "The exact ________ of the ancient temple has not yet been discovered.",
+        ],
+        [
+          7,
+          "Many young people are ________ adventure travel and exploring remote places.",
+        ],
+        [
+          8,
+          "The national park attracts thousands of visitors every year and has become a popular tourist ________.",
+        ],
+        [
+          9,
+          "The island is often described as a tropical ________ because of its beautiful beaches and crystal-clear water.",
+        ],
+        [
+          10,
+          "The mountain has a ________ appearance, especially when covered in snow.",
+        ],
+        [
+          11,
+          "Climate change can seriously damage the delicate marine ________.",
+        ],
+        [12, "The festival is an important cultural ________ of the region."],
+        [
+          13,
+          "The number of tourists usually reaches its ________ during the summer holiday.",
+        ],
+        [
+          14,
+          "Natural disasters such as earthquakes can ________ without warning.",
+        ],
+        [
+          15,
+          "The government is looking for more ________ ways to develop tourism without harming the environment.",
+        ],
+        [
+          16,
+          "The museum is open to the public, but visitors must pay an entrance fee to gain ________.",
+        ],
+        [
+          17,
+          "This area is an important ________ for migratory birds and endangered animals.",
+        ],
+        [
+          18,
+          "The organization provides financial ________ to local communities affected by tourism.",
+        ],
+        [
+          19,
+          "The situation is ________, so immediate action must be taken to protect the endangered species.",
+        ],
+        [
+          20,
+          "The company claims to ________ enough resources to complete the project.",
+        ],
+        [
+          21,
+          "Japan is a popular ________ for millions of international tourists every year.",
+        ],
+      ];
+
+      let fillHTML = "";
+
+      fillData.forEach((q) => {
+        fillHTML += `
+<div class="question">
+
+<p>${q[0]}. ${q[1]}</p>
+
+<input type="text" id="q${q[0]}" placeholder="Type your answer...">
+
+<button class="check-btn" onclick="checkAnswer(${q[0]})">
+Kiểm tra
+</button>
+
+<div id="result${q[0]}" class="result"></div>
+
+</div>
+`;
+      });
+
+      document.getElementById("fillQuestions").innerHTML = fillHTML;
+
+      /* =========================
+   MULTIPLE CHOICE
+========================= */
+
+      const mcData = [
+        [
+          22,
+          'Which word means "the variety of plants and animals in a particular area"?',
+          ["A. ecosystem", "B. biodiversity", "C. destination", "D. feature"],
+        ],
+
+        [
+          23,
+          "If you are <b>crazy about</b> something, you ________.",
+          [
+            "A. strongly dislike it",
+            "B. are extremely interested in it",
+            "C. are afraid of it",
+            "D. know nothing about it",
+          ],
+        ],
+
+        [
+          24,
+          "A <b>majestic</b> building is one that is ________.",
+          [
+            "A. small and ordinary",
+            "B. impressive and grand",
+            "C. old and dangerous",
+            "D. cheap and simple",
+          ],
+        ],
+
+        [
+          25,
+          "Which sentence uses <b>sustainable</b> correctly?",
+          [
+            "A. We need sustainable tourism that protects the environment.",
+            "B. The tourist was sustainable to enter the museum.",
+            "C. The mountain sustained at 3,000 metres.",
+            "D. She sustainably a beautiful destination.",
+          ],
+        ],
+
+        [
+          26,
+          "The word <b>permit</b> as a verb means:",
+          ["A. to allow", "B. to locate", "C. to possess", "D. to support"],
+        ],
+
+        [
+          27,
+          "Which word is closest in meaning to <b>urgent</b>?",
+          ["A. unnecessary", "B. immediate", "C. annual", "D. sustainable"],
+        ],
+
+        [
+          28,
+          "The phrase <b>travel destination</b> refers to:",
+          [
+            "A. a place where people travel to",
+            "B. a person who travels",
+            "C. a method of transportation",
+            "D. a travel document",
+          ],
+        ],
+
+        [
+          29,
+          "If a tourist wants to enter a restricted area, they may need to get official ________.",
+          ["A. peak", "B. permission", "C. biodiversity", "D. ecosystem"],
+        ],
+
+        [
+          30,
+          "Which sentence is grammatically correct?",
+          [
+            "A. The hotel locates near the beach.",
+            "B. The hotel is located near the beach.",
+            "C. The hotel is location near the beach.",
+            "D. The hotel located near the beach.",
+          ],
+        ],
+      ];
+
+      let mcHTML = "";
+
+      mcData.forEach((q) => {
+        mcHTML += `
+<div class="question">
+
+<p>${q[0]}. ${q[1]}</p>
+
+<div class="options">
+
+${q[2]
+  .map((option, index) => {
+    let letter = String.fromCharCode(65 + index);
+
+    return `
+<label>
+<input type="radio"
+name="q${q[0]}"
+value="${letter}"
+onclick="checkMC(${q[0]}, '${letter}')">
+${option}
+</label>
+`;
+  })
+  .join("")}
+
+</div>
+
+<div id="result${q[0]}" class="result"></div>
+
+</div>
+`;
+      });
+
+      document.getElementById("mcQuestions").innerHTML = mcHTML;
+
+      /* =========================
+   WORD FORM
+========================= */
+
+      const wordData = [
+        [
+          31,
+          "The government is concerned about the loss of ________ in tropical forests. (BIODIVERSE)",
+        ],
+        [
+          32,
+          "The island has become increasingly popular as a tourist ________. (DESTINE)",
+        ],
+        [
+          33,
+          "The company is trying to develop more ________ tourism projects. (SUSTAIN)",
+        ],
+        [
+          34,
+          "The annual festival is one of the main cultural ________ of the region. (FEATURE)",
+        ],
+        [
+          35,
+          "The researchers are studying the exact ________ of the ancient ruins. (LOCATE)",
+        ],
+        [
+          36,
+          "The government has introduced new laws to protect the natural ________ of the region. (ECOSYSTEM)",
+        ],
+        [
+          37,
+          "The situation requires ________ action from the authorities. (URGE)",
+        ],
+        [
+          38,
+          "The mountain's ________ beauty attracts thousands of visitors every year. (MAJESTY)",
+        ],
+      ];
+
+      let wordHTML = "";
+
+      wordData.forEach((q) => {
+        wordHTML += `
+<div class="question">
+
+<p>${q[0]}. ${q[1]}</p>
+
+<input type="text" id="q${q[0]}" placeholder="Type your answer...">
+
+<button class="check-btn" onclick="checkAnswer(${q[0]})">
+Kiểm tra
+</button>
+
+<div id="result${q[0]}" class="result"></div>
+
+</div>
+`;
+      });
+
+      document.getElementById("wordQuestions").innerHTML = wordHTML;
+
+      /* =========================
+   REWRITE
+========================= */
+
+      const rewriteData = [
+        [
+          39,
+          "I really love exploring new travel destinations.<br>→ I am ________ exploring new travel destinations. (CRAZY)",
+        ],
+
+        [
+          40,
+          "Tourists are not allowed to enter this area without official permission.<br>→ Tourists are not ________ this area without official permission. (PERMIT)",
+        ],
+
+        [
+          41,
+          "The hotel is situated in a quiet location near the beach.<br>→ The hotel is ________ in a quiet location near the beach. (LOCATE)",
+        ],
+
+        [
+          42,
+          "The organization helps local people protect the environment.<br>→ The organization provides ________ local people to protect the environment. (SUPPORT)",
+        ],
+
+        [
+          43,
+          "The government urgently needs to protect the coral reef.<br>→ It is ________ the government to protect the coral reef. (URGENT)",
+        ],
+      ];
+
+      let rewriteHTML = "";
+
+      rewriteData.forEach((q) => {
+        rewriteHTML += `
+<div class="question">
+
+<p>${q[0]}. ${q[1]}</p>
+
+<input type="text" id="q${q[0]}" placeholder="Type your answer...">
+
+<button class="check-btn" onclick="checkAnswer(${q[0]})">
+Kiểm tra
+</button>
+
+<div id="result${q[0]}" class="result"></div>
+
+</div>
+`;
+      });
+
+      document.getElementById("rewriteQuestions").innerHTML = rewriteHTML;
+
+      /* =========================
+   NORMAL CHECK
+========================= */
+
+      let completed = new Set();
+
+      function normalize(text) {
+        return text
+          .toLowerCase()
+          .trim()
+          .replace(/[.,!?]/g, "")
+          .replace(/\s+/g, " ");
+      }
+
+      function checkAnswer(num) {
+        let input = document.getElementById("q" + num);
+
+        let result = document.getElementById("result" + num);
+
+        let userAnswer = normalize(input.value);
+
+        let correctAnswer = answers[num];
+
+        let isCorrect = false;
+
+        if (Array.isArray(correctAnswer)) {
+          let parts = userAnswer.split(/\s+/);
+
+          isCorrect =
+            userAnswer.includes("permitted") &&
+            userAnswer.includes("permission");
+        } else {
+          isCorrect = userAnswer === normalize(correctAnswer);
+        }
+
+        if (isCorrect) {
+          result.innerHTML = `<span class="correct">✓ Chính xác!</span>`;
+
+          if (!completed.has(num)) {
+            completed.add(num);
+
+            document.getElementById("score").textContent = completed.size;
+          }
+        } else {
+          result.innerHTML = `<span class="wrong">✗ Chưa chính xác.</span>
+<br>
+<span class="answer">Đáp án: ${Array.isArray(correctAnswer) ? correctAnswer.join(" + ") : correctAnswer}</span>`;
+        }
+      }
+
+      /* =========================
+   MULTIPLE CHOICE CHECK
+========================= */
+
+      function checkMC(num, selected) {
+        let result = document.getElementById("result" + num);
+
+        let correctAnswer = answers[num];
+
+        if (selected === correctAnswer) {
+          result.innerHTML = `<span class="correct">✓ Chính xác!</span>`;
+
+          if (!completed.has(num)) {
+            completed.add(num);
+
+            document.getElementById("score").textContent = completed.size;
+          }
+        } else {
+          result.innerHTML = `<span class="wrong">✗ Sai rồi.</span>
+<br>
+<span class="answer">Đáp án đúng: ${correctAnswer}</span>`;
+        }
+      }
+
+      /* =========================
+   CHALLENGE CHECK
+========================= */
+
+      function checkChallenge() {
+        let challengeAnswers = [44, 45, 46, 47, 48, 49, 50, 51];
+
+        let correct = 0;
+
+        let wrongAnswers = [];
+
+        challengeAnswers.forEach((num) => {
+          let user = normalize(document.getElementById("q" + num).value);
+
+          let correctAns = normalize(answers[num]);
+
+          if (user === correctAns) {
+            correct++;
+
+            if (!completed.has(num)) {
+              completed.add(num);
+            }
+          } else {
+            wrongAnswers.push(`${num}: ${answers[num]}`);
+          }
+        });
+
+        document.getElementById("score").textContent = completed.size;
+
+        let result = document.getElementById("result44");
+
+        if (wrongAnswers.length === 0) {
+          result.innerHTML = `<span class="correct">
+✓ Hoàn hảo! Bạn đúng cả 8 câu.
+</span>`;
+        } else {
+          result.innerHTML = `<span class="correct">
+Bạn đúng ${correct}/8 câu.
+</span>
+<br>
+<span class="wrong">
+Các đáp án cần xem lại:
+</span>
+<br>
+<span class="answer">
+${wrongAnswers.join("<br>")}
+</span>`;
+        }
+      }
+
+      /* =========================
+   RESET
+========================= */
+
+      function resetQuiz() {
+        location.reload();
+      }
+    </script>
+  </body>
+</html>
