@@ -125,6 +125,19 @@
             <span id="reading">0</span>
           </div>
         </div>
+        <div class="card">
+          <a href="local.html" onclick="increase('local')"></a>
+
+          <div class="title">
+            Đề Chuyên<br />
+            các tỉnh
+          </div>
+
+          <div class="counter">
+            Lượt làm bài:
+            <span id="local">0</span>
+          </div>
+        </div>
 
         <div class="card">
           <a href="mcq.html" onclick="increase('mcq1')"></a>
@@ -231,19 +244,6 @@
             <span id="grammar">0</span>
           </div>
         </div>
-        <div class="card">
-          <a href="local.html" onclick="increase('local')"></a>
-
-          <div class="title">
-            Đề Chuyên<br />
-            các tỉnh
-          </div>
-
-          <div class="counter">
-            Lượt làm bài:
-            <span id="local">0</span>
-          </div>
-        </div>
       </div>
     </div>
 
@@ -263,6 +263,7 @@
       window.onload = function () {
         let ids = [
           "reading",
+          "local",
           "mcq1",
           "mcq2",
           "mcq3",
@@ -273,7 +274,6 @@
           "wf2",
           "wf3",
           "grammar",
-          "local",
         ];
 
         ids.forEach(function (id) {
