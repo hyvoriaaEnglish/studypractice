@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>English Practice Quiz</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f4f6fb;
+        margin: 0;
+        padding: 30px 15px;
+        color: #222;
+      }
+
+      .container {
+        max-width: 950px;
+        margin: auto;
+        background: white;
+        padding: 35px;
+        border-radius: 18px;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+      }
+
+      h1 {
+        text-align: center;
+        color: #4b4ded;
+        margin-bottom: 35px;
+      }
+
+      h2 {
+        color: #333;
+        margin-top: 40px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #eeeeee;
+      }
+
+      .question {
+        margin: 25px 0;
+        padding: 22px;
+        background: #f8f9ff;
+        border-radius: 12px;
+        border: 1px solid #e8e9f5;
+      }
+
+      .question p {
+        font-size: 16px;
+        line-height: 1.7;
+      }
+
+      .options {
+        margin-top: 15px;
+      }
+
+      label {
+        display: block;
+        padding: 11px 14px;
+        margin: 7px 0;
+        background: white;
+        border-radius: 8px;
+        cursor: pointer;
+        border: 1px solid #e5e5e5;
+        transition: 0.2s;
+      }
+
+      label:hover {
+        background: #eef0ff;
+        border-color: #4b4ded;
+      }
+
+      input[type="radio"] {
+        margin-right: 10px;
+      }
+
+      .result {
+        margin-top: 15px;
+        font-weight: bold;
+        font-size: 16px;
+        min-height: 22px;
+      }
+
+      .correct {
+        color: #16803c;
+      }
+
+      .wrong {
+        color: #d62828;
+      }
+
+      button {
+        display: block;
+        margin: 40px auto 20px;
+        padding: 15px 40px;
+        background: #4b4ded;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 17px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #3739c9;
+      }
+
+      #score {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        margin-top: 25px;
+        padding: 20px;
+        border-radius: 10px;
+        background: #f1f2ff;
+      }
+
+      .passage {
+        background: #fafafa;
+        padding: 20px;
+        border-radius: 10px;
+        line-height: 1.8;
+        margin-bottom: 25px;
+      }
+
+      .letter {
+        line-height: 1.8;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>English Practice Quiz</h1>
+
+      <!-- ================================= -->
+      <!-- PART I: GUIDED CLOZE -->
+      <!-- ================================= -->
+
+      <h2>Part I: Guided Cloze Test</h2>
+
+      <div class="passage">
+        <p>
+          It’s not always easy to decide which sport to take up. When choosing,
+          it is important to remember that excellence in sports results (41)
+          ______ a number of factors. For some sports, the body shape and
+          structure with (42) ______ you are born are important. Top runners are
+          typical examples of individuals who have selected a sport because of
+          their natural body type. Many other sports are more dependent (43)
+          ______ training and technique, and anyone following a well-structured
+          and appropriate training programme should do well.
+        </p>
+
+        <p>
+          The aim of all sports training is (44) ______ improve fitness and
+          skills, and to develop training programmes that are both safe and
+          effective. To do this properly, an understanding of the physical
+          demands of sport is needed. All sports require a combination of
+          strength, speed, endurance, agility and flexibility to varying
+          degrees. (45) ______ is important is how these elements are combined
+          to build up the skills of the sport in question. Other factors to be
+          (46) ______ into account in a training programme are diet, the
+          importance of avoiding injuries, your general state of health, and the
+          nature and role of other team players.
+        </p>
+
+        <p>
+          Bearing such considerations in mind, anyone prepared to work at it can
+          expect to progress to a very reasonable competitive level, even (47)
+          ______ only a few people will go on to break world records.
+        </p>
+      </div>
+
+      <!-- Question 41 -->
+
+      <div class="question">
+        <p>
+          <strong>41.</strong> excellence in sports results ______ a number of
+          factors.
+        </p>
+
+        <div class="options">
+          <label>
+            <input type="radio" name="q41" value="from" />
+            A. from
+          </label>
+
+          <label>
+            <input type="radio" name="q41" value="in" />
+            B. in
+          </label>
+
+          <label>
+            <input type="radio" name="q41" value="of" />
+            C. of
+          </label>
+
+          <label>
+            <input type="radio" name="q41" value="with" />
+            D. with
+          </label>
+        </div>
+
+        <div id="result41" class="result"></div>
+      </div>
+
+      <!-- Question 42 -->
+
+      <div class="question">
+        <p>
+          <strong>42.</strong> the body shape and structure with ______ you are
+          born are important.
+        </p>
+
+        <div class="options">
+          <label>
+            <input type="radio" name="q42" value="that" />
+            A. that
+          </label>
+
+          <label>
+            <input type="radio" name="q42" value="which" />
+            B. which
+          </label>
+
+          <label>
+            <input type="radio" name="q42" value="what" />
+            C. what
+          </label>
+
+          <label>
+            <input type="radio" name="q42" value="whom" />
+            D. whom
+          </label>
+        </div>
+
+        <div id="result42" class="result"></div>
+      </div>
+
+      <!-- Question 43 -->
+
+      <div class="question">
+        <p>
+          <strong>43.</strong> Many other sports are more dependent ______
+          training and technique.
+        </p>
+
+        <div class="options">
+          <label>
+            <input type="radio" name="q43" value="at" />
+            A. at
+          </label>
+
+          <label>
+            <input type="radio" name="q43" value="in" />
+            B. in
+          </label>
+
+          <label>
+            <input type="radio" name="q43" value="on" />
+            C. on
+          </label>
+
+          <label>
+            <input type="radio" name="q43" value="with" />
+            D. with
+          </label>
+        </div>
+
+        <div id="result43" class="result"></div>
+      </div>
+
+      <!-- Question 44 -->
+
+      <div class="question">
+        <p>
+          <strong>44.</strong> The aim of all sports training is ______ improve
+          fitness and skills.
+        </p>
+
+        <div class="options">
+          <label>
+            <input type="radio" name="q44" value="for" />
+            A. for
+          </label>
+
+          <label>
+            <input type="radio" name="q44" value="to" />
+            B. to
+          </label>
+
+          <label>
+            <input type="radio" name="q44" value="so" />
+            C. so
+          </label>
+
+          <label>
+            <input type="radio" name="q44" value="that" />
+            D. that
+          </label>
+        </div>
+
+        <div id="result44" class="result"></div>
+      </div>
+
+      <!-- Question 45 -->
+
+      <div class="question">
+        <p>
+          <strong>45.</strong> ______ is important is how these elements are
+          combined.
+        </p>
+
+        <div class="options">
+          <label>
+            <input type="radio" name="q45" value="What" />
+            A. What
+          </label>
+
+          <label>
+            <input type="radio" name="q45" value="Which" />
+            B. Which
+          </label>
+
+          <label>
+            <input type="radio" name="q45" value="That" />
+            C. That
+          </label>
+
+          <label>
+            <input type="radio" name="q45" value="It" />
+            D. It
+          </label>
+        </div>
+
+        <div id="result45" class="result"></div>
+      </div>
+
+      <!-- Question 46 -->
+
+      <div class="question">
+        <p>
+          <strong>46.</strong> Other factors to be ______ into account in a
+          training programme are diet...
+        </p>
+
+        <div class="options">
+          <label>
+            <input type="radio" name="q46" value="taken" />
+            A. taken
+          </label>
+
+          <label>
+            <input type="radio" name="q46" value="made" />
+            B. made
+          </label>
+
+          <label>
+            <input type="radio" name="q46" value="put" />
+            C. put
+          </label>
+
+          <label>
+            <input type="radio" name="q46" value="brought" />
+            D. brought
+          </label>
+        </div>
+
+        <div id="result46" class="result"></div>
+      </div>
+
+      <!-- Question 47 -->
+
+      <div class="question">
+        <p>
+          <strong>47.</strong> anyone prepared to work at it can expect to
+          progress, even ______ only a few people will go on to break world
+          records.
+        </p>
+
+        <div class="options">
+          <label>
+            <input type="radio" name="q47" value="because" />
+            A. because
+          </label>
+
+          <label>
+            <input type="radio" name="q47" value="though" />
+            B. though
+          </label>
+
+          <label>
+            <input type="radio" name="q47" value="if" />
+            C. if
+          </label>
+
+          <label>
+            <input type="radio" name="q47" value="unless" />
+            D. unless
+          </label>
+        </div>
+
+        <div id="result47" class="result"></div>
+      </div>
+
+      <!-- ================================= -->
+      <!-- PART II: SENTENCE REORDERING -->
+      <!-- ================================= -->
+
+      <h2>Part II: Sentence Reordering</h2>
+
+      <!-- Question 73 -->
+
+      <div class="question">
+        <p>
+          <strong>73.</strong> Choose the best arrangement to make a meaningful
+          exchange.
+        </p>
+
+        <p class="letter">
+          a. Marina: No, Michael, where is it?<br />
+
+          b. Marina: Oh. Is it good?<br />
+
+          c. Michael: In Long Road. You know, near Bridge Street, behind the
+          station.<br />
+
+          d. Michael: Hello, Marina. Have you been to the new sports centre
+          yet?<br />
+
+          e. Michael: Yes, it’s great! You can do a lot of sports. I played
+          table-tennis and volleyball last week.
+        </p>
+
+        <div class="options">
+          <label>
+            <input type="radio" name="q73" value="A" />
+            A. d – a – c – e – b
+          </label>
+
+          <label>
+            <input type="radio" name="q73" value="B" />
+            B. c – b – d – a – e
+          </label>
+
+          <label>
+            <input type="radio" name="q73" value="C" />
+            C. d – a – e – b – c
+          </label>
+
+          <label>
+            <input type="radio" name="q73" value="D" />
+            D. e – a – c – b – d
+          </label>
+        </div>
+
+        <div id="result73" class="result"></div>
+      </div>
+
+      <!-- Question 74 -->
+
+      <div class="question">
+        <p><strong>74.</strong> Dear Patty,</p>
+
+        <p class="letter">
+          a. Looking forward to your suggestions and hearing from you soon.<br />
+
+          b. I know you have travelled to many beach spots and I hope that you
+          can make some suggestions for me.<br />
+
+          c. I would like to stay at a comfortable and peaceful hotel
+          overlooking the beach, but I can’t spend too much money.<br />
+
+          d. How is everything?<br />
+
+          e. It’s been a while since we last caught up, and I’ve been thinking
+          about planning a summer vacation soon.
+        </p>
+
+        <p>Love, Cathy</p>
+
+        <div class="options">
+          <label>
+            <input type="radio" name="q74" value="A" />
+            A. e – b – d – a – c
+          </label>
+
+          <label>
+            <input type="radio" name="q74" value="B" />
+            B. c – d – e – a – b
+          </label>
+
+          <label>
+            <input type="radio" name="q74" value="C" />
+            C. d – e – a – b – c
+          </label>
+
+          <label>
+            <input type="radio" name="q74" value="D" />
+            D. b – e – a – c
+          </label>
+        </div>
+
+        <div id="result74" class="result"></div>
+      </div>
+
+      <!-- Question 75 -->
+
+      <div class="question">
+        <p>
+          <strong>75.</strong> Choose the best arrangement to make a meaningful
+          text.
+        </p>
+
+        <p class="letter">
+          a. Another advantage is personal growth, like joining a yoga class or
+          learning how to cook a new dish you enjoy.<br />
+
+          b. For example, employees in multinational corporations may find that
+          acquiring a new language enhances their remuneration or facilitates
+          opportunities for international assignments.<br />
+
+          c. “Lifelong learning” refers to the continuous pursuit of new
+          knowledge and competencies throughout one’s lifetime.<br />
+
+          d. In sum, lifelong learning constitutes a vital component of both
+          personal and professional advancement.<br />
+
+          e. First, lifelong learning fosters significant benefits for career
+          progression.
+        </p>
+
+        <div class="options">
+          <label>
+            <input type="radio" name="q75" value="A" />
+            A. c – e – b – a – d
+          </label>
+
+          <label>
+            <input type="radio" name="q75" value="B" />
+            B. c – b – a – e – d
+          </label>
+
+          <label>
+            <input type="radio" name="q75" value="C" />
+            C. a – e – b – c – d
+          </label>
+
+          <label>
+            <input type="radio" name="q75" value="D" />
+            D. e – a – b – c – d
+          </label>
+        </div>
+
+        <div id="result75" class="result"></div>
+      </div>
+
+      <!-- ================================= -->
+      <!-- CHECK ANSWERS -->
+      <!-- ================================= -->
+
+      <button onclick="checkAnswers()">Check Answers</button>
+
+      <div id="score"></div>
+    </div>
+
+    <script>
+      function checkAnswers() {
+        const answers = {
+          // Guided Cloze
+          q41: "from",
+          q42: "which",
+          q43: "on",
+          q44: "to",
+          q45: "What",
+          q46: "taken",
+          q47: "though",
+
+          // Sentence Reordering
+          q73: "A",
+          q74: "C",
+          q75: "A",
+        };
+
+        let score = 0;
+
+        const total = Object.keys(answers).length;
+
+        for (let question in answers) {
+          const selected = document.querySelector(
+            'input[name="' + question + '"]:checked',
+          );
+
+          const questionNumber = question.substring(1);
+
+          const result = document.getElementById("result" + questionNumber);
+
+          // No answer selected
+
+          if (!selected) {
+            result.innerHTML = "⚠️ Please choose an answer.";
+
+            result.className = "result wrong";
+          }
+
+          // Correct answer
+          else if (selected.value === answers[question]) {
+            result.innerHTML = "✅ Correct!";
+
+            result.className = "result correct";
+
+            score++;
+          }
+
+          // Wrong answer
+          else {
+            result.innerHTML =
+              "❌ Incorrect. The correct answer is: " +
+              "<strong>" +
+              answers[question] +
+              "</strong>";
+
+            result.className = "result wrong";
+          }
+        }
+
+        // Display final score
+
+        document.getElementById("score").innerHTML =
+          "Your Score: " + score + " / " + total;
+      }
+    </script>
+  </body>
+</html>

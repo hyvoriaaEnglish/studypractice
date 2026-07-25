@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Advanced English Vocabulary Test</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f4f6fb;
+        margin: 0;
+        padding: 30px 15px;
+        color: #222;
+      }
+
+      .container {
+        max-width: 950px;
+        margin: auto;
+        background: white;
+        padding: 35px;
+        border-radius: 18px;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+      }
+
+      h1 {
+        text-align: center;
+        color: #4b4ded;
+        margin-bottom: 35px;
+      }
+
+      h2 {
+        color: #333;
+        margin-top: 40px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #eeeeee;
+      }
+
+      .instructions {
+        background: #f1f2ff;
+        padding: 18px;
+        border-radius: 10px;
+        line-height: 1.7;
+        margin-bottom: 30px;
+      }
+
+      .question {
+        margin: 25px 0;
+        padding: 22px;
+        background: #f8f9ff;
+        border-radius: 12px;
+        border: 1px solid #e8e9f5;
+      }
+
+      .question-number {
+        font-weight: bold;
+        color: #4b4ded;
+        font-size: 17px;
+        margin-bottom: 10px;
+      }
+
+      .sentence {
+        font-size: 16px;
+        line-height: 1.8;
+      }
+
+      .answer-input {
+        padding: 10px 12px;
+        width: 180px;
+        border: 2px solid #ddd;
+        border-radius: 7px;
+        font-size: 16px;
+        outline: none;
+        margin: 3px;
+      }
+
+      .answer-input:focus {
+        border-color: #4b4ded;
+      }
+
+      .result {
+        margin-top: 15px;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 1.6;
+        min-height: 24px;
+      }
+
+      .correct {
+        color: #16803c;
+      }
+
+      .wrong {
+        color: #d62828;
+      }
+
+      button {
+        display: block;
+        margin: 40px auto 20px;
+        padding: 15px 40px;
+        background: #4b4ded;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 17px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #3739c9;
+      }
+
+      #score {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        margin-top: 25px;
+        padding: 20px;
+        border-radius: 10px;
+        background: #f1f2ff;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Advanced English Vocabulary Test</h1>
+
+      <div class="instructions">
+        <strong>Instructions:</strong><br />
+        Complete each sentence with the correct word, phrase, or preposition.
+        Type your answers into the boxes and click
+        <strong>Check Answers</strong> when you have finished.
+      </div>
+
+      <!-- ===================================== -->
+      <!-- PART I: WORD FORMATION -->
+      <!-- ===================================== -->
+
+      <h2>Part I: Word Formation</h2>
+
+      <!-- 1 -->
+
+      <div class="question">
+        <div class="question-number">1.</div>
+
+        <div class="sentence">
+          Everyone was surprised to see that Daisy blossomed into quite an (EYE)
+          <input type="text" class="answer-input" id="q1" />
+        </div>
+
+        <div id="result1" class="result"></div>
+      </div>
+
+      <!-- 2 -->
+
+      <div class="question">
+        <div class="question-number">2.</div>
+
+        <div class="sentence">
+          They should be grateful to the thoughtful researchers who have honored
+          them with thorough (CRITIC)
+          <input type="text" class="answer-input" id="q2" />
+        </div>
+
+        <div id="result2" class="result"></div>
+      </div>
+
+      <!-- 3 -->
+
+      <div class="question">
+        <div class="question-number">3.</div>
+
+        <div class="sentence">
+          In newborns, a (NORMAL)
+          <input type="text" class="answer-input" id="q3" />
+          temperature – rather than a fever – may be a sign of serious illness.
+        </div>
+
+        <div id="result3" class="result"></div>
+      </div>
+
+      <!-- 4 -->
+
+      <div class="question">
+        <div class="question-number">4.</div>
+
+        <div class="sentence">
+          We are (SKILL)
+          <input type="text" class="answer-input" id="q4" />
+          the team to help them be more effective in a competitive market.
+        </div>
+
+        <div id="result4" class="result"></div>
+      </div>
+
+      <!-- 5 -->
+
+      <div class="question">
+        <div class="question-number">5.</div>
+
+        <div class="sentence">
+          The non-governmental organisation launched a(n) (PRECEDE)
+          <input type="text" class="answer-input" id="q5" />
+          relief effort to support communities affected by the natural disaster.
+        </div>
+
+        <div id="result5" class="result"></div>
+      </div>
+
+      <!-- 6 -->
+
+      <div class="question">
+        <div class="question-number">6.</div>
+
+        <div class="sentence">
+          Regardless of the grueling race, the man managed to (DISTANCE)
+          <input type="text" class="answer-input" id="q6" />
+          his rivals with unwavering determination and strategic brilliance.
+        </div>
+
+        <div id="result6" class="result"></div>
+      </div>
+
+      <!-- 7 -->
+
+      <div class="question">
+        <div class="question-number">7.</div>
+
+        <div class="sentence">
+          My parents find TV commercials nowadays (POWER)
+          <input type="text" class="answer-input" id="q7" />
+          annoying, particularly those for motorcars.
+        </div>
+
+        <div id="result7" class="result"></div>
+      </div>
+
+      <!-- 8 -->
+
+      <div class="question">
+        <div class="question-number">8.</div>
+
+        <div class="sentence">
+          The landlady felt irritated when the renters turned her kitchen into a
+          greasy and (ODOR)
+          <input type="text" class="answer-input" id="q8" />
+          place.
+        </div>
+
+        <div id="result8" class="result"></div>
+      </div>
+
+      <!-- 9 -->
+
+      <div class="question">
+        <div class="question-number">9.</div>
+
+        <div class="sentence">
+          He was a(n) (ICON)
+          <input type="text" class="answer-input" id="q9" />
+          who always wanted to establish new ideas.
+        </div>
+
+        <div id="result9" class="result"></div>
+      </div>
+
+      <!-- 10 -->
+
+      <div class="question">
+        <div class="question-number">10.</div>
+
+        <div class="sentence">
+          Sir Francis Chichester was the first person to sail round the world
+          (HAND)
+          <input type="text" class="answer-input" id="q10" />
+          on his one-man boat.
+        </div>
+
+        <div id="result10" class="result"></div>
+      </div>
+
+      <!-- ===================================== -->
+      <!-- PART II: PREPOSITIONS & PHRASAL VERBS -->
+      <!-- ===================================== -->
+
+      <h2>Part II: Prepositions & Phrasal Verbs</h2>
+
+      <!-- 11 -->
+
+      <div class="question">
+        <div class="question-number">11.</div>
+
+        <div class="sentence">
+          Our group is willing to stand
+          <input type="text" class="answer-input" id="q11a" />
+          opposition
+          <input type="text" class="answer-input" id="q11b" />
+          the corporations planning to move in and destroy local business.
+        </div>
+
+        <div id="result11" class="result"></div>
+      </div>
+
+      <!-- 12 -->
+
+      <div class="question">
+        <div class="question-number">12.</div>
+
+        <div class="sentence">
+          His friends tried to talk him
+          <input type="text" class="answer-input" id="q12a" />
+          the problem, but it seemed to be
+          <input type="text" class="answer-input" id="q12b" />
+          his understanding.
+        </div>
+
+        <div id="result12" class="result"></div>
+      </div>
+
+      <!-- 13 -->
+
+      <div class="question">
+        <div class="question-number">13.</div>
+
+        <div class="sentence">
+          Maybe the committee should bring the meeting
+          <input type="text" class="answer-input" id="q13a" />
+          to this Friday instead of having it
+          <input type="text" class="answer-input" id="q13b" />
+          two weeks' time.
+        </div>
+
+        <div id="result13" class="result"></div>
+      </div>
+
+      <!-- 14 -->
+
+      <div class="question">
+        <div class="question-number">14.</div>
+
+        <div class="sentence">
+          The little boy’s unexpected question threw me
+          <input type="text" class="answer-input" id="q14a" />
+          balance, and I was at a total loss
+          <input type="text" class="answer-input" id="q14b" />
+          words.
+        </div>
+
+        <div id="result14" class="result"></div>
+      </div>
+
+      <!-- 15 -->
+
+      <div class="question">
+        <div class="question-number">15.</div>
+
+        <div class="sentence">
+          Thanks to the leading-edge medical technologies
+          <input type="text" class="answer-input" id="q15a" />
+          their disposal, doctors could perform life-saving surgeries
+          <input type="text" class="answer-input" id="q15b" />
+          precision.
+        </div>
+
+        <div id="result15" class="result"></div>
+      </div>
+
+      <!-- 16 -->
+
+      <div class="question">
+        <div class="question-number">16.</div>
+
+        <div class="sentence">
+          She is always running
+          <input type="text" class="answer-input" id="q16a" />
+          her friends
+          <input type="text" class="answer-input" id="q16b" />
+          their backs. She won’t have any friends left, I’m afraid.
+        </div>
+
+        <div id="result16" class="result"></div>
+      </div>
+
+      <!-- 17 -->
+
+      <div class="question">
+        <div class="question-number">17.</div>
+
+        <div class="sentence">
+          This sort of information is like a red rag
+          <input type="text" class="answer-input" id="q17a" />
+          a bull
+          <input type="text" class="answer-input" id="q17b" />
+          the job market.
+        </div>
+
+        <div id="result17" class="result"></div>
+      </div>
+
+      <!-- 18 -->
+
+      <div class="question">
+        <div class="question-number">18.</div>
+
+        <div class="sentence">
+          The delight
+          <input type="text" class="answer-input" id="q18a" />
+          treasure finding doesn’t always hinge
+          <input type="text" class="answer-input" id="q18b" />
+          acquiring tremendous amounts of jewellery.
+        </div>
+
+        <div id="result18" class="result"></div>
+      </div>
+
+      <!-- 19 -->
+
+      <div class="question">
+        <div class="question-number">19.</div>
+
+        <div class="sentence">
+          I’m so tired after work that I often just drop
+          <input type="text" class="answer-input" id="q19a" />
+          in front of the TV with a paper
+          <input type="text" class="answer-input" id="q19b" />
+          my face.
+        </div>
+
+        <div id="result19" class="result"></div>
+      </div>
+
+      <!-- 20 -->
+
+      <div class="question">
+        <div class="question-number">20.</div>
+
+        <div class="sentence">
+          Let’s make a dash
+          <input type="text" class="answer-input" id="q20a" />
+          the train now as the rain seems to ease
+          <input type="text" class="answer-input" id="q20b" />
+        </div>
+
+        <div id="result20" class="result"></div>
+      </div>
+
+      <!-- ===================================== -->
+      <!-- CHECK ANSWERS -->
+      <!-- ===================================== -->
+
+      <button onclick="checkAnswers()">Check Answers</button>
+
+      <div id="score"></div>
+    </div>
+
+    <script>
+      function normalizeAnswer(answer) {
+        return answer
+          .toLowerCase()
+          .trim()
+          .replace(/[.,!?;:]/g, "")
+          .replace(/\s+/g, " ");
+      }
+
+      function checkAnswers() {
+        const answers = {
+          // Word Formation
+
+          q1: ["eyeful"],
+          q2: ["criticism"],
+          q3: ["abnormally"],
+          q4: ["upskilling"],
+          q5: ["unprecedented"],
+          q6: ["outdistance"],
+          q7: ["powerfully"],
+          q8: ["odorous"],
+          q9: ["iconoclast"],
+          q10: ["single-handedly", "single handedly"],
+
+          // Prepositions / Phrasal Verbs
+
+          q11: ["in", "to"],
+          q12: ["through", "beyond"],
+          q13: ["forward", "in"],
+          q14: ["off", "for"],
+          q15: ["at", "with"],
+          q16: ["down", "behind"],
+          q17: ["to", "in"],
+          q18: ["of", "on"],
+          q19: ["down", "over"],
+          q20: ["for", "off"],
+        };
+
+        let score = 0;
+
+        const total = 30;
+
+        // =====================================
+        // QUESTIONS 1–10
+        // =====================================
+
+        for (let i = 1; i <= 10; i++) {
+          const input = document.getElementById("q" + i);
+
+          const result = document.getElementById("result" + i);
+
+          const userAnswer = normalizeAnswer(input.value);
+
+          if (userAnswer === "") {
+            result.innerHTML = "⚠️ Please enter your answer.";
+
+            result.className = "result wrong";
+          } else if (
+            answers["q" + i].some(
+              (answer) => normalizeAnswer(answer) === userAnswer,
+            )
+          ) {
+            result.innerHTML = "✅ Correct!";
+
+            result.className = "result correct";
+
+            score++;
+          } else {
+            result.innerHTML =
+              "❌ Incorrect.<br>" +
+              "Correct answer: <strong>" +
+              answers["q" + i][0] +
+              "</strong>";
+
+            result.className = "result wrong";
+          }
+        }
+
+        // =====================================
+        // QUESTIONS 11–20
+        // =====================================
+
+        for (let i = 11; i <= 20; i++) {
+          const inputA = document.getElementById("q" + i + "a");
+
+          const inputB = document.getElementById("q" + i + "b");
+
+          const result = document.getElementById("result" + i);
+
+          const answerA = normalizeAnswer(inputA.value);
+
+          const answerB = normalizeAnswer(inputB.value);
+
+          const correctA = answers["q" + i][0];
+
+          const correctB = answers["q" + i][1];
+
+          if (answerA === "" || answerB === "") {
+            result.innerHTML = "⚠️ Please complete both blanks.";
+
+            result.className = "result wrong";
+          } else if (answerA === correctA && answerB === correctB) {
+            result.innerHTML = "✅ Correct!";
+
+            result.className = "result correct";
+
+            score += 2;
+          } else {
+            result.innerHTML =
+              "❌ Incorrect.<br>" +
+              "Correct answers: <strong>" +
+              correctA +
+              " / " +
+              correctB +
+              "</strong>";
+
+            result.className = "result wrong";
+          }
+        }
+
+        // =====================================
+        // FINAL SCORE
+        // =====================================
+
+        document.getElementById("score").innerHTML =
+          "Your Score: " + score + " / " + total;
+      }
+    </script>
+  </body>
+</html>

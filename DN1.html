@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vocabulary & Word Formation Quiz</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f5f7fb;
+        margin: 0;
+        padding: 30px;
+        color: #222;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: auto;
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+      }
+
+      h1 {
+        text-align: center;
+        color: #4b4ded;
+      }
+
+      h2 {
+        margin-top: 35px;
+        color: #333;
+      }
+
+      .question {
+        margin: 25px 0;
+        padding: 20px;
+        background: #f8f9ff;
+        border-radius: 10px;
+      }
+
+      .question p {
+        font-size: 17px;
+        line-height: 1.6;
+        font-weight: 500;
+      }
+
+      label {
+        display: block;
+        padding: 10px;
+        margin: 5px 0;
+        background: white;
+        border-radius: 7px;
+        cursor: pointer;
+      }
+
+      label:hover {
+        background: #eef0ff;
+      }
+
+      input {
+        margin-right: 10px;
+      }
+
+      button {
+        display: block;
+        margin: 30px auto 10px;
+        padding: 14px 35px;
+        border: none;
+        border-radius: 8px;
+        background: #4b4ded;
+        color: white;
+        font-size: 17px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #3739c9;
+      }
+
+      .result {
+        margin-top: 10px;
+        font-weight: bold;
+        font-size: 16px;
+      }
+
+      .correct {
+        color: green;
+      }
+
+      .wrong {
+        color: red;
+      }
+
+      #score {
+        text-align: center;
+        font-size: 22px;
+        font-weight: bold;
+        margin-top: 25px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Vocabulary & Word Formation Quiz</h1>
+
+      <h2>Part 1: Phrasal Verbs</h2>
+
+      <!-- Question 1 -->
+      <div class="question">
+        <p>
+          1. We are encouraging the people in our community to ______ plastic
+          bags.
+        </p>
+
+        <label
+          ><input type="radio" name="q1" value="come down with" /> come down
+          with</label
+        >
+        <label
+          ><input type="radio" name="q1" value="fall through" /> fall
+          through</label
+        >
+        <label
+          ><input type="radio" name="q1" value="cut down on" /> cut down
+          on</label
+        >
+        <label
+          ><input type="radio" name="q1" value="give off" /> give off</label
+        >
+
+        <div id="result1" class="result"></div>
+      </div>
+
+      <!-- Question 2 -->
+      <div class="question">
+        <p>2. I'm ______ a cold. I have a runny nose and a sore throat.</p>
+
+        <label
+          ><input type="radio" name="q2" value="come down with" /> come down
+          with</label
+        >
+        <label
+          ><input type="radio" name="q2" value="fall through" /> fall
+          through</label
+        >
+        <label><input type="radio" name="q2" value="take on" /> take on</label>
+        <label><input type="radio" name="q2" value="drop by" /> drop by</label>
+
+        <div id="result2" class="result"></div>
+      </div>
+
+      <!-- Question 3 -->
+      <div class="question">
+        <p>3. We found a buyer for our house, but then the sale ______.</p>
+
+        <label
+          ><input type="radio" name="q3" value="gave off" /> gave off</label
+        >
+        <label
+          ><input type="radio" name="q3" value="fell through" /> fell
+          through</label
+        >
+        <label><input type="radio" name="q3" value="took on" /> took on</label>
+        <label
+          ><input type="radio" name="q3" value="dropped by" /> dropped by</label
+        >
+
+        <div id="result3" class="result"></div>
+      </div>
+
+      <!-- Question 4 -->
+      <div class="question">
+        <p>4. The flowers in my back garden are ______ a fragrant perfume.</p>
+
+        <label
+          ><input type="radio" name="q4" value="giving off" /> giving off</label
+        >
+        <label
+          ><input type="radio" name="q4" value="falling through" /> falling
+          through</label
+        >
+        <label
+          ><input type="radio" name="q4" value="taking on" /> taking on</label
+        >
+        <label
+          ><input type="radio" name="q4" value="coming down with" /> coming down
+          with</label
+        >
+
+        <div id="result4" class="result"></div>
+      </div>
+
+      <!-- Question 5 -->
+      <div class="question">
+        <p>
+          5. Olive has ______ more responsibilities, so she has to work overtime
+          to complete the tasks on time.
+        </p>
+
+        <label
+          ><input type="radio" name="q5" value="dropped by" /> dropped by</label
+        >
+        <label
+          ><input type="radio" name="q5" value="taken on" /> taken on</label
+        >
+        <label
+          ><input type="radio" name="q5" value="fallen through" /> fallen
+          through</label
+        >
+        <label
+          ><input type="radio" name="q5" value="given off" /> given off</label
+        >
+
+        <div id="result5" class="result"></div>
+      </div>
+
+      <h2>Part 2: Word Formation</h2>
+
+      <!-- Question 6 -->
+      <div class="question">
+        <p>
+          6. Finding a career that brings you ______ is crucial for long-term
+          happiness. (SATISFY)
+        </p>
+
+        <label
+          ><input type="radio" name="q6" value="satisfaction" />
+          satisfaction</label
+        >
+        <label
+          ><input type="radio" name="q6" value="satisfactory" />
+          satisfactory</label
+        >
+        <label
+          ><input type="radio" name="q6" value="satisfying" /> satisfying</label
+        >
+        <label><input type="radio" name="q6" value="satisfy" /> satisfy</label>
+
+        <div id="result6" class="result"></div>
+      </div>
+
+      <!-- Question 7 -->
+      <div class="question">
+        <p>
+          7. A large international meeting was held with the aim of promoting
+          ______ development in all countries. (SUSTAIN)
+        </p>
+
+        <label><input type="radio" name="q7" value="sustain" /> sustain</label>
+        <label
+          ><input type="radio" name="q7" value="sustainable" />
+          sustainable</label
+        >
+        <label
+          ><input type="radio" name="q7" value="sustainability" />
+          sustainability</label
+        >
+        <label
+          ><input type="radio" name="q7" value="sustainably" />
+          sustainably</label
+        >
+
+        <div id="result7" class="result"></div>
+      </div>
+
+      <!-- Question 8 -->
+      <div class="question">
+        <p>
+          8. We find the idea of exploring new places ______, as it brings
+          excitement and joy. (EXHILARATE)
+        </p>
+
+        <label
+          ><input type="radio" name="q8" value="exhilarate" /> exhilarate</label
+        >
+        <label
+          ><input type="radio" name="q8" value="exhilarated" />
+          exhilarated</label
+        >
+        <label
+          ><input type="radio" name="q8" value="exhilarating" />
+          exhilarating</label
+        >
+        <label
+          ><input type="radio" name="q8" value="exhilaration" />
+          exhilaration</label
+        >
+
+        <div id="result8" class="result"></div>
+      </div>
+
+      <!-- Question 9 -->
+      <div class="question">
+        <p>
+          9. Never try to mend a broken machine without ______ it from the
+          electricity supply. (CONNECT)
+        </p>
+
+        <label
+          ><input type="radio" name="q9" value="disconnect" /> disconnect</label
+        >
+        <label
+          ><input type="radio" name="q9" value="disconnecting" />
+          disconnecting</label
+        >
+        <label
+          ><input type="radio" name="q9" value="disconnection" />
+          disconnection</label
+        >
+        <label
+          ><input type="radio" name="q9" value="disconnected" />
+          disconnected</label
+        >
+
+        <div id="result9" class="result"></div>
+      </div>
+
+      <!-- Question 10 -->
+      <div class="question">
+        <p>
+          10. The number 30 on a road sign ______ that the speed limit is 30
+          miles an hour. (SIGNIFICANT)
+        </p>
+
+        <label
+          ><input type="radio" name="q10" value="signifies" /> signifies</label
+        >
+        <label
+          ><input type="radio" name="q10" value="significant" />
+          significant</label
+        >
+        <label
+          ><input type="radio" name="q10" value="significance" />
+          significance</label
+        >
+        <label
+          ><input type="radio" name="q10" value="significantly" />
+          significantly</label
+        >
+
+        <div id="result10" class="result"></div>
+      </div>
+
+      <!-- Question 11 -->
+      <div class="question">
+        <p>
+          11. Hana's scarf was ______ placed to hide a tear in her shirt.
+          (STRATEGY)
+        </p>
+
+        <label
+          ><input type="radio" name="q11" value="strategic" /> strategic</label
+        >
+        <label
+          ><input type="radio" name="q11" value="strategically" />
+          strategically</label
+        >
+        <label
+          ><input type="radio" name="q11" value="strategy" /> strategy</label
+        >
+        <label
+          ><input type="radio" name="q11" value="strategize" />
+          strategize</label
+        >
+
+        <div id="result11" class="result"></div>
+      </div>
+
+      <h2>Part 3: Advanced Word Formation</h2>
+
+      <!-- Question 12 -->
+      <div class="question">
+        <p>
+          12. David Attenborough, a passionate ______, fights tirelessly to keep
+          the forests alive. (PRESERVE)
+        </p>
+
+        <label
+          ><input type="radio" name="q12" value="preserver" /> preserver</label
+        >
+        <label
+          ><input type="radio" name="q12" value="preservation" />
+          preservation</label
+        >
+        <label
+          ><input type="radio" name="q12" value="preservationist" />
+          preservationist</label
+        >
+        <label
+          ><input type="radio" name="q12" value="preservative" />
+          preservative</label
+        >
+
+        <div id="result12" class="result"></div>
+      </div>
+
+      <!-- Question 13 -->
+      <div class="question">
+        <p>
+          13. In our modern days, stress has an ______ more serious effect on
+          our lives than we realize. (MEASURE)
+        </p>
+
+        <label
+          ><input type="radio" name="q13" value="immeasurable" />
+          immeasurable</label
+        >
+        <label
+          ><input type="radio" name="q13" value="measurable" />
+          measurable</label
+        >
+        <label
+          ><input type="radio" name="q13" value="measurement" />
+          measurement</label
+        >
+        <label
+          ><input type="radio" name="q13" value="measuring" /> measuring</label
+        >
+
+        <div id="result13" class="result"></div>
+      </div>
+
+      <!-- Question 14 -->
+      <div class="question">
+        <p>
+          14. His life was carefully ______ with his work in one city and his
+          social life in another. (COMPARTMENT)
+        </p>
+
+        <label
+          ><input type="radio" name="q14" value="compartmentalized" />
+          compartmentalized</label
+        >
+        <label
+          ><input type="radio" name="q14" value="compartmental" />
+          compartmental</label
+        >
+        <label
+          ><input type="radio" name="q14" value="compartmentation" />
+          compartmentation</label
+        >
+        <label
+          ><input type="radio" name="q14" value="compartment" />
+          compartment</label
+        >
+
+        <div id="result14" class="result"></div>
+      </div>
+
+      <!-- Question 15 -->
+      <div class="question">
+        <p>
+          15. Many of the children were clearly ______ and suffering from
+          various diseases. (NOURISH)
+        </p>
+
+        <label
+          ><input type="radio" name="q15" value="nourished" /> nourished</label
+        >
+        <label
+          ><input type="radio" name="q15" value="malnourished" />
+          malnourished</label
+        >
+        <label
+          ><input type="radio" name="q15" value="nourishment" />
+          nourishment</label
+        >
+        <label
+          ><input type="radio" name="q15" value="nourishing" />
+          nourishing</label
+        >
+
+        <div id="result15" class="result"></div>
+      </div>
+
+      <button onclick="checkAnswers()">Check Answers</button>
+
+      <div id="score"></div>
+    </div>
+
+    <script>
+      function checkAnswers() {
+        const answers = {
+          q1: "cut down on",
+          q2: "come down with",
+          q3: "fell through",
+          q4: "giving off",
+          q5: "taken on",
+
+          q6: "satisfaction",
+          q7: "sustainable",
+          q8: "exhilarating",
+          q9: "disconnecting",
+          q10: "signifies",
+          q11: "strategically",
+
+          q12: "preservationist",
+          q13: "immeasurable",
+          q14: "compartmentalized",
+          q15: "malnourished",
+        };
+
+        let score = 0;
+        let total = Object.keys(answers).length;
+
+        for (let question in answers) {
+          const selected = document.querySelector(
+            'input[name="' + question + '"]:checked',
+          );
+
+          const number = question.substring(1);
+
+          const result = document.getElementById("result" + number);
+
+          if (!selected) {
+            result.innerHTML = "⚠️ Please choose an answer.";
+            result.className = "result wrong";
+          } else if (selected.value === answers[question]) {
+            result.innerHTML = "✅ Correct!";
+            result.className = "result correct";
+            score++;
+          } else {
+            result.innerHTML =
+              "❌ Incorrect. The correct answer is: <strong>" +
+              answers[question] +
+              "</strong>";
+
+            result.className = "result wrong";
+          }
+        }
+
+        document.getElementById("score").innerHTML =
+          "Your Score: " + score + " / " + total;
+      }
+    </script>
+  </body>
+</html>

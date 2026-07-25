@@ -1,0 +1,647 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Advanced Sentence Transformation</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f4f6fb;
+        margin: 0;
+        padding: 30px 15px;
+        color: #222;
+      }
+
+      .container {
+        max-width: 950px;
+        margin: auto;
+        background: white;
+        padding: 35px;
+        border-radius: 18px;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+      }
+
+      h1 {
+        text-align: center;
+        color: #4b4ded;
+        margin-bottom: 35px;
+      }
+
+      h2 {
+        color: #333;
+        margin-top: 40px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #eeeeee;
+      }
+
+      .instructions {
+        background: #f1f2ff;
+        padding: 18px;
+        border-radius: 10px;
+        line-height: 1.7;
+        margin-bottom: 30px;
+      }
+
+      .question {
+        margin: 25px 0;
+        padding: 22px;
+        background: #f8f9ff;
+        border-radius: 12px;
+        border: 1px solid #e8e9f5;
+      }
+
+      .question-number {
+        font-weight: bold;
+        color: #4b4ded;
+        font-size: 17px;
+        margin-bottom: 10px;
+      }
+
+      .original {
+        font-size: 16px;
+        line-height: 1.8;
+        margin-bottom: 12px;
+      }
+
+      .transformation {
+        font-size: 16px;
+        line-height: 1.8;
+        font-weight: 500;
+      }
+
+      .keyword {
+        color: #d62828;
+        font-weight: bold;
+      }
+
+      .answer-input {
+        width: 100%;
+        padding: 13px;
+        margin-top: 12px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        font-size: 16px;
+        outline: none;
+      }
+
+      .answer-input:focus {
+        border-color: #4b4ded;
+      }
+
+      .result {
+        margin-top: 15px;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 1.6;
+        min-height: 24px;
+      }
+
+      .correct {
+        color: #16803c;
+      }
+
+      .wrong {
+        color: #d62828;
+      }
+
+      button {
+        display: block;
+        margin: 40px auto 20px;
+        padding: 15px 40px;
+        background: #4b4ded;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 17px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #3739c9;
+      }
+
+      #score {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        margin-top: 25px;
+        padding: 20px;
+        border-radius: 10px;
+        background: #f1f2ff;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Advanced Sentence Transformation</h1>
+
+      <!-- ===================================== -->
+      <!-- PART I -->
+      <!-- ===================================== -->
+
+      <h2>Part I: Sentence Transformation</h2>
+
+      <div class="instructions">
+        Complete the second sentence so that it has a similar meaning to the
+        first sentence. Type your answer in the box and click
+        <strong>Check Answers</strong>.
+      </div>
+
+      <!-- 1 -->
+
+      <div class="question">
+        <div class="question-number">1.</div>
+
+        <div class="original">
+          We must do something about the problem even if it costs a lot.
+        </div>
+
+        <div class="transformation">
+          However ______________________________________, we must do something
+          about the problem.
+        </div>
+
+        <input
+          type="text"
+          class="answer-input"
+          id="q1"
+          placeholder="Type your answer here..."
+        />
+
+        <div id="result1" class="result"></div>
+      </div>
+
+      <!-- 2 -->
+
+      <div class="question">
+        <div class="question-number">2.</div>
+
+        <div class="original">
+          People’s social background is revealed by what they eat, not their
+          table manners.
+        </div>
+
+        <div class="transformation">
+          What gives ______________________________________ is what they eat,
+          not their table manners.
+        </div>
+
+        <input
+          type="text"
+          class="answer-input"
+          id="q2"
+          placeholder="Type your answer here..."
+        />
+
+        <div id="result2" class="result"></div>
+      </div>
+
+      <!-- 3 -->
+
+      <div class="question">
+        <div class="question-number">3.</div>
+
+        <div class="original">
+          Those plays are so popular that the theatre is full every night.
+        </div>
+
+        <div class="transformation">
+          Such is the ______________________________________ that the theatre is
+          full every night.
+        </div>
+
+        <input
+          type="text"
+          class="answer-input"
+          id="q3"
+          placeholder="Type your answer here..."
+        />
+
+        <div id="result3" class="result"></div>
+      </div>
+
+      <!-- 4 -->
+
+      <div class="question">
+        <div class="question-number">4.</div>
+
+        <div class="original">
+          When it comes to population, Beijing is much denser than Auckland.
+        </div>
+
+        <div class="transformation">
+          Auckland’s population density is
+          ______________________________________.
+        </div>
+
+        <input
+          type="text"
+          class="answer-input"
+          id="q4"
+          placeholder="Type your answer here..."
+        />
+
+        <div id="result4" class="result"></div>
+      </div>
+
+      <!-- 5 -->
+
+      <div class="question">
+        <div class="question-number">5.</div>
+
+        <div class="original">
+          We would prefer them not to have stayed up too late.
+        </div>
+
+        <div class="transformation">
+          We would sooner ______________________________________.
+        </div>
+
+        <input
+          type="text"
+          class="answer-input"
+          id="q5"
+          placeholder="Type your answer here..."
+        />
+
+        <div id="result5" class="result"></div>
+      </div>
+
+      <!-- 6 -->
+
+      <div class="question">
+        <div class="question-number">6.</div>
+
+        <div class="original">
+          That rumour about the new construction contracts in the local area is
+          absolutely false.
+        </div>
+
+        <div class="transformation">
+          There is ______________________________________.
+        </div>
+
+        <input
+          type="text"
+          class="answer-input"
+          id="q6"
+          placeholder="Type your answer here..."
+        />
+
+        <div id="result6" class="result"></div>
+      </div>
+
+      <!-- 7 -->
+
+      <div class="question">
+        <div class="question-number">7.</div>
+
+        <div class="original">
+          A waiter spilled some soup over Hazel’s new dress last night.
+        </div>
+
+        <div class="transformation">
+          Hazel had ______________________________________.
+        </div>
+
+        <input
+          type="text"
+          class="answer-input"
+          id="q7"
+          placeholder="Type your answer here..."
+        />
+
+        <div id="result7" class="result"></div>
+      </div>
+
+      <!-- 8 -->
+
+      <div class="question">
+        <div class="question-number">8.</div>
+
+        <div class="original">
+          It’s quite likely that Jeremy was lying about what Eliot said.
+        </div>
+
+        <div class="transformation">
+          Jeremy may ______________________________________.
+        </div>
+
+        <input
+          type="text"
+          class="answer-input"
+          id="q8"
+          placeholder="Type your answer here..."
+        />
+
+        <div id="result8" class="result"></div>
+      </div>
+
+      <!-- 9 -->
+
+      <div class="question">
+        <div class="question-number">9.</div>
+
+        <div class="original">
+          Complete secrecy was crucial to the success of the mission.
+        </div>
+
+        <div class="transformation">
+          Without ______________________________________.
+        </div>
+
+        <input
+          type="text"
+          class="answer-input"
+          id="q9"
+          placeholder="Type your answer here..."
+        />
+
+        <div id="result9" class="result"></div>
+      </div>
+
+      <!-- 10 -->
+
+      <div class="question">
+        <div class="question-number">10.</div>
+
+        <div class="original">
+          “Nothing will persuade us to invest in your project,” they told the
+          young man.
+        </div>
+
+        <div class="transformation">
+          They flatly ______________________________________.
+        </div>
+
+        <input
+          type="text"
+          class="answer-input"
+          id="q10"
+          placeholder="Type your answer here..."
+        />
+
+        <div id="result10" class="result"></div>
+      </div>
+
+      <!-- ===================================== -->
+      <!-- PART II -->
+      <!-- ===================================== -->
+
+      <h2>Part II: Key Word Transformation</h2>
+
+      <div class="instructions">
+        Rewrite each sentence using the word given in brackets.
+        <br /><br />
+        <strong>Do NOT change the word given.</strong>
+        <br />
+        Use <strong>NO MORE THAN SIX words</strong>.
+      </div>
+
+      <!-- 11 -->
+
+      <div class="question">
+        <div class="question-number">11.</div>
+
+        <div class="original">
+          The mice appeared to be totally unaffected by the effects of the drug.
+          <span class="keyword">(TO)</span>
+        </div>
+
+        <div class="transformation">
+          The mice appeared to be __________________________ the effects of the
+          drug.
+        </div>
+
+        <input
+          type="text"
+          class="answer-input"
+          id="q11"
+          placeholder="Type your answer here..."
+        />
+
+        <div id="result11" class="result"></div>
+      </div>
+
+      <!-- 12 -->
+
+      <div class="question">
+        <div class="question-number">12.</div>
+
+        <div class="original">
+          As the deadline approached, Andrew became anxious and, as a result,
+          less efficient.
+          <span class="keyword">(DREW)</span>
+        </div>
+
+        <div class="transformation">
+          As the deadline __________________________ anxious caused him to
+          become less efficient.
+        </div>
+
+        <input
+          type="text"
+          class="answer-input"
+          id="q12"
+          placeholder="Type your answer here..."
+        />
+
+        <div id="result12" class="result"></div>
+      </div>
+
+      <!-- 13 -->
+
+      <div class="question">
+        <div class="question-number">13.</div>
+
+        <div class="original">
+          Pauline’s teachers believe she will get a scholarship if she really
+          wants to.
+          <span class="keyword">(MIND)</span>
+        </div>
+
+        <div class="transformation">
+          According to Pauline’s teachers, she will get the scholarship as long
+          as __________________________ it.
+        </div>
+
+        <input
+          type="text"
+          class="answer-input"
+          id="q13"
+          placeholder="Type your answer here..."
+        />
+
+        <div id="result13" class="result"></div>
+      </div>
+
+      <!-- 14 -->
+
+      <div class="question">
+        <div class="question-number">14.</div>
+
+        <div class="original">
+          They ought to realize it was luck that allowed them to escape serious
+          injuries.
+          <span class="keyword">(COUNT)</span>
+        </div>
+
+        <div class="transformation">
+          They should __________________________ away with only minor injuries.
+        </div>
+
+        <input
+          type="text"
+          class="answer-input"
+          id="q14"
+          placeholder="Type your answer here..."
+        />
+
+        <div id="result14" class="result"></div>
+      </div>
+
+      <!-- 15 -->
+
+      <div class="question">
+        <div class="question-number">15.</div>
+
+        <div class="original">
+          Who do you think is the most suitable candidate for the job?
+          <span class="keyword">(CUT)</span>
+        </div>
+
+        <div class="transformation">
+          Which candidate is __________________________ in your opinion?
+        </div>
+
+        <input
+          type="text"
+          class="answer-input"
+          id="q15"
+          placeholder="Type your answer here..."
+        />
+
+        <div id="result15" class="result"></div>
+      </div>
+
+      <!-- ===================================== -->
+      <!-- CHECK ANSWERS -->
+      <!-- ===================================== -->
+
+      <button onclick="checkAnswers()">Check Answers</button>
+
+      <div id="score"></div>
+    </div>
+
+    <script>
+      function normalizeAnswer(answer) {
+        return answer
+          .toLowerCase()
+          .trim()
+          .replace(/[.,!?;:]/g, "")
+          .replace(/\s+/g, " ");
+      }
+
+      function checkAnswers() {
+        const answers = {
+          // Part I
+
+          q1: ["much it costs", "much it may cost"],
+
+          q2: [
+            "away people’s social background",
+            "away people's social background",
+          ],
+
+          q3: ["popularity of those plays"],
+
+          q4: ["much lower than Beijing’s", "much lower than Beijing's"],
+
+          q5: [
+            "they hadn’t stayed up so late",
+            "they had not stayed up so late",
+          ],
+
+          q6: ["no truth in that rumour", "no truth in that rumor"],
+
+          q7: [
+            "some soup spilt over her new dress",
+            "some soup spilled over her new dress",
+          ],
+
+          q8: ["have been lying about what Eliot said"],
+
+          q9: [
+            "complete secrecy the mission would not have succeeded",
+            "complete secrecy the mission could not have succeeded",
+          ],
+
+          q10: [
+            "refused to invest in the young man’s project",
+            "refused to invest in the young man's project",
+          ],
+
+          // Part II
+
+          q11: ["immune to"],
+
+          q12: ["drew near Andrew became"],
+
+          q13: ["she sets her mind to"],
+
+          q14: ["count themselves lucky to get"],
+
+          q15: ["cut out for the job"],
+        };
+
+        let score = 0;
+
+        const total = 15;
+
+        for (let i = 1; i <= 15; i++) {
+          const input = document.getElementById("q" + i);
+
+          const result = document.getElementById("result" + i);
+
+          const userAnswer = normalizeAnswer(input.value);
+
+          if (userAnswer === "") {
+            result.innerHTML = "⚠️ Please enter your answer.";
+
+            result.className = "result wrong";
+          } else if (
+            answers["q" + i].some(
+              (answer) => normalizeAnswer(answer) === userAnswer,
+            )
+          ) {
+            result.innerHTML = "✅ Correct!";
+
+            result.className = "result correct";
+
+            score++;
+          } else {
+            result.innerHTML =
+              "❌ Incorrect.<br>" +
+              "Suggested answer: <strong>" +
+              answers["q" + i][0] +
+              "</strong>";
+
+            result.className = "result wrong";
+          }
+        }
+
+        document.getElementById("score").innerHTML =
+          "Your Score: " + score + " / " + total;
+      }
+    </script>
+  </body>
+</html>

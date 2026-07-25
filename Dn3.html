@@ -1,0 +1,770 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Sentence Transformation Quiz</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f4f6fb;
+        margin: 0;
+        padding: 30px 15px;
+        color: #222;
+      }
+
+      .container {
+        max-width: 950px;
+        margin: auto;
+        background: white;
+        padding: 35px;
+        border-radius: 18px;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+      }
+
+      h1 {
+        text-align: center;
+        color: #4b4ded;
+        margin-bottom: 15px;
+      }
+
+      .instructions {
+        background: #f1f2ff;
+        padding: 18px;
+        border-radius: 10px;
+        line-height: 1.7;
+        margin-bottom: 30px;
+      }
+
+      h2 {
+        color: #333;
+        margin-top: 40px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #eeeeee;
+      }
+
+      .question {
+        margin: 25px 0;
+        padding: 22px;
+        background: #f8f9ff;
+        border-radius: 12px;
+        border: 1px solid #e8e9f5;
+      }
+
+      .question-number {
+        font-weight: bold;
+        color: #4b4ded;
+        font-size: 17px;
+      }
+
+      .original {
+        font-size: 16px;
+        line-height: 1.7;
+        margin: 12px 0;
+      }
+
+      .transformation {
+        font-size: 16px;
+        line-height: 1.7;
+        font-weight: 500;
+      }
+
+      .answer-input {
+        width: 100%;
+        padding: 13px;
+        margin-top: 12px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        font-size: 16px;
+        outline: none;
+      }
+
+      .answer-input:focus {
+        border-color: #4b4ded;
+      }
+
+      .keyword {
+        font-weight: bold;
+        color: #d62828;
+      }
+
+      .result {
+        margin-top: 15px;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 1.6;
+        min-height: 25px;
+      }
+
+      .correct {
+        color: #16803c;
+      }
+
+      .wrong {
+        color: #d62828;
+      }
+
+      button {
+        display: block;
+        margin: 40px auto 20px;
+        padding: 15px 40px;
+        background: #4b4ded;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 17px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #3739c9;
+      }
+
+      #score {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        margin-top: 25px;
+        padding: 20px;
+        border-radius: 10px;
+        background: #f1f2ff;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Sentence Transformation Quiz</h1>
+
+      <div class="instructions">
+        <strong>Instructions:</strong><br />
+        Complete the second sentence so that it has a similar meaning to the
+        first sentence. Type your answer in the box and click
+        <strong>Check Answers</strong>. Your answer should be grammatically
+        correct and have a similar meaning to the original sentence.
+      </div>
+
+      <!-- ========================================= -->
+      <!-- QUESTIONS 76–85 -->
+      <!-- ========================================= -->
+
+      <h2>Part I: Sentence Transformation</h2>
+
+      <!-- 76 -->
+
+      <div class="question">
+        <div class="question-number">76.</div>
+
+        <div class="original">
+          The teacher doesn’t let us use our phones in class.
+        </div>
+
+        <div class="transformation">
+          We are not _________________________________________
+        </div>
+
+        <input
+          type="text"
+          class="answer-input"
+          id="q76"
+          placeholder="Type your answer here..."
+        />
+
+        <div id="result76" class="result"></div>
+      </div>
+
+      <!-- 77 -->
+
+      <div class="question">
+        <div class="question-number">77.</div>
+
+        <div class="original">
+          My younger brother doesn’t intend to find a part-time job this summer.
+        </div>
+
+        <div class="transformation">
+          My younger brother has _________________________________________
+        </div>
+
+        <input
+          type="text"
+          class="answer-input"
+          id="q77"
+          placeholder="Type your answer here..."
+        />
+
+        <div id="result77" class="result"></div>
+      </div>
+
+      <!-- 78 -->
+
+      <div class="question">
+        <div class="question-number">78.</div>
+
+        <div class="original">
+          I don’t think it was easy for Victoria to change her hairstyle.
+        </div>
+
+        <div class="transformation">
+          It can’t _________________________________________
+        </div>
+
+        <input
+          type="text"
+          class="answer-input"
+          id="q78"
+          placeholder="Type your answer here..."
+        />
+
+        <div id="result78" class="result"></div>
+      </div>
+
+      <!-- 79 -->
+
+      <div class="question">
+        <div class="question-number">79.</div>
+
+        <div class="original">
+          Her views on this subject are exactly the same as yours.
+        </div>
+
+        <div class="transformation">
+          There isn’t any _________________________________________
+        </div>
+
+        <input
+          type="text"
+          class="answer-input"
+          id="q79"
+          placeholder="Type your answer here..."
+        />
+
+        <div id="result79" class="result"></div>
+      </div>
+
+      <!-- 80 -->
+
+      <div class="question">
+        <div class="question-number">80.</div>
+
+        <div class="original">
+          Could you guard my handbag while I go to the shop?
+        </div>
+
+        <div class="transformation">
+          Could you keep _________________________________________
+        </div>
+
+        <input
+          type="text"
+          class="answer-input"
+          id="q80"
+          placeholder="Type your answer here..."
+        />
+
+        <div id="result80" class="result"></div>
+      </div>
+
+      <!-- 81 -->
+
+      <div class="question">
+        <div class="question-number">81.</div>
+
+        <div class="original">
+          I’m surprised at her knowledge of French literature.
+        </div>
+
+        <div class="transformation">
+          What surprises _________________________________________
+        </div>
+
+        <input
+          type="text"
+          class="answer-input"
+          id="q81"
+          placeholder="Type your answer here..."
+        />
+
+        <div id="result81" class="result"></div>
+      </div>
+
+      <!-- 82 -->
+
+      <div class="question">
+        <div class="question-number">82.</div>
+
+        <div class="original">
+          Dad doesn’t mind if I stay out late as long as I phone.
+        </div>
+
+        <div class="transformation">
+          Dad doesn’t object _________________________________________
+        </div>
+
+        <input
+          type="text"
+          class="answer-input"
+          id="q82"
+          placeholder="Type your answer here..."
+        />
+
+        <div id="result82" class="result"></div>
+      </div>
+
+      <!-- 83 -->
+
+      <div class="question">
+        <div class="question-number">83.</div>
+
+        <div class="original">
+          “It’s your fault that we are late, Kelvin”, said Ciara.
+        </div>
+
+        <div class="transformation">
+          Ciara put _________________________________________
+        </div>
+
+        <input
+          type="text"
+          class="answer-input"
+          id="q83"
+          placeholder="Type your answer here..."
+        />
+
+        <div id="result83" class="result"></div>
+      </div>
+
+      <!-- 84 -->
+
+      <div class="question">
+        <div class="question-number">84.</div>
+
+        <div class="original">
+          Mark couldn’t open the door even though he tried hard.
+        </div>
+
+        <div class="transformation">
+          No matter _________________________________________
+        </div>
+
+        <input
+          type="text"
+          class="answer-input"
+          id="q84"
+          placeholder="Type your answer here..."
+        />
+
+        <div id="result84" class="result"></div>
+      </div>
+
+      <!-- 85 -->
+
+      <div class="question">
+        <div class="question-number">85.</div>
+
+        <div class="original">
+          Donald was so nervous that he couldn’t make up his mind what to do
+          next.
+        </div>
+
+        <div class="transformation">
+          Such _________________________________________
+        </div>
+
+        <input
+          type="text"
+          class="answer-input"
+          id="q85"
+          placeholder="Type your answer here..."
+        />
+
+        <div id="result85" class="result"></div>
+      </div>
+
+      <!-- ========================================= -->
+      <!-- QUESTIONS 86–95 -->
+      <!-- ========================================= -->
+
+      <h2>Part II: Key Word Transformation</h2>
+
+      <div class="instructions">
+        For questions 86–95, complete the second sentence so that it has a
+        similar meaning to the first sentence, using the word given in brackets.
+        <br /><br />
+        <strong>Do NOT change the word given.</strong>
+        <br />
+        You must use between <strong>THREE and SIX words</strong>, including the
+        word given.
+      </div>
+
+      <!-- 86 -->
+
+      <div class="question">
+        <div class="question-number">86.</div>
+
+        <div class="original">
+          We chose not to drive because we thought there would be too much snow.
+          <span class="keyword">(FEAR)</span>
+        </div>
+
+        <div class="transformation">
+          We chose _________________________________________ too much snow.
+        </div>
+
+        <input
+          type="text"
+          class="answer-input"
+          id="q86"
+          placeholder="Type your answer here..."
+        />
+
+        <div id="result86" class="result"></div>
+      </div>
+
+      <!-- 87 -->
+
+      <div class="question">
+        <div class="question-number">87.</div>
+
+        <div class="original">
+          People think that hunting has resulted in the extinction of the dodo.
+          <span class="keyword">(BROUGHT)</span>
+        </div>
+
+        <div class="transformation">
+          The extinction of the dodo is
+          _________________________________________ by hunting.
+        </div>
+
+        <input
+          type="text"
+          class="answer-input"
+          id="q87"
+          placeholder="Type your answer here..."
+        />
+
+        <div id="result87" class="result"></div>
+      </div>
+
+      <!-- 88 -->
+
+      <div class="question">
+        <div class="question-number">88.</div>
+
+        <div class="original">
+          The secretary said that there wasn’t any paper left for the
+          photocopier.
+          <span class="keyword">(RUN)</span>
+        </div>
+
+        <div class="transformation">
+          The secretary said that they _________________________________________
+          for the photocopier.
+        </div>
+
+        <input
+          type="text"
+          class="answer-input"
+          id="q88"
+          placeholder="Type your answer here..."
+        />
+
+        <div id="result88" class="result"></div>
+      </div>
+
+      <!-- 89 -->
+
+      <div class="question">
+        <div class="question-number">89.</div>
+
+        <div class="original">
+          She regrets not contacting Eddy when she was in California.
+          <span class="keyword">(TOUCH)</span>
+        </div>
+
+        <div class="transformation">
+          She wishes that she _________________________________________ Eddy
+          when she was in California.
+        </div>
+
+        <input
+          type="text"
+          class="answer-input"
+          id="q89"
+          placeholder="Type your answer here..."
+        />
+
+        <div id="result89" class="result"></div>
+      </div>
+
+      <!-- 90 -->
+
+      <div class="question">
+        <div class="question-number">90.</div>
+
+        <div class="original">
+          After discovering the theft, the only option open to us was calling
+          the police.
+          <span class="keyword">(BUT)</span>
+        </div>
+
+        <div class="transformation">
+          We had no _________________________________________ after our
+          discovery of the theft.
+        </div>
+
+        <input
+          type="text"
+          class="answer-input"
+          id="q90"
+          placeholder="Type your answer here..."
+        />
+
+        <div id="result90" class="result"></div>
+      </div>
+
+      <!-- 91 -->
+
+      <div class="question">
+        <div class="question-number">91.</div>
+
+        <div class="original">
+          Cindy would do almost anything to win a scholarship to Eton.
+          <span class="keyword">(LENGTHS)</span>
+        </div>
+
+        <div class="transformation">
+          Cindy would _________________________________________ a scholarship to
+          Eton.
+        </div>
+
+        <input
+          type="text"
+          class="answer-input"
+          id="q91"
+          placeholder="Type your answer here..."
+        />
+
+        <div id="result91" class="result"></div>
+      </div>
+
+      <!-- 92 -->
+
+      <div class="question">
+        <div class="question-number">92.</div>
+
+        <div class="original">
+          She was amazed because there were no problems throughout the holiday.
+          <span class="keyword">(WENT)</span>
+        </div>
+
+        <div class="transformation">
+          To _________________________________________ throughout the holiday.
+        </div>
+
+        <input
+          type="text"
+          class="answer-input"
+          id="q92"
+          placeholder="Type your answer here..."
+        />
+
+        <div id="result92" class="result"></div>
+      </div>
+
+      <!-- 93 -->
+
+      <div class="question">
+        <div class="question-number">93.</div>
+
+        <div class="original">
+          David forgot his daughter’s birthday and didn’t know how to compensate
+          for it.
+          <span class="keyword">(AMENDS)</span>
+        </div>
+
+        <div class="transformation">
+          David didn’t know how to _________________________________________ his
+          daughter’s birthday.
+        </div>
+
+        <input
+          type="text"
+          class="answer-input"
+          id="q93"
+          placeholder="Type your answer here..."
+        />
+
+        <div id="result93" class="result"></div>
+      </div>
+
+      <!-- 94 -->
+
+      <div class="question">
+        <div class="question-number">94.</div>
+
+        <div class="original">
+          Why did you reveal my plan to Cynthia?
+          <span class="keyword">(BREATHED)</span>
+        </div>
+
+        <div class="transformation">
+          I’d rather _________________________________________ my plan to
+          Cynthia.
+        </div>
+
+        <input
+          type="text"
+          class="answer-input"
+          id="q94"
+          placeholder="Type your answer here..."
+        />
+
+        <div id="result94" class="result"></div>
+      </div>
+
+      <!-- 95 -->
+
+      <div class="question">
+        <div class="question-number">95.</div>
+
+        <div class="original">
+          Nobody could believe the story Ellie told us although it was true.
+          <span class="keyword">(BEYOND)</span>
+        </div>
+
+        <div class="transformation">
+          The story _________________________________________ although it was
+          true.
+        </div>
+
+        <input
+          type="text"
+          class="answer-input"
+          id="q95"
+          placeholder="Type your answer here..."
+        />
+
+        <div id="result95" class="result"></div>
+      </div>
+
+      <!-- ========================================= -->
+      <!-- CHECK ANSWERS -->
+      <!-- ========================================= -->
+
+      <button onclick="checkAnswers()">Check Answers</button>
+
+      <div id="score"></div>
+    </div>
+
+    <script>
+      function normalizeAnswer(answer) {
+        return answer
+          .toLowerCase()
+          .trim()
+          .replace(/[.,!?;:]/g, "")
+          .replace(/\s+/g, " ");
+      }
+
+      function checkAnswers() {
+        const answers = {
+          q76: ["allowed to use our phones in class"],
+
+          q77: ["no intention of finding a part-time job this summer"],
+
+          q78: ["have been easy for Victoria to change her hairstyle"],
+
+          q79: ["difference between her views on this subject and yours"],
+
+          q80: ["an eye on my handbag"],
+
+          q81: ["me is her knowledge of French literature"],
+
+          q82: ["to my staying out late as long as I phone"],
+
+          q83: ["the blame for our being late on Kelvin"],
+
+          q84: ["hard he tried could Mark open the door"],
+
+          q85: [
+            "was Donald's nervousness that he couldn't make up his mind what to do next",
+          ],
+
+          // Key Word Transformation
+
+          q86: ["not to drive for fear of"],
+
+          q87: ["thought to have been brought about"],
+
+          q88: ["had run out of paper"],
+
+          q89: ["had kept in touch with"],
+
+          q90: ["option but to call the police"],
+
+          q91: ["go to any lengths to win"],
+
+          q92: ["her amazement nothing went wrong"],
+
+          q93: ["make amends for forgetting"],
+
+          q94: ["you hadn't breathed a word about"],
+
+          q95: ["was beyond belief"],
+        };
+
+        let score = 0;
+
+        const total = Object.keys(answers).length;
+
+        for (let question in answers) {
+          const input = document.getElementById(question);
+
+          const result = document.getElementById(
+            "result" + question.substring(1),
+          );
+
+          const userAnswer = normalizeAnswer(input.value);
+
+          if (userAnswer === "") {
+            result.innerHTML = "⚠️ Please enter your answer.";
+
+            result.className = "result wrong";
+
+            continue;
+          }
+
+          const isCorrect = answers[question].some(
+            (answer) => normalizeAnswer(answer) === userAnswer,
+          );
+
+          if (isCorrect) {
+            result.innerHTML = "✅ Correct!";
+
+            result.className = "result correct";
+
+            score++;
+          } else {
+            result.innerHTML =
+              "❌ Incorrect.<br>" +
+              "Suggested answer: <strong>" +
+              answers[question][0] +
+              "</strong>";
+
+            result.className = "result wrong";
+          }
+        }
+
+        document.getElementById("score").innerHTML =
+          "Your Score: " + score + " / " + total;
+      }
+    </script>
+  </body>
+</html>
