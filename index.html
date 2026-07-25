@@ -1,18 +1,23 @@
 <!doctype html>
+
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    ```
     <title>HanVerse - English Learning Website</title>
 
     <meta
       name="description"
       content="HanVerse - Website luyện tiếng Anh, từ vựng và bài đọc dành cho học sinh."
     />
+
     <meta
       name="google-site-verification"
       content="gj7CqlpVeyG9ETrO8zP0Okc-LMuQZH-d-4tPcY6Q9nY"
     />
+
     <style>
       * {
         margin: 0;
@@ -31,7 +36,9 @@
         position: relative;
       }
 
-      /* Nền hồng */
+      /* =========================
+     NỀN HỒNG
+  ========================= */
 
       body::before {
         content: "";
@@ -44,7 +51,68 @@
         transform: rotate(12deg);
       }
 
-      /* Khối chứa */
+      /* =========================
+     NÚT ĐĂNG NHẬP / ĐĂNG KÝ
+  ========================= */
+
+      .account-menu {
+        position: absolute;
+        top: 25px;
+        right: 30px;
+        z-index: 10;
+
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .account-btn {
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-size: 15px;
+        transition: 0.3s;
+      }
+
+      .login-btn {
+        color: #211c1e;
+        border: 1px solid #211c1e;
+        background: white;
+      }
+
+      .register-btn {
+        color: white;
+        background: #211c1e;
+        border: 1px solid #211c1e;
+      }
+
+      .account-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+      }
+
+      /* =========================
+     SHOPPING
+  ========================= */
+
+      .shopping {
+        position: absolute;
+        top: 25px;
+        left: 30px;
+        z-index: 10;
+
+        text-decoration: none;
+        color: #211c1e;
+        font-size: 15px;
+      }
+
+      .shopping:hover {
+        text-decoration: underline;
+      }
+
+      /* =========================
+     KHỐI MENU
+  ========================= */
 
       .menu {
         display: flex;
@@ -53,7 +121,9 @@
         z-index: 2;
       }
 
-      /* Các nút */
+      /* =========================
+     CÁC NÚT KHÓA HỌC
+  ========================= */
 
       .btn {
         width: 360px;
@@ -89,15 +159,66 @@
         transform: translateY(-5px);
         box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
       }
+
+      /* =========================
+     RESPONSIVE CHO ĐIỆN THOẠI
+  ========================= */
+
+      @media (max-width: 600px) {
+        .account-menu {
+          top: 15px;
+          right: 15px;
+        }
+
+        .shopping {
+          top: 15px;
+          left: 15px;
+        }
+
+        .account-btn {
+          padding: 8px 12px;
+          font-size: 13px;
+        }
+
+        .btn {
+          width: 300px;
+          height: 65px;
+          font-size: 21px;
+        }
+      }
     </style>
+    ```
   </head>
 
   <body>
-    <a href="https://s.shopee.vn/30mSiPlHXm" target="_blank"> Shopping here </a>
+    ```
+    <!-- =========================
+     SHOPPING
+========================= -->
+
+    <a href="https://s.shopee.vn/30mSiPlHXm" target="_blank" class="shopping">
+      Shopping here
+    </a>
+
+    <!-- =========================
+     ĐĂNG NHẬP / ĐĂNG KÝ
+========================= -->
+
+    <div class="account-menu">
+      <a href="login.html" class="account-btn login-btn"> Đăng nhập </a>
+
+      <a href="register.html" class="account-btn register-btn"> Đăng ký </a>
+    </div>
+
+    <!-- =========================
+     MENU KHÓA HỌC
+========================= -->
+
     <div class="menu">
       <a href="mainn/hi.html" class="btn btn-dark"> Tiếng Anh Chuyên </a>
 
       <a href="mainn/hello.html" class="btn btn-light"> Tiếng Anh Đại Trà </a>
     </div>
+    ```
   </body>
 </html>

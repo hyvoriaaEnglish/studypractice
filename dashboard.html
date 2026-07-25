@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+
+    <title>Tài khoản của tôi</title>
+  </head>
+
+  <body>
+    <h1>Trang cá nhân</h1>
+
+    <p id="userEmail"></p>
+
+    <button id="logoutBtn">Đăng xuất</button>
+
+    <script type="module">
+      import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+      const SUPABASE_URL = "https://hojyicohcqqknfwgfkct.supabase.co";
+
+      const SUPABASE_KEY = "sb_publishable_HDrjvHHHC40fqAv4s61XLA_Vp38jiAn";
+
+      const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+      // Kiểm tra người dùng hiện tại
+
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      // Nếu chưa đăng nhập
+
+      if (!user) {
+        window.location.href = "login.html";
+      } else {
+        document.getElementById("userEmail").textContent =
+          "Bạn đang đăng nhập bằng: " + user.email;
+      }
+
+      // ĐĂNG XUẤT
+
+      document
+        .getElementById("logoutBtn")
+        .addEventListener("click", async () => {
+          await supabase.auth.signOut();
+
+          window.location.href = "login.html";
+        });
+    </script>
+  </body>
+</html>

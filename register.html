@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Đăng ký tài khoản - Hyvoria English</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f5f7fb;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+      }
+
+      .container {
+        width: 350px;
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 25px;
+      }
+
+      input {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 12px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+      }
+
+      button {
+        width: 100%;
+        padding: 12px;
+        background: #111;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        opacity: 0.8;
+      }
+
+      #message {
+        text-align: center;
+        margin-top: 15px;
+      }
+
+      .login-link {
+        text-align: center;
+        margin-top: 15px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Đăng ký</h1>
+
+      <input type="email" id="email" placeholder="Email của bạn" />
+
+      <input type="password" id="password" placeholder="Mật khẩu" />
+
+      <button id="registerBtn">Đăng ký</button>
+
+      <p id="message"></p>
+
+      <div class="login-link">
+        Đã có tài khoản?
+        <a href="login.html">Đăng nhập</a>
+      </div>
+    </div>
+
+    <script type="module">
+      import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+      // =====================================
+      // THAY 2 GIÁ TRỊ NÀY BẰNG CỦA BẠN
+      // =====================================
+
+      const SUPABASE_URL = "https://hojyicohcqqknfwgfkct.supabase.co";
+
+      const SUPABASE_KEY = "sb_publishable_HDrjvHHHC40fqAv4s61XLA_Vp38jiAn";
+
+      // KẾT NỐI SUPABASE
+
+      const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+      // =====================================
+      // XỬ LÝ ĐĂNG KÝ
+      // =====================================
+
+      document
+        .getElementById("registerBtn")
+        .addEventListener("click", async () => {
+          const email = document.getElementById("email").value.trim();
+
+          const password = document.getElementById("password").value;
+
+          // Kiểm tra bỏ trống
+
+          if (!email || !password) {
+            document.getElementById("message").textContent =
+              "Vui lòng nhập email và mật khẩu.";
+
+            return;
+          }
+
+          // Gửi thông tin đăng ký lên Supabase
+
+          const { data, error } = await supabase.auth.signUp({
+            email: email,
+            password: password,
+          });
+
+          if (error) {
+            document.getElementById("message").textContent = error.message;
+            return;
+          }
+
+          window.location.href = "index.html";
+        });
+    </script>
+  </body>
+</html>

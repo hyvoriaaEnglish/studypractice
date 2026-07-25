@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Đăng nhập - Hyvoria English</title>
+  </head>
+
+  <body>
+    <h1>Đăng nhập</h1>
+
+    <input type="email" id="email" placeholder="Email" />
+
+    <input type="password" id="password" placeholder="Mật khẩu" />
+
+    <button id="loginBtn">Đăng nhập</button>
+
+    <p id="message"></p>
+
+    <p>
+      Chưa có tài khoản?
+
+      <a href="register.html"> Đăng ký </a>
+    </p>
+
+    <script type="module">
+      import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+      // ===============================
+      // SUPABASE
+      // ===============================
+
+      const SUPABASE_URL = "https://hojyicohcqqknfwgfkct.supabase.co";
+
+      const SUPABASE_KEY = "sb_publishable_HDrjvHHHC40fqAv4s61XLA_Vp38jiAn";
+
+      const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+      // ===============================
+      // ĐĂNG NHẬP
+      // ===============================
+
+      document
+        .getElementById("loginBtn")
+        .addEventListener("click", async () => {
+          const email = document.getElementById("email").value.trim();
+
+          const password = document.getElementById("password").value;
+
+          if (!email || !password) {
+            document.getElementById("message").textContent =
+              "Vui lòng nhập email và mật khẩu.";
+
+            return;
+          }
+
+          // Gửi thông tin đăng nhập
+
+          const { data, error } = await supabase.auth.signInWithPassword({
+            email: email,
+
+            password: password,
+          });
+
+          // Nếu sai tài khoản hoặc mật khẩu
+
+          if (error) {
+            document.getElementById("message").textContent =
+              "Email hoặc mật khẩu không chính xác.";
+
+            return;
+          }
+
+          // Đăng nhập thành công
+
+          window.location.href = "dashboard.html";
+        });
+    </script>
+  </body>
+</html>
