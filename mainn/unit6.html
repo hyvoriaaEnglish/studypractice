@@ -5,7 +5,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Reading Practice</title>
+    <title>Unit 6 Practice</title>
 
     <style>
       /* =====================================================
@@ -25,7 +25,7 @@
       body {
         min-height: 100vh;
 
-        background-color: white;
+        background-color: #fffdf5;
 
         font-family: Arial, Helvetica, sans-serif;
 
@@ -35,10 +35,10 @@
       }
 
       /* =====================================================
-         TRÁI TIM TRANG TRÍ
+         MÈO TRANG TRÍ
       ===================================================== */
 
-      .hearts {
+      .cats {
         position: fixed;
 
         width: 100%;
@@ -52,102 +52,100 @@
         z-index: 1;
       }
 
-      .heart {
+      .cat {
         position: absolute;
 
-        /* MÀU VÀNG */
+        font-size: 45px;
 
-        color: #f3c85b;
-
-        opacity: 0.7;
+        opacity: 0.75;
 
         animation: floating 4s ease-in-out infinite;
       }
 
       /* =====================================================
-         VỊ TRÍ TRÁI TIM
+         VỊ TRÍ CÁC CHÚ MÈO
       ===================================================== */
 
-      .heart:nth-child(1) {
+      .cat:nth-child(1) {
         top: 3%;
-        left: 7%;
-        font-size: 40px;
+        left: 6%;
+        font-size: 48px;
       }
 
-      .heart:nth-child(2) {
+      .cat:nth-child(2) {
         top: 10%;
         left: 25%;
-        font-size: 25px;
+        font-size: 30px;
       }
 
-      .heart:nth-child(3) {
+      .cat:nth-child(3) {
         top: 4%;
         left: 47%;
-        font-size: 30px;
+        font-size: 35px;
       }
 
-      .heart:nth-child(4) {
+      .cat:nth-child(4) {
         top: 8%;
         right: 25%;
-        font-size: 25px;
+        font-size: 28px;
       }
 
-      .heart:nth-child(5) {
+      .cat:nth-child(5) {
         top: 15%;
-        right: 7%;
-        font-size: 40px;
+        right: 6%;
+        font-size: 50px;
       }
 
-      .heart:nth-child(6) {
+      .cat:nth-child(6) {
         top: 32%;
         left: 18%;
-        font-size: 35px;
+        font-size: 40px;
       }
 
-      .heart:nth-child(7) {
+      .cat:nth-child(7) {
         top: 35%;
         right: 15%;
-        font-size: 25px;
+        font-size: 30px;
       }
 
-      .heart:nth-child(8) {
+      .cat:nth-child(8) {
         top: 58%;
         left: 3%;
-        font-size: 40px;
+        font-size: 48px;
       }
 
-      .heart:nth-child(9) {
+      .cat:nth-child(9) {
         top: 65%;
         right: 10%;
-        font-size: 35px;
+        font-size: 42px;
       }
 
-      .heart:nth-child(10) {
+      .cat:nth-child(10) {
         bottom: 15%;
         left: 30%;
-        font-size: 25px;
+        font-size: 30px;
       }
 
-      .heart:nth-child(11) {
+      .cat:nth-child(11) {
         bottom: 5%;
         left: 48%;
-        font-size: 40px;
+        font-size: 48px;
       }
 
-      .heart:nth-child(12) {
+      .cat:nth-child(12) {
         bottom: 8%;
         right: 24%;
-        font-size: 25px;
+        font-size: 28px;
       }
 
-      .heart:nth-child(13) {
+      .cat:nth-child(13) {
         bottom: 10%;
         right: 7%;
-        font-size: 30px;
+        font-size: 38px;
       }
 
       /* =====================================================
-         HIỆU ỨNG TRÁI TIM
+         HIỆU ỨNG MÈO BAY NHẸ
       ===================================================== */
 
       @keyframes floating {
@@ -156,7 +154,7 @@
         }
 
         50% {
-          transform: translateY(-7px);
+          transform: translateY(-8px);
         }
 
         100% {
@@ -185,7 +183,7 @@
 
         justify-content: center;
 
-        gap: 35px;
+        gap: 25px;
 
         padding: 60px 20px;
       }
@@ -195,13 +193,11 @@
       ===================================================== */
 
       .link-box {
-        width: 320px;
+        width: 340px;
 
-        min-height: 110px;
+        min-height: 90px;
 
         padding: 20px;
-
-        /* MÀU VÀNG PASTEL */
 
         background-color: #f9dfa0;
 
@@ -217,7 +213,7 @@
 
         color: #765f24;
 
-        font-size: 24px;
+        font-size: 22px;
 
         font-weight: 400;
 
@@ -242,18 +238,18 @@
 
       @media (max-width: 600px) {
         .container {
-          gap: 25px;
+          gap: 20px;
         }
 
         .link-box {
-          width: 240px;
+          width: 250px;
 
-          min-height: 85px;
+          min-height: 80px;
 
-          font-size: 20px;
+          font-size: 19px;
         }
 
-        .heart {
+        .cat {
           transform: scale(0.8);
         }
       }
@@ -262,35 +258,35 @@
 
   <body>
     <!-- =====================================================
-         TRÁI TIM VÀNG TRANG TRÍ
+         CÁC CHÚ MÈO MÀU VÀNG TRANG TRÍ
     ===================================================== -->
 
-    <div class="hearts">
-      <div class="heart">♥</div>
+    <div class="cats">
+      <div class="cat">🐱</div>
 
-      <div class="heart">♥</div>
+      <div class="cat">🐱</div>
 
-      <div class="heart">♥</div>
+      <div class="cat">🐱</div>
 
-      <div class="heart">♥</div>
+      <div class="cat">🐱</div>
 
-      <div class="heart">♥</div>
+      <div class="cat">🐱</div>
 
-      <div class="heart">♥</div>
+      <div class="cat">🐱</div>
 
-      <div class="heart">♥</div>
+      <div class="cat">🐱</div>
 
-      <div class="heart">♥</div>
+      <div class="cat">🐱</div>
 
-      <div class="heart">♥</div>
+      <div class="cat">🐱</div>
 
-      <div class="heart">♥</div>
+      <div class="cat">🐱</div>
 
-      <div class="heart">♥</div>
+      <div class="cat">🐱</div>
 
-      <div class="heart">♥</div>
+      <div class="cat">🐱</div>
 
-      <div class="heart">♥</div>
+      <div class="cat">🐱</div>
     </div>
 
     <!-- =====================================================
@@ -298,13 +294,21 @@
     ===================================================== -->
 
     <main class="container">
-      <!-- 5 BÀI ĐỌC ĐIỀN TỪ (1) -->
+      <!-- GUIDED CLOZE 1 -->
 
-      <a href="../reQG.html" class="link-box"> 5 bài đọc điền từ (1) </a>
+      <a href="../u6.html" class="link-box"> Phần bài đọc Guided Cloze </a>
 
-      <!-- 5 BÀI ĐỌC ĐIỀN TỪ (2) -->
+      <!-- GUIDED CLOZE 2 -->
 
-      <a href="../reGQ2.html" class="link-box"> 5 bài đọc điền từ (2) </a>
+      <a href="../u6re.html" class="link-box"> Phần bài đọc Guided Cloze 2 </a>
+
+      <!-- BỨC THƯ 1 -->
+
+      <a href="../u6re2.html" class="link-box"> Phần bài đọc dạng bức thư </a>
+
+      <!-- BỨC THƯ 2 -->
+
+      <a href="../u6re4.html" class="link-box"> Phần bài đọc dạng bức thư 2 </a>
     </main>
   </body>
 </html>

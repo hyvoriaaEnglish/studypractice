@@ -1,13 +1,394 @@
 <!doctype html>
-<html lang="en">
+<html lang="vi">
   <head>
     <meta charset="UTF-8" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+
+    <title>Unit 1 Practice</title>
+
+    <style>
+      /* =====================================================
+         RESET
+      ===================================================== */
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* =====================================================
+         BODY
+      ===================================================== */
+
+      body {
+        min-height: 100vh;
+
+        background-color: #e8f8fa;
+
+        font-family: Arial, Helvetica, sans-serif;
+
+        overflow-x: hidden;
+
+        position: relative;
+      }
+
+      /* =====================================================
+         HỌA TIẾT SÓNG BIỂN TRANG TRÍ
+      ===================================================== */
+
+      .waves {
+        position: fixed;
+
+        width: 100%;
+        height: 100%;
+
+        top: 0;
+        left: 0;
+
+        pointer-events: none;
+
+        z-index: 1;
+
+        overflow: hidden;
+      }
+
+      /* =====================================================
+         CÁC ĐƯỜNG SÓNG
+      ===================================================== */
+
+      .wave {
+        position: absolute;
+
+        width: 180%;
+
+        height: 100px;
+
+        border-top: 5px solid #7ccfd3;
+
+        border-radius: 50%;
+
+        opacity: 0.5;
+
+        animation: waveMove 8s ease-in-out infinite;
+      }
+
+      .wave:nth-child(1) {
+        top: 5%;
+
+        left: -40%;
+
+        transform: rotate(-2deg);
+      }
+
+      .wave:nth-child(2) {
+        top: 20%;
+
+        left: -30%;
+
+        border-top-color: #a4dfe1;
+
+        transform: rotate(2deg);
+
+        animation-delay: 1s;
+      }
+
+      .wave:nth-child(3) {
+        top: 42%;
+
+        left: -45%;
+
+        border-top-color: #6fc4ca;
+
+        transform: rotate(-2deg);
+
+        animation-delay: 2s;
+      }
+
+      .wave:nth-child(4) {
+        top: 65%;
+
+        left: -30%;
+
+        border-top-color: #a4dfe1;
+
+        transform: rotate(2deg);
+
+        animation-delay: 1.5s;
+      }
+
+      .wave:nth-child(5) {
+        top: 85%;
+
+        left: -45%;
+
+        border-top-color: #7ccfd3;
+
+        transform: rotate(-2deg);
+
+        animation-delay: 3s;
+      }
+
+      /* =====================================================
+         HIỆU ỨNG SÓNG
+      ===================================================== */
+
+      @keyframes waveMove {
+        0% {
+          transform: translateX(0) rotate(-2deg);
+        }
+
+        50% {
+          transform: translateX(30px) rotate(2deg);
+        }
+
+        100% {
+          transform: translateX(0) rotate(-2deg);
+        }
+      }
+
+      /* =====================================================
+         BỌT BIỂN TRANG TRÍ
+      ===================================================== */
+
+      .bubbles {
+        position: fixed;
+
+        width: 100%;
+        height: 100%;
+
+        top: 0;
+        left: 0;
+
+        pointer-events: none;
+
+        z-index: 2;
+      }
+
+      .bubble {
+        position: absolute;
+
+        border-radius: 50%;
+
+        border: 3px solid #8bd6da;
+
+        opacity: 0.5;
+
+        animation: bubbleFloat 5s ease-in-out infinite;
+      }
+
+      .bubble:nth-child(1) {
+        width: 30px;
+        height: 30px;
+
+        top: 8%;
+        left: 8%;
+      }
+
+      .bubble:nth-child(2) {
+        width: 18px;
+        height: 18px;
+
+        top: 15%;
+        right: 15%;
+      }
+
+      .bubble:nth-child(3) {
+        width: 40px;
+        height: 40px;
+
+        top: 35%;
+        left: 5%;
+      }
+
+      .bubble:nth-child(4) {
+        width: 22px;
+        height: 22px;
+
+        top: 48%;
+        right: 8%;
+      }
+
+      .bubble:nth-child(5) {
+        width: 35px;
+        height: 35px;
+
+        bottom: 12%;
+        left: 12%;
+      }
+
+      .bubble:nth-child(6) {
+        width: 20px;
+        height: 20px;
+
+        bottom: 8%;
+        right: 18%;
+      }
+
+      @keyframes bubbleFloat {
+        0% {
+          transform: translateY(0);
+        }
+
+        50% {
+          transform: translateY(-12px);
+        }
+
+        100% {
+          transform: translateY(0);
+        }
+      }
+
+      /* =====================================================
+         KHU VỰC CHÍNH
+      ===================================================== */
+
+      .container {
+        position: relative;
+
+        z-index: 10;
+
+        min-height: 100vh;
+
+        width: 100%;
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: 30px;
+
+        padding: 60px 20px;
+      }
+
+      /* =====================================================
+         CÁC Ô LINK - XANH NƯỚC PASTEL
+      ===================================================== */
+
+      .link-box {
+        width: 340px;
+
+        min-height: 100px;
+
+        padding: 20px;
+
+        background-color: #b8e4e7;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        text-align: center;
+
+        text-decoration: none;
+
+        color: #286b70;
+
+        font-size: 23px;
+
+        font-weight: 400;
+
+        transition: all 0.3s ease;
+      }
+
+      /* =====================================================
+         HIỆU ỨNG HOVER
+      ===================================================== */
+
+      .link-box:hover {
+        transform: scale(1.05);
+
+        background-color: #9dd6da;
+
+        box-shadow: 0 8px 20px rgba(50, 150, 160, 0.25);
+      }
+
+      /* =====================================================
+         RESPONSIVE - ĐIỆN THOẠI
+      ===================================================== */
+
+      @media (max-width: 600px) {
+        .container {
+          gap: 22px;
+        }
+
+        .link-box {
+          width: 250px;
+
+          min-height: 85px;
+
+          font-size: 19px;
+        }
+
+        .wave {
+          width: 250%;
+        }
+      }
+    </style>
   </head>
+
   <body>
-    <a href="../unit1abcd.html">Phần trắc nghiệm ABCD</a><br />
-    <a href="../u1abcd2.html">Phần từ đồng nghĩa và viết lại câu</a><br />
-    <a href="../unit1guidedcloze.html">Phần bài đọc điền từ</a>
+    <!-- =====================================================
+         HỌA TIẾT SÓNG BIỂN
+    ===================================================== -->
+
+    <div class="waves">
+      <div class="wave"></div>
+
+      <div class="wave"></div>
+
+      <div class="wave"></div>
+
+      <div class="wave"></div>
+
+      <div class="wave"></div>
+    </div>
+
+    <!-- =====================================================
+         BỌT NƯỚC
+    ===================================================== -->
+
+    <div class="bubbles">
+      <div class="bubble"></div>
+
+      <div class="bubble"></div>
+
+      <div class="bubble"></div>
+
+      <div class="bubble"></div>
+
+      <div class="bubble"></div>
+
+      <div class="bubble"></div>
+    </div>
+
+    <!-- =====================================================
+         NỘI DUNG CHÍNH
+    ===================================================== -->
+
+    <main class="container">
+      <!-- TRẮC NGHIỆM ABCD -->
+
+      <a href="../unit1abcd.html" class="link-box"> Phần trắc nghiệm ABCD </a>
+
+      <!-- TỪ ĐỒNG NGHĨA VÀ VIẾT LẠI CÂU -->
+
+      <a href="../u1abcd2.html" class="link-box">
+        Phần từ đồng nghĩa và viết lại câu
+      </a>
+
+      <!-- BÀI ĐỌC ĐIỀN TỪ -->
+
+      <a href="../unit1guidedcloze.html" class="link-box">
+        Phần bài đọc điền từ
+      </a>
+    </main>
   </body>
 </html>
