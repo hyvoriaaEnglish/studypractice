@@ -2,9 +2,11 @@
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Font -->
+
     <link
       href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Oswald:wght@600&display=swap"
       rel="stylesheet"
@@ -13,104 +15,265 @@
     <title>Tiếng Anh Đại Trà</title>
 
     <style>
+      /* =====================================================
+         RESET
+      ===================================================== */
+
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
       }
 
+      /* =====================================================
+         BODY
+      ===================================================== */
+
       body {
         background: #f6bfd5;
+
         display: flex;
+
         justify-content: center;
+
         align-items: center;
-        height: 100vh;
+
+        min-height: 100vh;
+
         font-family: "Baloo 2", cursive;
+
+        position: relative;
+
+        padding: 100px 20px 40px;
       }
 
-      /* Tiêu đề */
+      /* =====================================================
+         TIÊU ĐỀ
+      ===================================================== */
+
       .title {
         position: absolute;
+
         left: 45px;
+
         top: 45px;
 
         background: #ffe0b7;
+
         color: #222;
 
         padding: 15px 25px;
 
         font-family: "Oswald", sans-serif;
+
         font-size: 42px;
+
         font-weight: 600;
       }
 
-      /* Khối chứa nút */
+      /* =====================================================
+         KHỐI CHỨA NÚT
+      ===================================================== */
+
       .menu {
         display: flex;
+
         flex-direction: column;
+
         gap: 22px;
+
         align-items: center;
       }
 
-      /* Nút chung */
+      /* =====================================================
+         NÚT CHUNG
+      ===================================================== */
+
       .btn {
         text-decoration: none;
+
         width: 290px;
-        height: 78px;
+
+        min-height: 78px;
+
+        padding: 10px 20px;
 
         display: flex;
+
         justify-content: center;
+
         align-items: center;
 
         border-radius: 45px;
 
         font-size: 34px;
+
         font-weight: 700;
 
-        transition: 0.25s;
+        transition: all 0.25s ease;
+
+        text-align: center;
       }
+
+      /* =====================================================
+         HIỆU ỨNG HOVER
+      ===================================================== */
 
       .btn:hover {
         transform: scale(1.05);
+
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
       }
 
-      /* Unit 1 */
+      /* =====================================================
+         UNIT 1
+      ===================================================== */
+
       .btn1 {
         background: #ff6f8d;
+
         color: white;
       }
 
-      /* Unit 2 */
+      /* =====================================================
+         UNIT 2 AND 3
+      ===================================================== */
+
       .btn2 {
         background: #241b1d;
+
         color: #ffe6ef;
       }
 
-      /* Unit 4 */
+      /* =====================================================
+         UNIT 4
+      ===================================================== */
+
       .btn3 {
         background: #fff2f2;
+
         color: #ff6f8d;
+      }
+
+      /* =====================================================
+         UNIT 5
+      ===================================================== */
+
+      .btn4 {
+        background: #f7d6e0;
+
+        color: #7a3045;
+      }
+
+      /* =====================================================
+         UNIT 6
+      ===================================================== */
+
+      .btn5 {
+        background: #d8c4e8;
+
+        color: #51366b;
+      }
+
+      /* =====================================================
+         UNIT 7
+      ===================================================== */
+
+      .btn6 {
+        background: #c5e6e8;
+
+        color: #28656b;
+      }
+
+      /* =====================================================
+         UNIT 8
+      ===================================================== */
+
+      .btn7 {
+        background: #f3dfb3;
+
+        color: #6d5223;
+      }
+
+      /* =====================================================
+         RESPONSIVE - ĐIỆN THOẠI
+      ===================================================== */
+
+      @media (max-width: 600px) {
+        body {
+          padding-top: 120px;
+        }
+
+        .title {
+          position: relative;
+
+          left: auto;
+
+          top: auto;
+
+          margin-bottom: 30px;
+
+          font-size: 30px;
+        }
+
+        body {
+          flex-direction: column;
+        }
+
+        .menu {
+          width: 100%;
+        }
+
+        .btn {
+          width: 260px;
+
+          min-height: 65px;
+
+          font-size: 27px;
+        }
       }
     </style>
   </head>
 
   <body>
+    <!-- =====================================================
+         TIÊU ĐỀ
+    ===================================================== -->
+
     <div class="title">Phần Anh đại trà</div>
 
+    <!-- =====================================================
+         MENU
+    ===================================================== -->
+
     <div class="menu">
+      <!-- UNIT 1 -->
+
       <a class="btn btn1" href="unit1.html"> Unit 1 </a>
+
+      <!-- UNIT 2 AND 3 -->
 
       <a class="btn btn2" href="unit2.html"> Unit 2 and 3 </a>
 
+      <!-- UNIT 4 -->
+
       <a class="btn btn3" href="unit4.html"> Unit 4 </a>
 
-      <a class="btn btn4" href="unit5.html">Unit 5</a>
+      <!-- UNIT 5 -->
 
-      <a class="btn btn5" href="unit6.html">Unit 6</a>
+      <a class="btn btn4" href="unit5.html"> Unit 5 </a>
 
-      <a class="btn btn6" href="unit7.html">Unit 7</a>
+      <!-- UNIT 6 -->
 
-      <a class="btn btn7" href="unit8.html">Unit 8</a>
+      <a class="btn btn5" href="unit6.html"> Unit 6 </a>
+
+      <!-- UNIT 7 -->
+
+      <a class="btn btn6" href="unit7.html"> Unit 7 </a>
+
+      <!-- UNIT 8 -->
+
+      <a class="btn btn7" href="unit8.html"> Unit 8 </a>
     </div>
   </body>
 </html>
