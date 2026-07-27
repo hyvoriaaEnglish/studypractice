@@ -1,0 +1,1124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>C1 English Cloze Test</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f7f5;
+        color: #26332d;
+        line-height: 1.7;
+        padding: 30px 15px;
+      }
+
+      .container {
+        max-width: 950px;
+        margin: auto;
+      }
+
+      header {
+        background: white;
+        padding: 35px;
+        border-radius: 20px;
+        text-align: center;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+      }
+
+      header h1 {
+        font-size: 30px;
+        color: #315b43;
+        margin-bottom: 8px;
+      }
+
+      header p {
+        color: #68756e;
+      }
+
+      .score-box {
+        margin-top: 20px;
+        display: inline-block;
+        background: #eaf3ed;
+        padding: 10px 25px;
+        border-radius: 10px;
+        font-weight: bold;
+      }
+
+      .passage {
+        background: white;
+        padding: 30px;
+        border-radius: 20px;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      .passage h2 {
+        color: #315b43;
+        margin-bottom: 5px;
+      }
+
+      .subtitle {
+        font-weight: bold;
+        font-size: 18px;
+        margin-bottom: 20px;
+      }
+
+      .passage-text {
+        text-align: justify;
+      }
+
+      .question {
+        background: #fafcfb;
+        border: 1px solid #dfe7e2;
+        padding: 22px;
+        border-radius: 15px;
+        margin-top: 25px;
+      }
+
+      .question-title {
+        font-weight: bold;
+        margin-bottom: 15px;
+      }
+
+      .options {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+
+      .option {
+        border: 1px solid #ccd7d0;
+        background: white;
+        padding: 12px 15px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.2s;
+        text-align: left;
+        font-size: 15px;
+      }
+
+      .option:hover:not(.disabled) {
+        background: #eef5f0;
+        transform: translateY(-2px);
+      }
+
+      .option.correct {
+        background: #dff4e5;
+        border-color: #35a85a;
+        color: #176b31;
+        font-weight: bold;
+      }
+
+      .option.wrong {
+        background: #fde4e4;
+        border-color: #dc4c4c;
+        color: #9b1c1c;
+        font-weight: bold;
+      }
+
+      .option.disabled {
+        cursor: default;
+      }
+
+      .feedback {
+        display: none;
+        margin-top: 15px;
+        padding: 15px;
+        border-radius: 10px;
+      }
+
+      .feedback.correct-feedback {
+        background: #edf9f0;
+        border-left: 4px solid #35a85a;
+      }
+
+      .feedback.wrong-feedback {
+        background: #fff0f0;
+        border-left: 4px solid #dc4c4c;
+      }
+
+      .feedback strong {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      #finalResult {
+        display: none;
+        background: white;
+        padding: 30px;
+        border-radius: 20px;
+        text-align: center;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      #finalResult h2 {
+        color: #315b43;
+        margin-bottom: 10px;
+      }
+
+      #finalScore {
+        font-size: 30px;
+        font-weight: bold;
+        color: #315b43;
+        margin: 10px 0;
+      }
+
+      .reset-container {
+        text-align: center;
+        margin: 35px 0;
+      }
+
+      .reset-btn {
+        border: none;
+        background: #315b43;
+        color: white;
+        padding: 13px 30px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      .reset-btn:hover {
+        background: #244633;
+      }
+
+      @media (max-width: 600px) {
+        .options {
+          grid-template-columns: 1fr;
+        }
+
+        .passage {
+          padding: 20px;
+        }
+
+        header h1 {
+          font-size: 24px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <h1>C1 English Cloze Test</h1>
+        <p>Environmental Issues & Community Responsibility</p>
+
+        <div class="score-box">Score: <span id="score">0</span> / 25</div>
+      </header>
+
+      <!-- ==================================================
+       BÀI 3 — FOOD WASTE
+  ================================================== -->
+
+      <section class="passage">
+        <h2>PASSAGE 1 — REDUCING FOOD WASTE</h2>
+
+        <div class="subtitle">Food Waste Awareness Week</div>
+
+        <div class="passage-text">
+          Every year, enormous quantities of perfectly edible food are
+          discarded, contributing unnecessarily to environmental degradation. In
+          response to this pressing issue, our school is launching Food Waste
+          Awareness Week. We urge students to reconsider their consumption
+          habits and make a conscious effort to (1)______ unnecessary waste.
+
+          <br /><br />
+
+          The campaign aims to raise awareness (2)______ the environmental and
+          social repercussions of excessive food consumption. Throughout the
+          week, students will participate in a range of activities intended to
+          highlight the importance of responsible consumption.
+
+          <br /><br />
+
+          Leftover food from the school canteen will be collected and
+          redistributed wherever possible, rather than being (3)______ away.
+          Meanwhile, educational workshops will encourage students to (4)______
+          more sustainable dietary practices and avoid purchasing more food than
+          they actually need.
+
+          <br /><br />
+
+          Ultimately, the campaign seeks to (5)______ a shift in attitudes
+          towards food consumption and encourage students to recognise the value
+          of resources that are often taken for granted.
+        </div>
+
+        <div class="question" data-answer="A">
+          <div class="question-title">
+            1. ...make a conscious effort to (1)______ unnecessary waste.
+          </div>
+
+          <div class="options">
+            <button class="option" data-choice="A">A. curtail</button>
+            <button class="option" data-choice="B">B. diminish</button>
+            <button class="option" data-choice="C">C. restrain</button>
+            <button class="option" data-choice="D">D. suppress</button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+            <span></span>
+          </div>
+        </div>
+
+        <div class="question" data-answer="B">
+          <div class="question-title">
+            2. The campaign aims to raise awareness (2)______ the
+            environmental...
+          </div>
+
+          <div class="options">
+            <button class="option" data-choice="A">A. of</button>
+            <button class="option" data-choice="B">B. about</button>
+            <button class="option" data-choice="C">C. on</button>
+            <button class="option" data-choice="D">D. for</button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+            <span></span>
+          </div>
+        </div>
+
+        <div class="question" data-answer="A">
+          <div class="question-title">
+            3. ...rather than being (3)______ away.
+          </div>
+
+          <div class="options">
+            <button class="option" data-choice="A">A. thrown</button>
+            <button class="option" data-choice="B">B. cast</button>
+            <button class="option" data-choice="C">C. put</button>
+            <button class="option" data-choice="D">D. taken</button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+            <span></span>
+          </div>
+        </div>
+
+        <div class="question" data-answer="A">
+          <div class="question-title">
+            4. ...encourage students to (4)______ more sustainable dietary
+            practices.
+          </div>
+
+          <div class="options">
+            <button class="option" data-choice="A">A. adopt</button>
+            <button class="option" data-choice="B">B. adapt</button>
+            <button class="option" data-choice="C">C. accommodate</button>
+            <button class="option" data-choice="D">D. adjust</button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+            <span></span>
+          </div>
+        </div>
+
+        <div class="question" data-answer="A">
+          <div class="question-title">
+            5. The campaign seeks to (5)______ a shift in attitudes...
+          </div>
+
+          <div class="options">
+            <button class="option" data-choice="A">A. bring about</button>
+            <button class="option" data-choice="B">B. bring up</button>
+            <button class="option" data-choice="C">C. bring out</button>
+            <button class="option" data-choice="D">D. bring over</button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+            <span></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================
+       BÀI 4 — DIGITAL WELL-BEING
+  ================================================== -->
+
+      <section class="passage">
+        <h2>PASSAGE 2 — DIGITAL WELL-BEING CAMPAIGN</h2>
+
+        <div class="subtitle">
+          Reclaim Your Time: Digital Well-Being Campaign
+        </div>
+
+        <div class="passage-text">
+          In an increasingly connected world, excessive screen time has become a
+          growing concern among young people. To address this issue, the School
+          Counselling Department is introducing a digital well-being campaign
+          designed to encourage students to reassess their relationship with
+          technology.
+
+          <br /><br />
+
+          The campaign aims to enhance students' (1)______ of the potential
+          consequences of excessive digital consumption, including reduced
+          concentration and disrupted sleep patterns. Rather than advocating a
+          complete withdrawal from technology, the initiative encourages
+          students to strike a balance (2)______ online and offline activities.
+
+          <br /><br />
+
+          Throughout the campaign, students will be invited to take part in
+          workshops that explore practical strategies for (3)______ distractions
+          and maintaining focus. They will also be encouraged to (4)______ time
+          for hobbies, exercise and face-to-face interaction.
+
+          <br /><br />
+
+          We hope that these initiatives will (5)______ students to develop
+          healthier digital habits that can be sustained well beyond the
+          duration of the campaign.
+        </div>
+
+        <div class="question" data-answer="A">
+          <div class="question-title">
+            6. The campaign aims to enhance students' (1)______ of the potential
+            consequences...
+          </div>
+
+          <div class="options">
+            <button class="option" data-choice="A">A. awareness</button>
+            <button class="option" data-choice="B">B. knowledge</button>
+            <button class="option" data-choice="C">C. understanding</button>
+            <button class="option" data-choice="D">D. consciousness</button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+            <span></span>
+          </div>
+        </div>
+
+        <div class="question" data-answer="B">
+          <div class="question-title">
+            7. ...encourages students to strike a balance (2)______ online and
+            offline activities.
+          </div>
+
+          <div class="options">
+            <button class="option" data-choice="A">A. among</button>
+            <button class="option" data-choice="B">B. between</button>
+            <button class="option" data-choice="C">C. within</button>
+            <button class="option" data-choice="D">D. across</button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+            <span></span>
+          </div>
+        </div>
+
+        <div class="question" data-answer="A">
+          <div class="question-title">
+            8. ...strategies for (3)______ distractions and maintaining focus.
+          </div>
+
+          <div class="options">
+            <button class="option" data-choice="A">A. minimising</button>
+            <button class="option" data-choice="B">B. diminishing</button>
+            <button class="option" data-choice="C">C. declining</button>
+            <button class="option" data-choice="D">D. lowering</button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+            <span></span>
+          </div>
+        </div>
+
+        <div class="question" data-answer="A">
+          <div class="question-title">
+            9. They will also be encouraged to (4)______ time for hobbies...
+          </div>
+
+          <div class="options">
+            <button class="option" data-choice="A">A. set aside</button>
+            <button class="option" data-choice="B">B. set out</button>
+            <button class="option" data-choice="C">C. set off</button>
+            <button class="option" data-choice="D">D. set back</button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+            <span></span>
+          </div>
+        </div>
+
+        <div class="question" data-answer="A">
+          <div class="question-title">
+            10. These initiatives will (5)______ students to develop healthier
+            digital habits.
+          </div>
+
+          <div class="options">
+            <button class="option" data-choice="A">A. empower</button>
+            <button class="option" data-choice="B">B. enable</button>
+            <button class="option" data-choice="C">C. permit</button>
+            <button class="option" data-choice="D">D. allow</button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+            <span></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================
+       BÀI 5 — BIODIVERSITY
+  ================================================== -->
+
+      <section class="passage">
+        <h2>PASSAGE 3 — BIODIVERSITY CONSERVATION PROJECT</h2>
+
+        <div class="subtitle">Protecting Our Local Biodiversity</div>
+
+        <div class="passage-text">
+          The Environmental Science Club is launching a biodiversity
+          conservation project to raise awareness of the ecological richness of
+          our local area. Although biodiversity is frequently discussed in
+          academic contexts, its importance is often (1)______ by the general
+          public.
+
+          <br /><br />
+
+          The project seeks to familiarise students (2)______ the diverse
+          species that inhabit our region and highlight the threats posed by
+          habitat destruction and climate change. As part of the initiative,
+          students will participate in field trips during which they will
+          document local wildlife and identify areas of ecological significance.
+
+          <br /><br />
+
+          The data collected will subsequently be compiled into a report, which
+          will be used to (3)______ the case for greater environmental
+          protection. Students will also be encouraged to (4)______ practical
+          measures that could help preserve local ecosystems.
+
+          <br /><br />
+
+          By bringing together students, teachers and environmental
+          organisations, we hope to (5)______ a collaborative approach to
+          conservation and ensure that biodiversity remains a priority for
+          future generations.
+        </div>
+
+        <div class="question" data-answer="A">
+          <div class="question-title">
+            11. Its importance is often (1)______ by the general public.
+          </div>
+
+          <div class="options">
+            <button class="option" data-choice="A">A. overlooked</button>
+            <button class="option" data-choice="B">B. underestimated</button>
+            <button class="option" data-choice="C">C. disregarded</button>
+            <button class="option" data-choice="D">D. neglected</button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+            <span></span>
+          </div>
+        </div>
+
+        <div class="question" data-answer="B">
+          <div class="question-title">
+            12. The project seeks to familiarise students (2)______ the diverse
+            species...
+          </div>
+
+          <div class="options">
+            <button class="option" data-choice="A">A. to</button>
+            <button class="option" data-choice="B">B. with</button>
+            <button class="option" data-choice="C">C. of</button>
+            <button class="option" data-choice="D">D. about</button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+            <span></span>
+          </div>
+        </div>
+
+        <div class="question" data-answer="A">
+          <div class="question-title">
+            13. The report will be used to (3)______ the case for greater
+            environmental protection.
+          </div>
+
+          <div class="options">
+            <button class="option" data-choice="A">A. make</button>
+            <button class="option" data-choice="B">B. do</button>
+            <button class="option" data-choice="C">C. give</button>
+            <button class="option" data-choice="D">D. put</button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+            <span></span>
+          </div>
+        </div>
+
+        <div class="question" data-answer="A">
+          <div class="question-title">
+            14. Students will also be encouraged to (4)______ practical
+            measures...
+          </div>
+
+          <div class="options">
+            <button class="option" data-choice="A">A. propose</button>
+            <button class="option" data-choice="B">B. suggest</button>
+            <button class="option" data-choice="C">C. recommend</button>
+            <button class="option" data-choice="D">D. advocate</button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+            <span></span>
+          </div>
+        </div>
+
+        <div class="question" data-answer="A">
+          <div class="question-title">
+            15. We hope to (5)______ a collaborative approach to conservation...
+          </div>
+
+          <div class="options">
+            <button class="option" data-choice="A">A. foster</button>
+            <button class="option" data-choice="B">B. facilitate</button>
+            <button class="option" data-choice="C">C. promote</button>
+            <button class="option" data-choice="D">D. encourage</button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+            <span></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================
+       BÀI 4 — COMMUNITY VOLUNTEER DAY
+  ================================================== -->
+
+      <section class="passage">
+        <h2>PASSAGE 4 — COMMUNITY VOLUNTEER DAY</h2>
+
+        <div class="subtitle">Let's Help Our Community!</div>
+
+        <div class="passage-text">
+          The School Youth Union is organizing a Community Volunteer Day next
+          month. Students are invited to join various activities to support
+          local residents. If everyone (1)______ a hand, we can make our
+          community a better place.
+
+          <br /><br />
+
+          The event aims to develop students' (2)______ of social
+          responsibility. Volunteers will visit elderly people and help clean
+          public areas. All necessary equipment will be (3)______ to
+          participants before the activities begin.
+
+          <br /><br />
+
+          Students will also learn how to (4)______ with different members of
+          the community and work effectively as a team. We hope this event will
+          (5)______ stronger connections among students and local residents.
+
+          <br /><br />
+
+          Your participation is greatly appreciated!
+        </div>
+
+        <div class="question" data-answer="A">
+          <div class="question-title">
+            16. If everyone (1)______ a hand, we can make our community a better
+            place.
+          </div>
+
+          <div class="options">
+            <button class="option" data-choice="A">A. lend</button>
+            <button class="option" data-choice="B">B. lent</button>
+            <button class="option" data-choice="C">C. lends</button>
+            <button class="option" data-choice="D">D. lending</button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+            <span></span>
+          </div>
+        </div>
+
+        <div class="question" data-answer="A">
+          <div class="question-title">
+            17. The event aims to develop students' (2)______ of social
+            responsibility.
+          </div>
+
+          <div class="options">
+            <button class="option" data-choice="A">A. sense</button>
+            <button class="option" data-choice="B">B. attention</button>
+            <button class="option" data-choice="C">C. emphasis</button>
+            <button class="option" data-choice="D">D. focus</button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+            <span></span>
+          </div>
+        </div>
+
+        <div class="question" data-answer="C">
+          <div class="question-title">
+            18. All necessary equipment will be (3)______ to participants...
+          </div>
+
+          <div class="options">
+            <button class="option" data-choice="A">A. provide</button>
+            <button class="option" data-choice="B">B. providing</button>
+            <button class="option" data-choice="C">C. provided</button>
+            <button class="option" data-choice="D">D. provides</button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+            <span></span>
+          </div>
+        </div>
+
+        <div class="question" data-answer="A">
+          <div class="question-title">
+            19. Students will also learn how to (4)______ with different
+            members...
+          </div>
+
+          <div class="options">
+            <button class="option" data-choice="A">A. communicate</button>
+            <button class="option" data-choice="B">B. produce</button>
+            <button class="option" data-choice="C">C. prevent</button>
+            <button class="option" data-choice="D">D. protect</button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+            <span></span>
+          </div>
+        </div>
+
+        <div class="question" data-answer="A">
+          <div class="question-title">
+            20. We hope this event will (5)______ stronger connections...
+          </div>
+
+          <div class="options">
+            <button class="option" data-choice="A">A. build</button>
+            <button class="option" data-choice="B">B. destroy</button>
+            <button class="option" data-choice="C">C. reduce</button>
+            <button class="option" data-choice="D">D. remove</button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+            <span></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================
+       BÀI 5 — SAVE ENERGY
+  ================================================== -->
+
+      <section class="passage">
+        <h2>PASSAGE 5 — SAVE ENERGY CAMPAIGN</h2>
+
+        <div class="subtitle">Save Energy, Save Our Future!</div>
+
+        <div class="passage-text">
+          The Green School Club is launching a campaign to encourage students to
+          save energy. We believe that if everyone (1)______ small changes to
+          their daily habits, we can reduce energy consumption at school.
+
+          <br /><br />
+
+          The campaign aims to raise students' (2)______ of the importance of
+          saving energy. Posters will be (3)______ around the school to remind
+          students to turn off lights and fans when they are not in use.
+
+          <br /><br />
+
+          Students will also attend workshops where they can learn how to
+          (4)______ energy in their everyday lives. Through these activities, we
+          hope to (5)______ environmentally responsible habits among students.
+
+          <br /><br />
+
+          Let's work together to protect our planet!
+        </div>
+
+        <div class="question" data-answer="A">
+          <div class="question-title">
+            21. If everyone (1)______ small changes to their daily habits...
+          </div>
+
+          <div class="options">
+            <button class="option" data-choice="A">A. make</button>
+            <button class="option" data-choice="B">B. made</button>
+            <button class="option" data-choice="C">C. makes</button>
+            <button class="option" data-choice="D">D. making</button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+            <span></span>
+          </div>
+        </div>
+
+        <div class="question" data-answer="A">
+          <div class="question-title">
+            22. The campaign aims to raise students' (2)______ of the
+            importance...
+          </div>
+
+          <div class="options">
+            <button class="option" data-choice="A">A. awareness</button>
+            <button class="option" data-choice="B">B. attention</button>
+            <button class="option" data-choice="C">C. emphasis</button>
+            <button class="option" data-choice="D">D. focus</button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+            <span></span>
+          </div>
+        </div>
+
+        <div class="question" data-answer="C">
+          <div class="question-title">
+            23. Posters will be (3)______ around the school...
+          </div>
+
+          <div class="options">
+            <button class="option" data-choice="A">A. putting</button>
+            <button class="option" data-choice="B">B. put</button>
+            <button class="option" data-choice="C">C. placed</button>
+            <button class="option" data-choice="D">D. place</button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+            <span></span>
+          </div>
+        </div>
+
+        <div class="question" data-answer="A">
+          <div class="question-title">
+            24. Students can learn how to (4)______ energy in their everyday
+            lives.
+          </div>
+
+          <div class="options">
+            <button class="option" data-choice="A">A. conserve</button>
+            <button class="option" data-choice="B">B. consume</button>
+            <button class="option" data-choice="C">C. produce</button>
+            <button class="option" data-choice="D">D. waste</button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+            <span></span>
+          </div>
+        </div>
+
+        <div class="question" data-answer="A">
+          <div class="question-title">
+            25. We hope to (5)______ environmentally responsible habits...
+          </div>
+
+          <div class="options">
+            <button class="option" data-choice="A">A. develop</button>
+            <button class="option" data-choice="B">B. destroy</button>
+            <button class="option" data-choice="C">C. prevent</button>
+            <button class="option" data-choice="D">D. remove</button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+            <span></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================
+       FINAL RESULT
+  ================================================== -->
+
+      <div id="finalResult">
+        <h2>Quiz Completed!</h2>
+
+        <p>Your final score is:</p>
+
+        <div id="finalScore">0 / 25</div>
+
+        <p id="finalMessage"></p>
+      </div>
+
+      <div class="reset-container">
+        <button class="reset-btn" onclick="resetQuiz()">Reset Quiz</button>
+      </div>
+    </div>
+
+    <script>
+      /* ==================================================
+   SCORE
+================================================== */
+
+      let score = 0;
+
+      let answeredQuestions = 0;
+
+      /* ==================================================
+   EXPLANATIONS
+================================================== */
+
+      const explanations = {
+        1: "Correct answer: A. 'Curtail' means to reduce or limit something, especially something undesirable. 'Curtail unnecessary waste' is the best fit here.",
+
+        2: "Correct answer: B. 'Raise awareness about something' is a common collocation meaning to make people more conscious of an issue.",
+
+        3: "Correct answer: A. 'Throw away' is a phrasal verb meaning to discard something that is no longer wanted.",
+
+        4: "Correct answer: A. 'Adopt a practice/habit' means to begin using or following a particular practice or behaviour.",
+
+        5: "Correct answer: A. 'Bring about' means to cause something to happen, especially a change or result.",
+
+        6: "Correct answer: A. 'Awareness of' is the most natural collocation when referring to consciousness of potential consequences or problems.",
+
+        7: "Correct answer: B. The fixed expression is 'strike a balance between A and B'.",
+
+        8: "Correct answer: A. 'Minimise distractions' means to reduce distractions as much as possible. This is the most natural collocation in this context.",
+
+        9: "Correct answer: A. 'Set aside time' means to reserve or deliberately allocate time for a particular activity.",
+
+        10: "Correct answer: A. 'Empower someone to do something' means to give someone the confidence, ability or authority to take action.",
+
+        11: "Correct answer: A. 'Overlook' means to fail to notice or give sufficient attention to something. The importance of biodiversity may be overlooked by the general public.",
+
+        12: "Correct answer: B. The fixed collocation is 'familiarise someone with something', meaning to help someone become acquainted with something.",
+
+        13: "Correct answer: A. The collocation 'make the case for something' means to present arguments or evidence supporting a particular idea or action.",
+
+        14: "Correct answer: A. 'Propose practical measures' means to formally put forward suggestions or plans for consideration.",
+
+        15: "Correct answer: A. 'Foster a collaborative approach' means to encourage and gradually develop cooperation among different groups.",
+
+        16: "Correct answer: A. In the first conditional, we use 'If + present simple'. 'Everyone' is grammatically singular, but the expression 'lend a hand' is used here with the implied subject 'everyone' in the plural sense of collective participation. The intended answer is 'lend'.",
+
+        17: "Correct answer: A. 'A sense of social responsibility' is a common collocation referring to an awareness of one's duties towards society.",
+
+        18: "Correct answer: C. The sentence uses the future passive: 'will be + past participle'. Therefore, 'provided' is correct.",
+
+        19: "Correct answer: A. 'Communicate with someone' means to exchange information, ideas or feelings with them.",
+
+        20: "Correct answer: A. 'Build connections' is a common collocation meaning to establish or strengthen relationships between people.",
+
+        21: "Correct answer: A. In the first conditional, the structure is 'If + present simple, ... will/can + verb'. The intended collocation is 'make small changes'.",
+
+        22: "Correct answer: A. 'Raise awareness of something' is a standard collocation meaning to increase people's understanding or consciousness of an issue.",
+
+        23: "Correct answer: C. The sentence requires the passive structure 'will be + past participle'. 'Placed' means put in a particular position.",
+
+        24: "Correct answer: A. 'Conserve energy' means to use energy carefully and avoid unnecessary consumption.",
+
+        25: "Correct answer: A. 'Develop habits' means to gradually form or establish patterns of behaviour. 'Develop environmentally responsible habits' is the natural choice.",
+      };
+
+      /* ==================================================
+   QUIZ FUNCTION
+================================================== */
+
+      const questions = document.querySelectorAll(".question");
+
+      questions.forEach((question, index) => {
+        const options = question.querySelectorAll(".option");
+
+        const correctAnswer = question.dataset.answer;
+
+        const feedback = question.querySelector(".feedback");
+
+        const feedbackTitle = feedback.querySelector("strong");
+
+        const feedbackText = feedback.querySelector("span");
+
+        const questionNumber = index + 1;
+
+        options.forEach((option) => {
+          option.addEventListener("click", function () {
+            /* Prevent multiple answers */
+
+            if (question.classList.contains("answered")) {
+              return;
+            }
+
+            question.classList.add("answered");
+
+            answeredQuestions++;
+
+            const selectedAnswer = this.dataset.choice;
+
+            /* Disable all buttons */
+
+            options.forEach((btn) => {
+              btn.classList.add("disabled");
+            });
+
+            /* =========================================
+         CORRECT ANSWER
+      ========================================= */
+
+            if (selectedAnswer === correctAnswer) {
+              this.classList.add("correct");
+
+              feedback.classList.add("correct-feedback");
+
+              feedbackTitle.textContent = "✓ Correct!";
+
+              score++;
+
+              document.getElementById("score").textContent = score;
+            } else {
+
+            /* =========================================
+         WRONG ANSWER
+      ========================================= */
+              this.classList.add("wrong");
+
+              feedback.classList.add("wrong-feedback");
+
+              feedbackTitle.textContent =
+                "✗ Incorrect! Correct answer: " + correctAnswer;
+
+              /* Highlight correct answer */
+
+              options.forEach((btn) => {
+                if (btn.dataset.choice === correctAnswer) {
+                  btn.classList.add("correct");
+                }
+              });
+            }
+
+            /* Show explanation */
+
+            feedbackText.textContent = explanations[questionNumber];
+
+            feedback.style.display = "block";
+
+            /* =========================================
+         COMPLETE QUIZ
+      ========================================= */
+
+            if (answeredQuestions === 25) {
+              showFinalResult();
+            }
+          });
+        });
+      });
+
+      /* ==================================================
+   FINAL RESULT
+================================================== */
+
+      function showFinalResult() {
+        const finalResult = document.getElementById("finalResult");
+
+        const finalScore = document.getElementById("finalScore");
+
+        const finalMessage = document.getElementById("finalMessage");
+
+        finalScore.textContent = score + " / 25";
+
+        let message;
+
+        if (score === 25) {
+          message =
+            "Outstanding! You have demonstrated excellent command of English vocabulary and grammar.";
+        } else if (score >= 20) {
+          message =
+            "Excellent work! You have a strong command of advanced English.";
+        } else if (score >= 15) {
+          message =
+            "Good job! You have a solid foundation, but there are still some areas to improve.";
+        } else if (score >= 10) {
+          message =
+            "Keep practising! Review the explanations and focus on collocations and word choice.";
+        } else {
+          message =
+            "Keep working on it! Pay close attention to vocabulary, collocations and grammar structures.";
+        }
+
+        finalMessage.textContent = message;
+
+        finalResult.style.display = "block";
+
+        finalResult.scrollIntoView({
+          behavior: "smooth",
+        });
+      }
+
+      /* ==================================================
+   RESET QUIZ
+================================================== */
+
+      function resetQuiz() {
+        score = 0;
+
+        answeredQuestions = 0;
+
+        document.getElementById("score").textContent = "0";
+
+        questions.forEach((question) => {
+          question.classList.remove("answered");
+
+          const options = question.querySelectorAll(".option");
+
+          const feedback = question.querySelector(".feedback");
+
+          options.forEach((option) => {
+            option.classList.remove("correct", "wrong", "disabled");
+          });
+
+          feedback.style.display = "none";
+
+          feedback.classList.remove("correct-feedback", "wrong-feedback");
+        });
+
+        document.getElementById("finalResult").style.display = "none";
+
+        window.scrollTo({
+          top: 0,
+
+          behavior: "smooth",
+        });
+      }
+    </script>
+  </body>
+</html>

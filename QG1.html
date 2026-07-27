@@ -1,0 +1,872 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>C1 Sentence Ordering Practice</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f7f5;
+        color: #26332d;
+        line-height: 1.7;
+        padding: 30px 15px;
+      }
+
+      .container {
+        max-width: 950px;
+        margin: auto;
+      }
+
+      header {
+        background: white;
+        padding: 35px;
+        border-radius: 20px;
+        text-align: center;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+      }
+
+      header h1 {
+        color: #315b43;
+        font-size: 30px;
+        margin-bottom: 8px;
+      }
+
+      header p {
+        color: #68756e;
+      }
+
+      .score-box {
+        margin-top: 20px;
+        display: inline-block;
+        background: #eaf3ed;
+        padding: 10px 25px;
+        border-radius: 10px;
+        font-weight: bold;
+      }
+
+      .exercise {
+        background: white;
+        padding: 30px;
+        border-radius: 20px;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      .exercise h2 {
+        color: #315b43;
+        margin-bottom: 20px;
+      }
+
+      .sentences {
+        background: #fafcfb;
+        padding: 20px;
+        border-radius: 12px;
+        margin-bottom: 25px;
+      }
+
+      .sentences p {
+        margin-bottom: 10px;
+      }
+
+      .options {
+        display: grid;
+        gap: 12px;
+      }
+
+      .option {
+        width: 100%;
+        padding: 14px 18px;
+        background: white;
+        border: 1px solid #ccd7d0;
+        border-radius: 10px;
+        cursor: pointer;
+        text-align: left;
+        font-size: 15px;
+        transition: 0.2s;
+      }
+
+      .option:hover:not(.disabled) {
+        background: #eef5f0;
+        transform: translateY(-2px);
+      }
+
+      .option.correct {
+        background: #dff4e5;
+        border-color: #35a85a;
+        color: #176b31;
+        font-weight: bold;
+      }
+
+      .option.wrong {
+        background: #fde4e4;
+        border-color: #dc4c4c;
+        color: #9b1c1c;
+        font-weight: bold;
+      }
+
+      .option.disabled {
+        cursor: default;
+      }
+
+      .feedback {
+        display: none;
+        margin-top: 18px;
+        padding: 16px;
+        border-radius: 10px;
+      }
+
+      .feedback.correct-feedback {
+        display: block;
+        background: #edf9f0;
+        border-left: 4px solid #35a85a;
+      }
+
+      .feedback.wrong-feedback {
+        display: block;
+        background: #fff0f0;
+        border-left: 4px solid #dc4c4c;
+      }
+
+      .feedback strong {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      #finalResult {
+        display: none;
+        background: white;
+        padding: 30px;
+        border-radius: 20px;
+        text-align: center;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      #finalResult h2 {
+        color: #315b43;
+      }
+
+      #finalScore {
+        font-size: 32px;
+        font-weight: bold;
+        color: #315b43;
+        margin: 10px 0;
+      }
+
+      .reset-container {
+        text-align: center;
+        margin: 35px 0;
+      }
+
+      .reset-btn {
+        border: none;
+        background: #315b43;
+        color: white;
+        padding: 13px 30px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      .reset-btn:hover {
+        background: #244633;
+      }
+
+      @media (max-width: 600px) {
+        body {
+          padding: 15px 10px;
+        }
+
+        .exercise {
+          padding: 20px;
+        }
+
+        header h1 {
+          font-size: 24px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <h1>C1 Sentence Ordering</h1>
+
+        <p>Arrange the sentences to form a coherent paragraph.</p>
+
+        <div class="score-box">Score: <span id="score">0</span> / 8</div>
+      </header>
+
+      <!-- =====================================================
+BÀI 1
+===================================================== -->
+
+      <div class="exercise">
+        <h2>Question 1</h2>
+
+        <div class="sentences">
+          <p>
+            <b>a.</b> The initiative initially faced resistance from residents
+            who were concerned about the cost and potential disruption to their
+            daily routines.
+          </p>
+
+          <p>
+            <b>b.</b> After several months, however, the number of households
+            participating in the programme had increased substantially,
+            resulting in a noticeable reduction in landfill waste.
+          </p>
+
+          <p>
+            <b>c.</b> In response, the municipal authorities launched an
+            extensive recycling campaign aimed at encouraging households to
+            separate recyclable materials from general waste.
+          </p>
+
+          <p>
+            <b>d.</b> To address these concerns, officials organised a series of
+            public consultations and introduced financial incentives for
+            participating households.
+          </p>
+
+          <p>
+            <b>e.</b> The rapid growth of the city's population had placed
+            considerable pressure on its already overstretched waste-management
+            system.
+          </p>
+        </div>
+
+        <div class="options">
+          <button class="option" data-answer="A">A. e – c – a – d – b</button>
+
+          <button class="option" data-answer="B">B. c – e – d – a – b</button>
+
+          <button class="option" data-answer="C">C. e – a – c – d – b</button>
+
+          <button class="option" data-answer="D">D. a – e – c – b – d</button>
+        </div>
+
+        <div class="feedback">
+          <strong></strong>
+
+          <span>
+            The paragraph begins with the problem (e), followed by the
+            authorities' response (c). Resistance is then introduced (a),
+            followed by measures to address it (d). Finally, the positive result
+            is presented (b).
+          </span>
+        </div>
+      </div>
+
+      <!-- =====================================================
+BÀI 2
+===================================================== -->
+
+      <div class="exercise">
+        <h2>Question 2</h2>
+
+        <div class="sentences">
+          <p>
+            <b>a.</b> As a result, several technology companies have begun
+            investing heavily in developing more efficient battery systems and
+            expanding charging infrastructure.
+          </p>
+
+          <p>
+            <b>b.</b> However, the widespread adoption of electric vehicles has
+            been hindered by concerns over their relatively limited driving
+            range and the scarcity of charging stations.
+          </p>
+
+          <p>
+            <b>c.</b> In recent years, electric vehicles have emerged as a
+            promising alternative to conventional petrol-powered cars.
+          </p>
+
+          <p>
+            <b>d.</b> These developments are expected to make electric vehicles
+            increasingly accessible and practical for consumers in the years
+            ahead.
+          </p>
+
+          <p>
+            <b>e.</b> Their growing popularity can be attributed largely to
+            increasing environmental awareness and advances in battery
+            technology.
+          </p>
+        </div>
+
+        <div class="options">
+          <button class="option" data-answer="A">A. c – e – b – a – d</button>
+
+          <button class="option" data-answer="B">B. c – b – e – a – d</button>
+
+          <button class="option" data-answer="C">C. e – c – b – d – a</button>
+
+          <button class="option" data-answer="D">D. b – c – e – a – d</button>
+        </div>
+
+        <div class="feedback">
+          <strong></strong>
+
+          <span>
+            The paragraph introduces electric vehicles (c), explains their
+            growing popularity (e), then presents a challenge (b). 'As a result'
+            introduces companies' response to this challenge (a), followed by
+            the expected future outcome (d).
+          </span>
+        </div>
+      </div>
+
+      <!-- =====================================================
+BÀI 3
+===================================================== -->
+
+      <div class="exercise">
+        <h2>Question 3</h2>
+
+        <div class="sentences">
+          <p>
+            <b>a.</b> Rather than relying solely on traditional lectures, the
+            programme incorporates interactive simulations, collaborative
+            projects and real-world case studies.
+          </p>
+
+          <p>
+            <b>b.</b> This approach has not only improved students' engagement
+            but has also enabled them to develop practical skills that are
+            difficult to acquire through conventional classroom instruction.
+          </p>
+
+          <p>
+            <b>c.</b> Recognising the need to equip students with skills
+            relevant to an increasingly competitive labour market, the
+            university recently redesigned its curriculum.
+          </p>
+
+          <p>
+            <b>d.</b> The changes were initially met with scepticism by some
+            faculty members, who questioned whether the new model could maintain
+            academic rigour.
+          </p>
+
+          <p>
+            <b>e.</b> Nevertheless, after the first year of implementation, the
+            results suggested that the revised curriculum had achieved its
+            intended objectives.
+          </p>
+        </div>
+
+        <div class="options">
+          <button class="option" data-answer="A">A. c – a – d – e – b</button>
+
+          <button class="option" data-answer="B">B. c – d – a – b – e</button>
+
+          <button class="option" data-answer="C">C. a – c – d – e – b</button>
+
+          <button class="option" data-answer="D">D. c – a – e – d – b</button>
+        </div>
+
+        <div class="feedback">
+          <strong></strong>
+
+          <span>
+            The university's curriculum change is introduced first (c), followed
+            by details of the new programme (a). The initial scepticism is then
+            mentioned (d). 'Nevertheless' signals a positive result (e), which
+            is further explained in (b).
+          </span>
+        </div>
+      </div>
+
+      <!-- =====================================================
+BÀI 4
+===================================================== -->
+
+      <div class="exercise">
+        <h2>Question 4</h2>
+
+        <div class="sentences">
+          <p>
+            <b>a.</b> Consequently, researchers have turned their attention to
+            developing alternative materials that can decompose naturally
+            without releasing harmful substances.
+          </p>
+
+          <p>
+            <b>b.</b> One promising solution is biodegradable packaging, which
+            is increasingly being adopted by businesses seeking to reduce their
+            environmental footprint.
+          </p>
+
+          <p>
+            <b>c.</b> The widespread use of conventional plastic packaging has
+            become a major environmental concern due to its persistence in
+            ecosystems.
+          </p>
+
+          <p>
+            <b>d.</b> Although these alternatives are generally more expensive
+            to produce, technological advances are gradually bringing down their
+            cost.
+          </p>
+
+          <p>
+            <b>e.</b> If this trend continues, biodegradable materials could
+            eventually become a viable replacement for traditional plastic in a
+            wide range of industries.
+          </p>
+        </div>
+
+        <div class="options">
+          <button class="option" data-answer="A">A. c – a – b – d – e</button>
+
+          <button class="option" data-answer="B">B. a – c – b – e – d</button>
+
+          <button class="option" data-answer="C">C. c – b – a – d – e</button>
+
+          <button class="option" data-answer="D">D. b – c – a – d – e</button>
+        </div>
+
+        <div class="feedback">
+          <strong></strong>
+
+          <span>
+            The paragraph starts with the environmental problem caused by
+            plastic (c). 'Consequently' introduces the researchers' response
+            (a). A specific solution is then presented (b), followed by its
+            current disadvantage and technological improvement (d), leading to
+            the possible future outcome (e).
+          </span>
+        </div>
+      </div>
+
+      <!-- =====================================================
+BÀI 5
+===================================================== -->
+
+      <div class="exercise">
+        <h2>Question 5</h2>
+
+        <div class="sentences">
+          <p>
+            <b>a.</b> The scheme was initially introduced on a small scale, with
+            only a handful of participating businesses and local residents.
+          </p>
+
+          <p>
+            <b>b.</b> Encouraged by these results, the authorities subsequently
+            expanded the programme to cover neighbouring districts.
+          </p>
+
+          <p>
+            <b>c.</b> The success of the initiative has since prompted other
+            cities to consider implementing similar schemes of their own.
+          </p>
+
+          <p>
+            <b>d.</b> Within months, however, the initiative had generated
+            considerable interest, as both businesses and consumers recognised
+            its potential benefits.
+          </p>
+
+          <p>
+            <b>e.</b> In an effort to reduce traffic congestion and improve air
+            quality, the city council introduced a comprehensive bicycle-sharing
+            scheme.
+          </p>
+        </div>
+
+        <div class="options">
+          <button class="option" data-answer="A">A. e – a – b – d – c</button>
+
+          <button class="option" data-answer="B">B. a – e – d – b – c</button>
+
+          <button class="option" data-answer="C">C. e – d – a – c – b</button>
+
+          <button class="option" data-answer="D">D. e – a – d – b – c</button>
+        </div>
+
+        <div class="feedback">
+          <strong></strong>
+
+          <span>
+            The scheme is introduced first (e), followed by its initial
+            small-scale implementation (a). 'Within months, however' shows the
+            rapid growth in interest (d). 'Encouraged by these results' leads to
+            expansion (b), and the final sentence presents the wider influence
+            on other cities (c).
+          </span>
+        </div>
+      </div>
+
+      <!-- =====================================================
+BÀI 6
+===================================================== -->
+
+      <div class="exercise">
+        <h2>Question 6</h2>
+
+        <div class="sentences">
+          <p>
+            <b>a.</b> Despite these challenges, the project was completed ahead
+            of schedule, largely due to effective coordination between the
+            engineers and local authorities.
+          </p>
+
+          <p>
+            <b>b.</b> The construction of the new railway line was initially
+            expected to take at least five years because of the area's difficult
+            terrain.
+          </p>
+
+          <p>
+            <b>c.</b> Once completed, the railway significantly reduced travel
+            times between remote communities and major urban centres.
+          </p>
+
+          <p>
+            <b>d.</b> However, advances in tunnelling technology allowed
+            engineers to overcome several obstacles that had previously been
+            considered insurmountable.
+          </p>
+
+          <p>
+            <b>e.</b> The project has since been widely regarded as a landmark
+            achievement in the region's transport infrastructure.
+          </p>
+        </div>
+
+        <div class="options">
+          <button class="option" data-answer="A">A. b – a – d – c – e</button>
+
+          <button class="option" data-answer="B">B. b – d – a – c – e</button>
+
+          <button class="option" data-answer="C">C. d – b – a – e – c</button>
+
+          <button class="option" data-answer="D">D. b – d – c – a – e</button>
+        </div>
+
+        <div class="feedback">
+          <strong></strong>
+
+          <span>
+            The expected difficulty is introduced first (b). 'However' presents
+            the technological solution (d). 'Despite these challenges' then
+            refers back to the obstacles and explains the successful completion
+            (a). The benefits after completion follow (c), ending with the
+            project's long-term reputation (e).
+          </span>
+        </div>
+      </div>
+
+      <!-- =====================================================
+BÀI 7
+===================================================== -->
+
+      <div class="exercise">
+        <h2>Question 7</h2>
+
+        <div class="sentences">
+          <p>
+            <b>a.</b> This unexpected outcome led scientists to reconsider their
+            original assumptions about how the species adapted to environmental
+            changes.
+          </p>
+
+          <p>
+            <b>b.</b> For decades, researchers had believed that the species was
+            highly vulnerable to fluctuations in temperature and rainfall.
+          </p>
+
+          <p>
+            <b>c.</b> However, a recent long-term study has revealed that
+            certain populations have demonstrated a remarkable capacity to adapt
+            to changing climatic conditions.
+          </p>
+
+          <p>
+            <b>d.</b> The findings may have significant implications for
+            conservation strategies, particularly in regions experiencing rapid
+            environmental change.
+          </p>
+
+          <p>
+            <b>e.</b> Further research is now being conducted to determine
+            whether similar adaptive mechanisms can be observed in other
+            populations.
+          </p>
+        </div>
+
+        <div class="options">
+          <button class="option" data-answer="A">A. b – c – a – d – e</button>
+
+          <button class="option" data-answer="B">B. c – b – a – e – d</button>
+
+          <button class="option" data-answer="C">C. b – a – c – d – e</button>
+
+          <button class="option" data-answer="D">D. b – c – d – a – e</button>
+        </div>
+
+        <div class="feedback">
+          <strong></strong>
+
+          <span>
+            The paragraph begins with the researchers' long-held belief (b).
+            'However' introduces contradictory new evidence (c). 'This
+            unexpected outcome' refers directly to that evidence (a). The
+            implications of the findings are then discussed (d), followed by
+            ongoing research (e).
+          </span>
+        </div>
+      </div>
+
+      <!-- =====================================================
+BÀI 8
+===================================================== -->
+
+      <div class="exercise">
+        <h2>Question 8</h2>
+
+        <div class="sentences">
+          <p>
+            <b>a.</b> Nevertheless, the transition has not been entirely smooth,
+            as some employees have struggled to maintain productivity without
+            direct supervision.
+          </p>
+
+          <p>
+            <b>b.</b> As a result, many companies have introduced hybrid working
+            models that combine the flexibility of remote work with the
+            collaborative benefits of office-based employment.
+          </p>
+
+          <p>
+            <b>c.</b> The widespread adoption of remote working has
+            fundamentally altered the way many organisations operate.
+          </p>
+
+          <p>
+            <b>d.</b> Managers have therefore been compelled to reconsider how
+            performance should be evaluated and how teams can remain connected
+            across different locations.
+          </p>
+
+          <p>
+            <b>e.</b> While the arrangement offers employees greater autonomy
+            and can reduce operational costs, it also presents a number of
+            organisational challenges.
+          </p>
+        </div>
+
+        <div class="options">
+          <button class="option" data-answer="A">A. c – e – a – d – b</button>
+
+          <button class="option" data-answer="B">B. c – a – e – d – b</button>
+
+          <button class="option" data-answer="C">C. e – c – a – b – d</button>
+
+          <button class="option" data-answer="D">D. c – e – d – a – b</button>
+        </div>
+
+        <div class="feedback">
+          <strong></strong>
+
+          <span>
+            The topic is introduced in (c). The benefits and challenges of
+            remote work are explained in (e). 'Nevertheless' introduces a
+            specific difficulty (a), which causes managers to reconsider
+            performance and team connection (d). 'As a result' then introduces
+            hybrid working as a response (b).
+          </span>
+        </div>
+      </div>
+
+      <!-- =====================================================
+FINAL RESULT
+===================================================== -->
+
+      <div id="finalResult">
+        <h2>Quiz Completed!</h2>
+
+        <p>Your final score:</p>
+
+        <div id="finalScore">0 / 8</div>
+
+        <p id="finalMessage"></p>
+      </div>
+
+      <div class="reset-container">
+        <button class="reset-btn" onclick="resetQuiz()">Reset Quiz</button>
+      </div>
+    </div>
+
+    <script>
+      let score = 0;
+      let answered = 0;
+
+      const correctAnswers = ["A", "A", "A", "A", "D", "B", "A", "A"];
+
+      const exercises = document.querySelectorAll(".exercise");
+
+      exercises.forEach((exercise, index) => {
+        const options = exercise.querySelectorAll(".option");
+
+        const feedback = exercise.querySelector(".feedback");
+
+        const feedbackTitle = feedback.querySelector("strong");
+
+        const correctAnswer = correctAnswers[index];
+
+        options.forEach((option) => {
+          option.addEventListener("click", function () {
+            /* Không cho chọn lại */
+
+            if (exercise.classList.contains("answered")) {
+              return;
+            }
+
+            exercise.classList.add("answered");
+
+            answered++;
+
+            const selected = this.dataset.answer;
+
+            /* Disable tất cả đáp án */
+
+            options.forEach((btn) => {
+              btn.classList.add("disabled");
+            });
+
+            /* ===============================
+         ĐÚNG
+      =============================== */
+
+            if (selected === correctAnswer) {
+              this.classList.add("correct");
+
+              feedback.classList.add("correct-feedback");
+
+              feedbackTitle.textContent = "✓ Correct!";
+
+              score++;
+
+              document.getElementById("score").textContent = score;
+            } else {
+
+            /* ===============================
+         SAI
+      =============================== */
+              this.classList.add("wrong");
+
+              feedback.classList.add("wrong-feedback");
+
+              feedbackTitle.textContent =
+                "✗ Incorrect! Correct answer: " + correctAnswer;
+
+              /* Highlight đáp án đúng */
+
+              options.forEach((btn) => {
+                if (btn.dataset.answer === correctAnswer) {
+                  btn.classList.add("correct");
+                }
+              });
+            }
+
+            /* Hiện giải thích */
+
+            feedback.style.display = "block";
+
+            /* Nếu hoàn thành */
+
+            if (answered === 8) {
+              showResult();
+            }
+          });
+        });
+      });
+
+      /* ==========================================
+   HIỆN KẾT QUẢ
+========================================== */
+
+      function showResult() {
+        const result = document.getElementById("finalResult");
+
+        const finalScore = document.getElementById("finalScore");
+
+        const message = document.getElementById("finalMessage");
+
+        finalScore.textContent = score + " / 8";
+
+        if (score === 8) {
+          message.textContent =
+            "Outstanding! You have an excellent understanding of logical paragraph organisation.";
+        } else if (score >= 6) {
+          message.textContent =
+            "Excellent work! You have a strong ability to identify logical links and cohesive devices.";
+        } else if (score >= 4) {
+          message.textContent =
+            "Good effort! Pay closer attention to linking words, pronoun references and cause-effect relationships.";
+        } else {
+          message.textContent =
+            "Keep practising! Focus on identifying the opening sentence, linking devices and logical progression.";
+        }
+
+        result.style.display = "block";
+
+        result.scrollIntoView({
+          behavior: "smooth",
+        });
+      }
+
+      /* ==========================================
+   RESET
+========================================== */
+
+      function resetQuiz() {
+        score = 0;
+
+        answered = 0;
+
+        document.getElementById("score").textContent = "0";
+
+        exercises.forEach((exercise) => {
+          exercise.classList.remove("answered");
+
+          const options = exercise.querySelectorAll(".option");
+
+          const feedback = exercise.querySelector(".feedback");
+
+          options.forEach((option) => {
+            option.classList.remove("correct", "wrong", "disabled");
+          });
+
+          feedback.style.display = "none";
+
+          feedback.classList.remove("correct-feedback", "wrong-feedback");
+        });
+
+        document.getElementById("finalResult").style.display = "none";
+
+        window.scrollTo({
+          top: 0,
+
+          behavior: "smooth",
+        });
+      }
+    </script>
+  </body>
+</html>
