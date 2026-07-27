@@ -1,0 +1,806 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Reading 39 - Road Safety</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f7f5;
+        color: #26332d;
+        line-height: 1.7;
+        padding: 30px 15px;
+      }
+
+      .container {
+        max-width: 950px;
+        margin: auto;
+      }
+
+      /* HEADER */
+
+      header {
+        background: white;
+        padding: 35px;
+        border-radius: 20px;
+        text-align: center;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+      }
+
+      header h1 {
+        color: #315b43;
+        font-size: 30px;
+        margin-bottom: 10px;
+      }
+
+      header p {
+        color: #68756e;
+      }
+
+      .score-box {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 25px;
+        background: #eaf3ed;
+        border-radius: 10px;
+        font-weight: bold;
+      }
+
+      /* READING */
+
+      .reading {
+        background: white;
+        padding: 30px;
+        border-radius: 20px;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      .reading h2 {
+        color: #315b43;
+        margin-bottom: 20px;
+        font-size: 25px;
+      }
+
+      .passage {
+        background: #fafcfb;
+        padding: 25px;
+        border-radius: 12px;
+        margin-bottom: 30px;
+        text-align: justify;
+      }
+
+      .passage p {
+        margin-bottom: 15px;
+      }
+
+      .passage p:last-child {
+        margin-bottom: 0;
+      }
+
+      /* QUESTIONS */
+
+      .question {
+        border-top: 1px solid #e2e8e4;
+        padding-top: 25px;
+        margin-top: 25px;
+      }
+
+      .question h3 {
+        margin-bottom: 15px;
+        color: #34483b;
+      }
+
+      .options {
+        display: grid;
+        gap: 10px;
+      }
+
+      .option {
+        width: 100%;
+        padding: 13px 17px;
+        background: white;
+        border: 1px solid #ccd7d0;
+        border-radius: 10px;
+        cursor: pointer;
+        text-align: left;
+        font-size: 15px;
+        transition: 0.2s;
+      }
+
+      .option:hover:not(.disabled) {
+        background: #eef5f0;
+        transform: translateY(-2px);
+      }
+
+      .option.correct {
+        background: #dff4e5;
+        border-color: #35a85a;
+        color: #176b31;
+        font-weight: bold;
+      }
+
+      .option.wrong {
+        background: #fde4e4;
+        border-color: #dc4c4c;
+        color: #9b1c1c;
+        font-weight: bold;
+      }
+
+      .option.disabled {
+        cursor: default;
+      }
+
+      /* FEEDBACK */
+
+      .feedback {
+        display: none;
+        margin-top: 15px;
+        padding: 15px;
+        border-radius: 10px;
+      }
+
+      .feedback.correct-feedback {
+        display: block;
+        background: #edf9f0;
+        border-left: 4px solid #35a85a;
+      }
+
+      .feedback.wrong-feedback {
+        display: block;
+        background: #fff0f0;
+        border-left: 4px solid #dc4c4c;
+      }
+
+      .feedback strong {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      /* RESULT */
+
+      #finalResult {
+        display: none;
+        background: white;
+        padding: 35px;
+        border-radius: 20px;
+        text-align: center;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      #finalResult h2 {
+        color: #315b43;
+      }
+
+      #finalScore {
+        font-size: 34px;
+        font-weight: bold;
+        color: #315b43;
+        margin: 10px 0;
+      }
+
+      /* RESET */
+
+      .reset-container {
+        text-align: center;
+        margin: 35px 0;
+      }
+
+      .reset-btn {
+        border: none;
+        background: #315b43;
+        color: white;
+        padding: 13px 30px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      .reset-btn:hover {
+        background: #244633;
+      }
+
+      /* MOBILE */
+
+      @media (max-width: 600px) {
+        body {
+          padding: 15px 10px;
+        }
+
+        .reading {
+          padding: 20px;
+        }
+
+        .passage {
+          padding: 18px;
+        }
+
+        header h1 {
+          font-size: 24px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- HEADER -->
+
+      <header>
+        <h1>C1–C2 Reading Practice</h1>
+
+        <p>Reading 39 — Road Safety: A Shared Responsibility</p>
+
+        <div class="score-box">Score: <span id="score">0</span> / 10</div>
+      </header>
+
+      <!-- READING -->
+
+      <div class="reading">
+        <h2>Reading 39 — Road Safety: A Shared Responsibility</h2>
+
+        <!-- PASSAGE -->
+
+        <div class="passage">
+          <p>
+            Road accidents remain a significant public concern in many
+            countries, causing millions of injuries and fatalities each year.
+            Although governments often invest heavily in infrastructure
+            improvements and traffic regulations, human behavior continues to be
+            one of the leading causes of accidents. Speeding, distracted
+            driving, and driving under the influence of alcohol are among the
+            most common factors contributing to road collisions. As the number
+            of vehicles on the road increases, ensuring road safety has become
+            an increasingly complex challenge.
+          </p>
+
+          <p>
+            Improving road safety requires cooperation from multiple
+            stakeholders, including governments, law enforcement agencies,
+            vehicle manufacturers, and individual road users. Public awareness
+            campaigns can educate people about responsible driving habits, while
+            technological innovations such as automatic emergency braking
+            systems may help reduce human error. Nevertheless, experts emphasize
+            that no amount of technology can entirely eliminate risk if drivers
+            fail to act responsibly. Ultimately, road safety depends not only on
+            laws and infrastructure but also on the willingness of individuals
+            to make cautious and informed decisions whenever they travel.
+          </p>
+        </div>
+
+        <!-- QUESTION 1 -->
+
+        <div class="question">
+          <h3>1. What is the main purpose of the passage?</h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">
+              A. To explain the causes of road accidents and the importance of
+              collective efforts to improve road safety.
+            </button>
+
+            <button class="option" data-answer="B">
+              B. To argue that technology can completely eliminate road
+              accidents.
+            </button>
+
+            <button class="option" data-answer="C">
+              C. To criticize government spending on transportation.
+            </button>
+
+            <button class="option" data-answer="D">
+              D. To compare different types of vehicles.
+            </button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              The passage discusses major causes of road accidents, such as
+              speeding and distracted driving, and emphasizes that improving
+              road safety requires cooperation among governments, organizations,
+              technology providers, and individual road users.
+            </span>
+          </div>
+        </div>
+
+        <!-- QUESTION 2 -->
+
+        <div class="question">
+          <h3>
+            2. The word "fatalities" in paragraph 1 is closest in meaning to:
+          </h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">A. injuries</button>
+
+            <button class="option" data-answer="B">B. deaths</button>
+
+            <button class="option" data-answer="C">C. delays</button>
+
+            <button class="option" data-answer="D">D. violations</button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              "Fatalities" refers to deaths, especially deaths resulting from an
+              accident or disaster. Therefore, B is the correct answer.
+            </span>
+          </div>
+        </div>
+
+        <!-- QUESTION 3 -->
+
+        <div class="question">
+          <h3>
+            3. According to the passage, which of the following is mentioned as
+            a common cause of road accidents?
+          </h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">
+              A. Poor weather conditions
+            </button>
+
+            <button class="option" data-answer="B">
+              B. Mechanical failures
+            </button>
+
+            <button class="option" data-answer="C">
+              C. Distracted driving
+            </button>
+
+            <button class="option" data-answer="D">
+              D. Lack of public transportation
+            </button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              The passage explicitly identifies distracted driving, along with
+              speeding and driving under the influence of alcohol, as common
+              factors contributing to road collisions.
+            </span>
+          </div>
+        </div>
+
+        <!-- QUESTION 4 -->
+
+        <div class="question">
+          <h3>
+            4. The word "stakeholders" in paragraph 2 most nearly refers to:
+          </h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">
+              A. people or groups involved in an issue
+            </button>
+
+            <button class="option" data-answer="B">
+              B. government officials only
+            </button>
+
+            <button class="option" data-answer="C">C. vehicle owners</button>
+
+            <button class="option" data-answer="D">D. traffic police</button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              "Stakeholders" means individuals, organizations, or groups that
+              are involved in or affected by a particular issue. In this
+              passage, they include governments, law enforcement agencies,
+              vehicle manufacturers, and road users.
+            </span>
+          </div>
+        </div>
+
+        <!-- QUESTION 5 -->
+
+        <div class="question">
+          <h3>5. Which of the following can be inferred from the passage?</h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">
+              A. Infrastructure improvements alone cannot guarantee road safety.
+            </button>
+
+            <button class="option" data-answer="B">
+              B. Most accidents are caused by vehicle defects.
+            </button>
+
+            <button class="option" data-answer="C">
+              C. Technology has made traffic laws unnecessary.
+            </button>
+
+            <button class="option" data-answer="D">
+              D. Road safety is solely the responsibility of drivers.
+            </button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              The passage states that road safety depends not only on laws and
+              infrastructure but also on responsible individual behavior.
+              Therefore, infrastructure improvements alone cannot guarantee
+              safety.
+            </span>
+          </div>
+        </div>
+
+        <!-- QUESTION 6 -->
+
+        <div class="question">
+          <h3>
+            6. Why does the author mention automatic emergency braking systems?
+          </h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">
+              A. To criticize modern vehicles.
+            </button>
+
+            <button class="option" data-answer="B">
+              B. To provide an example of technology that may improve safety.
+            </button>
+
+            <button class="option" data-answer="C">
+              C. To explain how accidents occur.
+            </button>
+
+            <button class="option" data-answer="D">
+              D. To compare different transportation systems.
+            </button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              Automatic emergency braking is mentioned as an example of
+              technological innovation that may help reduce human error and
+              improve road safety.
+            </span>
+          </div>
+        </div>
+
+        <!-- QUESTION 7 -->
+
+        <div class="question">
+          <h3>
+            7. The word "eliminate" in paragraph 2 is closest in meaning to:
+          </h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">A. reduce</button>
+
+            <button class="option" data-answer="B">B. identify</button>
+
+            <button class="option" data-answer="C">C. remove completely</button>
+
+            <button class="option" data-answer="D">D. increase</button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              "Eliminate" means to remove something completely or get rid of it.
+              The passage states that technology cannot entirely eliminate risk.
+            </span>
+          </div>
+        </div>
+
+        <!-- QUESTION 8 -->
+
+        <div class="question">
+          <h3>8. Which statement would the author most likely agree with?</h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">
+              A. Human behavior plays a crucial role in road safety.
+            </button>
+
+            <button class="option" data-answer="B">
+              B. Traffic regulations are ineffective.
+            </button>
+
+            <button class="option" data-answer="C">
+              C. Technology is more important than personal responsibility.
+            </button>
+
+            <button class="option" data-answer="D">
+              D. Road accidents are unavoidable.
+            </button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              The passage repeatedly emphasizes the importance of responsible
+              human behavior. Even with technology and regulations, road safety
+              depends greatly on individuals making cautious and informed
+              decisions.
+            </span>
+          </div>
+        </div>
+
+        <!-- QUESTION 9 -->
+
+        <div class="question">
+          <h3>9. The author's tone is best described as:</h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">
+              A. analytical and informative
+            </button>
+
+            <button class="option" data-answer="B">
+              B. emotional and dramatic
+            </button>
+
+            <button class="option" data-answer="C">
+              C. humorous and lighthearted
+            </button>
+
+            <button class="option" data-answer="D">
+              D. critical and hostile
+            </button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              The author presents information about road accidents, identifies
+              contributing factors, and discusses possible solutions in an
+              objective and reasoned manner. Therefore, the tone is analytical
+              and informative.
+            </span>
+          </div>
+        </div>
+
+        <!-- QUESTION 10 -->
+
+        <div class="question">
+          <h3>10. Which of the following best summarizes the passage?</h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">
+              A. Road safety depends on a combination of regulations,
+              technology, and responsible behavior.
+            </button>
+
+            <button class="option" data-answer="B">
+              B. Governments are solely responsible for reducing accidents.
+            </button>
+
+            <button class="option" data-answer="C">
+              C. Most road accidents are caused by poor infrastructure.
+            </button>
+
+            <button class="option" data-answer="D">
+              D. New technology will eventually replace drivers.
+            </button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              The passage emphasizes that road safety requires a combination of
+              government regulations, infrastructure, technological innovations,
+              public awareness, and responsible decisions by individual road
+              users.
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FINAL RESULT -->
+
+      <div id="finalResult">
+        <h2>Reading Practice Completed!</h2>
+
+        <p>Your final score:</p>
+
+        <div id="finalScore">0 / 10</div>
+
+        <p id="finalMessage"></p>
+      </div>
+
+      <!-- RESET -->
+
+      <div class="reset-container">
+        <button class="reset-btn" onclick="resetQuiz()">Reset Quiz</button>
+      </div>
+    </div>
+
+    <script>
+      /* ==========================================
+   ANSWER KEY - READING 39
+
+   1. A
+   2. B
+   3. C
+   4. A
+   5. A
+   6. B
+   7. C
+   8. A
+   9. A
+   10. A
+========================================== */
+
+      const correctAnswers = ["A", "B", "C", "A", "A", "B", "C", "A", "A", "A"];
+
+      let score = 0;
+      let answered = 0;
+
+      const questions = document.querySelectorAll(".question");
+
+      questions.forEach(function (question, index) {
+        const options = question.querySelectorAll(".option");
+
+        const feedback = question.querySelector(".feedback");
+
+        const feedbackTitle = feedback.querySelector("strong");
+
+        const correctAnswer = correctAnswers[index];
+
+        options.forEach(function (option) {
+          option.addEventListener("click", function () {
+            /* Không cho chọn lại */
+            if (question.classList.contains("answered")) {
+              return;
+            }
+
+            question.classList.add("answered");
+
+            answered++;
+
+            const selected = this.dataset.answer;
+
+            /* Disable tất cả đáp án */
+            options.forEach(function (btn) {
+              btn.classList.add("disabled");
+            });
+
+            /* =========================
+         ANSWER CORRECT
+      ========================= */
+
+            if (selected === correctAnswer) {
+              this.classList.add("correct");
+
+              feedback.classList.add("correct-feedback");
+
+              feedbackTitle.textContent = "✓ Correct!";
+
+              score++;
+
+              document.getElementById("score").textContent = score;
+            } else {
+
+            /* =========================
+         ANSWER WRONG
+      ========================= */
+              this.classList.add("wrong");
+
+              feedback.classList.add("wrong-feedback");
+
+              feedbackTitle.textContent =
+                "✗ Incorrect! Correct answer: " + correctAnswer;
+
+              /* Tô xanh đáp án đúng */
+              options.forEach(function (btn) {
+                if (btn.dataset.answer === correctAnswer) {
+                  btn.classList.add("correct");
+                }
+              });
+            }
+
+            /* Hiện giải thích */
+            feedback.style.display = "block";
+
+            /* Nếu hoàn thành */
+            if (answered === correctAnswers.length) {
+              showFinalResult();
+            }
+          });
+        });
+      });
+
+      /* ==========================================
+   SHOW FINAL RESULT
+========================================== */
+
+      function showFinalResult() {
+        const result = document.getElementById("finalResult");
+
+        const finalScore = document.getElementById("finalScore");
+
+        const message = document.getElementById("finalMessage");
+
+        finalScore.textContent = score + " / 10";
+
+        if (score === 10) {
+          message.textContent =
+            "Outstanding! Your C1–C2 reading comprehension is excellent.";
+        } else if (score >= 8) {
+          message.textContent =
+            "Excellent work! You have a very strong understanding of advanced reading texts.";
+        } else if (score >= 6) {
+          message.textContent =
+            "Good job! Keep improving your vocabulary and inference skills.";
+        } else {
+          message.textContent =
+            "Keep practising! Focus on main ideas, vocabulary in context, and inference questions.";
+        }
+
+        result.style.display = "block";
+
+        result.scrollIntoView({
+          behavior: "smooth",
+        });
+      }
+
+      /* ==========================================
+   RESET QUIZ
+========================================== */
+
+      function resetQuiz() {
+        score = 0;
+
+        answered = 0;
+
+        document.getElementById("score").textContent = "0";
+
+        questions.forEach(function (question) {
+          question.classList.remove("answered");
+
+          const options = question.querySelectorAll(".option");
+
+          const feedback = question.querySelector(".feedback");
+
+          options.forEach(function (option) {
+            option.classList.remove("correct", "wrong", "disabled");
+          });
+
+          feedback.style.display = "none";
+
+          feedback.classList.remove("correct-feedback", "wrong-feedback");
+        });
+
+        document.getElementById("finalResult").style.display = "none";
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+    </script>
+  </body>
+</html>

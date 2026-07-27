@@ -1,0 +1,808 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Reading 40 - The Psychology of Impulse Purchases</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f7f5;
+        color: #26332d;
+        line-height: 1.7;
+        padding: 30px 15px;
+      }
+
+      .container {
+        max-width: 950px;
+        margin: auto;
+      }
+
+      /* HEADER */
+
+      header {
+        background: white;
+        padding: 35px;
+        border-radius: 20px;
+        text-align: center;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+      }
+
+      header h1 {
+        color: #315b43;
+        font-size: 30px;
+        margin-bottom: 10px;
+      }
+
+      header p {
+        color: #68756e;
+      }
+
+      .score-box {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 25px;
+        background: #eaf3ed;
+        border-radius: 10px;
+        font-weight: bold;
+      }
+
+      /* READING */
+
+      .reading {
+        background: white;
+        padding: 30px;
+        border-radius: 20px;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      .reading h2 {
+        color: #315b43;
+        margin-bottom: 20px;
+        font-size: 25px;
+      }
+
+      .passage {
+        background: #fafcfb;
+        padding: 25px;
+        border-radius: 12px;
+        margin-bottom: 30px;
+        text-align: justify;
+      }
+
+      .passage p {
+        margin-bottom: 15px;
+      }
+
+      .passage p:last-child {
+        margin-bottom: 0;
+      }
+
+      /* QUESTIONS */
+
+      .question {
+        border-top: 1px solid #e2e8e4;
+        padding-top: 25px;
+        margin-top: 25px;
+      }
+
+      .question h3 {
+        margin-bottom: 15px;
+        color: #34483b;
+      }
+
+      .options {
+        display: grid;
+        gap: 10px;
+      }
+
+      .option {
+        width: 100%;
+        padding: 13px 17px;
+        background: white;
+        border: 1px solid #ccd7d0;
+        border-radius: 10px;
+        cursor: pointer;
+        text-align: left;
+        font-size: 15px;
+        transition: 0.2s;
+      }
+
+      .option:hover:not(.disabled) {
+        background: #eef5f0;
+        transform: translateY(-2px);
+      }
+
+      .option.correct {
+        background: #dff4e5;
+        border-color: #35a85a;
+        color: #176b31;
+        font-weight: bold;
+      }
+
+      .option.wrong {
+        background: #fde4e4;
+        border-color: #dc4c4c;
+        color: #9b1c1c;
+        font-weight: bold;
+      }
+
+      .option.disabled {
+        cursor: default;
+      }
+
+      /* FEEDBACK */
+
+      .feedback {
+        display: none;
+        margin-top: 15px;
+        padding: 15px;
+        border-radius: 10px;
+      }
+
+      .feedback.correct-feedback {
+        display: block;
+        background: #edf9f0;
+        border-left: 4px solid #35a85a;
+      }
+
+      .feedback.wrong-feedback {
+        display: block;
+        background: #fff0f0;
+        border-left: 4px solid #dc4c4c;
+      }
+
+      .feedback strong {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      /* FINAL RESULT */
+
+      #finalResult {
+        display: none;
+        background: white;
+        padding: 35px;
+        border-radius: 20px;
+        text-align: center;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      #finalResult h2 {
+        color: #315b43;
+      }
+
+      #finalScore {
+        font-size: 34px;
+        font-weight: bold;
+        color: #315b43;
+        margin: 10px 0;
+      }
+
+      /* RESET */
+
+      .reset-container {
+        text-align: center;
+        margin: 35px 0;
+      }
+
+      .reset-btn {
+        border: none;
+        background: #315b43;
+        color: white;
+        padding: 13px 30px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      .reset-btn:hover {
+        background: #244633;
+      }
+
+      /* MOBILE */
+
+      @media (max-width: 600px) {
+        body {
+          padding: 15px 10px;
+        }
+
+        .reading {
+          padding: 20px;
+        }
+
+        .passage {
+          padding: 18px;
+        }
+
+        header h1 {
+          font-size: 24px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- HEADER -->
+
+      <header>
+        <h1>C1–C2 Reading Practice</h1>
+
+        <p>Reading 40 — The Psychology of Impulse Purchases</p>
+
+        <div class="score-box">Score: <span id="score">0</span> / 10</div>
+      </header>
+
+      <!-- READING -->
+
+      <div class="reading">
+        <h2>Reading 40 — The Psychology of Impulse Purchases</h2>
+
+        <!-- PASSAGE -->
+
+        <div class="passage">
+          <p>
+            An impulse purchase refers to a spontaneous buying decision made
+            without extensive planning or deliberation. Unlike rational
+            purchases, which are typically based on necessity or careful
+            comparison, impulse purchases are often driven by emotions.
+            Retailers frequently capitalize on this tendency by placing
+            attractive products near checkout counters, offering limited-time
+            discounts, or creating a sense of urgency. As a result, consumers
+            may purchase items they had never intended to buy.
+          </p>
+
+          <p>
+            Several psychological factors contribute to impulsive spending. One
+            of the most significant is the desire for immediate gratification.
+            Purchasing a new product can generate a temporary sense of pleasure,
+            which may encourage individuals to prioritize short-term
+            satisfaction over long-term financial goals. In addition, emotional
+            states such as stress, boredom, or excitement can increase the
+            likelihood of impulse buying. Online shopping platforms have further
+            intensified this phenomenon by making purchases more convenient and
+            reducing the time available for reflection.
+          </p>
+
+          <p>
+            However, impulse purchases are not always harmful. In some cases,
+            spontaneous spending can bring enjoyment and improve an individual's
+            mood. Problems arise when impulsive behavior becomes habitual and
+            leads to financial difficulties or buyer's remorse. Consequently,
+            financial experts often recommend strategies such as creating
+            shopping lists, setting budgets, and delaying purchases to reduce
+            unnecessary spending. These techniques can help consumers make more
+            deliberate decisions and maintain greater control over their
+            finances.
+          </p>
+        </div>
+
+        <!-- QUESTION 1 -->
+
+        <div class="question">
+          <h3>1. What is the main purpose of the passage?</h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">
+              A. To explain the causes and consequences of impulse purchases.
+            </button>
+
+            <button class="option" data-answer="B">
+              B. To argue that shopping is harmful.
+            </button>
+
+            <button class="option" data-answer="C">
+              C. To compare online and offline shopping.
+            </button>
+
+            <button class="option" data-answer="D">
+              D. To promote budgeting techniques.
+            </button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              The passage explains what impulse purchases are, why people make
+              them, their possible positive and negative consequences, and
+              strategies for controlling excessive impulsive spending.
+            </span>
+          </div>
+        </div>
+
+        <!-- QUESTION 2 -->
+
+        <div class="question">
+          <h3>
+            2. The word "capitalize on" in paragraph 1 is closest in meaning to:
+          </h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">A. ignore</button>
+
+            <button class="option" data-answer="B">B. take advantage of</button>
+
+            <button class="option" data-answer="C">C. reduce</button>
+
+            <button class="option" data-answer="D">D. measure</button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              "Capitalize on" means to take advantage of a situation or
+              opportunity in order to gain a benefit. Here, retailers take
+              advantage of consumers' tendency to make impulse purchases.
+            </span>
+          </div>
+        </div>
+
+        <!-- QUESTION 3 -->
+
+        <div class="question">
+          <h3>
+            3. According to the passage, impulse purchases are often driven by:
+          </h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">
+              A. detailed financial planning.
+            </button>
+
+            <button class="option" data-answer="B">B. necessity.</button>
+
+            <button class="option" data-answer="C">C. emotions.</button>
+
+            <button class="option" data-answer="D">
+              D. professional advice.
+            </button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              The passage directly states that impulse purchases are often
+              driven by emotions rather than necessity or careful comparison.
+            </span>
+          </div>
+        </div>
+
+        <!-- QUESTION 4 -->
+
+        <div class="question">
+          <h3>
+            4. Which of the following is mentioned as a factor that may increase
+            impulsive spending?
+          </h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">
+              A. Long-term financial planning.
+            </button>
+
+            <button class="option" data-answer="B">
+              B. Emotional states such as stress or boredom.
+            </button>
+
+            <button class="option" data-answer="C">C. Product quality.</button>
+
+            <button class="option" data-answer="D">D. Economic growth.</button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              The passage identifies emotional states such as stress, boredom,
+              and excitement as factors that can increase the likelihood of
+              impulse buying.
+            </span>
+          </div>
+        </div>
+
+        <!-- QUESTION 5 -->
+
+        <div class="question">
+          <h3>
+            5. The phrase "immediate gratification" most nearly refers to:
+          </h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">
+              A. instant satisfaction or pleasure.
+            </button>
+
+            <button class="option" data-answer="B">
+              B. financial security.
+            </button>
+
+            <button class="option" data-answer="C">
+              C. social recognition.
+            </button>
+
+            <button class="option" data-answer="D">D. future rewards.</button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              "Immediate gratification" refers to the desire to experience
+              pleasure or satisfaction immediately rather than waiting for a
+              future benefit.
+            </span>
+          </div>
+        </div>
+
+        <!-- QUESTION 6 -->
+
+        <div class="question">
+          <h3>6. Which of the following can be inferred from the passage?</h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">
+              A. Online shopping may encourage impulse buying by making
+              purchases easier.
+            </button>
+
+            <button class="option" data-answer="B">
+              B. All impulse purchases lead to regret.
+            </button>
+
+            <button class="option" data-answer="C">
+              C. Retailers discourage spontaneous spending.
+            </button>
+
+            <button class="option" data-answer="D">
+              D. Impulse buying is caused only by stress.
+            </button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              The passage states that online shopping has intensified impulse
+              buying by making purchases more convenient and reducing the time
+              available for reflection. Therefore, easier online purchasing may
+              encourage impulsive decisions.
+            </span>
+          </div>
+        </div>
+
+        <!-- QUESTION 7 -->
+
+        <div class="question">
+          <h3>
+            7. The word "habitual" in paragraph 3 is closest in meaning to:
+          </h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">A. temporary</button>
+
+            <button class="option" data-answer="B">B. expensive</button>
+
+            <button class="option" data-answer="C">
+              C. repeated and routine
+            </button>
+
+            <button class="option" data-answer="D">D. beneficial</button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              "Habitual" means something that is done regularly or repeatedly,
+              often becoming a normal or routine behavior.
+            </span>
+          </div>
+        </div>
+
+        <!-- QUESTION 8 -->
+
+        <div class="question">
+          <h3>8. Why does the author mention buyer's remorse?</h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">
+              A. To provide an example of a possible negative consequence of
+              impulse buying.
+            </button>
+
+            <button class="option" data-answer="B">
+              B. To define a marketing strategy.
+            </button>
+
+            <button class="option" data-answer="C">
+              C. To explain online shopping.
+            </button>
+
+            <button class="option" data-answer="D">
+              D. To describe consumer rights.
+            </button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              "Buyer's remorse" is mentioned as an example of a negative
+              consequence that may occur when impulsive buying becomes excessive
+              or habitual.
+            </span>
+          </div>
+        </div>
+
+        <!-- QUESTION 9 -->
+
+        <div class="question">
+          <h3>9. Which statement would the author most likely agree with?</h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">
+              A. Impulse purchases are always harmful.
+            </button>
+
+            <button class="option" data-answer="B">
+              B. Consumers should never shop online.
+            </button>
+
+            <button class="option" data-answer="C">
+              C. Managing impulse buying requires conscious decision-making.
+            </button>
+
+            <button class="option" data-answer="D">
+              D. Budgets are unnecessary for responsible spending.
+            </button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              The passage recommends strategies such as shopping lists, budgets,
+              and delaying purchases. These techniques encourage consumers to
+              make more deliberate and conscious decisions about spending.
+            </span>
+          </div>
+        </div>
+
+        <!-- QUESTION 10 -->
+
+        <div class="question">
+          <h3>10. Which of the following best summarizes the passage?</h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">
+              A. Impulse purchases are emotional buying decisions that can be
+              enjoyable but may cause problems if they become excessive.
+            </button>
+
+            <button class="option" data-answer="B">
+              B. Retailers are responsible for all consumer spending habits.
+            </button>
+
+            <button class="option" data-answer="C">
+              C. Online shopping should be avoided completely.
+            </button>
+
+            <button class="option" data-answer="D">
+              D. Financial success depends entirely on self-control.
+            </button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              The passage presents impulse purchases as emotionally driven
+              decisions that can sometimes provide enjoyment but may result in
+              financial problems and regret when they become excessive or
+              habitual.
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FINAL RESULT -->
+
+      <div id="finalResult">
+        <h2>Reading Practice Completed!</h2>
+
+        <p>Your final score:</p>
+
+        <div id="finalScore">0 / 10</div>
+
+        <p id="finalMessage"></p>
+      </div>
+
+      <!-- RESET -->
+
+      <div class="reset-container">
+        <button class="reset-btn" onclick="resetQuiz()">Reset Quiz</button>
+      </div>
+    </div>
+
+    <script>
+      /* ==========================================
+   ANSWER KEY - READING 40
+
+   1. A
+   2. B
+   3. C
+   4. B
+   5. A
+   6. A
+   7. C
+   8. A
+   9. C
+   10. A
+========================================== */
+
+      const correctAnswers = ["A", "B", "C", "B", "A", "A", "C", "A", "C", "A"];
+
+      let score = 0;
+      let answered = 0;
+
+      const questions = document.querySelectorAll(".question");
+
+      questions.forEach(function (question, index) {
+        const options = question.querySelectorAll(".option");
+
+        const feedback = question.querySelector(".feedback");
+
+        const feedbackTitle = feedback.querySelector("strong");
+
+        const correctAnswer = correctAnswers[index];
+
+        options.forEach(function (option) {
+          option.addEventListener("click", function () {
+            /* Không cho chọn lại */
+            if (question.classList.contains("answered")) {
+              return;
+            }
+
+            question.classList.add("answered");
+
+            answered++;
+
+            const selected = this.dataset.answer;
+
+            /* Disable tất cả đáp án */
+            options.forEach(function (btn) {
+              btn.classList.add("disabled");
+            });
+
+            /* =========================
+         CORRECT ANSWER
+      ========================= */
+
+            if (selected === correctAnswer) {
+              this.classList.add("correct");
+
+              feedback.classList.add("correct-feedback");
+
+              feedbackTitle.textContent = "✓ Correct!";
+
+              score++;
+
+              document.getElementById("score").textContent = score;
+            } else {
+
+            /* =========================
+         WRONG ANSWER
+      ========================= */
+              this.classList.add("wrong");
+
+              feedback.classList.add("wrong-feedback");
+
+              feedbackTitle.textContent =
+                "✗ Incorrect! Correct answer: " + correctAnswer;
+
+              /* Highlight đáp án đúng */
+              options.forEach(function (btn) {
+                if (btn.dataset.answer === correctAnswer) {
+                  btn.classList.add("correct");
+                }
+              });
+            }
+
+            /* Hiện giải thích */
+            feedback.style.display = "block";
+
+            /* Hoàn thành tất cả câu */
+            if (answered === correctAnswers.length) {
+              showFinalResult();
+            }
+          });
+        });
+      });
+
+      /* ==========================================
+   SHOW FINAL RESULT
+========================================== */
+
+      function showFinalResult() {
+        const result = document.getElementById("finalResult");
+
+        const finalScore = document.getElementById("finalScore");
+
+        const message = document.getElementById("finalMessage");
+
+        finalScore.textContent = score + " / 10";
+
+        if (score === 10) {
+          message.textContent =
+            "Outstanding! Your C1–C2 reading comprehension is excellent.";
+        } else if (score >= 8) {
+          message.textContent =
+            "Excellent work! You have a very strong understanding of advanced reading texts.";
+        } else if (score >= 6) {
+          message.textContent =
+            "Good job! Keep improving your vocabulary in context and inference skills.";
+        } else {
+          message.textContent =
+            "Keep practising! Focus on main ideas, vocabulary in context, and inference questions.";
+        }
+
+        result.style.display = "block";
+
+        result.scrollIntoView({
+          behavior: "smooth",
+        });
+      }
+
+      /* ==========================================
+   RESET QUIZ
+========================================== */
+
+      function resetQuiz() {
+        score = 0;
+
+        answered = 0;
+
+        document.getElementById("score").textContent = "0";
+
+        questions.forEach(function (question) {
+          question.classList.remove("answered");
+
+          const options = question.querySelectorAll(".option");
+
+          const feedback = question.querySelector(".feedback");
+
+          options.forEach(function (option) {
+            option.classList.remove("correct", "wrong", "disabled");
+          });
+
+          feedback.style.display = "none";
+
+          feedback.classList.remove("correct-feedback", "wrong-feedback");
+        });
+
+        document.getElementById("finalResult").style.display = "none";
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+    </script>
+  </body>
+</html>

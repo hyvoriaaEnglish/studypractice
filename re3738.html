@@ -1,0 +1,1050 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>C1-C2 Reading Practice 37-38</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f7f5;
+        color: #26332d;
+        line-height: 1.7;
+        padding: 30px 15px;
+      }
+
+      .container {
+        max-width: 950px;
+        margin: auto;
+      }
+
+      /* =========================
+   HEADER
+========================= */
+
+      header {
+        background: white;
+        padding: 35px;
+        border-radius: 20px;
+        text-align: center;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+      }
+
+      header h1 {
+        color: #315b43;
+        font-size: 30px;
+        margin-bottom: 10px;
+      }
+
+      header p {
+        color: #68756e;
+      }
+
+      .score-box {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 25px;
+        background: #eaf3ed;
+        border-radius: 10px;
+        font-weight: bold;
+      }
+
+      /* =========================
+   READING
+========================= */
+
+      .reading {
+        background: white;
+        padding: 30px;
+        border-radius: 20px;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      .reading h2 {
+        color: #315b43;
+        margin-bottom: 20px;
+        font-size: 25px;
+      }
+
+      .passage {
+        background: #fafcfb;
+        padding: 25px;
+        border-radius: 12px;
+        margin-bottom: 30px;
+        text-align: justify;
+      }
+
+      .passage p {
+        margin-bottom: 15px;
+      }
+
+      .passage p:last-child {
+        margin-bottom: 0;
+      }
+
+      /* =========================
+   QUESTIONS
+========================= */
+
+      .question {
+        border-top: 1px solid #e2e8e4;
+        padding-top: 25px;
+        margin-top: 25px;
+      }
+
+      .question h3 {
+        margin-bottom: 15px;
+        color: #34483b;
+      }
+
+      .options {
+        display: grid;
+        gap: 10px;
+      }
+
+      .option {
+        width: 100%;
+        padding: 13px 17px;
+        background: white;
+        border: 1px solid #ccd7d0;
+        border-radius: 10px;
+        cursor: pointer;
+        text-align: left;
+        font-size: 15px;
+        transition: 0.2s;
+      }
+
+      .option:hover:not(.disabled) {
+        background: #eef5f0;
+        transform: translateY(-2px);
+      }
+
+      .option.correct {
+        background: #dff4e5;
+        border-color: #35a85a;
+        color: #176b31;
+        font-weight: bold;
+      }
+
+      .option.wrong {
+        background: #fde4e4;
+        border-color: #dc4c4c;
+        color: #9b1c1c;
+        font-weight: bold;
+      }
+
+      .option.disabled {
+        cursor: default;
+      }
+
+      /* =========================
+   FEEDBACK
+========================= */
+
+      .feedback {
+        display: none;
+        margin-top: 15px;
+        padding: 15px;
+        border-radius: 10px;
+      }
+
+      .feedback.correct-feedback {
+        display: block;
+        background: #edf9f0;
+        border-left: 4px solid #35a85a;
+      }
+
+      .feedback.wrong-feedback {
+        display: block;
+        background: #fff0f0;
+        border-left: 4px solid #dc4c4c;
+      }
+
+      .feedback strong {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      /* =========================
+   FINAL RESULT
+========================= */
+
+      #finalResult {
+        display: none;
+        background: white;
+        padding: 35px;
+        border-radius: 20px;
+        text-align: center;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      #finalResult h2 {
+        color: #315b43;
+      }
+
+      #finalScore {
+        font-size: 34px;
+        font-weight: bold;
+        color: #315b43;
+        margin: 10px 0;
+      }
+
+      /* =========================
+   RESET BUTTON
+========================= */
+
+      .reset-container {
+        text-align: center;
+        margin: 35px 0;
+      }
+
+      .reset-btn {
+        border: none;
+        background: #315b43;
+        color: white;
+        padding: 13px 30px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      .reset-btn:hover {
+        background: #244633;
+      }
+
+      /* =========================
+   MOBILE
+========================= */
+
+      @media (max-width: 600px) {
+        body {
+          padding: 15px 10px;
+        }
+
+        .reading {
+          padding: 20px;
+        }
+
+        .passage {
+          padding: 18px;
+        }
+
+        header h1 {
+          font-size: 24px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- =========================
+     HEADER
+========================= -->
+
+      <header>
+        <h1>C1–C2 Reading Practice</h1>
+
+        <p>Reading 37 & Reading 38</p>
+
+        <div class="score-box">Score: <span id="score">0</span> / 15</div>
+      </header>
+
+      <!-- =====================================================
+READING 37
+===================================================== -->
+
+      <div class="reading">
+        <h2>Reading 37 — Zebras: More Than Stripes</h2>
+
+        <div class="passage">
+          <p>
+            Zebras are among the most recognizable animals in the world due to
+            their distinctive black-and-white stripes. Native to the grasslands
+            and savannas of Africa, these herbivorous mammals belong to the same
+            family as horses and donkeys. Although zebras may appear similar,
+            each individual possesses a unique stripe pattern, much like a human
+            fingerprint.
+          </p>
+
+          <p>
+            For many years, scientists debated the purpose of zebra stripes.
+            Some researchers believed that the patterns helped zebras camouflage
+            themselves from predators. Others suggested that the stripes played
+            a role in social recognition, allowing members of a herd to identify
+            one another. More recent studies have proposed that the stripes may
+            help deter biting insects, such as horseflies, which are less likely
+            to land on striped surfaces.
+          </p>
+
+          <p>
+            Zebras are highly social animals and typically live in groups for
+            protection. By remaining together, they can more effectively detect
+            predators and warn one another of danger. However, habitat loss and
+            human activities have threatened some zebra populations.
+            Consequently, conservation efforts are increasingly important to
+            ensure the survival of these remarkable animals and the ecosystems
+            in which they live.
+          </p>
+        </div>
+
+        <!-- Q1 -->
+
+        <div class="question">
+          <h3>1. What is the main purpose of the passage?</h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">
+              A. To explain several characteristics and possible functions of
+              zebra stripes.
+            </button>
+
+            <button class="option" data-answer="B">
+              B. To compare zebras with horses.
+            </button>
+
+            <button class="option" data-answer="C">
+              C. To describe African ecosystems.
+            </button>
+
+            <button class="option" data-answer="D">
+              D. To discuss animal migration.
+            </button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              The passage introduces zebra characteristics and focuses
+              particularly on the possible functions of their distinctive
+              stripes, including camouflage, social recognition, and deterring
+              insects.
+            </span>
+          </div>
+        </div>
+
+        <!-- Q2 -->
+
+        <div class="question">
+          <h3>
+            2. The word "distinctive" in paragraph 1 is closest in meaning to:
+          </h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">
+              A. unusual and easily recognized
+            </button>
+
+            <button class="option" data-answer="B">B. temporary</button>
+
+            <button class="option" data-answer="C">C. colorful</button>
+
+            <button class="option" data-answer="D">D. attractive</button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              "Distinctive" means having a special characteristic that makes
+              something clearly different or easily recognizable.
+            </span>
+          </div>
+        </div>
+
+        <!-- Q3 -->
+
+        <div class="question">
+          <h3>3. According to the passage, each zebra:</h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">
+              A. has identical stripes.
+            </button>
+
+            <button class="option" data-answer="B">
+              B. develops stripes later in life.
+            </button>
+
+            <button class="option" data-answer="C">
+              C. possesses a unique stripe pattern.
+            </button>
+
+            <button class="option" data-answer="D">
+              D. changes its stripes seasonally.
+            </button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              The passage explicitly states that each individual zebra possesses
+              a unique stripe pattern, similar to a human fingerprint.
+            </span>
+          </div>
+        </div>
+
+        <!-- Q4 -->
+
+        <div class="question">
+          <h3>4. Which of the following can be inferred from the passage?</h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">
+              A. Scientists have not completely agreed on the purpose of zebra
+              stripes.
+            </button>
+
+            <button class="option" data-answer="B">
+              B. Zebra stripes serve only one function.
+            </button>
+
+            <button class="option" data-answer="C">
+              C. Predators cannot see zebra stripes.
+            </button>
+
+            <button class="option" data-answer="D">
+              D. All zebra populations are endangered.
+            </button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              The passage presents several competing explanations for zebra
+              stripes, including camouflage, social recognition, and insect
+              deterrence. Therefore, scientists have not reached complete
+              agreement on their purpose.
+            </span>
+          </div>
+        </div>
+
+        <!-- Q5 -->
+
+        <div class="question">
+          <h3>5. The word "deter" in paragraph 2 most nearly means:</h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">A. attract</button>
+
+            <button class="option" data-answer="B">
+              B. prevent or discourage
+            </button>
+
+            <button class="option" data-answer="C">C. observe</button>
+
+            <button class="option" data-answer="D">D. identify</button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              "To deter" means to discourage or prevent someone or something
+              from doing a particular action. Here, zebra stripes may discourage
+              biting insects from landing on them.
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- =====================================================
+READING 38
+===================================================== -->
+
+      <div class="reading">
+        <h2>Reading 38 — The Global Popularity of K-Dramas</h2>
+
+        <div class="passage">
+          <p>
+            Korean dramas, commonly known as K-dramas, have gained immense
+            popularity far beyond South Korea in recent decades. Their success
+            can be attributed to several factors, including compelling
+            storylines, high production quality, and emotionally engaging
+            characters. Unlike some television series that continue for many
+            years, many K-dramas consist of a single season with a clearly
+            defined ending. This format appeals to viewers who prefer concise
+            narratives and are reluctant to commit to lengthy series. In
+            addition, streaming platforms have made K-dramas more accessible to
+            international audiences by providing subtitles in multiple
+            languages.
+          </p>
+
+          <p>
+            Despite their widespread appeal, K-dramas have also faced criticism.
+            Some observers argue that certain series rely heavily on familiar
+            plot devices, such as love triangles or improbable coincidences.
+            Others contend that K-dramas occasionally present unrealistic
+            standards of beauty, wealth, or romance. Nevertheless, supporters
+            maintain that these dramas resonate with audiences because they
+            explore universal themes such as family, friendship, ambition, and
+            personal growth. As a result, K-dramas have become an important
+            component of the global spread of Korean popular culture.
+          </p>
+        </div>
+
+        <!-- Q6 -->
+
+        <div class="question">
+          <h3>1. What is the main purpose of the passage?</h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">
+              A. To explain the popularity of K-dramas while acknowledging
+              criticisms.
+            </button>
+
+            <button class="option" data-answer="B">
+              B. To compare K-dramas with American television.
+            </button>
+
+            <button class="option" data-answer="C">
+              C. To criticize the influence of Korean culture.
+            </button>
+
+            <button class="option" data-answer="D">
+              D. To describe the history of South Korean cinema.
+            </button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              The passage explains why K-dramas have become globally popular
+              while also presenting criticisms of the genre. It therefore
+              provides a balanced overview rather than simply praising or
+              criticizing K-dramas.
+            </span>
+          </div>
+        </div>
+
+        <!-- Q7 -->
+
+        <div class="question">
+          <h3>
+            2. The word "compelling" in paragraph 1 is closest in meaning to:
+          </h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">A. confusing</button>
+
+            <button class="option" data-answer="B">B. predictable</button>
+
+            <button class="option" data-answer="C">C. captivating</button>
+
+            <button class="option" data-answer="D">D. unrealistic</button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              "Compelling" means very interesting or engaging, making people
+              want to continue watching or paying attention. "Captivating" is
+              the closest meaning.
+            </span>
+          </div>
+        </div>
+
+        <!-- Q8 -->
+
+        <div class="question">
+          <h3>
+            3. According to the passage, one reason viewers enjoy K-dramas is
+            that they:
+          </h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">
+              A. are always based on real events.
+            </button>
+
+            <button class="option" data-answer="B">
+              B. usually have a clear ending.
+            </button>
+
+            <button class="option" data-answer="C">
+              C. avoid emotional themes.
+            </button>
+
+            <button class="option" data-answer="D">
+              D. contain multiple seasons.
+            </button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              The passage explains that many K-dramas consist of a single season
+              with a clearly defined ending, which appeals to viewers who prefer
+              concise narratives.
+            </span>
+          </div>
+        </div>
+
+        <!-- Q9 -->
+
+        <div class="question">
+          <h3>4. What does the word "This" in paragraph 1 refer to?</h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">
+              A. the popularity of South Korea
+            </button>
+
+            <button class="option" data-answer="B">
+              B. high production quality
+            </button>
+
+            <button class="option" data-answer="C">
+              C. the single-season format with a defined ending
+            </button>
+
+            <button class="option" data-answer="D">
+              D. the use of subtitles
+            </button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              "This format" refers to the immediately preceding idea that many
+              K-dramas consist of a single season with a clearly defined ending.
+            </span>
+          </div>
+        </div>
+
+        <!-- Q10 -->
+
+        <div class="question">
+          <h3>
+            5. Which factor has helped K-dramas reach international audiences?
+          </h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">
+              A. government regulations
+            </button>
+
+            <button class="option" data-answer="B">B. movie theaters</button>
+
+            <button class="option" data-answer="C">
+              C. streaming platforms with subtitles
+            </button>
+
+            <button class="option" data-answer="D">D. printed magazines</button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              The passage directly states that streaming platforms have made
+              K-dramas more accessible internationally by providing subtitles in
+              multiple languages.
+            </span>
+          </div>
+        </div>
+
+        <!-- Q11 -->
+
+        <div class="question">
+          <h3>
+            6. The word "improbable" in paragraph 2 is closest in meaning to:
+          </h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">A. unlikely</button>
+
+            <button class="option" data-answer="B">B. memorable</button>
+
+            <button class="option" data-answer="C">C. emotional</button>
+
+            <button class="option" data-answer="D">D. entertaining</button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              "Improbable" means unlikely to happen or difficult to believe.
+              Therefore, "unlikely" is correct.
+            </span>
+          </div>
+        </div>
+
+        <!-- Q12 -->
+
+        <div class="question">
+          <h3>7. Which of the following can be inferred from the passage?</h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">
+              A. Not all viewers agree on the strengths of K-dramas.
+            </button>
+
+            <button class="option" data-answer="B">
+              B. K-dramas are popular only in Asia.
+            </button>
+
+            <button class="option" data-answer="C">
+              C. Every K-drama follows the same storyline.
+            </button>
+
+            <button class="option" data-answer="D">
+              D. Critics believe K-dramas lack production quality.
+            </button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              The passage presents both supporters and critics. Supporters
+              praise the universal themes and appeal of K-dramas, while critics
+              point out repetitive plot devices and unrealistic standards.
+              Therefore, viewers do not all share the same opinion.
+            </span>
+          </div>
+        </div>
+
+        <!-- Q13 -->
+
+        <div class="question">
+          <h3>
+            8. Why does the author mention love triangles and coincidences?
+          </h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">
+              A. To provide examples of criticisms directed at K-dramas.
+            </button>
+
+            <button class="option" data-answer="B">
+              B. To explain why K-dramas are unique.
+            </button>
+
+            <button class="option" data-answer="C">
+              C. To recommend popular shows.
+            </button>
+
+            <button class="option" data-answer="D">
+              D. To compare K-dramas with films.
+            </button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              The author mentions love triangles and improbable coincidences as
+              examples of familiar plot devices that critics believe some
+              K-dramas rely on too heavily.
+            </span>
+          </div>
+        </div>
+
+        <!-- Q14 -->
+
+        <div class="question">
+          <h3>9. Which statement would the author most likely agree with?</h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">
+              A. K-dramas owe their success solely to streaming services.
+            </button>
+
+            <button class="option" data-answer="B">
+              B. The appeal of K-dramas cannot be explained by a single factor.
+            </button>
+
+            <button class="option" data-answer="C">
+              C. K-dramas should avoid discussing family relationships.
+            </button>
+
+            <button class="option" data-answer="D">
+              D. Unrealistic elements prevent people from enjoying K-dramas.
+            </button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              The author identifies several reasons for K-dramas' success,
+              including compelling storylines, production quality, emotional
+              characters, accessible formats, subtitles, and universal themes.
+              Therefore, their popularity cannot be attributed to one factor
+              alone.
+            </span>
+          </div>
+        </div>
+
+        <!-- Q15 -->
+
+        <div class="question">
+          <h3>10. Which of the following best summarizes the passage?</h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">
+              A. K-dramas have become globally popular due to several strengths,
+              although some aspects of the genre remain controversial.
+            </button>
+
+            <button class="option" data-answer="B">
+              B. K-dramas are replacing all other forms of entertainment.
+            </button>
+
+            <button class="option" data-answer="C">
+              C. Most K-dramas focus exclusively on romance.
+            </button>
+
+            <button class="option" data-answer="D">
+              D. Critics have largely ended the popularity of K-dramas.
+            </button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              The passage explains the global success of K-dramas, identifies
+              multiple reasons for their appeal, and acknowledges criticisms of
+              certain aspects of the genre. Therefore, A provides the most
+              complete summary.
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- =====================================================
+FINAL RESULT
+===================================================== -->
+
+      <div id="finalResult">
+        <h2>Reading Practice Completed!</h2>
+
+        <p>Your final score:</p>
+
+        <div id="finalScore">0 / 15</div>
+
+        <p id="finalMessage"></p>
+      </div>
+
+      <!-- RESET -->
+
+      <div class="reset-container">
+        <button class="reset-btn" onclick="resetQuiz()">Reset Quiz</button>
+      </div>
+    </div>
+
+    <script>
+      /* ==========================================
+         ANSWER KEY
+
+         Reading 37:
+         A - A - C - A - B
+
+         Reading 38:
+         A - C - B - C - C
+         A - A - A - B - A
+      ========================================== */
+
+      const correctAnswers = [
+        /* Reading 37 */
+
+        "A",
+        "A",
+        "C",
+        "A",
+        "B",
+
+        /* Reading 38 */
+
+        "A",
+        "C",
+        "B",
+        "C",
+        "C",
+        "A",
+        "A",
+        "A",
+        "B",
+        "A",
+      ];
+
+      let score = 0;
+
+      let answered = 0;
+
+      /* Tất cả câu hỏi */
+
+      const questions = document.querySelectorAll(".question");
+
+      questions.forEach((question, index) => {
+        const options = question.querySelectorAll(".option");
+
+        const feedback = question.querySelector(".feedback");
+
+        const feedbackTitle = feedback.querySelector("strong");
+
+        const correctAnswer = correctAnswers[index];
+
+        options.forEach((option) => {
+          option.addEventListener("click", function () {
+            /* Không cho chọn lại */
+
+            if (question.classList.contains("answered")) {
+              return;
+            }
+
+            question.classList.add("answered");
+
+            answered++;
+
+            const selected = this.dataset.answer;
+
+            /* Disable toàn bộ */
+
+            options.forEach((btn) => {
+              btn.classList.add("disabled");
+            });
+
+            /* =========================
+               ĐÚNG
+            ========================= */
+
+            if (selected === correctAnswer) {
+              this.classList.add("correct");
+
+              feedback.classList.add("correct-feedback");
+
+              feedbackTitle.textContent = "✓ Correct!";
+
+              score++;
+
+              document.getElementById("score").textContent = score;
+            } else {
+
+            /* =========================
+               SAI
+            ========================= */
+              this.classList.add("wrong");
+
+              feedback.classList.add("wrong-feedback");
+
+              feedbackTitle.textContent =
+                "✗ Incorrect! Correct answer: " + correctAnswer;
+
+              /* Highlight đáp án đúng */
+
+              options.forEach((btn) => {
+                if (btn.dataset.answer === correctAnswer) {
+                  btn.classList.add("correct");
+                }
+              });
+            }
+
+            /* Hiện giải thích */
+
+            feedback.style.display = "block";
+
+            /* Hoàn thành toàn bộ */
+
+            if (answered === correctAnswers.length) {
+              showFinalResult();
+            }
+          });
+        });
+      });
+
+      /* ==========================================
+         FINAL RESULT
+      ========================================== */
+
+      function showFinalResult() {
+        const result = document.getElementById("finalResult");
+
+        const finalScore = document.getElementById("finalScore");
+
+        const message = document.getElementById("finalMessage");
+
+        finalScore.textContent = score + " / 15";
+
+        if (score === 15) {
+          message.textContent =
+            "Outstanding! Your C1–C2 reading comprehension is excellent.";
+        } else if (score >= 12) {
+          message.textContent =
+            "Excellent work! You have a very strong understanding of advanced reading texts.";
+        } else if (score >= 9) {
+          message.textContent =
+            "Good job! Keep improving your vocabulary in context and inference skills.";
+        } else {
+          message.textContent =
+            "Keep practising! Focus on main ideas, contextual vocabulary, reference words, and implied information.";
+        }
+
+        result.style.display = "block";
+
+        result.scrollIntoView({
+          behavior: "smooth",
+        });
+      }
+
+      /* ==========================================
+         RESET QUIZ
+      ========================================== */
+
+      function resetQuiz() {
+        score = 0;
+
+        answered = 0;
+
+        document.getElementById("score").textContent = "0";
+
+        questions.forEach((question) => {
+          question.classList.remove("answered");
+
+          const options = question.querySelectorAll(".option");
+
+          const feedback = question.querySelector(".feedback");
+
+          options.forEach((option) => {
+            option.classList.remove("correct", "wrong", "disabled");
+          });
+
+          feedback.style.display = "none";
+
+          feedback.classList.remove("correct-feedback", "wrong-feedback");
+        });
+
+        document.getElementById("finalResult").style.display = "none";
+
+        window.scrollTo({
+          top: 0,
+
+          behavior: "smooth",
+        });
+      }
+    </script>
+  </body>
+</html>

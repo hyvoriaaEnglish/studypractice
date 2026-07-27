@@ -1,0 +1,877 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>C1-C2 Reading Practice</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f7f5;
+        color: #26332d;
+        line-height: 1.7;
+        padding: 30px 15px;
+      }
+
+      .container {
+        max-width: 950px;
+        margin: auto;
+      }
+
+      /* HEADER */
+
+      header {
+        background: white;
+        padding: 35px;
+        border-radius: 20px;
+        text-align: center;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+      }
+
+      header h1 {
+        color: #315b43;
+        font-size: 30px;
+        margin-bottom: 10px;
+      }
+
+      header p {
+        color: #68756e;
+      }
+
+      .score-box {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 25px;
+        background: #eaf3ed;
+        border-radius: 10px;
+        font-weight: bold;
+      }
+
+      /* READING */
+
+      .reading {
+        background: white;
+        padding: 30px;
+        border-radius: 20px;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      .reading h2 {
+        color: #315b43;
+        margin-bottom: 20px;
+      }
+
+      .passage {
+        background: #fafcfb;
+        padding: 25px;
+        border-radius: 12px;
+        margin-bottom: 25px;
+        text-align: justify;
+      }
+
+      .passage p {
+        margin-bottom: 15px;
+      }
+
+      .passage p:last-child {
+        margin-bottom: 0;
+      }
+
+      /* QUESTIONS */
+
+      .question {
+        border-top: 1px solid #e2e8e4;
+        padding-top: 25px;
+        margin-top: 25px;
+      }
+
+      .question h3 {
+        margin-bottom: 15px;
+        color: #34483b;
+      }
+
+      .options {
+        display: grid;
+        gap: 10px;
+      }
+
+      .option {
+        width: 100%;
+        padding: 13px 17px;
+        background: white;
+        border: 1px solid #ccd7d0;
+        border-radius: 10px;
+        cursor: pointer;
+        text-align: left;
+        font-size: 15px;
+        transition: 0.2s;
+      }
+
+      .option:hover:not(.disabled) {
+        background: #eef5f0;
+        transform: translateY(-2px);
+      }
+
+      .option.correct {
+        background: #dff4e5;
+        border-color: #35a85a;
+        color: #176b31;
+        font-weight: bold;
+      }
+
+      .option.wrong {
+        background: #fde4e4;
+        border-color: #dc4c4c;
+        color: #9b1c1c;
+        font-weight: bold;
+      }
+
+      .option.disabled {
+        cursor: default;
+      }
+
+      /* FEEDBACK */
+
+      .feedback {
+        display: none;
+        margin-top: 15px;
+        padding: 15px;
+        border-radius: 10px;
+      }
+
+      .feedback.correct-feedback {
+        display: block;
+        background: #edf9f0;
+        border-left: 4px solid #35a85a;
+      }
+
+      .feedback.wrong-feedback {
+        display: block;
+        background: #fff0f0;
+        border-left: 4px solid #dc4c4c;
+      }
+
+      .feedback strong {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      /* FINAL RESULT */
+
+      #finalResult {
+        display: none;
+        background: white;
+        padding: 35px;
+        border-radius: 20px;
+        text-align: center;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      #finalResult h2 {
+        color: #315b43;
+      }
+
+      #finalScore {
+        font-size: 34px;
+        font-weight: bold;
+        color: #315b43;
+        margin: 10px 0;
+      }
+
+      /* BUTTON */
+
+      .reset-container {
+        text-align: center;
+        margin: 35px 0;
+      }
+
+      .reset-btn {
+        border: none;
+        background: #315b43;
+        color: white;
+        padding: 13px 30px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      .reset-btn:hover {
+        background: #244633;
+      }
+
+      @media (max-width: 600px) {
+        body {
+          padding: 15px 10px;
+        }
+
+        .reading {
+          padding: 20px;
+        }
+
+        .passage {
+          padding: 18px;
+        }
+
+        header h1 {
+          font-size: 24px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- HEADER -->
+
+      <header>
+        <h1>C1–C2 Reading Practice</h1>
+
+        <p>Read the passages carefully and choose the best answer.</p>
+
+        <div class="score-box">Score: <span id="score">0</span> / 10</div>
+      </header>
+
+      <!-- =====================================================
+READING 35
+===================================================== -->
+
+      <div class="reading">
+        <h2>Reading 35 — The Origins of Herbal Tea</h2>
+
+        <div class="passage">
+          <p>
+            Although many people associate tea with the leaves of the tea plant
+            (<i>Camellia sinensis</i>), herbal tea has a distinct history and
+            origin. Strictly speaking, herbal teas are not true teas because
+            they are made from a variety of herbs, flowers, fruits, seeds, or
+            roots rather than tea leaves. Nevertheless, they have been consumed
+            for thousands of years and have played an important role in numerous
+            cultures around the world.
+          </p>
+
+          <p>
+            The earliest forms of herbal tea are believed to have originated in
+            ancient civilizations, where plants were often used for both
+            culinary and medicinal purposes. In regions such as ancient China,
+            Egypt, and Greece, people experimented with different herbs and
+            discovered that certain infusions appeared to alleviate discomfort
+            or promote relaxation. As a result, herbal beverages gradually
+            became integrated into traditional medical practices. Chamomile,
+            peppermint, ginger, and hibiscus were among the plants most commonly
+            used due to their perceived therapeutic properties.
+          </p>
+
+          <p>
+            Over time, the consumption of herbal tea spread through trade routes
+            and cultural exchange. Different societies adapted the practice
+            according to local resources and traditions, creating a remarkable
+            diversity of herbal infusions. While many historical claims
+            regarding the health benefits of herbal tea were based primarily on
+            observation rather than scientific evidence, modern researchers have
+            begun investigating these claims more systematically. Some studies
+            suggest that certain herbal ingredients may indeed possess
+            beneficial compounds, although experts caution against viewing
+            herbal tea as a substitute for professional medical treatment.
+          </p>
+
+          <p>
+            Today, herbal tea remains popular not only for its flavor but also
+            for the sense of comfort and tradition it provides. Its enduring
+            appeal reflects humanity's long-standing fascination with the
+            natural world and its potential to enhance well-being.
+          </p>
+        </div>
+
+        <!-- QUESTION 1 -->
+
+        <div class="question">
+          <h3>1. What is the main purpose of the passage?</h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">
+              A. To explain the history and development of herbal tea.
+            </button>
+
+            <button class="option" data-answer="B">
+              B. To prove that herbal tea is healthier than ordinary tea.
+            </button>
+
+            <button class="option" data-answer="C">
+              C. To compare ancient and modern medicine.
+            </button>
+
+            <button class="option" data-answer="D">
+              D. To describe how tea is manufactured.
+            </button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              The passage traces the origins of herbal tea, its development
+              across different cultures, its historical uses, and its modern
+              popularity. Therefore, its main purpose is to explain the history
+              and development of herbal tea.
+            </span>
+          </div>
+        </div>
+
+        <!-- QUESTION 2 -->
+
+        <div class="question">
+          <h3>
+            2. The word "alleviate" in paragraph 2 is closest in meaning to:
+          </h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">A. worsen</button>
+
+            <button class="option" data-answer="B">B. reduce</button>
+
+            <button class="option" data-answer="C">C. identify</button>
+
+            <button class="option" data-answer="D">D. prevent</button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              "Alleviate" means to make something less severe or painful.
+              Therefore, "reduce" is the closest meaning.
+            </span>
+          </div>
+        </div>
+
+        <!-- QUESTION 3 -->
+
+        <div class="question">
+          <h3>
+            3. According to the passage, herbal teas differ from true teas
+            because they:
+          </h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">
+              A. contain more caffeine.
+            </button>
+
+            <button class="option" data-answer="B">
+              B. originated outside Asia.
+            </button>
+
+            <button class="option" data-answer="C">
+              C. are not made from tea leaves.
+            </button>
+
+            <button class="option" data-answer="D">
+              D. are consumed only for medical reasons.
+            </button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              The first paragraph explicitly states that herbal teas are not
+              true teas because they are made from herbs, flowers, fruits,
+              seeds, or roots rather than tea leaves.
+            </span>
+          </div>
+        </div>
+
+        <!-- QUESTION 4 -->
+
+        <div class="question">
+          <h3>4. Which of the following can be inferred from the passage?</h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">
+              A. Ancient people relied entirely on scientific research.
+            </button>
+
+            <button class="option" data-answer="B">
+              B. The popularity of herbal tea was influenced by cultural
+              exchange.
+            </button>
+
+            <button class="option" data-answer="C">
+              C. All herbal teas have proven medical benefits.
+            </button>
+
+            <button class="option" data-answer="D">
+              D. Herbal tea originated exclusively in China.
+            </button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              The passage says that herbal tea spread through trade routes and
+              cultural exchange, with different societies adapting the practice
+              according to local traditions. This suggests that cultural
+              exchange contributed to its popularity and diversity.
+            </span>
+          </div>
+        </div>
+
+        <!-- QUESTION 5 -->
+
+        <div class="question">
+          <h3>
+            5. The author's attitude toward herbal tea is best described as:
+          </h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">
+              A. enthusiastic and uncritical.
+            </button>
+
+            <button class="option" data-answer="B">
+              B. skeptical and dismissive.
+            </button>
+
+            <button class="option" data-answer="C">
+              C. balanced and informative.
+            </button>
+
+            <button class="option" data-answer="D">
+              D. emotional and nostalgic.
+            </button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              The author presents both the historical and potential benefits of
+              herbal tea while also noting that some health claims lack
+              scientific evidence and that herbal tea should not replace
+              professional medical treatment. This makes the tone balanced and
+              informative.
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- =====================================================
+READING 36
+===================================================== -->
+
+      <div class="reading">
+        <h2>Reading 36 — The Significance of Birthdays</h2>
+
+        <div class="passage">
+          <p>
+            Birthdays are among the most widely celebrated occasions across
+            cultures, yet their significance extends beyond cakes, gifts, and
+            parties. At their core, birthdays serve as annual milestones that
+            mark the passage of time and provide individuals with an opportunity
+            to reflect on their lives. For many people, a birthday is not merely
+            a celebration of age but also a moment to evaluate personal
+            achievements, relationships, and future aspirations.
+          </p>
+
+          <p>
+            The tradition of celebrating birthdays has ancient origins.
+            Historians believe that some of the earliest birthday celebrations
+            can be traced to ancient civilizations, where important figures such
+            as rulers or religious leaders were honored on the anniversaries of
+            their births. Over time, the practice became more widespread and
+            gradually evolved into a social custom observed by people from
+            various backgrounds. Today, birthdays are often associated with
+            expressions of affection, gratitude, and social connection,
+            reinforcing bonds among family members and friends.
+          </p>
+
+          <p>
+            However, attitudes toward birthdays vary considerably. While some
+            individuals eagerly anticipate the occasion, others experience mixed
+            emotions. A birthday may remind people of goals they have not yet
+            accomplished or of the rapid passage of time. Psychologists suggest
+            that such reflections are natural because birthdays encourage
+            individuals to compare their present circumstances with their
+            expectations and aspirations. Nevertheless, this process can also be
+            beneficial, as it may inspire personal growth and motivate people to
+            pursue new objectives.
+          </p>
+
+          <p>
+            Ultimately, the enduring popularity of birthdays reflects a
+            fundamental human desire to acknowledge the passage of time and
+            celebrate meaningful connections. Whether observed with a large
+            gathering or in quiet reflection, birthdays continue to hold
+            cultural and personal significance for millions of people around the
+            world.
+          </p>
+        </div>
+
+        <!-- QUESTION 6 -->
+
+        <div class="question">
+          <h3>1. What is the main purpose of the passage?</h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">
+              A. To explain the historical and personal significance of
+              birthdays.
+            </button>
+
+            <button class="option" data-answer="B">
+              B. To describe how birthday parties are organized.
+            </button>
+
+            <button class="option" data-answer="C">
+              C. To argue that birthdays should not be celebrated.
+            </button>
+
+            <button class="option" data-answer="D">
+              D. To compare birthdays in different countries.
+            </button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              The passage discusses the origins of birthday celebrations and
+              explains their personal, social, psychological, and cultural
+              significance. Therefore, A is the best answer.
+            </span>
+          </div>
+        </div>
+
+        <!-- QUESTION 7 -->
+
+        <div class="question">
+          <h3>
+            2. The word "milestones" in paragraph 1 is closest in meaning to:
+          </h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">A. obstacles</button>
+
+            <button class="option" data-answer="B">
+              B. important stages or events
+            </button>
+
+            <button class="option" data-answer="C">C. celebrations</button>
+
+            <button class="option" data-answer="D">D. traditions</button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              A "milestone" is an important event or stage in a person's life or
+              in a process. Therefore, B is correct.
+            </span>
+          </div>
+        </div>
+
+        <!-- QUESTION 8 -->
+
+        <div class="question">
+          <h3>
+            3. According to the passage, birthdays often provide an opportunity
+            for people to:
+          </h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">
+              A. increase their income.
+            </button>
+
+            <button class="option" data-answer="B">
+              B. compare themselves with others.
+            </button>
+
+            <button class="option" data-answer="C">
+              C. reflect on their lives and future goals.
+            </button>
+
+            <button class="option" data-answer="D">
+              D. learn about history.
+            </button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              The first paragraph states that birthdays allow people to reflect
+              on their lives and evaluate personal achievements, relationships,
+              and future aspirations.
+            </span>
+          </div>
+        </div>
+
+        <!-- QUESTION 9 -->
+
+        <div class="question">
+          <h3>4. Which of the following can be inferred from the passage?</h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">
+              A. Not everyone views birthdays in the same way.
+            </button>
+
+            <button class="option" data-answer="B">
+              B. Birthdays were originally celebrated only by children.
+            </button>
+
+            <button class="option" data-answer="C">
+              C. Most people dislike growing older.
+            </button>
+
+            <button class="option" data-answer="D">
+              D. Birthday traditions have remained unchanged throughout history.
+            </button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              The passage explicitly explains that some people eagerly
+              anticipate birthdays while others experience mixed emotions.
+              Therefore, people's attitudes toward birthdays are not identical.
+            </span>
+          </div>
+        </div>
+
+        <!-- QUESTION 10 -->
+
+        <div class="question">
+          <h3>5. The author's tone is best described as:</h3>
+
+          <div class="options">
+            <button class="option" data-answer="A">
+              A. analytical and reflective.
+            </button>
+
+            <button class="option" data-answer="B">
+              B. humorous and informal.
+            </button>
+
+            <button class="option" data-answer="C">
+              C. critical and pessimistic.
+            </button>
+
+            <button class="option" data-answer="D">
+              D. enthusiastic and emotional.
+            </button>
+          </div>
+
+          <div class="feedback">
+            <strong></strong>
+
+            <span>
+              The author examines birthdays from historical, psychological,
+              social, and cultural perspectives while reflecting on their deeper
+              meaning. Therefore, the tone is analytical and reflective.
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FINAL RESULT -->
+
+      <div id="finalResult">
+        <h2>Reading Practice Completed!</h2>
+
+        <p>Your final score:</p>
+
+        <div id="finalScore">0 / 10</div>
+
+        <p id="finalMessage"></p>
+      </div>
+
+      <div class="reset-container">
+        <button class="reset-btn" onclick="resetQuiz()">Reset Quiz</button>
+      </div>
+    </div>
+
+    <script>
+      /* ==========================================
+   ĐÁP ÁN
+   Reading 35:
+   A B C B C
+
+   Reading 36:
+   A B C A A
+========================================== */
+
+      const correctAnswers = ["A", "B", "C", "B", "C", "A", "B", "C", "A", "A"];
+
+      let score = 0;
+      let answered = 0;
+
+      /* Lấy tất cả câu hỏi */
+
+      const questions = document.querySelectorAll(".question");
+
+      questions.forEach((question, index) => {
+        const options = question.querySelectorAll(".option");
+
+        const feedback = question.querySelector(".feedback");
+
+        const feedbackTitle = feedback.querySelector("strong");
+
+        const correctAnswer = correctAnswers[index];
+
+        options.forEach((option) => {
+          option.addEventListener("click", function () {
+            /* Không cho chọn lại */
+
+            if (question.classList.contains("answered")) {
+              return;
+            }
+
+            question.classList.add("answered");
+
+            answered++;
+
+            const selected = this.dataset.answer;
+
+            /* Disable tất cả */
+
+            options.forEach((btn) => {
+              btn.classList.add("disabled");
+            });
+
+            /* ==========================
+         ĐÁP ÁN ĐÚNG
+      ========================== */
+
+            if (selected === correctAnswer) {
+              this.classList.add("correct");
+
+              feedback.classList.add("correct-feedback");
+
+              feedbackTitle.textContent = "✓ Correct!";
+
+              score++;
+
+              document.getElementById("score").textContent = score;
+            } else {
+
+            /* ==========================
+         ĐÁP ÁN SAI
+      ========================== */
+              this.classList.add("wrong");
+
+              feedback.classList.add("wrong-feedback");
+
+              feedbackTitle.textContent =
+                "✗ Incorrect! Correct answer: " + correctAnswer;
+
+              /* Highlight đáp án đúng */
+
+              options.forEach((btn) => {
+                if (btn.dataset.answer === correctAnswer) {
+                  btn.classList.add("correct");
+                }
+              });
+            }
+
+            /* Hiện giải thích */
+
+            feedback.style.display = "block";
+
+            /* Nếu hoàn thành 10 câu */
+
+            if (answered === correctAnswers.length) {
+              showFinalResult();
+            }
+          });
+        });
+      });
+
+      /* ==========================================
+   HIỆN KẾT QUẢ CUỐI
+========================================== */
+
+      function showFinalResult() {
+        const result = document.getElementById("finalResult");
+
+        const finalScore = document.getElementById("finalScore");
+
+        const message = document.getElementById("finalMessage");
+
+        finalScore.textContent = score + " / 10";
+
+        if (score === 10) {
+          message.textContent =
+            "Outstanding! Your C1–C2 reading comprehension is excellent.";
+        } else if (score >= 8) {
+          message.textContent =
+            "Excellent work! You have a very strong understanding of advanced reading texts.";
+        } else if (score >= 6) {
+          message.textContent =
+            "Good job! Keep working on inference, vocabulary in context, and author's tone.";
+        } else {
+          message.textContent =
+            "Keep practising! Focus on identifying main ideas, contextual vocabulary, and implied information.";
+        }
+
+        result.style.display = "block";
+
+        result.scrollIntoView({
+          behavior: "smooth",
+        });
+      }
+
+      /* ==========================================
+   RESET QUIZ
+========================================== */
+
+      function resetQuiz() {
+        score = 0;
+
+        answered = 0;
+
+        document.getElementById("score").textContent = "0";
+
+        questions.forEach((question) => {
+          question.classList.remove("answered");
+
+          const options = question.querySelectorAll(".option");
+
+          const feedback = question.querySelector(".feedback");
+
+          options.forEach((option) => {
+            option.classList.remove("correct", "wrong", "disabled");
+          });
+
+          feedback.style.display = "none";
+
+          feedback.classList.remove("correct-feedback", "wrong-feedback");
+        });
+
+        document.getElementById("finalResult").style.display = "none";
+
+        window.scrollTo({
+          top: 0,
+
+          behavior: "smooth",
+        });
+      }
+    </script>
+  </body>
+</html>
