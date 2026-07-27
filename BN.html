@@ -1,0 +1,887 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Bac Ninh English Practice</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f5f7fb;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      .container {
+        width: 92%;
+        max-width: 1000px;
+        margin: 40px auto;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 35px;
+      }
+
+      .header h1 {
+        color: #2c3e50;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        color: #666;
+      }
+
+      .section {
+        background: white;
+        padding: 30px;
+        margin-bottom: 30px;
+        border-radius: 18px;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+      }
+
+      .section h2 {
+        color: #2c3e50;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 12px;
+      }
+
+      .instruction {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 25px;
+      }
+
+      .question {
+        margin-bottom: 28px;
+        padding: 22px;
+        background: #fafafa;
+        border-left: 5px solid #3498db;
+        border-radius: 10px;
+      }
+
+      .question-text {
+        font-weight: bold;
+        margin-bottom: 15px;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        padding: 12px 15px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        outline: none;
+        margin-top: 8px;
+      }
+
+      input[type="text"]:focus {
+        border-color: #3498db;
+      }
+
+      .input-label {
+        font-size: 14px;
+        font-weight: bold;
+        color: #555;
+        margin-top: 12px;
+        display: block;
+      }
+
+      .result {
+        display: none;
+        margin-top: 15px;
+        padding: 12px 15px;
+        border-radius: 8px;
+        font-weight: bold;
+      }
+
+      .correct {
+        display: block;
+        background: #d4edda;
+        color: #155724;
+      }
+
+      .wrong {
+        display: block;
+        background: #f8d7da;
+        color: #721c24;
+      }
+
+      button {
+        display: block;
+        margin: 30px auto 0;
+        padding: 13px 30px;
+        font-size: 16px;
+        font-weight: bold;
+        color: white;
+        background: #3498db;
+        border: none;
+        border-radius: 9px;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+
+      button:hover {
+        background: #2980b9;
+      }
+
+      .score {
+        display: none;
+        margin-top: 25px;
+        padding: 18px;
+        text-align: center;
+        font-size: 21px;
+        font-weight: bold;
+        background: #eef6ff;
+        color: #2c3e50;
+        border-radius: 10px;
+      }
+
+      .error-note {
+        font-size: 14px;
+        color: #666;
+        margin-top: 10px;
+      }
+
+      @media (max-width: 600px) {
+        .container {
+          width: 95%;
+          margin: 20px auto;
+        }
+
+        .section {
+          padding: 20px;
+        }
+
+        .question {
+          padding: 18px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- HEADER -->
+
+      <div class="header">
+        <h1>Bac Ninh English Practice</h1>
+        <p>Verb Forms – Word Formation – Error Correction</p>
+      </div>
+
+      <!-- ====================================== -->
+      <!-- PART II – VERB FORMS -->
+      <!-- ====================================== -->
+
+      <div class="section">
+        <h2>II. Verb Forms</h2>
+
+        <div class="instruction">
+          <strong>Instruction:</strong>
+          Give the correct tense/form of the verb in brackets to complete each
+          sentence.
+        </div>
+
+        <!-- Q1 -->
+
+        <div class="question">
+          <div class="question-text">
+            1. Though (write) ______ for children, “Alice in the Wonderland”
+            appeals to many adult readers, too.
+          </div>
+
+          <input type="text" id="v1" placeholder="Type your answer..." />
+
+          <div id="result-v1" class="result"></div>
+        </div>
+
+        <!-- Q2 -->
+
+        <div class="question">
+          <div class="question-text">
+            2. His roommate (always enter) ______ the room without knocking
+            first, which annoys him a lot.
+          </div>
+
+          <input type="text" id="v2" placeholder="Type your answer..." />
+
+          <div id="result-v2" class="result"></div>
+        </div>
+
+        <!-- Q3 -->
+
+        <div class="question">
+          <div class="question-text">
+            3. The woman insisted that the lost child (take) ______ to the
+            store’s information desk so his parents could be paged.
+          </div>
+
+          <input type="text" id="v3" placeholder="Type your answer..." />
+
+          <div id="result-v3" class="result"></div>
+        </div>
+
+        <!-- Q4 -->
+
+        <div class="question">
+          <div class="question-text">
+            4. I can’t help (choose) ______ as a school representative; it was
+            the head teacher’s decision, so you needn’t be jealous.
+          </div>
+
+          <input type="text" id="v4" placeholder="Type your answer..." />
+
+          <div id="result-v4" class="result"></div>
+        </div>
+
+        <!-- Q5 -->
+
+        <div class="question">
+          <div class="question-text">
+            5. ‘Didn’t you know that Olivia works as a curator?’ ‘To be
+            perfectly honest, she (tell) ______ me, but I probably forgot.’
+          </div>
+
+          <input type="text" id="v5" placeholder="Type your answer..." />
+
+          <div id="result-v5" class="result"></div>
+        </div>
+
+        <!-- Q6 -->
+
+        <div class="question">
+          <div class="question-text">
+            6. If we hadn’t rehearsed day and night for the past six weeks, we
+            (not/celebrate) ______ our success right now!
+          </div>
+
+          <input type="text" id="v6" placeholder="Type your answer..." />
+
+          <div id="result-v6" class="result"></div>
+        </div>
+
+        <!-- Q7 -->
+
+        <div class="question">
+          <div class="question-text">
+            7. (Not/save) ______ up enough money, Jane decided to turn down her
+            friends’ suggestion to go on holiday.
+          </div>
+
+          <input type="text" id="v7" placeholder="Type your answer..." />
+
+          <div id="result-v7" class="result"></div>
+        </div>
+
+        <!-- Q8 -->
+
+        <div class="question">
+          <div class="question-text">
+            8. At the end of next month, Sarah (work) ______ in government for
+            exactly 40 years.
+          </div>
+
+          <input type="text" id="v8" placeholder="Type your answer..." />
+
+          <div id="result-v8" class="result"></div>
+        </div>
+
+        <!-- Q9 -->
+
+        <div class="question">
+          <div class="question-text">
+            9. The topic (discuss) ______ at yesterday’s meeting was of great
+            importance.
+          </div>
+
+          <input type="text" id="v9" placeholder="Type your answer..." />
+
+          <div id="result-v9" class="result"></div>
+        </div>
+
+        <!-- Q10 -->
+
+        <div class="question">
+          <div class="question-text">
+            10. Olivia is still the only student (award) ______ the first prize
+            four times for the best design.
+          </div>
+
+          <input type="text" id="v10" placeholder="Type your answer..." />
+
+          <div id="result-v10" class="result"></div>
+        </div>
+
+        <button onclick="checkVerbForms()">Check Part II</button>
+
+        <div id="score-verb" class="score"></div>
+      </div>
+
+      <!-- ====================================== -->
+      <!-- PART III – WORD FORMATION -->
+      <!-- ====================================== -->
+
+      <div class="section">
+        <h2>III. Word Formation</h2>
+
+        <div class="instruction">
+          <strong>Instruction:</strong>
+          Give the correct form of the given word to complete each sentence.
+        </div>
+
+        <!-- Q1 -->
+
+        <div class="question">
+          <div class="question-text">
+            1. We should make young people realize that drug-taking is ______
+            (DESTROY).
+          </div>
+
+          <input type="text" id="w1" placeholder="Type your answer..." />
+
+          <div id="result-w1" class="result"></div>
+        </div>
+
+        <!-- Q2 -->
+
+        <div class="question">
+          <div class="question-text">
+            2. Lots of smart people are interested in the problems of unhealthy
+            and ______ (PRODUCE) workplaces and what to do about them.
+          </div>
+
+          <input type="text" id="w2" placeholder="Type your answer..." />
+
+          <div id="result-w2" class="result"></div>
+        </div>
+
+        <!-- Q3 -->
+
+        <div class="question">
+          <div class="question-text">
+            3. Vienna ______ (MEMORY) the 200th anniversary of Schubert’s birth
+            with a series of exhibitions and concerts.
+          </div>
+
+          <input type="text" id="w3" placeholder="Type your answer..." />
+
+          <div id="result-w3" class="result"></div>
+        </div>
+
+        <!-- Q4 -->
+
+        <div class="question">
+          <div class="question-text">
+            4. The stories ______ (VARY) focus on domestic problems they may
+            have experienced themselves.
+          </div>
+
+          <input type="text" id="w4" placeholder="Type your answer..." />
+
+          <div id="result-w4" class="result"></div>
+        </div>
+
+        <!-- Q5 -->
+
+        <div class="question">
+          <div class="question-text">
+            5. The principal said some ______ (COURAGE) words to the pupils
+            before the exam.
+          </div>
+
+          <input type="text" id="w5" placeholder="Type your answer..." />
+
+          <div id="result-w5" class="result"></div>
+        </div>
+
+        <!-- Q6 -->
+
+        <div class="question">
+          <div class="question-text">
+            6. The Manufacturing Technology Show in Chicago attracted nearly
+            90,000 ______ (ATTEND) and 1,200 exhibitors.
+          </div>
+
+          <input type="text" id="w6" placeholder="Type your answer..." />
+
+          <div id="result-w6" class="result"></div>
+        </div>
+
+        <!-- Q7 -->
+
+        <div class="question">
+          <div class="question-text">
+            7. The purpose of the United Nations is the ______ (MAINTAIN) of
+            international peace and security.
+          </div>
+
+          <input type="text" id="w7" placeholder="Type your answer..." />
+
+          <div id="result-w7" class="result"></div>
+        </div>
+
+        <!-- Q8 -->
+
+        <div class="question">
+          <div class="question-text">
+            8. Melanin producing cells in our bodies are ______ (ACTIVE) by
+            ultraviolet light from the sun and can have a protective effect.
+          </div>
+
+          <input type="text" id="w8" placeholder="Type your answer..." />
+
+          <div id="result-w8" class="result"></div>
+        </div>
+
+        <!-- Q9 -->
+
+        <div class="question">
+          <div class="question-text">
+            9. The heavy rain made the cave ______ (ACCESS). The water level was
+            so high that it would be dangerous to enter the cave.
+          </div>
+
+          <input type="text" id="w9" placeholder="Type your answer..." />
+
+          <div id="result-w9" class="result"></div>
+        </div>
+
+        <!-- Q10 -->
+
+        <div class="question">
+          <div class="question-text">
+            10. I’m full of ______ (ADMIRE) for Terry – she’s really achieved a
+            lot in her life.
+          </div>
+
+          <input type="text" id="w10" placeholder="Type your answer..." />
+
+          <div id="result-w10" class="result"></div>
+        </div>
+
+        <button onclick="checkWordFormation()">Check Part III</button>
+
+        <div id="score-word" class="score"></div>
+      </div>
+
+      <!-- ====================================== -->
+      <!-- PART IV – ERROR CORRECTION -->
+      <!-- ====================================== -->
+
+      <div class="section">
+        <h2>IV. Error Correction</h2>
+
+        <div class="instruction">
+          <strong>Instruction:</strong>
+          Each sentence contains ONE mistake. Identify the mistake and give the
+          correction.
+        </div>
+
+        <!-- ERROR 1 -->
+
+        <div class="question">
+          <div class="question-text">
+            1. He paid me $5 for cleaning twenty windows, most of them hadn’t
+            been cleaned for at least a year.
+          </div>
+
+          <label class="input-label"> Mistake: </label>
+
+          <input
+            type="text"
+            id="e1wrong"
+            placeholder="Enter the incorrect word/phrase..."
+          />
+
+          <label class="input-label"> Correction: </label>
+
+          <input
+            type="text"
+            id="e1correct"
+            placeholder="Enter the correct word/phrase..."
+          />
+
+          <div id="result-e1" class="result"></div>
+        </div>
+
+        <!-- ERROR 2 -->
+
+        <div class="question">
+          <div class="question-text">
+            2. Melons which most probably originated in Persia introduced to the
+            North American continent during the sixteenth century.
+          </div>
+
+          <label class="input-label"> Mistake: </label>
+
+          <input
+            type="text"
+            id="e2wrong"
+            placeholder="Enter the incorrect word/phrase..."
+          />
+
+          <label class="input-label"> Correction: </label>
+
+          <input
+            type="text"
+            id="e2correct"
+            placeholder="Enter the correct word/phrase..."
+          />
+
+          <div id="result-e2" class="result"></div>
+        </div>
+
+        <!-- ERROR 3 -->
+
+        <div class="question">
+          <div class="question-text">
+            3. Many people object to use physical punishment in dealing with
+            discipline problems at school.
+          </div>
+
+          <label class="input-label"> Mistake: </label>
+
+          <input
+            type="text"
+            id="e3wrong"
+            placeholder="Enter the incorrect word/phrase..."
+          />
+
+          <label class="input-label"> Correction: </label>
+
+          <input
+            type="text"
+            id="e3correct"
+            placeholder="Enter the correct word/phrase..."
+          />
+
+          <div id="result-e3" class="result"></div>
+        </div>
+
+        <!-- ERROR 4 -->
+
+        <div class="question">
+          <div class="question-text">
+            4. Never in the history of humanity has there been more people
+            living on this relatively small planet.
+          </div>
+
+          <label class="input-label"> Mistake: </label>
+
+          <input
+            type="text"
+            id="e4wrong"
+            placeholder="Enter the incorrect word/phrase..."
+          />
+
+          <label class="input-label"> Correction: </label>
+
+          <input
+            type="text"
+            id="e4correct"
+            placeholder="Enter the correct word/phrase..."
+          />
+
+          <div id="result-e4" class="result"></div>
+        </div>
+
+        <!-- ERROR 5 -->
+
+        <div class="question">
+          <div class="question-text">
+            5. I’ve always wanted to do martial arts – maybe I saw too many
+            Jackie Chan movies at an impressive age.
+          </div>
+
+          <label class="input-label"> Mistake: </label>
+
+          <input
+            type="text"
+            id="e5wrong"
+            placeholder="Enter the incorrect word/phrase..."
+          />
+
+          <label class="input-label"> Correction: </label>
+
+          <input
+            type="text"
+            id="e5correct"
+            placeholder="Enter the correct word/phrase..."
+          />
+
+          <div id="result-e5" class="result"></div>
+        </div>
+
+        <button onclick="checkErrors()">Check Part IV</button>
+
+        <div id="score-error" class="score"></div>
+      </div>
+    </div>
+
+    <script>
+      /* ==========================================
+   HELPER FUNCTION
+========================================== */
+
+      function normalizeAnswer(answer) {
+        return answer
+          .toLowerCase()
+          .trim()
+          .replace(/[.,!?]/g, "")
+          .replace(/\s+/g, " ");
+      }
+
+      /* ==========================================
+   PART II – VERB FORMS
+========================================== */
+
+      /*
+  Multiple possible answers can be accepted
+  where appropriate.
+*/
+
+      const verbAnswers = {
+        v1: ["written"],
+
+        v2: ["is always entering"],
+
+        v3: ["be taken"],
+
+        v4: ["being chosen"],
+
+        v5: ["may have told", "might have told"],
+
+        v6: ["would not be celebrating", "wouldn't be celebrating"],
+
+        v7: ["not having saved"],
+
+        v8: ["will have been working"],
+
+        v9: ["discussed"],
+
+        v10: ["to have been awarded"],
+      };
+
+      function checkVerbForms() {
+        let score = 0;
+
+        for (let question in verbAnswers) {
+          const input = document.getElementById(question);
+
+          const result = document.getElementById("result-" + question);
+
+          const userAnswer = normalizeAnswer(input.value);
+
+          const correctAnswers = verbAnswers[question];
+
+          result.className = "result";
+
+          if (userAnswer === "") {
+            result.textContent = "⚠️ Please enter an answer.";
+
+            result.classList.add("wrong");
+          } else if (
+            correctAnswers.some(
+              (answer) => normalizeAnswer(answer) === userAnswer,
+            )
+          ) {
+            score++;
+
+            result.textContent = "✅ Correct!";
+
+            result.classList.add("correct");
+          } else {
+            result.textContent =
+              "❌ Incorrect! Correct answer: " + correctAnswers[0];
+
+            result.classList.add("wrong");
+          }
+        }
+
+        const scoreBox = document.getElementById("score-verb");
+
+        scoreBox.style.display = "block";
+
+        scoreBox.textContent = "Your Score: " + score + "/10";
+      }
+
+      /* ==========================================
+   PART III – WORD FORMATION
+========================================== */
+
+      const wordAnswers = {
+        w1: ["destructive"],
+
+        w2: ["unproductive"],
+
+        w3: ["commemorated"],
+
+        w4: ["variously"],
+
+        w5: ["encouraging"],
+
+        w6: ["attendees"],
+
+        w7: ["maintenance"],
+
+        w8: ["activated"],
+
+        w9: ["inaccessible"],
+
+        w10: ["admiration"],
+      };
+
+      function checkWordFormation() {
+        let score = 0;
+
+        for (let question in wordAnswers) {
+          const input = document.getElementById(question);
+
+          const result = document.getElementById("result-" + question);
+
+          const userAnswer = normalizeAnswer(input.value);
+
+          const correctAnswers = wordAnswers[question];
+
+          result.className = "result";
+
+          if (userAnswer === "") {
+            result.textContent = "⚠️ Please enter an answer.";
+
+            result.classList.add("wrong");
+          } else if (
+            correctAnswers.some(
+              (answer) => normalizeAnswer(answer) === userAnswer,
+            )
+          ) {
+            score++;
+
+            result.textContent = "✅ Correct!";
+
+            result.classList.add("correct");
+          } else {
+            result.textContent =
+              "❌ Incorrect! Correct answer: " + correctAnswers[0];
+
+            result.classList.add("wrong");
+          }
+        }
+
+        const scoreBox = document.getElementById("score-word");
+
+        scoreBox.style.display = "block";
+
+        scoreBox.textContent = "Your Score: " + score + "/10";
+      }
+
+      /* ==========================================
+   PART IV – ERROR CORRECTION
+========================================== */
+
+      const errorAnswers = {
+        e1: {
+          wrong: ["most of them"],
+          correct: ["most of which"],
+        },
+
+        e2: {
+          wrong: ["introduced"],
+          correct: ["were introduced"],
+        },
+
+        e3: {
+          wrong: ["use"],
+          correct: ["using"],
+        },
+
+        e4: {
+          wrong: ["more people"],
+          correct: ["more people than ever"],
+        },
+
+        e5: {
+          wrong: ["impressive"],
+          correct: ["impressionable"],
+        },
+      };
+
+      function checkErrors() {
+        let score = 0;
+
+        for (let question in errorAnswers) {
+          const wrongInput = document.getElementById(question + "wrong");
+
+          const correctInput = document.getElementById(question + "correct");
+
+          const result = document.getElementById("result-" + question);
+
+          const userWrong = normalizeAnswer(wrongInput.value);
+
+          const userCorrect = normalizeAnswer(correctInput.value);
+
+          const correctWrong = errorAnswers[question].wrong;
+
+          const correctCorrection = errorAnswers[question].correct;
+
+          const wrongIsCorrect = correctWrong.some(
+            (answer) => normalizeAnswer(answer) === userWrong,
+          );
+
+          const correctionIsCorrect = correctCorrection.some(
+            (answer) => normalizeAnswer(answer) === userCorrect,
+          );
+
+          result.className = "result";
+
+          if (userWrong === "" || userCorrect === "") {
+            result.textContent =
+              "⚠️ Please complete both the mistake and the correction.";
+
+            result.classList.add("wrong");
+          } else if (wrongIsCorrect && correctionIsCorrect) {
+            score++;
+
+            result.textContent =
+              "✅ Correct! Both the mistake and correction are correct.";
+
+            result.classList.add("correct");
+          } else if (wrongIsCorrect && !correctionIsCorrect) {
+            result.textContent =
+              "❌ The mistake is correct, but the correction should be: " +
+              correctCorrection[0];
+
+            result.classList.add("wrong");
+          } else if (!wrongIsCorrect && correctionIsCorrect) {
+            result.textContent =
+              "❌ The correction is correct, but identify the mistake more precisely: " +
+              correctWrong[0];
+
+            result.classList.add("wrong");
+          } else {
+            result.textContent =
+              "❌ Incorrect! Mistake: " +
+              correctWrong[0] +
+              " → Correction: " +
+              correctCorrection[0];
+
+            result.classList.add("wrong");
+          }
+        }
+
+        const scoreBox = document.getElementById("score-error");
+
+        scoreBox.style.display = "block";
+
+        scoreBox.textContent = "Your Score: " + score + "/5";
+      }
+    </script>
+  </body>
+</html>

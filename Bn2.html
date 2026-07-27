@@ -1,0 +1,939 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>English Practice - Ecotourism & Transformations</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f5f7fb;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      .container {
+        width: 92%;
+        max-width: 1050px;
+        margin: 40px auto;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 35px;
+      }
+
+      .header h1 {
+        color: #2c3e50;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        color: #666;
+      }
+
+      .section {
+        background: white;
+        padding: 30px;
+        margin-bottom: 30px;
+        border-radius: 18px;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+      }
+
+      .section h2 {
+        color: #2c3e50;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 12px;
+      }
+
+      .instruction {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 25px;
+      }
+
+      .passage {
+        background: #fafafa;
+        padding: 22px;
+        border-radius: 12px;
+        margin-bottom: 25px;
+      }
+
+      .question {
+        margin-bottom: 28px;
+        padding: 22px;
+        background: #fafafa;
+        border-left: 5px solid #3498db;
+        border-radius: 10px;
+      }
+
+      .question-text {
+        font-weight: bold;
+        margin-bottom: 15px;
+      }
+
+      .option {
+        display: block;
+        padding: 11px 15px;
+        margin: 8px 0;
+        background: white;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+
+      .option:hover {
+        background: #eef6ff;
+        border-color: #3498db;
+      }
+
+      .option input {
+        margin-right: 10px;
+        cursor: pointer;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        padding: 12px 15px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        outline: none;
+        margin-top: 8px;
+      }
+
+      input[type="text"]:focus {
+        border-color: #3498db;
+      }
+
+      .input-label {
+        font-size: 14px;
+        font-weight: bold;
+        color: #555;
+        margin-top: 12px;
+        display: block;
+      }
+
+      .result {
+        display: none;
+        margin-top: 15px;
+        padding: 12px 15px;
+        border-radius: 8px;
+        font-weight: bold;
+      }
+
+      .correct {
+        display: block;
+        background: #d4edda;
+        color: #155724;
+      }
+
+      .wrong {
+        display: block;
+        background: #f8d7da;
+        color: #721c24;
+      }
+
+      button {
+        display: block;
+        margin: 30px auto 0;
+        padding: 13px 30px;
+        font-size: 16px;
+        font-weight: bold;
+        color: white;
+        background: #3498db;
+        border: none;
+        border-radius: 9px;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+
+      button:hover {
+        background: #2980b9;
+      }
+
+      .score {
+        display: none;
+        margin-top: 25px;
+        padding: 18px;
+        text-align: center;
+        font-size: 21px;
+        font-weight: bold;
+        background: #eef6ff;
+        color: #2c3e50;
+        border-radius: 10px;
+      }
+
+      .sub-question {
+        margin-top: 15px;
+      }
+
+      .sub-question p {
+        margin-bottom: 5px;
+      }
+
+      @media (max-width: 600px) {
+        .container {
+          width: 95%;
+          margin: 20px auto;
+        }
+
+        .section {
+          padding: 20px;
+        }
+
+        .question {
+          padding: 18px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- ===================================== -->
+      <!-- HEADER -->
+      <!-- ===================================== -->
+
+      <div class="header">
+        <h1>English Practice</h1>
+
+        <p>Ecotourism – Multiple Choice – Sentence Transformation</p>
+      </div>
+
+      <!-- ===================================== -->
+      <!-- PART I – OPEN CLOZE -->
+      <!-- ===================================== -->
+
+      <div class="section">
+        <h2>I. Open Cloze</h2>
+
+        <div class="instruction">
+          <strong>Instruction:</strong>
+          Read the passage and fill each blank with ONE suitable word.
+        </div>
+
+        <div class="passage">
+          <p>
+            Ecotourism is a booming business that many tour operators cite as
+            (1) ______ helpful to nature. Every year, millions of people descend
+            on protected and pristine natural areas to observe rare species.
+            However, a new report casts (2) ______ on the value of this form of
+            tourism. In fact, it suggests that ecotourism is more damaging than
+            helpful to nature. Details are in a report published in the journal
+            ‘Trends in Ecology and Evolution’. Researchers believe tourists are
+            disrupting animals in their natural habitat. They pointed to a
+            recent event (3) ______ sea turtles in Costa Rica had problems
+            laying their eggs because of tourists who flocked to watch the
+            turtles’ nesting habits.
+          </p>
+
+          <p>
+            The report says that ecotourism is making animals bolder and that
+            this could endanger the animals. A regular human presence might make
+            animals tamer and less cautious about (4) ______ animals around
+            them, and this could put them at risk of being attacked by their
+            natural threats. “Then they will suffer higher mortality when they
+            encounter real predators,” the report says. The report said it was
+            essential, “to develop a more comprehensive understanding of how
+            different species in different situations (5) ______ to human
+            visitation and under what precise conditions human exposure might
+            put them at risk.”
+          </p>
+        </div>
+
+        <!-- Q1 -->
+
+        <div class="question">
+          <div class="question-text">1. cite as ______ helpful to nature</div>
+
+          <input type="text" id="c1" placeholder="Type one word..." />
+
+          <div id="result-c1" class="result"></div>
+        </div>
+
+        <!-- Q2 -->
+
+        <div class="question">
+          <div class="question-text">
+            2. casts ______ on the value of this form of tourism
+          </div>
+
+          <input type="text" id="c2" placeholder="Type one word..." />
+
+          <div id="result-c2" class="result"></div>
+        </div>
+
+        <!-- Q3 -->
+
+        <div class="question">
+          <div class="question-text">
+            3. a recent event ______ sea turtles in Costa Rica had problems...
+          </div>
+
+          <input type="text" id="c3" placeholder="Type one word..." />
+
+          <div id="result-c3" class="result"></div>
+        </div>
+
+        <!-- Q4 -->
+
+        <div class="question">
+          <div class="question-text">
+            4. less cautious about ______ animals around them
+          </div>
+
+          <input type="text" id="c4" placeholder="Type one word..." />
+
+          <div id="result-c4" class="result"></div>
+        </div>
+
+        <!-- Q5 -->
+
+        <div class="question">
+          <div class="question-text">
+            5. how different species in different situations ______ to human
+            visitation
+          </div>
+
+          <input type="text" id="c5" placeholder="Type one word..." />
+
+          <div id="result-c5" class="result"></div>
+        </div>
+
+        <button onclick="checkCloze()">Check Part I</button>
+
+        <div id="score-cloze" class="score"></div>
+      </div>
+
+      <!-- ===================================== -->
+      <!-- PART II – MULTIPLE CHOICE -->
+      <!-- ===================================== -->
+
+      <div class="section">
+        <h2>II. Multiple Choice Cloze</h2>
+
+        <div class="instruction">
+          <strong>Instruction:</strong>
+          Choose the word that best fits each blank.
+        </div>
+
+        <!-- Q1 -->
+
+        <div class="question">
+          <div class="question-text">
+            1. Her mastery of light and shadow, ______ with a keen eye for
+            detail, made her work stand out in the crowded field of contemporary
+            art.
+          </div>
+
+          <label class="option">
+            <input type="radio" name="m1" value="A" />
+            A. coupled
+          </label>
+
+          <label class="option">
+            <input type="radio" name="m1" value="B" />
+            B. coupling
+          </label>
+
+          <label class="option">
+            <input type="radio" name="m1" value="C" />
+            C. having coupled
+          </label>
+
+          <label class="option">
+            <input type="radio" name="m1" value="D" />
+            D. couples
+          </label>
+
+          <div id="result-m1" class="result"></div>
+        </div>
+
+        <!-- Q2 -->
+
+        <div class="question">
+          <div class="question-text">
+            2. Her latest exhibition did not receive the same level of ______
+            that her previous works had garnered.
+          </div>
+
+          <label class="option">
+            <input type="radio" name="m2" value="A" />
+            A. exclaim
+          </label>
+
+          <label class="option">
+            <input type="radio" name="m2" value="B" />
+            B. acclaim
+          </label>
+
+          <label class="option">
+            <input type="radio" name="m2" value="C" />
+            C. declaim
+          </label>
+
+          <label class="option">
+            <input type="radio" name="m2" value="D" />
+            D. proclaim
+          </label>
+
+          <div id="result-m2" class="result"></div>
+        </div>
+
+        <!-- Q3 -->
+
+        <div class="question">
+          <div class="question-text">
+            3. ______, some argued that she had taken too many creative
+            liberties, altering the natural forms to such an extent that they
+            became unrecognizable.
+          </div>
+
+          <label class="option">
+            <input type="radio" name="m3" value="A" />
+            A. Generally
+          </label>
+
+          <label class="option">
+            <input type="radio" name="m3" value="B" />
+            B. However
+          </label>
+
+          <label class="option">
+            <input type="radio" name="m3" value="C" />
+            C. Additionally
+          </label>
+
+          <label class="option">
+            <input type="radio" name="m3" value="D" />
+            D. Therefore
+          </label>
+
+          <div id="result-m3" class="result"></div>
+        </div>
+
+        <!-- Q4 -->
+
+        <div class="question">
+          <div class="question-text">
+            4. As a result, what was once considered her strength has now become
+            a ______ of contention.
+          </div>
+
+          <label class="option">
+            <input type="radio" name="m4" value="A" />
+            A. view
+          </label>
+
+          <label class="option">
+            <input type="radio" name="m4" value="B" />
+            B. term
+          </label>
+
+          <label class="option">
+            <input type="radio" name="m4" value="C" />
+            C. credit
+          </label>
+
+          <label class="option">
+            <input type="radio" name="m4" value="D" />
+            D. point
+          </label>
+
+          <div id="result-m4" class="result"></div>
+        </div>
+
+        <!-- Q5 -->
+
+        <div class="question">
+          <div class="question-text">
+            5. Her fans remain devoted, believing that her work still ______ a
+            chord when it comes to capturing the emotional depth of the natural
+            world.
+          </div>
+
+          <label class="option">
+            <input type="radio" name="m5" value="A" />
+            A. makes
+          </label>
+
+          <label class="option">
+            <input type="radio" name="m5" value="B" />
+            B. strikes
+          </label>
+
+          <label class="option">
+            <input type="radio" name="m5" value="C" />
+            C. does
+          </label>
+
+          <label class="option">
+            <input type="radio" name="m5" value="D" />
+            D. hits
+          </label>
+
+          <div id="result-m5" class="result"></div>
+        </div>
+
+        <button onclick="checkMultipleChoice()">Check Part II</button>
+
+        <div id="score-multiple" class="score"></div>
+      </div>
+
+      <!-- ===================================== -->
+      <!-- PART III – SENTENCE TRANSFORMATION -->
+      <!-- ===================================== -->
+
+      <div class="section">
+        <h2>III. Sentence Transformation</h2>
+
+        <div class="instruction">
+          <strong>Instruction:</strong>
+          Complete each sentence so that it has a similar meaning to the
+          original.
+        </div>
+
+        <!-- Q1 -->
+
+        <div class="question">
+          <div class="question-text">
+            1. The fund-raisers haven’t officially decided where to send the
+            proceeds of the concert.
+          </div>
+
+          <p>→ No official ______</p>
+
+          <input type="text" id="t1" placeholder="Complete the sentence..." />
+
+          <div id="result-t1" class="result"></div>
+        </div>
+
+        <!-- Q2 -->
+
+        <div class="question">
+          <div class="question-text">
+            2. This picture reminds me of the time I went to Ho Chi Minh City to
+            watch the military parade.
+          </div>
+
+          <p>→ This picture takes me ______</p>
+
+          <input type="text" id="t2" placeholder="Complete the sentence..." />
+
+          <div id="result-t2" class="result"></div>
+        </div>
+
+        <!-- Q3 -->
+
+        <div class="question">
+          <div class="question-text">
+            3. The minister proposed regular meetings for the committee.
+          </div>
+
+          <p>→ The minister suggested ______</p>
+
+          <input type="text" id="t3" placeholder="Complete the sentence..." />
+
+          <div id="result-t3" class="result"></div>
+        </div>
+
+        <!-- Q4 -->
+
+        <div class="question">
+          <div class="question-text">
+            4. I would prefer him not to have said all those embarrassing things
+            about me.
+          </div>
+
+          <p>→ I’d sooner ______</p>
+
+          <input type="text" id="t4" placeholder="Complete the sentence..." />
+
+          <div id="result-t4" class="result"></div>
+        </div>
+
+        <!-- Q5 -->
+
+        <div class="question">
+          <div class="question-text">
+            5. I almost gave up jogging because of my health problem.
+          </div>
+
+          <p>→ I came very ______</p>
+
+          <input type="text" id="t5" placeholder="Complete the sentence..." />
+
+          <div id="result-t5" class="result"></div>
+        </div>
+
+        <button onclick="checkTransformation()">Check Part III</button>
+
+        <div id="score-transformation" class="score"></div>
+      </div>
+
+      <!-- ===================================== -->
+      <!-- PART IV – KEY WORD TRANSFORMATION -->
+      <!-- ===================================== -->
+
+      <div class="section">
+        <h2>IV. Key Word Transformation</h2>
+
+        <div class="instruction">
+          <strong>Instruction:</strong>
+          Complete the second sentence using the word in bold. Do NOT change the
+          word given.
+        </div>
+
+        <!-- Q1 -->
+
+        <div class="question">
+          <div class="question-text">
+            1. I don’t think it’s likely that you’ll win the competition.
+            <strong>(CHANCE)</strong>
+          </div>
+
+          <p>→ I think there is ______</p>
+
+          <input type="text" id="k1" placeholder="Complete the sentence..." />
+
+          <div id="result-k1" class="result"></div>
+        </div>
+
+        <!-- Q2 -->
+
+        <div class="question">
+          <div class="question-text">
+            2. He was not given details of the company’s new plans.
+            <strong>(DARK)</strong>
+          </div>
+
+          <p>→ He was ______</p>
+
+          <input type="text" id="k2" placeholder="Complete the sentence..." />
+
+          <div id="result-k2" class="result"></div>
+        </div>
+
+        <!-- Q3 -->
+
+        <div class="question">
+          <div class="question-text">
+            3. His excuse for such bad behavior has little effect on her.
+            <strong>(CUTS)</strong>
+          </div>
+
+          <p>→ His excuse ______</p>
+
+          <input type="text" id="k3" placeholder="Complete the sentence..." />
+
+          <div id="result-k3" class="result"></div>
+        </div>
+
+        <!-- Q4 -->
+
+        <div class="question">
+          <div class="question-text">
+            4. The adverts look exactly the same as the articles in this
+            magazine.
+            <strong>(DIFFERENCE)</strong>
+          </div>
+
+          <p>→ It’s impossible ______</p>
+
+          <input type="text" id="k4" placeholder="Complete the sentence..." />
+
+          <div id="result-k4" class="result"></div>
+        </div>
+
+        <!-- Q5 -->
+
+        <div class="question">
+          <div class="question-text">
+            5. They remain close friends despite having had many arguments.
+            <strong>(FALL)</strong>
+          </div>
+
+          <p>→ Frequently as ______</p>
+
+          <input type="text" id="k5" placeholder="Complete the sentence..." />
+
+          <div id="result-k5" class="result"></div>
+        </div>
+
+        <button onclick="checkKeyWord()">Check Part IV</button>
+
+        <div id="score-keyword" class="score"></div>
+      </div>
+    </div>
+
+    <script>
+      /* ==========================================
+   HELPER
+========================================== */
+
+      function normalizeAnswer(answer) {
+        return answer
+          .toLowerCase()
+          .trim()
+          .replace(/[.,!?]/g, "")
+          .replace(/\s+/g, " ");
+      }
+
+      /* ==========================================
+   PART I – OPEN CLOZE
+========================================== */
+
+      const clozeAnswers = {
+        c1: ["being"],
+
+        c2: ["doubt"],
+
+        c3: ["when"],
+
+        c4: ["other"],
+
+        c5: ["respond"],
+      };
+
+      function checkCloze() {
+        let score = 0;
+
+        for (let question in clozeAnswers) {
+          const input = document.getElementById(question);
+
+          const result = document.getElementById("result-" + question);
+
+          const userAnswer = normalizeAnswer(input.value);
+
+          const correctAnswers = clozeAnswers[question];
+
+          result.className = "result";
+
+          if (userAnswer === "") {
+            result.textContent = "⚠️ Please enter an answer.";
+
+            result.classList.add("wrong");
+          } else if (
+            correctAnswers.some(
+              (answer) => normalizeAnswer(answer) === userAnswer,
+            )
+          ) {
+            score++;
+
+            result.textContent = "✅ Correct!";
+
+            result.classList.add("correct");
+          } else {
+            result.textContent =
+              "❌ Incorrect! Correct answer: " + correctAnswers[0];
+
+            result.classList.add("wrong");
+          }
+        }
+
+        const scoreBox = document.getElementById("score-cloze");
+
+        scoreBox.style.display = "block";
+
+        scoreBox.textContent = "Your Score: " + score + "/5";
+      }
+
+      /* ==========================================
+   PART II – MULTIPLE CHOICE
+========================================== */
+
+      const multipleAnswers = {
+        m1: "A",
+        m2: "B",
+        m3: "C",
+        m4: "D",
+        m5: "B",
+      };
+
+      function checkMultipleChoice() {
+        let score = 0;
+
+        for (let question in multipleAnswers) {
+          const selected = document.querySelector(
+            `input[name="${question}"]:checked`,
+          );
+
+          const result = document.getElementById("result-" + question);
+
+          result.className = "result";
+
+          if (!selected) {
+            result.textContent = "⚠️ Please select an answer.";
+
+            result.classList.add("wrong");
+          } else if (selected.value === multipleAnswers[question]) {
+            score++;
+
+            result.textContent = "✅ Correct!";
+
+            result.classList.add("correct");
+          } else {
+            result.textContent =
+              "❌ Incorrect! Correct answer: " + multipleAnswers[question];
+
+            result.classList.add("wrong");
+          }
+        }
+
+        const scoreBox = document.getElementById("score-multiple");
+
+        scoreBox.style.display = "block";
+
+        scoreBox.textContent = "Your Score: " + score + "/5";
+      }
+
+      /* ==========================================
+   PART III – SENTENCE TRANSFORMATION
+========================================== */
+
+      const transformationAnswers = {
+        t1: [
+          "decision has been made about where to send the proceeds of the concert",
+          "decision has been made on where to send the proceeds of the concert",
+        ],
+
+        t2: [
+          "back to the time I went to Ho Chi Minh City to watch the military parade",
+        ],
+
+        t3: [
+          "that the committee should meet regularly",
+          "regular meetings for the committee",
+        ],
+
+        t4: ["he had not said all those embarrassing things about me"],
+
+        t5: [
+          "close to giving up jogging because of my health problem",
+          "close to giving up jogging due to my health problem",
+        ],
+      };
+
+      function checkTransformation() {
+        let score = 0;
+
+        for (let question in transformationAnswers) {
+          const input = document.getElementById(question);
+
+          const result = document.getElementById("result-" + question);
+
+          const userAnswer = normalizeAnswer(input.value);
+
+          const correctAnswers = transformationAnswers[question];
+
+          result.className = "result";
+
+          if (userAnswer === "") {
+            result.textContent = "⚠️ Please complete the sentence.";
+
+            result.classList.add("wrong");
+          } else if (
+            correctAnswers.some(
+              (answer) => normalizeAnswer(answer) === userAnswer,
+            )
+          ) {
+            score++;
+
+            result.textContent = "✅ Correct!";
+
+            result.classList.add("correct");
+          } else {
+            result.textContent =
+              "❌ Incorrect! One possible answer: " + correctAnswers[0];
+
+            result.classList.add("wrong");
+          }
+        }
+
+        const scoreBox = document.getElementById("score-transformation");
+
+        scoreBox.style.display = "block";
+
+        scoreBox.textContent = "Your Score: " + score + "/5";
+      }
+
+      /* ==========================================
+   PART IV – KEY WORD TRANSFORMATION
+========================================== */
+
+      const keyWordAnswers = {
+        k1: [
+          "little chance of you winning the competition",
+          "not much chance of you winning the competition",
+        ],
+
+        k2: [
+          "kept in the dark about the company’s new plans",
+          "kept in the dark about the company's new plans",
+        ],
+
+        k3: ["cuts little ice with her", "cuts no ice with her"],
+
+        k4: ["to tell the adverts from the articles in this magazine"],
+
+        k5: [
+          "they have fallen out they remain close friends",
+          "they fall out they remain close friends",
+        ],
+      };
+
+      function checkKeyWord() {
+        let score = 0;
+
+        for (let question in keyWordAnswers) {
+          const input = document.getElementById(question);
+
+          const result = document.getElementById("result-" + question);
+
+          const userAnswer = normalizeAnswer(input.value);
+
+          const correctAnswers = keyWordAnswers[question];
+
+          result.className = "result";
+
+          if (userAnswer === "") {
+            result.textContent = "⚠️ Please complete the sentence.";
+
+            result.classList.add("wrong");
+          } else if (
+            correctAnswers.some(
+              (answer) => normalizeAnswer(answer) === userAnswer,
+            )
+          ) {
+            score++;
+
+            result.textContent = "✅ Correct!";
+
+            result.classList.add("correct");
+          } else {
+            result.textContent =
+              "❌ Incorrect! One possible answer: " + correctAnswers[0];
+
+            result.classList.add("wrong");
+          }
+        }
+
+        const scoreBox = document.getElementById("score-keyword");
+
+        scoreBox.style.display = "block";
+
+        scoreBox.textContent = "Your Score: " + score + "/5";
+      }
+    </script>
+  </body>
+</html>
