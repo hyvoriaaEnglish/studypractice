@@ -1,0 +1,1027 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Present Perfect & Past Continuous | Hyvoria English</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Oswald:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Baloo 2", sans-serif;
+        background: #f7f4ff;
+        color: #302b45;
+        line-height: 1.7;
+        min-height: 100vh;
+      }
+
+      /* ================= HEADER ================= */
+
+      header {
+        background: linear-gradient(135deg, #6c4ce8, #8d6cff);
+        color: white;
+        padding: 18px 7%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        box-shadow: 0 4px 15px rgba(70, 50, 130, 0.18);
+      }
+
+      .logo {
+        font-family: "Oswald", sans-serif;
+        font-size: 27px;
+        font-weight: 700;
+        letter-spacing: 1px;
+      }
+
+      .lesson-label {
+        font-size: 16px;
+        font-weight: 600;
+        opacity: 0.95;
+      }
+
+      /* ================= PROGRESS ================= */
+
+      .progress-container {
+        height: 7px;
+        background: #e4def8;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .progress-bar {
+        height: 100%;
+        width: 0%;
+        background: #ffb347;
+        transition: width 0.3s ease;
+      }
+
+      /* ================= MAIN ================= */
+
+      main {
+        width: min(1000px, 92%);
+        margin: 35px auto 100px;
+      }
+
+      .page {
+        display: none;
+        animation: fadeIn 0.35s ease;
+      }
+
+      .page.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ================= TITLE ================= */
+
+      .hero {
+        background: white;
+        border-radius: 25px;
+        padding: 38px 35px;
+        text-align: center;
+        margin-bottom: 25px;
+        box-shadow: 0 10px 30px rgba(74, 54, 140, 0.1);
+      }
+
+      .hero h1 {
+        font-family: "Oswald", sans-serif;
+        font-size: 38px;
+        color: #6042d8;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+      }
+
+      .hero h2 {
+        font-size: 21px;
+        color: #70678d;
+        font-weight: 600;
+      }
+
+      /* ================= CARDS ================= */
+
+      .card {
+        background: white;
+        border-radius: 22px;
+        padding: 30px;
+        margin-bottom: 22px;
+        box-shadow: 0 8px 25px rgba(74, 54, 140, 0.08);
+      }
+
+      .card h2 {
+        color: #6042d8;
+        font-size: 27px;
+        margin-bottom: 18px;
+      }
+
+      .card h3 {
+        color: #7659e8;
+        font-size: 21px;
+        margin: 22px 0 10px;
+      }
+
+      .card p {
+        margin-bottom: 12px;
+      }
+
+      .formula {
+        background: #f0ecff;
+        border-left: 5px solid #7052e5;
+        padding: 15px 20px;
+        border-radius: 12px;
+        font-size: 19px;
+        font-weight: 700;
+        color: #4e38b6;
+        margin: 15px 0;
+      }
+
+      .example {
+        background: #fff8ea;
+        border-left: 5px solid #ffb347;
+        padding: 15px 20px;
+        border-radius: 12px;
+        margin: 14px 0;
+      }
+
+      .example strong {
+        color: #9b6417;
+      }
+
+      .note {
+        background: #eef8ff;
+        border-left: 5px solid #48a9e8;
+        padding: 15px 20px;
+        border-radius: 12px;
+        margin: 15px 0;
+      }
+
+      .warning {
+        background: #fff0f0;
+        border-left: 5px solid #ef7777;
+        padding: 15px 20px;
+        border-radius: 12px;
+        margin: 15px 0;
+      }
+
+      /* ================= TABLE ================= */
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 18px 0;
+        overflow: hidden;
+        border-radius: 12px;
+      }
+
+      th {
+        background: #6c4ce8;
+        color: white;
+        padding: 13px;
+        text-align: left;
+      }
+
+      td {
+        padding: 13px;
+        border-bottom: 1px solid #e8e3f4;
+        background: #faf9ff;
+      }
+
+      tr:last-child td {
+        border-bottom: none;
+      }
+
+      /* ================= LIST ================= */
+
+      ul {
+        padding-left: 25px;
+        margin: 12px 0;
+      }
+
+      li {
+        margin: 5px 0;
+      }
+
+      .keyword {
+        display: inline-block;
+        background: #eee9ff;
+        color: #5b42c6;
+        padding: 5px 12px;
+        border-radius: 20px;
+        margin: 4px;
+        font-weight: 600;
+      }
+
+      /* ================= COMPARISON ================= */
+
+      .compare {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+        margin-top: 18px;
+      }
+
+      .compare-box {
+        padding: 22px;
+        border-radius: 18px;
+        background: #f8f6ff;
+        border: 2px solid #e7e0ff;
+      }
+
+      .compare-box h3 {
+        margin-top: 0;
+      }
+
+      /* ================= NAVIGATION ================= */
+
+      .navigation {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+        margin-top: 25px;
+      }
+
+      button,
+      .nav-link {
+        border: none;
+        text-decoration: none;
+        font-family: "Baloo 2", sans-serif;
+        font-size: 17px;
+        font-weight: 700;
+        cursor: pointer;
+        padding: 12px 23px;
+        border-radius: 14px;
+        transition: 0.2s;
+      }
+
+      .btn-prev {
+        background: #e9e5f7;
+        color: #51486b;
+      }
+
+      .btn-next {
+        background: #6c4ce8;
+        color: white;
+      }
+
+      button:hover,
+      .nav-link:hover {
+        transform: translateY(-2px);
+        opacity: 0.9;
+      }
+
+      .page-number {
+        font-weight: 700;
+        color: #776d91;
+      }
+
+      /* ================= FINAL ================= */
+
+      .final-card {
+        text-align: center;
+        padding: 45px 30px;
+      }
+
+      .final-card h2 {
+        font-size: 34px;
+      }
+
+      .quiz-button {
+        display: inline-block;
+        background: #ff9f43;
+        color: white;
+        font-size: 21px;
+        padding: 15px 35px;
+        border-radius: 17px;
+        margin-top: 20px;
+        text-decoration: none;
+        font-weight: 800;
+        box-shadow: 0 7px 0 #d98225;
+        transition: 0.2s;
+      }
+
+      .quiz-button:hover {
+        transform: translateY(3px);
+        box-shadow: 0 4px 0 #d98225;
+      }
+
+      .home-button {
+        display: inline-block;
+        margin-top: 25px;
+        background: #eeeaff;
+        color: #5c42c7;
+        padding: 12px 25px;
+        border-radius: 14px;
+        text-decoration: none;
+        font-weight: 700;
+      }
+
+      /* ================= RESPONSIVE ================= */
+
+      @media (max-width: 700px) {
+        header {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .hero h1 {
+          font-size: 29px;
+        }
+
+        .card {
+          padding: 22px;
+        }
+
+        .compare {
+          grid-template-columns: 1fr;
+        }
+
+        .navigation {
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+
+        table {
+          font-size: 14px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- ================= HEADER ================= -->
+
+    <header>
+      <div class="logo">Hyvoria English</div>
+      <div class="lesson-label">
+        Grammar Lesson • Present Perfect & Past Continuous
+      </div>
+    </header>
+
+    <!-- ================= PROGRESS BAR ================= -->
+
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <main>
+      <!-- ================= PAGE 1 ================= -->
+
+      <section class="page active">
+        <div class="hero">
+          <h1>Present Perfect & Past Continuous</h1>
+          <h2>Thì Hiện tại hoàn thành & Thì Quá khứ tiếp diễn</h2>
+        </div>
+
+        <div class="card">
+          <h2>🎯 Mục tiêu bài học</h2>
+
+          <p>Sau bài học này, bạn có thể:</p>
+
+          <ul>
+            <li>
+              Hiểu cấu trúc và cách dùng của <strong>Present Perfect</strong>.
+            </li>
+            <li>
+              Hiểu cấu trúc và cách dùng của <strong>Past Continuous</strong>.
+            </li>
+            <li>Phân biệt <strong>Present Perfect và Past Simple</strong>.</li>
+            <li>Phân biệt <strong>Past Continuous và Past Simple</strong>.</li>
+            <li>
+              Sử dụng đúng <strong>when</strong> và <strong>while</strong>.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ================= PAGE 2 ================= -->
+
+      <section class="page">
+        <div class="card">
+          <h2>🟦 PART 1. PRESENT PERFECT</h2>
+
+          <h3>1. Cấu trúc</h3>
+
+          <div class="formula">Khẳng định: S + have/has + V3/ed</div>
+
+          <p>Ví dụ:</p>
+
+          <div class="example">
+            I / You / We / They <strong>have studied</strong>.<br />
+            He / She / It <strong>has studied</strong>.
+          </div>
+
+          <div class="formula">Phủ định: S + have/has + not + V3/ed</div>
+
+          <div class="example">
+            I <strong>haven't finished</strong> my homework.<br />
+            She <strong>hasn't arrived</strong> yet.
+          </div>
+
+          <div class="formula">Nghi vấn: Have/Has + S + V3/ed?</div>
+
+          <div class="example">
+            <strong>Have</strong> you <strong>finished</strong> your
+            homework?<br />
+            <strong>Has</strong> she <strong>arrived</strong> yet?
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= PAGE 3 ================= -->
+
+      <section class="page">
+        <div class="card">
+          <h2>📌 Present Perfect – Cách dùng</h2>
+
+          <h3>1. Hành động bắt đầu trong quá khứ và kéo dài đến hiện tại</h3>
+
+          <p>Thường đi với <strong>for</strong> và <strong>since</strong>.</p>
+
+          <div class="example">
+            I <strong>have studied</strong> English <strong>for</strong> five
+            years.
+          </div>
+
+          <div class="example">
+            She <strong>has lived</strong> in Hai Phong
+            <strong>since</strong> 2020.
+          </div>
+
+          <table>
+            <tr>
+              <th>FOR</th>
+              <th>SINCE</th>
+            </tr>
+
+            <tr>
+              <td>for two years</td>
+              <td>since 2020</td>
+            </tr>
+
+            <tr>
+              <td>for three months</td>
+              <td>since January</td>
+            </tr>
+
+            <tr>
+              <td>for a long time</td>
+              <td>since Monday</td>
+            </tr>
+
+            <tr>
+              <td>for five days</td>
+              <td>since I was a child</td>
+            </tr>
+          </table>
+
+          <div class="note">
+            ⭐ <strong>FOR + khoảng thời gian</strong><br />
+            ⭐ <strong>SINCE + mốc thời gian</strong>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= PAGE 4 ================= -->
+
+      <section class="page">
+        <div class="card">
+          <h2>✨ Các cách dùng khác của Present Perfect</h2>
+
+          <h3>2. Hành động vừa mới xảy ra</h3>
+
+          <div class="example">
+            I have <strong>just finished</strong> my homework.
+          </div>
+
+          <div class="example">
+            She has <strong>just arrived</strong> at school.
+          </div>
+
+          <h3>3. Hành động đã xảy ra nhưng không nói rõ thời điểm</h3>
+
+          <div class="example">I <strong>have visited</strong> London.</div>
+
+          <div class="example">She <strong>has read</strong> this book.</div>
+
+          <h3>4. Kinh nghiệm</h3>
+
+          <p>
+            <span class="keyword">ever</span>
+            <span class="keyword">never</span>
+            <span class="keyword">before</span>
+            <span class="keyword">once</span>
+            <span class="keyword">twice</span>
+            <span class="keyword">many times</span>
+          </p>
+
+          <div class="example">
+            Have you <strong>ever visited</strong> Japan?
+          </div>
+
+          <div class="example">I have <strong>never tried</strong> sushi.</div>
+
+          <h3>5. Hành động có kết quả ở hiện tại</h3>
+
+          <div class="example">
+            I <strong>have lost</strong> my keys.
+            <br />
+            → Bây giờ tôi không có chìa khóa.
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= PAGE 5 ================= -->
+
+      <section class="page">
+        <div class="card">
+          <h2>🔎 Dấu hiệu nhận biết Present Perfect</h2>
+
+          <p>
+            <span class="keyword">already</span>
+            <span class="keyword">just</span>
+            <span class="keyword">yet</span>
+            <span class="keyword">ever</span>
+            <span class="keyword">never</span>
+            <span class="keyword">recently</span>
+            <span class="keyword">lately</span>
+            <span class="keyword">so far</span>
+            <span class="keyword">up to now</span>
+            <span class="keyword">for</span>
+            <span class="keyword">since</span>
+          </p>
+
+          <div class="example">
+            I have <strong>already finished</strong> my homework.
+          </div>
+
+          <div class="example">She hasn't arrived <strong>yet</strong>.</div>
+
+          <div class="example">
+            Have you <strong>ever seen</strong> this movie?
+          </div>
+
+          <div class="example">
+            We have lived here <strong>for ten years</strong>.
+          </div>
+
+          <div class="example">
+            He has worked here <strong>since 2018</strong>.
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= PAGE 6 ================= -->
+
+      <section class="page">
+        <div class="card">
+          <h2>⚠️ Present Perfect vs Past Simple</h2>
+
+          <div class="compare">
+            <div class="compare-box">
+              <h3>🟢 Present Perfect</h3>
+
+              <div class="formula">have/has + V3/ed</div>
+
+              <div class="example">I <strong>have visited</strong> London.</div>
+
+              <p>→ Đã từng đến London nhưng không nói thời điểm cụ thể.</p>
+            </div>
+
+            <div class="compare-box">
+              <h3>🔵 Past Simple</h3>
+
+              <div class="formula">V2/ed</div>
+
+              <div class="example">
+                I <strong>visited</strong> London last year.
+              </div>
+
+              <p>→ Có thời gian quá khứ cụ thể.</p>
+            </div>
+          </div>
+
+          <div class="warning">
+            ❌ I have visited London <strong>last year</strong>.<br /><br />
+            ✅ I visited London <strong>last year</strong>.
+          </div>
+
+          <p><strong>Past Simple</strong> thường đi với:</p>
+
+          <p>
+            <span class="keyword">yesterday</span>
+            <span class="keyword">last week</span>
+            <span class="keyword">last year</span>
+            <span class="keyword">two days ago</span>
+            <span class="keyword">in 2020</span>
+            <span class="keyword">when I was young</span>
+          </p>
+        </div>
+      </section>
+
+      <!-- ================= PAGE 7 ================= -->
+
+      <section class="page">
+        <div class="card">
+          <h2>🟩 PART 2. PAST CONTINUOUS</h2>
+
+          <h3>1. Cấu trúc</h3>
+
+          <div class="formula">Khẳng định: S + was/were + V-ing</div>
+
+          <div class="example">
+            I / He / She / It <strong>was studying</strong>.<br />
+            You / We / They <strong>were studying</strong>.
+          </div>
+
+          <div class="formula">Phủ định: S + was/were + not + V-ing</div>
+
+          <div class="example">
+            I <strong>wasn't sleeping</strong>.<br />
+            They <strong>weren't playing</strong> football.
+          </div>
+
+          <div class="formula">Nghi vấn: Was/Were + S + V-ing?</div>
+
+          <div class="example">
+            <strong>Were</strong> you <strong>studying</strong> at 8 p.m.?<br />
+            <strong>Was</strong> she <strong>sleeping</strong>?
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= PAGE 8 ================= -->
+
+      <section class="page">
+        <div class="card">
+          <h2>⏰ Past Continuous – Cách dùng</h2>
+
+          <h3>
+            1. Hành động đang xảy ra tại một thời điểm cụ thể trong quá khứ
+          </h3>
+
+          <div class="example">
+            At 8 p.m. yesterday, I <strong>was doing</strong> my homework.
+          </div>
+
+          <div class="example">
+            At this time last Sunday, we <strong>were travelling</strong> to
+            Hanoi.
+          </div>
+
+          <h3>2. Một hành động đang diễn ra thì hành động khác xen vào</h3>
+
+          <div class="formula">Past Continuous + when + Past Simple</div>
+
+          <div class="example">
+            I <strong>was studying</strong> when my friend
+            <strong>called</strong> me.
+          </div>
+
+          <div class="example">
+            She <strong>was walking</strong> home when it
+            <strong>started</strong> to rain.
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= PAGE 9 ================= -->
+
+      <section class="page">
+        <div class="card">
+          <h2>🔄 Past Continuous – Các cách dùng khác</h2>
+
+          <h3>3. Hai hành động xảy ra đồng thời</h3>
+
+          <div class="formula">While + Past Continuous, Past Continuous</div>
+
+          <div class="example">
+            While I <strong>was studying</strong>, my sister
+            <strong>was watching</strong> TV.
+          </div>
+
+          <div class="example">
+            I <strong>was cooking</strong> while my mother
+            <strong>was cleaning</strong> the house.
+          </div>
+
+          <h3>4. Mô tả bối cảnh trong một câu chuyện</h3>
+
+          <div class="example">
+            It <strong>was raining</strong>, and people
+            <strong>were rushing</strong> home when the accident
+            <strong>happened</strong>.
+          </div>
+
+          <div class="note">
+            💡 Past Continuous thường dùng để tạo <strong>bối cảnh</strong>,
+            trong khi Past Simple mô tả <strong>sự kiện chính</strong>.
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= PAGE 10 ================= -->
+
+      <section class="page">
+        <div class="card">
+          <h2>🟨 PART 3. WHEN & WHILE</h2>
+
+          <h3>WHEN</h3>
+
+          <p>
+            Thường dùng khi một hành động xảy ra và xen vào một hành động khác.
+          </p>
+
+          <div class="example">
+            I <strong>was reading</strong> when the phone <strong>rang</strong>.
+          </div>
+
+          <p>
+            <strong>was reading</strong> → hành động đang diễn ra<br />
+            <strong>rang</strong> → hành động xen vào
+          </p>
+
+          <h3>WHILE</h3>
+
+          <p>
+            Thường dùng với hành động đang diễn ra trong một khoảng thời gian.
+          </p>
+
+          <div class="example">
+            While I <strong>was reading</strong>, my brother
+            <strong>was playing</strong> games.
+          </div>
+
+          <div class="note">
+            ⭐ Mẹo nhớ:<br /><br />
+            <strong>WHEN</strong> → thường gặp hành động Past Simple xen vào.<br />
+            <strong>WHILE</strong> → thường gặp Past Continuous.
+          </div>
+
+          <p>⚠️ Đây là mẹo làm bài, không phải quy tắc tuyệt đối.</p>
+        </div>
+      </section>
+
+      <!-- ================= PAGE 11 ================= -->
+
+      <section class="page">
+        <div class="card">
+          <h2>🟥 PART 4. PRESENT PERFECT VS PAST CONTINUOUS</h2>
+
+          <table>
+            <tr>
+              <th>Present Perfect</th>
+              <th>Past Continuous</th>
+            </tr>
+
+            <tr>
+              <td>have/has + V3/ed</td>
+              <td>was/were + V-ing</td>
+            </tr>
+
+            <tr>
+              <td>Liên quan đến hiện tại</td>
+              <td>Đang diễn ra tại một thời điểm quá khứ</td>
+            </tr>
+
+            <tr>
+              <td>Kinh nghiệm</td>
+              <td>Hành động đang diễn ra</td>
+            </tr>
+
+            <tr>
+              <td>Hành động kéo dài đến hiện tại</td>
+              <td>Hành động đang diễn ra trong quá khứ</td>
+            </tr>
+
+            <tr>
+              <td>for, since, already, yet</td>
+              <td>at 8 p.m. yesterday, when, while</td>
+            </tr>
+          </table>
+
+          <div class="example">
+            I <strong>have studied</strong> English for five years.
+            <br />
+            → Tôi đã học tiếng Anh 5 năm và vẫn còn học.
+          </div>
+
+          <div class="example">
+            I <strong>was studying</strong> English at 8 p.m. yesterday.
+            <br />
+            → Tôi đang học tiếng Anh vào lúc 8 giờ tối hôm qua.
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= PAGE 12 ================= -->
+
+      <section class="page">
+        <div class="card">
+          <h2>🎯 TỔNG KẾT NHANH</h2>
+
+          <h3>🟢 PRESENT PERFECT</h3>
+
+          <div class="formula">S + have/has + V3/ed</div>
+
+          <ul>
+            <li>Kinh nghiệm</li>
+            <li>Hành động vừa xảy ra</li>
+            <li>Hành động có kết quả ở hiện tại</li>
+            <li>Hành động bắt đầu trong quá khứ và kéo dài đến hiện tại</li>
+          </ul>
+
+          <p>
+            Từ khóa:
+            <strong
+              >for – since – just – already – yet – ever – never – recently – so
+              far</strong
+            >
+          </p>
+
+          <h3>🔵 PAST CONTINUOUS</h3>
+
+          <div class="formula">S + was/were + V-ing</div>
+
+          <ul>
+            <li>Đang xảy ra tại một thời điểm trong quá khứ</li>
+            <li>Một hành động đang diễn ra thì hành động khác xen vào</li>
+            <li>Hai hành động đang diễn ra đồng thời</li>
+            <li>Mô tả bối cảnh trong quá khứ</li>
+          </ul>
+
+          <p>
+            Từ khóa:
+            <strong>at 8 p.m. yesterday – at that time – while – when</strong>
+          </p>
+        </div>
+      </section>
+
+      <!-- ================= PAGE 13 ================= -->
+
+      <section class="page">
+        <div class="card">
+          <h2>⭐ CÔNG THỨC VÀNG</h2>
+
+          <div class="example">
+            <strong>1. Hành động kéo dài đến hiện tại</strong><br />
+            I <strong>have lived</strong> here for five years.
+          </div>
+
+          <div class="example">
+            <strong>2. Đang xảy ra tại một thời điểm quá khứ</strong><br />
+            I <strong>was studying</strong> at 8 p.m. yesterday.
+          </div>
+
+          <div class="example">
+            <strong>3. Đang làm gì thì có hành động xen vào</strong><br />
+            I <strong>was studying</strong> when my friend
+            <strong>called</strong>.
+          </div>
+
+          <div class="example">
+            <strong>4. Hai hành động cùng đang diễn ra</strong><br />
+            While I <strong>was studying</strong>, my sister
+            <strong>was watching</strong> TV.
+          </div>
+
+          <div class="example">
+            <strong>5. Kinh nghiệm</strong><br />
+            Have you <strong>ever visited</strong> London?
+          </div>
+
+          <div class="example">
+            <strong>6. Hành động đã hoàn thành nhưng không nói thời điểm</strong
+            ><br />
+            I <strong>have finished</strong> my homework.
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= FINAL PAGE ================= -->
+
+      <section class="page">
+        <div class="card final-card">
+          <h2>🎉 Hoàn thành bài giảng!</h2>
+
+          <p>
+            Bạn đã hoàn thành bài học về
+            <strong>Present Perfect & Past Continuous</strong>.
+          </p>
+
+          <p>Hãy làm bài tập để kiểm tra mức độ hiểu bài của mình nhé!</p>
+
+          <a href="quiz9.html" class="quiz-button"> 📝 LÀM BÀI TẬP QUIZ 9 </a>
+
+          <br />
+
+          <a href="course9.html" class="home-button"> 🏠 QUAY VỀ TRANG CHỦ </a>
+        </div>
+      </section>
+
+      <!-- ================= NAVIGATION ================= -->
+
+      <div class="navigation">
+        <a href="course9.html" class="nav-link btn-prev"> 🏠 Trang chủ </a>
+
+        <button class="btn-prev" id="prevBtn" onclick="changePage(-1)">
+          ← Quay lại
+        </button>
+
+        <div class="page-number" id="pageNumber">1 / 14</div>
+
+        <button class="btn-next" id="nextBtn" onclick="changePage(1)">
+          Tiếp theo →
+        </button>
+      </div>
+    </main>
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+      const pages = document.querySelectorAll(".page");
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+      const pageNumber = document.getElementById("pageNumber");
+      const progressBar = document.getElementById("progressBar");
+
+      let currentPage = 0;
+
+      function showPage(index) {
+        pages.forEach((page, i) => {
+          page.classList.toggle("active", i === index);
+        });
+
+        currentPage = index;
+
+        pageNumber.textContent = `${currentPage + 1} / ${pages.length}`;
+
+        const progress = ((currentPage + 1) / pages.length) * 100;
+
+        progressBar.style.width = progress + "%";
+
+        prevBtn.style.visibility = currentPage === 0 ? "hidden" : "visible";
+
+        if (currentPage === pages.length - 1) {
+          nextBtn.style.display = "none";
+        } else {
+          nextBtn.style.display = "block";
+        }
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+
+      function changePage(direction) {
+        const newPage = currentPage + direction;
+
+        if (newPage >= 0 && newPage < pages.length) {
+          showPage(newPage);
+        }
+      }
+
+      // Keyboard navigation
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "ArrowRight") {
+          changePage(1);
+        }
+
+        if (event.key === "ArrowLeft") {
+          changePage(-1);
+        }
+      });
+
+      // Initial page
+      showPage(0);
+    </script>
+  </body>
+</html>

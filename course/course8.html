@@ -1,0 +1,1225 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Grammar Lesson 8 | Hyvoria English</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Oswald:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Baloo 2", sans-serif;
+        background: #f7f4ff;
+        color: #30264d;
+        line-height: 1.7;
+      }
+
+      /* ================= HEADER ================= */
+
+      header {
+        background: linear-gradient(135deg, #7357d9, #9c7ce8);
+        color: white;
+        padding: 17px 7%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 4px 18px rgba(80, 55, 150, 0.18);
+      }
+
+      .logo {
+        font-size: 26px;
+        font-weight: 800;
+      }
+
+      .lesson-label {
+        font-size: 16px;
+        font-weight: 600;
+      }
+
+      /* ================= PROGRESS ================= */
+
+      .progress-container {
+        width: 100%;
+        height: 6px;
+        background: #e5def8;
+        position: sticky;
+        top: 68px;
+        z-index: 999;
+      }
+
+      .progress-bar {
+        width: 0%;
+        height: 100%;
+        background: #ffd15c;
+        transition: width 0.3s ease;
+      }
+
+      /* ================= MAIN ================= */
+
+      main {
+        width: min(1000px, 92%);
+        margin: 42px auto 90px;
+      }
+
+      .page {
+        display: none;
+        animation: fadeIn 0.4s ease;
+      }
+
+      .page.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(12px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ================= HERO ================= */
+
+      .hero {
+        background: linear-gradient(135deg, #7357d9, #a58be9);
+        color: white;
+        padding: 45px;
+        border-radius: 28px;
+        margin-bottom: 28px;
+        box-shadow: 0 12px 30px rgba(85, 60, 160, 0.18);
+      }
+
+      .hero h1 {
+        font-size: 40px;
+        line-height: 1.2;
+        margin-bottom: 12px;
+      }
+
+      .hero p {
+        font-size: 19px;
+      }
+
+      /* ================= CARD ================= */
+
+      .card {
+        background: white;
+        padding: 30px;
+        border-radius: 24px;
+        margin-bottom: 24px;
+        box-shadow: 0 8px 25px rgba(75, 55, 130, 0.07);
+      }
+
+      h2 {
+        font-family: "Oswald", sans-serif;
+        color: #6347c1;
+        font-size: 29px;
+        margin-bottom: 18px;
+      }
+
+      h3 {
+        color: #7658d2;
+        font-size: 22px;
+        margin: 24px 0 10px;
+      }
+
+      h4 {
+        color: #8063d5;
+        font-size: 19px;
+        margin-top: 20px;
+      }
+
+      p {
+        margin: 9px 0;
+      }
+
+      ul {
+        padding-left: 25px;
+        margin: 12px 0;
+      }
+
+      li {
+        margin: 5px 0;
+      }
+
+      /* ================= FORMULA ================= */
+
+      .formula {
+        background: #f0ebff;
+        border-left: 5px solid #7357d9;
+        padding: 15px 20px;
+        border-radius: 10px;
+        margin: 18px 0;
+        font-size: 18px;
+        font-weight: 700;
+        color: #51379f;
+      }
+
+      .example {
+        background: #fff9e8;
+        border-left: 5px solid #f1bf43;
+        padding: 16px 20px;
+        border-radius: 10px;
+        margin: 16px 0;
+      }
+
+      .note {
+        background: #edf9f5;
+        border-left: 5px solid #42b88b;
+        padding: 16px 20px;
+        border-radius: 10px;
+        margin: 18px 0;
+      }
+
+      .warning {
+        background: #fff0f1;
+        border-left: 5px solid #df686d;
+        padding: 16px 20px;
+        border-radius: 10px;
+        margin: 18px 0;
+      }
+
+      .correct {
+        color: #258f69;
+        font-weight: 700;
+      }
+
+      .wrong {
+        color: #d85358;
+        font-weight: 700;
+      }
+
+      /* ================= TABLE ================= */
+
+      .table-wrapper {
+        overflow-x: auto;
+        margin: 20px 0;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 650px;
+      }
+
+      th {
+        background: #7357d9;
+        color: white;
+        padding: 13px;
+        text-align: left;
+      }
+
+      td {
+        padding: 13px;
+        border-bottom: 1px solid #e5def7;
+      }
+
+      tr:nth-child(even) {
+        background: #faf8ff;
+      }
+
+      /* ================= HIGHLIGHT ================= */
+
+      .highlight {
+        color: #684ac5;
+        font-weight: 800;
+      }
+
+      .english {
+        font-style: italic;
+        color: #51436d;
+      }
+
+      /* ================= NAVIGATION ================= */
+
+      .navigation {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+        margin-top: 35px;
+      }
+
+      .nav-btn {
+        border: none;
+        cursor: pointer;
+        padding: 13px 26px;
+        border-radius: 30px;
+        font-family: "Baloo 2", sans-serif;
+        font-size: 16px;
+        font-weight: 700;
+        transition: 0.25s;
+      }
+
+      .nav-btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .back-btn {
+        background: #e8e1fa;
+        color: #5e44b0;
+      }
+
+      .next-btn {
+        background: #7357d9;
+        color: white;
+      }
+
+      .page-number {
+        color: #806fb1;
+        font-weight: 700;
+      }
+
+      /* ================= FINAL ================= */
+
+      .final-box {
+        text-align: center;
+        background: linear-gradient(135deg, #7357d9, #9d7de8);
+        color: white;
+        padding: 45px 30px;
+        border-radius: 28px;
+        margin-top: 30px;
+      }
+
+      .final-box h2 {
+        color: white;
+      }
+
+      .final-box p {
+        font-size: 18px;
+        margin-bottom: 25px;
+      }
+
+      .quiz-btn {
+        display: inline-block;
+        text-decoration: none;
+        background: #ffd15c;
+        color: #3a2d59;
+        padding: 15px 36px;
+        border-radius: 30px;
+        font-size: 18px;
+        font-weight: 800;
+        transition: 0.25s;
+      }
+
+      .quiz-btn:hover {
+        transform: scale(1.05);
+        background: #ffda78;
+      }
+
+      .home-link {
+        display: inline-block;
+        margin-top: 18px;
+        color: white;
+        text-decoration: none;
+        font-weight: 700;
+      }
+
+      .home-link:hover {
+        text-decoration: underline;
+      }
+
+      /* ================= RESPONSIVE ================= */
+
+      @media (max-width: 700px) {
+        header {
+          padding: 14px 5%;
+        }
+
+        .logo {
+          font-size: 21px;
+        }
+
+        .lesson-label {
+          font-size: 12px;
+        }
+
+        main {
+          width: 94%;
+          margin-top: 25px;
+        }
+
+        .hero {
+          padding: 30px 22px;
+        }
+
+        .hero h1 {
+          font-size: 31px;
+        }
+
+        .card {
+          padding: 22px;
+        }
+
+        h2 {
+          font-size: 25px;
+        }
+
+        .navigation {
+          flex-wrap: wrap;
+        }
+
+        .page-number {
+          order: -1;
+          width: 100%;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- ================= HEADER ================= -->
+
+    <header>
+      <div class="logo">Hyvoria English</div>
+      <div class="lesson-label">
+        Grammar Lesson • Connectors & Result Clauses
+      </div>
+    </header>
+
+    <!-- ================= PROGRESS ================= -->
+
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <main>
+      <!-- =====================================================
+         PAGE 1 - INTRODUCTION
+    ====================================================== -->
+
+      <section class="page active">
+        <div class="hero">
+          <h1>Connectors & Result Clauses</h1>
+          <p>
+            That...that • Such...that • After • Although • Despite • Because
+          </p>
+        </div>
+
+        <div class="card">
+          <h2>🎯 Learning Objectives</h2>
+
+          <p>
+            In this lesson, you will learn how to connect ideas and express
+            <b>reason, contrast, time, and result</b> in English.
+          </p>
+
+          <ul>
+            <li>
+              Use <b>so...that</b> and <b>such...that</b> to express results.
+            </li>
+            <li>Use <b>after</b> to describe an earlier action.</li>
+            <li>
+              Distinguish <b>although</b> from <b>despite / in spite of</b>.
+            </li>
+            <li>Use <b>because</b> and <b>because of</b> correctly.</li>
+            <li>Apply common phrasal verbs and collocations in context.</li>
+          </ul>
+
+          <div class="note">
+            💡 <b>Key idea:</b> Before choosing a connector, identify the
+            relationship between the two ideas:
+            <b>reason, contrast, time,</b> or <b>result</b>.
+          </div>
+        </div>
+
+        <div class="navigation">
+          <button class="nav-btn back-btn" onclick="goHome()">
+            ← Trang chủ
+          </button>
+
+          <span class="page-number">1 / 9</span>
+
+          <button class="nav-btn next-btn" onclick="nextPage()">
+            Tiếp theo →
+          </button>
+        </div>
+      </section>
+
+      <!-- =====================================================
+         PAGE 2 - SO...THAT
+    ====================================================== -->
+
+      <section class="page">
+        <div class="card">
+          <h2>PART 1. SO...THAT – QUÁ... ĐẾN NỖI MÀ</h2>
+
+          <p>
+            Cấu trúc <b>so...that</b> dùng để diễn tả một mức độ hoặc kết quả.
+          </p>
+
+          <div class="formula">S + be + so + adjective + that + clause</div>
+
+          <div class="formula">S + V + so + adverb + that + clause</div>
+
+          <h3>🔹 So + adjective + that</h3>
+
+          <div class="example">
+            <p class="english">
+              The journey was <b>so difficult that</b> we almost gave up.
+            </p>
+            <p>→ Hành trình khó khăn đến nỗi chúng tôi gần như bỏ cuộc.</p>
+          </div>
+
+          <div class="example">
+            <p class="english">
+              The weather was <b>so bad that</b> we had to cancel the trip.
+            </p>
+            <p>→ Thời tiết tệ đến nỗi chúng tôi phải hủy chuyến đi.</p>
+          </div>
+
+          <h3>🔹 So + adverb + that</h3>
+
+          <div class="example">
+            <p class="english">
+              She spoke <b>so quietly that</b> nobody could hear her.
+            </p>
+            <p>→ Cô ấy nói nhỏ đến nỗi không ai có thể nghe thấy.</p>
+          </div>
+
+          <div class="note">
+            📌 <b>SO</b> thường đứng trước <b>adjective</b> hoặc <b>adverb</b>.
+          </div>
+        </div>
+
+        <div class="navigation">
+          <button class="nav-btn back-btn" onclick="prevPage()">
+            ← Quay lại
+          </button>
+
+          <span class="page-number">2 / 9</span>
+
+          <button class="nav-btn next-btn" onclick="nextPage()">
+            Tiếp theo →
+          </button>
+        </div>
+      </section>
+
+      <!-- =====================================================
+         PAGE 3 - SUCH...THAT
+    ====================================================== -->
+
+      <section class="page">
+        <div class="card">
+          <h2>PART 2. SUCH...THAT – QUÁ... ĐẾN NỖI MÀ</h2>
+
+          <p>
+            <b>Such...that</b> cũng diễn tả kết quả, nhưng <b>such</b> thường
+            đứng trước một <b>cụm danh từ</b>.
+          </p>
+
+          <div class="formula">
+            such + a/an + adjective + singular countable noun + that + clause
+          </div>
+
+          <div class="formula">
+            such + adjective + plural noun + that + clause
+          </div>
+
+          <div class="formula">
+            such + adjective + uncountable noun + that + clause
+          </div>
+
+          <h3>🔹 Such + a/an + adjective + noun</h3>
+
+          <div class="example">
+            <p class="english">
+              It was <b>such a difficult journey that</b> we almost gave up.
+            </p>
+            <p>→ Đó là một hành trình khó đến nỗi chúng tôi gần như bỏ cuộc.</p>
+          </div>
+
+          <h3>🔹 Such + adjective + plural noun</h3>
+
+          <div class="example">
+            <p class="english">
+              They were <b>such beautiful places that</b> we took hundreds of
+              photos.
+            </p>
+          </div>
+
+          <h3>🔹 Such + adjective + uncountable noun</h3>
+
+          <div class="example">
+            <p class="english">
+              We had <b>such bad weather that</b> we couldn't continue our trip.
+            </p>
+          </div>
+
+          <div class="note">
+            💡 <b>SO + adjective/adverb</b>
+            <br />
+            <b>SUCH + noun phrase</b>
+          </div>
+
+          <div class="table-wrapper">
+            <table>
+              <tr>
+                <th>SO...THAT</th>
+                <th>SUCH...THAT</th>
+              </tr>
+
+              <tr>
+                <td>so difficult that...</td>
+                <td>such a difficult journey that...</td>
+              </tr>
+
+              <tr>
+                <td>so beautiful that...</td>
+                <td>such beautiful places that...</td>
+              </tr>
+
+              <tr>
+                <td>so expensive that...</td>
+                <td>such an expensive hotel that...</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="navigation">
+          <button class="nav-btn back-btn" onclick="prevPage()">
+            ← Quay lại
+          </button>
+
+          <span class="page-number">3 / 9</span>
+
+          <button class="nav-btn next-btn" onclick="nextPage()">
+            Tiếp theo →
+          </button>
+        </div>
+      </section>
+
+      <!-- =====================================================
+         PAGE 4 - AFTER
+    ====================================================== -->
+
+      <section class="page">
+        <div class="card">
+          <h2>PART 3. AFTER – SAU KHI</h2>
+
+          <p>
+            <b>After</b> được dùng để nói rằng một hành động xảy ra
+            <b>sau một hành động khác</b>.
+          </p>
+
+          <div class="formula">After + S + V, S + V</div>
+
+          <div class="formula">After + V-ing, S + V</div>
+
+          <h3>🔹 After + clause</h3>
+
+          <div class="example">
+            <p class="english">
+              <b>After we visited</b> the museum, we went to a local restaurant.
+            </p>
+          </div>
+
+          <h3>🔹 After + V-ing</h3>
+
+          <div class="example">
+            <p class="english">
+              <b>After visiting</b> the museum, we went to a local restaurant.
+            </p>
+          </div>
+
+          <div class="note">
+            📌 Khi hai mệnh đề có cùng chủ ngữ, có thể rút gọn:
+            <br /><br />
+            After + S + V → <b>After + V-ing</b>
+          </div>
+
+          <h3>🔹 Ví dụ trong ngữ cảnh</h3>
+
+          <div class="example">
+            <p class="english">
+              After <b>finishing</b> the project, we celebrated together.
+            </p>
+
+            <p class="english">
+              After <b>we finished</b> the project, we celebrated together.
+            </p>
+          </div>
+        </div>
+
+        <div class="navigation">
+          <button class="nav-btn back-btn" onclick="prevPage()">
+            ← Quay lại
+          </button>
+
+          <span class="page-number">4 / 9</span>
+
+          <button class="nav-btn next-btn" onclick="nextPage()">
+            Tiếp theo →
+          </button>
+        </div>
+      </section>
+
+      <!-- =====================================================
+         PAGE 5 - ALTHOUGH / DESPITE
+    ====================================================== -->
+
+      <section class="page">
+        <div class="card">
+          <h2>PART 4. ALTHOUGH / DESPITE – MẶC DÙ</h2>
+
+          <h3>🔹 ALTHOUGH / THOUGH / EVEN THOUGH</h3>
+
+          <p>Dùng trước một <b>mệnh đề hoàn chỉnh</b> gồm chủ ngữ + động từ.</p>
+
+          <div class="formula">Although + S + V, S + V</div>
+
+          <div class="example">
+            <p class="english">
+              <b>Although the journey was difficult</b>, we managed to reach the
+              top.
+            </p>
+          </div>
+
+          <h3>🔹 DESPITE / IN SPITE OF</h3>
+
+          <p>Dùng trước <b>noun / noun phrase / V-ing</b>.</p>
+
+          <div class="formula">Despite + noun / noun phrase</div>
+
+          <div class="formula">Despite + V-ing</div>
+
+          <div class="example">
+            <p class="english">
+              <b>Despite the difficult journey</b>, we reached the top.
+            </p>
+
+            <p class="english">
+              <b>Despite being tired</b>, we continued walking.
+            </p>
+          </div>
+
+          <div class="warning">
+            ❌ Despite <b>the journey was difficult</b> <br /><br />
+            ✅ Although <b>the journey was difficult</b>
+            <br />
+            ✅ Despite <b>the difficult journey</b>
+          </div>
+
+          <h3>🔹 So sánh</h3>
+
+          <div class="table-wrapper">
+            <table>
+              <tr>
+                <th>Cấu trúc</th>
+                <th>Ví dụ</th>
+              </tr>
+
+              <tr>
+                <td>Although + S + V</td>
+                <td>Although it was raining, we went out.</td>
+              </tr>
+
+              <tr>
+                <td>Despite + noun</td>
+                <td>Despite the rain, we went out.</td>
+              </tr>
+
+              <tr>
+                <td>Despite + V-ing</td>
+                <td>Despite raining heavily, we went out.</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="navigation">
+          <button class="nav-btn back-btn" onclick="prevPage()">
+            ← Quay lại
+          </button>
+
+          <span class="page-number">5 / 9</span>
+
+          <button class="nav-btn next-btn" onclick="nextPage()">
+            Tiếp theo →
+          </button>
+        </div>
+      </section>
+
+      <!-- =====================================================
+         PAGE 6 - BECAUSE
+    ====================================================== -->
+
+      <section class="page">
+        <div class="card">
+          <h2>PART 5. BECAUSE / BECAUSE OF – BỞI VÌ</h2>
+
+          <h3>🔹 BECAUSE</h3>
+
+          <p><b>Because</b> đứng trước một mệnh đề hoàn chỉnh.</p>
+
+          <div class="formula">Because + S + V, S + V</div>
+
+          <div class="example">
+            <p class="english">
+              We stayed at the hotel <b>because it was raining heavily</b>.
+            </p>
+          </div>
+
+          <h3>🔹 BECAUSE OF</h3>
+
+          <p><b>Because of</b> đứng trước danh từ, cụm danh từ hoặc V-ing.</p>
+
+          <div class="formula">Because of + noun / noun phrase / V-ing</div>
+
+          <div class="example">
+            <p class="english">
+              We stayed at the hotel <b>because of the heavy rain</b>.
+            </p>
+
+            <p class="english">
+              The flight was delayed <b>because of bad weather</b>.
+            </p>
+          </div>
+
+          <div class="table-wrapper">
+            <table>
+              <tr>
+                <th>Because</th>
+                <th>Because of</th>
+              </tr>
+
+              <tr>
+                <td>because + S + V</td>
+                <td>because of + noun</td>
+              </tr>
+
+              <tr>
+                <td>because it rained</td>
+                <td>because of the rain</td>
+              </tr>
+
+              <tr>
+                <td>because the weather was bad</td>
+                <td>because of bad weather</td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="note">
+            💡 Mẹo nhớ:
+            <br /><br />
+            <b>BECAUSE → có S + V</b>
+            <br />
+            <b>BECAUSE OF → không có mệnh đề hoàn chỉnh</b>
+          </div>
+        </div>
+
+        <div class="navigation">
+          <button class="nav-btn back-btn" onclick="prevPage()">
+            ← Quay lại
+          </button>
+
+          <span class="page-number">6 / 9</span>
+
+          <button class="nav-btn next-btn" onclick="nextPage()">
+            Tiếp theo →
+          </button>
+        </div>
+      </section>
+
+      <!-- =====================================================
+         PAGE 7 - PHRASAL VERBS
+    ====================================================== -->
+
+      <section class="page">
+        <div class="card">
+          <h2>PART 6. PHRASAL VERBS</h2>
+
+          <p>
+            Dưới đây là một số phrasal verbs cơ bản thường gặp trong chủ đề
+            <b>experiences, travel, study và daily life</b>.
+          </p>
+
+          <div class="table-wrapper">
+            <table>
+              <tr>
+                <th>Phrasal Verb</th>
+                <th>Nghĩa</th>
+                <th>Ví dụ</th>
+              </tr>
+
+              <tr>
+                <td><b>find out</b></td>
+                <td>tìm ra, phát hiện</td>
+                <td>We found out the truth.</td>
+              </tr>
+
+              <tr>
+                <td><b>look for</b></td>
+                <td>tìm kiếm</td>
+                <td>We looked for a cheap hotel.</td>
+              </tr>
+
+              <tr>
+                <td><b>look after</b></td>
+                <td>chăm sóc</td>
+                <td>She looks after her younger brother.</td>
+              </tr>
+
+              <tr>
+                <td><b>set off</b></td>
+                <td>khởi hành</td>
+                <td>We set off early in the morning.</td>
+              </tr>
+
+              <tr>
+                <td><b>check in</b></td>
+                <td>làm thủ tục nhận phòng / lên máy bay</td>
+                <td>We checked in at the hotel.</td>
+              </tr>
+
+              <tr>
+                <td><b>check out</b></td>
+                <td>trả phòng</td>
+                <td>We checked out at noon.</td>
+              </tr>
+
+              <tr>
+                <td><b>give up</b></td>
+                <td>từ bỏ</td>
+                <td>Don't give up when things get difficult.</td>
+              </tr>
+
+              <tr>
+                <td><b>carry on</b></td>
+                <td>tiếp tục</td>
+                <td>We carried on walking despite the rain.</td>
+              </tr>
+
+              <tr>
+                <td><b>come across</b></td>
+                <td>tình cờ gặp / bắt gặp</td>
+                <td>We came across an old temple.</td>
+              </tr>
+
+              <tr>
+                <td><b>take part in</b></td>
+                <td>tham gia</td>
+                <td>She took part in a volunteer project.</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="navigation">
+          <button class="nav-btn back-btn" onclick="prevPage()">
+            ← Quay lại
+          </button>
+
+          <span class="page-number">7 / 9</span>
+
+          <button class="nav-btn next-btn" onclick="nextPage()">
+            Tiếp theo →
+          </button>
+        </div>
+      </section>
+
+      <!-- =====================================================
+         PAGE 8 - COLLOCATIONS
+    ====================================================== -->
+
+      <section class="page">
+        <div class="card">
+          <h2>PART 7. USEFUL COLLOCATIONS</h2>
+
+          <p>
+            Học theo cụm từ giúp bạn sử dụng tiếng Anh tự nhiên và hiệu quả hơn.
+          </p>
+
+          <div class="table-wrapper">
+            <table>
+              <tr>
+                <th>Collocation</th>
+                <th>Nghĩa</th>
+                <th>Ví dụ</th>
+              </tr>
+
+              <tr>
+                <td><b>make a contribution</b></td>
+                <td>đóng góp</td>
+                <td>Everyone can make a contribution to society.</td>
+              </tr>
+
+              <tr>
+                <td><b>cut down on</b></td>
+                <td>cắt giảm</td>
+                <td>We should cut down on plastic waste.</td>
+              </tr>
+
+              <tr>
+                <td><b>take responsibility for</b></td>
+                <td>chịu trách nhiệm về</td>
+                <td>We should take responsibility for our actions.</td>
+              </tr>
+
+              <tr>
+                <td><b>make an effort</b></td>
+                <td>nỗ lực</td>
+                <td>You should make an effort to improve your English.</td>
+              </tr>
+
+              <tr>
+                <td><b>have an impact on</b></td>
+                <td>có ảnh hưởng đến</td>
+                <td>Technology has an impact on our lives.</td>
+              </tr>
+
+              <tr>
+                <td><b>play a role in</b></td>
+                <td>đóng vai trò trong</td>
+                <td>Education plays an important role in society.</td>
+              </tr>
+
+              <tr>
+                <td><b>take advantage of</b></td>
+                <td>tận dụng</td>
+                <td>
+                  Students should take advantage of learning opportunities.
+                </td>
+              </tr>
+
+              <tr>
+                <td><b>deal with</b></td>
+                <td>giải quyết / đối phó với</td>
+                <td>We need to deal with this problem quickly.</td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="note">
+            ⭐ <b>Useful combinations:</b>
+
+            <br /><br />
+
+            make a contribution <br />
+            make an effort <br />
+            take responsibility for something <br />
+            have an impact on something <br />
+            play a role in something <br />
+            cut down on something
+          </div>
+        </div>
+
+        <div class="navigation">
+          <button class="nav-btn back-btn" onclick="prevPage()">
+            ← Quay lại
+          </button>
+
+          <span class="page-number">8 / 9</span>
+
+          <button class="nav-btn next-btn" onclick="nextPage()">
+            Tiếp theo →
+          </button>
+        </div>
+      </section>
+
+      <!-- =====================================================
+         PAGE 9 - SUMMARY
+    ====================================================== -->
+
+      <section class="page">
+        <div class="card">
+          <h2>🎯 FINAL SUMMARY</h2>
+
+          <h3>1. RESULT – KẾT QUẢ</h3>
+
+          <div class="formula">so + adjective/adverb + that + clause</div>
+
+          <div class="formula">
+            such + (a/an) + adjective + noun + that + clause
+          </div>
+
+          <h3>2. TIME – THỜI GIAN</h3>
+
+          <div class="formula">
+            after + S + V
+            <br />
+            after + V-ing
+          </div>
+
+          <h3>3. CONTRAST – TƯƠNG PHẢN</h3>
+
+          <div class="formula">
+            although + S + V
+            <br />
+            despite/in spite of + noun/V-ing
+          </div>
+
+          <h3>4. REASON – NGUYÊN NHÂN</h3>
+
+          <div class="formula">
+            because + S + V
+            <br />
+            because of + noun/V-ing
+          </div>
+
+          <h3>🔥 Quick Check</h3>
+
+          <div class="example">
+            <p><b>Although</b> the weather was bad, we continued our trip.</p>
+
+            <p><b>Despite</b> the bad weather, we continued our trip.</p>
+
+            <p>
+              The weather was <b>so bad that</b> we almost cancelled the trip.
+            </p>
+
+            <p>
+              It was <b>such bad weather that</b> we almost cancelled the trip.
+            </p>
+
+            <p>We stayed inside <b>because it was raining</b>.</p>
+
+            <p>We stayed inside <b>because of the rain</b>.</p>
+          </div>
+
+          <div class="warning">
+            ⚠️ <b>Remember:</b>
+
+            <br /><br />
+
+            Although + <b>CLAUSE</b> ✅
+            <br />
+
+            Despite + <b>NOUN / V-ING</b> ✅ <br /><br />
+
+            Because + <b>CLAUSE</b> ✅
+            <br />
+
+            Because of + <b>NOUN / V-ING</b> ✅
+          </div>
+        </div>
+
+        <!-- ================= FINAL BUTTONS ================= -->
+
+        <div class="final-box">
+          <h2>🎉 Lesson Completed!</h2>
+
+          <p>
+            Bạn đã hoàn thành bài giảng về các liên từ và cấu trúc chỉ nguyên
+            nhân, tương phản, thời gian và kết quả.
+          </p>
+
+          <a href="quiz8.html" class="quiz-btn"> Làm bài tập → </a>
+
+          <br />
+
+          <a href="course8.html" class="home-link">
+            ← Quay về trang chủ khóa học
+          </a>
+        </div>
+
+        <div class="navigation">
+          <button class="nav-btn back-btn" onclick="prevPage()">
+            ← Quay lại
+          </button>
+
+          <span class="page-number">9 / 9</span>
+
+          <button class="nav-btn next-btn" onclick="goQuiz()">
+            Làm bài tập →
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+      let currentPage = 0;
+
+      const pages = document.querySelectorAll(".page");
+
+      const progressBar = document.getElementById("progressBar");
+
+      function showPage(index) {
+        if (index < 0) {
+          index = 0;
+        }
+
+        if (index >= pages.length) {
+          index = pages.length - 1;
+        }
+
+        currentPage = index;
+
+        pages.forEach((page, i) => {
+          page.classList.toggle("active", i === currentPage);
+        });
+
+        updateProgress();
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+
+      function nextPage() {
+        if (currentPage < pages.length - 1) {
+          showPage(currentPage + 1);
+        }
+      }
+
+      function prevPage() {
+        if (currentPage > 0) {
+          showPage(currentPage - 1);
+        }
+      }
+
+      function updateProgress() {
+        const progress = ((currentPage + 1) / pages.length) * 100;
+
+        progressBar.style.width = progress + "%";
+      }
+
+      function goHome() {
+        window.location.href = "course8.html";
+      }
+
+      function goQuiz() {
+        window.location.href = "quiz8.html";
+      }
+
+      // Keyboard navigation
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "ArrowRight") {
+          nextPage();
+        }
+
+        if (event.key === "ArrowLeft") {
+          prevPage();
+        }
+      });
+
+      // Initial progress
+
+      updateProgress();
+    </script>
+  </body>
+</html>

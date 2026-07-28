@@ -1,0 +1,747 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Present Perfect & Past Continuous - Quiz</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #eef5ff, #f8f4ff);
+        color: #263238;
+        padding: 30px 15px;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: auto;
+      }
+
+      header {
+        background: linear-gradient(135deg, #536dfe, #7c4dff);
+        color: white;
+        padding: 35px 25px;
+        border-radius: 25px;
+        text-align: center;
+        margin-bottom: 25px;
+        box-shadow: 0 10px 25px rgba(83, 109, 254, 0.2);
+      }
+
+      header h1 {
+        font-size: 32px;
+        margin-bottom: 10px;
+      }
+
+      header p {
+        font-size: 16px;
+      }
+
+      .section-title {
+        background: white;
+        padding: 18px 22px;
+        border-radius: 15px;
+        margin: 25px 0 15px;
+        font-size: 21px;
+        font-weight: bold;
+        color: #3949ab;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+      }
+
+      .question {
+        background: white;
+        padding: 25px;
+        border-radius: 18px;
+        margin-bottom: 18px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+      }
+
+      .question-text {
+        font-size: 17px;
+        font-weight: bold;
+        line-height: 1.6;
+        margin-bottom: 16px;
+      }
+
+      .options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .option {
+        border: 2px solid #e0e0e0;
+        background: #fafafa;
+        padding: 13px 16px;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: 0.2s;
+        font-size: 16px;
+      }
+
+      .option:hover {
+        border-color: #536dfe;
+        background: #f0f3ff;
+      }
+
+      .option.correct {
+        background: #e8f5e9;
+        border-color: #43a047;
+        color: #2e7d32;
+        font-weight: bold;
+      }
+
+      .option.wrong {
+        background: #ffebee;
+        border-color: #e53935;
+        color: #c62828;
+        font-weight: bold;
+      }
+
+      .option.disabled {
+        cursor: default;
+      }
+
+      .feedback {
+        display: none;
+        margin-top: 15px;
+        padding: 15px;
+        border-radius: 12px;
+        line-height: 1.6;
+      }
+
+      .feedback.correct-feedback {
+        display: block;
+        background: #e8f5e9;
+        color: #2e7d32;
+      }
+
+      .feedback.wrong-feedback {
+        display: block;
+        background: #ffebee;
+        color: #c62828;
+      }
+
+      .score-box {
+        background: white;
+        padding: 25px;
+        border-radius: 20px;
+        text-align: center;
+        margin-top: 30px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      }
+
+      #score {
+        font-size: 24px;
+        font-weight: bold;
+        color: #3949ab;
+        margin-bottom: 15px;
+      }
+
+      .buttons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+        margin-top: 20px;
+      }
+
+      .btn {
+        text-decoration: none;
+        border: none;
+        padding: 14px 25px;
+        border-radius: 30px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+
+      .home-btn {
+        background: #536dfe;
+        color: white;
+      }
+
+      .reset-btn {
+        background: #eeeeee;
+        color: #333;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        opacity: 0.9;
+      }
+
+      @media (max-width: 600px) {
+        header h1 {
+          font-size: 25px;
+        }
+
+        .question {
+          padding: 18px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <h1>📚 PRESENT PERFECT & PAST CONTINUOUS</h1>
+        <p>Grammar Practice • 35 Multiple-Choice Questions</p>
+      </header>
+
+      <div id="quiz"></div>
+
+      <div class="score-box">
+        <div id="score">Score: 0 / 35</div>
+
+        <div class="buttons">
+          <button class="btn reset-btn" onclick="resetQuiz()">
+            🔄 Làm lại
+          </button>
+
+          <a href="course9.html" class="btn home-btn"> 🏠 Về bài giảng </a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const questions = [
+        // PART 1
+        {
+          section: "🟦 PART 1. PRESENT PERFECT",
+          question: "1. I ______ English for five years.",
+          options: [
+            "A. studied",
+            "B. have studied",
+            "C. am studying",
+            "D. was studying",
+          ],
+          answer: "B",
+          explanation:
+            "<b>have studied</b> đúng vì hành động bắt đầu trong quá khứ và kéo dài đến hiện tại. Cấu trúc: <b>have/has + V3/ed</b>. Từ <b>for five years</b> là dấu hiệu của Present Perfect.",
+        },
+
+        {
+          question: "2. She ______ her homework yet.",
+          options: [
+            "A. hasn't finished",
+            "B. didn't finish",
+            "C. isn't finishing",
+            "D. wasn't finishing",
+          ],
+          answer: "A",
+          explanation:
+            "<b>yet</b> thường được dùng trong câu phủ định hoặc nghi vấn của Present Perfect. Cấu trúc: <b>hasn't + V3</b> → hasn't finished.",
+        },
+
+        {
+          question: "3. ______ you ever ______ to Singapore?",
+          options: [
+            "A. Did / go",
+            "B. Have / been",
+            "C. Were / going",
+            "D. Have / went",
+          ],
+          answer: "B",
+          explanation:
+            "<b>ever</b> dùng để hỏi về trải nghiệm. Cấu trúc: <b>Have + S + ever + V3?</b>. Động từ <b>be</b> có V3 là <b>been</b>.",
+        },
+
+        {
+          question: "4. My brother ______ just ______ home.",
+          options: [
+            "A. has / arrived",
+            "B. did / arrive",
+            "C. was / arriving",
+            "D. is / arrived",
+          ],
+          answer: "A",
+          explanation:
+            "<b>just</b> thường đi với Present Perfect để diễn tả một hành động vừa mới xảy ra. Cấu trúc: <b>has + just + V3</b>.",
+        },
+
+        {
+          question: "5. We ______ this film three times.",
+          options: [
+            "A. watched",
+            "B. have watched",
+            "C. were watching",
+            "D. watch",
+          ],
+          answer: "B",
+          explanation:
+            "<b>three times</b> diễn tả số lần đã trải qua cho đến hiện tại. Dùng Present Perfect: <b>have + watched</b>.",
+        },
+
+        {
+          question: "6. I ______ my keys. I can't open the door.",
+          options: ["A. lost", "B. have lost", "C. was losing", "D. lose"],
+          answer: "B",
+          explanation:
+            "<b>have lost</b> đúng vì hành động mất chìa khóa có kết quả ở hiện tại: <b>I can't open the door</b>.",
+        },
+
+        {
+          question: "7. She ______ in Hai Phong since 2020.",
+          options: ["A. lived", "B. has lived", "C. was living", "D. lives"],
+          answer: "B",
+          explanation:
+            "<b>since 2020</b> là dấu hiệu của Present Perfect khi hành động bắt đầu từ quá khứ và kéo dài đến hiện tại.",
+        },
+
+        {
+          question: "8. They ______ already ______ the project.",
+          options: [
+            "A. have / completed",
+            "B. did / complete",
+            "C. were / completing",
+            "D. are / completed",
+          ],
+          answer: "A",
+          explanation:
+            "<b>already</b> thường được dùng với Present Perfect. Cấu trúc: <b>have + already + V3</b>.",
+        },
+
+        {
+          question: "9. He ______ never ______ sushi before.",
+          options: [
+            "A. did / eat",
+            "B. has / eaten",
+            "C. was / eating",
+            "D. has / ate",
+          ],
+          answer: "B",
+          explanation:
+            "<b>never</b> + trải nghiệm → Present Perfect. Sau <b>has</b> phải dùng V3: <b>eaten</b>, không dùng <b>ate</b>.",
+        },
+
+        {
+          question: "10. We ______ each other for more than ten years.",
+          options: ["A. knew", "B. have known", "C. were knowing", "D. know"],
+          answer: "B",
+          explanation:
+            "<b>for more than ten years</b> cho thấy mối quan hệ bắt đầu trong quá khứ và kéo dài đến hiện tại. Dùng Present Perfect: <b>have known</b>.",
+        },
+
+        // PART 2
+        {
+          section: "🟩 PART 2. PAST CONTINUOUS",
+          question: "11. At 9 p.m. last night, I ______ for my English test.",
+          options: [
+            "A. studied",
+            "B. have studied",
+            "C. was studying",
+            "D. am studying",
+          ],
+          answer: "C",
+          explanation:
+            "<b>At 9 p.m. last night</b> chỉ một thời điểm cụ thể trong quá khứ. Hành động đang diễn ra tại thời điểm đó dùng Past Continuous: <b>was + V-ing</b>.",
+        },
+
+        {
+          question: "12. They ______ football when it started to rain.",
+          options: [
+            "A. played",
+            "B. have played",
+            "C. were playing",
+            "D. are playing",
+          ],
+          answer: "C",
+          explanation:
+            "Hành động đang diễn ra là <b>were playing</b>. Hành động xen vào là <b>started</b> ở Past Simple.",
+        },
+
+        {
+          question:
+            "13. While my mother ______ dinner, I was doing my homework.",
+          options: ["A. cooked", "B. has cooked", "C. was cooking", "D. cooks"],
+          answer: "C",
+          explanation:
+            "Sau <b>while</b>, khi diễn tả hai hành động đang diễn ra đồng thời trong quá khứ, thường dùng Past Continuous: <b>was cooking</b>.",
+        },
+
+        {
+          question: "14. At this time yesterday, we ______ to Hanoi.",
+          options: [
+            "A. travelled",
+            "B. have travelled",
+            "C. were travelling",
+            "D. travel",
+          ],
+          answer: "C",
+          explanation:
+            "<b>At this time yesterday</b> chỉ một thời điểm cụ thể trong quá khứ → dùng Past Continuous: <b>were travelling</b>.",
+        },
+
+        {
+          question: "15. She ______ TV at 8 o'clock yesterday evening.",
+          options: [
+            "A. watched",
+            "B. was watching",
+            "C. has watched",
+            "D. watches",
+          ],
+          answer: "B",
+          explanation:
+            "<b>at 8 o'clock yesterday evening</b> → một thời điểm cụ thể trong quá khứ. Dùng <b>was watching</b>.",
+        },
+
+        {
+          question:
+            "16. The students ______ quietly when the teacher entered the classroom.",
+          options: [
+            "A. studied",
+            "B. have studied",
+            "C. were studying",
+            "D. study",
+          ],
+          answer: "C",
+          explanation:
+            "Hành động đang diễn ra: <b>were studying</b>. Hành động xen vào: <b>entered</b>.",
+        },
+
+        {
+          question: "17. I ______ home when I saw an old friend.",
+          options: ["A. walked", "B. have walked", "C. was walking", "D. walk"],
+          answer: "C",
+          explanation:
+            "Hành động đang diễn ra là <b>was walking</b>; hành động xen vào là <b>saw</b>.",
+        },
+
+        {
+          question:
+            "18. While they ______ in the park, they heard a loud noise.",
+          options: [
+            "A. walked",
+            "B. were walking",
+            "C. have walked",
+            "D. walk",
+          ],
+          answer: "B",
+          explanation:
+            "Sau <b>while</b>, hành động đang diễn ra trong quá khứ dùng Past Continuous: <b>were walking</b>.",
+        },
+
+        {
+          question: "19. At 7 a.m. yesterday, my parents ______ breakfast.",
+          options: ["A. had", "B. have had", "C. were having", "D. have"],
+          answer: "C",
+          explanation:
+            "<b>At 7 a.m. yesterday</b> → hành động đang diễn ra tại một thời điểm trong quá khứ → <b>were having</b>.",
+        },
+
+        {
+          question: "20. What ______ you ______ at 10 p.m. last night?",
+          options: [
+            "A. did / do",
+            "B. have / done",
+            "C. were / doing",
+            "D. are / doing",
+          ],
+          answer: "C",
+          explanation:
+            "Câu hỏi về hành động đang diễn ra tại <b>10 p.m. last night</b> → Past Continuous: <b>What were you doing?</b>",
+        },
+
+        // PART 3
+        {
+          section: "🟨 PART 3. PRESENT PERFECT VS PAST SIMPLE",
+          question: "21. I ______ this book last year.",
+          options: [
+            "A. have read",
+            "B. read",
+            "C. was reading",
+            "D. have been reading",
+          ],
+          answer: "B",
+          explanation:
+            "<b>last year</b> là thời gian quá khứ cụ thể đã kết thúc → dùng Past Simple: <b>read</b>.",
+        },
+
+        {
+          question: "22. She ______ her homework already.",
+          options: [
+            "A. finished",
+            "B. has finished",
+            "C. was finishing",
+            "D. finishes",
+          ],
+          answer: "B",
+          explanation:
+            "<b>already</b> trong ngữ cảnh này cho thấy hành động đã hoàn thành tính đến hiện tại → Present Perfect: <b>has finished</b>.",
+        },
+
+        {
+          question: "23. We ______ to London in 2023.",
+          options: [
+            "A. have travelled",
+            "B. travelled",
+            "C. were travelling",
+            "D. have been travelling",
+          ],
+          answer: "B",
+          explanation:
+            "<b>in 2023</b> là một thời điểm quá khứ cụ thể đã kết thúc → dùng Past Simple: <b>travelled</b>.",
+        },
+
+        {
+          question: "24. He ______ his phone two days ago.",
+          options: ["A. has lost", "B. lost", "C. was losing", "D. loses"],
+          answer: "B",
+          explanation:
+            "<b>two days ago</b> là dấu hiệu của Past Simple → <b>lost</b>.",
+        },
+
+        {
+          question: "25. I ______ never ______ such a beautiful place.",
+          options: [
+            "A. did / see",
+            "B. have / seen",
+            "C. was / seeing",
+            "D. have / saw",
+          ],
+          answer: "B",
+          explanation:
+            "<b>never</b> nói về trải nghiệm cho đến hiện tại → Present Perfect. Sau <b>have</b> dùng V3 <b>seen</b>.",
+        },
+
+        {
+          question: "26. They ______ the museum yesterday.",
+          options: [
+            "A. have visited",
+            "B. visited",
+            "C. were visiting",
+            "D. visit",
+          ],
+          answer: "B",
+          explanation:
+            "<b>yesterday</b> là thời gian quá khứ cụ thể đã kết thúc → Past Simple: <b>visited</b>.",
+        },
+
+        {
+          question: "27. My sister ______ just ______ her exam.",
+          options: [
+            "A. has / finished",
+            "B. did / finish",
+            "C. was / finishing",
+            "D. is / finished",
+          ],
+          answer: "A",
+          explanation:
+            "<b>just</b> + hành động vừa mới hoàn thành → Present Perfect: <b>has just finished</b>.",
+        },
+
+        // PART 4
+        {
+          section: "🟥 PART 4. MIXED PRACTICE",
+          question: "28. I ______ my homework when my friend called me.",
+          options: ["A. have done", "B. did", "C. was doing", "D. do"],
+          answer: "C",
+          explanation:
+            "Hành động đang diễn ra khi một hành động khác xen vào → <b>was doing</b> + <b>called</b>.",
+        },
+
+        {
+          question: "29. While we ______ dinner, the lights suddenly went out.",
+          options: ["A. had", "B. have had", "C. were having", "D. have"],
+          answer: "C",
+          explanation:
+            "Hành động đang diễn ra sau <b>while</b> → Past Continuous: <b>were having</b>. Hành động xen vào: <b>went out</b>.",
+        },
+
+        {
+          question:
+            "30. She ______ in this company since she graduated from university.",
+          options: ["A. worked", "B. has worked", "C. was working", "D. works"],
+          answer: "B",
+          explanation:
+            "<b>since she graduated</b> → hành động bắt đầu trong quá khứ và kéo dài đến hiện tại → Present Perfect: <b>has worked</b>.",
+        },
+
+        {
+          question: "31. When I arrived at the station, the train ______.",
+          options: ["A. has left", "B. left", "C. was leaving", "D. had left"],
+          answer: "D",
+          explanation:
+            "Câu này cần Past Perfect vì việc tàu rời đi xảy ra <b>trước</b> thời điểm tôi đến ga. <b>Had left</b> = đã rời đi trước đó.",
+        },
+
+        {
+          question:
+            "32. I ______ my best friend while I ______ at a summer camp.",
+          options: [
+            "A. met / was staying",
+            "B. have met / stayed",
+            "C. was meeting / stayed",
+            "D. met / have stayed",
+          ],
+          answer: "A",
+          explanation:
+            "Hành động chính xảy ra xen vào: <b>met</b> (Past Simple). Bối cảnh đang diễn ra: <b>was staying</b> (Past Continuous).",
+        },
+
+        {
+          question: "33. He ______ three books this month.",
+          options: ["A. read", "B. has read", "C. was reading", "D. reads"],
+          answer: "B",
+          explanation:
+            "<b>this month</b> là khoảng thời gian chưa kết thúc → dùng Present Perfect để nói về số lượng đã hoàn thành tính đến hiện tại.",
+        },
+
+        {
+          question:
+            "34. At 6 p.m. yesterday, my parents ______ dinner while I ______ my homework.",
+          options: [
+            "A. had / did",
+            "B. have had / have done",
+            "C. were having / was doing",
+            "D. had / was doing",
+          ],
+          answer: "C",
+          explanation:
+            "Hai hành động đang diễn ra đồng thời tại một thời điểm trong quá khứ → cả hai dùng Past Continuous: <b>were having</b> và <b>was doing</b>.",
+        },
+
+        {
+          question:
+            "35. ______ you ______ your assignment yet? I need to submit it now.",
+          options: [
+            "A. Did / finish",
+            "B. Were / finishing",
+            "C. Have / finished",
+            "D. Are / finishing",
+          ],
+          answer: "C",
+          explanation:
+            "<b>yet</b> trong câu hỏi về việc đã hoàn thành hay chưa → Present Perfect: <b>Have you finished...?</b>",
+        },
+      ];
+
+      let score = 0;
+      let answered = 0;
+
+      function renderQuiz() {
+        const quiz = document.getElementById("quiz");
+
+        quiz.innerHTML = "";
+
+        questions.forEach((q, index) => {
+          if (q.section) {
+            const sectionTitle = document.createElement("div");
+            sectionTitle.className = "section-title";
+            sectionTitle.innerHTML = q.section;
+            quiz.appendChild(sectionTitle);
+          }
+
+          const questionBox = document.createElement("div");
+          questionBox.className = "question";
+
+          const questionText = document.createElement("div");
+          questionText.className = "question-text";
+          questionText.innerHTML = q.question;
+
+          const optionsBox = document.createElement("div");
+          optionsBox.className = "options";
+
+          const feedback = document.createElement("div");
+          feedback.className = "feedback";
+
+          q.options.forEach((option) => {
+            const button = document.createElement("div");
+
+            button.className = "option";
+            button.innerHTML = option;
+
+            button.onclick = function () {
+              if (questionBox.dataset.answered === "true") {
+                return;
+              }
+
+              questionBox.dataset.answered = "true";
+              answered++;
+
+              const selected = option.charAt(0);
+              const correct = selected === q.answer;
+
+              const allOptions = optionsBox.querySelectorAll(".option");
+
+              allOptions.forEach((opt) => {
+                opt.classList.add("disabled");
+
+                if (opt.innerHTML.charAt(0) === q.answer) {
+                  opt.classList.add("correct");
+                }
+              });
+
+              if (correct) {
+                score++;
+
+                button.classList.add("correct");
+
+                feedback.className = "feedback correct-feedback";
+
+                feedback.innerHTML = "✅ <b>Chính xác!</b><br>" + q.explanation;
+              } else {
+                button.classList.add("wrong");
+
+                feedback.className = "feedback wrong-feedback";
+
+                feedback.innerHTML =
+                  "❌ <b>Chưa chính xác!</b><br>" +
+                  "Đáp án đúng là: <b>" +
+                  q.answer +
+                  "</b><br><br>" +
+                  q.explanation;
+              }
+
+              updateScore();
+            };
+
+            optionsBox.appendChild(button);
+          });
+
+          questionBox.appendChild(questionText);
+          questionBox.appendChild(optionsBox);
+          questionBox.appendChild(feedback);
+
+          quiz.appendChild(questionBox);
+        });
+
+        updateScore();
+      }
+
+      function updateScore() {
+        document.getElementById("score").innerHTML =
+          "🎯 Score: " +
+          score +
+          " / 35" +
+          " &nbsp; | &nbsp; Đã làm: " +
+          answered +
+          " / 35";
+      }
+
+      function resetQuiz() {
+        score = 0;
+        answered = 0;
+
+        renderQuiz();
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+
+      renderQuiz();
+    </script>
+  </body>
+</html>

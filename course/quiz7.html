@@ -1,0 +1,1037 @@
+```html
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Hyvoria English | Articles & Suggest Practice</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: linear-gradient(135deg, #f4f1ff, #eef7ff);
+        color: #222;
+        line-height: 1.6;
+        padding-bottom: 60px;
+      }
+
+      /* HEADER */
+      header {
+        background: linear-gradient(135deg, #6c5ce7, #8e7cff);
+        color: white;
+        text-align: center;
+        padding: 35px 20px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+      }
+
+      header h1 {
+        font-size: 32px;
+        margin-bottom: 8px;
+      }
+
+      header p {
+        font-size: 16px;
+        opacity: 0.95;
+      }
+
+      /* CONTAINER */
+      .container {
+        max-width: 950px;
+        margin: 30px auto;
+        padding: 0 15px;
+      }
+
+      /* SCORE */
+      .score-box {
+        background: white;
+        padding: 20px;
+        border-radius: 18px;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        position: sticky;
+        top: 10px;
+        z-index: 10;
+      }
+
+      .score-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: bold;
+        margin-bottom: 12px;
+      }
+
+      #score {
+        color: #6c5ce7;
+        font-size: 20px;
+      }
+
+      #progressText {
+        color: #555;
+      }
+
+      .progress-container {
+        width: 100%;
+        height: 12px;
+        background: #eeeeee;
+        border-radius: 20px;
+        overflow: hidden;
+      }
+
+      #progressBar {
+        width: 0%;
+        height: 100%;
+        background: linear-gradient(90deg, #6c5ce7, #00b894);
+        transition: width 0.4s ease;
+      }
+
+      /* SECTION */
+      .section {
+        margin-bottom: 40px;
+      }
+
+      .section-title {
+        background: linear-gradient(135deg, #6c5ce7, #8e7cff);
+        color: white;
+        padding: 20px 22px;
+        border-radius: 16px;
+        margin-bottom: 20px;
+        box-shadow: 0 5px 15px rgba(108, 92, 231, 0.2);
+      }
+
+      .section-title h2 {
+        font-size: 23px;
+        margin-bottom: 4px;
+      }
+
+      .section-title p {
+        opacity: 0.9;
+        font-size: 14px;
+      }
+
+      /* QUESTION */
+      .question {
+        background: white;
+        border-radius: 16px;
+        padding: 22px;
+        margin-bottom: 18px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+      }
+
+      .question-text {
+        font-weight: bold;
+        font-size: 17px;
+        margin-bottom: 15px;
+      }
+
+      .options {
+        display: grid;
+        gap: 10px;
+      }
+
+      .option {
+        width: 100%;
+        text-align: left;
+        padding: 13px 16px;
+        border: 2px solid #e5e5e5;
+        border-radius: 10px;
+        background: #fafafa;
+        cursor: pointer;
+        font-size: 15px;
+        transition: all 0.2s ease;
+      }
+
+      .option:hover:not(:disabled) {
+        border-color: #6c5ce7;
+        background: #f4f1ff;
+        transform: translateX(3px);
+      }
+
+      .option:disabled {
+        cursor: default;
+      }
+
+      /* CORRECT */
+      .option.correct {
+        background: #dff8ea;
+        border-color: #00b894;
+        color: #087f5b;
+        font-weight: bold;
+      }
+
+      /* WRONG */
+      .option.wrong {
+        background: #ffe5e5;
+        border-color: #ff7675;
+        color: #c0392b;
+        font-weight: bold;
+      }
+
+      /* FEEDBACK */
+      .feedback {
+        display: none;
+        margin-top: 15px;
+        padding: 15px;
+        border-radius: 10px;
+        font-size: 14px;
+      }
+
+      .feedback.show {
+        display: block;
+      }
+
+      .feedback.correct-feedback {
+        background: #e9fff4;
+        border-left: 5px solid #00b894;
+      }
+
+      .feedback.wrong-feedback {
+        background: #fff0f0;
+        border-left: 5px solid #ff7675;
+      }
+
+      .feedback strong {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 16px;
+      }
+
+      /* FINAL RESULT */
+      #finalResult {
+        display: none;
+        background: white;
+        padding: 30px;
+        border-radius: 18px;
+        text-align: center;
+        margin: 35px 0;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      #finalResult h2 {
+        color: #6c5ce7;
+        margin-bottom: 10px;
+      }
+
+      #finalScore {
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+      /* RESET */
+      .reset-container {
+        text-align: center;
+        margin: 40px 0;
+      }
+
+      #resetBtn {
+        background: #ff7675;
+        color: white;
+        border: none;
+        padding: 13px 30px;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      #resetBtn:hover {
+        background: #e85c5b;
+      }
+
+      /* MOBILE */
+      @media (max-width: 600px) {
+        header h1 {
+          font-size: 25px;
+        }
+
+        .score-top {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 5px;
+        }
+
+        .question-text {
+          font-size: 16px;
+        }
+
+        .section-title h2 {
+          font-size: 20px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>📚 Grammar Practice</h1>
+
+      <p>Articles & Subjunctive Mood with SUGGEST</p>
+    </header>
+
+    <div class="container">
+      <!-- SCORE -->
+
+      <div class="score-box">
+        <div class="score-top">
+          <span>
+            Progress:
+            <span id="progressText">0 / 45</span>
+          </span>
+
+          <span>
+            Score:
+            <span id="score">0</span>
+          </span>
+        </div>
+
+        <div class="progress-container">
+          <div id="progressBar"></div>
+        </div>
+      </div>
+
+      <!-- PART 1 -->
+
+      <section class="section">
+        <div class="section-title">
+          <h2>🟦 PART 1. ARTICLES</h2>
+
+          <p>A / AN / THE / Ø</p>
+        </div>
+
+        <div id="part1"></div>
+      </section>
+
+      <!-- PART 2 -->
+
+      <section class="section">
+        <div class="section-title">
+          <h2>🟩 PART 2. SUGGEST</h2>
+
+          <p>Suggest + (that) + S + (should) + V</p>
+        </div>
+
+        <div id="part2"></div>
+      </section>
+
+      <!-- PART 3 -->
+
+      <section class="section">
+        <div class="section-title">
+          <h2>🟨 PART 3. MIXED PRACTICE</h2>
+
+          <p>Articles & Suggest – Tổng hợp</p>
+        </div>
+
+        <div id="part3"></div>
+      </section>
+
+      <!-- FINAL RESULT -->
+
+      <div id="finalResult">
+        <h2>🎉 Quiz Completed!</h2>
+
+        <p id="finalScore"></p>
+      </div>
+
+      <!-- RESET -->
+
+      <div class="reset-container">
+        <button id="resetBtn">🔄 Reset Quiz</button>
+      </div>
+    </div>
+
+    <script>
+      /* =====================================================
+   QUESTION DATA
+===================================================== */
+
+      const questions = [
+        /* =========================
+   PART 1 – ARTICLES
+========================= */
+
+        {
+          part: 1,
+          q: "1. I saw ______ interesting documentary about climate change last night.",
+          options: ["A. a", "B. an", "C. the", "D. Ø"],
+          answer: 1,
+          explanation:
+            "Dùng 'an' trước danh từ số ít bắt đầu bằng nguyên âm. 'Interesting' bắt đầu bằng âm nguyên âm /ɪ/.",
+        },
+
+        {
+          part: 1,
+          q: "2. My brother wants to be ______ engineer when he grows up.",
+          options: ["A. a", "B. an", "C. the", "D. Ø"],
+          answer: 1,
+          explanation: "Engineer bắt đầu bằng âm nguyên âm /e/ nên dùng 'an'.",
+        },
+
+        {
+          part: 1,
+          q: "3. ______ sun rises in the east.",
+          options: ["A. A", "B. An", "C. The", "D. Ø"],
+          answer: 2,
+          explanation:
+            "The dùng với những sự vật duy nhất hoặc quen thuộc trên thế giới: the sun.",
+        },
+
+        {
+          part: 1,
+          q: "4. She bought ______ new dress yesterday.",
+          options: ["A. a", "B. an", "C. the", "D. Ø"],
+          answer: 0,
+          explanation:
+            "Dùng 'a' với danh từ số ít, đếm được và chưa xác định: a new dress.",
+        },
+
+        {
+          part: 1,
+          q: "5. I have ______ idea! Let's go to the library.",
+          options: ["A. a", "B. an", "C. the", "D. Ø"],
+          answer: 1,
+          explanation: "Idea bắt đầu bằng âm nguyên âm /aɪ/ → dùng 'an'.",
+        },
+
+        {
+          part: 1,
+          q: "6. We visited ______ museum near our hotel yesterday.",
+          options: ["A. a", "B. an", "C. the", "D. Ø"],
+          answer: 0,
+          explanation:
+            "Museum được nhắc đến lần đầu và chưa xác định cụ thể → dùng 'a'.",
+        },
+
+        {
+          part: 1,
+          q: "7. ______ museum was full of interesting historical objects.",
+          options: ["A. A", "B. An", "C. The", "D. Ø"],
+          answer: 2,
+          explanation: "Museum đã được nhắc đến ở câu trước nên dùng 'the'.",
+        },
+
+        {
+          part: 1,
+          q: "8. My sister is ______ student at a specialized high school.",
+          options: ["A. a", "B. an", "C. the", "D. Ø"],
+          answer: 0,
+          explanation:
+            "Student là danh từ số ít đếm được và được nhắc đến không cụ thể → a student.",
+        },
+
+        {
+          part: 1,
+          q: "9. I usually have ______ breakfast at 7 a.m.",
+          options: ["A. a", "B. an", "C. the", "D. Ø"],
+          answer: 3,
+          explanation:
+            "Các bữa ăn nói chung như breakfast, lunch, dinner thường không dùng mạo từ.",
+        },
+
+        {
+          part: 1,
+          q: "10. ______ information you gave me was very useful.",
+          options: ["A. A", "B. An", "C. The", "D. Ø"],
+          answer: 2,
+          explanation:
+            "Thông tin cụ thể mà bạn đã cung cấp → the information you gave me.",
+        },
+
+        {
+          part: 1,
+          q: "11. ______ information is important in the digital age.",
+          options: ["A. A", "B. An", "C. The", "D. Ø"],
+          answer: 3,
+          explanation:
+            "Information là danh từ không đếm được khi nói chung → không dùng mạo từ (Ø).",
+        },
+
+        {
+          part: 1,
+          q: "12. He wants to buy ______ umbrella because it is raining.",
+          options: ["A. a", "B. an", "C. the", "D. Ø"],
+          answer: 1,
+          explanation: "Umbrella bắt đầu bằng âm nguyên âm /ʌ/ → dùng 'an'.",
+        },
+
+        {
+          part: 1,
+          q: "13. She lives in ______ United Kingdom.",
+          options: ["A. a", "B. an", "C. the", "D. Ø"],
+          answer: 2,
+          explanation:
+            "Tên quốc gia có dạng liên bang / vương quốc như the United Kingdom dùng 'the'.",
+        },
+
+        {
+          part: 1,
+          q: "14. ______ English is spoken in many countries around the world.",
+          options: ["A. A", "B. An", "C. The", "D. Ø"],
+          answer: 3,
+          explanation:
+            "Tên ngôn ngữ khi nói chung không dùng mạo từ → English.",
+        },
+
+        {
+          part: 1,
+          q: "15. This is ______ most interesting book I have ever read.",
+          options: ["A. a", "B. an", "C. the", "D. Ø"],
+          answer: 2,
+          explanation: "So sánh nhất luôn dùng 'the': the most interesting.",
+        },
+
+        {
+          part: 1,
+          q: "16. He was ______ first student to finish the test.",
+          options: ["A. a", "B. an", "C. the", "D. Ø"],
+          answer: 2,
+          explanation:
+            "Số thứ tự như first, second, third thường đi với 'the': the first student.",
+        },
+
+        {
+          part: 1,
+          q: "17. ______ students in my class are preparing for the English exam.",
+          options: ["A. A", "B. An", "C. The", "D. Ø"],
+          answer: 2,
+          explanation:
+            "Nói về một nhóm học sinh cụ thể trong lớp tôi → the students in my class.",
+        },
+
+        {
+          part: 1,
+          q: "18. ______ students need to develop good study habits.",
+          options: ["A. A", "B. An", "C. The", "D. Ø"],
+          answer: 3,
+          explanation: "Nói chung về học sinh → Students không dùng mạo từ.",
+        },
+
+        {
+          part: 1,
+          q: "19. I saw ______ old man sitting under a tree.",
+          options: ["A. a", "B. an", "C. the", "D. Ø"],
+          answer: 1,
+          explanation: "Old bắt đầu bằng âm nguyên âm /əʊ/ → an old man.",
+        },
+
+        {
+          part: 1,
+          q: "20. ______ old man was reading a newspaper.",
+          options: ["A. A", "B. An", "C. The", "D. Ø"],
+          answer: 2,
+          explanation:
+            "Người đàn ông đã được nhắc đến ở câu trước → the old man.",
+        },
+
+        {
+          part: 1,
+          q: "21. She wants to study at ______ university in the UK.",
+          options: ["A. a", "B. an", "C. the", "D. Ø"],
+          answer: 0,
+          explanation:
+            "University bắt đầu bằng âm /juː/, là âm phụ âm → dùng 'a university'.",
+        },
+
+        {
+          part: 1,
+          q: "22. We crossed ______ Red River by boat.",
+          options: ["A. a", "B. an", "C. the", "D. Ø"],
+          answer: 2,
+          explanation: "Tên các con sông dùng 'the': the Red River.",
+        },
+
+        {
+          part: 1,
+          q: "23. ______ water is essential for human life.",
+          options: ["A. A", "B. An", "C. The", "D. Ø"],
+          answer: 3,
+          explanation:
+            "Water là danh từ không đếm được và đang được nói chung → Ø.",
+        },
+
+        {
+          part: 1,
+          q: "24. Please give me ______ book on the table.",
+          options: ["A. a", "B. an", "C. the", "D. Ø"],
+          answer: 2,
+          explanation:
+            "Cuốn sách được xác định rõ bằng cụm 'on the table' → the book.",
+        },
+
+        {
+          part: 1,
+          q: "25. My father is ______ doctor, and my mother is ______ teacher.",
+          options: ["A. a / a", "B. an / a", "C. a / an", "D. the / the"],
+          answer: 0,
+          explanation:
+            "Nghề nghiệp với danh từ số ít đếm được dùng a/an. Doctor và teacher đều bắt đầu bằng âm phụ âm → a doctor, a teacher.",
+        },
+
+        /* =========================
+   PART 2 – SUGGEST
+========================= */
+
+        {
+          part: 2,
+          q: "26. The teacher suggested that we ______ harder for the exam.",
+          options: ["A. studied", "B. study", "C. studying", "D. to study"],
+          answer: 1,
+          explanation:
+            "Suggest + that + S + V nguyên mẫu (subjunctive): suggested that we study.",
+        },
+
+        {
+          part: 2,
+          q: "27. She suggested that he ______ a doctor.",
+          options: ["A. should see", "B. seeing", "C. to see", "D. sees"],
+          answer: 0,
+          explanation:
+            "Suggest + that + S + should + V: suggested that he should see.",
+        },
+
+        {
+          part: 2,
+          q: "28. I suggest ______ to the library this afternoon.",
+          options: ["A. to go", "B. going", "C. go", "D. should go"],
+          answer: 1,
+          explanation: "Suggest + V-ing: suggest going.",
+        },
+
+        {
+          part: 2,
+          q: "29. The doctor suggested that I ______ more water.",
+          options: [
+            "A. drinking",
+            "B. to drink",
+            "C. should drink",
+            "D. drank",
+          ],
+          answer: 2,
+          explanation:
+            "Suggest + that + S + should + V: suggested that I should drink.",
+        },
+
+        {
+          part: 2,
+          q: "30. They suggested ______ a meeting next Monday.",
+          options: ["A. to have", "B. have", "C. having", "D. should have"],
+          answer: 2,
+          explanation: "Suggest + V-ing → suggested having.",
+        },
+
+        {
+          part: 2,
+          q: "31. My friend suggested that I ______ this book.",
+          options: ["A. should read", "B. reading", "C. to read", "D. reads"],
+          answer: 0,
+          explanation: "Suggest + that + S + should + V → should read.",
+        },
+
+        {
+          part: 2,
+          q: "32. The teacher suggested that students ______ their phones during the exam.",
+          options: [
+            "A. don't use",
+            "B. not use",
+            "C. not to use",
+            "D. didn't use",
+          ],
+          answer: 1,
+          explanation:
+            "Dạng phủ định của subjunctive: suggest that + S + not + V nguyên mẫu → not use.",
+        },
+
+        {
+          part: 2,
+          q: "33. I suggest that we ______ a break.",
+          options: ["A. should take", "B. taking", "C. to take", "D. takes"],
+          answer: 0,
+          explanation: "Suggest + that + S + should + V → should take.",
+        },
+
+        {
+          part: 2,
+          q: "34. She suggested ______ by bus instead of by taxi.",
+          options: [
+            "A. to travel",
+            "B. travel",
+            "C. travelling",
+            "D. should travel",
+          ],
+          answer: 2,
+          explanation: "Suggest + V-ing → suggested travelling.",
+        },
+
+        {
+          part: 2,
+          q: "35. The manager suggested that the company ______ a new policy.",
+          options: [
+            "A. introduces",
+            "B. introducing",
+            "C. should introduce",
+            "D. to introduce",
+          ],
+          answer: 2,
+          explanation: "Suggest + that + S + should + V → should introduce.",
+        },
+
+        {
+          part: 2,
+          q: "36. He suggested that we ______ the problem together.",
+          options: ["A. solve", "B. solving", "C. to solve", "D. solved"],
+          answer: 0,
+          explanation:
+            "Subjunctive sau suggest that dùng động từ nguyên mẫu không 'to': solve.",
+        },
+
+        {
+          part: 2,
+          q: "37. My mother suggested ______ earlier to avoid the traffic.",
+          options: ["A. leave", "B. leaving", "C. to leave", "D. should leave"],
+          answer: 1,
+          explanation: "Suggest + V-ing → suggested leaving.",
+        },
+
+        {
+          part: 2,
+          q: "38. The doctor suggested that she ______ more exercise.",
+          options: ["A. gets", "B. getting", "C. should get", "D. to get"],
+          answer: 2,
+          explanation: "Suggest + that + S + should + V → should get.",
+        },
+
+        {
+          part: 2,
+          q: "39. They suggested that we ______ the project before Friday.",
+          options: [
+            "A. should finish",
+            "B. finishing",
+            "C. to finish",
+            "D. finished",
+          ],
+          answer: 0,
+          explanation: "Suggest + that + S + should + V → should finish.",
+        },
+
+        {
+          part: 2,
+          q: "40. I suggest ______ a different approach to this problem.",
+          options: ["A. to try", "B. trying", "C. try", "D. should try"],
+          answer: 1,
+          explanation: "Suggest + V-ing → suggest trying.",
+        },
+
+        /* =========================
+   PART 3 – MIXED
+========================= */
+
+        {
+          part: 3,
+          q: "41. The teacher suggested that ______ students should use ______ dictionary when they don't know a word.",
+          options: ["A. the / a", "B. Ø / a", "C. Ø / an", "D. a / the"],
+          answer: 1,
+          explanation:
+            "Nói chung về học sinh → Ø students. Dictionary là danh từ số ít đếm được, chưa xác định → a dictionary.",
+        },
+
+        {
+          part: 3,
+          q: "42. I saw ______ interesting article yesterday. ______ article was about environmental protection.",
+          options: ["A. a / A", "B. an / The", "C. the / An", "D. an / An"],
+          answer: 1,
+          explanation:
+            "Lần đầu nhắc đến: an interesting article. Nhắc lại lần thứ hai: the article.",
+        },
+
+        {
+          part: 3,
+          q: "43. She suggested that we ______ ______ English club at school.",
+          options: [
+            "A. should join / an",
+            "B. joining / a",
+            "C. to join / an",
+            "D. join / the",
+          ],
+          answer: 0,
+          explanation:
+            "Suggest + that + S + should + V → should join. English bắt đầu bằng âm nguyên âm → an English club.",
+        },
+
+        {
+          part: 3,
+          q: "44. ______ first thing I do in ______ morning is check my study schedule.",
+          options: ["A. A / a", "B. An / the", "C. The / the", "D. Ø / the"],
+          answer: 2,
+          explanation: "Cấu trúc cố định: the first thing và the morning.",
+        },
+
+        {
+          part: 3,
+          q: "45. The teacher suggested ______ more books and suggested that we ______ notes while reading.",
+          options: [
+            "A. to read / took",
+            "B. reading / should take",
+            "C. read / taking",
+            "D. reading / to take",
+          ],
+          answer: 1,
+          explanation:
+            "Suggest + V-ing → suggested reading. Suggest + that + S + should + V → should take.",
+        },
+      ];
+
+      /* =====================================================
+   VARIABLES
+===================================================== */
+
+      let score = 0;
+      let answered = 0;
+
+      const totalQuestions = questions.length;
+
+      /* =====================================================
+   CONTAINERS
+===================================================== */
+
+      const containers = {
+        1: document.getElementById("part1"),
+
+        2: document.getElementById("part2"),
+
+        3: document.getElementById("part3"),
+      };
+
+      /* =====================================================
+   RENDER QUESTIONS
+===================================================== */
+
+      questions.forEach((item, index) => {
+        const questionBox = document.createElement("div");
+
+        questionBox.className = "question";
+
+        questionBox.innerHTML = `
+
+    <div class="question-text">
+
+      ${item.q}
+
+    </div>
+
+
+    <div class="options">
+
+      ${item.options
+        .map(
+          (option, optionIndex) => `
+
+        <button
+          class="option"
+          data-question="${index}"
+          data-option="${optionIndex}">
+
+          ${option}
+
+        </button>
+
+      `,
+        )
+        .join("")}
+
+    </div>
+
+
+    <div
+      class="feedback"
+      id="feedback-${index}">
+
+    </div>
+
+  `;
+
+        containers[item.part].appendChild(questionBox);
+      });
+
+      /* =====================================================
+   ANSWER HANDLER
+===================================================== */
+
+      document.querySelectorAll(".option").forEach((button) => {
+        button.addEventListener("click", function () {
+          const questionIndex = Number(this.dataset.question);
+
+          const selectedOption = Number(this.dataset.option);
+
+          const question = questions[questionIndex];
+
+          const allOptions = document.querySelectorAll(
+            `.option[data-question="${questionIndex}"]`,
+          );
+
+          const feedback = document.getElementById(`feedback-${questionIndex}`);
+
+          /* Prevent answering twice */
+
+          if (allOptions[0].disabled) {
+            return;
+          }
+
+          /* Disable all options */
+
+          allOptions.forEach((btn) => {
+            btn.disabled = true;
+          });
+
+          /* Highlight correct answer */
+
+          allOptions[question.answer].classList.add("correct");
+
+          /* =====================
+         CORRECT
+      ===================== */
+
+          if (selectedOption === question.answer) {
+            score++;
+
+            this.classList.add("correct");
+
+            feedback.className = "feedback show correct-feedback";
+
+            feedback.innerHTML = `
+
+          <strong>
+            ✅ Correct!
+          </strong>
+
+          ${question.explanation}
+
+        `;
+          } else {
+
+          /* =====================
+         WRONG
+      ===================== */
+            this.classList.add("wrong");
+
+            feedback.className = "feedback show wrong-feedback";
+
+            feedback.innerHTML = `
+
+          <strong>
+            ❌ Incorrect!
+          </strong>
+
+          <b>Đáp án đúng:</b>
+          ${question.options[question.answer]}
+
+          <br><br>
+
+          ${question.explanation}
+
+        `;
+          }
+
+          /* Update */
+
+          answered++;
+
+          updateProgress();
+        });
+      });
+
+      /* =====================================================
+   UPDATE PROGRESS
+===================================================== */
+
+      function updateProgress() {
+        document.getElementById("score").textContent = score;
+
+        document.getElementById("progressText").textContent =
+          `${answered} / ${totalQuestions}`;
+
+        const percentage = (answered / totalQuestions) * 100;
+
+        document.getElementById("progressBar").style.width = `${percentage}%`;
+
+        /* Quiz completed */
+
+        if (answered === totalQuestions) {
+          const finalResult = document.getElementById("finalResult");
+
+          const finalScore = document.getElementById("finalScore");
+
+          const percent = Math.round((score / totalQuestions) * 100);
+
+          finalResult.style.display = "block";
+
+          finalScore.textContent = `Bạn đạt ${score}/${totalQuestions} câu đúng (${percent}%).`;
+
+          finalResult.scrollIntoView({
+            behavior: "smooth",
+          });
+        }
+      }
+
+      /* =====================================================
+   RESET QUIZ
+===================================================== */
+
+      document
+        .getElementById("resetBtn")
+        .addEventListener("click", function () {
+          /* Reset score */
+
+          score = 0;
+
+          answered = 0;
+
+          /* Reset buttons */
+
+          document.querySelectorAll(".option").forEach((button) => {
+            button.disabled = false;
+
+            button.classList.remove("correct", "wrong");
+          });
+
+          /* Reset feedback */
+
+          document.querySelectorAll(".feedback").forEach((feedback) => {
+            feedback.className = "feedback";
+
+            feedback.innerHTML = "";
+          });
+
+          /* Reset score */
+
+          document.getElementById("score").textContent = "0";
+
+          /* Reset progress */
+
+          document.getElementById("progressText").textContent =
+            `0 / ${totalQuestions}`;
+
+          document.getElementById("progressBar").style.width = "0%";
+
+          /* Hide final result */
+
+          document.getElementById("finalResult").style.display = "none";
+
+          /* Scroll top */
+
+          window.scrollTo({
+            top: 0,
+
+            behavior: "smooth",
+          });
+        });
+    </script>
+  </body>
+</html>
+```

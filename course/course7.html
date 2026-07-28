@@ -1,0 +1,1019 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Articles & Subjunctive Mood</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Nunito", sans-serif;
+        background: linear-gradient(135deg, #eef2ff, #f5f3ff, #ecfeff);
+        min-height: 100vh;
+        color: #26324a;
+        padding-bottom: 100px;
+      }
+
+      /* ================= HEADER ================= */
+
+      header {
+        height: 75px;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 7%;
+        box-shadow: 0 3px 15px rgba(80, 70, 150, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .logo {
+        font-family: "Baloo 2", sans-serif;
+        font-size: 28px;
+        font-weight: 800;
+        color: #6d5dfc;
+      }
+
+      .lesson-label {
+        font-size: 14px;
+        font-weight: 700;
+        color: #7b8499;
+      }
+
+      /* ================= PROGRESS ================= */
+
+      .progress-container {
+        width: 100%;
+        height: 7px;
+        background: #e5e7eb;
+        position: sticky;
+        top: 75px;
+        z-index: 99;
+      }
+
+      .progress-bar {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #6d5dfc, #8b5cf6, #06b6d4);
+        transition: width 0.4s ease;
+      }
+
+      /* ================= MAIN ================= */
+
+      .container {
+        width: 90%;
+        max-width: 1050px;
+        margin: 40px auto;
+      }
+
+      .slide {
+        display: none;
+        background: white;
+        border-radius: 28px;
+        padding: 45px 55px;
+        box-shadow: 0 15px 45px rgba(70, 60, 140, 0.12);
+        animation: fadeIn 0.4s ease;
+        min-height: 560px;
+      }
+
+      .slide.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(12px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ================= TYPOGRAPHY ================= */
+
+      h1 {
+        font-family: "Baloo 2", sans-serif;
+        font-size: 42px;
+        color: #5b4ee8;
+        margin-bottom: 12px;
+      }
+
+      h2 {
+        font-family: "Baloo 2", sans-serif;
+        font-size: 32px;
+        color: #5b4ee8;
+        margin-bottom: 25px;
+      }
+
+      h3 {
+        font-size: 21px;
+        color: #4338ca;
+        margin: 25px 0 12px;
+      }
+
+      p {
+        font-size: 17px;
+        line-height: 1.8;
+        margin: 10px 0;
+      }
+
+      ul {
+        margin: 15px 0 15px 25px;
+      }
+
+      li {
+        font-size: 17px;
+        line-height: 1.8;
+        margin-bottom: 5px;
+      }
+
+      strong {
+        color: #5b4ee8;
+      }
+
+      /* ================= BADGE ================= */
+
+      .badge {
+        display: inline-block;
+        background: #ede9fe;
+        color: #6d28d9;
+        padding: 7px 15px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 800;
+        margin-bottom: 15px;
+      }
+
+      /* ================= BOX ================= */
+
+      .example-box {
+        background: #f8f7ff;
+        border-left: 5px solid #6d5dfc;
+        border-radius: 12px;
+        padding: 18px 22px;
+        margin: 18px 0;
+      }
+
+      .tip-box {
+        background: #ecfeff;
+        border-left: 5px solid #06b6d4;
+        border-radius: 12px;
+        padding: 18px 22px;
+        margin: 18px 0;
+      }
+
+      .warning-box {
+        background: #fff7ed;
+        border-left: 5px solid #f97316;
+        border-radius: 12px;
+        padding: 18px 22px;
+        margin: 18px 0;
+      }
+
+      .formula {
+        background: #f1f5f9;
+        padding: 18px;
+        border-radius: 14px;
+        text-align: center;
+        font-size: 21px;
+        font-weight: 800;
+        color: #4338ca;
+        margin: 20px 0;
+      }
+
+      .correct {
+        color: #16a34a;
+        font-weight: 800;
+      }
+
+      .wrong {
+        color: #dc2626;
+        font-weight: 800;
+      }
+
+      /* ================= TABLE ================= */
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        overflow: hidden;
+        border-radius: 12px;
+      }
+
+      th {
+        background: #6d5dfc;
+        color: white;
+        padding: 13px;
+        text-align: left;
+      }
+
+      td {
+        padding: 13px;
+        border-bottom: 1px solid #e5e7eb;
+        font-size: 16px;
+      }
+
+      tr:nth-child(even) {
+        background: #f8f7ff;
+      }
+
+      /* ================= NAVIGATION ================= */
+
+      .navigation {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 25px;
+      }
+
+      .nav-btn {
+        border: none;
+        padding: 14px 25px;
+        border-radius: 14px;
+        font-family: "Nunito", sans-serif;
+        font-size: 16px;
+        font-weight: 800;
+        cursor: pointer;
+        transition: 0.25s;
+      }
+
+      .prev-btn {
+        background: #e5e7eb;
+        color: #374151;
+      }
+
+      .next-btn {
+        background: #6d5dfc;
+        color: white;
+      }
+
+      .nav-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 7px 18px rgba(80, 70, 150, 0.2);
+      }
+
+      .slide-number {
+        font-weight: 800;
+        color: #7b8499;
+      }
+
+      /* ================= FINAL ================= */
+
+      .final-box {
+        text-align: center;
+        padding: 50px 20px;
+      }
+
+      .final-box h1 {
+        font-size: 45px;
+      }
+
+      .final-box p {
+        max-width: 650px;
+        margin: 15px auto 30px;
+      }
+
+      .final-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+
+      .final-btn {
+        display: inline-block;
+        text-decoration: none;
+        padding: 16px 30px;
+        border-radius: 15px;
+        font-weight: 800;
+        font-size: 17px;
+        transition: 0.25s;
+      }
+
+      .quiz-btn {
+        background: #6d5dfc;
+        color: white;
+      }
+
+      .home-btn {
+        background: #e5e7eb;
+        color: #374151;
+      }
+
+      .final-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(70, 60, 140, 0.2);
+      }
+
+      /* ================= RESPONSIVE ================= */
+
+      @media (max-width: 700px) {
+        header {
+          padding: 0 20px;
+        }
+
+        .lesson-label {
+          display: none;
+        }
+
+        .container {
+          width: 94%;
+          margin: 25px auto;
+        }
+
+        .slide {
+          padding: 30px 22px;
+          border-radius: 20px;
+        }
+
+        h1 {
+          font-size: 34px;
+        }
+
+        h2 {
+          font-size: 27px;
+        }
+
+        p,
+        li {
+          font-size: 16px;
+        }
+
+        .navigation {
+          gap: 10px;
+        }
+
+        .nav-btn {
+          padding: 12px 17px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- ================= HEADER ================= -->
+
+    <header>
+      <div class="logo">Hyvoria English</div>
+      <div class="lesson-label">
+        Grammar Lesson • Articles & Subjunctive Mood
+      </div>
+    </header>
+
+    <!-- ================= PROGRESS BAR ================= -->
+
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <main class="container">
+      <!-- ================= SLIDE 1 ================= -->
+
+      <section class="slide active">
+        <span class="badge">GRAMMAR LESSON</span>
+
+        <h1>Articles & Subjunctive Mood</h1>
+
+        <p>
+          📚 <strong>Chủ đề:</strong> Mạo từ A / AN / THE và Thức giả định với
+          <strong>suggest</strong>
+        </p>
+
+        <div class="formula">
+          A / AN • THE • Ø • SUGGEST + THAT + S + (SHOULD) + V
+        </div>
+
+        <div class="tip-box">
+          <strong>🎯 Mục tiêu bài học</strong>
+          <p>
+            Sau bài học, bạn có thể sử dụng chính xác các mạo từ
+            <strong>A, AN, THE, Ø</strong> và cấu trúc
+            <strong>suggest + V-ing / suggest + that + S + (should) + V</strong
+            >.
+          </p>
+        </div>
+      </section>
+
+      <!-- ================= SLIDE 2 ================= -->
+
+      <section class="slide">
+        <span class="badge">PART 1</span>
+
+        <h2>🟦 Articles – Mạo từ</h2>
+
+        <p>
+          Mạo từ đứng trước danh từ để cho biết danh từ đó được nhắc đến
+          <strong>chung chung</strong>,
+          <strong>một đối tượng bất kỳ</strong> hay
+          <strong>một đối tượng cụ thể</strong>.
+        </p>
+
+        <table>
+          <tr>
+            <th>Mạo từ</th>
+            <th>Cách dùng</th>
+            <th>Ví dụ</th>
+          </tr>
+
+          <tr>
+            <td><strong>A</strong></td>
+            <td>Danh từ đếm được số ít, chưa xác định</td>
+            <td>a book</td>
+          </tr>
+
+          <tr>
+            <td><strong>AN</strong></td>
+            <td>Như A nhưng trước âm nguyên âm</td>
+            <td>an apple</td>
+          </tr>
+
+          <tr>
+            <td><strong>THE</strong></td>
+            <td>Đối tượng cụ thể / xác định</td>
+            <td>the book</td>
+          </tr>
+
+          <tr>
+            <td><strong>Ø</strong></td>
+            <td>Không dùng mạo từ khi nói chung</td>
+            <td>Dogs are friendly.</td>
+          </tr>
+        </table>
+      </section>
+
+      <!-- ================= SLIDE 3 ================= -->
+
+      <section class="slide">
+        <span class="badge">A / AN</span>
+
+        <h2>1️⃣ A / AN – Mạo từ không xác định</h2>
+
+        <p>
+          Dùng trước <strong>danh từ đếm được số ít</strong> khi người nghe chưa
+          biết chính xác đó là người hoặc vật nào.
+        </p>
+
+        <div class="formula">a / an + singular countable noun</div>
+
+        <div class="example-box">
+          <p>🔹 I saw <strong>a dog</strong> in the street.</p>
+          <p>🔹 She is <strong>a student</strong>.</p>
+          <p>🔹 He bought <strong>a new phone</strong>.</p>
+        </div>
+
+        <h3>🔊 A hay AN?</h3>
+
+        <p>
+          Chọn dựa vào <strong>âm đầu tiên khi phát âm</strong>, không phải chữ
+          cái đầu tiên.
+        </p>
+
+        <table>
+          <tr>
+            <th>A + âm phụ âm</th>
+            <th>AN + âm nguyên âm</th>
+          </tr>
+
+          <tr>
+            <td>a book</td>
+            <td>an apple</td>
+          </tr>
+
+          <tr>
+            <td>a university /juː/</td>
+            <td>an hour /aʊə/</td>
+          </tr>
+
+          <tr>
+            <td>a European country</td>
+            <td>an honest person</td>
+          </tr>
+        </table>
+      </section>
+
+      <!-- ================= SLIDE 4 ================= -->
+
+      <section class="slide">
+        <span class="badge">A / AN</span>
+
+        <h2>2️⃣ A / AN với nghề nghiệp</h2>
+
+        <div class="formula">S + be + a / an + job</div>
+
+        <div class="example-box">
+          <p>✅ She is <strong>a teacher</strong>.</p>
+          <p>✅ He is <strong>an engineer</strong>.</p>
+          <p>✅ My father is <strong>a doctor</strong>.</p>
+          <p>✅ She wants to become <strong>an architect</strong>.</p>
+        </div>
+
+        <div class="warning-box">
+          <p class="wrong">❌ She is teacher.</p>
+          <p class="correct">✅ She is a teacher.</p>
+        </div>
+
+        <h3>💡 A / AN ≈ ONE</h3>
+
+        <p>
+          Trong một số trường hợp, A / AN có nghĩa gần với
+          <strong>one – một</strong>.
+        </p>
+
+        <div class="example-box">
+          <p>
+            I need <strong>a pen</strong>. = I need <strong>one pen</strong>.
+          </p>
+          <p>
+            She bought <strong>an apple</strong>. = She bought
+            <strong>one apple</strong>.
+          </p>
+        </div>
+      </section>
+
+      <!-- ================= SLIDE 5 ================= -->
+
+      <section class="slide">
+        <span class="badge">THE</span>
+
+        <h2>3️⃣ THE – Mạo từ xác định</h2>
+
+        <p>
+          Dùng <strong>THE</strong> khi người nói và người nghe đều biết hoặc có
+          thể xác định người / vật đang được nói đến.
+        </p>
+
+        <h3>🔹 Đã nhắc đến trước đó</h3>
+
+        <div class="example-box">
+          <p>
+            I saw <strong>a dog</strong> in the park.
+            <strong>The dog</strong> was very cute.
+          </p>
+        </div>
+
+        <p>
+          Lần đầu → <strong>A / AN</strong><br />
+          Lần thứ hai → <strong>THE</strong>
+        </p>
+
+        <h3>🔹 Vật duy nhất</h3>
+
+        <div class="example-box">
+          <p><strong>the sun</strong> • <strong>the moon</strong></p>
+          <p><strong>the Earth</strong> • <strong>the sky</strong></p>
+          <p><strong>the world</strong></p>
+        </div>
+      </section>
+
+      <!-- ================= SLIDE 6 ================= -->
+
+      <section class="slide">
+        <span class="badge">THE</span>
+
+        <h2>4️⃣ Những trường hợp dùng THE</h2>
+
+        <h3>🔹 Được xác định bằng cụm từ phía sau</h3>
+
+        <div class="example-box">
+          <p>the book <strong>on the table</strong></p>
+          <p>the girl <strong>in the red dress</strong></p>
+          <p>the house <strong>next to the school</strong></p>
+        </div>
+
+        <h3>🔹 So sánh nhất</h3>
+
+        <div class="formula">the + superlative</div>
+
+        <div class="example-box">
+          <p>the best</p>
+          <p>the biggest</p>
+          <p>the most beautiful</p>
+          <p>the most interesting</p>
+        </div>
+
+        <h3>🔹 Số thứ tự</h3>
+
+        <div class="example-box">
+          <p>the first • the second • the third</p>
+          <p>the last • the next</p>
+        </div>
+      </section>
+
+      <!-- ================= SLIDE 7 ================= -->
+
+      <section class="slide">
+        <span class="badge">GEOGRAPHICAL NAMES</span>
+
+        <h2>5️⃣ THE với một số địa danh</h2>
+
+        <table>
+          <tr>
+            <th>Loại địa danh</th>
+            <th>Ví dụ</th>
+          </tr>
+
+          <tr>
+            <td>Sông</td>
+            <td>the Red River, the Thames, the Nile</td>
+          </tr>
+
+          <tr>
+            <td>Biển / Đại dương</td>
+            <td>the Pacific Ocean, the Atlantic Ocean</td>
+          </tr>
+
+          <tr>
+            <td>Dãy núi</td>
+            <td>the Alps, the Himalayas</td>
+          </tr>
+
+          <tr>
+            <td>Sa mạc</td>
+            <td>the Sahara, the Gobi Desert</td>
+          </tr>
+
+          <tr>
+            <td>Quần đảo</td>
+            <td>the Philippines, the Maldives</td>
+          </tr>
+        </table>
+      </section>
+
+      <!-- ================= SLIDE 8 ================= -->
+
+      <section class="slide">
+        <span class="badge">ZERO ARTICLE</span>
+
+        <h2>6️⃣ Ø – Không dùng mạo từ</h2>
+
+        <h3>🔹 Danh từ số nhiều nói chung</h3>
+
+        <div class="example-box">
+          <p><strong>Dogs</strong> are friendly animals.</p>
+
+          <p>
+            Nhưng:
+            <strong>The dogs</strong> in my garden are noisy.
+          </p>
+        </div>
+
+        <h3>🔹 Danh từ không đếm được nói chung</h3>
+
+        <div class="example-box">
+          <p><strong>Water</strong> is important.</p>
+          <p><strong>Education</strong> is important.</p>
+          <p><strong>Information</strong> is useful.</p>
+          <p><strong>Music</strong> makes people happy.</p>
+        </div>
+
+        <h3>🔹 Tên riêng</h3>
+
+        <div class="example-box">
+          <p>Vietnam • Japan • France</p>
+          <p>London • Hanoi • English</p>
+        </div>
+
+        <div class="tip-box">
+          ⚠️ Một số tên quốc gia có THE:
+          <strong
+            >the United States, the United Kingdom, the Netherlands, the
+            Philippines</strong
+          >.
+        </div>
+      </section>
+
+      <!-- ================= SLIDE 9 ================= -->
+
+      <section class="slide">
+        <span class="badge">PART 2</span>
+
+        <h2>🟩 Subjunctive Mood – Suggest</h2>
+
+        <p>
+          Cấu trúc <strong>suggest</strong> được dùng để đề xuất, kiến nghị hoặc
+          khuyên nên làm gì.
+        </p>
+
+        <div class="formula">S + suggest + that + S + (should) + V</div>
+
+        <p>Có hai cách phổ biến:</p>
+
+        <div class="example-box">
+          <p>
+            ✅ The teacher suggested that we
+            <strong>should review</strong> the lesson.
+          </p>
+
+          <p>
+            ✅ The teacher suggested that we
+            <strong>review</strong> the lesson.
+          </p>
+        </div>
+
+        <div class="tip-box">
+          📌 Khi bỏ SHOULD, động từ vẫn giữ nguyên dạng nguyên mẫu.
+        </div>
+      </section>
+
+      <!-- ================= SLIDE 10 ================= -->
+
+      <section class="slide">
+        <span class="badge">SUBJUNCTIVE</span>
+
+        <h2>1️⃣ Suggest + That + S + (Should) + V</h2>
+
+        <div class="example-box">
+          <p>I suggest that he <strong>should study</strong> harder.</p>
+
+          <p>I suggest that he <strong>study</strong> harder.</p>
+        </div>
+
+        <p>👉 Cả hai câu đều đúng.</p>
+
+        <h3>⚠️ Không chia động từ sau THAT</h3>
+
+        <div class="warning-box">
+          <p class="wrong">❌ She suggested that he goes home.</p>
+
+          <p class="correct">✅ She suggested that he go home.</p>
+
+          <p class="correct">✅ She suggested that he should go home.</p>
+        </div>
+
+        <div class="warning-box">
+          <p class="wrong">❌ should going</p>
+          <p class="correct">✅ should go</p>
+        </div>
+      </section>
+
+      <!-- ================= SLIDE 11 ================= -->
+
+      <section class="slide">
+        <span class="badge">SUGGEST + V-ING</span>
+
+        <h2>2️⃣ Suggest + V-ing</h2>
+
+        <p>Khi đề xuất một hoạt động, ta có thể dùng:</p>
+
+        <div class="formula">S + suggest + V-ing</div>
+
+        <div class="example-box">
+          <p>✅ I suggest <strong>going</strong> by bus.</p>
+
+          <p>✅ She suggested <strong>visiting</strong> the museum.</p>
+
+          <p>✅ They suggested <strong>having</strong> a meeting.</p>
+        </div>
+
+        <div class="warning-box">
+          <p class="wrong">❌ I suggest to go home.</p>
+
+          <p class="correct">✅ I suggest going home.</p>
+
+          <p class="correct">✅ I suggest that we should go home.</p>
+        </div>
+      </section>
+
+      <!-- ================= SLIDE 12 ================= -->
+
+      <section class="slide">
+        <span class="badge">COMPARE</span>
+
+        <h2>3️⃣ Tổng hợp cấu trúc SUGGEST</h2>
+
+        <table>
+          <tr>
+            <th>Cấu trúc</th>
+            <th>Ví dụ</th>
+          </tr>
+
+          <tr>
+            <td>suggest + V-ing</td>
+            <td>I suggest <strong>going</strong> home.</td>
+          </tr>
+
+          <tr>
+            <td>suggest + that + S + should + V</td>
+            <td>I suggest that we <strong>should go</strong> home.</td>
+          </tr>
+
+          <tr>
+            <td>suggest + that + S + V</td>
+            <td>I suggest that we <strong>go</strong> home.</td>
+          </tr>
+        </table>
+
+        <div class="warning-box">
+          <h3>🚨 Lỗi cần tránh</h3>
+
+          <p class="wrong">❌ suggest + to V</p>
+
+          <p class="correct">✅ suggest + V-ing</p>
+
+          <p class="correct">✅ suggest + that + S + should + V</p>
+
+          <p class="correct">✅ suggest + that + S + V</p>
+        </div>
+      </section>
+
+      <!-- ================= SLIDE 13 ================= -->
+
+      <section class="slide">
+        <span class="badge">PASSIVE STRUCTURE</span>
+
+        <h2>4️⃣ Suggest trong câu bị động</h2>
+
+        <div class="formula">It is suggested that + S + (should) + V</div>
+
+        <div class="example-box">
+          <p>
+            It is suggested that students
+            <strong>should wear</strong> uniforms.
+          </p>
+
+          <p>
+            It is suggested that students
+            <strong>wear</strong> uniforms.
+          </p>
+        </div>
+
+        <p>→ Người ta đề nghị học sinh nên mặc đồng phục.</p>
+
+        <h3>📌 Lưu ý</h3>
+
+        <p>
+          Trong cấu trúc này, <strong>should</strong> có thể được dùng hoặc lược
+          bỏ.
+        </p>
+      </section>
+
+      <!-- ================= SLIDE 14 ================= -->
+
+      <section class="slide">
+        <span class="badge">FINAL SUMMARY</span>
+
+        <h2>🎯 Tổng kết</h2>
+
+        <h3>📚 ARTICLES</h3>
+
+        <div class="formula">A / AN → một đối tượng chưa xác định</div>
+
+        <div class="formula">THE → đối tượng cụ thể / xác định</div>
+
+        <div class="formula">Ø → nói chung</div>
+
+        <h3>💡 SUGGEST</h3>
+
+        <div class="formula">suggest + V-ing</div>
+
+        <div class="formula">suggest + that + S + should + V</div>
+
+        <div class="formula">suggest + that + S + V</div>
+
+        <div class="warning-box">
+          <strong>🔥 Nhớ:</strong>
+
+          <p>✅ suggest going</p>
+          <p>✅ suggest that he should go</p>
+          <p>✅ suggest that he go</p>
+          <p class="wrong">❌ suggest to go</p>
+        </div>
+      </section>
+
+      <!-- ================= FINAL SLIDE ================= -->
+
+      <section class="slide">
+        <div class="final-box">
+          <div style="font-size: 65px">🎉</div>
+
+          <h1>Great Job!</h1>
+
+          <p>
+            Bạn đã hoàn thành bài giảng về
+            <strong>Articles & Subjunctive Mood</strong>. Bây giờ hãy làm bài
+            tập để kiểm tra mức độ hiểu bài nhé!
+          </p>
+
+          <div class="final-buttons">
+            <!-- NÚT LÀM BÀI TẬP -->
+            <a href="quiz7.html" class="final-btn quiz-btn"> 📝 Làm bài tập </a>
+
+            <!-- NÚT TRANG CHỦ -->
+            <a href="course7.html" class="final-btn home-btn"> 🏠 Trang chủ </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= NAVIGATION ================= -->
+
+      <div class="navigation">
+        <button class="nav-btn prev-btn" id="prevBtn" onclick="changeSlide(-1)">
+          ← Quay lại
+        </button>
+
+        <div class="slide-number" id="slideNumber">1 / 15</div>
+
+        <button class="nav-btn next-btn" id="nextBtn" onclick="changeSlide(1)">
+          Tiếp theo →
+        </button>
+      </div>
+    </main>
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+      const slides = document.querySelectorAll(".slide");
+
+      const prevBtn = document.getElementById("prevBtn");
+
+      const nextBtn = document.getElementById("nextBtn");
+
+      const slideNumber = document.getElementById("slideNumber");
+
+      const progressBar = document.getElementById("progressBar");
+
+      let currentSlide = 0;
+
+      function showSlide(index) {
+        if (index < 0) {
+          index = 0;
+        }
+
+        if (index >= slides.length) {
+          index = slides.length - 1;
+        }
+
+        currentSlide = index;
+
+        slides.forEach((slide, i) => {
+          slide.classList.toggle("active", i === currentSlide);
+        });
+
+        // Cập nhật số trang
+
+        slideNumber.textContent = `${currentSlide + 1} / ${slides.length}`;
+
+        // Cập nhật thanh tiến trình
+
+        const progress = ((currentSlide + 1) / slides.length) * 100;
+
+        progressBar.style.width = progress + "%";
+
+        // Nút quay lại
+
+        prevBtn.disabled = currentSlide === 0;
+
+        // Đổi nội dung nút tiếp theo
+
+        if (currentSlide === slides.length - 1) {
+          nextBtn.style.display = "none";
+        } else {
+          nextBtn.style.display = "block";
+        }
+      }
+
+      function changeSlide(direction) {
+        showSlide(currentSlide + direction);
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+
+      // Cho phép dùng phím mũi tên
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "ArrowRight") {
+          changeSlide(1);
+        }
+
+        if (event.key === "ArrowLeft") {
+          changeSlide(-1);
+        }
+      });
+
+      // Khởi tạo
+
+      showSlide(0);
+    </script>
+  </body>
+</html>

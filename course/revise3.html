@@ -1,0 +1,880 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Grammar Practice - Hyvoria English</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #f5f0ff, #eef7ff);
+        color: #333;
+        padding-bottom: 50px;
+      }
+
+      header {
+        background: linear-gradient(135deg, #6c4ab6, #8d6bd1);
+        color: white;
+        padding: 30px 20px;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      header h1 {
+        font-size: 32px;
+        margin-bottom: 8px;
+      }
+
+      header p {
+        font-size: 17px;
+        opacity: 0.95;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 30px auto;
+        padding: 0 20px;
+      }
+
+      .score-box {
+        position: sticky;
+        top: 10px;
+        z-index: 10;
+        background: white;
+        border-radius: 15px;
+        padding: 15px 20px;
+        margin-bottom: 25px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+        color: #6c4ab6;
+      }
+
+      .part {
+        background: white;
+        border-radius: 18px;
+        padding: 25px;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+      }
+
+      .part-title {
+        color: #6c4ab6;
+        font-size: 24px;
+        margin-bottom: 8px;
+      }
+
+      .part-subtitle {
+        color: #777;
+        margin-bottom: 25px;
+        font-size: 15px;
+      }
+
+      .question {
+        border: 1px solid #e4def2;
+        border-radius: 14px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background: #fcfbff;
+      }
+
+      .question-text {
+        font-size: 17px;
+        line-height: 1.6;
+        font-weight: 600;
+        margin-bottom: 15px;
+      }
+
+      .options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .option {
+        border: 2px solid #ddd;
+        background: white;
+        padding: 12px 15px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.2s;
+        font-size: 16px;
+        text-align: left;
+      }
+
+      .option:hover {
+        border-color: #8d6bd1;
+        background: #f7f3ff;
+        transform: translateX(3px);
+      }
+
+      .option.correct {
+        background: #e7f8ed;
+        border-color: #28a745;
+        color: #16752d;
+        font-weight: bold;
+      }
+
+      .option.wrong {
+        background: #fdeaea;
+        border-color: #dc3545;
+        color: #a71d2a;
+        font-weight: bold;
+      }
+
+      .option.disabled {
+        cursor: default;
+      }
+
+      .option.disabled:hover {
+        transform: none;
+      }
+
+      .feedback {
+        display: none;
+        margin-top: 15px;
+        padding: 15px;
+        border-radius: 10px;
+        line-height: 1.6;
+        font-size: 15px;
+      }
+
+      .feedback.correct-feedback {
+        background: #e7f8ed;
+        color: #176b2c;
+        border-left: 4px solid #28a745;
+      }
+
+      .feedback.wrong-feedback {
+        background: #fdeaea;
+        color: #8f1d29;
+        border-left: 4px solid #dc3545;
+      }
+
+      .feedback strong {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      .final-box {
+        background: white;
+        border-radius: 18px;
+        padding: 30px;
+        text-align: center;
+        box-shadow: 0 5px 18px rgba(0, 0, 0, 0.1);
+        margin-top: 30px;
+      }
+
+      .final-box h2 {
+        color: #6c4ab6;
+        margin-bottom: 15px;
+      }
+
+      #finalScore {
+        font-size: 28px;
+        font-weight: bold;
+        margin: 15px 0;
+        color: #6c4ab6;
+      }
+
+      .btn {
+        display: inline-block;
+        border: none;
+        padding: 13px 25px;
+        margin: 8px;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        text-decoration: none;
+        transition: 0.2s;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        opacity: 0.9;
+      }
+
+      .reset-btn {
+        background: #6c4ab6;
+        color: white;
+      }
+
+      .home-btn {
+        background: #333;
+        color: white;
+      }
+
+      @media (max-width: 600px) {
+        header h1 {
+          font-size: 25px;
+        }
+
+        .part {
+          padding: 18px;
+        }
+
+        .question {
+          padding: 15px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>📚 GRAMMAR PRACTICE</h1>
+      <p>Articles – Tenses – Linking Words – So/Such/Too</p>
+    </header>
+
+    <div class="container">
+      <div class="score-box">
+        ⭐ Score: <span id="score">0</span> / 45 &nbsp; | &nbsp; 📝 Answered:
+        <span id="answered">0</span> / 45
+      </div>
+
+      <!-- PART 1 -->
+      <div class="part">
+        <h2 class="part-title">🟦 PART 1. ARTICLES – A / AN / THE / Ø</h2>
+        <p class="part-subtitle">Choose the best answer.</p>
+
+        <div id="part1"></div>
+      </div>
+
+      <!-- PART 2 -->
+      <div class="part">
+        <h2 class="part-title">🟩 PART 2. PAST CONTINUOUS</h2>
+        <p class="part-subtitle">Choose the correct form of the verb.</p>
+
+        <div id="part2"></div>
+      </div>
+
+      <!-- PART 3 -->
+      <div class="part">
+        <h2 class="part-title">🟨 PART 3. PRESENT PERFECT</h2>
+        <p class="part-subtitle">Choose the correct answer.</p>
+
+        <div id="part3"></div>
+      </div>
+
+      <!-- PART 4 -->
+      <div class="part">
+        <h2 class="part-title">🟧 PART 4. ALTHOUGH / DESPITE</h2>
+        <p class="part-subtitle">Choose the correct linking word.</p>
+
+        <div id="part4"></div>
+      </div>
+
+      <!-- PART 5 -->
+      <div class="part">
+        <h2 class="part-title">🟥 PART 5. BECAUSE / SINCE / AS</h2>
+        <p class="part-subtitle">Choose the correct conjunction.</p>
+
+        <div id="part5"></div>
+      </div>
+
+      <!-- PART 6 -->
+      <div class="part">
+        <h2 class="part-title">🟪 PART 6. SO...THAT / SUCH...THAT</h2>
+        <p class="part-subtitle">Choose the correct structure.</p>
+
+        <div id="part6"></div>
+      </div>
+
+      <!-- PART 7 -->
+      <div class="part">
+        <h2 class="part-title">🟫 PART 7. TOO...TO</h2>
+        <p class="part-subtitle">Choose the correct answer.</p>
+
+        <div id="part7"></div>
+      </div>
+
+      <!-- PART 8 -->
+      <div class="part">
+        <h2 class="part-title">🟦 PART 8. MIXED GRAMMAR</h2>
+        <p class="part-subtitle">Choose the best answer.</p>
+
+        <div id="part8"></div>
+      </div>
+
+      <div class="final-box">
+        <h2>🎉 COMPLETE!</h2>
+
+        <p>You have finished the quiz.</p>
+
+        <div id="finalScore">Your score: 0 / 45</div>
+
+        <button class="btn reset-btn" onclick="resetQuiz()">
+          🔄 Làm lại bài
+        </button>
+      </div>
+    </div>
+
+    <script>
+      const questions = [
+        /* PART 1 */
+        {
+          part: "part1",
+          q: "1. My sister wants to become ______ architect in the future.",
+          options: ["A. a", "B. an", "C. the", "D. Ø"],
+          answer: 1,
+          explanation:
+            "Architect bắt đầu bằng âm nguyên âm /ɑː/, vì vậy dùng AN. → an architect.",
+        },
+        {
+          part: "part1",
+          q: "2. We visited ______ museum in the city centre yesterday.",
+          options: ["A. a", "B. an", "C. the", "D. Ø"],
+          answer: 0,
+          explanation:
+            "Đây là lần đầu nhắc đến một bảo tàng chưa xác định cụ thể → dùng A.",
+        },
+        {
+          part: "part1",
+          q: "3. ______ museum was built more than one hundred years ago.",
+          options: ["A. A", "B. An", "C. The", "D. Ø"],
+          answer: 2,
+          explanation:
+            "Museum đã được nhắc đến ở câu trước, nên khi nhắc lại dùng THE.",
+        },
+        {
+          part: "part1",
+          q: "4. ______ education plays an important role in developing society.",
+          options: ["A. A", "B. An", "C. The", "D. Ø"],
+          answer: 3,
+          explanation:
+            "Education là danh từ không đếm được được dùng theo nghĩa chung → không dùng mạo từ (Ø).",
+        },
+        {
+          part: "part1",
+          q: "5. I saw ______ unusual bird in the garden this morning.",
+          options: ["A. a", "B. an", "C. the", "D. Ø"],
+          answer: 1,
+          explanation: "Unusual bắt đầu bằng âm nguyên âm /ʌ/ → dùng AN.",
+        },
+        {
+          part: "part1",
+          q: "6. ______ sun provides light and heat for the Earth.",
+          options: ["A. A", "B. An", "C. The", "D. Ø"],
+          answer: 2,
+          explanation: "Sun là vật thể duy nhất theo ngữ cảnh → dùng THE.",
+        },
+        {
+          part: "part1",
+          q: "7. She is ______ honest person who always tells the truth.",
+          options: ["A. a", "B. an", "C. the", "D. Ø"],
+          answer: 1,
+          explanation:
+            "Honest có âm đầu là nguyên âm vì H không được phát âm → an honest person.",
+        },
+        {
+          part: "part1",
+          q: "8. We need to protect ______ environment for future generations.",
+          options: ["A. a", "B. an", "C. the", "D. Ø"],
+          answer: 2,
+          explanation:
+            "Environment trong cụm 'the environment' chỉ môi trường nói chung → dùng THE.",
+        },
+        {
+          part: "part1",
+          q: "9. He hopes to study at ______ university abroad.",
+          options: ["A. a", "B. an", "C. the", "D. Ø"],
+          answer: 0,
+          explanation:
+            "University bắt đầu bằng âm /juː/, là âm phụ âm → dùng A university.",
+        },
+
+        /* PART 2 */
+        {
+          part: "part2",
+          q: "10. At 8 p.m. last night, I ______ for my English exam.",
+          options: [
+            "A. studied",
+            "B. have studied",
+            "C. was studying",
+            "D. am studying",
+          ],
+          answer: 2,
+          explanation:
+            "At 8 p.m. last night chỉ một thời điểm cụ thể trong quá khứ → Past Continuous: was studying.",
+        },
+        {
+          part: "part2",
+          q: "11. While we ______ through the city, it suddenly started to rain.",
+          options: [
+            "A. walked",
+            "B. were walking",
+            "C. have walked",
+            "D. walk",
+          ],
+          answer: 1,
+          explanation:
+            "Hành động đang diễn ra và bị hành động khác xen vào → were walking.",
+        },
+        {
+          part: "part2",
+          q: "12. I ______ dinner when my best friend called me.",
+          options: ["A. had", "B. have had", "C. was having", "D. am having"],
+          answer: 2,
+          explanation:
+            "Was having là hành động đang diễn ra; called là hành động xen vào → Past Continuous.",
+        },
+        {
+          part: "part2",
+          q: "13. At this time yesterday, they ______ a community project.",
+          options: [
+            "A. worked on",
+            "B. have worked on",
+            "C. were working on",
+            "D. work on",
+          ],
+          answer: 2,
+          explanation:
+            "At this time yesterday → hành động đang diễn ra tại một thời điểm trong quá khứ → were working on.",
+        },
+        {
+          part: "part2",
+          q: "14. While my mother was cooking, my father ______ the living room.",
+          options: [
+            "A. cleaned",
+            "B. has cleaned",
+            "C. was cleaning",
+            "D. cleans",
+          ],
+          answer: 2,
+          explanation:
+            "Hai hành động đang diễn ra đồng thời trong quá khứ với WHILE → was cleaning.",
+        },
+        {
+          part: "part2",
+          q: "15. The students ______ quietly when the teacher entered the classroom.",
+          options: [
+            "A. studied",
+            "B. have studied",
+            "C. were studying",
+            "D. study",
+          ],
+          answer: 2,
+          explanation:
+            "Students đang học thì giáo viên bước vào → were studying.",
+        },
+        {
+          part: "part2",
+          q: "16. What ______ you ______ at 10 o'clock last night?",
+          options: [
+            "A. did / do",
+            "B. have / done",
+            "C. were / doing",
+            "D. are / doing",
+          ],
+          answer: 2,
+          explanation:
+            "Hỏi một hành động đang diễn ra tại thời điểm cụ thể trong quá khứ → Were you doing?",
+        },
+
+        /* PART 3 */
+        {
+          part: "part3",
+          q: "17. I ______ English for six years.",
+          options: [
+            "A. studied",
+            "B. have studied",
+            "C. was studying",
+            "D. study",
+          ],
+          answer: 1,
+          explanation:
+            "FOR + khoảng thời gian kéo dài đến hiện tại → Present Perfect: have studied.",
+        },
+        {
+          part: "part3",
+          q: "18. She ______ her assignment yet.",
+          options: [
+            "A. hasn't completed",
+            "B. didn't complete",
+            "C. wasn't completing",
+            "D. doesn't complete",
+          ],
+          answer: 0,
+          explanation:
+            "YET thường dùng trong câu phủ định với Present Perfect → hasn't completed.",
+        },
+        {
+          part: "part3",
+          q: "19. ______ you ever ______ a volunteer project?",
+          options: [
+            "A. Did / join",
+            "B. Have / joined",
+            "C. Were / joining",
+            "D. Have / join",
+          ],
+          answer: 1,
+          explanation:
+            "EVER dùng để hỏi về kinh nghiệm → Have you ever joined...?",
+        },
+        {
+          part: "part3",
+          q: "20. They ______ just ______ the final decision.",
+          options: [
+            "A. have / announced",
+            "B. did / announce",
+            "C. were / announcing",
+            "D. are / announce",
+          ],
+          answer: 0,
+          explanation:
+            "JUST chỉ hành động vừa mới xảy ra → Present Perfect: have just announced.",
+        },
+        {
+          part: "part3",
+          q: "21. He ______ never ______ such an impressive performance before.",
+          options: [
+            "A. did / see",
+            "B. has / seen",
+            "C. was / seeing",
+            "D. has / saw",
+          ],
+          answer: 1,
+          explanation:
+            "NEVER + BEFORE nói về kinh nghiệm → Present Perfect: has never seen.",
+        },
+        {
+          part: "part3",
+          q: "22. We ______ in this neighbourhood since 2020.",
+          options: ["A. lived", "B. have lived", "C. were living", "D. live"],
+          answer: 1,
+          explanation:
+            "SINCE + mốc thời gian và hành động kéo dài đến hiện tại → have lived.",
+        },
+        {
+          part: "part3",
+          q: "23. I ______ my wallet, so I can't pay for the meal.",
+          options: ["A. lost", "B. have lost", "C. was losing", "D. lose"],
+          answer: 1,
+          explanation:
+            "Hành động mất ví có kết quả ở hiện tại: hiện giờ không thể trả tiền → have lost.",
+        },
+
+        /* PART 4 */
+        {
+          part: "part4",
+          q: "24. ______ the heavy rain, the volunteers continued their work.",
+          options: ["A. Although", "B. Because", "C. Despite", "D. Since"],
+          answer: 2,
+          explanation:
+            "Sau Despite phải là danh từ/cụm danh từ. 'the heavy rain' là cụm danh từ → Despite.",
+        },
+        {
+          part: "part4",
+          q: "25. ______ she was exhausted, she continued studying for the exam.",
+          options: ["A. Despite", "B. Although", "C. Because of", "D. Since"],
+          answer: 1,
+          explanation:
+            "Sau Although là một mệnh đề có chủ ngữ + động từ: she was exhausted → Although.",
+        },
+        {
+          part: "part4",
+          q: "26. ______ having limited financial resources, the organization helped many families.",
+          options: ["A. Although", "B. Because", "C. Despite", "D. Since"],
+          answer: 2,
+          explanation:
+            "Sau Despite có V-ing: having limited financial resources → Despite.",
+        },
+        {
+          part: "part4",
+          q: "27. ______ the fact that the project was expensive, the government decided to support it.",
+          options: ["A. Although", "B. Despite", "C. Because", "D. Since"],
+          answer: 1,
+          explanation: "Cấu trúc: Despite the fact that + mệnh đề → Despite.",
+        },
+        {
+          part: "part4",
+          q: "28. ______ the difficult circumstances, they managed to achieve their goal.",
+          options: ["A. Although", "B. Despite", "C. Because", "D. Since"],
+          answer: 1,
+          explanation:
+            "The difficult circumstances là cụm danh từ → dùng Despite.",
+        },
+
+        /* PART 5 */
+        {
+          part: "part5",
+          q: "29. We stayed at home ______ the weather was extremely bad.",
+          options: ["A. despite", "B. although", "C. because", "D. after"],
+          answer: 2,
+          explanation:
+            "Sau because là một mệnh đề: the weather was extremely bad → because.",
+        },
+        {
+          part: "part5",
+          q: "30. ______ she was feeling unwell, she decided to stay at home.",
+          options: ["A. Since", "B. Despite", "C. Although", "D. After"],
+          answer: 0,
+          explanation:
+            "Since có thể mang nghĩa 'bởi vì' và theo sau là mệnh đề → Since she was feeling unwell.",
+        },
+        {
+          part: "part5",
+          q: "31. ______ it was getting late, we decided to leave the meeting.",
+          options: ["A. Because of", "B. As", "C. Despite", "D. Although"],
+          answer: 1,
+          explanation:
+            "As + mệnh đề có thể mang nghĩa 'bởi vì' → As it was getting late.",
+        },
+        {
+          part: "part5",
+          q: "32. The event was cancelled ______ the severe weather conditions.",
+          options: ["A. because", "B. since", "C. because of", "D. although"],
+          answer: 2,
+          explanation:
+            "Sau because of là danh từ/cụm danh từ: the severe weather conditions → because of.",
+        },
+        {
+          part: "part5",
+          q: "33. ______ he had already finished his work, he helped his colleagues.",
+          options: ["A. Because", "B. Since", "C. Although", "D. As"],
+          answer: 2,
+          explanation:
+            "Câu mang nghĩa tương phản: mặc dù đã hoàn thành công việc, anh ấy vẫn giúp đồng nghiệp → Although.",
+        },
+
+        /* PART 6 */
+        {
+          part: "part6",
+          q: "34. The lecture was ______ informative that everyone took detailed notes.",
+          options: ["A. such", "B. so", "C. such an", "D. too"],
+          answer: 1,
+          explanation:
+            "Cấu trúc SO + adjective + THAT. Informative là tính từ → so informative that.",
+        },
+        {
+          part: "part6",
+          q: "35. It was ______ interesting documentary that I watched it twice.",
+          options: ["A. so", "B. such", "C. such an", "D. too"],
+          answer: 2,
+          explanation:
+            "Cấu trúc SUCH + AN + adjective + singular countable noun + THAT → such an interesting documentary.",
+        },
+        {
+          part: "part6",
+          q: "36. The instructions were ______ complicated that several students misunderstood them.",
+          options: ["A. such", "B. so", "C. such a", "D. enough"],
+          answer: 1,
+          explanation: "Complicated là tính từ → SO + adjective + THAT.",
+        },
+        {
+          part: "part6",
+          q: "37. They faced ______ serious challenges that they needed additional support.",
+          options: ["A. so", "B. such", "C. such a", "D. too"],
+          answer: 1,
+          explanation:
+            "Challenges là danh từ số nhiều → SUCH + adjective + plural noun + THAT.",
+        },
+        {
+          part: "part6",
+          q: "38. She is ______ responsible student that her teachers trust her completely.",
+          options: ["A. so", "B. such", "C. such a", "D. too"],
+          answer: 2,
+          explanation:
+            "Responsible student là danh từ đếm được số ít → SUCH A + adjective + noun + THAT.",
+        },
+        {
+          part: "part6",
+          q: "39. There were ______ many participants that the organizers had to prepare another room.",
+          options: ["A. such", "B. so", "C. such a", "D. too"],
+          answer: 1,
+          explanation:
+            "Cấu trúc SO + many/much/few/little + noun + THAT → so many participants that.",
+        },
+
+        /* PART 7 */
+        {
+          part: "part7",
+          q: "40. The box is ______ heavy for me to carry alone.",
+          options: ["A. so", "B. such", "C. too", "D. enough"],
+          answer: 2,
+          explanation:
+            "Cấu trúc TOO + adjective + TO-V: too heavy for me to carry.",
+        },
+        {
+          part: "part7",
+          q: "41. The coffee is ______ hot to drink right now.",
+          options: ["A. so", "B. too", "C. such", "D. enough"],
+          answer: 1,
+          explanation: "Cấu trúc TOO + adjective + TO-V → too hot to drink.",
+        },
+        {
+          part: "part7",
+          q: "42. He was ______ tired to continue working on the project.",
+          options: ["A. so", "B. such", "C. too", "D. enough"],
+          answer: 2,
+          explanation:
+            "Cấu trúc TOO + adjective + TO-V → too tired to continue.",
+        },
+        {
+          part: "part7",
+          q: "43. The question was ______ difficult for most students to answer.",
+          options: ["A. too", "B. such", "C. enough", "D. so"],
+          answer: 0,
+          explanation:
+            "Cấu trúc TOO + adjective + FOR + O + TO-V → too difficult for most students to answer.",
+        },
+
+        /* PART 8 */
+        {
+          part: "part8",
+          q: "44. I ______ my homework when my mother came home because I ______ to finish it before dinner.",
+          options: [
+            "A. was doing / had decided",
+            "B. have done / decided",
+            "C. did / have decided",
+            "D. was doing / decide",
+          ],
+          answer: 0,
+          explanation:
+            "Was doing diễn tả hành động đang diễn ra khi mẹ về. Had decided diễn tả quyết định đã xảy ra trước thời điểm đó → Past Continuous + Past Perfect.",
+        },
+        {
+          part: "part8",
+          q: "45. ______ the campaign was ______ successful that thousands of people decided to make a contribution to the community.",
+          options: [
+            "A. Despite / so",
+            "B. Because / such",
+            "C. Although / such a",
+            "D. Since / so",
+          ],
+          answer: 3,
+          explanation:
+            "Since + mệnh đề 'the campaign was so successful' → Since + S + be + SO + adjective + THAT. Đáp án D.",
+        },
+      ];
+
+      let score = 0;
+      let answered = 0;
+      let userAnswers = {};
+
+      function renderQuestions() {
+        questions.forEach((item, index) => {
+          const questionNumber = index + 1;
+
+          const questionDiv = document.createElement("div");
+          questionDiv.className = "question";
+
+          questionDiv.innerHTML = `
+      <div class="question-text">
+        ${item.q}
+      </div>
+
+      <div class="options">
+        ${item.options
+          .map(
+            (option, optionIndex) => `
+          <button 
+            class="option"
+            onclick="checkAnswer(${index}, ${optionIndex}, this)"
+          >
+            ${option}
+          </button>
+        `,
+          )
+          .join("")}
+      </div>
+
+      <div class="feedback" id="feedback-${index}"></div>
+    `;
+
+          document.getElementById(item.part).appendChild(questionDiv);
+        });
+      }
+
+      function checkAnswer(questionIndex, selectedIndex, selectedButton) {
+        // Nếu đã trả lời thì không cho chọn lại
+        if (userAnswers[questionIndex] !== undefined) {
+          return;
+        }
+
+        userAnswers[questionIndex] = selectedIndex;
+        answered++;
+
+        const question = questions[questionIndex];
+
+        const allButtons =
+          selectedButton.parentElement.querySelectorAll(".option");
+
+        allButtons.forEach((button) => {
+          button.classList.add("disabled");
+        });
+
+        const feedback = document.getElementById(`feedback-${questionIndex}`);
+
+        if (selectedIndex === question.answer) {
+          score++;
+
+          selectedButton.classList.add("correct");
+
+          feedback.className = "feedback correct-feedback";
+
+          feedback.innerHTML = `
+      <strong>✅ Chính xác!</strong>
+      ${question.explanation}
+    `;
+        } else {
+          selectedButton.classList.add("wrong");
+
+          allButtons[question.answer].classList.add("correct");
+
+          feedback.className = "feedback wrong-feedback";
+
+          feedback.innerHTML = `
+      <strong>❌ Chưa chính xác!</strong>
+      Đáp án đúng là <strong>${question.options[question.answer]}</strong>.<br>
+      ${question.explanation}
+    `;
+        }
+
+        feedback.style.display = "block";
+
+        updateScore();
+      }
+
+      function updateScore() {
+        document.getElementById("score").textContent = score;
+
+        document.getElementById("answered").textContent = answered;
+
+        document.getElementById("finalScore").textContent =
+          `Your score: ${score} / 45`;
+      }
+
+      function resetQuiz() {
+        score = 0;
+        answered = 0;
+        userAnswers = {};
+
+        document
+          .querySelectorAll(".question")
+          .forEach((question) => question.remove());
+
+        renderQuestions();
+
+        updateScore();
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+
+      renderQuestions();
+    </script>
+  </body>
+</html>

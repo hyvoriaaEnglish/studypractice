@@ -1,0 +1,1281 @@
+```html
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Hyvoria English | Grammar Practice</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: linear-gradient(135deg, #f4f1ff, #eef7ff);
+        color: #222;
+        line-height: 1.6;
+        padding-bottom: 60px;
+      }
+
+      header {
+        background: linear-gradient(135deg, #6c5ce7, #8e7cff);
+        color: white;
+        padding: 30px 20px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+      }
+
+      header h1 {
+        font-size: 32px;
+        margin-bottom: 5px;
+      }
+
+      header p {
+        font-size: 16px;
+        opacity: 0.95;
+      }
+
+      .container {
+        max-width: 950px;
+        margin: 30px auto;
+        padding: 0 15px;
+      }
+
+      /* SCORE BOX */
+      .score-box {
+        background: white;
+        padding: 20px;
+        border-radius: 18px;
+        margin-bottom: 25px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        position: sticky;
+        top: 10px;
+        z-index: 10;
+      }
+
+      .score-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+        font-weight: bold;
+      }
+
+      #score {
+        color: #6c5ce7;
+        font-size: 20px;
+      }
+
+      .progress-container {
+        height: 12px;
+        background: #eee;
+        border-radius: 20px;
+        overflow: hidden;
+      }
+
+      #progressBar {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #6c5ce7, #00b894);
+        transition: width 0.4s ease;
+      }
+
+      /* SECTION */
+      .section {
+        margin-bottom: 35px;
+      }
+
+      .section-title {
+        background: linear-gradient(135deg, #6c5ce7, #8e7cff);
+        color: white;
+        padding: 18px 22px;
+        border-radius: 15px;
+        margin-bottom: 20px;
+        box-shadow: 0 5px 15px rgba(108, 92, 231, 0.2);
+      }
+
+      .section-title h2 {
+        font-size: 22px;
+      }
+
+      .section-title p {
+        font-size: 14px;
+        margin-top: 3px;
+        opacity: 0.9;
+      }
+
+      /* QUESTION */
+      .question {
+        background: white;
+        border-radius: 16px;
+        padding: 22px;
+        margin-bottom: 18px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+      }
+
+      .question-text {
+        font-weight: bold;
+        font-size: 17px;
+        margin-bottom: 15px;
+      }
+
+      .options {
+        display: grid;
+        gap: 10px;
+      }
+
+      .option {
+        width: 100%;
+        text-align: left;
+        padding: 12px 15px;
+        border: 2px solid #e5e5e5;
+        border-radius: 10px;
+        background: #fafafa;
+        cursor: pointer;
+        font-size: 15px;
+        transition: all 0.2s ease;
+      }
+
+      .option:hover:not(:disabled) {
+        border-color: #6c5ce7;
+        background: #f4f1ff;
+        transform: translateX(3px);
+      }
+
+      .option:disabled {
+        cursor: default;
+      }
+
+      .option.correct {
+        background: #dff8ea;
+        border-color: #00b894;
+        color: #087f5b;
+        font-weight: bold;
+      }
+
+      .option.wrong {
+        background: #ffe5e5;
+        border-color: #ff7675;
+        color: #c0392b;
+        font-weight: bold;
+      }
+
+      .feedback {
+        display: none;
+        margin-top: 15px;
+        padding: 15px;
+        border-radius: 10px;
+        font-size: 14px;
+      }
+
+      .feedback.show {
+        display: block;
+      }
+
+      .feedback.correct-feedback {
+        background: #e9fff4;
+        border-left: 5px solid #00b894;
+      }
+
+      .feedback.wrong-feedback {
+        background: #fff0f0;
+        border-left: 5px solid #ff7675;
+      }
+
+      .feedback strong {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      /* WRITING QUESTIONS */
+      .open-question {
+        background: white;
+        border-radius: 16px;
+        padding: 22px;
+        margin-bottom: 18px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+      }
+
+      .answer-btn {
+        margin-top: 12px;
+        background: #6c5ce7;
+        color: white;
+        border: none;
+        padding: 10px 18px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      .answer-btn:hover {
+        background: #5849d6;
+      }
+
+      .model-answer {
+        display: none;
+        margin-top: 15px;
+        padding: 15px;
+        background: #f4f1ff;
+        border-left: 5px solid #6c5ce7;
+        border-radius: 8px;
+      }
+
+      .model-answer.show {
+        display: block;
+      }
+
+      /* RESET */
+      .reset-container {
+        text-align: center;
+        margin: 40px 0;
+      }
+
+      #resetBtn {
+        background: #ff7675;
+        color: white;
+        border: none;
+        padding: 13px 30px;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      #resetBtn:hover {
+        background: #e85c5b;
+      }
+
+      /* FINISH */
+      #finalResult {
+        display: none;
+        background: white;
+        padding: 30px;
+        border-radius: 18px;
+        text-align: center;
+        margin: 30px 0;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      #finalResult h2 {
+        color: #6c5ce7;
+        margin-bottom: 10px;
+      }
+
+      @media (max-width: 600px) {
+        header h1 {
+          font-size: 25px;
+        }
+
+        .question-text {
+          font-size: 16px;
+        }
+
+        .score-top {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 5px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>📚 Grammar Practice</h1>
+      <p>
+        Past Perfect • Wish • Verb Patterns • Relative Clauses • First
+        Conditional
+      </p>
+    </header>
+
+    <div class="container">
+      <!-- SCORE -->
+      <div class="score-box">
+        <div class="score-top">
+          <span>Progress: <span id="progressText">0 / 58</span></span>
+          <span>Score: <span id="score">0</span></span>
+        </div>
+
+        <div class="progress-container">
+          <div id="progressBar"></div>
+        </div>
+      </div>
+
+      <!-- PART 1 -->
+      <section class="section">
+        <div class="section-title">
+          <h2>PART 1. PAST PERFECT</h2>
+          <p>Quá khứ hoàn thành</p>
+        </div>
+
+        <div id="part1"></div>
+      </section>
+
+      <!-- PART 2 -->
+      <section class="section">
+        <div class="section-title">
+          <h2>PART 2. WISH</h2>
+          <p>Câu ước</p>
+        </div>
+
+        <div id="part2"></div>
+      </section>
+
+      <!-- PART 3 -->
+      <section class="section">
+        <div class="section-title">
+          <h2>PART 3. VERBS + TO V / V-ING</h2>
+          <p>Động từ đi với To V / V-ing</p>
+        </div>
+
+        <div id="part3"></div>
+      </section>
+
+      <!-- PART 4 -->
+      <section class="section">
+        <div class="section-title">
+          <h2>PART 4. RELATIVE CLAUSES</h2>
+          <p>Mệnh đề quan hệ</p>
+        </div>
+
+        <div id="part4"></div>
+      </section>
+
+      <!-- PART 5 -->
+      <section class="section">
+        <div class="section-title">
+          <h2>PART 5. FIRST CONDITIONAL</h2>
+          <p>Câu điều kiện loại 1</p>
+        </div>
+
+        <div id="part5"></div>
+      </section>
+
+      <!-- PART 6 -->
+      <section class="section">
+        <div class="section-title">
+          <h2>PART 6. MIXED GRAMMAR</h2>
+          <p>Tổng hợp</p>
+        </div>
+
+        <div id="part6"></div>
+      </section>
+
+      <!-- OPEN QUESTIONS -->
+      <section class="section">
+        <div class="section-title">
+          <h2>✍️ WRITING PRACTICE</h2>
+          <p>Rewrite and complete the sentences</p>
+        </div>
+
+        <div id="openQuestions"></div>
+      </section>
+
+      <!-- FINAL RESULT -->
+      <div id="finalResult">
+        <h2>🎉 Quiz Completed!</h2>
+        <p id="finalScore"></p>
+      </div>
+
+      <div class="reset-container">
+        <button id="resetBtn">🔄 Reset Quiz</button>
+      </div>
+    </div>
+
+    <script>
+      /* =====================================================
+   MULTIPLE CHOICE QUESTIONS
+===================================================== */
+
+      const questions = [
+        /* PART 1 */
+
+        {
+          part: 1,
+          q: "1. When I arrived at the station, the train ______.",
+          options: ["A. left", "B. has left", "C. had left", "D. was leaving"],
+          answer: 2,
+          explanation:
+            "Dùng Past Perfect (had left) vì tàu rời đi trước thời điểm 'I arrived'.",
+        },
+
+        {
+          part: 1,
+          q: "2. By the time we got to the cinema, the film ______.",
+          options: [
+            "A. started",
+            "B. had started",
+            "C. has started",
+            "D. was starting",
+          ],
+          answer: 1,
+          explanation:
+            "Bộ phim đã bắt đầu trước khi chúng ta đến rạp → Past Perfect.",
+        },
+
+        {
+          part: 1,
+          q: "3. She was tired because she ______ all night.",
+          options: [
+            "A. had studied",
+            "B. studied",
+            "C. has studied",
+            "D. was studying",
+          ],
+          answer: 0,
+          explanation:
+            "Hành động học xảy ra trước kết quả 'She was tired' → had studied.",
+        },
+
+        {
+          part: 1,
+          q: "4. After Tom ______ his homework, he went out with his friends.",
+          options: [
+            "A. finished",
+            "B. had finished",
+            "C. has finished",
+            "D. was finishing",
+          ],
+          answer: 1,
+          explanation:
+            "Tom hoàn thành bài tập trước rồi mới đi chơi → had finished.",
+        },
+
+        {
+          part: 1,
+          q: "5. They couldn't enter the house because they ______ the key.",
+          options: ["A. lost", "B. have lost", "C. had lost", "D. were losing"],
+          answer: 2,
+          explanation:
+            "Việc mất chìa khóa xảy ra trước việc không thể vào nhà → had lost.",
+        },
+
+        {
+          part: 1,
+          q: "6. When I arrived home, my parents ______ to bed.",
+          options: [
+            "A. already went",
+            "B. had already gone",
+            "C. have already gone",
+            "D. were going",
+          ],
+          answer: 1,
+          explanation:
+            "Cấu trúc: had + V3/ed. Bố mẹ đã đi ngủ trước khi tôi về nhà.",
+        },
+
+        {
+          part: 1,
+          q: "7. She ______ anything before she went to the party.",
+          options: [
+            "A. hadn't eaten",
+            "B. didn't eat",
+            "C. hasn't eaten",
+            "D. wasn't eating",
+          ],
+          answer: 0,
+          explanation:
+            "Hành động không ăn xảy ra trước 'went to the party' → hadn't eaten.",
+        },
+
+        {
+          part: 1,
+          q: "8. By the time the teacher came, the students ______ the test.",
+          options: [
+            "A. finish",
+            "B. finished",
+            "C. had finished",
+            "D. have finished",
+          ],
+          answer: 2,
+          explanation:
+            "Học sinh hoàn thành bài kiểm tra trước khi giáo viên đến → had finished.",
+        },
+
+        {
+          part: 1,
+          q: "9. After he ______ the book, he wrote a review about it.",
+          options: ["A. had read", "B. reads", "C. has read", "D. was reading"],
+          answer: 0,
+          explanation:
+            "Đọc sách xảy ra trước việc viết bài đánh giá → had read.",
+        },
+
+        {
+          part: 1,
+          q: "10. I was hungry because I ______ breakfast.",
+          options: [
+            "A. hadn't had",
+            "B. didn't have",
+            "C. haven't had",
+            "D. wasn't having",
+          ],
+          answer: 0,
+          explanation:
+            "Không ăn sáng xảy ra trước kết quả 'I was hungry' → hadn't had.",
+        },
+
+        /* PART 2 */
+
+        {
+          part: 2,
+          q: "11. I wish I ______ taller.",
+          options: ["A. am", "B. were", "C. will be", "D. have been"],
+          answer: 1,
+          explanation:
+            "Wish ở hiện tại: S + wish + S + V2/ed. Với 'be', thường dùng 'were' cho mọi chủ ngữ.",
+        },
+
+        {
+          part: 2,
+          q: "12. She wishes she ______ more free time.",
+          options: ["A. has", "B. had", "C. will have", "D. is having"],
+          answer: 1,
+          explanation: "Ước trái với hiện tại → wish + Past Simple: had.",
+        },
+
+        {
+          part: 2,
+          q: "13. I wish I ______ speak English more fluently.",
+          options: ["A. can", "B. could", "C. will", "D. am able"],
+          answer: 1,
+          explanation: "Ước về khả năng hiện tại → wish + could + V.",
+        },
+
+        {
+          part: 2,
+          q: "14. He wishes he ______ so much money yesterday.",
+          options: [
+            "A. didn't spend",
+            "B. hadn't spent",
+            "C. wouldn't spend",
+            "D. doesn't spend",
+          ],
+          answer: 1,
+          explanation:
+            "Ước trái với một hành động đã xảy ra trong quá khứ → wish + had + V3.",
+        },
+
+        {
+          part: 2,
+          q: "15. I wish my parents ______ me use my phone at night.",
+          options: [
+            "A. allow",
+            "B. allowed",
+            "C. had allowed",
+            "D. will allow",
+          ],
+          answer: 1,
+          explanation:
+            "Ước trái với tình trạng hiện tại → wish + Past Simple: allowed.",
+        },
+
+        /* PART 3 */
+
+        {
+          part: 3,
+          q: "21. I decided ______ a new language.",
+          options: ["A. learning", "B. to learn", "C. learn", "D. learned"],
+          answer: 1,
+          explanation: "Decide + to V → decided to learn.",
+        },
+
+        {
+          part: 3,
+          q: "22. She enjoys ______ books in her free time.",
+          options: ["A. to read", "B. read", "C. reading", "D. reads"],
+          answer: 2,
+          explanation: "Enjoy + V-ing → enjoys reading.",
+        },
+
+        {
+          part: 3,
+          q: "23. They hope ______ abroad next year.",
+          options: ["A. studying", "B. study", "C. to study", "D. studied"],
+          answer: 2,
+          explanation: "Hope + to V → hope to study.",
+        },
+
+        {
+          part: 3,
+          q: "24. He avoids ______ too much fast food.",
+          options: ["A. eating", "B. to eat", "C. eat", "D. ate"],
+          answer: 0,
+          explanation: "Avoid + V-ing → avoids eating.",
+        },
+
+        {
+          part: 3,
+          q: "25. We agreed ______ together for the exam.",
+          options: ["A. studying", "B. study", "C. to study", "D. studied"],
+          answer: 2,
+          explanation: "Agree + to V → agreed to study.",
+        },
+
+        {
+          part: 3,
+          q: "26. My brother doesn't mind ______ the dishes.",
+          options: ["A. to wash", "B. washing", "C. wash", "D. washed"],
+          answer: 1,
+          explanation: "Mind + V-ing → doesn't mind washing.",
+        },
+
+        {
+          part: 3,
+          q: "27. She promised ______ me with my homework.",
+          options: ["A. helping", "B. help", "C. to help", "D. helped"],
+          answer: 2,
+          explanation: "Promise + to V → promised to help.",
+        },
+
+        {
+          part: 3,
+          q: "28. I can't stand ______ in long queues.",
+          options: ["A. to wait", "B. wait", "C. waiting", "D. waited"],
+          answer: 2,
+          explanation: "Can't stand + V-ing → can't stand waiting.",
+        },
+
+        /* PART 4 */
+
+        {
+          part: 4,
+          q: "36. The girl ______ lives next door is my best friend.",
+          options: ["A. which", "B. who", "C. where", "D. whose"],
+          answer: 1,
+          explanation:
+            "Who dùng để thay thế cho người và làm chủ ngữ trong mệnh đề quan hệ.",
+        },
+
+        {
+          part: 4,
+          q: "37. This is the book ______ I bought yesterday.",
+          options: ["A. who", "B. where", "C. which", "D. whose"],
+          answer: 2,
+          explanation:
+            "Which dùng để thay thế cho vật: the book which I bought.",
+        },
+
+        {
+          part: 4,
+          q: "38. The man ______ car was stolen called the police.",
+          options: ["A. who", "B. which", "C. whose", "D. where"],
+          answer: 2,
+          explanation:
+            "Whose diễn tả sự sở hữu: người đàn ông mà chiếc xe của ông ấy bị đánh cắp.",
+        },
+
+        {
+          part: 4,
+          q: "39. This is the school ______ I studied when I was young.",
+          options: ["A. who", "B. which", "C. where", "D. whose"],
+          answer: 2,
+          explanation:
+            "Where dùng để thay thế cho nơi chốn: the school where I studied.",
+        },
+
+        {
+          part: 4,
+          q: "40. The teacher ______ teaches us English is very friendly.",
+          options: ["A. who", "B. which", "C. where", "D. whose"],
+          answer: 0,
+          explanation:
+            "Who dùng cho người và làm chủ ngữ: The teacher who teaches us English.",
+        },
+
+        {
+          part: 4,
+          q: "41. The movie ______ we watched last night was amazing.",
+          options: ["A. who", "B. where", "C. which", "D. whose"],
+          answer: 2,
+          explanation:
+            "Which dùng để thay thế cho vật/sự vật: the movie which we watched.",
+        },
+
+        {
+          part: 4,
+          q: "42. I know a girl ______ father is a famous doctor.",
+          options: ["A. who", "B. which", "C. whose", "D. where"],
+          answer: 2,
+          explanation:
+            "Whose dùng để chỉ sự sở hữu: cô gái mà bố cô ấy là bác sĩ nổi tiếng.",
+        },
+
+        /* PART 5 */
+
+        {
+          part: 5,
+          q: "48. If it ______ tomorrow, we will stay at home.",
+          options: ["A. rains", "B. will rain", "C. rained", "D. raining"],
+          answer: 0,
+          explanation:
+            "Câu điều kiện loại 1: If + Present Simple, S + will + V.",
+        },
+
+        {
+          part: 5,
+          q: "49. If you study hard, you ______ the exam.",
+          options: ["A. pass", "B. passed", "C. will pass", "D. would pass"],
+          answer: 2,
+          explanation: "Mệnh đề chính của câu điều kiện loại 1 dùng will + V.",
+        },
+
+        {
+          part: 5,
+          q: "50. If she ______ early, she will catch the bus.",
+          options: ["A. leaves", "B. will leave", "C. left", "D. leaving"],
+          answer: 0,
+          explanation: "Sau If dùng Present Simple → leaves.",
+        },
+
+        {
+          part: 5,
+          q: "51. We will go to the beach if the weather ______ nice.",
+          options: ["A. will be", "B. is", "C. was", "D. would be"],
+          answer: 1,
+          explanation: "Sau If dùng hiện tại đơn → is.",
+        },
+
+        {
+          part: 5,
+          q: "52. If you don't hurry, you ______ late for school.",
+          options: ["A. are", "B. were", "C. will be", "D. would be"],
+          answer: 2,
+          explanation: "Câu điều kiện loại 1: If + Present Simple → will + V.",
+        },
+
+        {
+          part: 5,
+          q: "53. If I have enough money, I ______ a new phone.",
+          options: ["A. buy", "B. bought", "C. will buy", "D. would buy"],
+          answer: 2,
+          explanation: "Mệnh đề kết quả dùng will + V → will buy.",
+        },
+
+        /* PART 6 */
+
+        {
+          part: 6,
+          q: "59. When we arrived at the airport, the plane ______.",
+          options: [
+            "A. had already taken off",
+            "B. already takes off",
+            "C. has already taken off",
+            "D. was already taking off",
+          ],
+          answer: 0,
+          explanation:
+            "Máy bay đã cất cánh trước khi chúng tôi đến sân bay → Past Perfect.",
+        },
+
+        {
+          part: 6,
+          q: "60. I wish I ______ more confident when speaking English.",
+          options: ["A. am", "B. were", "C. will be", "D. have been"],
+          answer: 1,
+          explanation: "Wish trái với hiện tại → Past Simple. Với be → were.",
+        },
+
+        {
+          part: 6,
+          q: "61. She decided ______ a new study plan.",
+          options: ["A. making", "B. make", "C. to make", "D. made"],
+          answer: 2,
+          explanation: "Decide + to V → decided to make.",
+        },
+
+        {
+          part: 6,
+          q: "62. The students ______ study hard will get good results.",
+          options: ["A. which", "B. where", "C. who", "D. whose"],
+          answer: 2,
+          explanation:
+            "Who dùng để thay thế cho người: the students who study hard.",
+        },
+
+        {
+          part: 6,
+          q: "63. If you ______ enough water, you will feel better.",
+          options: ["A. drink", "B. will drink", "C. drank", "D. drinking"],
+          answer: 0,
+          explanation: "Câu điều kiện loại 1: If + Present Simple → drink.",
+        },
+
+        {
+          part: 6,
+          q: "64. He regretted ______ so much time playing games.",
+          options: ["A. to spend", "B. spending", "C. spend", "D. spent"],
+          answer: 1,
+          explanation:
+            "Regret + V-ing khi nói về việc hối tiếc đã làm trong quá khứ.",
+        },
+
+        {
+          part: 6,
+          q: "65. This is the place ______ we first met.",
+          options: ["A. who", "B. which", "C. whose", "D. where"],
+          answer: 3,
+          explanation: "Where dùng cho địa điểm: the place where we first met.",
+        },
+
+        {
+          part: 6,
+          q: "66. By the time I got home, my sister ______ dinner.",
+          options: [
+            "A. cooks",
+            "B. has cooked",
+            "C. had cooked",
+            "D. was cook",
+          ],
+          answer: 2,
+          explanation:
+            "Em gái đã nấu xong bữa tối trước khi tôi về nhà → had cooked.",
+        },
+
+        {
+          part: 6,
+          q: "67. I wish I ______ my homework yesterday.",
+          options: [
+            "A. finished",
+            "B. had finished",
+            "C. finish",
+            "D. would finish",
+          ],
+          answer: 1,
+          explanation: "Wish về một điều trái với quá khứ → wish + had + V3.",
+        },
+
+        {
+          part: 6,
+          q: "68. If she ______ enough, she will get a good score.",
+          options: ["A. studies", "B. studied", "C. will study", "D. studying"],
+          answer: 0,
+          explanation: "Sau If dùng Present Simple → studies.",
+        },
+
+        {
+          part: 6,
+          q: "69. My friend suggested ______ to the library together.",
+          options: ["A. to go", "B. go", "C. going", "D. went"],
+          answer: 2,
+          explanation: "Suggest + V-ing → suggested going.",
+        },
+
+        {
+          part: 6,
+          q: "70. The laptop ______ I bought last month is already broken.",
+          options: ["A. who", "B. where", "C. whose", "D. which"],
+          answer: 3,
+          explanation: "Which thay thế cho vật: the laptop which I bought.",
+        },
+      ];
+
+      /* =====================================================
+   OPEN QUESTIONS
+===================================================== */
+
+      const openQuestions = [
+        {
+          number: 16,
+          question: "I don't have enough money to buy a new laptop.",
+          answer: "I wish I had enough money to buy a new laptop.",
+          explanation: "Ước trái với hiện tại → wish + Past Simple.",
+        },
+
+        {
+          number: 17,
+          question: "She can't speak French fluently.",
+          answer: "She wishes she could speak French fluently.",
+          explanation: "Ước về khả năng hiện tại → wish + could + V.",
+        },
+
+        {
+          number: 18,
+          question: "I didn't study harder for the exam.",
+          answer: "I wish I had studied harder for the exam.",
+          explanation: "Hối tiếc về quá khứ → wish + had + V3.",
+        },
+
+        {
+          number: 19,
+          question: "My best friend lives far away from me.",
+          answer: "I wish my best friend lived closer to me.",
+          explanation: "Ước trái với hiện tại → wish + Past Simple.",
+        },
+
+        {
+          number: 20,
+          question: "He spends too much time playing video games.",
+          answer: "He wishes he didn't spend so much time playing video games.",
+          explanation: "Ước trái với thói quen hiện tại → wish + Past Simple.",
+        },
+
+        {
+          number: 29,
+          question: "I want __________ (improve) my English.",
+          answer: "I want to improve my English.",
+          explanation: "Want + to V → want to improve.",
+        },
+
+        {
+          number: 30,
+          question: "She enjoys __________ (listen) to music.",
+          answer: "She enjoys listening to music.",
+          explanation: "Enjoy + V-ing → enjoys listening.",
+        },
+
+        {
+          number: 31,
+          question: "They decided __________ (join) the English club.",
+          answer: "They decided to join the English club.",
+          explanation: "Decide + to V → decided to join.",
+        },
+
+        {
+          number: 32,
+          question: "He avoids __________ (use) his phone while studying.",
+          answer: "He avoids using his phone while studying.",
+          explanation: "Avoid + V-ing → avoids using.",
+        },
+
+        {
+          number: 33,
+          question: "We hope __________ (visit) London one day.",
+          answer: "We hope to visit London one day.",
+          explanation: "Hope + to V → hope to visit.",
+        },
+
+        {
+          number: 34,
+          question: "My sister suggested __________ (go) to the library.",
+          answer: "My sister suggested going to the library.",
+          explanation: "Suggest + V-ing → suggested going.",
+        },
+
+        {
+          number: 35,
+          question: "I promised __________ (help) my friend with the project.",
+          answer: "I promised to help my friend with the project.",
+          explanation: "Promise + to V → promised to help.",
+        },
+
+        {
+          number: 43,
+          question: "The boy is my brother. He is wearing a blue jacket.",
+          answer: "The boy who is wearing a blue jacket is my brother.",
+          explanation: "Who dùng để nối hai mệnh đề nói về người.",
+        },
+
+        {
+          number: 44,
+          question: "This is the house. I was born here.",
+          answer: "This is the house where I was born.",
+          explanation: "Where dùng để thay thế cho 'here' và chỉ địa điểm.",
+        },
+
+        {
+          number: 45,
+          question: "I read a book. The book was written by a famous author.",
+          answer: "I read a book which was written by a famous author.",
+          explanation: "Which dùng để thay thế cho 'the book'.",
+        },
+
+        {
+          number: 46,
+          question:
+            "The woman is my English teacher. Her daughter studies at my school.",
+          answer:
+            "The woman whose daughter studies at my school is my English teacher.",
+          explanation: "Whose dùng để chỉ sự sở hữu.",
+        },
+
+        {
+          number: 47,
+          question:
+            "I visited a museum. It had many interesting historical objects.",
+          answer:
+            "I visited a museum which had many interesting historical objects.",
+          explanation: "Which dùng để thay thế cho 'a museum'.",
+        },
+
+        {
+          number: 54,
+          question: "If you study harder, ______________________________.",
+          answer: "If you study harder, you will get better results.",
+          explanation:
+            "Câu điều kiện loại 1: If + Present Simple, S + will + V.",
+        },
+
+        {
+          number: 55,
+          question:
+            "If I have enough free time, ______________________________.",
+          answer: "If I have enough free time, I will read more books.",
+          explanation:
+            "Sau If dùng Present Simple; mệnh đề chính dùng will + V.",
+        },
+
+        {
+          number: 56,
+          question:
+            "If the weather is good tomorrow, ______________________________.",
+          answer: "If the weather is good tomorrow, I will go outside.",
+          explanation:
+            "Câu điều kiện loại 1 diễn tả khả năng có thể xảy ra trong tương lai.",
+        },
+
+        {
+          number: 57,
+          question:
+            "If you don't sleep early tonight, ______________________________.",
+          answer:
+            "If you don't sleep early tonight, you will be tired tomorrow.",
+          explanation: "If + Present Simple → will + V.",
+        },
+
+        {
+          number: 58,
+          question: "If I pass the exam, ______________________________.",
+          answer: "If I pass the exam, I will celebrate with my family.",
+          explanation:
+            "Câu điều kiện loại 1 dùng để nói về kết quả có thể xảy ra trong tương lai.",
+        },
+      ];
+
+      /* =====================================================
+   RENDER MULTIPLE CHOICE
+===================================================== */
+
+      const partContainers = {
+        1: document.getElementById("part1"),
+        2: document.getElementById("part2"),
+        3: document.getElementById("part3"),
+        4: document.getElementById("part4"),
+        5: document.getElementById("part5"),
+        6: document.getElementById("part6"),
+      };
+
+      let score = 0;
+      let answered = 0;
+
+      /* Create questions */
+
+      questions.forEach((item, index) => {
+        const questionBox = document.createElement("div");
+        questionBox.className = "question";
+
+        questionBox.innerHTML = `
+    <div class="question-text">${item.q}</div>
+
+    <div class="options">
+      ${item.options
+        .map(
+          (option, optionIndex) => `
+        <button
+          class="option"
+          data-question="${index}"
+          data-option="${optionIndex}">
+          ${option}
+        </button>
+      `,
+        )
+        .join("")}
+    </div>
+
+    <div class="feedback" id="feedback-${index}"></div>
+  `;
+
+        partContainers[item.part].appendChild(questionBox);
+      });
+
+      /* =====================================================
+   HANDLE ANSWERS
+===================================================== */
+
+      document.querySelectorAll(".option").forEach((button) => {
+        button.addEventListener("click", function () {
+          const questionIndex = Number(this.dataset.question);
+          const selectedOption = Number(this.dataset.option);
+
+          const question = questions[questionIndex];
+
+          const allOptions = document.querySelectorAll(
+            `.option[data-question="${questionIndex}"]`,
+          );
+
+          const feedback = document.getElementById(`feedback-${questionIndex}`);
+
+          /* Prevent double click */
+          if (allOptions[0].disabled) {
+            return;
+          }
+
+          /* Disable all buttons */
+          allOptions.forEach((btn) => {
+            btn.disabled = true;
+          });
+
+          /* Correct answer */
+          allOptions[question.answer].classList.add("correct");
+
+          if (selectedOption === question.answer) {
+            score++;
+
+            this.classList.add("correct");
+
+            feedback.className = "feedback show correct-feedback";
+
+            feedback.innerHTML = `
+        <strong>✅ Correct!</strong>
+        ${question.explanation}
+      `;
+          } else {
+            this.classList.add("wrong");
+
+            feedback.className = "feedback show wrong-feedback";
+
+            feedback.innerHTML = `
+        <strong>❌ Incorrect!</strong>
+        <b>Đáp án đúng:</b> ${question.options[question.answer]}<br>
+        ${question.explanation}
+      `;
+          }
+
+          answered++;
+
+          updateProgress();
+        });
+      });
+
+      /* =====================================================
+   PROGRESS
+===================================================== */
+
+      function updateProgress() {
+        const total = questions.length;
+
+        document.getElementById("score").textContent = score;
+
+        document.getElementById("progressText").textContent =
+          `${answered} / ${total}`;
+
+        const percentage = (answered / total) * 100;
+
+        document.getElementById("progressBar").style.width = `${percentage}%`;
+
+        if (answered === total) {
+          const finalResult = document.getElementById("finalResult");
+
+          const finalScore = document.getElementById("finalScore");
+
+          finalResult.style.display = "block";
+
+          finalScore.textContent = `Bạn đạt ${score}/${total} câu đúng (${Math.round((score / total) * 100)}%).`;
+
+          finalResult.scrollIntoView({
+            behavior: "smooth",
+          });
+        }
+      }
+
+      /* =====================================================
+   RENDER OPEN QUESTIONS
+===================================================== */
+
+      const openContainer = document.getElementById("openQuestions");
+
+      openQuestions.forEach((item) => {
+        const box = document.createElement("div");
+
+        box.className = "open-question";
+
+        box.innerHTML = `
+
+    <div class="question-text">
+      ${item.number}. ${item.question}
+    </div>
+
+    <button class="answer-btn">
+      👁️ Show Answer
+    </button>
+
+    <div class="model-answer">
+
+      <strong>Đáp án:</strong><br>
+      ${item.answer}
+
+      <br><br>
+
+      <strong>💡 Explanation:</strong><br>
+      ${item.explanation}
+
+    </div>
+
+  `;
+
+        openContainer.appendChild(box);
+      });
+
+      /* =====================================================
+   SHOW / HIDE ANSWERS
+===================================================== */
+
+      document.querySelectorAll(".answer-btn").forEach((button) => {
+        button.addEventListener("click", function () {
+          const answerBox = this.nextElementSibling;
+
+          answerBox.classList.toggle("show");
+
+          if (answerBox.classList.contains("show")) {
+            this.textContent = "🙈 Hide Answer";
+          } else {
+            this.textContent = "👁️ Show Answer";
+          }
+        });
+      });
+
+      /* =====================================================
+   RESET QUIZ
+===================================================== */
+
+      document
+        .getElementById("resetBtn")
+        .addEventListener("click", function () {
+          score = 0;
+          answered = 0;
+
+          document.querySelectorAll(".option").forEach((button) => {
+            button.disabled = false;
+
+            button.classList.remove("correct", "wrong");
+          });
+
+          document.querySelectorAll(".feedback").forEach((feedback) => {
+            feedback.className = "feedback";
+
+            feedback.innerHTML = "";
+          });
+
+          document.getElementById("score").textContent = "0";
+
+          document.getElementById("progressText").textContent =
+            "0 / " + questions.length;
+
+          document.getElementById("progressBar").style.width = "0%";
+
+          document.getElementById("finalResult").style.display = "none";
+
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        });
+    </script>
+  </body>
+</html>
+```
