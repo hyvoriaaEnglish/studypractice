@@ -1,0 +1,1012 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tourism – Grammar Lesson</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f7fb;
+        color: #263238;
+        line-height: 1.7;
+      } /* ========================= HEADER ========================= */
+      header {
+        background: linear-gradient(135deg, #1565c0, #42a5f5);
+        color: white;
+        padding: 22px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+      }
+      .logo {
+        font-size: 24px;
+        font-weight: bold;
+      }
+      .lesson-label {
+        font-size: 15px;
+        opacity: 0.95;
+      } /* ========================= PROGRESS ========================= */
+      .progress-container {
+        width: 100%;
+        height: 7px;
+        background: #dbeafe;
+        position: sticky;
+        top: 77px;
+        z-index: 99;
+      }
+      .progress-bar {
+        height: 100%;
+        width: 0%;
+        background: #ffca28;
+        transition: width 0.3s ease;
+      } /* ========================= MAIN ========================= */
+      main {
+        max-width: 1000px;
+        margin: 40px auto;
+        padding: 0 20px 120px;
+      }
+      .lesson-page {
+        display: none;
+        animation: fadeIn 0.4s ease;
+      }
+      .lesson-page.active {
+        display: block;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      } /* ========================= TITLE ========================= */
+      .lesson-title {
+        text-align: center;
+        margin-bottom: 35px;
+      }
+      .lesson-title h1 {
+        font-size: 36px;
+        color: #1565c0;
+        margin-bottom: 10px;
+      }
+      .lesson-title p {
+        color: #607d8b;
+        font-size: 17px;
+      } /* ========================= CARDS ========================= */
+      .card {
+        background: white;
+        border-radius: 18px;
+        padding: 30px;
+        margin-bottom: 25px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+      }
+      .card h2 {
+        color: #1565c0;
+        margin-bottom: 20px;
+        font-size: 27px;
+      }
+      .card h3 {
+        color: #1976d2;
+        margin: 22px 0 12px;
+        font-size: 21px;
+      }
+      .card h4 {
+        margin-top: 18px;
+        color: #37474f;
+      }
+      .highlight {
+        background: #e3f2fd;
+        border-left: 5px solid #1976d2;
+        padding: 18px 20px;
+        border-radius: 8px;
+        margin: 18px 0;
+      }
+      .example {
+        background: #f8fafc;
+        border-radius: 10px;
+        padding: 15px 20px;
+        margin: 12px 0;
+        border: 1px solid #e2e8f0;
+      }
+      .formula {
+        background: #fff8e1;
+        border-left: 5px solid #ffb300;
+        padding: 18px;
+        border-radius: 8px;
+        font-size: 18px;
+        font-weight: bold;
+        margin: 15px 0;
+      }
+      .note {
+        background: #f1f8e9;
+        border-left: 5px solid #7cb342;
+        padding: 15px 18px;
+        border-radius: 8px;
+        margin: 15px 0;
+      }
+      .warning {
+        background: #ffebee;
+        border-left: 5px solid #e53935;
+        padding: 15px 18px;
+        border-radius: 8px;
+        margin: 15px 0;
+      }
+      .tip {
+        background: #f3e5f5;
+        border-left: 5px solid #8e24aa;
+        padding: 15px 18px;
+        border-radius: 8px;
+        margin: 15px 0;
+      }
+      ul {
+        padding-left: 25px;
+        margin: 10px 0;
+      }
+      li {
+        margin: 6px 0;
+      }
+      strong {
+        color: #0d47a1;
+      } /* ========================= TABLE ========================= */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        background: white;
+        overflow: hidden;
+        border-radius: 10px;
+      }
+      th,
+      td {
+        border: 1px solid #dfe6ee;
+        padding: 13px;
+        text-align: left;
+      }
+      th {
+        background: #1976d2;
+        color: white;
+      }
+      tr:nth-child(even) {
+        background: #f8fafc;
+      } /* ========================= NAVIGATION ========================= */
+      .navigation {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 35px;
+        gap: 15px;
+      }
+      .nav-btn {
+        border: none;
+        padding: 13px 25px;
+        border-radius: 30px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        transition: 0.2s;
+      }
+      .prev-btn {
+        background: #e0e7ef;
+        color: #37474f;
+      }
+      .next-btn {
+        background: #1565c0;
+        color: white;
+      }
+      .nav-btn:hover {
+        transform: translateY(-2px);
+        opacity: 0.9;
+      }
+      .page-number {
+        font-weight: bold;
+        color: #607d8b;
+      } /* ========================= HOME + PRACTICE ========================= */
+      .bottom-actions {
+        margin-top: 60px;
+        text-align: center;
+      }
+      .practice-btn {
+        display: inline-block;
+        background: #43a047;
+        color: white;
+        text-decoration: none;
+        padding: 15px 32px;
+        border-radius: 30px;
+        font-size: 17px;
+        font-weight: bold;
+        margin: 10px;
+        transition: 0.2s;
+      }
+      .home-btn {
+        display: inline-block;
+        background: #455a64;
+        color: white;
+        text-decoration: none;
+        padding: 13px 28px;
+        border-radius: 30px;
+        font-size: 16px;
+        font-weight: bold;
+        margin: 10px;
+      }
+      .practice-btn:hover,
+      .home-btn:hover {
+        transform: translateY(-2px);
+        opacity: 0.9;
+      } /* ========================= MOBILE ========================= */
+      @media (max-width: 700px) {
+        header {
+          padding: 16px 18px;
+          flex-direction: column;
+          gap: 5px;
+          text-align: center;
+        }
+        .logo {
+          font-size: 21px;
+        }
+        .lesson-label {
+          font-size: 13px;
+        }
+        .progress-container {
+          top: 84px;
+        }
+        main {
+          margin-top: 25px;
+        }
+        .lesson-title h1 {
+          font-size: 28px;
+        }
+        .card {
+          padding: 20px;
+        }
+        .card h2 {
+          font-size: 23px;
+        }
+        table {
+          font-size: 14px;
+        }
+        th,
+        td {
+          padding: 9px;
+        }
+        .navigation {
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+        .nav-btn {
+          padding: 11px 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ========================= HEADER ========================= -->
+    <header>
+      <div class="logo">Hyvoria English</div>
+      <div class="lesson-label">Grammar Lesson • Tourism</div>
+    </header>
+    <!-- PROGRESS BAR -->
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <main></main>
+    <!-- ==================================================
+     PAGE 1
+================================================== -->
+
+    <section class="lesson-page active">
+      <div class="lesson-title">
+        <h1>🌍 TOURISM</h1>
+        <p>Relative Clauses & Conditional Sentences – Type 1</p>
+      </div>
+
+      <div class="card">
+        <h2>📚 PART 1. RELATIVE CLAUSES</h2>
+
+        <h3>Mệnh đề quan hệ</h3>
+
+        <p>
+          <strong>Relative clause</strong> là mệnh đề dùng để
+          <strong>bổ sung thông tin cho một danh từ</strong> đứng trước nó.
+        </p>
+
+        <p>
+          Thay vì tách thành hai câu, ta có thể nối chúng lại bằng
+          <strong>relative pronouns</strong>.
+        </p>
+
+        <div class="example">
+          <strong>Ha Long Bay is a famous tourist destination.</strong><br />
+          It attracts millions of visitors every year.
+        </div>
+
+        <div class="highlight">
+          ➡️ Ha Long Bay is a famous tourist destination
+          <strong>which attracts millions of visitors every year</strong>.
+        </div>
+
+        <div class="note">
+          📌 <strong>which</strong> thay cho <strong>Ha Long Bay</strong>.
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>👤 PART 2. RELATIVE PRONOUNS</h2>
+
+        <h3>1. WHO – người</h3>
+
+        <p>Dùng <strong>who</strong> để thay thế cho người.</p>
+
+        <div class="example">
+          The tour guide is very friendly.<br />
+          He showed us around the city.
+        </div>
+
+        <div class="highlight">
+          ➡️ The tour guide <strong>who showed us around the city</strong>
+          is very friendly.
+        </div>
+
+        <div class="note">📌 <strong>who = he</strong></div>
+
+        <div class="example">
+          The tourists <strong>who visited the ancient temple</strong>
+          were impressed.
+        </div>
+
+        <h3>2. WHICH – vật / sự việc</h3>
+
+        <p>Dùng <strong>which</strong> để thay thế cho vật hoặc sự việc.</p>
+
+        <div class="example">
+          This is the hotel.<br />
+          It has a beautiful view of the sea.
+        </div>
+
+        <div class="highlight">
+          ➡️ This is the hotel
+          <strong>which has a beautiful view of the sea</strong>.
+        </div>
+
+        <div class="example">
+          We visited a museum
+          <strong>which displays traditional artefacts</strong>.
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================
+     PAGE 2
+================================================== -->
+
+    <section class="lesson-page">
+      <div class="card">
+        <h2>🔗 PART 2. RELATIVE PRONOUNS (CONTINUED)</h2>
+
+        <h3>3. THAT – người hoặc vật</h3>
+
+        <p>
+          <strong>That</strong> có thể thay thế cho <strong>who</strong> hoặc
+          <strong>which</strong>
+          trong mệnh đề quan hệ xác định.
+        </p>
+
+        <div class="example">
+          The guide <strong>that showed us around the city</strong>
+          was very helpful.
+        </div>
+
+        <div class="example">
+          The hotel <strong>that we stayed in</strong>
+          was excellent.
+        </div>
+
+        <div class="note">
+          📌 Trong bài thi, <strong>that</strong> thường được dùng trong mệnh đề
+          quan hệ xác định, không có dấu phẩy.
+        </div>
+
+        <h3>4. WHERE – nơi chốn 📍</h3>
+
+        <p>
+          Dùng <strong>where</strong> để thay thế cho
+          <strong>in / at / on which</strong>.
+        </p>
+
+        <div class="example">
+          This is the hotel <strong>where we stayed</strong>.
+        </div>
+
+        <div class="example">
+          Ha Long Bay is a place
+          <strong>where tourists can enjoy beautiful scenery</strong>.
+        </div>
+
+        <h3>5. WHEN – thời gian ⏰</h3>
+
+        <p>
+          Dùng <strong>when</strong> để thay thế cho
+          <strong>at / on / in which</strong>.
+        </p>
+
+        <div class="example">
+          Summer is the time
+          <strong>when many tourists travel abroad</strong>.
+        </div>
+
+        <h3>6. WHOSE – sở hữu 🎒</h3>
+
+        <p><strong>Whose</strong> = của ai / của cái gì.</p>
+
+        <div class="formula">Noun + whose + noun + V...</div>
+
+        <div class="example">
+          We met a tourist
+          <strong>whose camera was very expensive</strong>.
+        </div>
+
+        <div class="example">
+          I visited a hotel
+          <strong>whose rooms overlooked the beach</strong>.
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================
+     PAGE 3
+================================================== -->
+
+    <section class="lesson-page">
+      <div class="card">
+        <h2>📊 PART 3. TỔNG HỢP ĐẠI TỪ QUAN HỆ</h2>
+
+        <table>
+          <tr>
+            <th>Từ</th>
+            <th>Thay thế cho</th>
+            <th>Ví dụ</th>
+          </tr>
+
+          <tr>
+            <td><strong>who</strong></td>
+            <td>người</td>
+            <td>The guide <strong>who</strong> helped us</td>
+          </tr>
+
+          <tr>
+            <td><strong>which</strong></td>
+            <td>vật / sự việc</td>
+            <td>The hotel <strong>which</strong> we booked</td>
+          </tr>
+
+          <tr>
+            <td><strong>that</strong></td>
+            <td>người / vật</td>
+            <td>The place <strong>that</strong> we visited</td>
+          </tr>
+
+          <tr>
+            <td><strong>where</strong></td>
+            <td>nơi chốn</td>
+            <td>The city <strong>where</strong> I stayed</td>
+          </tr>
+
+          <tr>
+            <td><strong>when</strong></td>
+            <td>thời gian</td>
+            <td>The year <strong>when</strong> I travelled</td>
+          </tr>
+
+          <tr>
+            <td><strong>whose</strong></td>
+            <td>sở hữu</td>
+            <td>The tourist <strong>whose</strong> bag was lost</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <h2>🎯 PART 4. DEFINING RELATIVE CLAUSES</h2>
+
+        <h3>Mệnh đề quan hệ xác định</h3>
+
+        <p>
+          Đây là mệnh đề <strong>cần thiết</strong> để xác định danh từ đang
+          được nói đến.
+        </p>
+
+        <div class="formula">Noun + who / which / that + V...</div>
+
+        <div class="example">
+          The tourists <strong>who arrive early</strong>
+          can get the best seats.
+        </div>
+
+        <div class="note">
+          📌 Không có dấu phẩy. Nếu bỏ mệnh đề
+          <strong>who arrive early</strong>, ta không biết đang nói về nhóm
+          khách du lịch nào.
+        </div>
+
+        <h3>Ví dụ chủ đề Tourism</h3>
+
+        <div class="example">
+          The hotel <strong>which offers free breakfast</strong>
+          is very popular.
+        </div>
+
+        <div class="example">
+          The guide <strong>who speaks three languages</strong>
+          is highly experienced.
+        </div>
+
+        <div class="example">
+          The destination <strong>that attracts the most visitors</strong>
+          is Ha Long Bay.
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================
+     PAGE 4
+================================================== -->
+
+    <section class="lesson-page">
+      <div class="card">
+        <h2>✂️ PART 5. CÓ THỂ LƯỢC BỎ ĐẠI TỪ QUAN HỆ</h2>
+
+        <p>
+          Khi đại từ quan hệ đóng vai trò <strong>tân ngữ</strong>, ta có thể bỏ
+          <strong>who / which / that</strong>.
+        </p>
+
+        <div class="example">
+          The hotel <strong>which we booked</strong> was expensive.
+          <br />
+          ➡️ The hotel <strong>we booked</strong> was expensive. ✅
+        </div>
+
+        <div class="example">
+          The tour guide <strong>who we met</strong> was friendly.
+          <br />
+          ➡️ The tour guide <strong>we met</strong> was friendly. ✅
+        </div>
+
+        <div class="warning">
+          ⚠️ Không được bỏ khi đại từ quan hệ làm chủ ngữ.
+        </div>
+
+        <div class="example">
+          The guide <strong>who showed us around the city</strong>
+          was friendly. ✅
+        </div>
+
+        <div class="example">
+          ❌ The guide showed us around the city was friendly.
+        </div>
+
+        <div class="note">
+          📌 Vì <strong>who</strong> là chủ ngữ của động từ
+          <strong>showed</strong> nên không thể bỏ.
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>🌍 PART 6. CONDITIONAL SENTENCES – TYPE 1</h2>
+
+        <h3>Câu điều kiện loại 1</h3>
+
+        <p>
+          Câu điều kiện loại 1 dùng để nói về một điều kiện
+          <strong>có thể xảy ra ở hiện tại hoặc tương lai</strong>
+          và kết quả có khả năng xảy ra.
+        </p>
+
+        <div class="example">
+          If you visit Ha Long Bay, you will enjoy the beautiful scenery.
+        </div>
+
+        <div class="highlight">
+          📌 Điều kiện: Bạn đến Hạ Long.<br />
+          📌 Kết quả: Bạn sẽ thưởng thức cảnh đẹp.
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================
+     PAGE 5
+================================================== -->
+
+    <section class="lesson-page">
+      <div class="card">
+        <h2>🧩 PART 7. CẤU TRÚC CÂU ĐIỀU KIỆN LOẠI 1</h2>
+
+        <h3>Công thức cơ bản</h3>
+
+        <div class="formula">
+          If + S + V (hiện tại đơn), S + will + V nguyên mẫu
+        </div>
+
+        <div class="example">
+          If you <strong>visit</strong> this museum, you
+          <strong>will learn</strong> a lot about local history.
+        </div>
+
+        <h3>Phân tích</h3>
+
+        <div class="example">
+          <strong>If-clause:</strong><br />
+          If you <strong>visit</strong> this museum → Present Simple
+        </div>
+
+        <div class="example">
+          <strong>Main clause:</strong><br />
+          you <strong>will learn</strong> a lot → will + V
+        </div>
+
+        <h3>Ví dụ chủ đề Tourism</h3>
+
+        <ul>
+          <li>
+            If you visit Ha Long Bay, you
+            <strong>will see</strong> beautiful limestone islands.
+          </li>
+
+          <li>
+            If tourists respect local customs, they
+            <strong>will have</strong> a better experience.
+          </li>
+
+          <li>
+            If we book the hotel early, we
+            <strong>will get</strong> a better price.
+          </li>
+
+          <li>
+            If you travel during the summer, you
+            <strong>will meet</strong> many tourists.
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>↔️ PART 8. ĐẢO VỊ TRÍ HAI MỆNH ĐỀ</h2>
+
+        <h3>Cách 1</h3>
+
+        <div class="formula">If + S + V, S + will + V.</div>
+
+        <div class="example">
+          If you visit the museum, you will learn about local history.
+        </div>
+
+        <div class="note">📌 Có dấu phẩy.</div>
+
+        <h3>Cách 2</h3>
+
+        <div class="formula">S + will + V + if + S + V.</div>
+
+        <div class="example">
+          You will learn about local history if you visit the museum.
+        </div>
+
+        <div class="note">📌 Không có dấu phẩy.</div>
+      </div>
+    </section>
+
+    <!-- ==================================================
+     PAGE 6
+================================================== -->
+
+    <section class="lesson-page">
+      <div class="card">
+        <h2>🔮 PART 9. CÓ THỂ DÙNG MODAL VERBS</h2>
+
+        <p>Ngoài <strong>will</strong>, mệnh đề chính có thể dùng:</p>
+
+        <div class="formula">can / may / might / should / must</div>
+
+        <div class="example">
+          If you visit the island, you <strong>can</strong> go snorkeling.
+        </div>
+
+        <div class="example">
+          If tourists respect local customs, they <strong>may</strong> have a
+          better experience.
+        </div>
+
+        <div class="example">
+          If you travel during peak season, you <strong>might</strong> have to
+          wait longer.
+        </div>
+
+        <div class="example">
+          If you visit a religious site, you <strong>should</strong> dress
+          appropriately.
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>⚠️ PART 10. LỖI THƯỜNG GẶP</h2>
+
+        <h3>❌ Không dùng WILL sau IF</h3>
+
+        <div class="warning">
+          Sai:<br />
+          If you <strong>will visit</strong> Ha Long Bay, you will enjoy it.
+        </div>
+
+        <div class="note">
+          Đúng:<br />
+          If you <strong>visit</strong> Ha Long Bay, you will enjoy it.
+        </div>
+
+        <div class="tip">
+          📌 Sau <strong>if</strong> → dùng <strong>Present Simple</strong>.
+        </div>
+
+        <h3>❌ Không dùng WOULD</h3>
+
+        <div class="warning">
+          Sai:<br />
+          If tourists respect local customs, they <strong>would</strong> have a
+          better experience.
+        </div>
+
+        <div class="note">
+          Đúng:<br />
+          If tourists respect local customs, they <strong>will</strong> have a
+          better experience.
+        </div>
+
+        <div class="tip">
+          📌 Đây là <strong>Type 1</strong>, nên mệnh đề chính thường dùng
+          <strong>will</strong>.
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================
+     PAGE 7
+================================================== -->
+
+    <section class="lesson-page">
+      <div class="card">
+        <h2>🔥 PART 11. RELATIVE CLAUSES + CONDITIONAL TYPE 1</h2>
+
+        <p>Hai cấu trúc có thể xuất hiện cùng nhau trong một câu.</p>
+
+        <h3>Example 1</h3>
+
+        <div class="example">
+          If you visit a destination
+          <strong>which is famous for its beaches</strong>, you will have a
+          relaxing holiday.
+        </div>
+
+        <div class="note">
+          📌 <strong>which is famous for its beaches</strong> → Relative Clause,
+          bổ nghĩa cho <strong>destination</strong>. <br /><br />
+          📌 <strong>If you visit..., you will have...</strong>
+          → Conditional Type 1.
+        </div>
+
+        <h3>Example 2</h3>
+
+        <div class="example">
+          If you choose a hotel
+          <strong>that is close to the city centre</strong>, you will save time.
+        </div>
+
+        <div class="note">
+          📌 <strong>that is close to the city centre</strong> → bổ nghĩa cho
+          <strong>hotel</strong>. <br /><br />
+          📌 <strong>If you choose..., you will save...</strong>
+          → Conditional Type 1.
+        </div>
+
+        <h3>Example 3</h3>
+
+        <div class="example">
+          If you meet a tour guide
+          <strong>who speaks English fluently</strong>, you will find it easier
+          to communicate.
+        </div>
+
+        <div class="note">
+          📌 <strong>who speaks English fluently</strong> → bổ nghĩa cho
+          <strong>tour guide</strong>. <br /><br />
+          📌 <strong>If you meet..., you will find...</strong>
+          → Conditional Type 1.
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================
+     PAGE 8 – SUMMARY
+================================================== -->
+
+    <section class="lesson-page">
+      <div class="lesson-title">
+        <h1>🎯 FINAL SUMMARY</h1>
+        <p>Let's review what you have learned!</p>
+      </div>
+
+      <div class="card">
+        <h2>📚 RELATIVE CLAUSES</h2>
+
+        <div class="formula">
+          Noun + who / which / that / where / when / whose + clause
+        </div>
+
+        <p>📌 Dùng để <strong>bổ sung thông tin cho danh từ</strong>.</p>
+
+        <div class="example">
+          The hotel
+          <strong>which we stayed in</strong>
+          was excellent.
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>🌍 CONDITIONAL TYPE 1</h2>
+
+        <div class="formula">If + Present Simple, S + will + V</div>
+
+        <p>
+          📌 Dùng cho điều kiện có thật hoặc có khả năng xảy ra trong hiện tại /
+          tương lai.
+        </p>
+
+        <div class="example">
+          If you visit Ha Long Bay, you <strong>will enjoy</strong> the scenery.
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>⭐ MẸO NHỚ NHANH</h2>
+
+        <div class="example">👤 <strong>WHO</strong> → người</div>
+
+        <div class="example">🏨 <strong>WHICH</strong> → vật</div>
+
+        <div class="example">👤🏨 <strong>THAT</strong> → người / vật</div>
+
+        <div class="example">📍 <strong>WHERE</strong> → nơi</div>
+
+        <div class="example">⏰ <strong>WHEN</strong> → thời gian</div>
+
+        <div class="example">🎒 <strong>WHOSE</strong> → sở hữu</div>
+
+        <div class="formula">IF + HIỆN TẠI → WILL + V</div>
+
+        <div class="example">If you travel, you will have fun. ✈️</div>
+      </div>
+
+      <!-- =========================
+       BOTTOM ACTIONS
+  ========================= -->
+
+      <div class="bottom-actions">
+        <a href="quiz5.html" class="practice-btn"> 📝 Làm bài tập </a>
+
+        <a href="course5.html" class="home-btn"> 🏠 Về trang chủ </a>
+      </div>
+    </section>
+
+    <!-- =========================
+     NAVIGATION
+========================= -->
+
+    <div class="navigation">
+      <button class="nav-btn prev-btn" id="prevBtn" onclick="changePage(-1)">
+        ← Trang trước
+      </button>
+
+      <div class="page-number">
+        <span id="currentPage">1</span>
+        /
+        <span id="totalPages"></span>
+      </div>
+
+      <button class="nav-btn next-btn" id="nextBtn" onclick="changePage(1)">
+        Trang tiếp →
+      </button>
+    </div>
+    <script>
+      // =========================
+      // PAGE SYSTEM
+      // =========================
+
+      const pages = document.querySelectorAll(".lesson-page");
+      let currentPage = 0;
+
+      const totalPages = pages.length;
+
+      const currentPageText = document.getElementById("currentPage");
+      const totalPagesText = document.getElementById("totalPages");
+      const progressBar = document.getElementById("progressBar");
+
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+
+      // Hiển thị tổng số trang
+      totalPagesText.textContent = totalPages;
+
+      function showPage(index) {
+        // Hiển thị đúng trang hiện tại
+        pages.forEach((page, i) => {
+          page.classList.toggle("active", i === index);
+        });
+
+        // Cập nhật số trang
+        currentPageText.textContent = index + 1;
+
+        // Cập nhật thanh tiến trình
+        const progress = ((index + 1) / totalPages) * 100;
+        progressBar.style.width = progress + "%";
+
+        // Nút Previous
+        prevBtn.disabled = index === 0;
+
+        // Nút Next
+        if (index === totalPages - 1) {
+          nextBtn.style.display = "none";
+        } else {
+          nextBtn.style.display = "block";
+        }
+
+        // Cuộn lên đầu trang
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+
+      // Chuyển trang
+      function changePage(direction) {
+        const newPage = currentPage + direction;
+
+        if (newPage >= 0 && newPage < totalPages) {
+          currentPage = newPage;
+          showPage(currentPage);
+        }
+      }
+
+      // Nút Previous
+      prevBtn.addEventListener("click", function () {
+        changePage(-1);
+      });
+
+      // Nút Next
+      nextBtn.addEventListener("click", function () {
+        changePage(1);
+      });
+
+      // Bàn phím
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "ArrowRight") {
+          changePage(1);
+        }
+
+        if (event.key === "ArrowLeft") {
+          changePage(-1);
+        }
+      });
+
+      // Khởi tạo
+      showPage(currentPage);
+    </script>
+  </body>
+</html>

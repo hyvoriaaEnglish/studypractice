@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Tourism – Grammar Practice</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #263238;
+      line-height: 1.7;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1565c0, #42a5f5);
+      color: white;
+      padding: 25px 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    header h1 {
+      font-size: 30px;
+      margin-bottom: 5px;
+    }
+
+    header p {
+      font-size: 16px;
+      opacity: 0.95;
+    }
+
+    /* PROGRESS */
+
+    .progress-container {
+      width: 100%;
+      height: 8px;
+      background: #dbe4ee;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: #ffca28;
+      transition: width 0.3s ease;
+    }
+
+    /* PAGE */
+
+    main {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 0 20px 100px;
+    }
+
+    .lesson-page {
+      display: none;
+      animation: fadeIn 0.35s ease;
+    }
+
+    .lesson-page.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .part-title {
+      background: white;
+      padding: 20px 25px;
+      border-radius: 16px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      border-left: 6px solid #1976d2;
+    }
+
+    .part-title h2 {
+      color: #1565c0;
+      font-size: 23px;
+    }
+
+    .part-title p {
+      margin-top: 5px;
+      color: #607d8b;
+    }
+
+    /* QUESTION CARD */
+
+    .question-card {
+      background: white;
+      border-radius: 16px;
+      padding: 22px;
+      margin-bottom: 22px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+    }
+
+    .question-number {
+      font-weight: bold;
+      font-size: 18px;
+      color: #1565c0;
+      margin-bottom: 8px;
+    }
+
+    .question-text {
+      font-size: 17px;
+      margin-bottom: 15px;
+      font-weight: 500;
+    }
+
+    /* ANSWERS */
+
+    .options {
+      display: grid;
+      gap: 10px;
+    }
+
+    .option-btn {
+      width: 100%;
+      text-align: left;
+      padding: 12px 15px;
+      border: 2px solid #dce4ec;
+      background: #fafcff;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.2s;
+    }
+
+    .option-btn:hover {
+      background: #eaf4ff;
+      border-color: #42a5f5;
+      transform: translateX(3px);
+    }
+
+    .option-btn.correct {
+      background: #e8f5e9;
+      border-color: #43a047;
+      color: #1b5e20;
+      font-weight: bold;
+    }
+
+    .option-btn.wrong {
+      background: #ffebee;
+      border-color: #e53935;
+      color: #b71c1c;
+      font-weight: bold;
+    }
+
+    .option-btn:disabled {
+      cursor: default;
+    }
+
+    /* FEEDBACK */
+
+    .feedback {
+      display: none;
+      margin-top: 15px;
+      padding: 15px;
+      border-radius: 10px;
+      font-size: 15px;
+    }
+
+    .feedback.show {
+      display: block;
+    }
+
+    .feedback.correct-feedback {
+      background: #e8f5e9;
+      border-left: 5px solid #43a047;
+      color: #1b5e20;
+    }
+
+    .feedback.wrong-feedback {
+      background: #ffebee;
+      border-left: 5px solid #e53935;
+      color: #b71c1c;
+    }
+
+    .feedback strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    /* TEXT INPUT */
+
+    .text-answer {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #dce4ec;
+      border-radius: 10px;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    .check-btn {
+      background: #1976d2;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .check-btn:hover {
+      background: #0d47a1;
+    }
+
+    /* NAVIGATION */
+
+    .navigation {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: white;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      box-shadow: 0 -3px 15px rgba(0,0,0,0.12);
+      z-index: 200;
+    }
+
+    .nav-btn {
+      border: none;
+      padding: 11px 22px;
+      border-radius: 9px;
+      font-size: 15px;
+      cursor: pointer;
+      background: #1976d2;
+      color: white;
+    }
+
+    .nav-btn:hover {
+      background: #0d47a1;
+    }
+
+    .nav-btn:disabled {
+      background: #b0bec5;
+      cursor: not-allowed;
+    }
+
+    .page-counter {
+      font-weight: bold;
+      color: #455a64;
+      min-width: 100px;
+      text-align: center;
+    }
+
+    /* HOME */
+
+    .home-box {
+      text-align: center;
+      background: white;
+      padding: 35px 25px;
+      border-radius: 18px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      margin-bottom: 25px;
+    }
+
+    .home-box h2 {
+      color: #1565c0;
+      margin-bottom: 10px;
+    }
+
+    .home-box p {
+      color: #607d8b;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 24px;
+      }
+
+      main {
+        padding: 0 12px 100px;
+      }
+
+      .question-card {
+        padding: 17px;
+      }
+
+      .question-text {
+        font-size: 16px;
+      }
+
+      .navigation {
+        padding: 10px;
+      }
+
+      .nav-btn {
+        padding: 9px 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+
+  <header>
+    <h1>🌍 TOURISM – GRAMMAR PRACTICE</h1>
+    <p>Relative Clauses & Conditional Sentences – Type 1</p>
+  </header>
+
+  <!-- PROGRESS BAR -->
+
+  <div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <!-- MAIN -->
+
+  <main>
+
+    <!-- PAGE 1 -->
+
+    <section class="lesson-page active">
+
+      <div class="home-box">
+        <h2>🌍 Tourism Grammar Practice</h2>
+        <p>
+          Practice Relative Clauses and Conditional Sentences – Type 1.
+          Click an answer to see whether it is correct and read the explanation.
+        </p>
+      </div>
+
+      <div class="part-title">
+        <h2>PART 1. RELATIVE CLAUSES</h2>
+        <p>Bài 1. Chọn đáp án đúng</p>
+      </div>
+
+      <div class="question-card">
+        <div class="question-number">Question 1</div>
+        <div class="question-text">
+          The tour guide ______ showed us around the ancient town was very friendly.
+        </div>
+
+        <div class="options">
+          <button class="option-btn" onclick="checkAnswer(this, false, 'which', 'Dùng WHO vì đại từ quan hệ thay thế cho người (the tour guide).')">A. which</button>
+          <button class="option-btn" onclick="checkAnswer(this, true, 'who', 'WHO dùng để thay thế cho người. The tour guide = người.')">B. who</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'where', 'WHERE dùng để chỉ nơi chốn, không dùng để thay thế cho người.')">C. where</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'whose', 'WHOSE diễn tả sự sở hữu, không phù hợp với câu này.')">D. whose</button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 2</div>
+        <div class="question-text">
+          Ha Long Bay is a famous destination ______ attracts millions of tourists every year.
+        </div>
+
+        <div class="options">
+          <button class="option-btn" onclick="checkAnswer(this, false, 'who', 'WHO dùng cho người.')">A. who</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'where', 'WHERE dùng để chỉ nơi chốn khi mệnh đề sau không có tân ngữ thay thế trực tiếp cho địa điểm.')">B. where</button>
+          <button class="option-btn" onclick="checkAnswer(this, true, 'which', 'WHICH thay thế cho vật hoặc sự việc. Ở đây, which thay cho Ha Long Bay và làm chủ ngữ của attracts.')">C. which</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'whose', 'WHOSE diễn tả sự sở hữu.')">D. whose</button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 3</div>
+        <div class="question-text">
+          This is the hotel ______ we stayed during our holiday.
+        </div>
+
+        <div class="options">
+          <button class="option-btn" onclick="checkAnswer(this, false, 'who', 'WHO dùng cho người.')">A. who</button>
+          <button class="option-btn" onclick="checkAnswer(this, true, 'where', 'WHERE dùng để chỉ nơi chốn. The hotel là địa điểm mà chúng ta đã ở.')">B. where</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'whose', 'WHOSE diễn tả sự sở hữu.')">C. whose</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'when', 'WHEN dùng để chỉ thời gian.')">D. when</button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 4</div>
+        <div class="question-text">
+          The tourists ______ visited the museum were impressed by the ancient artefacts.
+        </div>
+
+        <div class="options">
+          <button class="option-btn" onclick="checkAnswer(this, false, 'which', 'WHICH dùng cho vật hoặc sự việc.')">A. which</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'where', 'WHERE dùng để chỉ nơi chốn.')">B. where</button>
+          <button class="option-btn" onclick="checkAnswer(this, true, 'who', 'WHO thay thế cho người. The tourists là người.')">C. who</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'whose', 'WHOSE dùng để chỉ sự sở hữu.')">D. whose</button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 5</div>
+        <div class="question-text">
+          Summer is the season ______ many families go on holiday.
+        </div>
+
+        <div class="options">
+          <button class="option-btn" onclick="checkAnswer(this, false, 'where', 'WHERE dùng để chỉ nơi chốn.')">A. where</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'whose', 'WHOSE diễn tả sự sở hữu.')">B. whose</button>
+          <button class="option-btn" onclick="checkAnswer(this, true, 'when', 'WHEN dùng để chỉ thời gian. Summer là một khoảng thời gian.')">C. when</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'who', 'WHO dùng cho người.')">D. who</button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+    </section>
+
+
+    <!-- PAGE 2 -->
+
+    <section class="lesson-page">
+
+      <div class="part-title">
+        <h2>PART 1. RELATIVE CLAUSES</h2>
+        <p>Bài 2. Điền đại từ quan hệ thích hợp</p>
+      </div>
+
+      <div class="question-card">
+        <div class="question-number">Question 11</div>
+        <div class="question-text">
+          The guide ______ speaks four languages is very popular with foreign tourists.
+        </div>
+
+        <input class="text-answer" placeholder="Type your answer..." />
+
+        <button class="check-btn"
+          onclick="checkText(this, ['who'], 'WHO dùng cho người và ở đây who là chủ ngữ của speaks.')">
+          Check Answer
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 12</div>
+        <div class="question-text">
+          We visited a museum ______ displayed many ancient paintings.
+        </div>
+
+        <input class="text-answer" placeholder="Type your answer..." />
+
+        <button class="check-btn"
+          onclick="checkText(this, ['which'], 'WHICH thay thế cho museum và làm chủ ngữ của displayed.')">
+          Check Answer
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 13</div>
+        <div class="question-text">
+          This is the village ______ my grandparents were born.
+        </div>
+
+        <input class="text-answer" placeholder="Type your answer..." />
+
+        <button class="check-btn"
+          onclick="checkText(this, ['where'], 'WHERE dùng để chỉ nơi chốn: the village where my grandparents were born.')">
+          Check Answer
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 14</div>
+        <div class="question-text">
+          2025 was the year ______ I first travelled abroad.
+        </div>
+
+        <input class="text-answer" placeholder="Type your answer..." />
+
+        <button class="check-btn"
+          onclick="checkText(this, ['when'], 'WHEN dùng để chỉ thời gian: the year when I first travelled abroad.')">
+          Check Answer
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 15</div>
+        <div class="question-text">
+          We met a tourist ______ camera had been stolen.
+        </div>
+
+        <input class="text-answer" placeholder="Type your answer..." />
+
+        <button class="check-btn"
+          onclick="checkText(this, ['whose'], 'WHOSE diễn tả sự sở hữu: the tourist whose camera had been stolen.')">
+          Check Answer
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+    </section>
+
+
+    <!-- PAGE 3 -->
+
+    <section class="lesson-page">
+
+      <div class="part-title">
+        <h2>PART 2. CONDITIONAL SENTENCES – TYPE 1</h2>
+        <p>Bài 3. Chọn đáp án đúng</p>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 21</div>
+        <div class="question-text">
+          If you ______ Ha Long Bay, you will see many beautiful limestone islands.
+        </div>
+
+        <div class="options">
+          <button class="option-btn" onclick="checkAnswer(this, true, 'visit', 'Trong câu điều kiện loại 1, sau IF dùng Present Simple. Vì vậy dùng visit.')">A. visit</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'will visit', 'Không dùng WILL sau IF trong câu điều kiện loại 1.')">B. will visit</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'visited', 'Visited là Past Simple, không phù hợp với Type 1.')">C. visited</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'visiting', 'Sau IF cần một động từ chia ở Present Simple.')">D. visiting</button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 22</div>
+        <div class="question-text">
+          If we book our hotel early, we ______ a better price.
+        </div>
+
+        <div class="options">
+          <button class="option-btn" onclick="checkAnswer(this, false, 'get', 'Trong bài này, kết quả có khả năng xảy ra trong tương lai nên dùng will get.')">A. get</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'got', 'Got là Past Simple.')">B. got</button>
+          <button class="option-btn" onclick="checkAnswer(this, true, 'will get', 'Câu điều kiện loại 1: If + Present Simple, S + will + V.')">C. will get</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'would get', 'Would thường dùng trong câu điều kiện loại 2, không phải Type 1.')">D. would get</button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 23</div>
+        <div class="question-text">
+          If tourists respect local customs, they ______ a better travel experience.
+        </div>
+
+        <div class="options">
+          <button class="option-btn" onclick="checkAnswer(this, true, 'will have', 'Mệnh đề IF dùng Present Simple (respect), mệnh đề chính dùng will + V: will have.')">A. will have</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'had', 'Had không phù hợp với Conditional Type 1.')">B. had</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'have had', 'Have had là Present Perfect, không phù hợp với cấu trúc này.')">C. have had</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'would have', 'Would have không dùng trong Conditional Type 1 thông thường.')">D. would have</button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 24</div>
+        <div class="question-text">
+          If you travel during the peak season, you ______ many other tourists.
+        </div>
+
+        <div class="options">
+          <button class="option-btn" onclick="checkAnswer(this, false, 'meet', 'Trong ngữ cảnh này, kết quả dự đoán trong tương lai nên dùng will meet.')">A. meet</button>
+          <button class="option-btn" onclick="checkAnswer(this, true, 'will meet', 'Câu điều kiện loại 1 dùng will + V ở mệnh đề chính.')">B. will meet</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'met', 'Met là Past Simple.')">C. met</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'would meet', 'Would thường dùng cho Conditional Type 2.')">D. would meet</button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 25</div>
+        <div class="question-text">
+          If I have enough money, I ______ a trip around Europe next summer.
+        </div>
+
+        <div class="options">
+          <button class="option-btn" onclick="checkAnswer(this, false, 'take', 'Kết quả nói về kế hoạch có khả năng xảy ra trong tương lai nên dùng will take.')">A. take</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'took', 'Took là Past Simple.')">B. took</button>
+          <button class="option-btn" onclick="checkAnswer(this, true, 'will take', 'If + Present Simple (have), will + V (will take).')">C. will take</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'would take', 'Would take thuộc Conditional Type 2.')">D. would take</button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+    </section>
+
+
+    <!-- PAGE 4 -->
+
+    <section class="lesson-page">
+
+      <div class="part-title">
+        <h2>PART 3. RELATIVE CLAUSES + CONDITIONAL TYPE 1</h2>
+        <p>Bài 4. Chọn đáp án đúng</p>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 31</div>
+        <div class="question-text">
+          If you visit a destination ______ is famous for its beaches, you will have a relaxing holiday.
+        </div>
+
+        <div class="options">
+          <button class="option-btn" onclick="checkAnswer(this, false, 'who', 'WHO dùng cho người, nhưng destination là một địa điểm.')">A. who</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'where', 'WHERE dùng để chỉ nơi chốn, nhưng ở đây đại từ quan hệ làm chủ ngữ của is.')">B. where</button>
+          <button class="option-btn" onclick="checkAnswer(this, true, 'which', 'WHICH thay thế cho destination và làm chủ ngữ của is.')">C. which</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'whose', 'WHOSE diễn tả sở hữu.')">D. whose</button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 32</div>
+        <div class="question-text">
+          If you choose a hotel ______ is close to the city centre, you will save a lot of time.
+        </div>
+
+        <div class="options">
+          <button class="option-btn" onclick="checkAnswer(this, false, 'who', 'WHO dùng cho người.')">A. who</button>
+          <button class="option-btn" onclick="checkAnswer(this, true, 'which', 'WHICH thay thế cho hotel và làm chủ ngữ của is.')">B. which</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'where', 'WHERE không phù hợp vì đại từ quan hệ đang làm chủ ngữ của is.')">C. where</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'whose', 'WHOSE diễn tả sự sở hữu.')">D. whose</button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 33</div>
+        <div class="question-text">
+          If you meet a tour guide ______ speaks English fluently, you will find it easier to communicate.
+        </div>
+
+        <div class="options">
+          <button class="option-btn" onclick="checkAnswer(this, false, 'which', 'WHICH dùng cho vật hoặc sự việc.')">A. which</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'whose', 'WHOSE diễn tả sở hữu.')">B. whose</button>
+          <button class="option-btn" onclick="checkAnswer(this, true, 'who', 'WHO thay thế cho tour guide và làm chủ ngữ của speaks.')">C. who</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'where', 'WHERE dùng cho nơi chốn.')">D. where</button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 34</div>
+        <div class="question-text">
+          If you visit the town ______ my grandparents live, you will see many traditional houses.
+        </div>
+
+        <div class="options">
+          <button class="option-btn" onclick="checkAnswer(this, false, 'who', 'WHO dùng cho người.')">A. who</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'which', 'WHICH không phải lựa chọn phù hợp trong cấu trúc này.')">B. which</button>
+          <button class="option-btn" onclick="checkAnswer(this, true, 'where', 'WHERE thay thế cho cụm chỉ địa điểm: in the town where my grandparents live.')">C. where</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'whose', 'WHOSE diễn tả sở hữu.')">D. whose</button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 35</div>
+        <div class="question-text">
+          If you travel during the season ______ the weather is mild, you will enjoy your trip more.
+        </div>
+
+        <div class="options">
+          <button class="option-btn" onclick="checkAnswer(this, true, 'when', 'WHEN dùng để chỉ thời gian. The season là một khoảng thời gian.')">A. when</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'where', 'WHERE dùng cho nơi chốn.')">B. where</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'who', 'WHO dùng cho người.')">C. who</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'whose', 'WHOSE diễn tả sự sở hữu.')">D. whose</button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+    </section>
+
+
+    <!-- PAGE 5 -->
+
+    <section class="lesson-page">
+
+      <div class="part-title">
+        <h2>PART 4. FIND AND CORRECT THE MISTAKE</h2>
+        <p>Bài 5. Tìm lỗi sai và sửa lại</p>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 41</div>
+        <div class="question-text">
+          If you will visit Ha Long Bay, you will enjoy the beautiful scenery.
+        </div>
+
+        <input class="text-answer" placeholder="Rewrite the correct sentence..." />
+
+        <button class="check-btn"
+          onclick="checkText(this,
+          ['if you visit ha long bay, you will enjoy the beautiful scenery'],
+          'Sau IF của Conditional Type 1 dùng Present Simple, không dùng will. Câu đúng: If you visit Ha Long Bay, you will enjoy the beautiful scenery.')">
+          Check Answer
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 42</div>
+        <div class="question-text">
+          The tour guide which showed us around the city was very helpful.
+        </div>
+
+        <input class="text-answer" placeholder="Rewrite the correct sentence..." />
+
+        <button class="check-btn"
+          onclick="checkText(this,
+          ['the tour guide who showed us around the city was very helpful'],
+          'Tour guide là người nên dùng WHO, không dùng WHICH.')">
+          Check Answer
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 43</div>
+        <div class="question-text">
+          This is the hotel who we stayed in last summer.
+        </div>
+
+        <input class="text-answer" placeholder="Rewrite the correct sentence..." />
+
+        <button class="check-btn"
+          onclick="checkText(this,
+          ['this is the hotel which we stayed in last summer', 'this is the hotel that we stayed in last summer', 'this is the hotel we stayed in last summer'],
+          'Hotel là vật/nơi chốn nên có thể dùng WHICH hoặc THAT. Vì đại từ quan hệ làm tân ngữ, có thể lược bỏ: This is the hotel we stayed in last summer.')">
+          Check Answer
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 44</div>
+        <div class="question-text">
+          If tourists respects local customs, they will have a better experience.
+        </div>
+
+        <input class="text-answer" placeholder="Rewrite the correct sentence..." />
+
+        <button class="check-btn"
+          onclick="checkText(this,
+          ['if tourists respect local customs, they will have a better experience'],
+          'Chủ ngữ tourists là số nhiều nên động từ Present Simple là respect, không phải respects.')">
+          Check Answer
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 45</div>
+        <div class="question-text">
+          The city where attracts the most tourists is Paris.
+        </div>
+
+        <input class="text-answer" placeholder="Rewrite the correct sentence..." />
+
+        <button class="check-btn"
+          onclick="checkText(this,
+          ['the city which attracts the most tourists is paris', 'the city that attracts the most tourists is paris'],
+          'Ở đây đại từ quan hệ là chủ ngữ của attracts và city là vật/nơi chốn, nên dùng WHICH hoặc THAT.')">
+          Check Answer
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+    </section>
+
+
+    <!-- PAGE 6 -->
+
+    <section class="lesson-page">
+
+      <div class="part-title">
+        <h2>PART 5. SENTENCE COMBINATION</h2>
+        <p>Bài 6. Nối hai câu sử dụng mệnh đề quan hệ</p>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 49</div>
+        <div class="question-text">
+          I visited a beautiful island. The island is famous for its beaches.
+        </div>
+
+        <input class="text-answer" placeholder="Rewrite using a relative clause..." />
+
+        <button class="check-btn"
+          onclick="checkText(this,
+          ['i visited a beautiful island which is famous for its beaches', 'i visited a beautiful island that is famous for its beaches'],
+          'Island là vật nên dùng WHICH hoặc THAT để nối hai câu.')">
+          Check Answer
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 50</div>
+        <div class="question-text">
+          We met a tour guide. He spoke three languages.
+        </div>
+
+        <input class="text-answer" placeholder="Rewrite using a relative clause..." />
+
+        <button class="check-btn"
+          onclick="checkText(this,
+          ['we met a tour guide who spoke three languages', 'we met a tour guide that spoke three languages'],
+          'Tour guide là người nên dùng WHO hoặc THAT.')">
+          Check Answer
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 51</div>
+        <div class="question-text">
+          This is the hotel. We stayed at this hotel last summer.
+        </div>
+
+        <input class="text-answer" placeholder="Rewrite using a relative clause..." />
+
+        <button class="check-btn"
+          onclick="checkText(this,
+          ['this is the hotel where we stayed last summer', 'this is the hotel which we stayed at last summer', 'this is the hotel that we stayed at last summer', 'this is the hotel we stayed at last summer'],
+          'Có thể dùng WHERE cho địa điểm, hoặc WHICH/THAT + stayed at. Có thể lược bỏ đại từ quan hệ khi nó làm tân ngữ.')">
+          Check Answer
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 52</div>
+        <div class="question-text">
+          I visited a village. My grandparents were born there.
+        </div>
+
+        <input class="text-answer" placeholder="Rewrite using a relative clause..." />
+
+        <button class="check-btn"
+          onclick="checkText(this,
+          ['i visited a village where my grandparents were born', 'i visited a village in which my grandparents were born'],
+          'Village là địa điểm nên có thể dùng WHERE hoặc IN WHICH.')">
+          Check Answer
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 53</div>
+        <div class="question-text">
+          We met a tourist. Her suitcase had been lost.
+        </div>
+
+        <input class="text-answer" placeholder="Rewrite using a relative clause..." />
+
+        <button class="check-btn"
+          onclick="checkText(this,
+          ['we met a tourist whose suitcase had been lost'],
+          'WHOSE dùng để diễn tả sự sở hữu: the tourist whose suitcase...')">
+          Check Answer
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+    </section>
+
+
+    <!-- PAGE 7 -->
+
+    <section class="lesson-page">
+
+      <div class="part-title">
+        <h2>PART 6. REWRITE – CONDITIONAL TYPE 1</h2>
+        <p>Bài 7. Viết lại câu sử dụng câu điều kiện loại 1</p>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 54</div>
+        <div class="question-text">
+          You should book your hotel early. You will get a better price.
+        </div>
+
+        <input class="text-answer" placeholder="Rewrite using If..." />
+
+        <button class="check-btn"
+          onclick="checkText(this,
+          ['if you book your hotel early, you will get a better price'],
+          'Câu điều kiện loại 1: If + Present Simple, will + V.')">
+          Check Answer
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 55</div>
+        <div class="question-text">
+          The weather is good tomorrow. We will go sightseeing.
+        </div>
+
+        <input class="text-answer" placeholder="Rewrite using If..." />
+
+        <button class="check-btn"
+          onclick="checkText(this,
+          ['if the weather is good tomorrow, we will go sightseeing'],
+          'Sau IF dùng Present Simple: is. Mệnh đề chính dùng will go.')">
+          Check Answer
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 56</div>
+        <div class="question-text">
+          You don't respect local customs. You may have problems.
+        </div>
+
+        <input class="text-answer" placeholder="Rewrite using If..." />
+
+        
+       <button class="check-btn"
+  onclick="checkText(this,
+  ['if you don&#39;t respect local customs, you may have problems', 'if you don’t respect local customs, you may have problems'],
+  'Câu điều kiện loại 1 có thể dùng MAY ở mệnh đề chính để diễn tả khả năng.')">
+  Check Answer
+</button>
+
+        <div class="feedback"></div>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 57</div>
+        <div class="question-text">
+          You visit the ancient museum. You will learn about local history.
+        </div>
+
+        <input class="text-answer" placeholder="Rewrite using If..." />
+
+        <button class="check-btn"
+          onclick="checkText(this,
+          ['if you visit the ancient museum, you will learn about local history'],
+          'Sau IF dùng Present Simple: visit. Mệnh đề chính dùng will learn.')">
+          Check Answer
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 58</div>
+        <div class="question-text">
+          We don't leave early. We will miss the tour.
+        </div>
+
+        <input class="text-answer" placeholder="Rewrite using If..." />
+
+        <button class="check-btn"
+  onclick="checkText(this, ['if we don’t leave early, we will miss the tour', 'if we do not leave early, we will miss the tour'], 'Điều kiện phủ định: If we don’t leave early, ...')">
+  Kiểm tra
+</button>
+          Check Answer
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+    </section>
+
+
+    <!-- PAGE 8 -->
+
+    <section class="lesson-page">
+
+      <div class="part-title">
+        <h2>PART 7. MIXED PRACTICE 🔥</h2>
+        <p>Bài 8. Chọn đáp án đúng</p>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 59</div>
+        <div class="question-text">
+          If you visit the ancient town ______ is famous for its traditional architecture, you will learn a lot about local history.
+        </div>
+
+        <div class="options">
+          <button class="option-btn" onclick="checkAnswer(this, false, 'who', 'WHO dùng cho người.')">A. who</button>
+          <button class="option-btn" onclick="checkAnswer(this, true, 'which', 'WHICH thay thế cho the ancient town và làm chủ ngữ của is.')">B. which</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'where', 'WHERE chỉ nơi chốn, nhưng ở đây đại từ quan hệ làm chủ ngữ của is.')">C. where</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'whose', 'WHOSE diễn tả sở hữu.')">D. whose</button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 60</div>
+        <div class="question-text">
+          If we stay at the hotel ______ my parents recommended, we will probably have a great holiday.
+        </div>
+
+        <div class="options">
+          <button class="option-btn" onclick="checkAnswer(this, false, 'who', 'WHO dùng cho người.')">A. who</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'where', 'WHERE không phù hợp vì hotel là tân ngữ của recommended.')">B. where</button>
+          <button class="option-btn" onclick="checkAnswer(this, true, 'which', 'WHICH thay thế cho hotel và làm tân ngữ của recommended. Có thể lược bỏ which: the hotel my parents recommended.')">C. which</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'whose', 'WHOSE diễn tả sự sở hữu.')">D. whose</button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 61</div>
+        <div class="question-text">
+          The tourists ______ arrive early will get the best seats. If they arrive late, they ______ have to stand.
+        </div>
+
+        <div class="options">
+          <button class="option-btn" onclick="checkAnswer(this, false, 'which / will', 'Tourists là người nên dùng WHO, không phải WHICH.')">A. which / will</button>
+          <button class="option-btn" onclick="checkAnswer(this, true, 'who / will', 'WHO dùng cho tourists. Conditional Type 1: If they arrive late, they will have to stand.')">B. who / will</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'where / would', 'WHERE dùng cho nơi chốn và WOULD không phù hợp với Type 1.')">C. where / would</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'whose / would', 'WHOSE diễn tả sở hữu và WOULD không phù hợp với Type 1.')">D. whose / would</button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 62</div>
+        <div class="question-text">
+          If you visit the city ______ my brother lives, you will see many famous landmarks.
+        </div>
+
+        <div class="options">
+          <button class="option-btn" onclick="checkAnswer(this, false, 'who', 'WHO dùng cho người.')">A. who</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'which', 'WHICH không phải lựa chọn tốt nhất vì câu có nghĩa là my brother lives in the city.')">B. which</button>
+          <button class="option-btn" onclick="checkAnswer(this, true, 'where', 'WHERE thay thế cho in the city: the city where my brother lives.')">C. where</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'whose', 'WHOSE diễn tả sự sở hữu.')">D. whose</button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 63</div>
+        <div class="question-text">
+          If you choose a tour guide ______ has plenty of experience, you will probably enjoy your trip more.
+        </div>
+
+        <div class="options">
+          <button class="option-btn" onclick="checkAnswer(this, true, 'who', 'WHO thay thế cho tour guide và làm chủ ngữ của has.')">A. who</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'which', 'WHICH dùng cho vật hoặc sự việc.')">B. which</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'where', 'WHERE dùng cho nơi chốn.')">C. where</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'when', 'WHEN dùng cho thời gian.')">D. when</button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 64</div>
+        <div class="question-text">
+          If you visit the museum ______ we went to yesterday, you will see many ancient paintings.
+        </div>
+
+        <div class="options">
+          <button class="option-btn" onclick="checkAnswer(this, false, 'who', 'WHO dùng cho người.')">A. who</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'where', 'WHERE không phù hợp vì we went to the museum; museum là tân ngữ của went to.')">B. where</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'whose', 'WHOSE diễn tả sự sở hữu.')">C. whose</button>
+          <button class="option-btn" onclick="checkAnswer(this, true, 'which', 'WHICH thay thế cho museum và làm tân ngữ của went to. Có thể nói: the museum we went to yesterday.')">D. which</button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 65</div>
+        <div class="question-text">
+          The hotel ______ has a swimming pool is very popular. If you book it early, you ______ get a room there.
+        </div>
+
+        <div class="options">
+          <button class="option-btn" onclick="checkAnswer(this, false, 'who / will', 'Hotel là vật nên dùng WHICH, không dùng WHO.')">A. who / will</button>
+          <button class="option-btn" onclick="checkAnswer(this, true, 'which / will', 'WHICH dùng cho hotel. Conditional Type 1: If you book it early, you will get a room.')">B. which / will</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'where / would', 'WHERE và WOULD đều không phù hợp trong cấu trúc này.')">C. where / would</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'whose / would', 'WHOSE và WOULD đều không phù hợp trong cấu trúc này.')">D. whose / would</button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 66</div>
+        <div class="question-text">
+          If tourists visit places ______ are less crowded, they will have a more relaxing holiday.
+        </div>
+
+        <div class="options">
+          <button class="option-btn" onclick="checkAnswer(this, false, 'who', 'WHO dùng cho người.')">A. who</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'where', 'WHERE dùng cho nơi chốn, nhưng ở đây đại từ quan hệ là chủ ngữ của are.')">B. where</button>
+          <button class="option-btn" onclick="checkAnswer(this, true, 'which', 'WHICH thay thế cho places và làm chủ ngữ của are.')">C. which</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'whose', 'WHOSE diễn tả sở hữu.')">D. whose</button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 67</div>
+        <div class="question-text">
+          The local guide ______ we met yesterday recommended a restaurant. If we have time, we ______ try it tonight.
+        </div>
+
+        <div class="options">
+          <button class="option-btn" onclick="checkAnswer(this, true, 'who / will', 'WHO thay thế cho người. Câu điều kiện loại 1: If we have time, we will try it.')">A. who / will</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'which / would', 'WHO dùng cho người, không dùng WHICH. WOULD cũng không phù hợp với Type 1.')">B. which / would</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'where / will', 'WHERE dùng cho nơi chốn, không dùng cho local guide.')">C. where / will</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'whose / would', 'WHOSE diễn tả sở hữu và WOULD không phù hợp.')">D. whose / would</button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+
+      <div class="question-card">
+        <div class="question-number">Question 68</div>
+        <div class="question-text">
+          If you travel to a country ______ culture is very different from yours, you should learn about its customs first.
+        </div>
+
+        <div class="options">
+          <button class="option-btn" onclick="checkAnswer(this, false, 'who', 'WHO dùng cho người.')">A. who</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'which', 'WHICH không diễn tả quan hệ sở hữu giữa country và culture.')">B. which</button>
+          <button class="option-btn" onclick="checkAnswer(this, false, 'where', 'WHERE dùng cho nơi chốn, không diễn tả sở hữu.')">C. where</button>
+          <button class="option-btn" onclick="checkAnswer(this, true, 'whose', 'WHOSE diễn tả sự sở hữu: a country whose culture is very different.')">D. whose</button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- NAVIGATION -->
+
+  <div class="navigation">
+
+    <button
+      class="nav-btn"
+      id="prevBtn"
+      onclick="changePage(-1)">
+      ← Previous
+    </button>
+
+    <div class="page-counter">
+      <span id="currentPage">1</span>
+      /
+      <span id="totalPages">8</span>
+    </div>
+
+    <button
+      class="nav-btn"
+      id="nextBtn"
+      onclick="changePage(1)">
+      Next →
+    </button>
+
+  </div>
+
+
+  <script>
+
+    // =========================
+    // ANSWER CHECKING
+    // =========================
+
+    function checkAnswer(button, isCorrect, answer, explanation) {
+
+      const card = button.closest(".question-card");
+      const buttons = card.querySelectorAll(".option-btn");
+      const feedback = card.querySelector(".feedback");
+
+      // Prevent changing answer after selection
+      buttons.forEach(btn => {
+        btn.disabled = true;
+      });
+
+      if (isCorrect) {
+
+        button.classList.add("correct");
+
+        feedback.className = "feedback show correct-feedback";
+
+        feedback.innerHTML = `
+          <strong>✅ Correct!</strong>
+          Answer: <b>${answer}</b><br>
+          ${explanation}
+        `;
+
+      } else {
+
+        button.classList.add("wrong");
+
+        feedback.className = "feedback show wrong-feedback";
+
+        feedback.innerHTML = `
+          <strong>❌ Incorrect!</strong>
+          Your answer: <b>${answer}</b><br>
+          ${explanation}
+        `;
+
+        // Find correct answer if available
+        buttons.forEach(btn => {
+
+          if (
+            btn.getAttribute("onclick") &&
+            btn.getAttribute("onclick").includes("true")
+          ) {
+            btn.classList.add("correct");
+          }
+
+        });
+
+      }
+
+    }
+
+
+    // =========================
+    // TEXT ANSWER CHECKING
+    // =========================
+
+    function checkText(button, correctAnswers, explanation) {
+
+      const card = button.closest(".question-card");
+
+      const input = card.querySelector(".text-answer");
+
+      const feedback = card.querySelector(".feedback");
+
+      const userAnswer = input.value
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, " ");
+
+      const isCorrect = correctAnswers.some(answer =>
+        userAnswer === answer.toLowerCase()
+      );
+
+      input.disabled = true;
+      button.disabled = true;
+
+      if (isCorrect) {
+
+        feedback.className = "feedback show correct-feedback";
+
+        feedback.innerHTML = `
+          <strong>✅ Correct!</strong>
+          ${explanation}
+        `;
+
+      } else {
+
+        feedback.className = "feedback show wrong-feedback";
+
+        feedback.innerHTML = `
+          <strong>❌ Incorrect!</strong>
+          <b>Suggested answer:</b><br>
+          ${correctAnswers[0]}<br><br>
+          ${explanation}
+        `;
+
+      }
+
+    }
+
+
+    
+
+    const pages = document.querySelectorAll(".lesson-page");
+
+    let currentPage = 0;
+
+    const totalPages = pages.length;
+
+    const currentPageText =
+      document.getElementById("currentPage");
+
+    const totalPagesText =
+      document.getElementById("totalPages");
+
+    const progressBar =
+      document.getElementById("progressBar");
+
+    const prevBtn =
+      document.getElementById("prevBtn");
+
+    const nextBtn =
+      document.getElementById("nextBtn");
+
+
+    totalPagesText.textContent = totalPages;
+
+
+    function showPage(index) {
+
+      pages.forEach((page, i) => {
+
+        page.classList.toggle(
+          "active",
+          i === index
+        );
+
+      });
+
+      currentPageText.textContent =
+        index + 1;
+
+
+      const progress =
+        ((index + 1) / totalPages) * 100;
+
+      progressBar.style.width =
+        progress + "%";
+
+
+      prevBtn.disabled =
+        index === 0;
+
+
+      if (index === totalPages - 1) {
+
+        nextBtn.style.display =
+          "none";
+
+      } else {
+
+        nextBtn.style.display =
+          "block";
+
+      }
+
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
+
+
+    function changePage(direction) {
+
+      const newPage =
+        currentPage + direction;
+
+
+      if (
+        newPage >= 0 &&
+        newPage < totalPages
+      ) {
+
+        currentPage =
+          newPage;
+
+        showPage(currentPage);
+
+      }
+
+    }
+
+
+    // =========================
+    // KEYBOARD NAVIGATION
+    // =========================
+
+    document.addEventListener(
+      "keydown",
+      function(event) {
+
+        if (
+          event.key === "ArrowRight"
+        ) {
+
+          changePage(1);
+
+        }
+
+
+        if (
+          event.key === "ArrowLeft"
+        ) {
+
+          changePage(-1);
+
+        }
+
+      }
+    );
+
+
+    // =========================
+    // INITIALIZE
+    // =========================
+
+    showPage(currentPage);
+
+  </script>
+
+</body>
+</html>

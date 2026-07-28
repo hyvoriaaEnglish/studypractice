@@ -1,0 +1,1821 @@
+<!doctype html>
+
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Our Experiences - Quiz 6</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Nunito", sans-serif;
+        background: #f5f7ff;
+        color: #27324a;
+        min-height: 100vh;
+      }
+
+      /* =========================
+       HEADER
+    ========================= */
+
+      header {
+        background: white;
+        min-height: 75px;
+        padding: 15px 6%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .logo {
+        font-family: "Baloo 2", cursive;
+        font-size: 27px;
+        font-weight: 800;
+        color: #5b5ce2;
+      }
+
+      .lesson-label {
+        font-weight: 700;
+        color: #697386;
+      }
+
+      /* =========================
+       TOP NAV
+    ========================= */
+
+      .top-nav {
+        background: #6259e8;
+        padding: 12px 6%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+        color: white;
+      }
+
+      .top-nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: 800;
+        background: rgba(255, 255, 255, 0.15);
+        padding: 9px 16px;
+        border-radius: 10px;
+        transition: 0.2s;
+      }
+
+      .top-nav a:hover {
+        background: rgba(255, 255, 255, 0.25);
+      }
+
+      /* =========================
+       PROGRESS
+    ========================= */
+
+      .progress-container {
+        width: 100%;
+        height: 7px;
+        background: #e4e6f5;
+      }
+
+      .progress-bar {
+        width: 0%;
+        height: 100%;
+        background: linear-gradient(90deg, #6259e8, #8b7cff);
+        transition: width 0.4s ease;
+      }
+
+      /* =========================
+       MAIN
+    ========================= */
+
+      main {
+        max-width: 1050px;
+        margin: 40px auto;
+        padding: 0 20px 100px;
+      }
+
+      .quiz-header {
+        background: linear-gradient(135deg, #6259e8, #8278f7);
+        color: white;
+        border-radius: 28px;
+        padding: 45px 30px;
+        text-align: center;
+        margin-bottom: 30px;
+        box-shadow: 0 15px 40px rgba(91, 92, 226, 0.25);
+      }
+
+      .quiz-header .emoji {
+        font-size: 55px;
+      }
+
+      .quiz-header h1 {
+        font-family: "Baloo 2", cursive;
+        font-size: 43px;
+        margin: 5px 0;
+      }
+
+      .quiz-header p {
+        font-size: 18px;
+      }
+
+      /* =========================
+       SCORE
+    ========================= */
+
+      .score-box {
+        background: white;
+        border-radius: 18px;
+        padding: 20px 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+        box-shadow: 0 6px 20px rgba(30, 40, 80, 0.07);
+      }
+
+      .score {
+        font-size: 20px;
+        font-weight: 800;
+        color: #514bd8;
+      }
+
+      .answered {
+        color: #697386;
+        font-weight: 700;
+      }
+
+      /* =========================
+       SECTION
+    ========================= */
+
+      .section {
+        margin-top: 45px;
+      }
+
+      .section-title {
+        background: #6259e8;
+        color: white;
+        border-radius: 18px;
+        padding: 18px 25px;
+        margin-bottom: 20px;
+      }
+
+      .section-title h2 {
+        font-family: "Baloo 2", cursive;
+        font-size: 28px;
+      }
+
+      .section-title p {
+        margin-top: 3px;
+      }
+
+      /* =========================
+       QUESTION CARD
+    ========================= */
+
+      .question-card {
+        background: white;
+        border-radius: 20px;
+        padding: 25px;
+        margin-bottom: 20px;
+        box-shadow: 0 6px 25px rgba(30, 40, 80, 0.07);
+        border: 2px solid transparent;
+      }
+
+      .question-card.correct-card {
+        border-color: #4ac985;
+      }
+
+      .question-card.wrong-card {
+        border-color: #ef6a6a;
+      }
+
+      .question-number {
+        color: #6259e8;
+        font-weight: 800;
+        font-size: 17px;
+        margin-bottom: 10px;
+      }
+
+      .question-text {
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 1.7;
+        margin-bottom: 18px;
+      }
+
+      /* =========================
+       OPTIONS
+    ========================= */
+
+      .options {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .option {
+        border: 2px solid #e1e4f0;
+        background: #fafaff;
+        border-radius: 12px;
+        padding: 13px 16px;
+        text-align: left;
+        font-family: "Nunito", sans-serif;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+
+      .option:hover {
+        border-color: #6259e8;
+        background: #f0efff;
+      }
+
+      .option.correct {
+        background: #e9fff3;
+        border-color: #4ac985;
+        color: #168653;
+      }
+
+      .option.wrong {
+        background: #fff0f0;
+        border-color: #ef6a6a;
+        color: #c43d3d;
+      }
+
+      .option.disabled {
+        cursor: default;
+      }
+
+      /* =========================
+       FEEDBACK
+    ========================= */
+
+      .feedback {
+        display: none;
+        margin-top: 18px;
+        padding: 18px;
+        border-radius: 14px;
+        line-height: 1.7;
+      }
+
+      .feedback.show {
+        display: block;
+      }
+
+      .feedback.correct-feedback {
+        background: #eafff3;
+        border-left: 5px solid #4ac985;
+      }
+
+      .feedback.wrong-feedback {
+        background: #fff0f0;
+        border-left: 5px solid #ef6a6a;
+      }
+
+      .feedback-title {
+        font-weight: 800;
+        font-size: 18px;
+        margin-bottom: 6px;
+      }
+
+      /* =========================
+       INPUT QUESTIONS
+    ========================= */
+
+      .answer-input {
+        width: 100%;
+        padding: 14px 16px;
+        border: 2px solid #dfe2ee;
+        border-radius: 12px;
+        font-family: "Nunito", sans-serif;
+        font-size: 16px;
+        outline: none;
+        margin-bottom: 12px;
+      }
+
+      .answer-input:focus {
+        border-color: #6259e8;
+      }
+
+      .check-btn {
+        background: #6259e8;
+        color: white;
+        border: none;
+        padding: 12px 22px;
+        border-radius: 10px;
+        font-family: "Nunito", sans-serif;
+        font-weight: 800;
+        cursor: pointer;
+      }
+
+      .check-btn:hover {
+        transform: translateY(-2px);
+      }
+
+      /* =========================
+       WRITING
+    ========================= */
+
+      .writing-box {
+        background: white;
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 6px 25px rgba(30, 40, 80, 0.07);
+      }
+
+      .writing-box textarea {
+        width: 100%;
+        min-height: 220px;
+        padding: 18px;
+        border: 2px solid #dfe2ee;
+        border-radius: 14px;
+        resize: vertical;
+        font-family: "Nunito", sans-serif;
+        font-size: 16px;
+        line-height: 1.7;
+        margin-top: 15px;
+        outline: none;
+      }
+
+      .writing-box textarea:focus {
+        border-color: #6259e8;
+      }
+
+      .sample-answer {
+        display: none;
+        margin-top: 20px;
+        padding: 20px;
+        background: #f0efff;
+        border-left: 5px solid #6259e8;
+        border-radius: 12px;
+        line-height: 1.8;
+      }
+
+      /* =========================
+       FINAL
+    ========================= */
+
+      .final-box {
+        margin-top: 50px;
+        background: white;
+        padding: 50px 30px;
+        border-radius: 25px;
+        text-align: center;
+        box-shadow: 0 8px 30px rgba(30, 40, 80, 0.08);
+      }
+
+      .final-box .big-emoji {
+        font-size: 65px;
+      }
+
+      .final-box h2 {
+        font-family: "Baloo 2", cursive;
+        font-size: 40px;
+        color: #514bd8;
+      }
+
+      .final-buttons {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 25px;
+      }
+
+      .final-button {
+        display: inline-block;
+        text-decoration: none;
+        padding: 14px 25px;
+        border-radius: 12px;
+        font-weight: 800;
+        background: #6259e8;
+        color: white;
+      }
+
+      .final-button.home {
+        background: #edf0f7;
+        color: #414b70;
+      }
+
+      /* =========================
+       RESPONSIVE
+    ========================= */
+
+      @media (max-width: 700px) {
+        header {
+          padding: 12px 20px;
+        }
+
+        .lesson-label {
+          display: none;
+        }
+
+        .top-nav {
+          padding: 12px 20px;
+        }
+
+        .options {
+          grid-template-columns: 1fr;
+        }
+
+        .quiz-header h1 {
+          font-size: 35px;
+        }
+
+        .score-box {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 8px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="logo">Hyvoria English</div>
+      <div class="lesson-label">Quiz 6 • Our Experiences</div>
+    </header>
+
+    <div class="top-nav">
+      <a href="course6.html">← Bài giảng</a>
+      <a href="course6.html">🏠 Trang chủ</a>
+    </div>
+
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <main>
+      <div class="quiz-header">
+        <div class="emoji">🌟</div>
+        <h1>OUR EXPERIENCES – PRACTICE</h1>
+        <p>Verbs + To-Infinitive / V-ing</p>
+      </div>
+
+      <div class="score-box">
+        <div class="score">⭐ Score: <span id="score">0</span></div>
+
+        ```
+        <div class="answered">Answered: <span id="answered">0</span> / 84</div>
+        ```
+      </div>
+
+      <!-- =====================================================
+       PART 1
+  ====================================================== -->
+
+      <section class="section">
+        ```
+        <div class="section-title">
+          <h2>PART 1. VERB + TO-INFINITIVE</h2>
+          <p>Bài 1. Chọn đáp án đúng</p>
+        </div>
+
+        <div id="part1"></div>
+        ```
+      </section>
+
+      <!-- =====================================================
+       PART 2
+  ====================================================== -->
+
+      <section class="section">
+        ```
+        <div class="section-title">
+          <h2>PART 2. VERB + V-ING</h2>
+          <p>Bài 2. Chọn đáp án đúng</p>
+        </div>
+
+        <div id="part2"></div>
+        ```
+      </section>
+
+      <!-- =====================================================
+       PART 3
+  ====================================================== -->
+
+      <section class="section">
+        ```
+        <div class="section-title">
+          <h2>PART 3. VERB + TO-V / V-ING</h2>
+          <p>Bài 3. Chọn đáp án đúng</p>
+        </div>
+
+        <div id="part3"></div>
+        ```
+      </section>
+
+      <!-- =====================================================
+       PART 4
+  ====================================================== -->
+
+      <section class="section">
+        ```
+        <div class="section-title">
+          <h2>PART 4. VERBS WITH DIFFERENT MEANINGS</h2>
+          <p>Remember, Forget, Stop, Try, Regret</p>
+        </div>
+
+        <div id="part4"></div>
+        ```
+      </section>
+
+      <!-- =====================================================
+       PART 5
+  ====================================================== -->
+
+      <section class="section">
+        ```
+        <div class="section-title">
+          <h2>PART 5. VERB + OBJECT + TO-INFINITIVE</h2>
+          <p>Bài 5. Chọn đáp án đúng</p>
+        </div>
+
+        <div id="part5"></div>
+        ```
+      </section>
+
+      <!-- =====================================================
+       PART 6
+  ====================================================== -->
+
+      <section class="section">
+        ```
+        <div class="section-title">
+          <h2>PART 6. FIND AND CORRECT THE MISTAKE</h2>
+          <p>Tìm lỗi sai và sửa lại</p>
+        </div>
+
+        <div id="part6"></div>
+        ```
+      </section>
+
+      <!-- =====================================================
+       PART 7
+  ====================================================== -->
+
+      <section class="section">
+        ```
+        <div class="section-title">
+          <h2>PART 7. COMPLETE THE SENTENCES</h2>
+          <p>Chia dạng đúng của động từ</p>
+        </div>
+
+        <div id="part7"></div>
+        ```
+      </section>
+
+      <!-- =====================================================
+       PART 8
+  ====================================================== -->
+
+      <section class="section">
+        ```
+        <div class="section-title">
+          <h2>PART 8. CONTEXT PRACTICE</h2>
+          <p>Đọc đoạn văn và chia dạng đúng của động từ</p>
+        </div>
+
+        <div class="question-card">
+          <p class="question-text">
+            Last summer, I
+            <strong>(66) ________ (decide)</strong>
+            to join a volunteer trip to a small village. Before
+            <strong>(67) ________ (leave)</strong>
+            home, my parents reminded me
+            <strong>(68) ________ (bring)</strong>
+            enough clothes and medicine. During the trip, I really enjoyed
+            <strong>(69) ________ (meet)</strong>
+            local people and
+            <strong>(70) ________ (learn)</strong>
+            about their culture. My friends suggested
+            <strong>(71) ________ (visit)</strong>
+            an ancient temple nearby, so we decided
+            <strong>(72) ________ (explore)</strong>
+            it together. I remember
+            <strong>(73) ________ (see)</strong>
+            many beautiful traditional houses there. On the way back, we stopped
+            <strong>(74) ________ (take)</strong>
+            some photos. We also tried
+            <strong>(75) ________ (ask)</strong>
+            a local person about the history of the village. It was an
+            unforgettable experience, and I hope
+            <strong>(76) ________ (return)</strong>
+            there one day.
+          </p>
+
+          <div id="part8"></div>
+        </div>
+        ```
+      </section>
+
+      <!-- =====================================================
+       PART 9
+  ====================================================== -->
+
+      <section class="section">
+        ```
+        <div class="section-title">
+          <h2>PART 9. SENTENCE TRANSFORMATION</h2>
+          <p>Viết lại câu sử dụng từ gợi ý</p>
+        </div>
+
+        <div id="part9"></div>
+        ```
+      </section>
+
+      <!-- =====================================================
+       PART 10
+  ====================================================== -->
+
+      <section class="section">
+        ```
+        <div class="section-title">
+          <h2>PART 10. WRITING CHALLENGE ✍️</h2>
+          <p>An Unforgettable Experience</p>
+        </div>
+
+        <div class="writing-box">
+          <h3>Write 100–120 words.</h3>
+
+          <p>Viết về một trải nghiệm đáng nhớ của em. Hãy sử dụng ít nhất:</p>
+
+          <ul style="line-height: 2; margin: 15px 0 15px 25px">
+            <li>2 động từ + to-infinitive</li>
+            <li>2 động từ + V-ing</li>
+            <li>1 cấu trúc remember + V-ing / remember + to-V</li>
+            <li>1 cấu trúc stop + to-V / stop + V-ing</li>
+            <li>1 cấu trúc try + to-V / try + V-ing</li>
+            <li>Mô tả rõ khi nào, ở đâu và chuyện gì đã xảy ra</li>
+          </ul>
+
+          <textarea
+            id="writingAnswer"
+            placeholder="One of the most unforgettable experiences I have ever had was..."
+          ></textarea>
+
+          <br /><br />
+
+          <button class="check-btn" onclick="showSample()">
+            💡 Xem bài tham khảo
+          </button>
+
+          <div class="sample-answer" id="sampleAnswer">
+            <strong>Sample Answer:</strong>
+
+            <br /><br />
+
+            One of the most unforgettable experiences I have ever had was a
+            volunteer trip to a small village last summer. I decided to join the
+            trip because I wanted to help local people. Before leaving home, I
+            remembered to bring some books and clothes for the children. During
+            the trip, I enjoyed meeting the villagers and learning about their
+            culture. We stopped to take photos of the beautiful scenery and
+            tried asking local people about their traditions. Although the
+            journey was tiring, I managed to complete the trip successfully. I
+            will never forget visiting that wonderful village.
+          </div>
+        </div>
+        ```
+      </section>
+
+      <!-- =====================================================
+       FINAL
+  ====================================================== -->
+
+      <div class="final-box">
+        ```
+        <div class="big-emoji">🎉</div>
+
+        <h2>Great Job!</h2>
+
+        <p style="margin-top: 10px">
+          You have completed the
+          <strong>Our Experiences</strong>
+          grammar practice.
+        </p>
+
+        <div class="final-buttons">
+          <a href="course6.html" class="final-button"> ← Xem lại bài giảng </a>
+
+          <a href="course6.html" class="final-button home">
+            🏠 Quay về trang chủ
+          </a>
+        </div>
+        ```
+      </div>
+    </main>
+
+    <script>
+      /* ==========================================================
+   SCORE SYSTEM
+========================================================== */
+
+      let score = 0;
+
+      let answeredQuestions = new Set();
+
+      const totalQuestions = 84;
+
+      function updateScore(questionNumber, isCorrect) {
+        if (answeredQuestions.has(questionNumber)) {
+          return;
+        }
+
+        answeredQuestions.add(questionNumber);
+
+        if (isCorrect) {
+          score++;
+        }
+
+        document.getElementById("score").textContent = score;
+
+        document.getElementById("answered").textContent =
+          answeredQuestions.size;
+
+        const progress = (answeredQuestions.size / totalQuestions) * 100;
+
+        document.getElementById("progressBar").style.width = progress + "%";
+      }
+
+      /* ==========================================================
+   MULTIPLE CHOICE QUESTIONS
+========================================================== */
+
+      const multipleChoiceQuestions = {
+        part1: [
+          {
+            n: 1,
+            q: "Last summer, I decided ______ a volunteer trip with my classmates.",
+            options: ["joining", "to join", "join", "joined"],
+            answer: 1,
+            explanation: "Decide + to-V. Vì vậy: decided to join.",
+          },
+
+          {
+            n: 2,
+            q: "My friends hope ______ abroad one day.",
+            options: ["travelling", "travel", "to travel", "travelled"],
+            answer: 2,
+            explanation: "Hope + to-V → hope to travel.",
+          },
+
+          {
+            n: 3,
+            q: "We planned ______ the ancient village before sunset.",
+            options: ["visiting", "to visit", "visit", "visited"],
+            answer: 1,
+            explanation: "Plan + to-V → planned to visit.",
+          },
+
+          {
+            n: 4,
+            q: "She promised ______ me the photos from our trip.",
+            options: ["sending", "send", "to send", "sent"],
+            answer: 2,
+            explanation: "Promise + to-V → promised to send.",
+          },
+
+          {
+            n: 5,
+            q: "The students agreed ______ the local community.",
+            options: ["helping", "to help", "help", "helped"],
+            answer: 1,
+            explanation: "Agree + to-V → agreed to help.",
+          },
+
+          {
+            n: 6,
+            q: "I want ______ more about different cultures.",
+            options: ["learning", "learn", "to learn", "learned"],
+            answer: 2,
+            explanation: "Want + to-V → want to learn.",
+          },
+
+          {
+            n: 7,
+            q: "Despite the difficult journey, we managed ______ the top of the mountain.",
+            options: ["reaching", "reach", "to reach", "reached"],
+            answer: 2,
+            explanation: "Manage + to-V → managed to reach.",
+          },
+
+          {
+            n: 8,
+            q: "My parents encouraged me ______ more places while I was young.",
+            options: ["explore", "exploring", "to explore", "explored"],
+            answer: 2,
+            explanation:
+              "Encourage + object + to-V → encouraged me to explore.",
+          },
+
+          {
+            n: 9,
+            q: "The tour guide reminded us ______ our passports.",
+            options: ["bringing", "to bring", "bring", "brought"],
+            answer: 1,
+            explanation: "Remind + object + to-V → reminded us to bring.",
+          },
+
+          {
+            n: 10,
+            q: "The hotel offered ______ us a free room upgrade.",
+            options: ["giving", "give", "to give", "gave"],
+            answer: 2,
+            explanation: "Offer + to-V → offered to give.",
+          },
+        ],
+
+        part2: [
+          {
+            n: 11,
+            q: "I really enjoyed ______ new people during my trip.",
+            options: ["meet", "to meet", "meeting", "met"],
+            answer: 2,
+            explanation: "Enjoy + V-ing → enjoyed meeting.",
+          },
+
+          {
+            n: 12,
+            q: "We finished ______ the museum at around five o'clock.",
+            options: ["visiting", "to visit", "visit", "visited"],
+            answer: 0,
+            explanation: "Finish + V-ing → finished visiting.",
+          },
+
+          {
+            n: 13,
+            q: "My friend suggested ______ the local market.",
+            options: ["explore", "exploring", "to explore", "explored"],
+            answer: 1,
+            explanation: "Suggest + V-ing → suggested exploring.",
+          },
+
+          {
+            n: 14,
+            q: "Tourists should avoid ______ too much plastic when travelling.",
+            options: ["use", "to use", "using", "used"],
+            answer: 2,
+            explanation: "Avoid + V-ing → avoid using.",
+          },
+
+          {
+            n: 15,
+            q: "We spent three hours ______ around the old town.",
+            options: ["walk", "to walk", "walking", "walked"],
+            answer: 2,
+            explanation: "Spend time + V-ing → spent three hours walking.",
+          },
+
+          {
+            n: 16,
+            q: "She is interested in ______ about the history of the city.",
+            options: ["learn", "learning", "to learn", "learned"],
+            answer: 1,
+            explanation: "Preposition in + V-ing → interested in learning.",
+          },
+
+          {
+            n: 17,
+            q: "I look forward to ______ my grandparents again.",
+            options: ["visit", "visiting", "to visit", "visited"],
+            answer: 1,
+            explanation: "Look forward to + V-ing. Here, to is a preposition.",
+          },
+
+          {
+            n: 18,
+            q: "Before ______ the hotel, I checked that I had my passport.",
+            options: ["leave", "to leave", "leaving", "left"],
+            answer: 2,
+            explanation: "Before + V-ing → before leaving.",
+          },
+
+          {
+            n: 19,
+            q: "We travelled without ______ a hotel in advance.",
+            options: ["book", "to book", "booking", "booked"],
+            answer: 2,
+            explanation: "Without + V-ing → without booking.",
+          },
+
+          {
+            n: 20,
+            q: "After ______ the ancient castle, we went to a local restaurant.",
+            options: ["explore", "to explore", "exploring", "explored"],
+            answer: 2,
+            explanation: "After + V-ing → after exploring.",
+          },
+        ],
+
+        part3: [
+          {
+            n: 21,
+            q: "I love ______ to new places with my family.",
+            options: [
+              "travelling",
+              "to travel",
+              "A and B are both possible",
+              "travelled",
+            ],
+            answer: 2,
+            explanation: "Love có thể đi với cả V-ing và to-V.",
+          },
+
+          {
+            n: 22,
+            q: "She prefers ______ by train because it is more comfortable.",
+            options: [
+              "travelling",
+              "to travel",
+              "A and B are both possible",
+              "travelled",
+            ],
+            answer: 2,
+            explanation: "Prefer có thể đi với cả V-ing và to-V.",
+          },
+
+          {
+            n: 23,
+            q: "My brother hates ______ in crowded airports.",
+            options: [
+              "waiting",
+              "to wait",
+              "A and B are both possible",
+              "waited",
+            ],
+            answer: 2,
+            explanation: "Hate có thể đi với cả V-ing và to-V.",
+          },
+
+          {
+            n: 24,
+            q: "I like ______ my trips carefully before I leave.",
+            options: [
+              "planning",
+              "to plan",
+              "A and B are both possible",
+              "planned",
+            ],
+            answer: 2,
+            explanation: "Like có thể đi với cả V-ing và to-V.",
+          },
+
+          {
+            n: 25,
+            q: "They prefer ______ local food when they travel.",
+            options: ["trying", "to try", "A and B are both possible", "tried"],
+            answer: 2,
+            explanation: "Prefer có thể đi với cả V-ing và to-V.",
+          },
+        ],
+
+        part4: [
+          {
+            n: 26,
+            q: "I remember ______ this museum when I was a child.",
+            options: ["to visit", "visiting", "visit", "visited"],
+            answer: 1,
+            explanation: "Remember + V-ing = nhớ đã từng làm gì trong quá khứ.",
+          },
+
+          {
+            n: 27,
+            q: "Please remember ______ your passport before leaving home.",
+            options: ["bringing", "to bring", "bring", "brought"],
+            answer: 1,
+            explanation: "Remember + to-V = nhớ phải làm việc gì.",
+          },
+
+          {
+            n: 28,
+            q: "She remembered ______ the hotel before she left the airport.",
+            options: ["booking", "to book", "book", "booked"],
+            answer: 1,
+            explanation:
+              "Remembered to book = nhớ thực hiện việc đặt khách sạn.",
+          },
+
+          {
+            n: 29,
+            q: "I clearly remember ______ my first trip abroad.",
+            options: ["to take", "taking", "take", "took"],
+            answer: 1,
+            explanation: "Remember + V-ing = nhớ về một trải nghiệm đã xảy ra.",
+          },
+
+          {
+            n: 30,
+            q: "I forgot ______ my camera, so I couldn't take any photos.",
+            options: ["bringing", "to bring", "bring", "brought"],
+            answer: 1,
+            explanation: "Forget + to-V = quên làm việc cần làm.",
+          },
+
+          {
+            n: 31,
+            q: "I'll never forget ______ the Eiffel Tower for the first time.",
+            options: ["to see", "seeing", "see", "saw"],
+            answer: 1,
+            explanation:
+              "Forget + V-ing = không quên một trải nghiệm đã xảy ra.",
+          },
+
+          {
+            n: 32,
+            q: "We stopped ______ some photos of the beautiful landscape.",
+            options: ["taking", "to take", "take", "took"],
+            answer: 1,
+            explanation:
+              "Stop + to-V = dừng việc đang làm để làm một việc khác.",
+          },
+
+          {
+            n: 33,
+            q: "It started raining, so we stopped ______ photos.",
+            options: ["taking", "to take", "take", "took"],
+            answer: 0,
+            explanation: "Stop + V-ing = ngừng một hoạt động đang làm.",
+          },
+
+          {
+            n: 34,
+            q: "We tried ______ a local person for directions.",
+            options: ["asking", "to ask", "ask", "asked"],
+            answer: 0,
+            explanation: "Try + V-ing = thử làm gì để xem có hiệu quả không.",
+          },
+
+          {
+            n: 35,
+            q: "We tried ______ the lost tourist find his hotel.",
+            options: ["helping", "to help", "help", "helped"],
+            answer: 1,
+            explanation: "Try + to-V = cố gắng làm gì.",
+          },
+
+          {
+            n: 36,
+            q: "I regret ______ such an expensive hotel.",
+            options: ["booking", "to book", "book", "booked"],
+            answer: 0,
+            explanation: "Regret + V-ing = hối tiếc vì đã làm gì.",
+          },
+
+          {
+            n: 37,
+            q: "We regret ______ you that the flight has been cancelled.",
+            options: ["informing", "to inform", "inform", "informed"],
+            answer: 1,
+            explanation: "Regret + to-V = tiếc khi phải thông báo điều gì.",
+          },
+        ],
+
+        part5: [
+          {
+            n: 38,
+            q: "My parents encouraged me ______ more countries.",
+            options: ["visiting", "visit", "to visit", "visited"],
+            answer: 2,
+            explanation: "Encourage + object + to-V → encouraged me to visit.",
+          },
+
+          {
+            n: 39,
+            q: "The tour guide advised us ______ comfortable shoes.",
+            options: ["wearing", "to wear", "wear", "wore"],
+            answer: 1,
+            explanation: "Advise + object + to-V → advised us to wear.",
+          },
+
+          {
+            n: 40,
+            q: "My friend invited me ______ a trip to Da Nang.",
+            options: ["joining", "join", "to join", "joined"],
+            answer: 2,
+            explanation: "Invite + object + to-V → invited me to join.",
+          },
+
+          {
+            n: 41,
+            q: "The guide reminded the tourists ______ their belongings.",
+            options: ["checking", "check", "to check", "checked"],
+            answer: 2,
+            explanation:
+              "Remind + object + to-V → reminded the tourists to check.",
+          },
+
+          {
+            n: 42,
+            q: "My teacher told us ______ careful when travelling abroad.",
+            options: ["being", "be", "to be", "been"],
+            answer: 2,
+            explanation: "Tell + object + to-V → told us to be.",
+          },
+        ],
+      };
+
+      /* ==========================================================
+   RENDER MULTIPLE CHOICE
+========================================================== */
+
+      function renderMultipleChoice(containerId, questions) {
+        const container = document.getElementById(containerId);
+
+        questions.forEach((q) => {
+          const card = document.createElement("div");
+
+          card.className = "question-card";
+
+          card.innerHTML = `
+
+      <div class="question-number">
+        Question ${q.n}
+      </div>
+
+      <div class="question-text">
+        ${q.q}
+      </div>
+
+      <div class="options">
+
+        ${q.options
+          .map(
+            (option, index) => `
+
+          <button
+            class="option"
+            onclick="checkMCQ(
+              this,
+              ${q.n},
+              ${index},
+              ${q.answer},
+              '${q.explanation.replace(/'/g, "\\'")}'
+            )"
+          >
+
+            ${String.fromCharCode(65 + index)}. ${option}
+
+          </button>
+
+        `,
+          )
+          .join("")}
+
+      </div>
+
+      <div
+        class="feedback"
+        id="feedback-${q.n}"
+      ></div>
+
+    `;
+
+          container.appendChild(card);
+        });
+      }
+
+      /* ==========================================================
+   CHECK MULTIPLE CHOICE
+========================================================== */
+
+      function checkMCQ(
+        button,
+        questionNumber,
+        selected,
+        correct,
+        explanation,
+      ) {
+        const card = button.closest(".question-card");
+
+        const buttons = card.querySelectorAll(".option");
+
+        const feedback = card.querySelector(".feedback");
+
+        buttons.forEach((btn) => {
+          btn.classList.add("disabled");
+
+          btn.disabled = true;
+        });
+
+        buttons[correct].classList.add("correct");
+
+        const isCorrect = selected === correct;
+
+        if (!isCorrect) {
+          button.classList.add("wrong");
+        }
+
+        updateScore(questionNumber, isCorrect);
+
+        card.classList.add(isCorrect ? "correct-card" : "wrong-card");
+
+        feedback.classList.add("show");
+
+        if (isCorrect) {
+          feedback.classList.add("correct-feedback");
+
+          feedback.innerHTML = `
+      <div class="feedback-title">
+        ✅ Correct!
+      </div>
+
+      <div>
+        ${explanation}
+      </div>
+    `;
+        } else {
+          feedback.classList.add("wrong-feedback");
+
+          feedback.innerHTML = `
+      <div class="feedback-title">
+        ❌ Incorrect!
+      </div>
+
+      <div>
+        Đáp án đúng:
+        <strong>
+          ${String.fromCharCode(65 + correct)}.
+          ${buttons[correct].textContent.trim().substring(3)}
+        </strong>
+      </div>
+
+      <div style="margin-top: 8px;">
+        ${explanation}
+      </div>
+    `;
+        }
+      }
+
+      /* ==========================================================
+   RENDER PART 1-5
+========================================================== */
+
+      renderMultipleChoice("part1", multipleChoiceQuestions.part1);
+
+      renderMultipleChoice("part2", multipleChoiceQuestions.part2);
+
+      renderMultipleChoice("part3", multipleChoiceQuestions.part3);
+
+      renderMultipleChoice("part4", multipleChoiceQuestions.part4);
+
+      renderMultipleChoice("part5", multipleChoiceQuestions.part5);
+
+      /* ==========================================================
+   PART 6 - ERROR CORRECTION
+========================================================== */
+
+      const part6Questions = [
+        {
+          n: 43,
+          q: "I decided joining the volunteer programme last summer.",
+          answer: "I decided to join the volunteer programme last summer.",
+          keywords: ["decided to join"],
+          explanation: "Decide + to-V → decided to join.",
+        },
+
+        {
+          n: 44,
+          q: "We really enjoyed to explore the old town.",
+          answer: "We really enjoyed exploring the old town.",
+          keywords: ["enjoyed exploring"],
+          explanation: "Enjoy + V-ing → enjoyed exploring.",
+        },
+
+        {
+          n: 45,
+          q: "My friend suggested to visit the local museum.",
+          answer: "My friend suggested visiting the local museum.",
+          keywords: ["suggested visiting"],
+          explanation: "Suggest + V-ing → suggested visiting.",
+        },
+
+        {
+          n: 46,
+          q: "I am looking forward to meet my friends again.",
+          answer: "I am looking forward to meeting my friends again.",
+          keywords: ["looking forward to meeting"],
+          explanation: "Look forward to + V-ing → looking forward to meeting.",
+        },
+
+        {
+          n: 47,
+          q: "She forgot bringing her passport, so she couldn't board the plane.",
+          answer:
+            "She forgot to bring her passport, so she couldn't board the plane.",
+          keywords: ["forgot to bring"],
+          explanation: "Forget + to-V = quên làm việc cần làm.",
+        },
+
+        {
+          n: 48,
+          q: "I remember to visit this place when I was five years old.",
+          answer: "I remember visiting this place when I was five years old.",
+          keywords: ["remember visiting"],
+          explanation:
+            "Remember + V-ing = nhớ một việc đã xảy ra trong quá khứ.",
+        },
+
+        {
+          n: 49,
+          q: "We stopped taking some photos because the view was beautiful.",
+          answer:
+            "We stopped to take some photos because the view was beautiful.",
+          keywords: ["stopped to take"],
+          explanation: "Stop + to-V = dừng việc đang làm để làm việc khác.",
+        },
+
+        {
+          n: 50,
+          q: "They managed reaching the top of the mountain before sunset.",
+          answer:
+            "They managed to reach the top of the mountain before sunset.",
+          keywords: ["managed to reach"],
+          explanation: "Manage + to-V → managed to reach.",
+        },
+      ];
+
+      function renderInputQuestions(containerId, questions) {
+        const container = document.getElementById(containerId);
+
+        questions.forEach((q) => {
+          container.innerHTML += `
+
+      <div class="question-card">
+
+        <div class="question-number">
+          Question ${q.n}
+        </div>
+
+        <div class="question-text">
+          ${q.q}
+        </div>
+
+        <input
+          class="answer-input"
+          id="input-${q.n}"
+          placeholder="Type your answer here..."
+        />
+
+        <button
+          class="check-btn"
+          onclick="checkTextAnswer(
+            ${q.n},
+            '${q.keywords.join("|")}',
+            '${q.explanation.replace(/'/g, "\\'")}'
+          )"
+        >
+          Check Answer
+        </button>
+
+        <div
+          class="feedback"
+          id="feedback-${q.n}"
+        ></div>
+
+      </div>
+
+    `;
+        });
+      }
+
+      function checkTextAnswer(questionNumber, keywordsString, explanation) {
+        const input = document.getElementById(`input-${questionNumber}`);
+
+        const feedback = document.getElementById(`feedback-${questionNumber}`);
+
+        const card = input.closest(".question-card");
+
+        const userAnswer = input.value.toLowerCase().trim();
+
+        if (!userAnswer) {
+          alert("Please enter your answer first!");
+
+          return;
+        }
+
+        const keywords = keywordsString.toLowerCase().split("|");
+
+        const isCorrect = keywords.some((keyword) =>
+          userAnswer.includes(keyword),
+        );
+
+        updateScore(questionNumber, isCorrect);
+
+        feedback.className =
+          "feedback show " +
+          (isCorrect ? "correct-feedback" : "wrong-feedback");
+
+        if (isCorrect) {
+          feedback.innerHTML = `
+
+      <div class="feedback-title">
+        ✅ Correct!
+      </div>
+
+      ${explanation}
+
+    `;
+
+          card.classList.add("correct-card");
+        } else {
+          feedback.innerHTML = `
+
+      <div class="feedback-title">
+        ❌ Not quite right.
+      </div>
+
+      <strong>Check the grammar rule again.</strong>
+
+      <br><br>
+
+      ${explanation}
+
+    `;
+
+          card.classList.add("wrong-card");
+        }
+      }
+
+      /* ==========================================================
+   PART 7
+========================================================== */
+
+      const part7Questions = [
+        [
+          51,
+          "I decided __________ (join) the school trip after hearing about it.",
+          "to join",
+          "Decide + to-V.",
+        ],
+        [
+          52,
+          "We really enjoyed __________ (explore) the ancient village.",
+          "exploring",
+          "Enjoy + V-ing.",
+        ],
+        [
+          53,
+          "My friends suggested __________ (visit) the local museum.",
+          "visiting",
+          "Suggest + V-ing.",
+        ],
+        [
+          54,
+          "She hopes __________ (travel) around Europe next summer.",
+          "to travel",
+          "Hope + to-V.",
+        ],
+        [
+          55,
+          "I remember __________ (see) this monument when I was a child.",
+          "seeing",
+          "Remember + V-ing = nhớ việc đã xảy ra.",
+        ],
+        [
+          56,
+          "Don't forget __________ (bring) your passport.",
+          "to bring",
+          "Forget + to-V = nhớ đừng quên làm việc cần làm.",
+        ],
+        [
+          57,
+          "We stopped __________ (take) photos when it started raining.",
+          "taking",
+          "Stop + V-ing = ngừng hoạt động.",
+        ],
+        [
+          58,
+          "We stopped __________ (take) photos because the view was amazing.",
+          "to take",
+          "Stop + to-V = dừng lại để làm việc khác.",
+        ],
+        [
+          59,
+          "We tried __________ (ask) a local person for directions.",
+          "asking",
+          "Try + V-ing = thử làm gì.",
+        ],
+        [
+          60,
+          "We tried __________ (find) the hotel, but we got lost.",
+          "to find",
+          "Try + to-V = cố gắng làm gì.",
+        ],
+        [
+          61,
+          "I regret __________ (book) such an expensive hotel.",
+          "booking",
+          "Regret + V-ing = hối tiếc vì đã làm.",
+        ],
+        [
+          62,
+          "We regret __________ (inform) you that the tour has been cancelled.",
+          "to inform",
+          "Regret + to-V = tiếc khi phải thông báo.",
+        ],
+        [
+          63,
+          "I am interested in __________ (learn) about different cultures.",
+          "learning",
+          "Preposition in + V-ing.",
+        ],
+        [
+          64,
+          "We look forward to __________ (meet) new people.",
+          "meeting",
+          "Look forward to + V-ing.",
+        ],
+        [
+          65,
+          "Before __________ (leave) the hotel, I checked my luggage.",
+          "leaving",
+          "Before + V-ing.",
+        ],
+      ];
+
+      part7Questions.forEach(([n, q, answer, explanation]) => {
+        document.getElementById("part7").innerHTML += `
+
+      <div class="question-card">
+
+        <div class="question-number">
+          Question ${n}
+        </div>
+
+        <div class="question-text">
+          ${q}
+        </div>
+
+        <input
+          class="answer-input"
+          id="input-${n}"
+          placeholder="Your answer..."
+        />
+
+        <button
+          class="check-btn"
+          onclick="checkFillAnswer(
+            ${n},
+            '${answer}',
+            '${explanation}'
+          )"
+        >
+          Check Answer
+        </button>
+
+        <div
+          class="feedback"
+          id="feedback-${n}"
+        ></div>
+
+      </div>
+
+    `;
+      });
+
+      function checkFillAnswer(number, correctAnswer, explanation) {
+        const input = document.getElementById(`input-${number}`);
+
+        const feedback = document.getElementById(`feedback-${number}`);
+
+        const userAnswer = input.value.toLowerCase().trim();
+
+        if (!userAnswer) {
+          alert("Please enter your answer first!");
+
+          return;
+        }
+
+        const isCorrect = userAnswer === correctAnswer.toLowerCase();
+
+        updateScore(number, isCorrect);
+
+        feedback.className =
+          "feedback show " +
+          (isCorrect ? "correct-feedback" : "wrong-feedback");
+
+        if (isCorrect) {
+          feedback.innerHTML = `
+
+      <div class="feedback-title">
+        ✅ Correct!
+      </div>
+
+      ${explanation}
+
+    `;
+        } else {
+          feedback.innerHTML = `
+
+      <div class="feedback-title">
+        ❌ Incorrect!
+      </div>
+
+      Đáp án đúng:
+      <strong>${correctAnswer}</strong>
+
+      <br><br>
+
+      ${explanation}
+
+    `;
+        }
+      }
+
+      /* ==========================================================
+   PART 8
+========================================================== */
+
+      const part8Questions = [
+        [66, "decided", "Decide + to-V → decided."],
+        [67, "leaving", "Before + V-ing → before leaving."],
+        [68, "to bring", "Remind + object + to-V → reminded me to bring."],
+        [69, "meeting", "Enjoy + V-ing → enjoyed meeting."],
+        [70, "learning", "Enjoy + V-ing. Learning is parallel with meeting."],
+        [71, "visiting", "Suggest + V-ing → suggested visiting."],
+        [72, "to explore", "Decide + to-V → decided to explore."],
+        [73, "seeing", "Remember + V-ing = nhớ việc đã xảy ra."],
+        [74, "to take", "Stop + to-V = dừng lại để chụp ảnh."],
+        [75, "asking", "Try + V-ing = thử hỏi."],
+        [76, "to return", "Hope + to-V → hope to return."],
+      ];
+
+      part8Questions.forEach(([n, answer, explanation]) => {
+        document.getElementById("part8").innerHTML += `
+
+      <div style="margin-bottom: 18px;">
+
+        <input
+          class="answer-input"
+          id="input-${n}"
+          placeholder="Question ${n} answer..."
+        />
+
+        <button
+          class="check-btn"
+          onclick="checkFillAnswer(
+            ${n},
+            '${answer}',
+            '${explanation}'
+          )"
+        >
+          Check
+        </button>
+
+        <div
+          class="feedback"
+          id="feedback-${n}"
+        ></div>
+
+      </div>
+
+    `;
+      });
+
+      /* ==========================================================
+   PART 9
+========================================================== */
+
+      const part9Questions = [
+        [77, "I made a decision to join the trip last summer.", "decision"],
+        [78, "I enjoyed exploring the ancient village.", "enjoyed"],
+        [79, "My friend suggested visiting the museum.", "suggested"],
+        [80, "I remember visiting this place when I was young.", "remember"],
+        [81, "Remember to bring your passport.", "remember"],
+        [82, "We stopped taking photos because it started raining.", "stopped"],
+        [83, "We stopped walking to take some photos.", "stopped"],
+        [84, "We tried asking a local person for directions.", "try"],
+      ];
+
+      part9Questions.forEach(([n, answer, keyword]) => {
+        document.getElementById("part9").innerHTML += `
+
+      <div class="question-card">
+
+        <div class="question-number">
+          Question ${n}
+        </div>
+
+        <div class="question-text">
+          Rewrite the sentence using the given word.
+        </div>
+
+        <div class="intro-box">
+          <strong>Expected answer:</strong>
+          Write your answer below.
+        </div>
+
+        <input
+          class="answer-input"
+          id="input-${n}"
+          placeholder="Write your sentence..."
+        />
+
+        <button
+          class="check-btn"
+          onclick="checkTransformation(
+            ${n},
+            '${answer.replace(/'/g, "\\'")}',
+            '${keyword}'
+          )"
+        >
+          Check Answer
+        </button>
+
+        <div
+          class="feedback"
+          id="feedback-${n}"
+        ></div>
+
+      </div>
+
+    `;
+      });
+
+      function checkTransformation(number, correctAnswer, keyword) {
+        const input = document.getElementById(`input-${number}`);
+
+        const feedback = document.getElementById(`feedback-${number}`);
+
+        const userAnswer = input.value.toLowerCase().trim();
+
+        if (!userAnswer) {
+          alert("Please enter your answer first!");
+
+          return;
+        }
+
+        const isCorrect = userAnswer.includes(keyword.toLowerCase());
+
+        updateScore(number, isCorrect);
+
+        feedback.className =
+          "feedback show " +
+          (isCorrect ? "correct-feedback" : "wrong-feedback");
+
+        if (isCorrect) {
+          feedback.innerHTML = `
+
+      <div class="feedback-title">
+        ✅ Good job!
+      </div>
+
+      Your answer contains the key structure.
+
+      <br><br>
+
+      <strong>Suggested answer:</strong>
+      ${correctAnswer}
+
+    `;
+        } else {
+          feedback.innerHTML = `
+
+      <div class="feedback-title">
+        ❌ Check your answer.
+      </div>
+
+      <strong>Suggested answer:</strong>
+      ${correctAnswer}
+
+    `;
+        }
+      }
+
+      /* ==========================================================
+   WRITING SAMPLE
+========================================================== */
+
+      function showSample() {
+        const sample = document.getElementById("sampleAnswer");
+
+        if (sample.style.display === "block") {
+          sample.style.display = "none";
+        } else {
+          sample.style.display = "block";
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1490 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Our Experiences - Grammar Lesson</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Nunito", sans-serif;
+        background: #f5f7ff;
+        color: #27324a;
+        min-height: 100vh;
+      }
+
+      /* =========================
+       HEADER
+    ========================= */
+
+      header {
+        height: 75px;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 6%;
+        box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .logo {
+        font-family: "Baloo 2", cursive;
+        font-size: 27px;
+        font-weight: 800;
+        color: #5b5ce2;
+      }
+
+      .lesson-label {
+        font-weight: 700;
+        color: #697386;
+        font-size: 15px;
+      }
+
+      /* =========================
+       PROGRESS
+    ========================= */
+
+      .progress-container {
+        height: 7px;
+        background: #e5e7f5;
+        width: 100%;
+      }
+
+      .progress-bar {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #6c63ff, #8b7cff);
+        transition: width 0.4s ease;
+      }
+
+      /* =========================
+       MAIN
+    ========================= */
+
+      main {
+        max-width: 1050px;
+        margin: 45px auto;
+        padding: 0 20px 120px;
+      }
+
+      .page {
+        display: none;
+        animation: fadeIn 0.4s ease;
+      }
+
+      .page.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(12px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* =========================
+       HERO
+    ========================= */
+
+      .hero {
+        background: linear-gradient(135deg, #6259e8, #8278f7);
+        color: white;
+        padding: 60px 50px;
+        border-radius: 30px;
+        text-align: center;
+        box-shadow: 0 15px 40px rgba(91, 92, 226, 0.25);
+      }
+
+      .hero .emoji {
+        font-size: 60px;
+        margin-bottom: 15px;
+      }
+
+      .hero h1 {
+        font-family: "Baloo 2", cursive;
+        font-size: 48px;
+        line-height: 1.1;
+        margin-bottom: 15px;
+      }
+
+      .hero p {
+        font-size: 19px;
+        opacity: 0.95;
+      }
+
+      /* =========================
+       CONTENT CARD
+    ========================= */
+
+      .content-card {
+        background: white;
+        border-radius: 25px;
+        padding: 40px;
+        box-shadow: 0 8px 30px rgba(30, 40, 80, 0.08);
+      }
+
+      h2 {
+        font-family: "Baloo 2", cursive;
+        font-size: 34px;
+        color: #514bd8;
+        margin-bottom: 25px;
+      }
+
+      h3 {
+        font-family: "Baloo 2", cursive;
+        font-size: 25px;
+        color: #414b70;
+        margin: 25px 0 12px;
+      }
+
+      p {
+        font-size: 17px;
+        line-height: 1.7;
+        margin-bottom: 15px;
+      }
+
+      .intro-box {
+        background: #f0efff;
+        border-left: 5px solid #6259e8;
+        padding: 20px;
+        border-radius: 12px;
+        margin: 20px 0;
+      }
+
+      .formula {
+        background: #272c4a;
+        color: white;
+        padding: 20px;
+        border-radius: 14px;
+        font-size: 20px;
+        text-align: center;
+        margin: 20px 0;
+        font-weight: 700;
+      }
+
+      .example {
+        background: #f8f9ff;
+        border: 1px solid #e4e6f5;
+        padding: 18px 22px;
+        border-radius: 14px;
+        margin: 15px 0;
+      }
+
+      .example strong {
+        color: #5b5ce2;
+      }
+
+      .translation {
+        color: #687083;
+        font-style: italic;
+        margin-top: 7px;
+      }
+
+      .note {
+        background: #fff8df;
+        border-left: 5px solid #f3c74f;
+        padding: 18px 20px;
+        border-radius: 12px;
+        margin: 20px 0;
+      }
+
+      .danger {
+        background: #fff0f0;
+        border-left: 5px solid #ef6a6a;
+        padding: 18px 20px;
+        border-radius: 12px;
+        margin: 20px 0;
+      }
+
+      .success {
+        background: #edfff5;
+        border-left: 5px solid #4ac985;
+        padding: 18px 20px;
+        border-radius: 12px;
+        margin: 20px 0;
+      }
+
+      /* =========================
+       TABLE
+    ========================= */
+
+      .table-wrapper {
+        overflow-x: auto;
+        margin: 20px 0;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 550px;
+      }
+
+      th,
+      td {
+        padding: 15px;
+        border: 1px solid #e3e5f0;
+        text-align: left;
+      }
+
+      th {
+        background: #6259e8;
+        color: white;
+      }
+
+      tr:nth-child(even) {
+        background: #f8f9ff;
+      }
+
+      /* =========================
+       TAGS
+    ========================= */
+
+      .verb-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 20px 0;
+      }
+
+      .tag {
+        background: #eeedff;
+        color: #514bd8;
+        padding: 10px 16px;
+        border-radius: 30px;
+        font-weight: 700;
+      }
+
+      /* =========================
+       TIMELINE
+    ========================= */
+
+      .timeline {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        margin: 25px 0;
+        flex-wrap: wrap;
+      }
+
+      .timeline-box {
+        background: #6259e8;
+        color: white;
+        padding: 15px 25px;
+        border-radius: 12px;
+        font-weight: 700;
+      }
+
+      .arrow {
+        font-size: 25px;
+        font-weight: bold;
+        color: #6259e8;
+      }
+
+      /* =========================
+       FINAL PAGE
+    ========================= */
+
+      .final-box {
+        text-align: center;
+        padding: 50px 20px;
+      }
+
+      .final-box .big-emoji {
+        font-size: 70px;
+        margin-bottom: 15px;
+      }
+
+      .final-box h2 {
+        font-size: 42px;
+      }
+
+      .final-box p {
+        max-width: 650px;
+        margin: 0 auto 30px;
+      }
+
+      .quiz-button {
+        display: inline-block;
+        background: linear-gradient(135deg, #6259e8, #8278f7);
+        color: white;
+        text-decoration: none;
+        padding: 16px 35px;
+        border-radius: 15px;
+        font-size: 18px;
+        font-weight: 800;
+        margin: 8px;
+        box-shadow: 0 8px 20px rgba(91, 92, 226, 0.25);
+        transition: 0.25s;
+      }
+
+      .quiz-button:hover {
+        transform: translateY(-3px);
+      }
+
+      .home-button {
+        background: #edf0f7;
+        color: #414b70;
+        box-shadow: none;
+      }
+
+      /* =========================
+       NAVIGATION
+    ========================= */
+
+      .navigation {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: white;
+        padding: 15px 6%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.08);
+        z-index: 100;
+      }
+
+      .nav-btn {
+        border: none;
+        padding: 13px 25px;
+        border-radius: 12px;
+        font-family: "Nunito", sans-serif;
+        font-size: 16px;
+        font-weight: 800;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+
+      .prev-btn {
+        background: #edf0f7;
+        color: #414b70;
+      }
+
+      .next-btn {
+        background: #6259e8;
+        color: white;
+      }
+
+      .nav-btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .nav-btn:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .page-number {
+        font-weight: 800;
+        color: #697386;
+      }
+
+      /* =========================
+       RESPONSIVE
+    ========================= */
+
+      @media (max-width: 700px) {
+        header {
+          padding: 0 20px;
+        }
+
+        .lesson-label {
+          display: none;
+        }
+
+        main {
+          margin-top: 25px;
+        }
+
+        .hero {
+          padding: 40px 25px;
+        }
+
+        .hero h1 {
+          font-size: 38px;
+        }
+
+        .content-card {
+          padding: 25px 20px;
+        }
+
+        h2 {
+          font-size: 29px;
+        }
+
+        .navigation {
+          padding: 12px 15px;
+        }
+
+        .nav-btn {
+          padding: 11px 17px;
+        }
+
+        .page-number {
+          font-size: 14px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- =========================
+       HEADER
+  ========================= -->
+
+    <header>
+      <div class="logo">Hyvoria English</div>
+      <div class="lesson-label">Grammar Lesson • Our Experiences</div>
+    </header>
+
+    <!-- =========================
+       PROGRESS BAR
+  ========================= -->
+
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- =========================
+       MAIN CONTENT
+  ========================= -->
+
+    <main>
+      <!-- PAGE 1 -->
+      <section class="page active">
+        <div class="hero">
+          <div class="emoji">🌟</div>
+
+          <h1>OUR EXPERIENCES</h1>
+
+          <p>Verbs + To-Infinitive / V-ing</p>
+
+          <p>Learn how to use different verb patterns in context.</p>
+        </div>
+      </section>
+
+      <!-- PAGE 2 -->
+      <section class="page">
+        <div class="content-card">
+          <h2>📘 Part 1. Verb + To-Infinitive</h2>
+
+          <h3>1. Cấu trúc</h3>
+
+          <p>
+            Một số động từ thường được theo sau bởi
+            <strong>to + V nguyên mẫu</strong>.
+          </p>
+
+          <div class="formula">S + V + to-infinitive</div>
+
+          <div class="example">
+            I <strong>decided to join</strong> the school trip.
+            <div class="translation">
+              → Tôi quyết định tham gia chuyến đi của trường.
+            </div>
+          </div>
+
+          <div class="example">
+            She <strong>wanted to visit</strong> a new country.
+            <div class="translation">
+              → Cô ấy muốn đến thăm một quốc gia mới.
+            </div>
+          </div>
+
+          <div class="example">
+            We <strong>planned to travel</strong> together.
+            <div class="translation">
+              → Chúng tôi đã lên kế hoạch đi du lịch cùng nhau.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE 3 -->
+      <section class="page">
+        <div class="content-card">
+          <h2>🟣 Common Verbs + To-V</h2>
+
+          <div class="table-wrapper">
+            <table>
+              <tr>
+                <th>Verb</th>
+                <th>Meaning</th>
+              </tr>
+
+              <tr>
+                <td>agree to do</td>
+                <td>đồng ý làm</td>
+              </tr>
+
+              <tr>
+                <td>decide to do</td>
+                <td>quyết định làm</td>
+              </tr>
+
+              <tr>
+                <td>expect to do</td>
+                <td>mong đợi</td>
+              </tr>
+
+              <tr>
+                <td>hope to do</td>
+                <td>hy vọng</td>
+              </tr>
+
+              <tr>
+                <td>learn to do</td>
+                <td>học cách làm</td>
+              </tr>
+
+              <tr>
+                <td>manage to do</td>
+                <td>xoay xở / cố gắng làm được</td>
+              </tr>
+
+              <tr>
+                <td>need to do</td>
+                <td>cần làm</td>
+              </tr>
+
+              <tr>
+                <td>offer to do</td>
+                <td>đề nghị làm</td>
+              </tr>
+
+              <tr>
+                <td>plan to do</td>
+                <td>lên kế hoạch làm</td>
+              </tr>
+
+              <tr>
+                <td>promise to do</td>
+                <td>hứa làm</td>
+              </tr>
+
+              <tr>
+                <td>refuse to do</td>
+                <td>từ chối làm</td>
+              </tr>
+
+              <tr>
+                <td>want to do</td>
+                <td>muốn làm</td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="success">
+            ⭐ <strong>Remember:</strong> These verbs are followed by
+            <strong>to + V</strong>.
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE 4 -->
+      <section class="page">
+        <div class="content-card">
+          <h2>✈️ To-V in Context</h2>
+
+          <div class="example">
+            I <strong>decided to join</strong> a volunteer trip last summer.
+            <div class="translation">
+              Tôi đã quyết định tham gia một chuyến tình nguyện vào mùa hè năm
+              ngoái.
+            </div>
+          </div>
+
+          <div class="example">
+            We <strong>hope to visit</strong> many interesting places during our
+            trip.
+            <div class="translation">
+              Chúng tôi hy vọng sẽ đến thăm nhiều địa điểm thú vị trong chuyến
+              đi.
+            </div>
+          </div>
+
+          <div class="example">
+            My friends and I <strong>planned to explore</strong> the old town.
+            <div class="translation">
+              Tôi và bạn bè đã lên kế hoạch khám phá khu phố cổ.
+            </div>
+          </div>
+
+          <div class="example">
+            Although the journey was difficult, we
+            <strong>managed to reach</strong> the top of the mountain.
+            <div class="translation">
+              Mặc dù hành trình khó khăn, chúng tôi vẫn xoay xở để lên được đỉnh
+              núi.
+            </div>
+          </div>
+
+          <div class="note">
+            📌 <strong>manage to do</strong> = làm được một việc dù gặp khó
+            khăn.
+          </div>
+
+          <div class="example">
+            My friend <strong>promised to send</strong> me the photos from our
+            trip.
+            <div class="translation">
+              Bạn tôi đã hứa sẽ gửi cho tôi những bức ảnh từ chuyến đi.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE 5 -->
+      <section class="page">
+        <div class="content-card">
+          <h2>🔵 Part 2. Verb + V-ing</h2>
+
+          <h3>1. Cấu trúc</h3>
+
+          <div class="formula">S + V + V-ing</div>
+
+          <div class="example">
+            I <strong>enjoyed visiting</strong> the ancient village.
+            <div class="translation">→ Tôi thích chuyến thăm ngôi làng cổ.</div>
+          </div>
+
+          <div class="example">
+            She <strong>avoids travelling</strong> alone.
+            <div class="translation">→ Cô ấy tránh đi du lịch một mình.</div>
+          </div>
+
+          <div class="example">
+            We <strong>finished exploring</strong> the museum.
+            <div class="translation">
+              → Chúng tôi đã khám phá xong bảo tàng.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE 6 -->
+      <section class="page">
+        <div class="content-card">
+          <h2>🔵 Common Verbs + V-ing</h2>
+
+          <div class="verb-list">
+            <div class="tag">avoid doing</div>
+            <div class="tag">consider doing</div>
+            <div class="tag">enjoy doing</div>
+            <div class="tag">finish doing</div>
+            <div class="tag">imagine doing</div>
+            <div class="tag">keep doing</div>
+            <div class="tag">mind doing</div>
+            <div class="tag">miss doing</div>
+            <div class="tag">practise doing</div>
+            <div class="tag">suggest doing</div>
+            <div class="tag">recommend doing</div>
+            <div class="tag">spend time doing</div>
+          </div>
+
+          <div class="note">
+            📌 <strong>suggest + V-ing</strong> <br /><br />
+            ❌ suggest to visit
+            <br />
+            ✅ suggest visiting
+          </div>
+
+          <div class="example">
+            My friend <strong>suggested visiting</strong> the ancient castle.
+          </div>
+
+          <div class="example">
+            We <strong>spent two hours walking</strong> around the old town.
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE 7 -->
+      <section class="page">
+        <div class="content-card">
+          <h2>🟡 Part 3. Verb + To-V / V-ing</h2>
+
+          <h3>LIKE</h3>
+
+          <p>
+            <strong>Like + V-ing</strong> thường nói về việc thích một hoạt động
+            nói chung.
+          </p>
+
+          <div class="example">
+            I <strong>like travelling</strong> with my family.
+          </div>
+
+          <p>
+            <strong>Like + to-V</strong> thường nói về thói quen hoặc lựa chọn
+            cụ thể.
+          </p>
+
+          <div class="example">
+            I <strong>like to plan</strong> my trips carefully.
+          </div>
+
+          <div class="note">
+            📌 Trong nhiều trường hợp,
+            <strong>like + to-V</strong> và
+            <strong>like + V-ing</strong>
+            đều có thể dùng được.
+          </div>
+
+          <h3>LOVE / HATE / PREFER</h3>
+
+          <div class="example">
+            I <strong>love travelling</strong> abroad.
+            <br />
+            I <strong>love to travel</strong> abroad.
+          </div>
+
+          <div class="example">
+            She <strong>hates waiting</strong> at airports.
+            <br />
+            She <strong>hates to wait</strong> at airports.
+          </div>
+
+          <div class="example">
+            I <strong>prefer travelling</strong> by train.
+            <br />
+            I <strong>prefer to travel</strong> by train.
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE 8 -->
+      <section class="page">
+        <div class="content-card">
+          <h2>🔴 Part 4. Remember</h2>
+
+          <h3>Remember + to-V</h3>
+
+          <p>= nhớ <strong>phải làm gì</strong></p>
+
+          <div class="example">
+            I <strong>remembered to bring</strong> my passport.
+          </div>
+
+          <div class="timeline">
+            <div class="timeline-box">Remember</div>
+            <div class="arrow">→</div>
+            <div class="timeline-box">Bring passport</div>
+          </div>
+
+          <h3>Remember + V-ing</h3>
+
+          <p>= nhớ <strong>đã từng làm gì</strong></p>
+
+          <div class="example">
+            I <strong>remember visiting</strong> this museum when I was young.
+          </div>
+
+          <div class="timeline">
+            <div class="timeline-box">Visit museum</div>
+            <div class="arrow">→</div>
+            <div class="timeline-box">Remember</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE 9 -->
+      <section class="page">
+        <div class="content-card">
+          <h2>🔴 Forget</h2>
+
+          <h3>Forget + to-V</h3>
+
+          <p>= quên làm một việc cần làm.</p>
+
+          <div class="example">
+            I <strong>forgot to bring</strong> my passport.
+          </div>
+
+          <div class="danger">
+            📌 Kết quả: Tôi <strong>không mang hộ chiếu</strong>.
+          </div>
+
+          <h3>Forget + V-ing</h3>
+
+          <p>= quên một việc đã từng xảy ra.</p>
+
+          <div class="example">
+            I'll never forget <strong>visiting</strong> Paris for the first
+            time.
+          </div>
+
+          <div class="success">
+            ⭐ Hành động <strong>visiting</strong> đã xảy ra trong quá khứ.
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE 10 -->
+      <section class="page">
+        <div class="content-card">
+          <h2>🛑 Stop</h2>
+
+          <h3>Stop + V-ing</h3>
+
+          <p>= dừng hẳn một hoạt động đang làm.</p>
+
+          <div class="example">
+            We <strong>stopped taking</strong> photos because it started
+            raining.
+          </div>
+
+          <h3>Stop + to-V</h3>
+
+          <p>= dừng một việc đang làm để làm việc khác.</p>
+
+          <div class="example">
+            We <strong>stopped to take</strong> some photos.
+          </div>
+
+          <div class="table-wrapper">
+            <table>
+              <tr>
+                <th>Structure</th>
+                <th>Meaning</th>
+              </tr>
+
+              <tr>
+                <td>stop taking photos</td>
+                <td>ngừng chụp ảnh</td>
+              </tr>
+
+              <tr>
+                <td>stop to take photos</td>
+                <td>dừng lại để chụp ảnh</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE 11 -->
+      <section class="page">
+        <div class="content-card">
+          <h2>🎯 Try</h2>
+
+          <h3>Try + to-V</h3>
+
+          <p>= cố gắng làm điều gì.</p>
+
+          <div class="example">
+            We <strong>tried to find</strong> the hotel.
+          </div>
+
+          <h3>Try + V-ing</h3>
+
+          <p>= thử làm gì để xem có hiệu quả không.</p>
+
+          <div class="example">
+            We <strong>tried asking</strong> a local person for directions.
+          </div>
+
+          <div class="table-wrapper">
+            <table>
+              <tr>
+                <th>Structure</th>
+                <th>Meaning</th>
+              </tr>
+
+              <tr>
+                <td>try to find</td>
+                <td>cố gắng tìm</td>
+              </tr>
+
+              <tr>
+                <td>try asking</td>
+                <td>thử hỏi</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE 12 -->
+      <section class="page">
+        <div class="content-card">
+          <h2>😔 Regret</h2>
+
+          <h3>Regret + to-V</h3>
+
+          <p>= tiếc khi phải thông báo / nói điều gì.</p>
+
+          <div class="example">
+            We <strong>regret to inform</strong> you that the flight has been
+            cancelled.
+          </div>
+
+          <h3>Regret + V-ing</h3>
+
+          <p>= hối tiếc vì đã làm điều gì.</p>
+
+          <div class="example">
+            I <strong>regret booking</strong> such an expensive hotel.
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE 13 -->
+      <section class="page">
+        <div class="content-card">
+          <h2>👥 Part 5. Verb + Object + To-Infinitive</h2>
+
+          <div class="formula">S + V + O + to-V</div>
+
+          <div class="table-wrapper">
+            <table>
+              <tr>
+                <th>Verb</th>
+                <th>Structure</th>
+              </tr>
+
+              <tr>
+                <td>advise</td>
+                <td>advise someone to do</td>
+              </tr>
+
+              <tr>
+                <td>allow</td>
+                <td>allow someone to do</td>
+              </tr>
+
+              <tr>
+                <td>ask</td>
+                <td>ask someone to do</td>
+              </tr>
+
+              <tr>
+                <td>encourage</td>
+                <td>encourage someone to do</td>
+              </tr>
+
+              <tr>
+                <td>invite</td>
+                <td>invite someone to do</td>
+              </tr>
+
+              <tr>
+                <td>remind</td>
+                <td>remind someone to do</td>
+              </tr>
+
+              <tr>
+                <td>tell</td>
+                <td>tell someone to do</td>
+              </tr>
+
+              <tr>
+                <td>want</td>
+                <td>want someone to do</td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="example">
+            My parents <strong>encouraged me to travel</strong> more.
+          </div>
+
+          <div class="example">
+            The tour guide <strong>reminded us to bring</strong> our passports.
+          </div>
+
+          <div class="example">
+            My friend <strong>invited me to join</strong> the trip.
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE 14 -->
+      <section class="page">
+        <div class="content-card">
+          <h2>🔗 Part 6. Verb + Preposition + V-ing</h2>
+
+          <p>
+            Sau <strong>giới từ</strong>, động từ phải ở dạng
+            <strong>V-ing</strong>.
+          </p>
+
+          <div class="formula">Preposition + V-ing</div>
+
+          <div class="example">
+            I'm interested <strong>in learning</strong> about different
+            cultures.
+          </div>
+
+          <div class="example">
+            She is good <strong>at taking</strong> photographs.
+          </div>
+
+          <div class="example">
+            We talked <strong>about visiting</strong> the old town.
+          </div>
+
+          <div class="example">
+            He left without <strong>saying</strong> goodbye.
+          </div>
+
+          <div class="verb-list">
+            <div class="tag">in</div>
+            <div class="tag">at</div>
+            <div class="tag">about</div>
+            <div class="tag">for</div>
+            <div class="tag">of</div>
+            <div class="tag">without</div>
+            <div class="tag">before</div>
+            <div class="tag">after</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE 15 -->
+      <section class="page">
+        <div class="content-card">
+          <h2>⭐ Part 7. "TO" là giới từ → V-ing</h2>
+
+          <p>
+            Không phải lúc nào <strong>to</strong> cũng đi với động từ nguyên
+            mẫu.
+          </p>
+
+          <div class="example">
+            I look forward to <strong>meeting</strong> you.
+          </div>
+
+          <div class="example">
+            She is used to <strong>travelling</strong> alone.
+          </div>
+
+          <div class="example">
+            We are looking forward to <strong>visiting</strong> the museum.
+          </div>
+
+          <div class="note">
+            📌 Trong những cấu trúc này:
+            <br /><br />
+            <strong>to = preposition</strong>
+            <br /><br />
+            ➡️ Sau <strong>to</strong> dùng <strong>V-ing</strong>.
+          </div>
+
+          <div class="danger">
+            ❌ I look forward to travel abroad.
+            <br /><br />
+            ✅ I look forward to travelling abroad.
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE 16 -->
+      <section class="page">
+        <div class="content-card">
+          <h2>📖 Part 8. V-ing after Prepositions</h2>
+
+          <div class="example">
+            After <strong>visiting</strong> the museum, we went to a restaurant.
+          </div>
+
+          <div class="example">
+            Before <strong>leaving</strong> the hotel, I checked my passport.
+          </div>
+
+          <div class="example">
+            We travelled without <strong>booking</strong> a hotel in advance.
+          </div>
+
+          <div class="example">
+            She is interested in <strong>learning</strong> about local culture.
+          </div>
+
+          <div class="success">
+            ⭐ Remember:
+            <br /><br />
+            <strong>Preposition + V-ing</strong>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE 17 -->
+      <section class="page">
+        <div class="content-card">
+          <h2>📚 Part 9. To-V / V-ing in Context</h2>
+
+          <h3>Context 1</h3>
+
+          <div class="intro-box">
+            Last summer, I <strong>decided to join</strong> a volunteer trip. I
+            <strong>enjoyed meeting</strong> local people and
+            <strong>learning</strong> about their culture. Before
+            <strong>leaving</strong> the village, I
+            <strong>promised to come</strong> back one day.
+          </div>
+
+          <h3>Analysis</h3>
+
+          <div class="example">
+            <strong>decided to join</strong>
+            → decide + to-V
+          </div>
+
+          <div class="example">
+            <strong>enjoyed meeting</strong>
+            → enjoy + V-ing
+          </div>
+
+          <div class="example">
+            <strong>learning</strong>
+            → song song với meeting
+          </div>
+
+          <div class="example">
+            <strong>before leaving</strong>
+            → before + V-ing
+          </div>
+
+          <div class="example">
+            <strong>promised to come</strong>
+            → promise + to-V
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE 18 -->
+      <section class="page">
+        <div class="content-card">
+          <h2>🧠 Context 2</h2>
+
+          <div class="intro-box">
+            I <strong>remember visiting</strong> a small village when I was a
+            child. Last year, I <strong>decided to return</strong> there.
+            However, I <strong>forgot to bring</strong> my camera, so I couldn't
+            take any photos.
+          </div>
+
+          <h3>Analysis</h3>
+
+          <div class="example">
+            <strong>remember visiting</strong>
+            → nhớ về một trải nghiệm đã xảy ra.
+          </div>
+
+          <div class="example">
+            <strong>decided to return</strong>
+            → quyết định làm gì.
+          </div>
+
+          <div class="example">
+            <strong>forgot to bring</strong>
+            → quên làm một việc cần làm.
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE 19 -->
+      <section class="page">
+        <div class="content-card">
+          <h2>📋 Part 10. Tổng hợp</h2>
+
+          <h3>🟢 VERB + TO-V</h3>
+
+          <div class="verb-list">
+            <div class="tag">decide to do</div>
+            <div class="tag">hope to do</div>
+            <div class="tag">plan to do</div>
+            <div class="tag">want to do</div>
+            <div class="tag">need to do</div>
+            <div class="tag">promise to do</div>
+            <div class="tag">agree to do</div>
+            <div class="tag">refuse to do</div>
+            <div class="tag">manage to do</div>
+          </div>
+
+          <h3>🔵 VERB + V-ING</h3>
+
+          <div class="verb-list">
+            <div class="tag">enjoy doing</div>
+            <div class="tag">avoid doing</div>
+            <div class="tag">finish doing</div>
+            <div class="tag">suggest doing</div>
+            <div class="tag">consider doing</div>
+            <div class="tag">keep doing</div>
+            <div class="tag">mind doing</div>
+            <div class="tag">practise doing</div>
+            <div class="tag">recommend doing</div>
+          </div>
+
+          <h3>🟡 CẢ TO-V VÀ V-ING</h3>
+
+          <div class="verb-list">
+            <div class="tag">like</div>
+            <div class="tag">love</div>
+            <div class="tag">hate</div>
+            <div class="tag">prefer</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE 20 -->
+      <section class="page">
+        <div class="content-card">
+          <h2>🔴 Verbs with Different Meanings</h2>
+
+          <div class="table-wrapper">
+            <table>
+              <tr>
+                <th>Verb</th>
+                <th>To-V</th>
+                <th>V-ing</th>
+              </tr>
+
+              <tr>
+                <td><strong>remember</strong></td>
+                <td>nhớ phải làm</td>
+                <td>nhớ đã làm</td>
+              </tr>
+
+              <tr>
+                <td><strong>forget</strong></td>
+                <td>quên phải làm</td>
+                <td>quên việc đã làm</td>
+              </tr>
+
+              <tr>
+                <td><strong>stop</strong></td>
+                <td>dừng lại để làm</td>
+                <td>ngừng làm</td>
+              </tr>
+
+              <tr>
+                <td><strong>try</strong></td>
+                <td>cố gắng làm</td>
+                <td>thử làm</td>
+              </tr>
+
+              <tr>
+                <td><strong>regret</strong></td>
+                <td>tiếc khi phải làm/nói</td>
+                <td>hối tiếc đã làm</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE 21 -->
+      <section class="page">
+        <div class="content-card">
+          <h2>🎯 Final Summary</h2>
+
+          <div class="success">
+            ⭐ <strong>DECIDE → TO-V</strong> <br /><br />
+            I decided <strong>to travel</strong>.
+          </div>
+
+          <div class="success">
+            ⭐ <strong>ENJOY → V-ING</strong> <br /><br />
+            I enjoyed <strong>travelling</strong>.
+          </div>
+
+          <div class="success">
+            ⭐ <strong>PREPOSITION → V-ING</strong> <br /><br />
+            I am interested in <strong>travelling</strong>.
+          </div>
+
+          <div class="note">
+            <strong>REMEMBER TO-V</strong>
+            → nhớ phải làm
+            <br /><br />
+
+            <strong>REMEMBER V-ING</strong>
+            → nhớ đã làm
+          </div>
+
+          <div class="note">
+            <strong>STOP TO-V</strong>
+            → dừng để làm
+            <br /><br />
+
+            <strong>STOP V-ING</strong>
+            → dừng làm
+          </div>
+
+          <div class="note">
+            <strong>TRY TO-V</strong>
+            → cố gắng làm
+            <br /><br />
+
+            <strong>TRY V-ING</strong>
+            → thử làm
+          </div>
+
+          <div class="note">
+            <strong>FORGET TO-V</strong>
+            → quên làm
+            <br /><br />
+
+            <strong>FORGET V-ING</strong>
+            → quên đã làm
+          </div>
+
+          <div class="note">
+            <strong>REGRET TO-V</strong>
+            → tiếc khi phải nói/làm
+            <br /><br />
+
+            <strong>REGRET V-ING</strong>
+            → hối tiếc đã làm
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE 22 - FINAL -->
+      <section class="page">
+        <div class="content-card final-box">
+          <div class="big-emoji">🎉</div>
+
+          <h2>Great Job!</h2>
+
+          <p>
+            You have finished the grammar lesson
+            <strong>Our Experiences</strong>.
+          </p>
+
+          <p>
+            Now it's time to test your knowledge and practise
+            <strong>To-Infinitive & V-ing</strong>.
+          </p>
+
+          <a href="quiz6.html" class="quiz-button"> 📝 Làm bài tập </a>
+
+          <a href="course6.html" class="quiz-button home-button">
+            🏠 Quay về trang chủ
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <!-- =========================
+       NAVIGATION
+  ========================= -->
+
+    <div class="navigation">
+      <button class="nav-btn prev-btn" id="prevBtn" onclick="changePage(-1)">
+        ← Previous
+      </button>
+
+      <div class="page-number" id="pageNumber">1 / 22</div>
+
+      <button class="nav-btn next-btn" id="nextBtn" onclick="changePage(1)">
+        Next →
+      </button>
+    </div>
+
+    <!-- =========================
+       JAVASCRIPT
+  ========================= -->
+
+    <script>
+      const pages = document.querySelectorAll(".page");
+
+      const prevBtn = document.getElementById("prevBtn");
+
+      const nextBtn = document.getElementById("nextBtn");
+
+      const pageNumber = document.getElementById("pageNumber");
+
+      const progressBar = document.getElementById("progressBar");
+
+      let currentPage = 0;
+
+      function showPage(index) {
+        pages.forEach((page, i) => {
+          page.classList.toggle("active", i === index);
+        });
+
+        // Update page number
+
+        pageNumber.textContent = `${index + 1} / ${pages.length}`;
+
+        // Disable previous button
+
+        prevBtn.disabled = index === 0;
+
+        // Change next button on final page
+
+        if (index === pages.length - 1) {
+          nextBtn.style.display = "none";
+        } else {
+          nextBtn.style.display = "block";
+        }
+
+        // Update progress
+
+        const progress = ((index + 1) / pages.length) * 100;
+
+        progressBar.style.width = progress + "%";
+
+        // Scroll to top
+
+        window.scrollTo({
+          top: 0,
+
+          behavior: "smooth",
+        });
+      }
+
+      function changePage(direction) {
+        const newPage = currentPage + direction;
+
+        if (newPage >= 0 && newPage < pages.length) {
+          currentPage = newPage;
+
+          showPage(currentPage);
+        }
+      }
+
+      // Keyboard navigation
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "ArrowRight") {
+          changePage(1);
+        }
+
+        if (event.key === "ArrowLeft") {
+          changePage(-1);
+        }
+      });
+
+      // Initialize
+
+      showPage(currentPage);
+    </script>
+  </body>
+</html>

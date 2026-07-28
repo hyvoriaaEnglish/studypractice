@@ -1,0 +1,1370 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Remembering the Past – Practice</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Oswald:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Baloo 2", sans-serif;
+        background: #f7f4ef;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      /* =========================
+       HEADER
+    ========================= */
+
+      header {
+        background: #263238;
+        color: white;
+        padding: 20px 7%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .logo {
+        font-family: "Oswald", sans-serif;
+        font-size: 25px;
+        letter-spacing: 1px;
+      }
+
+      .lesson-label {
+        font-size: 15px;
+        opacity: 0.9;
+      }
+
+      /* =========================
+       PROGRESS BAR
+    ========================= */
+
+      .progress-container {
+        height: 7px;
+        background: #ddd;
+        position: sticky;
+        top: 76px;
+        z-index: 999;
+      }
+
+      .progress-bar {
+        height: 100%;
+        width: 0%;
+        background: #ff8a65;
+        transition: width 0.3s ease;
+      }
+
+      /* =========================
+       HERO
+    ========================= */
+
+      .hero {
+        background: #ff8a65;
+        color: white;
+        padding: 55px 20px;
+        text-align: center;
+      }
+
+      .hero h1 {
+        font-family: "Oswald", sans-serif;
+        font-size: 42px;
+        letter-spacing: 1px;
+        margin-bottom: 10px;
+      }
+
+      .hero p {
+        font-size: 19px;
+      }
+
+      /* =========================
+       MAIN
+    ========================= */
+
+      main {
+        width: 90%;
+        max-width: 950px;
+        margin: 40px auto;
+      }
+
+      /* =========================
+       SECTION
+    ========================= */
+
+      .section-title {
+        background: #263238;
+        color: white;
+        padding: 18px 25px;
+        border-radius: 15px;
+        margin: 50px 0 25px;
+        font-size: 25px;
+        font-weight: 700;
+      }
+
+      .section-description {
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        margin-bottom: 25px;
+        border-left: 5px solid #ff8a65;
+      }
+
+      /* =========================
+       QUESTION CARD
+    ========================= */
+
+      .question-card {
+        background: white;
+        border-radius: 16px;
+        padding: 25px;
+        margin-bottom: 22px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      }
+
+      .question-number {
+        font-size: 19px;
+        font-weight: 700;
+        color: #263238;
+        margin-bottom: 15px;
+      }
+
+      .question-text {
+        font-size: 17px;
+        margin-bottom: 15px;
+      }
+
+      /* =========================
+       OPTIONS
+    ========================= */
+
+      .options {
+        display: grid;
+        gap: 10px;
+      }
+
+      .option {
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        padding: 12px 15px;
+        cursor: pointer;
+        background: #fafafa;
+        transition: 0.2s;
+        font-size: 16px;
+      }
+
+      .option:hover {
+        border-color: #ff8a65;
+        background: #fff4ef;
+      }
+
+      .option.correct {
+        background: #e8f5e9;
+        border-color: #43a047;
+        color: #2e7d32;
+        font-weight: 700;
+      }
+
+      .option.wrong {
+        background: #ffebee;
+        border-color: #e53935;
+        color: #c62828;
+        font-weight: 700;
+      }
+
+      .option.disabled {
+        cursor: default;
+      }
+
+      /* =========================
+       FEEDBACK
+    ========================= */
+
+      .feedback {
+        display: none;
+        margin-top: 18px;
+        padding: 15px;
+        border-radius: 10px;
+        font-size: 15px;
+      }
+
+      .feedback.show {
+        display: block;
+      }
+
+      .feedback.correct-feedback {
+        background: #e8f5e9;
+        border-left: 5px solid #43a047;
+      }
+
+      .feedback.wrong-feedback {
+        background: #ffebee;
+        border-left: 5px solid #e53935;
+      }
+
+      .feedback strong {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      /* =========================
+       WRITING QUESTIONS
+    ========================= */
+
+      .answer-input {
+        width: 100%;
+        min-height: 80px;
+        border: 2px solid #ddd;
+        border-radius: 10px;
+        padding: 12px;
+        font-family: inherit;
+        font-size: 16px;
+        resize: vertical;
+        margin-top: 10px;
+      }
+
+      .answer-input:focus {
+        outline: none;
+        border-color: #ff8a65;
+      }
+
+      .check-btn {
+        margin-top: 12px;
+        border: none;
+        background: #263238;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-family: inherit;
+        font-size: 15px;
+        cursor: pointer;
+      }
+
+      .check-btn:hover {
+        background: #455a64;
+      }
+
+      /* =========================
+       FOOTER NAVIGATION
+    ========================= */
+
+      .navigation {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+        margin: 60px 0 30px;
+        flex-wrap: wrap;
+      }
+
+      .nav-btn {
+        text-decoration: none;
+        padding: 14px 28px;
+        border-radius: 10px;
+        font-weight: 700;
+        color: white;
+        background: #263238;
+        transition: 0.2s;
+      }
+
+      .nav-btn:hover {
+        transform: translateY(-2px);
+        opacity: 0.9;
+      }
+
+      .next-btn {
+        background: #ff8a65;
+      }
+
+      footer {
+        text-align: center;
+        padding: 30px;
+        background: #263238;
+        color: white;
+        margin-top: 50px;
+      }
+
+      /* =========================
+       MOBILE
+    ========================= */
+
+      @media (max-width: 700px) {
+        header {
+          flex-direction: column;
+          gap: 5px;
+          text-align: center;
+        }
+
+        .progress-container {
+          top: 105px;
+        }
+
+        .hero h1 {
+          font-size: 32px;
+        }
+
+        .question-card {
+          padding: 18px;
+        }
+
+        .navigation {
+          flex-direction: column;
+        }
+
+        .nav-btn {
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- =========================
+       HEADER
+  ========================= -->
+
+    <header>
+      <div class="logo">Hyvoria English</div>
+      <div class="lesson-label">Practice • Remembering the Past</div>
+    </header>
+
+    <!-- PROGRESS BAR -->
+
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- =========================
+       HERO
+  ========================= -->
+
+    <section class="hero">
+      <h1>📚 REMEMBERING THE PAST</h1>
+      <p>Past Perfect • Wish + Past Simple • Vocabulary</p>
+    </section>
+
+    <main>
+      <!-- =====================================================
+         PART 1
+    ====================================================== -->
+
+      <div class="section-title">PART 1. PAST PERFECT – QUÁ KHỨ HOÀN THÀNH</div>
+
+      <div class="section-description">
+        <strong>Choose the best answer.</strong>
+        <br />
+        Click an answer to see whether it is correct and read the explanation.
+      </div>
+
+      <div id="part1"></div>
+
+      <!-- =====================================================
+         PART 2
+    ====================================================== -->
+
+      <div class="section-title">PART 2. WISH + PAST SIMPLE</div>
+
+      <div class="section-description">
+        Choose the correct answer. Remember:
+        <strong>Wish + Past Simple</strong> expresses a wish that is contrary to
+        the present reality.
+      </div>
+
+      <div id="part2"></div>
+
+      <!-- =====================================================
+         PART 3
+    ====================================================== -->
+
+      <div class="section-title">
+        PART 3. PAST PERFECT OR WISH + PAST SIMPLE?
+      </div>
+
+      <div id="part3"></div>
+
+      <!-- =====================================================
+         PART 4
+    ====================================================== -->
+
+      <div class="section-title">PART 4. VOCABULARY IN CONTEXT</div>
+
+      <div id="part4"></div>
+
+      <!-- =====================================================
+         PART 5
+    ====================================================== -->
+
+      <div class="section-title">PART 5. MIXED PRACTICE 🔥</div>
+
+      <div id="part5"></div>
+
+      <!-- =====================================================
+         PART 6
+    ====================================================== -->
+
+      <div class="section-title">PART 6. SENTENCE TRANSFORMATION</div>
+
+      <div class="section-description">
+        Write your answer in the box and click
+        <strong>Check Answer</strong>.
+      </div>
+
+      <div id="part6"></div>
+
+      <!-- =====================================================
+         NAVIGATION
+    ====================================================== -->
+
+      <div class="navigation">
+        <!-- THAY LINK HOME Ở ĐÂY -->
+        <a href="course4.html" class="nav-btn"> 🏠 Home </a>
+
+        <!-- THAY LINK BÀI GIẢNG Ở ĐÂY -->
+        <a href="course4.html" class="nav-btn"> 📖 Back to Lesson </a>
+      </div>
+    </main>
+
+    <footer>
+      <p>© 2026 Hyvoria English • Learn. Practice. Improve.</p>
+    </footer>
+
+    <script>
+      /* =====================================================
+       QUESTION DATA
+    ====================================================== */
+
+      const questions = [
+        /* ================= PART 1 ================= */
+
+        {
+          part: "part1",
+          q: "When we arrived at the ancient castle, the tour guide ______ already ______ the history of the building.",
+          options: [
+            "A. has / explained",
+            "B. had / explained",
+            "C. was / explaining",
+            "D. did / explain",
+          ],
+          answer: 1,
+          explanation:
+            "The tour guide explained the history before we arrived. The earlier past action uses Past Perfect: had + V3.",
+        },
+
+        {
+          part: "part1",
+          q: "By the time the anniversary ceremony began, the local government ______ the monument.",
+          options: [
+            "A. had already restored",
+            "B. already restores",
+            "C. has already restored",
+            "D. was restoring",
+          ],
+          answer: 0,
+          explanation:
+            "The restoration happened before the ceremony began, so Past Perfect is needed: had already restored.",
+        },
+
+        {
+          part: "part1",
+          q: "The old castle ______ for several generations before it became a popular tourist attraction.",
+          options: [
+            "A. had existed",
+            "B. exists",
+            "C. has existed",
+            "D. was exist",
+          ],
+          answer: 0,
+          explanation:
+            "The castle existed before it became a tourist attraction. The earlier action uses Past Perfect: had existed.",
+        },
+
+        {
+          part: "part1",
+          q: "When I visited my grandparents' village, I discovered that many young people ______ to the city.",
+          options: ["A. move", "B. have moved", "C. had moved", "D. were move"],
+          answer: 2,
+          explanation:
+            "The young people moved before I visited the village, so Past Perfect is used: had moved.",
+        },
+
+        {
+          part: "part1",
+          q: "Before the new shopping centre was built, this area ______ by a traditional communal house.",
+          options: [
+            "A. had been occupied",
+            "B. has occupied",
+            "C. occupied",
+            "D. was occupying",
+          ],
+          answer: 0,
+          explanation:
+            "The communal house occupied the area before the shopping centre was built. We use Past Perfect Passive: had been occupied.",
+        },
+
+        {
+          part: "part1",
+          q: "By the time we arrived at the festival, people ______ the traditional religious ceremony.",
+          options: [
+            "A. already observed",
+            "B. had already observed",
+            "C. have already observed",
+            "D. are observing",
+          ],
+          answer: 1,
+          explanation:
+            "The ceremony was observed before we arrived, so Past Perfect is required: had already observed.",
+        },
+
+        {
+          part: "part1",
+          q: "When the younger generation returned to the village, the elders told them that the monument ______ many historical events.",
+          options: [
+            "A. witnessed",
+            "B. has witnessed",
+            "C. had witnessed",
+            "D. was witnessing",
+          ],
+          answer: 2,
+          explanation:
+            "The monument witnessed the events before the younger generation returned, so Past Perfect is used.",
+        },
+
+        {
+          part: "part1",
+          q: "The local people ______ the ancient structure for many years before experts came to recognise its historical value.",
+          options: [
+            "A. had protected",
+            "B. protect",
+            "C. have protected",
+            "D. were protect",
+          ],
+          answer: 0,
+          explanation:
+            "The protection happened for years before the experts came. Therefore, Past Perfect is used: had protected.",
+        },
+
+        {
+          part: "part1",
+          q: "After the organisation ______ the deep-rooted tradition, it decided to promote it among younger generations.",
+          options: [
+            "A. had recognised",
+            "B. recognises",
+            "C. has recognised",
+            "D. was recognising",
+          ],
+          answer: 0,
+          explanation:
+            "The organisation recognised the tradition first and then decided to promote it. The earlier action uses Past Perfect.",
+        },
+
+        {
+          part: "part1",
+          q: "By the time the anniversary celebration started, the villagers ______ all the traditional food, including fish and chips and other takeaway dishes.",
+          options: [
+            "A. prepared",
+            "B. have prepared",
+            "C. had prepared",
+            "D. are preparing",
+          ],
+          answer: 2,
+          explanation:
+            "The villagers prepared the food before the celebration started. Therefore, Past Perfect is used: had prepared.",
+        },
+
+        /* ================= PART 2 ================= */
+
+        {
+          part: "part2",
+          q: "I wish I ______ more about the ancient castle in my hometown.",
+          options: ["A. know", "B. knew", "C. had known", "D. will know"],
+          answer: 1,
+          explanation:
+            "Wish + Past Simple expresses a present wish contrary to reality. 'I wish I knew' means I don't know enough now.",
+        },
+
+        {
+          part: "part2",
+          q: "My grandmother wishes she ______ closer to the communal house.",
+          options: ["A. lives", "B. lived", "C. has lived", "D. will live"],
+          answer: 1,
+          explanation:
+            "This is a present unreal wish, so we use Past Simple: lived.",
+        },
+
+        {
+          part: "part2",
+          q: "I wish young people ______ more about our deep-rooted cultural traditions.",
+          options: [
+            "A. understand",
+            "B. understood",
+            "C. had understood",
+            "D. will understand",
+          ],
+          answer: 1,
+          explanation:
+            "The speaker wishes the present situation were different. Therefore, use Past Simple: understood.",
+        },
+
+        {
+          part: "part2",
+          q: "We wish our town ______ more ancient monuments.",
+          options: ["A. has", "B. had", "C. had had", "D. will have"],
+          answer: 1,
+          explanation:
+            "The wish concerns the present, so use Past Simple: had.",
+        },
+
+        {
+          part: "part2",
+          q: "I wish I ______ the opportunity to visit that religious monument.",
+          options: ["A. have", "B. had", "C. had had", "D. will have"],
+          answer: 1,
+          explanation:
+            "The speaker does not have the opportunity now. Wish + Past Simple is used: had.",
+        },
+
+        {
+          part: "part2",
+          q: "She wishes she ______ how to observe the traditional ceremony properly.",
+          options: ["A. knows", "B. knew", "C. had known", "D. will know"],
+          answer: 1,
+          explanation:
+            "This is a present wish about knowledge. Use Past Simple: knew.",
+        },
+
+        {
+          part: "part2",
+          q: "I wish my grandparents ______ still here to tell me stories about the past.",
+          options: ["A. are", "B. were", "C. had been", "D. will be"],
+          answer: 1,
+          explanation:
+            "For an unreal present situation with 'be', standard English uses were: I wish my grandparents were still here.",
+        },
+
+        {
+          part: "part2",
+          q: "The younger generation wishes they ______ more face-to-face time with their grandparents.",
+          options: ["A. have", "B. had", "C. had had", "D. will have"],
+          answer: 1,
+          explanation:
+            "The wish concerns something they do not have enough of now. Use Past Simple: had.",
+        },
+
+        {
+          part: "part2",
+          q: "I wish our city ______ more to promote its ancient cultural heritage.",
+          options: ["A. does", "B. did", "C. had done", "D. will do"],
+          answer: 1,
+          explanation:
+            "This is a present wish about what the city does. Use Past Simple: did.",
+        },
+
+        {
+          part: "part2",
+          q: "We wish people ______ the importance of preserving old structures.",
+          options: [
+            "A. recognise",
+            "B. recognised",
+            "C. had recognised",
+            "D. will recognise",
+          ],
+          answer: 1,
+          explanation:
+            "The speaker wants the present situation to be different. Therefore, use Past Simple: recognised.",
+        },
+
+        /* ================= PART 3 ================= */
+
+        {
+          part: "part3",
+          q: "When I returned to my hometown, I realised that the ancient castle ______.",
+          options: [
+            "A. had disappeared",
+            "B. disappeared",
+            "C. has disappeared",
+            "D. disappears",
+          ],
+          answer: 0,
+          explanation:
+            "The castle disappeared before I returned and realised it. The earlier past action uses Past Perfect.",
+        },
+
+        {
+          part: "part3",
+          q: "I wish the ancient castle ______ still standing today.",
+          options: ["A. is", "B. was", "C. were", "D. had been"],
+          answer: 2,
+          explanation:
+            "This is an unreal present wish. With 'be', standard English uses were for all subjects.",
+        },
+
+        {
+          part: "part3",
+          q: "By the time we arrived, the anniversary ceremony ______.",
+          options: [
+            "A. had already begun",
+            "B. already begins",
+            "C. has already begun",
+            "D. was begin",
+          ],
+          answer: 0,
+          explanation:
+            "The ceremony began before we arrived, so Past Perfect is needed.",
+        },
+
+        {
+          part: "part3",
+          q: "I wish I ______ more time to learn about my family's history.",
+          options: ["A. have", "B. had", "C. had had", "D. will have"],
+          answer: 1,
+          explanation:
+            "The speaker does not have enough time now. Wish + Past Simple: had.",
+        },
+
+        {
+          part: "part3",
+          q: "When the tourists arrived, the local people ______ the traditional ceremony.",
+          options: [
+            "A. had already finished",
+            "B. already finish",
+            "C. have already finished",
+            "D. are finishing",
+          ],
+          answer: 0,
+          explanation:
+            "The ceremony finished before the tourists arrived. Use Past Perfect.",
+        },
+
+        {
+          part: "part3",
+          q: "I wish more teenagers ______ interested in deep-rooted traditions.",
+          options: ["A. are", "B. were", "C. had been", "D. will be"],
+          answer: 1,
+          explanation: "This is a present unreal wish. Use were.",
+        },
+
+        {
+          part: "part3",
+          q: "After the government ______ the monument, more tourists came to visit it.",
+          options: [
+            "A. had restored",
+            "B. restores",
+            "C. has restored",
+            "D. was restoring",
+          ],
+          answer: 0,
+          explanation:
+            "The restoration happened before tourists came. Use Past Perfect.",
+        },
+
+        {
+          part: "part3",
+          q: "I wish my hometown ______ more traditional communal houses.",
+          options: ["A. has", "B. had", "C. had had", "D. will have"],
+          answer: 1,
+          explanation:
+            "The wish concerns the present number of communal houses. Use Past Simple: had.",
+        },
+
+        {
+          part: "part3",
+          q: "By the time I met my grandparents, they ______ the story of our family to my parents.",
+          options: [
+            "A. had already told",
+            "B. already tell",
+            "C. have already told",
+            "D. were tell",
+          ],
+          answer: 0,
+          explanation:
+            "They told the story before I met them. Therefore, Past Perfect is used.",
+        },
+
+        {
+          part: "part3",
+          q: "I wish young people ______ more face-to-face conversations with older generations.",
+          options: ["A. have", "B. had", "C. had had", "D. will have"],
+          answer: 1,
+          explanation:
+            "This is a present wish about the amount of face-to-face communication. Use Past Simple: had.",
+        },
+
+        /* ================= PART 4 ================= */
+
+        {
+          part: "part4",
+          q: "The ______ castle attracts thousands of visitors every year.",
+          options: ["A. ancient", "B. basic", "C. barefoot", "D. takeaway"],
+          answer: 0,
+          explanation: "An ancient castle is a very old castle.",
+        },
+
+        {
+          part: "part4",
+          q: "Our town is going to celebrate its 100th ______ next month.",
+          options: [
+            "A. generation",
+            "B. anniversary",
+            "C. structure",
+            "D. monument",
+          ],
+          answer: 1,
+          explanation:
+            "An anniversary marks a date or event that happened in a previous year.",
+        },
+
+        {
+          part: "part4",
+          q: "In some traditional festivals, people walk ______ as part of a cultural ritual.",
+          options: ["A. complex", "B. barefoot", "C. communal", "D. religious"],
+          answer: 1,
+          explanation: "Barefoot means without wearing shoes or socks.",
+        },
+
+        {
+          part: "part4",
+          q: "The villagers share a ______ kitchen where everyone can prepare food together.",
+          options: ["A. ancient", "B. basic", "C. communal", "D. deep-rooted"],
+          answer: 2,
+          explanation: "Communal means shared by members of a community.",
+        },
+
+        {
+          part: "part4",
+          q: "The transport system in modern cities is becoming increasingly ______.",
+          options: ["A. barefoot", "B. complex", "C. ancient", "D. religious"],
+          answer: 1,
+          explanation:
+            "Complex means complicated and consisting of many connected parts.",
+        },
+
+        {
+          part: "part4",
+          q: "The tradition is ______ in the local community and has been passed down for generations.",
+          options: [
+            "A. basic",
+            "B. deep-rooted",
+            "C. takeaway",
+            "D. face-to-face",
+          ],
+          answer: 1,
+          explanation:
+            "Deep-rooted describes something strongly established over a long period.",
+        },
+
+        {
+          part: "part4",
+          q: "Many young people prefer ______ communication to chatting through social media.",
+          options: [
+            "A. ancient",
+            "B. face-to-face",
+            "C. communal",
+            "D. religious",
+          ],
+          answer: 1,
+          explanation:
+            "Face-to-face communication happens when people communicate in person.",
+        },
+
+        {
+          part: "part4",
+          q: "The local government wants to ______ traditional culture among younger generations.",
+          options: ["A. occupy", "B. promote", "C. recognise", "D. found"],
+          answer: 1,
+          explanation: "Promote means to support or encourage something.",
+        },
+
+        {
+          part: "part4",
+          q: "The museum was ______ in 1925 by a group of local historians.",
+          options: [
+            "A. recognised",
+            "B. observed",
+            "C. founded",
+            "D. occupied",
+          ],
+          answer: 2,
+          explanation: "Founded means established or officially started.",
+        },
+
+        {
+          part: "part4",
+          q: "The city built a large ______ to honour the soldiers who had protected the country.",
+          options: [
+            "A. monument",
+            "B. takeaway",
+            "C. generation",
+            "D. anniversary",
+          ],
+          answer: 0,
+          explanation:
+            "A monument is a structure built to remember or honour a person or event.",
+        },
+
+        {
+          part: "part4",
+          q: "The local people still ______ the traditional religious festival every year.",
+          options: ["A. occupy", "B. observe", "C. found", "D. recognise"],
+          answer: 1,
+          explanation:
+            "Observe can mean to celebrate or follow a tradition, ceremony, or festival.",
+        },
+
+        {
+          part: "part4",
+          q: "The old building was once used to ______ an important government office.",
+          options: ["A. occupy", "B. promote", "C. observe", "D. found"],
+          answer: 0,
+          explanation: "Occupy means to use or take up a place or building.",
+        },
+
+        {
+          part: "part4",
+          q: "The town has finally ______ the historical importance of the ancient structure.",
+          options: [
+            "A. occupied",
+            "B. recognised",
+            "C. promoted",
+            "D. observed",
+          ],
+          answer: 1,
+          explanation:
+            "Recognise means to realise or accept the importance or truth of something.",
+        },
+
+        {
+          part: "part4",
+          q: "The traditional British dish of ______ is popular with tourists.",
+          options: [
+            "A. fish and chips",
+            "B. face-to-face",
+            "C. communal",
+            "D. basic",
+          ],
+          answer: 0,
+          explanation:
+            "Fish and chips is a traditional British dish consisting of fried fish and chips.",
+        },
+
+        {
+          part: "part4",
+          q: "We bought a ______ meal because we didn't have enough time to cook.",
+          options: [
+            "A. religious",
+            "B. deep-rooted",
+            "C. takeaway",
+            "D. ancient",
+          ],
+          answer: 2,
+          explanation:
+            "A takeaway meal is food bought from a restaurant or shop to eat elsewhere.",
+        },
+
+        /* ================= PART 5 ================= */
+
+        {
+          part: "part5",
+          q: "When I visited my hometown last year, I discovered that the old communal house ______ into a museum.",
+          options: [
+            "A. had been turned",
+            "B. was turned",
+            "C. has turned",
+            "D. turns",
+          ],
+          answer: 0,
+          explanation:
+            "The building was turned into a museum before I visited it. The earlier action uses Past Perfect Passive: had been turned.",
+        },
+
+        {
+          part: "part5",
+          q: "I wish my grandparents ______ still alive so that I could ask them about our family traditions.",
+          options: ["A. are", "B. were", "C. had been", "D. will be"],
+          answer: 1,
+          explanation:
+            "This expresses an unreal situation in the present. With 'be' after wish, use were.",
+        },
+
+        {
+          part: "part5",
+          q: "By the time the younger generation returned, the local people ______ the ancient monument.",
+          options: [
+            "A. had already restored",
+            "B. already restore",
+            "C. have already restored",
+            "D. are restoring",
+          ],
+          answer: 0,
+          explanation:
+            "The monument was restored before the younger generation returned. Use Past Perfect.",
+        },
+
+        {
+          part: "part5",
+          q: "I wish I ______ how important this deep-rooted tradition was when I was younger.",
+          options: [
+            "A. realise",
+            "B. realised",
+            "C. had realised",
+            "D. will realise",
+          ],
+          answer: 2,
+          explanation:
+            "This wish refers to a regret about the past, so Past Perfect is used: had realised.",
+        },
+
+        {
+          part: "part5",
+          q: "After the town ______ its 500th anniversary, the local government decided to promote its cultural heritage.",
+          options: [
+            "A. had celebrated",
+            "B. celebrates",
+            "C. has celebrated",
+            "D. was celebrating",
+          ],
+          answer: 0,
+          explanation:
+            "The anniversary celebration happened before the government made the decision. Use Past Perfect.",
+        },
+
+        {
+          part: "part5",
+          q: "I wish young people ______ more interested in the history of their hometowns.",
+          options: ["A. are", "B. were", "C. had been", "D. will be"],
+          answer: 1,
+          explanation: "This is a present unreal wish. Use were.",
+        },
+
+        {
+          part: "part5",
+          q: "When we arrived at the ancient castle, the guide told us that it ______ by a famous king hundreds of years earlier.",
+          options: [
+            "A. had been founded",
+            "B. was founded",
+            "C. has been founded",
+            "D. is founded",
+          ],
+          answer: 0,
+          explanation:
+            "The castle was founded before the time we arrived. Past Perfect Passive is used: had been founded.",
+        },
+
+        {
+          part: "part5",
+          q: "I wish our school ______ more activities to help students recognise the importance of local culture.",
+          options: [
+            "A. organises",
+            "B. organised",
+            "C. had organised",
+            "D. will organise",
+          ],
+          answer: 1,
+          explanation:
+            "The speaker wishes the school did more now. Use Wish + Past Simple: organised.",
+        },
+
+        {
+          part: "part5",
+          q: "By the time the festival started, the villagers ______ the communal area and prepared traditional food.",
+          options: [
+            "A. had decorated",
+            "B. decorate",
+            "C. have decorated",
+            "D. are decorating",
+          ],
+          answer: 0,
+          explanation:
+            "The decoration happened before the festival started. Use Past Perfect.",
+        },
+
+        {
+          part: "part5",
+          q: "I wish I ______ more face-to-face conversations with my grandparents before they passed away.",
+          options: ["A. have", "B. had", "C. had had", "D. will have"],
+          answer: 2,
+          explanation:
+            "This expresses regret about something that did not happen enough in the past. Use Wish + Past Perfect: had had.",
+        },
+      ];
+
+      /* =====================================================
+       RENDER MULTIPLE CHOICE QUESTIONS
+    ====================================================== */
+
+      function renderQuestions() {
+        questions.forEach((item, index) => {
+          const container = document.getElementById(item.part);
+
+          const card = document.createElement("div");
+
+          card.className = "question-card";
+
+          card.innerHTML = `
+          <div class="question-number">
+            Question ${index + 1}
+          </div>
+
+          <div class="question-text">
+            ${item.q}
+          </div>
+
+          <div class="options">
+            ${item.options
+              .map(
+                (option, optionIndex) => `
+              <div
+                class="option"
+                onclick="checkAnswer(this, ${index}, ${optionIndex})"
+              >
+                ${option}
+              </div>
+            `,
+              )
+              .join("")}
+          </div>
+
+          <div class="feedback" id="feedback-${index}"></div>
+        `;
+
+          container.appendChild(card);
+        });
+      }
+
+      /* =====================================================
+       CHECK ANSWER
+    ====================================================== */
+
+      function checkAnswer(element, questionIndex, selectedIndex) {
+        const question = questions[questionIndex];
+
+        const feedback = document.getElementById(`feedback-${questionIndex}`);
+
+        const options = element.parentElement.querySelectorAll(".option");
+
+        /* Prevent changing answer */
+
+        if (feedback.classList.contains("show")) {
+          return;
+        }
+
+        /* Disable all options */
+
+        options.forEach((option) => {
+          option.classList.add("disabled");
+        });
+
+        /* Correct answer */
+
+        options[question.answer].classList.add("correct");
+
+        if (selectedIndex === question.answer) {
+          element.classList.add("correct");
+
+          feedback.className = "feedback show correct-feedback";
+
+          feedback.innerHTML = `
+          <strong>✅ Correct!</strong>
+          ${question.explanation}
+        `;
+        } else {
+          element.classList.add("wrong");
+
+          feedback.className = "feedback show wrong-feedback";
+
+          feedback.innerHTML = `
+          <strong>❌ Incorrect!</strong>
+          <strong>Correct answer: ${question.options[question.answer]}</strong>
+          ${question.explanation}
+        `;
+        }
+
+        updateProgress();
+      }
+
+      /* =====================================================
+       PROGRESS
+    ====================================================== */
+
+      function updateProgress() {
+        const answered = document.querySelectorAll(".feedback.show").length;
+
+        const total = questions.length + 10;
+
+        let progress = Math.min((answered / total) * 100, 100);
+
+        document.getElementById("progressBar").style.width = progress + "%";
+      }
+
+      /* =====================================================
+       PART 6 – SENTENCE TRANSFORMATION
+    ====================================================== */
+
+      const transformations = [
+        {
+          q: "I don't know much about the history of my hometown.",
+          answer: "I wish I knew more about the history of my hometown.",
+          explanation:
+            "The sentence expresses a present situation the speaker wants to be different. Use Wish + Past Simple: knew.",
+        },
+
+        {
+          q: "The government restored the monument before tourists arrived.",
+          answer:
+            "By the time tourists arrived, the government had restored the monument.",
+          explanation:
+            "The restoration happened before tourists arrived, so use Past Perfect: had restored.",
+        },
+
+        {
+          q: "I don't have enough time to visit the ancient castle.",
+          answer: "I wish I had enough time to visit the ancient castle.",
+          explanation:
+            "This is a present unreal wish. Use Wish + Past Simple: had.",
+        },
+
+        {
+          q: "The villagers finished preparing the communal area before the ceremony started.",
+          answer:
+            "The villagers had finished preparing the communal area before the ceremony started.",
+          explanation:
+            "The preparation was completed before another past action, so use Past Perfect.",
+        },
+
+        {
+          q: "My hometown doesn't have many ancient structures.",
+          answer: "I wish my hometown had more ancient structures.",
+          explanation:
+            "This is a present wish contrary to reality. Use Wish + Past Simple: had.",
+        },
+
+        {
+          q: "The museum was founded before I was born.",
+          answer: "The museum had been founded before I was born.",
+          explanation:
+            "The museum was founded before another past event, so Past Perfect Passive is used.",
+        },
+
+        {
+          q: "I can't speak face-to-face with my grandparents anymore.",
+          answer: "I wish I could speak face-to-face with my grandparents.",
+          explanation:
+            "The speaker wishes the present situation were different. Use wish + could.",
+        },
+
+        {
+          q: "The local people recognised the importance of the monument after experts had studied it.",
+          answer:
+            "Before the local people recognised its importance, experts had studied it.",
+          explanation:
+            "The experts' study happened first, so Past Perfect is used: had studied.",
+        },
+
+        {
+          q: "Young people don't know enough about deep-rooted traditions.",
+          answer: "I wish young people knew more about deep-rooted traditions.",
+          explanation:
+            "This is a present unreal wish. Use Wish + Past Simple: knew.",
+        },
+
+        {
+          q: "The town had celebrated its anniversary before the visitors arrived.",
+          answer:
+            "Before the visitors arrived, the town had celebrated its anniversary.",
+          explanation:
+            "The anniversary celebration happened first, so Past Perfect is used.",
+        },
+      ];
+
+      function renderTransformations() {
+        const container = document.getElementById("part6");
+
+        transformations.forEach((item, index) => {
+          const card = document.createElement("div");
+
+          card.className = "question-card";
+
+          card.innerHTML = `
+
+          <div class="question-number">
+            Question ${index + 56}
+          </div>
+
+          <div class="question-text">
+            ${item.q}
+          </div>
+
+          <textarea
+            class="answer-input"
+            id="input-${index}"
+            placeholder="Write your answer here..."
+          ></textarea>
+
+          <button
+            class="check-btn"
+            onclick="checkTransformation(${index})"
+          >
+            Check Answer
+          </button>
+
+          <div
+            class="feedback"
+            id="transform-feedback-${index}"
+          ></div>
+
+        `;
+
+          container.appendChild(card);
+        });
+      }
+
+      function checkTransformation(index) {
+        const input = document.getElementById(`input-${index}`).value.trim();
+
+        const feedback = document.getElementById(`transform-feedback-${index}`);
+
+        if (input === "") {
+          feedback.className = "feedback show wrong-feedback";
+
+          feedback.innerHTML = `
+          <strong>⚠️ Please write an answer first.</strong>
+          Try to complete the sentence before checking.
+        `;
+
+          return;
+        }
+
+        feedback.className = "feedback show correct-feedback";
+
+        feedback.innerHTML = `
+        <strong>💡 Suggested answer:</strong>
+        ${transformations[index].answer}
+
+        <br><br>
+
+        <strong>📌 Explanation:</strong>
+        ${transformations[index].explanation}
+      `;
+
+        updateProgress();
+      }
+
+      renderQuestions();
+      renderTransformations();
+    </script>
+  </body>
+</html>

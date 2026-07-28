@@ -1,0 +1,875 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Mixed Practice – Interactive Quiz</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f5f7fb;
+        color: #1f2937;
+      }
+
+      header {
+        background: linear-gradient(135deg, #4f46e5, #7c3aed);
+        color: white;
+        text-align: center;
+        padding: 45px 20px;
+      }
+
+      header h1 {
+        margin: 0 0 8px;
+      }
+
+      header p {
+        margin: 0;
+      }
+
+      .progress-box {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: white;
+        padding: 12px 5%;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      }
+
+      .progress-text {
+        font-weight: bold;
+      }
+
+      .progress {
+        height: 8px;
+        background: #e5e7eb;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-top: 7px;
+      }
+
+      .progress-bar {
+        height: 100%;
+        width: 0%;
+        background: #4f46e5;
+        transition: 0.3s;
+      }
+
+      .container {
+        width: min(1000px, 92%);
+        margin: 30px auto;
+      }
+
+      .section {
+        background: white;
+        padding: 25px;
+        margin-bottom: 25px;
+        border-radius: 18px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+      }
+
+      .section h2 {
+        color: #4338ca;
+        border-bottom: 2px solid #e5e7eb;
+        padding-bottom: 12px;
+      }
+
+      .question {
+        border: 1px solid #e5e7eb;
+        padding: 18px;
+        margin: 18px 0;
+        border-radius: 14px;
+      }
+
+      .question-title {
+        font-weight: bold;
+        margin-bottom: 15px;
+      }
+
+      .options {
+        display: grid;
+        gap: 10px;
+      }
+
+      .option {
+        padding: 12px 15px;
+        background: white;
+        border: 1px solid #d1d5db;
+        border-radius: 10px;
+        cursor: pointer;
+        text-align: left;
+        font-size: 15px;
+        transition: 0.2s;
+      }
+
+      .option:hover {
+        background: #eef2ff;
+        border-color: #6366f1;
+      }
+
+      .option.correct {
+        background: #dcfce7;
+        border-color: #16a34a;
+        color: #166534;
+      }
+
+      .option.wrong {
+        background: #fee2e2;
+        border-color: #dc2626;
+        color: #991b1b;
+      }
+
+      .option:disabled {
+        cursor: default;
+      }
+
+      .feedback {
+        display: none;
+        margin-top: 15px;
+        padding: 15px;
+        border-radius: 10px;
+      }
+
+      .feedback.show {
+        display: block;
+      }
+
+      .feedback.correct {
+        background: #f0fdf4;
+        color: #166534;
+      }
+
+      .feedback.wrong {
+        background: #fef2f2;
+        color: #991b1b;
+      }
+
+      .feedback strong {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      @media (max-width: 600px) {
+        .section {
+          padding: 16px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>📝 Mixed Practice – Interactive Quiz</h1>
+
+      <p>Local Community • City Life • Healthy Living for Teens</p>
+    </header>
+
+    <div class="progress-box">
+      <div class="progress-text">
+        Đã trả lời:
+        <span id="done">0</span>
+        /
+        <span id="total">0</span>
+      </div>
+
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+
+    <main class="container">
+      <div class="section">
+        <h2>📌 Hướng dẫn</h2>
+
+        <p>Bấm vào một đáp án để kiểm tra. Hệ thống sẽ tự động hiển thị:</p>
+
+        <ul>
+          <li>✅ ĐÚNG hoặc ❌ SAI</li>
+
+          <li>Đáp án đúng</li>
+
+          <li>Giải thích chi tiết</li>
+        </ul>
+
+        <p>Sau khi chọn đáp án, câu hỏi sẽ được khóa lại.</p>
+      </div>
+
+      <div id="quiz"></div>
+    </main>
+
+    <script>
+      /* =====================================================
+   DỮ LIỆU BÀI TẬP
+===================================================== */
+
+      const quizData = [
+        /* =========================
+PART 1
+========================= */
+
+        {
+          section: "PART 1. WH-WORDS + TO-INFINITIVE",
+
+          questions: [
+            {
+              q: "I don't know ______ to promote our local festival to young people.",
+              options: ["what", "how", "where", "which"],
+              answer: 1,
+              explain:
+                "How + to-infinitive được dùng để hỏi về cách thức làm một việc gì đó.",
+            },
+
+            {
+              q: "Can you tell me ______ to get to the ancient castle?",
+              options: ["what", "how", "who", "why"],
+              answer: 1,
+              explain:
+                "How to get to the ancient castle có nghĩa là 'cách để đến lâu đài cổ'.",
+            },
+
+            {
+              q: "Mai hasn't decided ______ to join the communal activity.",
+              options: ["whether", "why", "where", "who"],
+              answer: 0,
+              explain:
+                "Whether + to-infinitive được dùng khi nói về việc chưa quyết định có làm một việc hay không.",
+            },
+
+            {
+              q: "We don't know ______ to invite to the anniversary celebration.",
+              options: ["what", "where", "who", "how"],
+              answer: 2,
+              explain:
+                "Who to invite có nghĩa là 'mời ai'. Who đóng vai trò tân ngữ của invite.",
+            },
+
+            {
+              q: "The students are discussing ______ to observe the local tradition respectfully.",
+              options: ["how", "what", "who", "when"],
+              answer: 0,
+              explain:
+                "How to observe có nghĩa là 'cách thực hiện/tuân thủ' truyền thống địa phương một cách tôn trọng.",
+            },
+          ],
+        },
+
+        /* =========================
+PART 2
+========================= */
+
+        {
+          section: "PART 2. PHRASAL VERBS",
+
+          questions: [
+            {
+              q: "We should ______ our old traditions and pass them on to the next generation.",
+              options: ["give up", "carry on", "turn off", "look after"],
+              answer: 1,
+              explain:
+                "Carry on = tiếp tục. Câu nói về việc tiếp tục duy trì truyền thống và truyền lại cho thế hệ sau.",
+            },
+
+            {
+              q: "The city is trying to ______ the use of public transport to reduce pollution.",
+              options: ["cut down", "promote", "put off", "give away"],
+              answer: 1,
+              explain:
+                "Promote = thúc đẩy, khuyến khích. Thành phố muốn khuyến khích việc sử dụng phương tiện công cộng.",
+            },
+
+            {
+              q: "You should ______ unhealthy snacks and eat more fresh fruit.",
+              options: ["cut down on", "look up", "take after", "turn into"],
+              answer: 0,
+              explain:
+                "Cut down on = cắt giảm. Ở đây cần giảm lượng đồ ăn vặt không lành mạnh.",
+            },
+
+            {
+              q: "The local government wants to ______ the old monument instead of destroying it.",
+              options: ["take care of", "give up", "run out of", "turn off"],
+              answer: 0,
+              explain:
+                "Take care of = chăm sóc, bảo vệ. Chính quyền muốn bảo tồn tượng đài cũ.",
+            },
+
+            {
+              q: "If you want to stay healthy, you should ______ regular exercise.",
+              options: ["take up", "put off", "look for", "break down"],
+              answer: 0,
+              explain:
+                "Take up = bắt đầu một hoạt động mới. Take up regular exercise = bắt đầu tập thể dục thường xuyên.",
+            },
+
+            {
+              q: "The town has ______ many changes over the past few generations.",
+              options: [
+                "gone through",
+                "looked after",
+                "turned off",
+                "given up",
+              ],
+              answer: 0,
+              explain:
+                "Go through = trải qua. Thị trấn đã trải qua nhiều thay đổi.",
+            },
+
+            {
+              q: "Don't ______ your health just because you are busy studying.",
+              options: ["look after", "give up", "neglect", "take after"],
+              answer: 2,
+              explain:
+                "Neglect = bỏ bê, không quan tâm đúng mức. Không nên bỏ bê sức khỏe vì bận học.",
+            },
+
+            {
+              q: "We need to ______ a solution to the traffic problem.",
+              options: ["come up with", "turn down", "take off", "look after"],
+              answer: 0,
+              explain:
+                "Come up with = nghĩ ra, đưa ra một ý tưởng hoặc giải pháp.",
+            },
+          ],
+        },
+
+        /* =========================
+PART 3
+========================= */
+
+        {
+          section: "PART 3. DOUBLE COMPARATIVES – SO SÁNH KÉP",
+
+          questions: [
+            {
+              q: "The ______ the city becomes, the ______ traffic congestion there is.",
+              options: [
+                "crowded / worse",
+                "more crowded / worse",
+                "more crowded / more bad",
+                "most crowded / worst",
+              ],
+              answer: 1,
+              explain:
+                "Cấu trúc so sánh kép: The + comparative, the + comparative. Crowded → more crowded; bad → worse.",
+            },
+
+            {
+              q: "The more people use public transport, the ______ the air becomes.",
+              options: ["cleaner", "cleanest", "more clean", "clean"],
+              answer: 0,
+              explain:
+                "Clean có dạng so sánh hơn là cleaner. Cấu trúc: The more..., the cleaner...",
+            },
+
+            {
+              q: "The ______ teenagers exercise, the ______ they feel.",
+              options: [
+                "more / healthier",
+                "most / healthier",
+                "more / more healthy",
+                "much / healthiest",
+              ],
+              answer: 0,
+              explain:
+                "Cấu trúc đúng là The more + S + V, the comparative + S + V. Healthy → healthier.",
+            },
+
+            {
+              q: "The less fast food you eat, the ______ your diet will be.",
+              options: ["healthy", "healthier", "healthiest", "more healthy"],
+              answer: 1,
+              explain:
+                "Sau 'the less...' dùng dạng so sánh hơn: the healthier.",
+            },
+
+            {
+              q: "The ______ a city grows, the more complex its transport system becomes.",
+              options: ["large", "larger", "largest", "more large"],
+              answer: 1,
+              explain:
+                "Cấu trúc so sánh kép yêu cầu dạng so sánh hơn: The larger..., the more complex...",
+            },
+
+            {
+              q: "The more seriously young people observe healthy habits, the ______ their quality of life becomes.",
+              options: ["good", "better", "best", "well"],
+              answer: 1,
+              explain: "Good có dạng so sánh hơn bất quy tắc là better.",
+            },
+          ],
+        },
+
+        /* =========================
+PART 4
+========================= */
+
+        {
+          section: "PART 4. INDIRECT QUESTIONS – CÂU HỎI GIÁN TIẾP",
+
+          questions: [
+            {
+              q: "Could you tell me ______ the ancient castle was built?",
+              options: ["when", "when was", "was when", "that when"],
+              answer: 0,
+              explain:
+                "Câu hỏi gián tiếp dùng trật tự câu khẳng định: when + S + V. Vì vậy: when the ancient castle was built.",
+            },
+
+            {
+              q: "Do you know ______ the local festival starts?",
+              options: [
+                "what time",
+                "what time does",
+                "does what time",
+                "that what time",
+              ],
+              answer: 0,
+              explain:
+                "Trong câu hỏi gián tiếp, không đảo trợ động từ: what time the local festival starts.",
+            },
+
+            {
+              q: "I wonder ______ we should invite to the anniversary celebration.",
+              options: ["who", "who should", "should who", "that who"],
+              answer: 0,
+              explain:
+                "Câu hỏi gián tiếp dùng who + S + should + V: who we should invite.",
+            },
+
+            {
+              q: "Can you tell me ______ to the city centre?",
+              options: [
+                "how can I get",
+                "how I can get",
+                "how do I get",
+                "how I get can",
+              ],
+              answer: 1,
+              explain: "Câu hỏi gián tiếp dùng trật tự S + V: how I can get.",
+            },
+
+            {
+              q: "Do you know ______ the monument is located?",
+              options: ["where", "where is", "is where", "that where"],
+              answer: 0,
+              explain: "Dùng where + S + V: where the monument is located.",
+            },
+
+            {
+              q: "I would like to know ______ people still observe this religious tradition.",
+              options: ["why", "why do", "do why", "that why"],
+              answer: 0,
+              explain:
+                "Câu hỏi gián tiếp không đảo trợ động từ: why people still observe...",
+            },
+          ],
+        },
+
+        /* =========================
+PART 6
+========================= */
+
+        {
+          section: "PART 6. MODAL VERBS IN CONTEXT",
+
+          questions: [
+            {
+              q: "Teenagers ______ get enough sleep every night to stay healthy.",
+              options: ["should", "shouldn't", "can't", "might"],
+              answer: 0,
+              explain:
+                "Should dùng để đưa ra lời khuyên. Teenagers should get enough sleep.",
+            },
+
+            {
+              q: "You ______ spend too much time sitting in front of a screen.",
+              options: ["should", "shouldn't", "must", "can"],
+              answer: 1,
+              explain:
+                "Shouldn't = không nên. Đây là lời khuyên không nên ngồi trước màn hình quá lâu.",
+            },
+
+            {
+              q: "Visitors ______ take photos inside the religious monument. It is prohibited.",
+              options: ["must", "mustn't", "should", "may"],
+              answer: 1,
+              explain: "Mustn't diễn tả sự cấm đoán: không được phép chụp ảnh.",
+            },
+
+            {
+              q: "You ______ try the local fish and chips when you visit the town.",
+              options: ["should", "mustn't", "can't", "shouldn't"],
+              answer: 0,
+              explain: "Should được dùng để đưa ra lời khuyên hoặc gợi ý.",
+            },
+
+            {
+              q: "Students ______ wear sports shoes during PE lessons.",
+              options: ["might", "must", "could", "would"],
+              answer: 1,
+              explain: "Must diễn tả nghĩa vụ hoặc quy định bắt buộc.",
+            },
+
+            {
+              q: "You ______ ask a local person for directions if you get lost.",
+              options: ["can", "mustn't", "shouldn't", "can't"],
+              answer: 0,
+              explain:
+                "Can diễn tả khả năng hoặc một lựa chọn có thể thực hiện.",
+            },
+
+            {
+              q: "People ______ respect religious customs when visiting ancient sites.",
+              options: ["should", "shouldn't", "can't", "wouldn't"],
+              answer: 0,
+              explain:
+                "Should được dùng để đưa ra lời khuyên: mọi người nên tôn trọng phong tục tôn giáo.",
+            },
+
+            {
+              q: "You ______ eat takeaway food every day because it may contain too much salt and fat.",
+              options: ["should", "shouldn't", "must", "can"],
+              answer: 1,
+              explain:
+                "Shouldn't = không nên. Ăn đồ ăn mang đi mỗi ngày có thể không tốt cho sức khỏe.",
+            },
+          ],
+        },
+
+        /* =========================
+PART 8
+========================= */
+
+        {
+          section: "PART 8. VOCABULARY – CITY LIFE",
+
+          questions: [
+            {
+              q: "Life in a big city can be convenient, but it is often more ______.",
+              options: ["basic", "complex", "ancient", "religious"],
+              answer: 1,
+              explain:
+                "Complex = phức tạp. Cuộc sống ở thành phố lớn thường có nhiều hệ thống và vấn đề phức tạp.",
+            },
+
+            {
+              q: "Many young people prefer ______ communication to chatting online.",
+              options: ["face-to-face", "deep-rooted", "communal", "barefoot"],
+              answer: 0,
+              explain:
+                "Face-to-face communication = giao tiếp trực tiếp, đối mặt.",
+            },
+
+            {
+              q: "If you don't have time to cook, you can order a ______ meal.",
+              options: ["monument", "takeaway", "castle", "generation"],
+              answer: 1,
+              explain: "Takeaway meal = đồ ăn mua về hoặc mang đi.",
+            },
+
+            {
+              q: "______ is a popular British meal consisting of fried fish and chips.",
+              options: [
+                "Fish and chips",
+                "Takeaway",
+                "Communal food",
+                "Basic food",
+              ],
+              answer: 0,
+              explain:
+                "Fish and chips là món ăn nổi tiếng của Anh gồm cá chiên và khoai tây chiên.",
+            },
+
+            {
+              q: "The transport system in modern cities is becoming increasingly ______.",
+              options: ["complex", "barefoot", "ancient", "religious"],
+              answer: 0,
+              explain:
+                "Complex = phức tạp. Hệ thống giao thông đô thị ngày càng phức tạp.",
+            },
+
+            {
+              q: "Many people in cities prefer living in modern apartment ______.",
+              options: [
+                "structures",
+                "generations",
+                "anniversaries",
+                "monuments",
+              ],
+              answer: 0,
+              explain:
+                "Structure = công trình/cấu trúc. Apartment structures phù hợp với ngữ cảnh các công trình căn hộ hiện đại.",
+            },
+          ],
+        },
+
+        /* =========================
+PART 10
+========================= */
+
+        {
+          section: "PART 10. MIXED GRAMMAR & VOCABULARY",
+
+          questions: [
+            {
+              q: "The more teenagers ______ healthy habits, the better their physical and mental health becomes.",
+              options: ["observe", "observes", "observing", "observed"],
+              answer: 0,
+              explain:
+                "Teenagers là chủ ngữ số nhiều nên dùng động từ nguyên mẫu observe.",
+            },
+
+            {
+              q: "Could you tell me ______ to stay healthy during the exam period?",
+              options: ["how", "how can I", "how I can", "what can I"],
+              answer: 0,
+              explain:
+                "How + to-infinitive: how to stay healthy. Đây là cấu trúc Wh-word + to-infinitive.",
+            },
+
+            {
+              q: "I don't know ______ to reduce my dependence on takeaway food.",
+              options: ["how", "what", "who", "where"],
+              answer: 0,
+              explain:
+                "How to reduce = cách giảm. How phù hợp với cấu trúc Wh-word + to-infinitive.",
+            },
+
+            {
+              q: "The ______ teenagers use social media, the ______ face-to-face communication they may have.",
+              options: [
+                "more / less",
+                "more / fewer",
+                "most / less",
+                "more / least",
+              ],
+              answer: 0,
+              explain:
+                "Communication là danh từ không đếm được nên dùng less. Cấu trúc: The more..., the less...",
+            },
+
+            {
+              q: "Do you know ______ this ancient monument was founded?",
+              options: ["when", "when was", "was when", "that when"],
+              answer: 0,
+              explain:
+                "Câu hỏi gián tiếp dùng trật tự khẳng định: when this ancient monument was founded.",
+            },
+
+            {
+              q: "Teenagers ______ get enough sleep instead of staying up late every night.",
+              options: ["should", "shouldn't", "mustn't", "can't"],
+              answer: 0,
+              explain:
+                "Should được dùng để đưa ra lời khuyên: thanh thiếu niên nên ngủ đủ giấc.",
+            },
+
+            {
+              q: "The more crowded the city becomes, the ______ complex its transport system is.",
+              options: ["more", "most", "much", "many"],
+              answer: 0,
+              explain:
+                "Cấu trúc so sánh kép: The more crowded..., the more complex...",
+            },
+
+            {
+              q: "I haven't decided ______ to join the communal activity.",
+              options: [
+                "whether",
+                "whether should I",
+                "whether I should",
+                "both A and C",
+              ],
+              answer: 3,
+              explain:
+                "Cả 'whether to join' và 'whether I should join' đều đúng. Vì vậy đáp án là D – both A and C.",
+            },
+
+            {
+              q: "Young people ______ respect deep-rooted cultural traditions, even if their lifestyles are changing.",
+              options: ["should", "shouldn't", "can't", "mightn't"],
+              answer: 0,
+              explain: "Should diễn tả lời khuyên hoặc điều nên làm.",
+            },
+
+            {
+              q: "Can you tell me ______ the local government is trying to promote?",
+              options: ["what", "what is", "is what", "that what"],
+              answer: 0,
+              explain:
+                "What đóng vai trò tân ngữ của promote: what the local government is trying to promote.",
+            },
+          ],
+        },
+      ];
+
+      const quizContainer = document.getElementById("quiz");
+
+      let questionNumber = 0;
+
+      let totalQuestions = 0;
+
+      let answeredQuestions = 0;
+
+      /* Đếm tổng số câu */
+
+      quizData.forEach((section) => {
+        totalQuestions += section.questions.length;
+      });
+
+      document.getElementById("total").textContent = totalQuestions;
+
+      /* Tạo từng phần */
+
+      quizData.forEach((section) => {
+        const sectionElement = document.createElement("section");
+
+        sectionElement.className = "section";
+
+        const title = document.createElement("h2");
+
+        title.textContent = section.section;
+
+        sectionElement.appendChild(title);
+
+        section.questions.forEach((question) => {
+          questionNumber++;
+
+          const questionElement = document.createElement("div");
+
+          questionElement.className = "question";
+
+          questionElement.innerHTML = `
+
+      <div class="question-title">
+
+        ${questionNumber}.
+        ${question.q}
+
+      </div>
+
+      <div class="options"></div>
+
+      <div class="feedback"></div>
+
+    `;
+
+          const optionsContainer = questionElement.querySelector(".options");
+
+          const feedback = questionElement.querySelector(".feedback");
+
+          question.options.forEach((optionText, index) => {
+            const button = document.createElement("button");
+
+            button.className = "option";
+
+            button.textContent =
+              String.fromCharCode(65 + index) + ". " + optionText;
+
+            button.onclick = function () {
+              checkAnswer(questionElement, question, index, feedback);
+            };
+
+            optionsContainer.appendChild(button);
+          });
+
+          sectionElement.appendChild(questionElement);
+        });
+
+        quizContainer.appendChild(sectionElement);
+      });
+
+      function checkAnswer(questionElement, question, selectedIndex, feedback) {
+        /*
+    Không cho trả lời lại
+  */
+
+        if (questionElement.dataset.answered === "true") {
+          return;
+        }
+
+        questionElement.dataset.answered = "true";
+
+        answeredQuestions++;
+
+        const buttons = questionElement.querySelectorAll(".option");
+
+        /*
+    Khóa tất cả nút
+  */
+
+        buttons.forEach((button) => {
+          button.disabled = true;
+        });
+
+        /*
+    Tô màu đáp án đúng
+  */
+
+        buttons[question.answer].classList.add("correct");
+
+        /*
+    Người dùng chọn đúng
+  */
+
+        if (selectedIndex === question.answer) {
+          feedback.className = "feedback show correct";
+
+          feedback.innerHTML = `
+
+      <strong>✅ ĐÚNG!</strong>
+
+      ${question.explain}
+
+    `;
+        } else {
+          /*
+    Người dùng chọn sai
+  */
+          buttons[selectedIndex].classList.add("wrong");
+
+          const correctLetter = String.fromCharCode(65 + question.answer);
+
+          feedback.className = "feedback show wrong";
+
+          feedback.innerHTML = `
+
+      <strong>❌ SAI!</strong>
+
+      Đáp án đúng là:
+
+      <b>
+        ${correctLetter}.
+        ${question.options[question.answer]}
+      </b>
+
+      <br><br>
+
+      ${question.explain}
+
+    `;
+        }
+
+        /*
+    Cập nhật số câu đã làm
+  */
+
+        document.getElementById("done").textContent = answeredQuestions;
+
+        /*
+    Cập nhật thanh tiến độ
+  */
+
+        const percentage = (answeredQuestions / totalQuestions) * 100;
+
+        document.getElementById("progressBar").style.width = percentage + "%";
+      }
+    </script>
+  </body>
+</html>

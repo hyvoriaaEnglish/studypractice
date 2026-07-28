@@ -1,0 +1,1230 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Remembering the Past | Hyvoria English</title>
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Oswald:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Baloo 2", sans-serif;
+        background: #f6f7fb;
+        color: #333;
+        line-height: 1.7;
+      }
+
+      /* =========================
+       HEADER
+    ========================= */
+
+      header {
+        background: linear-gradient(135deg, #6c63ff, #8e7dff);
+        color: white;
+        padding: 20px 6%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 3px 15px rgba(0, 0, 0, 0.12);
+      }
+
+      .logo {
+        font-size: 27px;
+        font-weight: 800;
+      }
+
+      .lesson-label {
+        font-size: 16px;
+        opacity: 0.95;
+      }
+
+      .home-btn {
+        background: white;
+        color: #6c63ff;
+        padding: 9px 18px;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: 700;
+        transition: 0.25s;
+      }
+
+      .home-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      /* =========================
+       PROGRESS BAR
+    ========================= */
+
+      .progress-container {
+        width: 100%;
+        height: 6px;
+        background: #e3e3e3;
+        position: sticky;
+        top: 77px;
+        z-index: 999;
+      }
+
+      .progress-bar {
+        height: 100%;
+        width: 0%;
+        background: #ffcc70;
+        transition: width 0.4s ease;
+      }
+
+      /* =========================
+       MAIN
+    ========================= */
+
+      main {
+        max-width: 1000px;
+        margin: 40px auto;
+        padding: 0 20px 60px;
+      }
+
+      /* =========================
+       LESSON HERO
+    ========================= */
+
+      .hero {
+        background: white;
+        border-radius: 25px;
+        padding: 45px 35px;
+        text-align: center;
+        margin-bottom: 30px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+      }
+
+      .hero h1 {
+        font-family: "Oswald", sans-serif;
+        font-size: 42px;
+        color: #5148d8;
+        margin-bottom: 10px;
+      }
+
+      .hero p {
+        font-size: 19px;
+        color: #666;
+      }
+
+      .topic-badge {
+        display: inline-block;
+        background: #eeeaff;
+        color: #5b52df;
+        padding: 7px 18px;
+        border-radius: 20px;
+        margin-top: 15px;
+        font-weight: 700;
+      }
+
+      /* =========================
+       LESSON SECTIONS
+    ========================= */
+
+      .lesson-section {
+        display: none;
+        background: white;
+        padding: 35px;
+        border-radius: 25px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+        margin-bottom: 25px;
+        animation: fadeIn 0.4s ease;
+      }
+
+      .lesson-section.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .section-number {
+        display: inline-block;
+        background: #6c63ff;
+        color: white;
+        padding: 5px 14px;
+        border-radius: 20px;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+
+      h2 {
+        color: #5148d8;
+        font-size: 30px;
+        margin-bottom: 20px;
+      }
+
+      h3 {
+        color: #444;
+        font-size: 23px;
+        margin: 25px 0 12px;
+      }
+
+      h4 {
+        color: #5b52df;
+        font-size: 20px;
+        margin: 20px 0 10px;
+      }
+
+      p {
+        margin-bottom: 14px;
+      }
+
+      /* =========================
+       FORMULA BOX
+    ========================= */
+
+      .formula-box {
+        background: #f1efff;
+        border-left: 5px solid #6c63ff;
+        padding: 18px 22px;
+        border-radius: 12px;
+        margin: 18px 0;
+        font-size: 19px;
+        font-weight: 700;
+        color: #4f46c9;
+      }
+
+      .note-box {
+        background: #fff7df;
+        border-left: 5px solid #f2b84b;
+        padding: 18px 22px;
+        border-radius: 12px;
+        margin: 18px 0;
+      }
+
+      .example-box {
+        background: #f8f8fb;
+        border-radius: 15px;
+        padding: 18px 22px;
+        margin: 15px 0;
+      }
+
+      .example-box strong {
+        color: #5148d8;
+      }
+
+      /* =========================
+       TIMELINE
+    ========================= */
+
+      .timeline {
+        background: #f5f4ff;
+        padding: 25px;
+        border-radius: 18px;
+        margin: 20px 0;
+        text-align: center;
+      }
+
+      .timeline-title {
+        font-weight: 800;
+        color: #5148d8;
+        margin-bottom: 15px;
+      }
+
+      .timeline-flow {
+        font-size: 18px;
+        font-weight: 700;
+        color: #555;
+      }
+
+      .timeline-flow span {
+        display: inline-block;
+        padding: 10px 18px;
+        background: white;
+        border-radius: 12px;
+        margin: 5px;
+      }
+
+      /* =========================
+       TABLE
+    ========================= */
+
+      .table-wrapper {
+        overflow-x: auto;
+        margin: 20px 0;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 500px;
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 12px 15px;
+        text-align: left;
+      }
+
+      th {
+        background: #6c63ff;
+        color: white;
+      }
+
+      tr:nth-child(even) {
+        background: #f7f7fb;
+      }
+
+      /* =========================
+       TWO COLUMN
+    ========================= */
+
+      .compare-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-top: 20px;
+      }
+
+      .compare-card {
+        padding: 22px;
+        border-radius: 18px;
+        background: #f7f7fb;
+        border-top: 5px solid #6c63ff;
+      }
+
+      .compare-card h3 {
+        color: #5148d8;
+        margin-top: 0;
+      }
+
+      /* =========================
+       SUMMARY
+    ========================= */
+
+      .summary-card {
+        background: linear-gradient(135deg, #6c63ff, #8e7dff);
+        color: white;
+        padding: 30px;
+        border-radius: 22px;
+        margin-top: 20px;
+      }
+
+      .summary-card h2 {
+        color: white;
+      }
+
+      .summary-item {
+        background: rgba(255, 255, 255, 0.15);
+        padding: 15px 20px;
+        border-radius: 12px;
+        margin: 12px 0;
+      }
+
+      /* =========================
+       NAVIGATION
+    ========================= */
+
+      .navigation {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+        margin-top: 25px;
+      }
+
+      .nav-btn {
+        border: none;
+        background: #6c63ff;
+        color: white;
+        padding: 12px 25px;
+        border-radius: 25px;
+        font-family: inherit;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.25s;
+      }
+
+      .nav-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 12px rgba(108, 99, 255, 0.3);
+      }
+
+      .nav-btn:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+      }
+
+      .page-counter {
+        font-weight: 700;
+        color: #666;
+      }
+
+      /* =========================
+       PRACTICE BUTTON
+    ========================= */
+
+      .practice-area {
+        display: none;
+        background: white;
+        border-radius: 25px;
+        padding: 40px 30px;
+        text-align: center;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+      }
+
+      .practice-area.show {
+        display: block;
+        animation: fadeIn 0.5s ease;
+      }
+
+      .practice-area h2 {
+        margin-bottom: 10px;
+      }
+
+      .practice-area p {
+        color: #666;
+        margin-bottom: 25px;
+      }
+
+      .practice-btn {
+        display: inline-block;
+        background: #6c63ff;
+        color: white;
+        text-decoration: none;
+        padding: 14px 30px;
+        border-radius: 30px;
+        font-size: 18px;
+        font-weight: 700;
+        transition: 0.25s;
+        margin: 5px;
+      }
+
+      .practice-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 7px 15px rgba(108, 99, 255, 0.3);
+      }
+
+      .back-home {
+        background: #eeeaff;
+        color: #5b52df;
+      }
+
+      @media (max-width: 700px) {
+        header {
+          padding: 15px;
+        }
+
+        .logo {
+          font-size: 21px;
+        }
+
+        .lesson-label {
+          display: none;
+        }
+
+        .hero h1 {
+          font-size: 32px;
+        }
+
+        .lesson-section {
+          padding: 25px 20px;
+        }
+
+        .compare-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .navigation {
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+
+        .page-counter {
+          order: -1;
+          width: 100%;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- =========================
+       HEADER
+  ========================= -->
+
+    <header>
+      <div class="logo">Hyvoria English</div>
+
+      <div class="lesson-label">Grammar Lesson • Remembering the Past</div>
+
+      <!-- ĐỔI LINK NÀY THÀNH LINK TRANG CHỦ CỦA BẠN -->
+      <a href="course4.html" class="home-btn"> 🏠 Home </a>
+    </header>
+
+    <!-- PROGRESS BAR -->
+
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <main>
+      <!-- =========================
+         HERO
+    ========================= -->
+
+      <section class="hero">
+        <h1>📚 Remembering the Past</h1>
+
+        <p>Learn how to use Past Perfect and Wish + Past Simple</p>
+
+        <div class="topic-badge">Past Perfect • Wish + Past Simple</div>
+      </section>
+
+      <!-- =========================
+         SECTION 1
+    ========================= -->
+
+      <section class="lesson-section active">
+        <span class="section-number">PART 1</span>
+
+        <h2>⏳ Past Perfect – Thì quá khứ hoàn thành</h2>
+
+        <h3>1. Cách dùng</h3>
+
+        <p>
+          Thì <strong>Past Perfect</strong> được dùng để nói về một hành động đã
+          xảy ra và hoàn thành
+          <strong>trước một hành động khác trong quá khứ</strong>.
+        </p>
+
+        <div class="formula-box">
+          👉 Hành động xảy ra trước → Past Perfect
+          <br />
+          👉 Hành động xảy ra sau → Past Simple
+        </div>
+
+        <div class="example-box">
+          <strong>Example:</strong>
+          <br /><br />
+
+          When I arrived at the old house, my grandmother
+          <strong>had already left</strong>. <br /><br />
+
+          → Tôi đến ngôi nhà cũ sau.
+          <br />
+          → Bà tôi rời đi trước.
+          <br /><br />
+
+          <strong>had left</strong> = Past Perfect
+          <br />
+          <strong>arrived</strong> = Past Simple
+        </div>
+
+        <h3>2. Cấu trúc</h3>
+
+        <h4>✅ Khẳng định</h4>
+
+        <div class="formula-box">S + had + V3/ed</div>
+
+        <div class="table-wrapper">
+          <table>
+            <tr>
+              <th>Subject</th>
+              <th>Past Perfect</th>
+            </tr>
+
+            <tr>
+              <td>I</td>
+              <td>had visited</td>
+            </tr>
+
+            <tr>
+              <td>You</td>
+              <td>had visited</td>
+            </tr>
+
+            <tr>
+              <td>He</td>
+              <td>had visited</td>
+            </tr>
+
+            <tr>
+              <td>She</td>
+              <td>had visited</td>
+            </tr>
+
+            <tr>
+              <td>We</td>
+              <td>had visited</td>
+            </tr>
+
+            <tr>
+              <td>They</td>
+              <td>had visited</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="note-box">
+          📌 <strong>Had</strong> được dùng với tất cả các chủ ngữ.
+        </div>
+
+        <div class="example-box">
+          I <strong>had visited</strong> my hometown before I moved away.
+          <br /><br />
+
+          She <strong>had already seen</strong> the old photograph. <br /><br />
+
+          They <strong>had finished</strong> the project before the teacher
+          arrived.
+        </div>
+
+        <h4>❌ Phủ định</h4>
+
+        <div class="formula-box">
+          S + had not + V3/ed
+          <br />
+          had not = hadn't
+        </div>
+
+        <div class="example-box">
+          I <strong>hadn't visited</strong> the village before. <br /><br />
+
+          She <strong>hadn't seen</strong> the monument before that day.
+          <br /><br />
+
+          They <strong>hadn't finished</strong> the work when I arrived.
+        </div>
+
+        <h4>❓ Nghi vấn</h4>
+
+        <div class="formula-box">Had + S + V3/ed...?</div>
+
+        <div class="example-box">
+          <strong>Had</strong> you <strong>visited</strong> the old village
+          before? <br /><br />
+
+          <strong>Had</strong> she <strong>seen</strong> that photograph?
+          <br /><br />
+
+          <strong>Had</strong> they <strong>finished</strong> the project?
+        </div>
+
+        <div class="note-box">
+          📌 Trả lời ngắn:
+          <br /><br />
+          Yes, S + had.
+          <br />
+          No, S + hadn't.
+        </div>
+      </section>
+
+      <!-- =========================
+         SECTION 2
+    ========================= -->
+
+      <section class="lesson-section">
+        <span class="section-number">PART 1.2</span>
+
+        <h2>🔗 Past Perfect với Past Simple</h2>
+
+        <p>Đây là cách dùng quan trọng nhất của Past Perfect.</p>
+
+        <div class="formula-box">S + had + V3/ed + before + S + V2/ed</div>
+
+        <div class="example-box">
+          I <strong>had visited</strong> the museum before I
+          <strong>moved</strong> to another city.
+        </div>
+
+        <div class="formula-box">S + V2/ed + after + S + had + V3/ed</div>
+
+        <div class="example-box">
+          I <strong>moved</strong> to another city after I
+          <strong>had visited</strong> the museum.
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-title">📌 TIMELINE</div>
+
+          <div class="timeline-flow">
+            <span>PAST</span>
+            ➡️
+            <span>had visited museum</span>
+            ➡️
+            <span>moved to another city</span>
+            ➡️
+            <span>NOW</span>
+          </div>
+        </div>
+
+        <div class="note-box">
+          🧠 Hành động xảy ra trước → <strong>Past Perfect</strong> <br /><br />
+          Hành động xảy ra sau → <strong>Past Simple</strong>
+        </div>
+
+        <h3>⏰ Các từ thường gặp</h3>
+
+        <div class="example-box">
+          <strong>before</strong> = trước khi <br /><br />
+          When I arrived, the ceremony
+          <strong>had already started</strong>.
+        </div>
+
+        <div class="example-box">
+          <strong>after</strong> = sau khi <br /><br />
+          After we <strong>had finished</strong> dinner, we went for a walk.
+        </div>
+
+        <div class="example-box">
+          <strong>by the time</strong> = vào lúc / đến khi <br /><br />
+          By the time I arrived, my friends <strong>had left</strong>.
+        </div>
+
+        <div class="example-box">
+          <strong>already</strong> = đã... rồi <br /><br />
+          She <strong>had already visited</strong>
+          the old castle.
+        </div>
+
+        <div class="example-box">
+          <strong>just</strong> = vừa mới <br /><br />
+          He <strong>had just left</strong>
+          when I called him.
+        </div>
+
+        <div class="example-box">
+          <strong>never</strong> = chưa bao giờ <br /><br />
+          I <strong>had never seen</strong>
+          such an ancient monument before.
+        </div>
+
+        <div class="example-box">
+          <strong>yet</strong> = chưa <br /><br />
+          They <strong>hadn't finished</strong>
+          the project yet.
+        </div>
+      </section>
+
+      <!-- =========================
+         SECTION 3
+    ========================= -->
+
+      <section class="lesson-section">
+        <span class="section-number">PART 1.3</span>
+
+        <h2>🏙️ Past Perfect – Remembering the Past</h2>
+
+        <div class="example-box">
+          <strong>Example 1</strong>
+          <br /><br />
+
+          When I returned to my hometown, many things
+          <strong>had changed</strong>. <br /><br />
+
+          → <strong>had changed</strong> xảy ra trước <strong>returned</strong>.
+        </div>
+
+        <div class="example-box">
+          <strong>Example 2</strong>
+          <br /><br />
+
+          By the time we visited the old school, it
+          <strong>had been</strong> closed for several years. <br /><br />
+
+          → Trường đã đóng cửa trước thời điểm chúng tôi đến thăm.
+        </div>
+
+        <div class="example-box">
+          <strong>Example 3</strong>
+          <br /><br />
+
+          I was excited because I
+          <strong>had never visited</strong>
+          my grandparents' village before.
+          <br /><br />
+
+          → Việc "chưa từng đến thăm" xảy ra trước thời điểm "was excited".
+        </div>
+
+        <div class="note-box">
+          💡 <strong>Mẹo nhớ:</strong> <br /><br />
+          Past Perfect = Một hành động xảy ra
+          <strong>trước một hành động khác trong quá khứ</strong>.
+        </div>
+      </section>
+
+      <!-- =========================
+         SECTION 4
+    ========================= -->
+
+      <section class="lesson-section">
+        <span class="section-number">PART 2</span>
+
+        <h2>💭 Wish + Past Simple</h2>
+
+        <h3>1. Cách dùng</h3>
+
+        <p>
+          Cấu trúc <strong>Wish + Past Simple</strong>
+          được dùng để diễn tả điều ước
+          <strong>trái với sự thật ở hiện tại</strong>.
+        </p>
+
+        <div class="formula-box">S + wish(es) + S + V2/ed</div>
+
+        <div class="example-box">
+          I wish I <strong>lived</strong> in the countryside. <br /><br />
+
+          → Thực tế: Tôi <strong>không sống</strong>
+          ở nông thôn.
+          <br /><br />
+
+          → Tôi ước mình sống ở nông thôn.
+        </div>
+
+        <div class="example-box">
+          I wish I <strong>had</strong> more time to visit my hometown.
+          <br /><br />
+
+          → Thực tế: Tôi không có đủ thời gian.
+        </div>
+
+        <div class="example-box">
+          She wishes she <strong>knew</strong> more about her family's history.
+          <br /><br />
+
+          → Thực tế: Cô ấy không biết nhiều về lịch sử gia đình.
+        </div>
+
+        <h3>2. Wish với động từ BE</h3>
+
+        <div class="formula-box">S + wish(es) + S + were</div>
+
+        <div class="note-box">
+          📌 Trong văn phong chuẩn, với động từ <strong>be</strong>, ta thường
+          dùng <strong>were</strong> cho tất cả các chủ ngữ.
+        </div>
+
+        <div class="example-box">
+          I wish I <strong>were</strong> younger. <br /><br />
+
+          He wishes he <strong>were</strong> here. <br /><br />
+
+          They wish they <strong>were</strong> at home.
+        </div>
+
+        <div class="note-box">
+          💡 Trong giao tiếp, đôi khi bạn có thể gặp
+          <strong>was</strong>, nhưng trong bài kiểm tra và văn viết, nên ưu
+          tiên <strong>were</strong>.
+        </div>
+      </section>
+
+      <!-- =========================
+         SECTION 5
+    ========================= -->
+
+      <section class="lesson-section">
+        <span class="section-number">PART 2.2</span>
+
+        <h2>📝 Wish với động từ thường</h2>
+
+        <div class="formula-box">S + wish(es) + S + V2/ed</div>
+
+        <div class="example-box">
+          I wish I <strong>knew</strong> the answer. <br /><br />
+
+          She wishes she <strong>lived</strong> closer to her grandparents.
+          <br /><br />
+
+          We wish we <strong>had</strong> more time together.
+        </div>
+
+        <h3>⚠️ Một số động từ bất quy tắc</h3>
+
+        <div class="table-wrapper">
+          <table>
+            <tr>
+              <th>Present</th>
+              <th>Past</th>
+            </tr>
+
+            <tr>
+              <td>have</td>
+              <td>had</td>
+            </tr>
+
+            <tr>
+              <td>know</td>
+              <td>knew</td>
+            </tr>
+
+            <tr>
+              <td>go</td>
+              <td>went</td>
+            </tr>
+
+            <tr>
+              <td>live</td>
+              <td>lived</td>
+            </tr>
+
+            <tr>
+              <td>see</td>
+              <td>saw</td>
+            </tr>
+
+            <tr>
+              <td>be</td>
+              <td>were</td>
+            </tr>
+
+            <tr>
+              <td>can</td>
+              <td>could</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="example-box">
+          I wish I <strong>knew</strong> more about my family history.
+          <br /><br />
+
+          I wish I <strong>could</strong> visit my hometown more often.
+          <br /><br />
+
+          I wish I <strong>had</strong> more old photographs.
+        </div>
+      </section>
+
+      <!-- =========================
+         SECTION 6
+    ========================= -->
+
+      <section class="lesson-section">
+        <span class="section-number">PART 3</span>
+
+        <h2>⚖️ Phân biệt hai cấu trúc</h2>
+
+        <div class="compare-grid">
+          <div class="compare-card">
+            <h3>⏳ Past Perfect</h3>
+
+            <p>👉 Nói về <strong>hai hành động trong quá khứ</strong>.</p>
+
+            <div class="example-box">
+              When I arrived, my grandfather
+              <strong>had already gone</strong>.
+            </div>
+
+            <p>
+              📌 Một hành động xảy ra
+              <strong>trước một hành động khác trong quá khứ</strong>.
+            </p>
+
+            <strong>Formula:</strong>
+
+            <p>had + V3/ed</p>
+          </div>
+
+          <div class="compare-card">
+            <h3>💭 Wish + Past Simple</h3>
+
+            <p>
+              👉 Nói về <strong>mong muốn trái với thực tế hiện tại</strong>.
+            </p>
+
+            <div class="example-box">
+              I wish my grandfather
+              <strong>were</strong> still here.
+            </div>
+
+            <p>📌 Thực tế: Ông tôi không còn ở đây.</p>
+
+            <strong>Formula:</strong>
+
+            <p>wish + V2/ed</p>
+          </div>
+        </div>
+
+        <h3>🧠 So sánh nhanh</h3>
+
+        <div class="table-wrapper">
+          <table>
+            <tr>
+              <th>Past Perfect</th>
+              <th>Wish + Past Simple</th>
+            </tr>
+
+            <tr>
+              <td>Quá khứ trước một quá khứ khác</td>
+              <td>Điều ước trái với hiện tại</td>
+            </tr>
+
+            <tr>
+              <td>had + V3/ed</td>
+              <td>V2/ed</td>
+            </tr>
+
+            <tr>
+              <td>had gone</td>
+              <td>went</td>
+            </tr>
+
+            <tr>
+              <td>had visited</td>
+              <td>visited</td>
+            </tr>
+
+            <tr>
+              <td>had seen</td>
+              <td>saw</td>
+            </tr>
+
+            <tr>
+              <td>had been</td>
+              <td>were</td>
+            </tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- =========================
+         SECTION 7
+    ========================= -->
+
+      <section class="lesson-section">
+        <span class="section-number">PART 4</span>
+
+        <h2>🔗 Combine the Two</h2>
+
+        <p>Hai cấu trúc có thể xuất hiện cùng nhau trong một đoạn văn.</p>
+
+        <div class="example-box">
+          When I visited my hometown last summer, I realized that many things
+          <strong>had changed</strong>. <br /><br />
+
+          I wished I <strong>could</strong>
+          stay there longer.
+
+          <br /><br />
+
+          📌 <strong>had changed</strong>
+          → Một sự thay đổi xảy ra trước thời điểm tôi nhận ra.
+          <br /><br />
+
+          📌 <strong>could stay</strong>
+          → Điều ước trái với thực tế tại thời điểm đó.
+        </div>
+
+        <div class="example-box">
+          By the time I returned to my old school, my best friend
+          <strong>had moved</strong> away. <br /><br />
+
+          I wished we <strong>were</strong>
+          still classmates.
+
+          <br /><br />
+
+          📌 <strong>had moved</strong>
+          → Bạn đã chuyển đi trước khi tôi quay lại trường.
+          <br /><br />
+
+          📌 <strong>were</strong>
+          → Tôi ước chúng tôi vẫn là bạn cùng lớp, nhưng thực tế không phải vậy.
+        </div>
+      </section>
+
+      <!-- =========================
+         SECTION 8 - SUMMARY
+    ========================= -->
+
+      <section class="lesson-section">
+        <span class="section-number">🎯 SUMMARY</span>
+
+        <div class="summary-card">
+          <h2>Remembering the Past</h2>
+
+          <div class="summary-item">
+            <strong>⏳ PAST PERFECT</strong>
+            <br /><br />
+
+            S + had + V3/ed
+            <br /><br />
+
+            📌 Hành động xảy ra
+            <strong>trước một hành động khác trong quá khứ</strong>.
+            <br /><br />
+
+            Example:
+            <br />
+
+            When I arrived, they <strong>had left</strong>.
+          </div>
+
+          <div class="summary-item">
+            <strong>💭 WISH + PAST SIMPLE</strong>
+            <br /><br />
+
+            S + wish(es) + S + V2/ed
+            <br /><br />
+
+            📌 Điều ước
+            <strong>trái với sự thật ở hiện tại</strong>. <br /><br />
+
+            Example:
+            <br />
+
+            I wish I <strong>lived</strong>
+            closer to my hometown.
+          </div>
+
+          <div class="summary-item">
+            ⭐ <strong>MẸO NHỚ</strong> <br /><br />
+
+            PAST PERFECT = Quá khứ trước quá khứ.
+            <br /><br />
+
+            WISH + PAST SIMPLE = Ước hiện tại khác đi.
+          </div>
+        </div>
+      </section>
+
+      <div class="navigation">
+        <button class="nav-btn" id="prevBtn" onclick="previousSection()">
+          ← Previous
+        </button>
+
+        <div class="page-counter" id="pageCounter">Part 1 / 8</div>
+
+        <button class="nav-btn" id="nextBtn" onclick="nextSection()">
+          Next →
+        </button>
+      </div>
+
+      <section class="practice-area" id="practiceArea">
+        <h2>🎉 Lesson Completed!</h2>
+
+        <p>
+          Bạn đã hoàn thành bài giảng
+          <strong>Remembering the Past</strong>.
+          <br />
+          Hãy làm bài tập để kiểm tra kiến thức nhé!
+        </p>
+
+        <a href="quiz4.html" class="practice-btn"> 📝 Go to Practice </a>
+
+        <a href="course4.html" class="practice-btn back-home">
+          🏠 Back to Home
+        </a>
+      </section>
+    </main>
+
+    <script>
+      let currentSection = 0;
+
+      const sections = document.querySelectorAll(".lesson-section");
+
+      const prevBtn = document.getElementById("prevBtn");
+
+      const nextBtn = document.getElementById("nextBtn");
+
+      const pageCounter = document.getElementById("pageCounter");
+
+      const progressBar = document.getElementById("progressBar");
+
+      const practiceArea = document.getElementById("practiceArea");
+
+      function showSection(index) {
+        sections.forEach((section, i) => {
+          section.classList.toggle("active", i === index);
+        });
+
+        currentSection = index;
+
+        // Update page counter
+
+        pageCounter.textContent = `Part ${index + 1} / ${sections.length}`;
+
+        // Disable Previous
+
+        prevBtn.disabled = index === 0;
+
+        if (index === sections.length - 1) {
+          nextBtn.textContent = "🎉 Finish Lesson";
+        } else {
+          nextBtn.textContent = "Next →";
+        }
+
+        // Update progress bar
+
+        const progress = ((index + 1) / sections.length) * 100;
+
+        progressBar.style.width = progress + "%";
+
+        // Scroll to top
+
+        window.scrollTo({
+          top: 0,
+
+          behavior: "smooth",
+        });
+      }
+
+      function nextSection() {
+        if (currentSection < sections.length - 1) {
+          showSection(currentSection + 1);
+        } else {
+          // Hide navigation
+
+          document.querySelector(".navigation").style.display = "none";
+
+          // Show practice area
+
+          practiceArea.classList.add("show");
+
+          progressBar.style.width = "100%";
+
+          setTimeout(() => {
+            practiceArea.scrollIntoView({
+              behavior: "smooth",
+
+              block: "start",
+            });
+          }, 100);
+        }
+      }
+
+      function previousSection() {
+        if (currentSection > 0) {
+          showSection(currentSection - 1);
+        }
+      }
+
+      showSection(0);
+    </script>
+  </body>
+</html>
