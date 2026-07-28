@@ -1,0 +1,808 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Sentence Ordering Practice – Questions 13–22</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f4f7fb;
+        color: #1f2937;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: 40px auto;
+        padding: 20px;
+      }
+
+      .header {
+        background: white;
+        padding: 30px;
+        border-radius: 18px;
+        text-align: center;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        margin-bottom: 25px;
+      }
+
+      .header h1 {
+        margin: 0 0 10px;
+        color: #2563eb;
+        font-size: 28px;
+      }
+
+      .header p {
+        margin: 0;
+        color: #64748b;
+      }
+
+      .question {
+        background: white;
+        padding: 25px;
+        margin-bottom: 25px;
+        border-radius: 16px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+      }
+
+      .question h2 {
+        margin-top: 0;
+        color: #1d4ed8;
+        font-size: 21px;
+      }
+
+      .sentences {
+        background: #f8fafc;
+        border-left: 5px solid #3b82f6;
+        padding: 18px 20px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+      }
+
+      .sentences p {
+        margin: 8px 0;
+      }
+
+      .options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .option {
+        width: 100%;
+        padding: 13px 16px;
+        border: 2px solid #dbe3ef;
+        background: white;
+        border-radius: 10px;
+        cursor: pointer;
+        text-align: left;
+        font-size: 16px;
+        transition: 0.2s;
+      }
+
+      .option:hover {
+        background: #eff6ff;
+        border-color: #60a5fa;
+      }
+
+      .option.correct {
+        background: #dcfce7;
+        border-color: #22c55e;
+        color: #166534;
+        font-weight: bold;
+      }
+
+      .option.wrong {
+        background: #fee2e2;
+        border-color: #ef4444;
+        color: #991b1b;
+      }
+
+      .option.disabled {
+        cursor: default;
+      }
+
+      .feedback {
+        display: none;
+        margin-top: 18px;
+        padding: 15px 18px;
+        border-radius: 10px;
+        font-size: 15px;
+      }
+
+      .feedback.correct-feedback {
+        display: block;
+        background: #f0fdf4;
+        border-left: 5px solid #22c55e;
+        color: #166534;
+      }
+
+      .feedback.wrong-feedback {
+        display: block;
+        background: #fef2f2;
+        border-left: 5px solid #ef4444;
+        color: #991b1b;
+      }
+
+      .feedback strong {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 16px;
+      }
+
+      .score-box {
+        background: white;
+        padding: 25px;
+        border-radius: 16px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+        margin-top: 30px;
+      }
+
+      #score {
+        font-size: 22px;
+        font-weight: bold;
+        color: #2563eb;
+      }
+
+      .reset-btn {
+        margin-top: 15px;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 8px;
+        background: #2563eb;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      .reset-btn:hover {
+        background: #1d4ed8;
+      }
+
+      @media (max-width: 600px) {
+        .container {
+          margin: 15px auto;
+          padding: 10px;
+        }
+
+        .question {
+          padding: 18px;
+        }
+
+        .header h1 {
+          font-size: 23px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>📚 SENTENCE ORDERING PRACTICE</h1>
+        <p>B2–C1 Level | Questions 13–22</p>
+      </div>
+
+      <!-- QUESTION 13 -->
+      <div class="question" id="q13">
+        <h2>Question 13</h2>
+
+        <div class="sentences">
+          <p>
+            <strong>a.</strong> However, this convenience has also contributed
+            to a culture of instant gratification in which people expect
+            immediate results.
+          </p>
+          <p>
+            <strong>b.</strong> The rise of online shopping has fundamentally
+            changed the way consumers purchase goods and services.
+          </p>
+          <p>
+            <strong>c.</strong> Customers can now compare prices, read reviews,
+            and place orders without leaving their homes.
+          </p>
+          <p>
+            <strong>d.</strong> As a consequence, traditional retailers have
+            been forced to reconsider their business strategies and improve the
+            experience they offer in physical stores.
+          </p>
+          <p>
+            <strong>e.</strong> This shift has made shopping more accessible
+            while simultaneously intensifying competition among businesses.
+          </p>
+        </div>
+
+        <div class="options">
+          <button class="option" onclick="checkAnswer(this, 13, 'C')">
+            A. b – e – c – a – d
+          </button>
+          <button class="option" onclick="checkAnswer(this, 13, 'C')">
+            B. c – b – e – d – a
+          </button>
+          <button class="option" onclick="checkAnswer(this, 13, 'C')">
+            C. b – c – e – a – d
+          </button>
+          <button class="option" onclick="checkAnswer(this, 13, 'C')">
+            D. e – b – c – a – d
+          </button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 14 -->
+      <div class="question" id="q14">
+        <h2>Question 14</h2>
+
+        <div class="sentences">
+          <p>
+            <strong>a.</strong> Nevertheless, the effectiveness of such
+            programmes depends largely on whether participants are provided with
+            meaningful opportunities to apply what they have learned.
+          </p>
+          <p>
+            <strong>b.</strong> Volunteering is increasingly recognised as a
+            valuable way for young people to develop skills beyond the
+            classroom.
+          </p>
+          <p>
+            <strong>c.</strong> Through community projects, students may improve
+            their communication, teamwork, and problem-solving abilities.
+          </p>
+          <p>
+            <strong>d.</strong> These experiences can also help them gain a
+            deeper understanding of social issues affecting people in their
+            communities.
+          </p>
+          <p>
+            <strong>e.</strong> For this reason, educational institutions are
+            increasingly encouraging students to participate in organised
+            volunteering activities.
+          </p>
+        </div>
+
+        <div class="options">
+          <button class="option" onclick="checkAnswer(this, 14, 'A')">
+            A. b – c – d – e – a
+          </button>
+          <button class="option" onclick="checkAnswer(this, 14, 'A')">
+            B. b – d – c – a – e
+          </button>
+          <button class="option" onclick="checkAnswer(this, 14, 'A')">
+            C. c – b – d – e – a
+          </button>
+          <button class="option" onclick="checkAnswer(this, 14, 'A')">
+            D. b – c – d – a – e
+          </button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 15 -->
+      <div class="question" id="q15">
+        <h2>Question 15</h2>
+
+        <div class="sentences">
+          <p>
+            <strong>a.</strong> The resulting loss of biodiversity can disrupt
+            food chains and reduce the resilience of entire ecosystems.
+          </p>
+          <p>
+            <strong>b.</strong> Habitat destruction is one of the most
+            significant threats facing wildlife in many parts of the world.
+          </p>
+          <p>
+            <strong>c.</strong> As human populations expand, forests, wetlands,
+            and grasslands are increasingly converted for agriculture, industry,
+            and urban development.
+          </p>
+          <p>
+            <strong>d.</strong> Protecting remaining natural habitats is
+            therefore essential if governments are to prevent further ecological
+            decline.
+          </p>
+          <p>
+            <strong>e.</strong> Species that depend on these environments may be
+            forced to migrate, adapt to unfamiliar conditions, or compete for
+            increasingly limited resources.
+          </p>
+        </div>
+
+        <div class="options">
+          <button class="option" onclick="checkAnswer(this, 15, 'A')">
+            A. b – c – e – a – d
+          </button>
+          <button class="option" onclick="checkAnswer(this, 15, 'A')">
+            B. c – b – e – d – a
+          </button>
+          <button class="option" onclick="checkAnswer(this, 15, 'A')">
+            C. b – e – c – a – d
+          </button>
+          <button class="option" onclick="checkAnswer(this, 15, 'A')">
+            D. b – c – a – e – d
+          </button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 16 -->
+      <div class="question" id="q16">
+        <h2>Question 16</h2>
+
+        <div class="sentences">
+          <p>
+            <strong>a.</strong> This can make it difficult for individuals to
+            distinguish between genuinely reliable information and deliberately
+            misleading content.
+          </p>
+          <p>
+            <strong>b.</strong> The rapid spread of information through social
+            media has transformed the way people learn about current events.
+          </p>
+          <p>
+            <strong>c.</strong> Although news can now reach audiences within
+            seconds, not all information shared online is accurate or
+            trustworthy.
+          </p>
+          <p>
+            <strong>d.</strong> Developing strong media literacy is therefore
+            becoming increasingly important in modern society.
+          </p>
+          <p>
+            <strong>e.</strong> Users should be encouraged to evaluate sources
+            critically and verify claims before accepting or sharing them.
+          </p>
+        </div>
+
+        <div class="options">
+          <button class="option" onclick="checkAnswer(this, 16, 'A')">
+            A. b – c – a – e – d
+          </button>
+          <button class="option" onclick="checkAnswer(this, 16, 'A')">
+            B. c – b – a – d – e
+          </button>
+          <button class="option" onclick="checkAnswer(this, 16, 'A')">
+            C. b – a – c – e – d
+          </button>
+          <button class="option" onclick="checkAnswer(this, 16, 'A')">
+            D. b – c – e – a – d
+          </button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 17 -->
+      <div class="question" id="q17">
+        <h2>Question 17</h2>
+
+        <div class="sentences">
+          <p>
+            <strong>a.</strong> In contrast, countries that invest in efficient
+            public transport can reduce the number of private vehicles on the
+            road.
+          </p>
+          <p>
+            <strong>b.</strong> Transport systems play a crucial role in
+            determining the environmental quality of modern cities.
+          </p>
+          <p>
+            <strong>c.</strong> Heavy reliance on private cars contributes to
+            air pollution, traffic congestion, and greenhouse gas emissions.
+          </p>
+          <p>
+            <strong>d.</strong> Such investments can also make urban areas more
+            accessible to people who cannot afford to own a car.
+          </p>
+          <p>
+            <strong>e.</strong> Improving public transportation should therefore
+            be considered an essential component of sustainable urban
+            development.
+          </p>
+        </div>
+
+        <div class="options">
+          <button class="option" onclick="checkAnswer(this, 17, 'A')">
+            A. b – c – a – d – e
+          </button>
+          <button class="option" onclick="checkAnswer(this, 17, 'A')">
+            B. b – a – c – d – e
+          </button>
+          <button class="option" onclick="checkAnswer(this, 17, 'A')">
+            C. c – b – a – e – d
+          </button>
+          <button class="option" onclick="checkAnswer(this, 17, 'A')">
+            D. b – c – d – a – e
+          </button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 18 -->
+      <div class="question" id="q18">
+        <h2>Question 18</h2>
+
+        <div class="sentences">
+          <p>
+            <strong>a.</strong> However, excessive tourism can undermine the
+            very cultural heritage that attracts visitors in the first place.
+          </p>
+          <p>
+            <strong>b.</strong> Historic cities and cultural landmarks have long
+            attracted travellers seeking to experience places with distinctive
+            identities.
+          </p>
+          <p>
+            <strong>c.</strong> Large crowds may place pressure on ancient
+            buildings, while commercial development can gradually alter the
+            character of traditional neighbourhoods.
+          </p>
+          <p>
+            <strong>d.</strong> Sustainable tourism policies are therefore
+            necessary to ensure that cultural attractions remain protected for
+            future generations.
+          </p>
+          <p>
+            <strong>e.</strong> Preserving these sites requires a careful
+            balance between generating income from tourism and maintaining their
+            historical authenticity.
+          </p>
+        </div>
+
+        <div class="options">
+          <button class="option" onclick="checkAnswer(this, 18, 'B')">
+            A. b – c – a – e – d
+          </button>
+          <button class="option" onclick="checkAnswer(this, 18, 'B')">
+            B. b – a – c – e – d
+          </button>
+          <button class="option" onclick="checkAnswer(this, 18, 'B')">
+            C. c – b – a – d – e
+          </button>
+          <button class="option" onclick="checkAnswer(this, 18, 'B')">
+            D. b – a – e – c – d
+          </button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 19 -->
+      <div class="question" id="q19">
+        <h2>Question 19</h2>
+
+        <div class="sentences">
+          <p>
+            <strong>a.</strong> Consequently, many employers are placing greater
+            emphasis on candidates who can demonstrate adaptability and a
+            willingness to learn.
+          </p>
+          <p>
+            <strong>b.</strong> The modern workplace is changing rapidly as
+            automation and digital technologies reshape traditional occupations.
+          </p>
+          <p>
+            <strong>c.</strong> Some routine tasks that were once performed by
+            employees can now be completed by machines or sophisticated
+            software.
+          </p>
+          <p>
+            <strong>d.</strong> Rather than eliminating all employment
+            opportunities, however, technological progress is also creating new
+            roles that require specialised expertise.
+          </p>
+          <p>
+            <strong>e.</strong> Workers who continually update their knowledge
+            and develop transferable skills are therefore more likely to remain
+            competitive.
+          </p>
+        </div>
+
+        <div class="options">
+          <button class="option" onclick="checkAnswer(this, 19, 'A')">
+            A. b – c – d – a – e
+          </button>
+          <button class="option" onclick="checkAnswer(this, 19, 'A')">
+            B. b – d – c – e – a
+          </button>
+          <button class="option" onclick="checkAnswer(this, 19, 'A')">
+            C. c – b – d – a – e
+          </button>
+          <button class="option" onclick="checkAnswer(this, 19, 'A')">
+            D. b – c – a – d – e
+          </button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 20 -->
+      <div class="question" id="q20">
+        <h2>Question 20</h2>
+
+        <div class="sentences">
+          <p>
+            <strong>a.</strong> This is particularly important because sleep
+            deprivation can impair memory, concentration, and emotional
+            regulation.
+          </p>
+          <p>
+            <strong>b.</strong> Despite its importance, sleep is often
+            sacrificed when people face demanding academic or professional
+            schedules.
+          </p>
+          <p>
+            <strong>c.</strong> Adequate sleep is essential for maintaining both
+            physical health and cognitive performance.
+          </p>
+          <p>
+            <strong>d.</strong> Individuals who consistently fail to get enough
+            rest may therefore experience difficulties that extend far beyond
+            temporary tiredness.
+          </p>
+          <p>
+            <strong>e.</strong> Establishing regular sleeping habits and
+            creating a suitable environment for rest can help people protect
+            their long-term well-being.
+          </p>
+        </div>
+
+        <div class="options">
+          <button class="option" onclick="checkAnswer(this, 20, 'C')">
+            A. c – b – a – d – e
+          </button>
+          <button class="option" onclick="checkAnswer(this, 20, 'C')">
+            B. c – a – b – d – e
+          </button>
+          <button class="option" onclick="checkAnswer(this, 20, 'C')">
+            C. b – c – a – e – d
+          </button>
+          <button class="option" onclick="checkAnswer(this, 20, 'C')">
+            D. c – b – d – a – e
+          </button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 21 -->
+      <div class="question" id="q21">
+        <h2>Question 21</h2>
+
+        <div class="sentences">
+          <p>
+            <strong>a.</strong> In addition, international collaboration can
+            help countries share expertise and develop solutions that would be
+            difficult to achieve independently.
+          </p>
+          <p>
+            <strong>b.</strong> Environmental problems increasingly require
+            cooperation between nations rather than isolated national action.
+          </p>
+          <p>
+            <strong>c.</strong> Pollution, climate change, and biodiversity loss
+            often cross political borders and affect multiple regions
+            simultaneously.
+          </p>
+          <p>
+            <strong>d.</strong> No single government can effectively address
+            such challenges without considering their wider international
+            consequences.
+          </p>
+          <p>
+            <strong>e.</strong> Strengthening global partnerships is therefore
+            essential for creating effective and lasting responses to
+            environmental threats.
+          </p>
+        </div>
+
+        <div class="options">
+          <button class="option" onclick="checkAnswer(this, 21, 'A')">
+            A. b – c – d – a – e
+          </button>
+          <button class="option" onclick="checkAnswer(this, 21, 'A')">
+            B. c – b – d – a – e
+          </button>
+          <button class="option" onclick="checkAnswer(this, 21, 'A')">
+            C. b – c – a – d – e
+          </button>
+          <button class="option" onclick="checkAnswer(this, 21, 'A')">
+            D. b – c – a – d – e
+          </button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 22 -->
+      <div class="question" id="q22">
+        <h2>Question 22</h2>
+
+        <div class="sentences">
+          <p>
+            <strong>a.</strong> Nevertheless, the growing popularity of these
+            platforms has raised concerns about the impact of excessive screen
+            time on young people's well-being.
+          </p>
+          <p>
+            <strong>b.</strong> Online learning platforms have expanded access
+            to educational resources for students around the world.
+          </p>
+          <p>
+            <strong>c.</strong> Learners can access lectures, interactive
+            exercises, and specialised courses regardless of their geographical
+            location.
+          </p>
+          <p>
+            <strong>d.</strong> Prolonged exposure to screens may contribute to
+            reduced physical activity and make it harder for some students to
+            maintain concentration.
+          </p>
+          <p>
+            <strong>e.</strong> Educators and parents must therefore find ways
+            to combine the advantages of digital learning with opportunities for
+            offline interaction and physical activity.
+          </p>
+        </div>
+
+        <div class="options">
+          <button class="option" onclick="checkAnswer(this, 22, 'B')">
+            A. b – a – c – d – e
+          </button>
+          <button class="option" onclick="checkAnswer(this, 22, 'B')">
+            B. b – c – a – d – e
+          </button>
+          <button class="option" onclick="checkAnswer(this, 22, 'B')">
+            C. c – b – a – e – d
+          </button>
+          <button class="option" onclick="checkAnswer(this, 22, 'B')">
+            D. b – c – d – a – e
+          </button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+      <div class="score-box">
+        <div id="score">Score: 0 / 10 | Answered: 0 / 10</div>
+        <button class="reset-btn" onclick="resetQuiz()">Reset Quiz</button>
+      </div>
+    </div>
+
+    <script>
+      const answers = {
+        13: "C",
+        14: "A",
+        15: "A",
+        16: "A",
+        17: "A",
+        18: "B",
+        19: "A",
+        20: "C",
+        21: "A",
+        22: "B",
+      };
+
+      const explanations = {
+        13: "The logical order is b → c → e → a → d. Sentence b introduces the rise of online shopping. Sentence c explains what customers can now do. Sentence e summarises the positive effects and increased competition. Sentence a introduces a negative consequence, while d explains how traditional retailers have responded.",
+
+        14: "The logical order is b → c → d → e → a. Sentence b introduces volunteering and its benefits. Sentence c explains the skills students can develop. Sentence d adds another benefit of these experiences. Sentence e gives the resulting action by educational institutions, while a introduces a condition affecting programme effectiveness.",
+
+        15: "The logical order is b → c → e → a → d. Sentence b introduces habitat destruction as a major threat. Sentence c explains how human expansion causes habitat loss. Sentence e describes the consequences for species. Sentence a explains the wider ecological impact, and d concludes with the need for habitat protection.",
+
+        16: "The logical order is b → c → a → e → d. Sentence b introduces the rapid spread of information through social media. Sentence c contrasts speed with concerns about accuracy. Sentence a explains the resulting difficulty in identifying reliable information. Sentence e gives advice for users, and d concludes with the importance of media literacy.",
+
+        17: "The logical order is b → c → a → d → e. Sentence b introduces the importance of transport systems. Sentence c explains the problems caused by private cars. Sentence a contrasts this with investment in public transport. Sentence d adds another benefit, and e concludes with the importance of public transportation for sustainable development.",
+
+        18: "The logical order is b → a → c → e → d. Sentence b introduces historic cities and cultural landmarks as tourist attractions. Sentence a presents the negative consequence of excessive tourism. Sentence c gives specific examples of the damage. Sentence e explains the need for balance, and d concludes with sustainable tourism policies.",
+
+        19: "The logical order is b → c → d → a → e. Sentence b introduces changes in the modern workplace. Sentence c explains how automation affects routine tasks. Sentence d contrasts job displacement with the creation of specialised roles. Sentence a explains what employers increasingly value, and e concludes with the importance of continually developing skills.",
+
+        20: "The logical order is b → c → a → e → d. Sentence b introduces the problem of sacrificing sleep. Sentence c states the importance of adequate sleep. Sentence a explains why sleep is particularly important. Sentence e gives practical advice for maintaining good sleep habits, while d describes the consequences of insufficient rest.",
+
+        21: "The logical order is b → c → d → a → e. Sentence b introduces the need for international cooperation. Sentence c explains why environmental problems cross national borders. Sentence d states that individual governments cannot solve these problems alone. Sentence a adds the benefits of international collaboration, and e gives the final conclusion.",
+
+        22: "The logical order is b → c → a → d → e. Sentence b introduces online learning platforms and their benefits. Sentence c gives examples of how learners can access educational resources. Sentence a introduces concerns about excessive screen time. Sentence d explains the negative effects, and e concludes with the need to balance digital learning with offline activities.",
+      };
+
+      let score = 0;
+      let answered = 0;
+
+      function checkAnswer(button, questionNumber, correctAnswer) {
+        const question = document.getElementById("q" + questionNumber);
+        const buttons = question.querySelectorAll(".option");
+        const feedback = question.querySelector(".feedback");
+
+        if (question.dataset.answered === "true") {
+          return;
+        }
+
+        question.dataset.answered = "true";
+        answered++;
+
+        const selectedAnswer = button.textContent.trim().charAt(0);
+
+        buttons.forEach((btn) => {
+          btn.classList.add("disabled");
+
+          const answerLetter = btn.textContent.trim().charAt(0);
+
+          if (answerLetter === correctAnswer) {
+            btn.classList.add("correct");
+          }
+        });
+
+        if (selectedAnswer === correctAnswer) {
+          score++;
+
+          button.classList.add("correct");
+
+          feedback.className = "feedback correct-feedback";
+
+          feedback.innerHTML = `
+        <strong>✅ Correct!</strong>
+        Your answer is correct. The correct answer is <strong>${correctAnswer}</strong>.<br><br>
+        <strong>Explanation:</strong> ${explanations[questionNumber]}
+      `;
+        } else {
+          button.classList.add("wrong");
+
+          feedback.className = "feedback wrong-feedback";
+
+          feedback.innerHTML = `
+        <strong>❌ Incorrect!</strong>
+        The correct answer is <strong>${correctAnswer}</strong>.<br><br>
+        <strong>Explanation:</strong> ${explanations[questionNumber]}
+      `;
+        }
+
+        updateScore();
+      }
+
+      function updateScore() {
+        document.getElementById("score").textContent =
+          `Score: ${score} / 10 | Answered: ${answered} / 10`;
+      }
+
+      function resetQuiz() {
+        score = 0;
+        answered = 0;
+
+        for (let i = 13; i <= 22; i++) {
+          const question = document.getElementById("q" + i);
+          const buttons = question.querySelectorAll(".option");
+          const feedback = question.querySelector(".feedback");
+
+          question.dataset.answered = "false";
+
+          buttons.forEach((btn) => {
+            btn.classList.remove("correct", "wrong", "disabled");
+          });
+
+          feedback.className = "feedback";
+          feedback.innerHTML = "";
+        }
+
+        updateScore();
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+    </script>
+  </body>
+</html>
