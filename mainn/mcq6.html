@@ -1,0 +1,1298 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Advanced English Quiz 124–156</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #f5f7ff, #eef2ff);
+        color: #222;
+        padding: 30px 15px;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: auto;
+      }
+
+      .header {
+        background: white;
+        padding: 30px;
+        border-radius: 20px;
+        text-align: center;
+        margin-bottom: 25px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+      }
+
+      .header h1 {
+        margin: 0 0 10px;
+        color: #4f46e5;
+      }
+
+      .header p {
+        margin: 0;
+        color: #666;
+      }
+
+      .question-card {
+        background: white;
+        padding: 25px;
+        margin-bottom: 20px;
+        border-radius: 18px;
+        box-shadow: 0 5px 18px rgba(0, 0, 0, 0.07);
+      }
+
+      .question {
+        font-size: 18px;
+        font-weight: bold;
+        line-height: 1.6;
+        margin-bottom: 18px;
+      }
+
+      .option {
+        width: 100%;
+        text-align: left;
+        padding: 13px 16px;
+        margin: 7px 0;
+        border: 2px solid #e5e7eb;
+        background: #fff;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: 0.2s;
+      }
+
+      .option:hover {
+        border-color: #6366f1;
+        background: #f5f3ff;
+      }
+
+      .option.correct {
+        background: #dcfce7;
+        border-color: #22c55e;
+        color: #166534;
+        font-weight: bold;
+      }
+
+      .option.wrong {
+        background: #fee2e2;
+        border-color: #ef4444;
+        color: #991b1b;
+        font-weight: bold;
+      }
+
+      .option.disabled {
+        cursor: default;
+      }
+
+      .result {
+        display: none;
+        margin-top: 18px;
+        padding: 15px;
+        border-radius: 12px;
+        line-height: 1.6;
+      }
+
+      .result.correct-result {
+        display: block;
+        background: #f0fdf4;
+        border-left: 5px solid #22c55e;
+      }
+
+      .result.wrong-result {
+        display: block;
+        background: #fef2f2;
+        border-left: 5px solid #ef4444;
+      }
+
+      .result strong {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      .explanation {
+        margin-top: 8px;
+        color: #444;
+      }
+
+      .reset-container {
+        text-align: center;
+        margin: 35px 0;
+      }
+
+      #resetBtn {
+        padding: 14px 30px;
+        border: none;
+        border-radius: 12px;
+        background: #4f46e5;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      #resetBtn:hover {
+        background: #4338ca;
+      }
+
+      .score {
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: 20px;
+        color: #4f46e5;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Advanced English Quiz</h1>
+        <p>Questions 124–156 • Grammar, Vocabulary & Phrasal Verbs</p>
+        <div class="score" id="score">Score: 0 / 33</div>
+      </div>
+
+      <!-- 124 -->
+      <div class="question-card">
+        <div class="question">
+          124. Writer Ernest Hemingway is known for his ______ language and his
+          lively dialogue.
+        </div>
+
+        <button class="option" onclick="checkAnswer(this, 124, 'A')">
+          A. simplification
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 124, 'B')">
+          B. simple
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 124, 'C')">
+          C. simplistic
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 124, 'D')">
+          D. simplicity
+        </button>
+
+        <div class="result" id="result124"></div>
+      </div>
+
+      <!-- 125 -->
+      <div class="question-card">
+        <div class="question">
+          125. It is imperative that this letter ______ immediately.
+        </div>
+
+        <button class="option" onclick="checkAnswer(this, 125, 'A')">
+          A. were sent
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 125, 'B')">
+          B. sent
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 125, 'C')">
+          C. be sent
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 125, 'D')">
+          D. send
+        </button>
+
+        <div class="result" id="result125"></div>
+      </div>
+
+      <!-- 126 -->
+      <div class="question-card">
+        <div class="question">
+          126. ______ had booked in advance were allowed in.
+        </div>
+
+        <button class="option" onclick="checkAnswer(this, 126, 'A')">
+          A. Only who
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 126, 'B')">
+          B. Only those who
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 126, 'C')">
+          C. Only who were those
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 126, 'D')">
+          D. Only were those who
+        </button>
+
+        <div class="result" id="result126"></div>
+      </div>
+
+      <!-- 127 -->
+      <div class="question-card">
+        <div class="question">
+          127. Not only ______ to speak to him, but she also vowed never to see
+          him again.
+        </div>
+
+        <button class="option" onclick="checkAnswer(this, 127, 'A')">
+          A. she refused
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 127, 'B')">
+          B. did she refuse
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 127, 'C')">
+          C. she did refuse
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 127, 'D')">
+          D. when she refused
+        </button>
+
+        <div class="result" id="result127"></div>
+      </div>
+
+      <!-- 128 -->
+      <div class="question-card">
+        <div class="question">
+          128. The bad weather caused serious damage to the crop. If only it
+          ______ warmer.
+        </div>
+
+        <button class="option" onclick="checkAnswer(this, 128, 'A')">
+          A. was
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 128, 'B')">
+          B. were
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 128, 'C')">
+          C. has been
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 128, 'D')">
+          D. had been
+        </button>
+
+        <div class="result" id="result128"></div>
+      </div>
+
+      <!-- 129 -->
+      <div class="question-card">
+        <div class="question">
+          129. "Eric is really upset about losing his job."<br />
+          "Well, ______ once myself, I can understand."
+        </div>
+
+        <button class="option" onclick="checkAnswer(this, 129, 'A')">
+          A. Having been fired
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 129, 'B')">
+          B. Fired
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 129, 'C')">
+          C. Having fired
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 129, 'D')">
+          D. Being fired
+        </button>
+
+        <div class="result" id="result129"></div>
+      </div>
+
+      <!-- 130 -->
+      <div class="question-card">
+        <div class="question">
+          130. ______ his advice, I would never have got a job.
+        </div>
+
+        <button class="option" onclick="checkAnswer(this, 130, 'A')">
+          A. Except
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 130, 'B')">
+          B. Apart from
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 130, 'C')">
+          C. But for
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 130, 'D')">
+          D. As for
+        </button>
+
+        <div class="result" id="result130"></div>
+      </div>
+
+      <!-- 131 -->
+      <div class="question-card">
+        <div class="question">
+          131. She demanded that she ______ allowed to meet her son in prison.
+        </div>
+
+        <button class="option" onclick="checkAnswer(this, 131, 'A')">
+          A. was
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 131, 'B')">
+          B. might be
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 131, 'C')">
+          C. be
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 131, 'D')">
+          D. could be
+        </button>
+
+        <div class="result" id="result131"></div>
+      </div>
+
+      <!-- 132 -->
+      <div class="question-card">
+        <div class="question">
+          132. There is absolutely no ______ for the ridiculous amount of money
+          the government spent on this campaign.
+        </div>
+
+        <button class="option" onclick="checkAnswer(this, 132, 'A')">
+          A. convention
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 132, 'B')">
+          B. justification
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 132, 'C')">
+          C. constraint
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 132, 'D')">
+          D. procedure
+        </button>
+
+        <div class="result" id="result132"></div>
+      </div>
+
+      <!-- 133 -->
+      <div class="question-card">
+        <div class="question">
+          133. The Red Cross is ______ an international aid organization.
+        </div>
+
+        <button class="option" onclick="checkAnswer(this, 133, 'A')">
+          A. intriguingly
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 133, 'B')">
+          B. intrusively
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 133, 'C')">
+          C. intrinsically
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 133, 'D')">
+          D. intrepidly
+        </button>
+
+        <div class="result" id="result133"></div>
+      </div>
+
+      <!-- 134 -->
+      <div class="question-card">
+        <div class="question">
+          134. I don't need any medicine. I'm as right as ______.
+        </div>
+
+        <button class="option" onclick="checkAnswer(this, 134, 'A')">
+          A. clouds
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 134, 'B')">
+          B. a ray
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 134, 'C')">
+          C. rain
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 134, 'D')">
+          D. a haze
+        </button>
+
+        <div class="result" id="result134"></div>
+      </div>
+
+      <!-- 135 -->
+      <div class="question-card">
+        <div class="question">
+          135. I couldn't tolerate my mother's incessant nagging.
+        </div>
+
+        <button class="option" onclick="checkAnswer(this, 135, 'A')">
+          A. endless
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 135, 'B')">
+          B. bothersome
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 135, 'C')">
+          C. annoying
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 135, 'D')">
+          D. repetitive
+        </button>
+
+        <div class="result" id="result135"></div>
+      </div>
+
+      <!-- 136 -->
+      <div class="question-card">
+        <div class="question">
+          136. You must forgive my ______ in these matters.
+        </div>
+
+        <button class="option" onclick="checkAnswer(this, 136, 'A')">
+          A. experience
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 136, 'B')">
+          B. inexperience
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 136, 'C')">
+          C. unexperience
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 136, 'D')">
+          D. imexperience
+        </button>
+
+        <div class="result" id="result136"></div>
+      </div>
+
+      <!-- 137 -->
+      <div class="question-card">
+        <div class="question">
+          137. Marie ______ a face when I told her we were having cabbage for
+          dinner.
+        </div>
+
+        <button class="option" onclick="checkAnswer(this, 137, 'A')">
+          A. pulled
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 137, 'B')">
+          B. dragged
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 137, 'C')">
+          C. gave
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 137, 'D')">
+          D. fixed
+        </button>
+
+        <div class="result" id="result137"></div>
+      </div>
+
+      <!-- 138 -->
+      <div class="question-card">
+        <div class="question">
+          138. It was a ______ of luck that June was available when the job came
+          up.
+        </div>
+
+        <button class="option" onclick="checkAnswer(this, 138, 'A')">
+          A. blow
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 138, 'B')">
+          B. stroke
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 138, 'C')">
+          C. brush
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 138, 'D')">
+          D. touch
+        </button>
+
+        <div class="result" id="result138"></div>
+      </div>
+
+      <!-- 139 -->
+      <div class="question-card">
+        <div class="question">
+          139. I didn't want to make a decision ______, so I said I'd like to
+          think about it.
+        </div>
+
+        <button class="option" onclick="checkAnswer(this, 139, 'A')">
+          A. on and off
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 139, 'B')">
+          B. in one go
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 139, 'C')">
+          C. there and then
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 139, 'D')">
+          D. at a stroke
+        </button>
+
+        <div class="result" id="result139"></div>
+      </div>
+
+      <!-- 140 -->
+      <div class="question-card">
+        <div class="question">
+          140. The children gazed at the magician ______ as he performed his
+          tricks.
+        </div>
+
+        <button class="option" onclick="checkAnswer(this, 140, 'A')">
+          A. open-eyed
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 140, 'B')">
+          B. lit-eyed
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 140, 'C')">
+          C. hawked-eyed
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 140, 'D')">
+          D. wide-eyed
+        </button>
+
+        <div class="result" id="result140"></div>
+      </div>
+
+      <!-- 141 -->
+      <div class="question-card">
+        <div class="question">
+          141. He knew that the beautiful sports car he was looking at must have
+          cost a ______ penny.
+        </div>
+
+        <button class="option" onclick="checkAnswer(this, 141, 'A')">
+          A. pretty
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 141, 'B')">
+          B. big
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 141, 'C')">
+          C. bent
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 141, 'D')">
+          D. shiny
+        </button>
+
+        <div class="result" id="result141"></div>
+      </div>
+
+      <!-- 142 -->
+      <div class="question-card">
+        <div class="question">
+          142. Arrows would continue to fly forward forever in a straight line
+          ______ which brings them down to earth.
+        </div>
+
+        <button class="option" onclick="checkAnswer(this, 142, 'A')">
+          A. were it not for gravity
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 142, 'B')">
+          B. without gravity
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 142, 'C')">
+          C. but for gravity
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 142, 'D')">
+          D. for no gravity
+        </button>
+
+        <div class="result" id="result142"></div>
+      </div>
+
+      <!-- 143 -->
+      <div class="question-card">
+        <div class="question">
+          143. I got a letter from the University to say that owing to the
+          financial situation they ______ the scholarships at the end of the
+          year instead of at the beginning.
+        </div>
+
+        <button class="option" onclick="checkAnswer(this, 143, 'A')">
+          A. can have paid
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 143, 'B')">
+          B. would have paid
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 143, 'C')">
+          C. must have paid
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 143, 'D')">
+          D. were going to pay
+        </button>
+
+        <div class="result" id="result143"></div>
+      </div>
+
+      <!-- 144 -->
+      <div class="question-card">
+        <div class="question">
+          144. When Susan was told the whole story, she ______ in the film.
+        </div>
+
+        <button class="option" onclick="checkAnswer(this, 144, 'A')">
+          A. ceased interest
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 144, 'B')">
+          B. ceased to interest
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 144, 'C')">
+          C. ceased being interested
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 144, 'D')">
+          D. ceased interested
+        </button>
+
+        <div class="result" id="result144"></div>
+      </div>
+
+      <!-- 145 -->
+      <div class="question-card">
+        <div class="question">145. I've yet ______ a person as Theo.</div>
+
+        <button class="option" onclick="checkAnswer(this, 145, 'A')">
+          A. to meet as infuriating
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 145, 'B')">
+          B. to have met such infuriating
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 145, 'C')">
+          C. been meeting as infuriating
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 145, 'D')">
+          D. been meeting such infuriating
+        </button>
+
+        <div class="result" id="result145"></div>
+      </div>
+
+      <!-- 146 -->
+      <div class="question-card">
+        <div class="question">
+          146. A horse and cart ______ seen ______ to the market.
+        </div>
+
+        <button class="option" onclick="checkAnswer(this, 146, 'A')">
+          A. was being / going
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 146, 'B')">
+          B. were / to go
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 146, 'C')">
+          C. was / to go
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 146, 'D')">
+          D. were being / going
+        </button>
+
+        <div class="result" id="result146"></div>
+      </div>
+
+      <!-- 147 -->
+      <div class="question-card">
+        <div class="question">
+          147. I want to ______ my duties because I feel so tired.
+        </div>
+
+        <button class="option" onclick="checkAnswer(this, 147, 'A')">
+          A. lay down
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 147, 'B')">
+          B. put away
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 147, 'C')">
+          C. builds up
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 147, 'D')">
+          D. goes in for
+        </button>
+
+        <div class="result" id="result147"></div>
+      </div>
+
+      <!-- 148 -->
+      <div class="question-card">
+        <div class="question">148. She is always ______ my hair.</div>
+
+        <button class="option" onclick="checkAnswer(this, 148, 'A')">
+          A. sheltering in
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 148, 'B')">
+          B. getting in
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 148, 'C')">
+          C. standing by
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 148, 'D')">
+          D. coming near
+        </button>
+
+        <div class="result" id="result148"></div>
+      </div>
+
+      <!-- 149 -->
+      <div class="question-card">
+        <div class="question">
+          149. The driver had probably ______ at the wheel.
+        </div>
+
+        <button class="option" onclick="checkAnswer(this, 149, 'A')">
+          A. fallen out
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 149, 'B')">
+          B. dropped in on
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 149, 'C')">
+          C. blacked out
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 149, 'D')">
+          D. came in for
+        </button>
+
+        <div class="result" id="result149"></div>
+      </div>
+
+      <!-- 150 -->
+      <div class="question-card">
+        <div class="question">
+          150. After twenty years in the police she could smell a liar a mile
+          ______.
+        </div>
+
+        <button class="option" onclick="checkAnswer(this, 150, 'A')">
+          A. out
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 150, 'B')">
+          B. on
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 150, 'C')">
+          C. up
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 150, 'D')">
+          D. off / away
+        </button>
+
+        <div class="result" id="result150"></div>
+      </div>
+
+      <!-- 151 -->
+      <div class="question-card">
+        <div class="question">
+          151. After a week in the new job, I soon realized that I was ______ my
+          head.
+        </div>
+
+        <button class="option" onclick="checkAnswer(this, 151, 'A')">
+          A. in for
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 151, 'B')">
+          B. in upon
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 151, 'C')">
+          C. on over
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 151, 'D')">
+          D. in over
+        </button>
+
+        <div class="result" id="result151"></div>
+      </div>
+
+      <!-- 152 -->
+      <div class="question-card">
+        <div class="question">
+          152. I think Galaxy Tab S3 will ______ on February 28th, 2017.
+        </div>
+
+        <button class="option" onclick="checkAnswer(this, 152, 'A')">
+          A. be come out
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 152, 'B')">
+          B. be showed up
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 152, 'C')">
+          C. come out
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 152, 'D')">
+          D. give out
+        </button>
+
+        <div class="result" id="result152"></div>
+      </div>
+
+      <!-- 153 -->
+      <div class="question-card">
+        <div class="question">
+          153. Once ______ a blue moon does he visit me.
+        </div>
+
+        <button class="option" onclick="checkAnswer(this, 153, 'A')">
+          A. into
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 153, 'B')">
+          B. in
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 153, 'C')">
+          C. on
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 153, 'D')">
+          D. for
+        </button>
+
+        <div class="result" id="result153"></div>
+      </div>
+
+      <!-- 154 -->
+      <div class="question-card">
+        <div class="question">
+          154. And he ______ with all the money he had been given.
+        </div>
+
+        <button class="option" onclick="checkAnswer(this, 154, 'A')">
+          A. made off
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 154, 'B')">
+          B. took away
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 154, 'C')">
+          C. shut down
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 154, 'D')">
+          D. came across
+        </button>
+
+        <div class="result" id="result154"></div>
+      </div>
+
+      <!-- 155 -->
+      <div class="question-card">
+        <div class="question">
+          155. Bosnia is ______ from the Adriatic by the mountains.
+        </div>
+
+        <button class="option" onclick="checkAnswer(this, 155, 'A')">
+          A. blocked off
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 155, 'B')">
+          B. shut off
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 155, 'C')">
+          C. closed off
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 155, 'D')">
+          D. isolated off
+        </button>
+
+        <div class="result" id="result155"></div>
+      </div>
+
+      <!-- 156 -->
+      <div class="question-card">
+        <div class="question">
+          156. We need your help because we are ______ a brick wall.
+        </div>
+
+        <button class="option" onclick="checkAnswer(this, 156, 'A')">
+          A. up with
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 156, 'B')">
+          B. up to
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 156, 'C')">
+          C. up against
+        </button>
+
+        <button class="option" onclick="checkAnswer(this, 156, 'D')">
+          D. up for
+        </button>
+
+        <div class="result" id="result156"></div>
+      </div>
+
+      <div class="reset-container">
+        <button id="resetBtn" onclick="resetQuiz()">🔄 Reset Quiz</button>
+      </div>
+    </div>
+
+    <script>
+      const answers = {
+        124: {
+          answer: "B",
+          explanation:
+            "<b>simple language</b> = ngôn ngữ đơn giản. Sau tính từ sở hữu 'his' và trước danh từ 'language' cần một tính từ.",
+        },
+
+        125: {
+          answer: "C",
+          explanation:
+            "Sau 'It is imperative that...' dùng <b>subjunctive</b>: S + V nguyên mẫu. Vì câu ở thể bị động nên dùng <b>be sent</b>.",
+        },
+
+        126: {
+          answer: "B",
+          explanation:
+            "<b>those who</b> = những người mà... 'Those' thay cho people và 'who' là đại từ quan hệ.",
+        },
+
+        127: {
+          answer: "B",
+          explanation:
+            "Khi 'Not only' đứng đầu câu, phải đảo trợ động từ lên trước chủ ngữ: <b>Not only did she refuse...</b>",
+        },
+
+        128: {
+          answer: "D",
+          explanation:
+            "'If only' diễn tả điều ước trái với quá khứ: <b>If only + past perfect</b> → had been.",
+        },
+
+        129: {
+          answer: "A",
+          explanation:
+            "<b>Having been fired</b> là phân từ hoàn thành bị động, nghĩa là 'đã từng bị sa thải'.",
+        },
+
+        130: {
+          answer: "C",
+          explanation:
+            "<b>But for</b> = nếu không có. 'But for his advice, I would never have got a job.'",
+        },
+
+        131: {
+          answer: "C",
+          explanation:
+            "Sau động từ chỉ yêu cầu như <b>demand</b>, dùng subjunctive: demand that + S + V nguyên mẫu → <b>be allowed</b>.",
+        },
+
+        132: {
+          answer: "B",
+          explanation:
+            "<b>Justification</b> = sự biện minh / lý do chính đáng. 'There is no justification for...' là cụm dùng tự nhiên.",
+        },
+
+        133: {
+          answer: "C",
+          explanation:
+            "<b>Intrinsically</b> = về bản chất, vốn dĩ. Red Cross is intrinsically an international aid organization.",
+        },
+
+        134: {
+          answer: "C",
+          explanation:
+            "<b>As right as rain</b> là thành ngữ có nghĩa là hoàn toàn khỏe mạnh / không có vấn đề gì.",
+        },
+
+        135: {
+          answer: "A",
+          explanation:
+            "<b>Incessant</b> = không ngừng, liên tục → gần nghĩa nhất với <b>endless</b>.",
+        },
+
+        136: {
+          answer: "B",
+          explanation:
+            "<b>Inexperience</b> = sự thiếu kinh nghiệm. 'Forgive my inexperience' là cách dùng đúng.",
+        },
+
+        137: {
+          answer: "A",
+          explanation:
+            "<b>Pull a face</b> = nhăn mặt / làm vẻ mặt thể hiện sự không thích.",
+        },
+
+        138: {
+          answer: "B",
+          explanation: "<b>A stroke of luck</b> = một sự may mắn bất ngờ.",
+        },
+
+        139: {
+          answer: "C",
+          explanation:
+            "<b>There and then</b> = ngay lúc đó, ngay lập tức. Câu có nghĩa là không muốn quyết định ngay tại chỗ.",
+        },
+
+        140: {
+          answer: "D",
+          explanation:
+            "<b>Wide-eyed</b> = mở to mắt, thường thể hiện sự ngạc nhiên hoặc kinh ngạc.",
+        },
+
+        141: {
+          answer: "A",
+          explanation: "<b>Cost a pretty penny</b> = rất đắt tiền.",
+        },
+
+        142: {
+          answer: "A",
+          explanation:
+            "<b>Were it not for...</b> = nếu không vì... Đây là dạng đảo ngữ của 'If it were not for gravity'.",
+        },
+
+        143: {
+          answer: "D",
+          explanation:
+            "Trong lời tường thuật, 'are going to pay' chuyển thành <b>were going to pay</b>.",
+        },
+
+        144: {
+          answer: "C",
+          explanation:
+            "<b>Cease + V-ing</b> hoặc cease to V đều có thể dùng. Ở đây 'interested' là tính từ nên dùng <b>ceased being interested</b>.",
+        },
+
+        145: {
+          answer: "A",
+          explanation:
+            "Cấu trúc <b>I've yet to meet + noun + as + adjective</b>: 'I've yet to meet a person as infuriating as Theo.'",
+        },
+
+        146: {
+          answer: "C",
+          explanation:
+            "'A horse and cart' được xem là một đơn vị / một phương tiện nên dùng động từ số ít: <b>was seen to go</b>.",
+        },
+
+        147: {
+          answer: "A",
+          explanation:
+            "<b>Lay down</b> = đặt xuống / nằm xuống. Tuy nhiên câu này có vẻ không tự nhiên về nghĩa; nếu muốn nói 'bỏ/buông nhiệm vụ', đáp án cho sẵn không thật sự phù hợp.",
+        },
+
+        148: {
+          answer: "B",
+          explanation:
+            "<b>Get in someone's hair</b> = làm phiền, quấy rầy ai đó. Câu này có vẻ bị thiếu 'my' trước hair theo cấu trúc idiom.",
+        },
+
+        149: {
+          answer: "C",
+          explanation:
+            "<b>Black out</b> = bất tỉnh / mất ý thức. 'Blacked out at the wheel' nghĩa là mất ý thức khi đang lái xe.",
+        },
+
+        150: {
+          answer: "A",
+          explanation:
+            "<b>Smell a liar a mile off</b> = dễ dàng nhận ra một kẻ nói dối dù ở khoảng cách xa.",
+        },
+
+        151: {
+          answer: "D",
+          explanation:
+            "<b>In over one's head</b> = gặp tình huống vượt quá khả năng hoặc kinh nghiệm của mình.",
+        },
+
+        152: {
+          answer: "C",
+          explanation:
+            "<b>Come out</b> = được phát hành / ra mắt. Không dùng 'be come out'.",
+        },
+
+        153: {
+          answer: "B",
+          explanation: "<b>Once in a blue moon</b> = rất hiếm khi.",
+        },
+
+        154: {
+          answer: "A",
+          explanation:
+            "<b>Make off with something</b> = bỏ trốn / tẩu thoát cùng với thứ gì đó.",
+        },
+
+        155: {
+          answer: "A",
+          explanation:
+            "<b>Block off</b> = chặn, ngăn cách. 'Bosnia is blocked off from the Adriatic by the mountains.'",
+        },
+
+        156: {
+          answer: "C",
+          explanation:
+            "<b>Be up against</b> = đối mặt với một khó khăn hoặc trở ngại. 'We are up against a brick wall.'",
+        },
+      };
+
+      let score = 0;
+
+      let answered = {};
+
+      function checkAnswer(button, questionNumber, selectedAnswer) {
+        // Không cho chọn lại
+        if (answered[questionNumber]) {
+          return;
+        }
+
+        answered[questionNumber] = true;
+
+        const correctAnswer = answers[questionNumber].answer;
+
+        const result = document.getElementById("result" + questionNumber);
+
+        const card = button.parentElement;
+
+        const buttons = card.querySelectorAll(".option");
+
+        // Disable tất cả button
+        buttons.forEach((btn) => {
+          btn.classList.add("disabled");
+          btn.disabled = true;
+        });
+
+        // Tô đáp án đúng
+        buttons.forEach((btn) => {
+          const answerLetter = btn.innerText.trim().charAt(0);
+
+          if (answerLetter === correctAnswer) {
+            btn.classList.add("correct");
+          }
+        });
+
+        if (selectedAnswer === correctAnswer) {
+          score++;
+
+          button.classList.add("correct");
+
+          result.className = "result correct-result";
+
+          result.innerHTML = `
+        <strong>✅ Correct!</strong>
+        Đáp án đúng: <b>${correctAnswer}</b>
+        <div class="explanation">
+          💡 ${answers[questionNumber].explanation}
+        </div>
+      `;
+        } else {
+          button.classList.add("wrong");
+
+          result.className = "result wrong-result";
+
+          result.innerHTML = `
+        <strong>❌ Incorrect!</strong>
+        Đáp án bạn chọn: <b>${selectedAnswer}</b><br>
+        Đáp án đúng: <b>${correctAnswer}</b>
+        <div class="explanation">
+          💡 ${answers[questionNumber].explanation}
+        </div>
+      `;
+        }
+
+        // Cập nhật điểm
+        document.getElementById("score").innerText = `Score: ${score} / 33`;
+      }
+
+      function resetQuiz() {
+        score = 0;
+
+        answered = {};
+
+        document.getElementById("score").innerText = "Score: 0 / 33";
+
+        document.querySelectorAll(".option").forEach((button) => {
+          button.disabled = false;
+
+          button.classList.remove("correct", "wrong", "disabled");
+        });
+
+        document.querySelectorAll(".result").forEach((result) => {
+          result.className = "result";
+
+          result.innerHTML = "";
+        });
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+    </script>
+  </body>
+</html>
