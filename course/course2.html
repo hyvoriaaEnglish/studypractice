@@ -1,0 +1,1684 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>City Life – Double Comparatives & Phrasal Verbs</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Oswald:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Baloo 2", sans-serif;
+        background: #f7f8fc;
+        color: #333;
+        line-height: 1.7;
+      }
+
+      /* =========================
+       HEADER
+    ========================= */
+
+      header {
+        height: 70px;
+        background: #ffffff;
+        border-bottom: 1px solid #e8e8ee;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 35px;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .logo {
+        font-size: 25px;
+        font-weight: 800;
+        color: #6c63ff;
+      }
+
+      .lesson-label {
+        font-size: 15px;
+        color: #777;
+        font-weight: 600;
+      }
+
+      /* =========================
+       PROGRESS
+    ========================= */
+
+      .progress-container {
+        width: 100%;
+        height: 5px;
+        background: #eeeeee;
+        position: fixed;
+        top: 70px;
+        left: 0;
+        z-index: 1001;
+      }
+
+      .progress-bar {
+        height: 100%;
+        width: 0%;
+        background: #6c63ff;
+        transition: width 0.3s ease;
+      }
+
+      /* =========================
+       LAYOUT
+    ========================= */
+
+      .course-layout {
+        display: flex;
+        max-width: 1450px;
+        margin: 0 auto;
+      }
+
+      /* =========================
+       SIDEBAR
+    ========================= */
+
+      .sidebar {
+        width: 280px;
+        min-height: calc(100vh - 75px);
+        background: #ffffff;
+        border-right: 1px solid #e8e8ee;
+        padding: 30px 20px;
+        position: sticky;
+        top: 75px;
+        height: calc(100vh - 75px);
+        overflow-y: auto;
+      }
+
+      .sidebar-title {
+        font-size: 18px;
+        font-weight: 800;
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      .lesson-list {
+        list-style: none;
+      }
+
+      .lesson-list li {
+        margin-bottom: 8px;
+      }
+
+      .lesson-list button {
+        width: 100%;
+        border: none;
+        background: transparent;
+        text-align: left;
+        padding: 11px 13px;
+        border-radius: 10px;
+        font-family: inherit;
+        font-size: 14px;
+        color: #666;
+        cursor: pointer;
+        transition: 0.25s;
+      }
+
+      .lesson-list button:hover {
+        background: #f2f1ff;
+        color: #6c63ff;
+      }
+
+      .lesson-list button.active {
+        background: #6c63ff;
+        color: white;
+        font-weight: 700;
+      }
+
+      /* =========================
+       MAIN
+    ========================= */
+
+      .main-content {
+        flex: 1;
+        padding: 50px;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      .lesson-page {
+        display: none;
+        animation: fadeIn 0.35s ease;
+      }
+
+      .lesson-page.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* =========================
+       PAGE HEADER
+    ========================= */
+
+      .page-number {
+        color: #6c63ff;
+        font-size: 14px;
+        font-weight: 700;
+        margin-bottom: 5px;
+      }
+
+      h1 {
+        font-family: "Oswald", sans-serif;
+        font-size: 38px;
+        line-height: 1.3;
+        margin-bottom: 20px;
+        color: #222;
+      }
+
+      h2 {
+        font-size: 27px;
+        margin: 30px 0 15px;
+        color: #333;
+      }
+
+      h3 {
+        font-size: 21px;
+        margin: 25px 0 12px;
+        color: #444;
+      }
+
+      p {
+        margin-bottom: 15px;
+      }
+
+      /* =========================
+       HERO
+    ========================= */
+
+      .hero {
+        background: #6c63ff;
+        color: white;
+        border-radius: 20px;
+        padding: 40px;
+        margin-bottom: 35px;
+      }
+
+      .hero h1 {
+        color: white;
+        font-size: 42px;
+      }
+
+      .hero p {
+        font-size: 17px;
+        opacity: 0.95;
+      }
+
+      /* =========================
+       INFO BOX
+    ========================= */
+
+      .info-box {
+        background: #f1f0ff;
+        border-left: 5px solid #6c63ff;
+        padding: 20px 24px;
+        border-radius: 0 12px 12px 0;
+        margin: 20px 0;
+      }
+
+      .tip-box {
+        background: #fff8e6;
+        border-left: 5px solid #f0b429;
+        padding: 20px 24px;
+        border-radius: 0 12px 12px 0;
+        margin: 20px 0;
+      }
+
+      .example-box {
+        background: #ffffff;
+        border: 1px solid #e4e4eb;
+        border-radius: 14px;
+        padding: 20px 24px;
+        margin: 18px 0;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+      }
+
+      .example-en {
+        font-size: 18px;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 5px;
+      }
+
+      .example-vi {
+        color: #777;
+      }
+
+      /* =========================
+       FORMULA
+    ========================= */
+
+      .formula {
+        background: #25243a;
+        color: white;
+        padding: 22px;
+        border-radius: 14px;
+        text-align: center;
+        font-size: 20px;
+        font-weight: 700;
+        margin: 20px 0;
+      }
+
+      /* =========================
+       TABLE
+    ========================= */
+
+      .table-wrapper {
+        overflow-x: auto;
+        margin: 20px 0;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+      }
+
+      th,
+      td {
+        padding: 13px 16px;
+        border-bottom: 1px solid #eeeeee;
+        text-align: left;
+      }
+
+      th {
+        background: #f1f0ff;
+        color: #555;
+        font-weight: 700;
+      }
+
+      /* =========================
+       VOCABULARY CARDS
+    ========================= */
+
+      .vocab-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        margin: 20px 0;
+      }
+
+      .vocab-card {
+        background: white;
+        border: 1px solid #e6e6ec;
+        border-radius: 14px;
+        padding: 20px;
+        transition: 0.25s;
+      }
+
+      .vocab-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+      }
+
+      .vocab-number {
+        font-size: 13px;
+        color: #6c63ff;
+        font-weight: 700;
+      }
+
+      .vocab-word {
+        font-size: 20px;
+        font-weight: 800;
+        color: #333;
+        margin: 3px 0;
+      }
+
+      .vocab-meaning {
+        color: #777;
+      }
+
+      /* =========================
+       SUMMARY
+    ========================= */
+
+      .summary-box {
+        background: white;
+        border: 1px solid #e5e5eb;
+        border-radius: 16px;
+        padding: 25px;
+        margin: 20px 0;
+      }
+
+      .summary-box ul {
+        list-style: none;
+      }
+
+      .summary-box li {
+        padding: 7px 0;
+      }
+
+      /* =========================
+       NAVIGATION
+    ========================= */
+
+      .navigation {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+        margin-top: 50px;
+        padding-top: 25px;
+        border-top: 1px solid #e5e5eb;
+      }
+
+      .nav-btn {
+        border: none;
+        padding: 13px 25px;
+        border-radius: 10px;
+        font-family: inherit;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.25s;
+      }
+
+      .prev-btn {
+        background: #eeeef4;
+        color: #555;
+      }
+
+      .next-btn {
+        background: #6c63ff;
+        color: white;
+      }
+
+      .nav-btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .nav-btn:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      /* =========================
+       EXERCISE CTA
+    ========================= */
+
+      .exercise-cta {
+        margin-top: 40px;
+        background: #25243a;
+        color: white;
+        padding: 35px;
+        border-radius: 18px;
+        text-align: center;
+      }
+
+      .exercise-cta h2 {
+        color: white;
+        margin-top: 0;
+      }
+
+      .exercise-cta p {
+        color: #ddd;
+      }
+
+      .exercise-btn {
+        display: inline-block;
+        text-decoration: none;
+        background: #6c63ff;
+        color: white;
+        padding: 13px 28px;
+        border-radius: 10px;
+        font-weight: 700;
+        margin-top: 10px;
+        transition: 0.25s;
+      }
+
+      .exercise-btn:hover {
+        transform: translateY(-2px);
+      }
+
+      /* =========================
+       HOME BUTTON
+    ========================= */
+
+      .home-section {
+        text-align: center;
+        margin-top: 30px;
+      }
+
+      .home-btn {
+        display: inline-block;
+        text-decoration: none;
+        color: #6c63ff;
+        font-weight: 700;
+        padding: 10px 20px;
+      }
+
+      /* =========================
+       RESPONSIVE
+    ========================= */
+
+      @media (max-width: 850px) {
+        header {
+          padding: 0 20px;
+        }
+
+        .lesson-label {
+          display: none;
+        }
+
+        .course-layout {
+          display: block;
+        }
+
+        .sidebar {
+          position: relative;
+          top: 0;
+          width: 100%;
+          height: auto;
+          min-height: auto;
+          border-right: none;
+          border-bottom: 1px solid #e8e8ee;
+          padding: 15px;
+        }
+
+        .lesson-list {
+          display: flex;
+          gap: 8px;
+          overflow-x: auto;
+        }
+
+        .lesson-list li {
+          min-width: max-content;
+        }
+
+        .lesson-list button {
+          white-space: nowrap;
+        }
+
+        .main-content {
+          padding: 30px 20px;
+        }
+
+        .vocab-grid {
+          grid-template-columns: 1fr;
+        }
+
+        h1 {
+          font-size: 31px;
+        }
+
+        .hero h1 {
+          font-size: 34px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- =========================
+       HEADER
+  ========================= -->
+
+    <header>
+      <div class="logo">Hyvoria English</div>
+      <div class="lesson-label">Grammar Lesson • City Life</div>
+    </header>
+
+    <!-- PROGRESS BAR -->
+
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- =========================
+       COURSE LAYOUT
+  ========================= -->
+
+    <div class="course-layout">
+      <!-- =========================
+         SIDEBAR
+    ========================= -->
+
+      <aside class="sidebar">
+        <div class="sidebar-title">📚 Nội dung bài học</div>
+
+        <ul class="lesson-list">
+          <li>
+            <button class="lesson-tab active" onclick="goToPage(0)">
+              🏙️ Giới thiệu
+            </button>
+          </li>
+
+          <li>
+            <button class="lesson-tab" onclick="goToPage(1)">
+              1️⃣ So sánh kép
+            </button>
+          </li>
+
+          <li>
+            <button class="lesson-tab" onclick="goToPage(2)">
+              2️⃣ Cấu trúc cơ bản
+            </button>
+          </li>
+
+          <li>
+            <button class="lesson-tab" onclick="goToPage(3)">
+              3️⃣ Tính từ ngắn
+            </button>
+          </li>
+
+          <li>
+            <button class="lesson-tab" onclick="goToPage(4)">
+              4️⃣ Tính từ dài
+            </button>
+          </li>
+
+          <li>
+            <button class="lesson-tab" onclick="goToPage(5)">
+              5️⃣ More / Less / Fewer
+            </button>
+          </li>
+
+          <li>
+            <button class="lesson-tab" onclick="goToPage(6)">⭐ Mẹo nhớ</button>
+          </li>
+
+          <li>
+            <button class="lesson-tab" onclick="goToPage(7)">
+              🚇 Phrasal Verbs
+            </button>
+          </li>
+
+          <li>
+            <button class="lesson-tab" onclick="goToPage(8)">
+              🏠 Move Into / Out
+            </button>
+          </li>
+
+          <li>
+            <button class="lesson-tab" onclick="goToPage(9)">
+              🚗 Pick Up / Drop Off
+            </button>
+          </li>
+
+          <li>
+            <button class="lesson-tab" onclick="goToPage(10)">
+              🛠️ Các cụm động từ khác
+            </button>
+          </li>
+
+          <li>
+            <button class="lesson-tab" onclick="goToPage(11)">
+              🏙️ Kết hợp kiến thức
+            </button>
+          </li>
+
+          <li>
+            <button class="lesson-tab" onclick="goToPage(12)">
+              🎯 Tổng kết
+            </button>
+          </li>
+        </ul>
+      </aside>
+
+      <!-- =========================
+         MAIN CONTENT
+    ========================= -->
+
+      <main class="main-content">
+        <!-- =========================
+           PAGE 0
+      ========================= -->
+
+        <section class="lesson-page active">
+          <div class="hero">
+            <div class="page-number">LESSON 01</div>
+
+            <h1>🏙️ CITY LIFE</h1>
+
+            <p>Double Comparatives & Phrasal Verbs</p>
+
+            <p>
+              Học cách sử dụng cấu trúc
+              <strong>“Càng... thì càng...”</strong>
+              và các cụm động từ thông dụng trong chủ đề cuộc sống thành phố.
+            </p>
+          </div>
+
+          <h2>🎯 Mục tiêu bài học</h2>
+
+          <div class="info-box">
+            <p>Sau bài học này, em có thể:</p>
+
+            <p>✅ Hiểu và sử dụng <strong>so sánh kép</strong>.</p>
+
+            <p>
+              ✅ Phân biệt cách dùng <strong>-er</strong> và
+              <strong>more</strong>.
+            </p>
+
+            <p>✅ Sử dụng <strong>more, less, fewer</strong> chính xác.</p>
+
+            <p>
+              ✅ Hiểu và sử dụng các <strong>phrasal verbs</strong> phổ biến.
+            </p>
+
+            <p>✅ Áp dụng kiến thức vào chủ đề <strong>City Life</strong>.</p>
+          </div>
+
+          <div class="tip-box">
+            💡 <strong>Hãy nhớ:</strong>
+
+            <br />
+
+            Bài học này có 2 phần chính:
+
+            <br /><br />
+
+            🏙️ <strong>Part 1:</strong> Double Comparatives
+
+            <br />
+
+            🚇 <strong>Part 2:</strong> Phrasal Verbs
+          </div>
+        </section>
+
+        <!-- =========================
+           PAGE 1
+      ========================= -->
+
+        <section class="lesson-page">
+          <div class="page-number">PART 1 • DOUBLE COMPARATIVES</div>
+
+          <h1>1. So sánh kép là gì?</h1>
+
+          <p>So sánh kép dùng để nói về mối quan hệ:</p>
+
+          <div class="formula">CÀNG A → CÀNG B</div>
+
+          <p>Trong tiếng Anh, ta thường dùng cấu trúc:</p>
+
+          <div class="formula">The + comparative..., the + comparative...</div>
+
+          <div class="example-box">
+            <div class="example-en">
+              The bigger the city is, the more crowded it becomes.
+            </div>
+
+            <div class="example-vi">
+              → Thành phố càng lớn thì càng đông đúc.
+            </div>
+          </div>
+
+          <div class="tip-box">
+            ⭐ <strong>Mẹo nhớ:</strong>
+
+            <br />
+
+            Khi nhìn thấy:
+
+            <strong>The..., the...</strong>
+
+            <br />
+
+            Hãy nghĩ ngay:
+
+            <strong>CÀNG... THÌ CÀNG...</strong>
+          </div>
+        </section>
+
+        <!-- =========================
+           PAGE 2
+      ========================= -->
+
+        <section class="lesson-page">
+          <div class="page-number">PART 1 • DOUBLE COMPARATIVES</div>
+
+          <h1>2. Công thức cơ bản</h1>
+
+          <div class="formula">
+            The + so sánh hơn + ..., the + so sánh hơn + ...
+          </div>
+
+          <div class="info-box">
+            <strong>Vế 1:</strong> Càng...
+
+            <br />
+
+            <strong>Vế 2:</strong> Thì càng...
+          </div>
+
+          <div class="example-box">
+            <div class="example-en">
+              The bigger the city is, the more crowded it becomes.
+            </div>
+
+            <div class="example-vi">
+              → Thành phố càng lớn thì càng đông đúc.
+            </div>
+          </div>
+
+          <div class="example-box">
+            <div class="example-en">
+              The more people move into cities, the more traffic problems there
+              are.
+            </div>
+
+            <div class="example-vi">
+              → Càng nhiều người chuyển vào thành phố thì càng có nhiều vấn đề
+              giao thông.
+            </div>
+          </div>
+        </section>
+
+        <!-- =========================
+           PAGE 3
+      ========================= -->
+
+        <section class="lesson-page">
+          <div class="page-number">DOUBLE COMPARATIVES • SHORT ADJECTIVES</div>
+
+          <h1>3. Càng + tính từ ngắn</h1>
+
+          <p>Với tính từ ngắn, ta thường thêm <strong>-er</strong>.</p>
+
+          <div class="formula">
+            The + adjective-er..., the + adjective-er...
+          </div>
+
+          <div class="table-wrapper">
+            <table>
+              <tr>
+                <th>Từ gốc</th>
+                <th>So sánh hơn</th>
+                <th>Nghĩa</th>
+              </tr>
+
+              <tr>
+                <td>big</td>
+                <td>bigger</td>
+                <td>lớn → lớn hơn</td>
+              </tr>
+
+              <tr>
+                <td>small</td>
+                <td>smaller</td>
+                <td>nhỏ → nhỏ hơn</td>
+              </tr>
+
+              <tr>
+                <td>busy</td>
+                <td>busier</td>
+                <td>bận rộn → bận rộn hơn</td>
+              </tr>
+
+              <tr>
+                <td>fast</td>
+                <td>faster</td>
+                <td>nhanh → nhanh hơn</td>
+              </tr>
+
+              <tr>
+                <td>high</td>
+                <td>higher</td>
+                <td>cao → cao hơn</td>
+              </tr>
+
+              <tr>
+                <td>low</td>
+                <td>lower</td>
+                <td>thấp → thấp hơn</td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="example-box">
+            <div class="example-en">
+              The bigger the city becomes, the busier it gets.
+            </div>
+
+            <div class="example-vi">
+              → Thành phố càng lớn thì càng nhộn nhịp.
+            </div>
+          </div>
+
+          <div class="example-box">
+            <div class="example-en">
+              The faster the population grows, the greater the pressure becomes.
+            </div>
+
+            <div class="example-vi">
+              → Dân số càng tăng nhanh thì áp lực càng lớn.
+            </div>
+          </div>
+        </section>
+
+        <!-- =========================
+           PAGE 4
+      ========================= -->
+
+        <section class="lesson-page">
+          <div class="page-number">DOUBLE COMPARATIVES • LONG ADJECTIVES</div>
+
+          <h1>4. Càng + tính từ dài</h1>
+
+          <p>Với tính từ dài, ta dùng <strong>more</strong>.</p>
+
+          <div class="formula">
+            The more + adjective..., the more + adjective...
+          </div>
+
+          <div class="tip-box">
+            📌 Nhớ:
+
+            <br /><br />
+
+            <strong>TÍNH TỪ NGẮN</strong>
+            → thêm <strong>-ER</strong>
+
+            <br />
+
+            <strong>TÍNH TỪ DÀI</strong>
+            → dùng <strong>MORE</strong>
+          </div>
+
+          <div class="table-wrapper">
+            <table>
+              <tr>
+                <th>Từ gốc</th>
+                <th>So sánh hơn</th>
+                <th>Nghĩa</th>
+              </tr>
+
+              <tr>
+                <td>expensive</td>
+                <td>more expensive</td>
+                <td>đắt → đắt hơn</td>
+              </tr>
+
+              <tr>
+                <td>convenient</td>
+                <td>more convenient</td>
+                <td>thuận tiện → thuận tiện hơn</td>
+              </tr>
+
+              <tr>
+                <td>difficult</td>
+                <td>more difficult</td>
+                <td>khó → khó hơn</td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="example-box">
+            <div class="example-en">
+              The more expensive housing becomes, the harder it is to find a
+              home.
+            </div>
+
+            <div class="example-vi">
+              → Nhà ở càng đắt thì càng khó tìm được một căn nhà.
+            </div>
+          </div>
+
+          <div class="example-box">
+            <div class="example-en">
+              The more convenient public transport becomes, the more people use
+              it.
+            </div>
+
+            <div class="example-vi">
+              → Giao thông công cộng càng thuận tiện thì càng có nhiều người sử
+              dụng.
+            </div>
+          </div>
+        </section>
+
+        <!-- =========================
+           PAGE 5
+      ========================= -->
+
+        <section class="lesson-page">
+          <div class="page-number">
+            DOUBLE COMPARATIVES • MORE / LESS / FEWER
+          </div>
+
+          <h1>5. Càng nhiều → càng nhiều / càng ít</h1>
+
+          <h2>🔹 Càng nhiều → càng nhiều</h2>
+
+          <div class="formula">The more + noun, the more + noun</div>
+
+          <div class="example-box">
+            <div class="example-en">
+              The more people move into cities, the more traffic problems there
+              are.
+            </div>
+
+            <div class="example-vi">
+              → Càng nhiều người chuyển vào thành phố thì càng có nhiều vấn đề
+              giao thông.
+            </div>
+          </div>
+
+          <div class="example-box">
+            <div class="example-en">
+              The more tourists a city attracts, the more money it earns.
+            </div>
+
+            <div class="example-vi">
+              → Một thành phố càng thu hút nhiều khách du lịch thì càng kiếm
+              được nhiều tiền.
+            </div>
+          </div>
+
+          <h2>🔹 Càng nhiều → càng ít</h2>
+
+          <div class="formula">The more..., the less / fewer...</div>
+
+          <div class="info-box">
+            <strong>more</strong> = nhiều hơn
+
+            <br />
+
+            <strong>less</strong> = ít hơn + danh từ không đếm được
+
+            <br />
+
+            <strong>fewer</strong> = ít hơn + danh từ đếm được
+          </div>
+
+          <div class="example-box">
+            <div class="example-en">
+              The more people use public transport, the less traffic congestion
+              there is.
+            </div>
+
+            <div class="example-vi">
+              → Càng nhiều người sử dụng phương tiện công cộng thì càng ít tắc
+              đường.
+            </div>
+          </div>
+
+          <div class="example-box">
+            <div class="example-en">
+              The more people move to cities, the fewer green spaces there are.
+            </div>
+
+            <div class="example-vi">
+              → Càng nhiều người chuyển đến thành phố thì càng có ít không gian
+              xanh.
+            </div>
+          </div>
+        </section>
+
+        <!-- =========================
+           PAGE 6
+      ========================= -->
+
+        <section class="lesson-page">
+          <div class="page-number">QUICK MEMORY</div>
+
+          <h1>⭐ Mẹo nhớ siêu dễ</h1>
+
+          <div class="formula">The..., the... = Càng... thì càng...</div>
+
+          <div class="example-box">
+            <div class="example-en">The more, the better.</div>
+
+            <div class="example-vi">→ Càng nhiều càng tốt.</div>
+          </div>
+
+          <div class="example-box">
+            <div class="example-en">The sooner, the better.</div>
+
+            <div class="example-vi">→ Càng sớm càng tốt.</div>
+          </div>
+
+          <div class="example-box">
+            <div class="example-en">The bigger, the better.</div>
+
+            <div class="example-vi">→ Càng lớn càng tốt.</div>
+          </div>
+
+          <div class="tip-box">
+            🎯 <strong>TIP:</strong>
+
+            <br />
+
+            Gặp cấu trúc:
+
+            <strong>The + ..., the + ...</strong>
+
+            <br />
+
+            → Nghĩ ngay:
+
+            <strong>CÀNG... THÌ CÀNG...</strong>
+          </div>
+        </section>
+
+        <!-- =========================
+           PAGE 7
+      ========================= -->
+
+        <section class="lesson-page">
+          <div class="page-number">PART 2 • PHRASAL VERBS</div>
+
+          <h1>🚇 Phrasal Verbs – Cụm động từ</h1>
+
+          <div class="info-box">
+            <strong>Phrasal verb</strong> = Động từ + từ đi kèm
+
+            <br /><br />
+
+            Ví dụ:
+
+            <br />
+
+            <strong>move + into → move into</strong>
+
+            <br /><br />
+
+            Nghĩa của cả cụm có thể khác với nghĩa của động từ ban đầu.
+          </div>
+
+          <div class="example-box">
+            <div class="example-en">move + into → move into</div>
+
+            <div class="example-vi">→ chuyển đến sống</div>
+          </div>
+
+          <p>
+            Bây giờ hãy cùng học các phrasal verbs thường gặp trong chủ đề
+            <strong>City Life</strong>.
+          </p>
+        </section>
+
+        <!-- =========================
+           PAGE 8
+      ========================= -->
+
+        <section class="lesson-page">
+          <div class="page-number">PHRASAL VERBS • MOVING</div>
+
+          <h1>🏠 Move Into & Move Out</h1>
+
+          <div class="vocab-grid">
+            <div class="vocab-card">
+              <div class="vocab-number">01</div>
+
+              <div class="vocab-word">MOVE INTO</div>
+
+              <div class="vocab-meaning">= chuyển đến sống</div>
+
+              <p>
+                <strong>move into + nơi ở</strong>
+              </p>
+
+              <p>
+                Many young people
+                <strong>move into</strong>
+                big cities to find better jobs.
+              </p>
+
+              <p>
+                → Nhiều người trẻ chuyển đến các thành phố lớn để tìm việc tốt
+                hơn.
+              </p>
+            </div>
+
+            <div class="vocab-card">
+              <div class="vocab-number">02</div>
+
+              <div class="vocab-word">MOVE OUT</div>
+
+              <div class="vocab-meaning">= chuyển đi</div>
+
+              <p>
+                They decided to
+                <strong>move out</strong>
+                because the rent was too expensive.
+              </p>
+
+              <p>→ Họ quyết định chuyển đi vì tiền thuê nhà quá đắt.</p>
+            </div>
+          </div>
+
+          <div class="tip-box">
+            🧠 <strong>Nhớ nhanh:</strong>
+
+            <br /><br />
+
+            🏠 <strong>move into</strong> → chuyển <strong>vào</strong>
+
+            <br />
+
+            🚚 <strong>move out</strong> → chuyển <strong>ra</strong>
+          </div>
+        </section>
+
+        <!-- =========================
+           PAGE 9
+      ========================= -->
+
+        <section class="lesson-page">
+          <div class="page-number">PHRASAL VERBS • TRANSPORT</div>
+
+          <h1>🚗 Pick Up & Drop Off</h1>
+
+          <div class="vocab-grid">
+            <div class="vocab-card">
+              <div class="vocab-number">03</div>
+
+              <div class="vocab-word">PICK UP</div>
+
+              <div class="vocab-meaning">= đón ai đó</div>
+
+              <p>
+                My father
+                <strong>picks me up</strong>
+                at school.
+              </p>
+
+              <p>→ Bố đón tôi ở trường.</p>
+
+              <p>
+                📌 <strong>pick someone up</strong>
+                = đón ai đó
+              </p>
+            </div>
+
+            <div class="vocab-card">
+              <div class="vocab-number">04</div>
+
+              <div class="vocab-word">DROP OFF</div>
+
+              <div class="vocab-meaning">= đưa ai đến một nơi</div>
+
+              <p>
+                My mother
+                <strong>drops me off</strong>
+                at school.
+              </p>
+
+              <p>→ Mẹ đưa tôi đến trường.</p>
+            </div>
+          </div>
+
+          <div class="formula">
+            PICK UP → ĐÓN &nbsp;&nbsp; | &nbsp;&nbsp; DROP OFF → ĐƯA ĐẾN
+          </div>
+        </section>
+
+        <!-- =========================
+           PAGE 10
+      ========================= -->
+
+        <section class="lesson-page">
+          <div class="page-number">PHRASAL VERBS • CITY LIFE</div>
+
+          <h1>🛠️ Các cụm động từ quan trọng</h1>
+
+          <div class="vocab-grid">
+            <div class="vocab-card">
+              <div class="vocab-number">05</div>
+
+              <div class="vocab-word">PUT UP WITH</div>
+
+              <div class="vocab-meaning">= chịu đựng</div>
+
+              <p>
+                City residents have to
+                <strong>put up with</strong>
+                traffic jams.
+              </p>
+            </div>
+
+            <div class="vocab-card">
+              <div class="vocab-number">06</div>
+
+              <div class="vocab-word">DEAL WITH</div>
+
+              <div class="vocab-meaning">= giải quyết</div>
+
+              <p>
+                The government needs to
+                <strong>deal with</strong>
+                air pollution.
+              </p>
+            </div>
+
+            <div class="vocab-card">
+              <div class="vocab-number">07</div>
+
+              <div class="vocab-word">CUT DOWN ON</div>
+
+              <div class="vocab-meaning">= cắt giảm</div>
+
+              <p>
+                People should
+                <strong>cut down on</strong>
+                using private cars.
+              </p>
+            </div>
+
+            <div class="vocab-card">
+              <div class="vocab-number">08</div>
+
+              <div class="vocab-word">SET UP</div>
+
+              <div class="vocab-meaning">= thành lập / xây dựng</div>
+
+              <p>
+                The government plans to
+                <strong>set up</strong>
+                more bus stations.
+              </p>
+            </div>
+
+            <div class="vocab-card">
+              <div class="vocab-number">09</div>
+
+              <div class="vocab-word">BUILD UP</div>
+
+              <div class="vocab-meaning">= tăng lên / tích tụ</div>
+
+              <p>
+                Traffic
+                <strong>builds up</strong>
+                during rush hour.
+              </p>
+            </div>
+          </div>
+
+          <div class="tip-box">
+            💡 <strong>City Life Vocabulary:</strong>
+
+            <br /><br />
+
+            😫 put up with → chịu đựng
+
+            <br />
+
+            🛠️ deal with → giải quyết
+
+            <br />
+
+            📉 cut down on → cắt giảm
+
+            <br />
+
+            🏢 set up → thành lập / xây dựng
+
+            <br />
+
+            🚧 build up → tăng lên / tích tụ
+          </div>
+        </section>
+
+        <!-- =========================
+           PAGE 11
+      ========================= -->
+
+        <section class="lesson-page">
+          <div class="page-number">APPLY WHAT YOU HAVE LEARNED</div>
+
+          <h1>🏙️ Ghép hai phần với nhau</h1>
+
+          <p>
+            Bây giờ hãy thử kết hợp
+            <strong>Double Comparatives</strong>
+            và
+            <strong>Phrasal Verbs</strong>
+            nhé!
+          </p>
+
+          <div class="example-box">
+            <div class="example-en">
+              The more people move into cities, the more traffic builds up.
+            </div>
+
+            <div class="example-vi">
+              → Càng nhiều người chuyển vào thành phố thì giao thông càng ùn
+              tắc.
+            </div>
+
+            <br />
+
+            📌 <strong>The more..., the more...</strong>
+            → Càng... thì càng...
+
+            <br />
+
+            📌 <strong>move into</strong>
+            → chuyển vào
+
+            <br />
+
+            📌 <strong>build up</strong>
+            → tăng lên / ùn tắc
+          </div>
+
+          <div class="example-box">
+            <div class="example-en">
+              The more expensive city life becomes, the harder it is to put up
+              with the high cost of living.
+            </div>
+
+            <div class="example-vi">
+              → Cuộc sống thành phố càng đắt đỏ thì càng khó chịu đựng chi phí
+              sinh hoạt cao.
+            </div>
+
+            <br />
+
+            📌 <strong>The more..., the harder...</strong>
+            → Càng... thì càng...
+
+            <br />
+
+            📌 <strong>put up with</strong>
+            → chịu đựng
+          </div>
+
+          <div class="tip-box">
+            🎯 <strong>Challenge:</strong>
+
+            <br />
+
+            Hãy thử tự đặt một câu có:
+
+            <br /><br />
+
+            <strong>The more..., the more...</strong>
+
+            +
+
+            <strong>một phrasal verb</strong>
+
+            <br /><br />
+
+            Ví dụ:
+
+            <br />
+
+            The more people move into cities, the more traffic builds up.
+          </div>
+        </section>
+
+        <!-- =========================
+           PAGE 12
+      ========================= -->
+
+        <section class="lesson-page">
+          <div class="page-number">LESSON SUMMARY</div>
+
+          <h1>🎯 Tổng kết bài học</h1>
+
+          <div class="summary-box">
+            <h2>🏙️ DOUBLE COMPARATIVES</h2>
+
+            <div class="formula">
+              The + so sánh hơn..., the + so sánh hơn...
+            </div>
+
+            <p>= <strong>Càng... thì càng...</strong></p>
+
+            <ul>
+              <li>🔹 The bigger, the better. → Càng lớn càng tốt.</li>
+
+              <li>
+                🔹 The more people come, the more crowded it gets. → Càng nhiều
+                người đến thì càng đông.
+              </li>
+
+              <li>
+                🔹 The more people use buses, the less pollution there is. →
+                Càng nhiều người đi xe buýt thì càng ít ô nhiễm.
+              </li>
+            </ul>
+          </div>
+
+          <div class="summary-box">
+            <h2>🚇 PHRASAL VERBS</h2>
+
+            <ul>
+              <li>
+                🏠 <strong>move into</strong>
+                = chuyển vào
+              </li>
+
+              <li>
+                🚚 <strong>move out</strong>
+                = chuyển đi
+              </li>
+
+              <li>
+                🚇 <strong>get around</strong>
+                = đi lại
+              </li>
+
+              <li>
+                🚗 <strong>pick up</strong>
+                = đón
+              </li>
+
+              <li>
+                🚌 <strong>drop off</strong>
+                = đưa đến
+              </li>
+
+              <li>
+                😫 <strong>put up with</strong>
+                = chịu đựng
+              </li>
+
+              <li>
+                🛠️ <strong>deal with</strong>
+                = giải quyết
+              </li>
+
+              <li>
+                📉 <strong>cut down on</strong>
+                = cắt giảm
+              </li>
+
+              <li>
+                🏢 <strong>set up</strong>
+                = xây dựng / thành lập
+              </li>
+
+              <li>
+                🚧 <strong>build up</strong>
+                = tăng lên / tích tụ
+              </li>
+            </ul>
+          </div>
+
+          <!-- =========================
+             EXERCISE LINK
+        ========================= -->
+
+          <div class="exercise-cta">
+            <h2>🎉 Bạn đã hoàn thành bài giảng!</h2>
+
+            <p>
+              Hãy làm bài tập để kiểm tra xem bạn đã nắm chắc kiến thức chưa
+              nhé.
+            </p>
+
+            <a href="quiz2.html" class="exercise-btn"> 📝 Làm bài tập </a>
+          </div>
+
+          <div class="home-section">
+            <a href="course2.html" class="home-btn"> 🏠 Về trang chủ </a>
+          </div>
+        </section>
+
+        <!-- =========================
+           NAVIGATION
+      ========================= -->
+
+        <div class="navigation">
+          <button
+            class="nav-btn prev-btn"
+            id="prevBtn"
+            onclick="previousPage()"
+          >
+            ← Quay lại
+          </button>
+
+          <button class="nav-btn next-btn" id="nextBtn" onclick="nextPage()">
+            Tiếp theo →
+          </button>
+        </div>
+      </main>
+    </div>
+
+    <!-- =========================
+       JAVASCRIPT
+  ========================= -->
+
+    <script>
+      const pages = document.querySelectorAll(".lesson-page");
+      const tabs = document.querySelectorAll(".lesson-tab");
+
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+
+      const progressBar = document.getElementById("progressBar");
+
+      let currentPage = 0;
+
+      // =========================
+      // HIỂN THỊ TRANG
+      // =========================
+
+      function showPage(index) {
+        if (index < 0) {
+          index = 0;
+        }
+
+        if (index >= pages.length) {
+          index = pages.length - 1;
+        }
+
+        currentPage = index;
+
+        // Ẩn tất cả trang
+
+        pages.forEach((page) => {
+          page.classList.remove("active");
+        });
+
+        // Hiện trang hiện tại
+
+        pages[currentPage].classList.add("active");
+
+        // Active sidebar
+
+        tabs.forEach((tab) => {
+          tab.classList.remove("active");
+        });
+
+        if (tabs[currentPage]) {
+          tabs[currentPage].classList.add("active");
+        }
+
+        // Cập nhật nút
+
+        prevBtn.disabled = currentPage === 0;
+
+        if (currentPage === pages.length - 1) {
+          nextBtn.style.display = "none";
+        } else {
+          nextBtn.style.display = "block";
+        }
+
+        // Progress
+
+        const progress = ((currentPage + 1) / pages.length) * 100;
+
+        progressBar.style.width = progress + "%";
+
+        // Cuộn lên đầu
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+
+      // =========================
+      // TRANG TIẾP
+      // =========================
+
+      function nextPage() {
+        if (currentPage < pages.length - 1) {
+          showPage(currentPage + 1);
+        }
+      }
+
+      // =========================
+      // TRANG TRƯỚC
+      // =========================
+
+      function previousPage() {
+        if (currentPage > 0) {
+          showPage(currentPage - 1);
+        }
+      }
+
+      // =========================
+      // ĐI ĐẾN TRANG CỤ THỂ
+      // =========================
+
+      function goToPage(index) {
+        showPage(index);
+      }
+
+      // =========================
+      // KEYBOARD NAVIGATION
+      // =========================
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "ArrowRight") {
+          nextPage();
+        }
+
+        if (event.key === "ArrowLeft") {
+          previousPage();
+        }
+      });
+
+      // =========================
+      // KHỞI TẠO
+      // =========================
+
+      showPage(0);
+    </script>
+  </body>
+</html>

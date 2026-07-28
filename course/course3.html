@@ -1,0 +1,1235 @@
+```html
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Healthy Living for Teens – Grammar Lesson</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Nunito", sans-serif;
+        background: #f5f7fb;
+        color: #28323c;
+        min-height: 100vh;
+      }
+
+      /* =========================
+       HEADER
+    ========================= */
+
+      header {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        padding: 20px 7%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+      }
+
+      .logo {
+        font-family: "Baloo 2", cursive;
+        font-size: 28px;
+        font-weight: 800;
+      }
+
+      .lesson-label {
+        font-size: 15px;
+        font-weight: 700;
+      }
+
+      /* =========================
+       PROGRESS BAR
+    ========================= */
+
+      .progress-container {
+        height: 7px;
+        background: #e4e7ec;
+        position: sticky;
+        top: 76px;
+        z-index: 99;
+      }
+
+      .progress-bar {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #ff9a9e, #fad0c4);
+        transition: width 0.4s ease;
+      }
+
+      /* =========================
+       MAIN
+    ========================= */
+
+      main {
+        max-width: 1050px;
+        margin: 40px auto;
+        padding: 0 20px 100px;
+      }
+
+      .lesson-card {
+        display: none;
+        background: white;
+        border-radius: 25px;
+        padding: 45px;
+        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+        animation: fadeIn 0.4s ease;
+      }
+
+      .lesson-card.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* =========================
+       TITLES
+    ========================= */
+
+      h1 {
+        font-family: "Baloo 2", cursive;
+        font-size: 42px;
+        color: #5b4bdb;
+        margin-bottom: 8px;
+      }
+
+      h2 {
+        font-family: "Baloo 2", cursive;
+        font-size: 32px;
+        color: #5b4bdb;
+        margin-bottom: 20px;
+      }
+
+      h3 {
+        font-family: "Baloo 2", cursive;
+        font-size: 24px;
+        color: #764ba2;
+        margin: 28px 0 12px;
+      }
+
+      p {
+        font-size: 17px;
+        line-height: 1.8;
+        margin-bottom: 14px;
+      }
+
+      /* =========================
+       HERO
+    ========================= */
+
+      .hero {
+        text-align: center;
+        padding: 10px 0 35px;
+      }
+
+      .hero-icon {
+        font-size: 65px;
+        margin-bottom: 10px;
+      }
+
+      .hero-subtitle {
+        color: #69737d;
+        font-size: 18px;
+        font-weight: 700;
+      }
+
+      /* =========================
+       INFO BOX
+    ========================= */
+
+      .info-box {
+        background: #f2efff;
+        border-left: 6px solid #6c5ce7;
+        border-radius: 14px;
+        padding: 20px 25px;
+        margin: 22px 0;
+      }
+
+      .warning-box {
+        background: #fff7e8;
+        border-left: 6px solid #f0ad4e;
+        border-radius: 14px;
+        padding: 20px 25px;
+        margin: 22px 0;
+      }
+
+      .example-box {
+        background: #f8f9fc;
+        border-radius: 16px;
+        padding: 20px 25px;
+        margin: 18px 0;
+        border: 1px solid #e8eaf0;
+      }
+
+      .english {
+        font-size: 18px;
+        font-weight: 800;
+        color: #4938b5;
+        margin-bottom: 8px;
+        line-height: 1.6;
+      }
+
+      .translation {
+        color: #68727c;
+        font-style: italic;
+        line-height: 1.6;
+      }
+
+      /* =========================
+       FORMULA
+    ========================= */
+
+      .formula {
+        background: #272343;
+        color: white;
+        border-radius: 15px;
+        padding: 20px;
+        text-align: center;
+        font-size: 20px;
+        font-weight: 800;
+        line-height: 1.7;
+        margin: 20px 0;
+      }
+
+      /* =========================
+       MODAL CARDS
+    ========================= */
+
+      .modal-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+        margin-top: 20px;
+      }
+
+      .modal-card {
+        background: #faf9ff;
+        border: 1px solid #e5e1ff;
+        border-radius: 18px;
+        padding: 22px;
+        transition: 0.25s;
+      }
+
+      .modal-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(91, 75, 219, 0.12);
+      }
+
+      .modal-title {
+        font-size: 23px;
+        font-weight: 800;
+        color: #4938b5;
+        margin-bottom: 8px;
+      }
+
+      .modal-meaning {
+        font-weight: 800;
+        margin-bottom: 10px;
+      }
+
+      .modal-card p {
+        font-size: 16px;
+      }
+
+      /* =========================
+       TABLE
+    ========================= */
+
+      .table-wrapper {
+        overflow-x: auto;
+        margin: 20px 0;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 650px;
+        overflow: hidden;
+        border-radius: 12px;
+      }
+
+      th {
+        background: #6c5ce7;
+        color: white;
+        padding: 15px;
+        text-align: left;
+      }
+
+      td {
+        padding: 14px 15px;
+        border-bottom: 1px solid #e9e9ef;
+      }
+
+      tr:nth-child(even) {
+        background: #f8f8fc;
+      }
+
+      /* =========================
+       INDIRECT QUESTION
+    ========================= */
+
+      .direct-indirect {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin: 20px 0;
+      }
+
+      .question-card {
+        padding: 22px;
+        border-radius: 18px;
+        background: #f8f9fc;
+        border: 1px solid #e5e7ee;
+      }
+
+      .question-card h4 {
+        font-family: "Baloo 2", cursive;
+        font-size: 21px;
+        color: #764ba2;
+        margin-bottom: 10px;
+      }
+
+      .question-card p {
+        font-size: 16px;
+      }
+
+      /* =========================
+       STEPS
+    ========================= */
+
+      .steps {
+        list-style: none;
+        margin: 20px 0;
+      }
+
+      .steps li {
+        background: #f7f6ff;
+        padding: 15px 18px;
+        margin: 10px 0;
+        border-radius: 12px;
+        font-weight: 700;
+        line-height: 1.6;
+      }
+
+      .steps li span {
+        color: #6c5ce7;
+        font-weight: 800;
+      }
+
+      /* =========================
+       SUMMARY
+    ========================= */
+
+      .summary-list {
+        list-style: none;
+        margin-top: 20px;
+      }
+
+      .summary-list li {
+        padding: 14px 18px;
+        margin: 9px 0;
+        background: #f7f6ff;
+        border-radius: 12px;
+        font-weight: 700;
+        line-height: 1.6;
+      }
+
+      /* =========================
+       NAVIGATION
+    ========================= */
+
+      .navigation {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 35px;
+        gap: 15px;
+      }
+
+      button,
+      .practice-btn {
+        border: none;
+        padding: 14px 25px;
+        border-radius: 30px;
+        font-family: "Nunito", sans-serif;
+        font-size: 16px;
+        font-weight: 800;
+        cursor: pointer;
+        transition: 0.25s;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .prev-btn {
+        background: #ececf4;
+        color: #555;
+      }
+
+      .next-btn {
+        background: #6c5ce7;
+        color: white;
+        margin-left: auto;
+      }
+
+      button:hover,
+      .practice-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+      }
+
+      button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+      }
+
+      /* =========================
+       FINAL PRACTICE
+    ========================= */
+
+      .practice-section {
+        text-align: center;
+        padding: 30px 10px;
+      }
+
+      .practice-icon {
+        font-size: 70px;
+        margin-bottom: 15px;
+      }
+
+      .practice-section h2 {
+        margin-bottom: 15px;
+      }
+
+      .practice-section p {
+        max-width: 680px;
+        margin: 0 auto 25px;
+        color: #667078;
+      }
+
+      .practice-btn {
+        background: #6c5ce7;
+        color: white;
+        font-size: 18px;
+        padding: 16px 35px;
+      }
+
+      /* =========================
+       RESPONSIVE
+    ========================= */
+
+      @media (max-width: 700px) {
+        header {
+          padding: 16px 5%;
+          flex-direction: column;
+          gap: 3px;
+        }
+
+        .logo {
+          font-size: 24px;
+        }
+
+        .lesson-label {
+          font-size: 13px;
+        }
+
+        .progress-container {
+          top: 91px;
+        }
+
+        main {
+          margin-top: 25px;
+        }
+
+        .lesson-card {
+          padding: 28px 20px;
+          border-radius: 18px;
+        }
+
+        h1 {
+          font-size: 32px;
+        }
+
+        h2 {
+          font-size: 27px;
+        }
+
+        .modal-grid,
+        .direct-indirect {
+          grid-template-columns: 1fr;
+        }
+
+        .navigation {
+          flex-direction: column;
+        }
+
+        .next-btn {
+          margin-left: 0;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- =========================
+       HEADER
+  ========================= -->
+
+    <header>
+      <div class="logo">Hyvoria English</div>
+
+      <div class="lesson-label">Grammar Lesson • Healthy Living for Teens</div>
+    </header>
+
+    <!-- =========================
+       PROGRESS BAR
+  ========================= -->
+
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <main>
+      <!-- ==================================================
+         LESSON 1 – INTRODUCTION
+    ================================================== -->
+
+      <section class="lesson-card active">
+        <div class="hero">
+          <div class="hero-icon">🥗</div>
+
+          <h1>HEALTHY LIVING FOR TEENS</h1>
+
+          <p class="hero-subtitle">Modal Verbs & Indirect Questions</p>
+        </div>
+
+        <div class="info-box">
+          <h3>🎯 Learning Objectives</h3>
+
+          <p>Sau bài học này, bạn có thể:</p>
+
+          <p>
+            ✓ Sử dụng các <strong>Modal Verbs</strong>
+            để đưa ra lời khuyên, nói về nghĩa vụ, sự cần thiết và khả năng.
+          </p>
+
+          <p>
+            ✓ Hiểu và sử dụng
+            <strong>Indirect Questions</strong>
+            – câu hỏi gián tiếp.
+          </p>
+
+          <p>
+            ✓ Biết cách sử dụng
+            <strong>Backshift – lùi thì</strong>
+            trong câu hỏi gián tiếp.
+          </p>
+        </div>
+
+        <h3>🌱 Healthy Living for Teens</h3>
+
+        <p>
+          Teenagers need to make healthy choices every day. They should eat
+          nutritious food, get enough sleep and exercise regularly.
+        </p>
+
+        <div class="example-box">
+          <div class="english">
+            Teenagers should get enough sleep every night.
+          </div>
+
+          <div class="translation">
+            → Thanh thiếu niên nên ngủ đủ giấc mỗi tối.
+          </div>
+        </div>
+
+        <div class="navigation">
+          <button class="prev-btn" onclick="prevLesson()" disabled>
+            ← Quay lại
+          </button>
+
+          <button class="next-btn" onclick="nextLesson()">Tiếp theo →</button>
+        </div>
+      </section>
+
+      <!-- ==================================================
+         LESSON 2 – MODAL VERBS
+    ================================================== -->
+
+      <section class="lesson-card">
+        <h2>1. MODAL VERBS – ĐỘNG TỪ KHUYẾT THIẾU</h2>
+
+        <p>
+          Modal verbs được sử dụng để diễn tả lời khuyên, sự bắt buộc, sự cần
+          thiết, khả năng hoặc sự cho phép.
+        </p>
+
+        <div class="formula">Subject + Modal Verb + V (nguyên mẫu)</div>
+
+        <div class="warning-box">
+          <p>
+            📌 Sau <strong>modal verb</strong>, động từ luôn ở dạng
+            <strong>nguyên mẫu</strong>.
+          </p>
+
+          <p>❌ Teenagers should <strong>eats</strong> healthy food.</p>
+
+          <p>✅ Teenagers should <strong>eat</strong> healthy food.</p>
+        </div>
+
+        <div class="modal-grid">
+          <div class="modal-card">
+            <div class="modal-title">SHOULD</div>
+
+            <div class="modal-meaning">= nên</div>
+
+            <p>Dùng để đưa ra lời khuyên.</p>
+
+            <p>You <strong>should</strong> eat more vegetables.</p>
+          </div>
+
+          <div class="modal-card">
+            <div class="modal-title">SHOULDN'T</div>
+
+            <div class="modal-meaning">= không nên</div>
+
+            <p>Dùng để đưa ra lời khuyên không nên làm gì.</p>
+
+            <p>You <strong>shouldn't</strong> stay up late.</p>
+          </div>
+
+          <div class="modal-card">
+            <div class="modal-title">MUST</div>
+
+            <div class="modal-meaning">= phải</div>
+
+            <p>Diễn tả sự bắt buộc mạnh mẽ.</p>
+
+            <p>You <strong>must</strong> follow a healthy diet.</p>
+          </div>
+
+          <div class="modal-card">
+            <div class="modal-title">MUSTN'T</div>
+
+            <div class="modal-meaning">= không được phép</div>
+
+            <p>Diễn tả điều bị cấm.</p>
+
+            <p>You <strong>mustn't</strong> smoke.</p>
+          </div>
+
+          <div class="modal-card">
+            <div class="modal-title">HAVE TO</div>
+
+            <div class="modal-meaning">= phải</div>
+
+            <p>Diễn tả sự cần thiết hoặc nghĩa vụ.</p>
+
+            <p>You <strong>have to</strong> get enough sleep.</p>
+          </div>
+
+          <div class="modal-card">
+            <div class="modal-title">DON'T HAVE TO</div>
+
+            <div class="modal-meaning">= không cần phải</div>
+
+            <p>Diễn tả không có sự bắt buộc.</p>
+
+            <p>You <strong>don't have to</strong> exercise every day.</p>
+          </div>
+
+          <div class="modal-card">
+            <div class="modal-title">CAN</div>
+
+            <div class="modal-meaning">= có thể</div>
+
+            <p>Diễn tả khả năng hoặc sự cho phép.</p>
+
+            <p>Regular exercise <strong>can</strong> improve your health.</p>
+          </div>
+
+          <div class="modal-card">
+            <div class="modal-title">MAY / MIGHT</div>
+
+            <div class="modal-meaning">= có thể</div>
+
+            <p>Diễn tả khả năng có thể xảy ra.</p>
+
+            <p>Lack of sleep <strong>may</strong> affect your concentration.</p>
+          </div>
+        </div>
+
+        <div class="navigation">
+          <button class="prev-btn" onclick="prevLesson()">← Quay lại</button>
+
+          <button class="next-btn" onclick="nextLesson()">Tiếp theo →</button>
+        </div>
+      </section>
+
+      <!-- ==================================================
+         LESSON 3 – MODAL VERBS IN CONTEXT
+    ================================================== -->
+
+      <section class="lesson-card">
+        <h2>2. MODAL VERBS IN CONTEXT</h2>
+
+        <p>
+          Hãy xem cách sử dụng Modal Verbs trong chủ đề
+          <strong>Healthy Living for Teens</strong>.
+        </p>
+
+        <div class="example-box">
+          <div class="english">You should eat a balanced diet.</div>
+
+          <div class="translation">→ Bạn nên ăn một chế độ ăn cân bằng.</div>
+        </div>
+
+        <div class="example-box">
+          <div class="english">You shouldn't drink too many sugary drinks.</div>
+
+          <div class="translation">
+            → Bạn không nên uống quá nhiều đồ uống có đường.
+          </div>
+        </div>
+
+        <div class="example-box">
+          <div class="english">
+            Teenagers mustn't smoke or use harmful substances.
+          </div>
+
+          <div class="translation">
+            → Thanh thiếu niên không được hút thuốc hoặc sử dụng các chất có
+            hại.
+          </div>
+        </div>
+
+        <div class="example-box">
+          <div class="english">
+            You have to get enough sleep to stay healthy.
+          </div>
+
+          <div class="translation">
+            → Bạn phải ngủ đủ giấc để duy trì sức khỏe.
+          </div>
+        </div>
+
+        <div class="example-box">
+          <div class="english">
+            Regular exercise can improve your physical and mental health.
+          </div>
+
+          <div class="translation">
+            → Tập thể dục thường xuyên có thể cải thiện sức khỏe thể chất và
+            tinh thần.
+          </div>
+        </div>
+
+        <h3>⭐ Remember!</h3>
+
+        <div class="formula">Modal Verb + V nguyên mẫu</div>
+
+        <div class="navigation">
+          <button class="prev-btn" onclick="prevLesson()">← Quay lại</button>
+
+          <button class="next-btn" onclick="nextLesson()">Tiếp theo →</button>
+        </div>
+      </section>
+
+      <!-- ==================================================
+         LESSON 4 – INDIRECT QUESTIONS
+    ================================================== -->
+
+      <section class="lesson-card">
+        <h2>3. INDIRECT QUESTIONS – CÂU HỎI GIÁN TIẾP</h2>
+
+        <p>
+          Câu hỏi gián tiếp được sử dụng để hỏi một cách
+          <strong>lịch sự và tự nhiên hơn</strong>.
+        </p>
+
+        <div class="info-box">
+          <p>Câu hỏi trực tiếp:</p>
+
+          <p>
+            <strong>Where is the nearest gym?</strong>
+          </p>
+
+          <p>Câu hỏi gián tiếp:</p>
+
+          <p>
+            <strong>Could you tell me where the nearest gym is?</strong>
+          </p>
+        </div>
+
+        <h3>📌 Cấu trúc</h3>
+
+        <div class="formula">Introductory phrase + Question word + S + V</div>
+
+        <p>Một số cụm mở đầu thường gặp:</p>
+
+        <ul class="steps">
+          <li>
+            <span>Could you tell me...</span>
+            → Bạn có thể cho tôi biết...?
+          </li>
+
+          <li>
+            <span>Can you tell me...</span>
+            → Bạn có thể nói cho tôi biết...?
+          </li>
+
+          <li>
+            <span>Do you know...</span>
+            → Bạn có biết...?
+          </li>
+
+          <li>
+            <span>I'd like to know...</span>
+            → Tôi muốn biết...
+          </li>
+
+          <li>
+            <span>Would you mind telling me...</span>
+            → Bạn có phiền cho tôi biết...?
+          </li>
+        </ul>
+
+        <div class="warning-box">
+          <p>
+            ⚠️ Trong câu hỏi gián tiếp,
+            <strong>không đảo trợ động từ và chủ ngữ</strong>.
+          </p>
+
+          <p>❌ Could you tell me where <strong>is the gym</strong>?</p>
+
+          <p>✅ Could you tell me where <strong>the gym is</strong>?</p>
+        </div>
+
+        <div class="navigation">
+          <button class="prev-btn" onclick="prevLesson()">← Quay lại</button>
+
+          <button class="next-btn" onclick="nextLesson()">Tiếp theo →</button>
+        </div>
+      </section>
+
+      <!-- ==================================================
+         LESSON 5 – YES NO INDIRECT QUESTIONS
+    ================================================== -->
+
+      <section class="lesson-card">
+        <h2>4. INDIRECT QUESTIONS – YES / NO QUESTIONS</h2>
+
+        <p>Với câu hỏi Yes/No, ta sử dụng:</p>
+
+        <div class="formula">if / whether</div>
+
+        <div class="example-box">
+          <div class="english">
+            Direct: Is exercise important for teenagers?
+          </div>
+
+          <div class="translation">
+            → Tập thể dục có quan trọng đối với thanh thiếu niên không?
+          </div>
+        </div>
+
+        <div class="example-box">
+          <div class="english">
+            Indirect: Do you know if exercise is important for teenagers?
+          </div>
+
+          <div class="translation">
+            → Bạn có biết liệu tập thể dục có quan trọng đối với thanh thiếu
+            niên không?
+          </div>
+        </div>
+
+        <div class="example-box">
+          <div class="english">Direct: Does he eat healthy food?</div>
+
+          <div class="translation">→ Cậu ấy có ăn thức ăn lành mạnh không?</div>
+        </div>
+
+        <div class="example-box">
+          <div class="english">
+            Indirect: Could you tell me whether he eats healthy food?
+          </div>
+
+          <div class="translation">
+            → Bạn có thể cho tôi biết liệu cậu ấy có ăn thức ăn lành mạnh không?
+          </div>
+        </div>
+
+        <div class="warning-box">
+          <p>📌 Nhớ:</p>
+
+          <p>
+            <strong>Yes/No question → if / whether</strong>
+          </p>
+
+          <p>
+            Sau <strong>if / whether</strong>, dùng trật tự câu khẳng định:
+            <strong>S + V</strong>.
+          </p>
+        </div>
+
+        <div class="navigation">
+          <button class="prev-btn" onclick="prevLesson()">← Quay lại</button>
+
+          <button class="next-btn" onclick="nextLesson()">Tiếp theo →</button>
+        </div>
+      </section>
+
+      <!-- ==================================================
+         LESSON 6 – BACKSHIFT
+    ================================================== -->
+
+      <section class="lesson-card">
+        <h2>5. BACKSHIFT – LÙI THÌ</h2>
+
+        <p>
+          Khi chuyển sang câu hỏi gián tiếp trong quá khứ, động từ có thể được
+          <strong>lùi thì</strong>.
+        </p>
+
+        <div class="info-box">
+          <p>
+            📌 Đây là phần rất quan trọng khi làm bài về
+            <strong>Indirect Questions</strong>.
+          </p>
+        </div>
+
+        <h3>📚 Bảng lùi thì</h3>
+
+        <div class="table-wrapper">
+          <table>
+            <tr>
+              <th>Thì / Modal ban đầu</th>
+              <th>→</th>
+              <th>Thì / Modal sau khi lùi</th>
+            </tr>
+
+            <tr>
+              <td>Present Simple</td>
+              <td>→</td>
+              <td>Past Simple</td>
+            </tr>
+
+            <tr>
+              <td>Present Continuous</td>
+              <td>→</td>
+              <td>Past Continuous</td>
+            </tr>
+
+            <tr>
+              <td>Present Perfect</td>
+              <td>→</td>
+              <td>Past Perfect</td>
+            </tr>
+
+            <tr>
+              <td>Past Simple</td>
+              <td>→</td>
+              <td>Past Perfect</td>
+            </tr>
+
+            <tr>
+              <td>will</td>
+              <td>→</td>
+              <td>would</td>
+            </tr>
+
+            <tr>
+              <td>can</td>
+              <td>→</td>
+              <td>could</td>
+            </tr>
+
+            <tr>
+              <td>may</td>
+              <td>→</td>
+              <td>might</td>
+            </tr>
+          </table>
+        </div>
+
+        <h3>🧠 Mẹo nhớ nhanh</h3>
+
+        <div class="formula">
+          Present → Past
+          <br />
+          Past → Past Perfect
+          <br />
+          will → would
+          <br />
+          can → could
+          <br />
+          may → might
+        </div>
+
+        <div class="navigation">
+          <button class="prev-btn" onclick="prevLesson()">← Quay lại</button>
+
+          <button class="next-btn" onclick="nextLesson()">Tiếp theo →</button>
+        </div>
+      </section>
+
+      <!-- ==================================================
+         LESSON 7 – BACKSHIFT EXAMPLES
+    ================================================== -->
+
+      <section class="lesson-card">
+        <h2>6. BACKSHIFT – VÍ DỤ</h2>
+
+        <div class="example-box">
+          <div class="english">Direct: "Where does she exercise?"</div>
+
+          <div class="translation">→ Cô ấy tập thể dục ở đâu?</div>
+
+          <br />
+
+          <div class="english">Indirect: He asked where she exercised.</div>
+
+          <div class="translation">→ Anh ấy hỏi cô ấy tập thể dục ở đâu.</div>
+        </div>
+
+        <div class="example-box">
+          <div class="english">Direct: "Can teenagers exercise at home?"</div>
+
+          <div class="translation">
+            → Thanh thiếu niên có thể tập thể dục ở nhà không?
+          </div>
+
+          <br />
+
+          <div class="english">
+            Indirect: She asked whether teenagers could exercise at home.
+          </div>
+
+          <div class="translation">
+            → Cô ấy hỏi liệu thanh thiếu niên có thể tập thể dục ở nhà không.
+          </div>
+        </div>
+
+        <div class="example-box">
+          <div class="english">Direct: "Will you change your diet?"</div>
+
+          <div class="translation">
+            → Bạn sẽ thay đổi chế độ ăn uống của mình chứ?
+          </div>
+
+          <br />
+
+          <div class="english">
+            Indirect: He asked whether I would change my diet.
+          </div>
+
+          <div class="translation">
+            → Anh ấy hỏi liệu tôi có thay đổi chế độ ăn uống không.
+          </div>
+        </div>
+
+        <div class="warning-box">
+          <p>⚠️ Lưu ý:</p>
+
+          <p>Khi chuyển câu hỏi trực tiếp sang gián tiếp, cần chú ý:</p>
+
+          <p>1️⃣ Trật tự câu → <strong>S + V</strong></p>
+
+          <p>2️⃣ Lùi thì nếu cần</p>
+
+          <p>3️⃣ Đổi đại từ / tính từ sở hữu phù hợp</p>
+
+          <p>4️⃣ Đổi trạng từ chỉ thời gian, nơi chốn nếu cần</p>
+        </div>
+
+        <div class="navigation">
+          <button class="prev-btn" onclick="prevLesson()">← Quay lại</button>
+
+          <button class="next-btn" onclick="nextLesson()">Tiếp theo →</button>
+        </div>
+      </section>
+
+      <!-- ==================================================
+         LESSON 8 – QUICK REVIEW
+    ================================================== -->
+
+      <section class="lesson-card">
+        <div class="hero">
+          <div class="hero-icon">🎯</div>
+
+          <h2>QUICK REVIEW</h2>
+
+          <p class="hero-subtitle">Những kiến thức cần nhớ</p>
+        </div>
+
+        <h3>1️⃣ MODAL VERBS</h3>
+
+        <ul class="summary-list">
+          <li>SHOULD / SHOULDN'T → nên / không nên</li>
+
+          <li>MUST / MUSTN'T → phải / không được</li>
+
+          <li>HAVE TO / DON'T HAVE TO → phải / không cần phải</li>
+
+          <li>CAN → có thể</li>
+
+          <li>MAY / MIGHT → có thể, có khả năng</li>
+        </ul>
+
+        <h3>2️⃣ INDIRECT QUESTIONS</h3>
+
+        <div class="formula">
+          Question word + S + V
+          <br /><br />
+          Yes / No → if / whether + S + V
+        </div>
+
+        <h3>3️⃣ BACKSHIFT</h3>
+
+        <ul class="summary-list">
+          <li>Present Simple → Past Simple</li>
+
+          <li>Present Continuous → Past Continuous</li>
+
+          <li>Present Perfect → Past Perfect</li>
+
+          <li>Past Simple → Past Perfect</li>
+
+          <li>will → would</li>
+
+          <li>can → could</li>
+
+          <li>may → might</li>
+        </ul>
+
+        <div class="info-box">
+          <h3>💡 Remember!</h3>
+
+          <p>Câu hỏi trực tiếp:</p>
+
+          <p>
+            <strong>Where is the gym?</strong>
+          </p>
+
+          <p>Câu hỏi gián tiếp:</p>
+
+          <p>
+            <strong>Could you tell me where the gym is?</strong>
+          </p>
+        </div>
+
+        <div class="navigation">
+          <button class="prev-btn" onclick="prevLesson()">← Quay lại</button>
+
+          <button class="next-btn" onclick="nextLesson()">
+            Hoàn thành bài giảng →
+          </button>
+        </div>
+      </section>
+
+      <section class="lesson-card">
+        <div class="practice-section">
+          <div class="practice-icon">📝</div>
+
+          <h2>Bạn đã hoàn thành bài giảng!</h2>
+
+          <p>
+            Bạn đã học xong
+            <strong>Modal Verbs</strong>,
+            <strong>Indirect Questions</strong>
+            và <strong>Backshift</strong>.
+          </p>
+
+          <p>
+            Hãy chuyển sang phần bài tập để kiểm tra mức độ hiểu bài của mình
+            nhé!
+          </p>
+
+          <a href="quiz3.html" class="practice-btn"> 🚀 Bắt đầu làm bài tập </a>
+        </div>
+
+        <div class="navigation">
+          <button class="prev-btn" onclick="prevLesson()">
+            ← Xem lại bài giảng
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <!-- =========================
+       JAVASCRIPT
+  ========================= -->
+
+    <script>
+      const lessons = document.querySelectorAll(".lesson-card");
+
+      const progressBar = document.getElementById("progressBar");
+
+      let currentLesson = 0;
+
+      function showLesson(index) {
+        lessons.forEach((lesson, i) => {
+          lesson.classList.toggle("active", i === index);
+        });
+
+        currentLesson = index;
+
+        const progress = (currentLesson / (lessons.length - 1)) * 100;
+
+        progressBar.style.width = progress + "%";
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+
+      function nextLesson() {
+        if (currentLesson < lessons.length - 1) {
+          showLesson(currentLesson + 1);
+        }
+      }
+
+      function prevLesson() {
+        if (currentLesson > 0) {
+          showLesson(currentLesson - 1);
+        }
+      }
+
+      // Start lesson
+      showLesson(0);
+    </script>
+  </body>
+</html>
+```

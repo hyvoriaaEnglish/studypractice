@@ -1,0 +1,2999 @@
+```html
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>City Life – Practice</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Oswald:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Baloo 2", sans-serif;
+        background: #f7f8fc;
+        color: #333;
+        line-height: 1.7;
+      }
+
+      /* =========================
+       HEADER
+    ========================= */
+
+      header {
+        height: 70px;
+        background: #ffffff;
+        border-bottom: 1px solid #e8e8ee;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 35px;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .logo {
+        font-size: 25px;
+        font-weight: 800;
+        color: #6c63ff;
+      }
+
+      .lesson-label {
+        font-size: 15px;
+        color: #777;
+        font-weight: 600;
+      }
+
+      /* =========================
+       PROGRESS BAR
+    ========================= */
+
+      .progress-container {
+        width: 100%;
+        height: 5px;
+        background: #eeeeee;
+        position: fixed;
+        top: 70px;
+        left: 0;
+        z-index: 1001;
+      }
+
+      .progress-bar {
+        height: 100%;
+        width: 0%;
+        background: #6c63ff;
+        transition: width 0.3s ease;
+      }
+
+      /* =========================
+       LAYOUT
+    ========================= */
+
+      .page-layout {
+        display: flex;
+        max-width: 1450px;
+        margin: 0 auto;
+      }
+
+      /* =========================
+       SIDEBAR
+    ========================= */
+
+      .sidebar {
+        width: 280px;
+        min-height: calc(100vh - 75px);
+        background: white;
+        border-right: 1px solid #e8e8ee;
+        padding: 30px 20px;
+        position: sticky;
+        top: 75px;
+        height: calc(100vh - 75px);
+        overflow-y: auto;
+      }
+
+      .sidebar-title {
+        font-size: 18px;
+        font-weight: 800;
+        margin-bottom: 20px;
+      }
+
+      .section-list {
+        list-style: none;
+      }
+
+      .section-list li {
+        margin-bottom: 8px;
+      }
+
+      .section-btn {
+        width: 100%;
+        border: none;
+        background: transparent;
+        text-align: left;
+        padding: 11px 13px;
+        border-radius: 10px;
+        font-family: inherit;
+        font-size: 14px;
+        color: #666;
+        cursor: pointer;
+        transition: 0.25s;
+      }
+
+      .section-btn:hover {
+        background: #f1f0ff;
+        color: #6c63ff;
+      }
+
+      .section-btn.active {
+        background: #6c63ff;
+        color: white;
+        font-weight: 700;
+      }
+
+      /* =========================
+       MAIN
+    ========================= */
+
+      .main-content {
+        flex: 1;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 50px;
+      }
+
+      .practice-section {
+        display: none;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .practice-section.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* =========================
+       HERO
+    ========================= */
+
+      .hero {
+        background: #6c63ff;
+        color: white;
+        border-radius: 20px;
+        padding: 40px;
+        margin-bottom: 35px;
+      }
+
+      .hero h1 {
+        font-family: "Oswald", sans-serif;
+        font-size: 42px;
+        margin-bottom: 10px;
+      }
+
+      .hero p {
+        font-size: 17px;
+      }
+
+      .page-number {
+        font-size: 14px;
+        font-weight: 700;
+        opacity: 0.85;
+        margin-bottom: 5px;
+      }
+
+      h1 {
+        font-family: "Oswald", sans-serif;
+        font-size: 36px;
+        margin-bottom: 25px;
+      }
+
+      h2 {
+        font-size: 27px;
+        margin: 30px 0 20px;
+      }
+
+      h3 {
+        font-size: 21px;
+        margin: 25px 0 15px;
+      }
+
+      /* =========================
+       QUESTION CARD
+    ========================= */
+
+      .question-card {
+        background: white;
+        border: 1px solid #e6e6ec;
+        border-radius: 16px;
+        padding: 25px;
+        margin-bottom: 22px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+      }
+
+      .question-number {
+        color: #6c63ff;
+        font-weight: 800;
+        font-size: 15px;
+        margin-bottom: 5px;
+      }
+
+      .question-text {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 18px;
+      }
+
+      /* =========================
+       OPTIONS
+    ========================= */
+
+      .options {
+        display: grid;
+        gap: 10px;
+      }
+
+      .option-btn {
+        width: 100%;
+        border: 1px solid #dedee7;
+        background: #ffffff;
+        border-radius: 10px;
+        padding: 12px 15px;
+        text-align: left;
+        font-family: inherit;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+
+      .option-btn:hover {
+        border-color: #6c63ff;
+        background: #f5f4ff;
+      }
+
+      .option-btn.correct {
+        background: #eaf8ef;
+        border-color: #36a269;
+        color: #207544;
+        font-weight: 700;
+      }
+
+      .option-btn.wrong {
+        background: #fff0f0;
+        border-color: #e05a5a;
+        color: #b52e2e;
+        font-weight: 700;
+      }
+
+      .option-btn:disabled {
+        cursor: not-allowed;
+      }
+
+      /* =========================
+       FEEDBACK
+    ========================= */
+
+      .feedback {
+        display: none;
+        margin-top: 18px;
+        padding: 18px;
+        border-radius: 12px;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .feedback.show {
+        display: block;
+      }
+
+      .feedback.correct-feedback {
+        background: #eaf8ef;
+        border-left: 4px solid #36a269;
+      }
+
+      .feedback.wrong-feedback {
+        background: #fff0f0;
+        border-left: 4px solid #e05a5a;
+      }
+
+      .feedback-title {
+        font-size: 18px;
+        font-weight: 800;
+        margin-bottom: 5px;
+      }
+
+      .feedback-explanation {
+        color: #555;
+      }
+
+      /* =========================
+       FILL IN
+    ========================= */
+
+      .fill-answer {
+        font-weight: 700;
+        color: #6c63ff;
+      }
+
+      /* =========================
+       REWRITE ANSWER
+    ========================= */
+
+      .answer-box {
+        display: none;
+        background: #f1f0ff;
+        border-left: 4px solid #6c63ff;
+        padding: 18px;
+        margin-top: 15px;
+        border-radius: 0 10px 10px 0;
+      }
+
+      .show-answer-btn {
+        border: none;
+        background: #6c63ff;
+        color: white;
+        padding: 10px 18px;
+        border-radius: 8px;
+        font-family: inherit;
+        font-weight: 700;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+
+      /* =========================
+       SECTION NAVIGATION
+    ========================= */
+
+      .navigation {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 45px;
+        padding-top: 25px;
+        border-top: 1px solid #e5e5eb;
+      }
+
+      .nav-btn {
+        border: none;
+        padding: 13px 25px;
+        border-radius: 10px;
+        font-family: inherit;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.25s;
+      }
+
+      .prev-btn {
+        background: #eeeef4;
+        color: #555;
+      }
+
+      .next-btn {
+        background: #6c63ff;
+        color: white;
+      }
+
+      .nav-btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .nav-btn:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      /* =========================
+       SCORE
+    ========================= */
+
+      .score-box {
+        background: #25243a;
+        color: white;
+        border-radius: 20px;
+        padding: 35px;
+        text-align: center;
+        margin-top: 35px;
+      }
+
+      .score-number {
+        font-family: "Oswald", sans-serif;
+        font-size: 50px;
+        margin: 10px 0;
+        color: #ffffff;
+      }
+
+      .score-message {
+        font-size: 17px;
+        color: #ddd;
+      }
+
+      .restart-btn {
+        margin-top: 20px;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 10px;
+        background: #6c63ff;
+        color: white;
+        font-family: inherit;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      /* =========================
+       HOME
+    ========================= */
+
+      .home-section {
+        text-align: center;
+        margin-top: 30px;
+      }
+
+      .home-btn {
+        display: inline-block;
+        text-decoration: none;
+        color: #6c63ff;
+        font-weight: 700;
+        padding: 10px 20px;
+      }
+
+      /* =========================
+       RESPONSIVE
+    ========================= */
+
+      @media (max-width: 850px) {
+        header {
+          padding: 0 20px;
+        }
+
+        .lesson-label {
+          display: none;
+        }
+
+        .page-layout {
+          display: block;
+        }
+
+        .sidebar {
+          position: relative;
+          top: 0;
+          width: 100%;
+          height: auto;
+          min-height: auto;
+          border-right: none;
+          border-bottom: 1px solid #e8e8ee;
+          padding: 15px;
+        }
+
+        .section-list {
+          display: flex;
+          gap: 8px;
+          overflow-x: auto;
+        }
+
+        .section-list li {
+          min-width: max-content;
+        }
+
+        .section-btn {
+          white-space: nowrap;
+        }
+
+        .main-content {
+          padding: 30px 20px;
+        }
+
+        .hero h1 {
+          font-size: 34px;
+        }
+
+        h1 {
+          font-size: 30px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- =========================
+       HEADER
+  ========================= -->
+
+    <header>
+      <div class="logo">Hyvoria English</div>
+
+      <div class="lesson-label">Practice • City Life</div>
+    </header>
+
+    <!-- PROGRESS BAR -->
+
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- =========================
+       PAGE LAYOUT
+  ========================= -->
+
+    <div class="page-layout">
+      <!-- =========================
+         SIDEBAR
+    ========================= -->
+
+      <aside class="sidebar">
+        <div class="sidebar-title">📝 Nội dung bài tập</div>
+
+        <ul class="section-list">
+          <li>
+            <button class="section-btn active" onclick="goToSection(0)">
+              📚 Bài 1
+            </button>
+          </li>
+
+          <li>
+            <button class="section-btn" onclick="goToSection(1)">
+              ✏️ Bài 2
+            </button>
+          </li>
+
+          <li>
+            <button class="section-btn" onclick="goToSection(2)">
+              🔄 Bài 3
+            </button>
+          </li>
+
+          <li>
+            <button class="section-btn" onclick="goToSection(3)">
+              🚇 Bài 4
+            </button>
+          </li>
+
+          <li>
+            <button class="section-btn" onclick="goToSection(4)">
+              📝 Bài 5
+            </button>
+          </li>
+
+          <li>
+            <button class="section-btn" onclick="goToSection(5)">
+              🔥 Bài 6
+            </button>
+          </li>
+
+          <li>
+            <button class="section-btn" onclick="goToSection(6)">
+              🎯 Kết quả
+            </button>
+          </li>
+        </ul>
+      </aside>
+
+      <!-- =========================
+         MAIN CONTENT
+    ========================= -->
+
+      <main class="main-content">
+        <!-- =========================
+           INTRO
+      ========================= -->
+
+        <section class="practice-section active">
+          <div class="hero">
+            <div class="page-number">CITY LIFE • PRACTICE</div>
+
+            <h1>🏙️ CITY LIFE</h1>
+
+            <p>Double Comparatives & Phrasal Verbs</p>
+
+            <p>
+              Hãy chọn đáp án đúng. Sau khi chọn, em sẽ nhận được phản hồi và
+              lời giải thích ngay lập tức.
+            </p>
+          </div>
+
+          <div class="question-card">
+            <h2>🎯 Hướng dẫn</h2>
+
+            <p>1️⃣ Đọc kỹ câu hỏi.</p>
+
+            <p>2️⃣ Bấm vào đáp án em cho là đúng.</p>
+
+            <p>3️⃣ Hệ thống sẽ hiện <strong>Đúng / Sai</strong>.</p>
+
+            <p>4️⃣ Đọc phần giải thích để hiểu bài.</p>
+
+            <p>5️⃣ Hoàn thành tất cả bài tập để xem kết quả.</p>
+          </div>
+        </section>
+
+        <!-- =========================
+           BÀI 1
+      ========================= -->
+
+        <section class="practice-section">
+          <div class="page-number">PART 1 • DOUBLE COMPARATIVES</div>
+
+          <h1>Bài 1. Chọn đáp án đúng</h1>
+
+          <!-- QUESTION 1 -->
+
+          <div class="question-card">
+            <div class="question-number">Câu 1</div>
+
+            <div class="question-text">
+              The ______ the city becomes, the ______ crowded it gets.
+            </div>
+
+            <div class="options">
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là B. bigger / more. So sánh kép dùng The + so sánh hơn..., the + so sánh hơn....',
+                  )
+                "
+              >
+                A. big / more
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    true,
+                    'Đáp án đúng là B. bigger / more. Cấu trúc: The bigger..., the more crowded... = Thành phố càng lớn thì càng đông đúc.',
+                  )
+                "
+              >
+                B. bigger / more
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là B. bigger / more. Không dùng dạng so sánh nhất biggest / most trong cấu trúc so sánh kép này.',
+                  )
+                "
+              >
+                C. biggest / most
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là B. bigger / more. Không nói more big; tính từ big có dạng so sánh hơn là bigger.',
+                  )
+                "
+              >
+                D. more big / more
+              </button>
+            </div>
+
+            <div class="feedback"></div>
+          </div>
+
+          <!-- QUESTION 2 -->
+
+          <div class="question-card">
+            <div class="question-number">Câu 2</div>
+
+            <div class="question-text">
+              The more people move to cities, the ______ traffic problems there
+              are.
+            </div>
+
+            <div class="options">
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là B. more. Traffic problems là danh từ số nhiều nên dùng more = nhiều hơn.',
+                  )
+                "
+              >
+                A. much
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    true,
+                    'Đáp án đúng là B. more. The more people..., the more traffic problems... = Càng nhiều người chuyển đến thành phố thì càng có nhiều vấn đề giao thông.',
+                  )
+                "
+              >
+                B. more
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là B. more. Most là so sánh nhất, không phù hợp với cấu trúc The more..., the more....',
+                  )
+                "
+              >
+                C. most
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là B. more. Trong cấu trúc này cần dạng so sánh hơn more.',
+                  )
+                "
+              >
+                D. many
+              </button>
+            </div>
+
+            <div class="feedback"></div>
+          </div>
+
+          <!-- QUESTION 3 -->
+
+          <div class="question-card">
+            <div class="question-number">Câu 3</div>
+
+            <div class="question-text">
+              The ______ the population grows, the ______ pressure there is on
+              public services.
+            </div>
+
+            <div class="options">
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    true,
+                    'Đáp án đúng là A. faster / greater. Faster là so sánh hơn của fast, còn greater là so sánh hơn của great.',
+                  )
+                "
+              >
+                A. faster / greater
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là A. faster / greater. Không dùng so sánh nhất fastest / greatest trong cấu trúc này.',
+                  )
+                "
+              >
+                B. fastest / greatest
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là A. faster / greater. Không nói more fast hoặc more great trong trường hợp này.',
+                  )
+                "
+              >
+                C. more fast / more great
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là A. faster / greater. Great có dạng so sánh hơn là greater, không phải more great.',
+                  )
+                "
+              >
+                D. faster / more great
+              </button>
+            </div>
+
+            <div class="feedback"></div>
+          </div>
+
+          <!-- QUESTION 4 -->
+
+          <div class="question-card">
+            <div class="question-number">Câu 4</div>
+
+            <div class="question-text">
+              The more convenient public transport becomes, the ______ people
+              use private cars.
+            </div>
+
+            <div class="options">
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là B. fewer. People là danh từ đếm được số nhiều, vì vậy dùng fewer = ít hơn.',
+                  )
+                "
+              >
+                A. more
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    true,
+                    'Đáp án đúng là B. fewer. Giao thông công cộng càng thuận tiện thì càng ít người sử dụng ô tô cá nhân.',
+                  )
+                "
+              >
+                B. fewer
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là B. fewer. Less dùng với danh từ không đếm được, trong khi people là danh từ đếm được số nhiều.',
+                  )
+                "
+              >
+                C. less
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là B. fewer. Little không phù hợp với cấu trúc so sánh kép và không đi với people.',
+                  )
+                "
+              >
+                D. little
+              </button>
+            </div>
+
+            <div class="feedback"></div>
+          </div>
+
+          <!-- QUESTION 5 -->
+
+          <div class="question-card">
+            <div class="question-number">Câu 5</div>
+
+            <div class="question-text">
+              The ______ expensive housing becomes, the ______ difficult it is
+              for young people to buy a home.
+            </div>
+
+            <div class="options">
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    true,
+                    'Đáp án đúng là A. more / more. Expensive và difficult đều là tính từ dài nên dùng more: The more expensive..., the more difficult....',
+                  )
+                "
+              >
+                A. more / more
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là A. more / more. Most là so sánh nhất, không dùng trong cấu trúc này.',
+                  )
+                "
+              >
+                B. most / most
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là A. more / more. Cả expensive và difficult đều cần dạng so sánh hơn với more.',
+                  )
+                "
+              >
+                C. more / most
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là A. more / more. Much không được dùng để tạo dạng so sánh hơn cho expensive trong cấu trúc này.',
+                  )
+                "
+              >
+                D. much / more
+              </button>
+            </div>
+
+            <div class="feedback"></div>
+          </div>
+
+          <!-- QUESTION 6 -->
+
+          <div class="question-card">
+            <div class="question-number">Câu 6</div>
+
+            <div class="question-text">
+              The more people use public transport, the ______ traffic
+              congestion there is.
+            </div>
+
+            <div class="options">
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là B. less. Traffic congestion là danh từ không đếm được nên dùng less.',
+                  )
+                "
+              >
+                A. fewer
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    true,
+                    'Đáp án đúng là B. less. The more people use public transport, the less traffic congestion there is = Càng nhiều người dùng phương tiện công cộng thì càng ít tắc đường.',
+                  )
+                "
+              >
+                B. less
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là B. less. Ý nghĩa câu cho thấy khi nhiều người dùng phương tiện công cộng thì tình trạng tắc đường giảm.',
+                  )
+                "
+              >
+                C. more
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là B. less. Many không phù hợp với traffic congestion trong cấu trúc này.',
+                  )
+                "
+              >
+                D. many
+              </button>
+            </div>
+
+            <div class="feedback"></div>
+          </div>
+
+          <!-- QUESTION 7 -->
+
+          <div class="question-card">
+            <div class="question-number">Câu 7</div>
+
+            <div class="question-text">
+              The ______ a city becomes, the ______ opportunities it offers.
+            </div>
+
+            <div class="options">
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là B. larger / more. City là danh từ số ít và large có dạng so sánh hơn là larger.',
+                  )
+                "
+              >
+                A. large / more
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    true,
+                    'Đáp án đúng là B. larger / more. The larger a city becomes, the more opportunities it offers = Thành phố càng lớn thì càng có nhiều cơ hội.',
+                  )
+                "
+              >
+                B. larger / more
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là B. larger / more. Không dùng dạng so sánh nhất largest / most trong cấu trúc này.',
+                  )
+                "
+              >
+                C. largest / most
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là B. larger / more. Không nói more large; large có dạng so sánh hơn là larger.',
+                  )
+                "
+              >
+                D. more large / more
+              </button>
+            </div>
+
+            <div class="feedback"></div>
+          </div>
+
+          <!-- QUESTION 8 -->
+
+          <div class="question-card">
+            <div class="question-number">Câu 8</div>
+
+            <div class="question-text">
+              The more tourists a city attracts, the ______ pressure there is on
+              its infrastructure.
+            </div>
+
+            <div class="options">
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    true,
+                    'Đáp án đúng là A. more. Pressure là danh từ không đếm được. Càng nhiều khách du lịch thì càng có nhiều áp lực lên cơ sở hạ tầng.',
+                  )
+                "
+              >
+                A. more
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là A. more. Most là so sánh nhất, không phù hợp với cấu trúc The more..., the more....',
+                  )
+                "
+              >
+                B. most
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là A. more. Ý nghĩa câu cho thấy áp lực tăng lên khi số lượng khách du lịch tăng.',
+                  )
+                "
+              >
+                C. fewer
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là A. more. Khi có nhiều khách du lịch hơn, áp lực lên cơ sở hạ tầng tăng chứ không giảm.',
+                  )
+                "
+              >
+                D. less
+              </button>
+            </div>
+
+            <div class="feedback"></div>
+          </div>
+        </section>
+
+        <!-- =========================
+           BÀI 2
+      ========================= -->
+
+        <section class="practice-section">
+          <div class="page-number">PART 1 • DOUBLE COMPARATIVES</div>
+
+          <h1>Bài 2. Điền từ thích hợp</h1>
+
+          <p>Điền dạng đúng của từ trong ngoặc.</p>
+
+          <div class="question-card">
+            <div class="question-number">Câu 1</div>
+
+            <div class="question-text">
+              The ______ (big) the city is, the ______ (crowded) it becomes.
+            </div>
+
+            <p class="fill-answer">Đáp án: bigger / more crowded</p>
+
+            <div class="feedback show correct-feedback">
+              <div class="feedback-title">💡 Giải thích</div>
+
+              <div class="feedback-explanation">
+                Big là tính từ ngắn → bigger. Crowded là tính từ dài → more
+                crowded.
+                <br />
+                → The bigger the city is, the more crowded it becomes.
+              </div>
+            </div>
+          </div>
+
+          <div class="question-card">
+            <div class="question-number">Câu 2</div>
+
+            <div class="question-text">
+              The ______ (many) people move into cities, the ______ (high)
+              housing prices become.
+            </div>
+
+            <p class="fill-answer">Đáp án: more / higher</p>
+
+            <div class="feedback show correct-feedback">
+              <div class="feedback-title">💡 Giải thích</div>
+
+              <div class="feedback-explanation">
+                Many → more trong so sánh hơn. High → higher vì đây là tính từ
+                ngắn.
+              </div>
+            </div>
+          </div>
+
+          <div class="question-card">
+            <div class="question-number">Câu 3</div>
+
+            <div class="question-text">
+              The ______ (convenient) public transport is, the ______ (few)
+              private cars people use.
+            </div>
+
+            <p class="fill-answer">Đáp án: more convenient / fewer</p>
+
+            <div class="feedback show correct-feedback">
+              <div class="feedback-title">💡 Giải thích</div>
+
+              <div class="feedback-explanation">
+                Convenient là tính từ dài → more convenient. Private cars là
+                danh từ đếm được số nhiều → fewer.
+              </div>
+            </div>
+          </div>
+
+          <div class="question-card">
+            <div class="question-number">Câu 4</div>
+
+            <div class="question-text">
+              The ______ (expensive) city life becomes, the ______ (difficult)
+              it is for students to live independently.
+            </div>
+
+            <p class="fill-answer">Đáp án: more expensive / more difficult</p>
+
+            <div class="feedback show correct-feedback">
+              <div class="feedback-title">💡 Giải thích</div>
+
+              <div class="feedback-explanation">
+                Expensive và difficult đều là tính từ dài nên dùng more.
+              </div>
+            </div>
+          </div>
+
+          <div class="question-card">
+            <div class="question-number">Câu 5</div>
+
+            <div class="question-text">
+              The ______ (much) green space a city has, the ______ (healthy) its
+              residents are.
+            </div>
+
+            <p class="fill-answer">Đáp án: more / healthier</p>
+
+            <div class="feedback show correct-feedback">
+              <div class="feedback-title">💡 Giải thích</div>
+
+              <div class="feedback-explanation">
+                Much → more. Healthy kết thúc bằng phụ âm + y → đổi y thành i và
+                thêm -er: healthier.
+              </div>
+            </div>
+          </div>
+
+          <div class="question-card">
+            <div class="question-number">Câu 6</div>
+
+            <div class="question-text">
+              The ______ (early) the government deals with pollution, the ______
+              (easy) it will be to solve the problem.
+            </div>
+
+            <p class="fill-answer">Đáp án: earlier / easier</p>
+
+            <div class="feedback show correct-feedback">
+              <div class="feedback-title">💡 Giải thích</div>
+
+              <div class="feedback-explanation">
+                Early → earlier và easy → easier. Cả hai đều kết thúc bằng phụ
+                âm + y nên đổi y thành i rồi thêm -er.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- =========================
+           BÀI 3
+      ========================= -->
+
+        <section class="practice-section">
+          <div class="page-number">PART 1 • DOUBLE COMPARATIVES</div>
+
+          <h1>Bài 3. Viết lại câu sử dụng so sánh kép</h1>
+
+          <div class="question-card">
+            <div class="question-number">Câu 1</div>
+
+            <div class="question-text">
+              More people move to cities. There are more traffic problems.
+            </div>
+
+            <button class="show-answer-btn" onclick="showRewrite(this)">
+              👁️ Xem đáp án
+            </button>
+
+            <div class="answer-box">
+              <strong>
+                The more people move to cities, the more traffic problems there
+                are.
+              </strong>
+
+              <br /><br />
+
+              💡 Cả hai vế đều tăng: more people → more traffic problems.
+            </div>
+          </div>
+
+          <div class="question-card">
+            <div class="question-number">Câu 2</div>
+
+            <div class="question-text">
+              Public transport becomes more convenient. More people use it.
+            </div>
+
+            <button class="show-answer-btn" onclick="showRewrite(this)">
+              👁️ Xem đáp án
+            </button>
+
+            <div class="answer-box">
+              <strong>
+                The more convenient public transport becomes, the more people
+                use it.
+              </strong>
+
+              <br /><br />
+
+              💡 Convenient là tính từ dài → more convenient.
+            </div>
+          </div>
+
+          <div class="question-card">
+            <div class="question-number">Câu 3</div>
+
+            <div class="question-text">
+              Housing becomes more expensive. It becomes more difficult for
+              young people to buy a home.
+            </div>
+
+            <button class="show-answer-btn" onclick="showRewrite(this)">
+              👁️ Xem đáp án
+            </button>
+
+            <div class="answer-box">
+              <strong>
+                The more expensive housing becomes, the more difficult it is for
+                young people to buy a home.
+              </strong>
+
+              <br /><br />
+
+              💡 Expensive và difficult đều dùng more.
+            </div>
+          </div>
+
+          <div class="question-card">
+            <div class="question-number">Câu 4</div>
+
+            <div class="question-text">
+              People use more private cars. The streets become more crowded.
+            </div>
+
+            <button class="show-answer-btn" onclick="showRewrite(this)">
+              👁️ Xem đáp án
+            </button>
+
+            <div class="answer-box">
+              <strong>
+                The more private cars people use, the more crowded the streets
+                become.
+              </strong>
+
+              <br /><br />
+
+              💡 More private cars → more crowded streets.
+            </div>
+          </div>
+
+          <div class="question-card">
+            <div class="question-number">Câu 5</div>
+
+            <div class="question-text">
+              A city has more green spaces. The air becomes cleaner.
+            </div>
+
+            <button class="show-answer-btn" onclick="showRewrite(this)">
+              👁️ Xem đáp án
+            </button>
+
+            <div class="answer-box">
+              <strong>
+                The more green spaces a city has, the cleaner the air becomes.
+              </strong>
+
+              <br /><br />
+
+              💡 More green spaces → cleaner air.
+            </div>
+          </div>
+        </section>
+
+        <!-- =========================
+           BÀI 4
+      ========================= -->
+
+        <section class="practice-section">
+          <div class="page-number">PART 2 • PHRASAL VERBS</div>
+
+          <h1>Bài 4. Chọn cụm động từ đúng</h1>
+
+          <!-- 1 -->
+
+          <div class="question-card">
+            <div class="question-number">Câu 1</div>
+
+            <div class="question-text">
+              Many young people ______ big cities to find better jobs.
+            </div>
+
+            <div class="options">
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    true,
+                    'Move into = chuyển đến sống. Câu có nghĩa: Nhiều người trẻ chuyển đến các thành phố lớn để tìm việc tốt hơn.',
+                  )
+                "
+              >
+                A. move into
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Move out = chuyển đi, không phù hợp vì câu nói về việc chuyển đến thành phố để tìm việc.',
+                  )
+                "
+              >
+                B. move out
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Pick up = đón ai đó. Không phù hợp với ngữ cảnh chuyển đến thành phố.',
+                  )
+                "
+              >
+                C. pick up
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Drop off = đưa ai đó đến một nơi rồi rời đi. Không phù hợp với ngữ cảnh.',
+                  )
+                "
+              >
+                D. drop off
+              </button>
+            </div>
+
+            <div class="feedback"></div>
+          </div>
+
+          <!-- 2 -->
+
+          <div class="question-card">
+            <div class="question-number">Câu 2</div>
+
+            <div class="question-text">
+              The rent was too expensive, so they decided to ______.
+            </div>
+
+            <div class="options">
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Move into = chuyển vào. Nhưng tiền thuê quá đắt nên họ quyết định chuyển đi.',
+                  )
+                "
+              >
+                A. move into
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    true,
+                    'Move out = chuyển đi. Vì tiền thuê nhà quá đắt nên họ quyết định chuyển đi.',
+                  )
+                "
+              >
+                B. move out
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Set up = thành lập hoặc xây dựng. Không phù hợp với ngữ cảnh.',
+                  )
+                "
+              >
+                C. set up
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Get around = đi lại. Không phù hợp với ngữ cảnh.',
+                  )
+                "
+              >
+                D. get around
+              </button>
+            </div>
+
+            <div class="feedback"></div>
+          </div>
+
+          <!-- 3 -->
+
+          <div class="question-card">
+            <div class="question-number">Câu 3</div>
+
+            <div class="question-text">
+              It is easy to ______ the city by bus or metro.
+            </div>
+
+            <div class="options">
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Put up with = chịu đựng. Không phù hợp với việc đi lại trong thành phố.',
+                  )
+                "
+              >
+                A. put up with
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    true,
+                    'Get around = đi lại. Câu có nghĩa: Đi lại trong thành phố bằng xe buýt hoặc tàu điện rất dễ.',
+                  )
+                "
+              >
+                B. get around
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Run out of = hết, cạn kiệt. Không phù hợp với ngữ cảnh.',
+                  )
+                "
+              >
+                C. run out of
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Tear down = phá dỡ. Không phù hợp với việc đi lại.',
+                  )
+                "
+              >
+                D. tear down
+              </button>
+            </div>
+
+            <div class="feedback"></div>
+          </div>
+
+          <!-- 4 -->
+
+          <div class="question-card">
+            <div class="question-number">Câu 4</div>
+
+            <div class="question-text">
+              My father ______ me ______ at school every morning.
+            </div>
+
+            <div class="options">
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Put up with = chịu đựng. Không phù hợp với việc đón ai đó.',
+                  )
+                "
+              >
+                A. puts / up
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    true,
+                    'Pick someone up = đón ai đó. Vì vậy: My father picks me up at school every morning.',
+                  )
+                "
+              >
+                B. picks / up
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Move into = chuyển đến sống. Không phù hợp với cấu trúc đón ai đó.',
+                  )
+                "
+              >
+                C. moves / into
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Deal with = giải quyết. Không phù hợp với ngữ cảnh.',
+                  )
+                "
+              >
+                D. deals / with
+              </button>
+            </div>
+
+            <div class="feedback"></div>
+          </div>
+
+          <!-- 5 -->
+
+          <div class="question-card">
+            <div class="question-number">Câu 5</div>
+
+            <div class="question-text">
+              City residents have to ______ traffic jams during rush hour.
+            </div>
+
+            <div class="options">
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    true,
+                    'Put up with = chịu đựng. Người dân thành phố phải chịu đựng tình trạng tắc đường vào giờ cao điểm.',
+                  )
+                "
+              >
+                A. put up with
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Move into = chuyển vào. Không phù hợp với traffic jams.',
+                  )
+                "
+              >
+                B. move into
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Set up = thành lập hoặc xây dựng. Không phù hợp với traffic jams.',
+                  )
+                "
+              >
+                C. set up
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Pick up = đón. Không phù hợp với traffic jams.',
+                  )
+                "
+              >
+                D. pick up
+              </button>
+            </div>
+
+            <div class="feedback"></div>
+          </div>
+
+          <!-- 6 -->
+
+          <div class="question-card">
+            <div class="question-number">Câu 6</div>
+
+            <div class="question-text">
+              The government needs to ______ air pollution.
+            </div>
+
+            <div class="options">
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Move out = chuyển đi. Không phù hợp với air pollution.',
+                  )
+                "
+              >
+                A. move out
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    true,
+                    'Deal with = giải quyết hoặc xử lý. Chính phủ cần giải quyết vấn đề ô nhiễm không khí.',
+                  )
+                "
+              >
+                B. deal with
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Drop off = đưa ai đó đến một nơi. Không phù hợp với air pollution.',
+                  )
+                "
+              >
+                C. drop off
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Get around = đi lại. Không phù hợp với air pollution.',
+                  )
+                "
+              >
+                D. get around
+              </button>
+            </div>
+
+            <div class="feedback"></div>
+          </div>
+
+          <!-- 7 -->
+
+          <div class="question-card">
+            <div class="question-number">Câu 7</div>
+
+            <div class="question-text">
+              People should ______ their use of private cars.
+            </div>
+
+            <div class="options">
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    true,
+                    'Cut down on = cắt giảm. People should cut down on their use of private cars = Mọi người nên giảm sử dụng ô tô cá nhân.',
+                  )
+                "
+              >
+                A. cut down on
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Move into = chuyển vào. Không phù hợp với use of private cars.',
+                  )
+                "
+              >
+                B. move into
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Pick up = đón. Không phù hợp với ngữ cảnh.',
+                  )
+                "
+              >
+                C. pick up
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Build up = tăng lên hoặc tích tụ. Trái với ý nghĩa cắt giảm việc sử dụng ô tô.',
+                  )
+                "
+              >
+                D. build up
+              </button>
+            </div>
+
+            <div class="feedback"></div>
+          </div>
+
+          <!-- 8 -->
+
+          <div class="question-card">
+            <div class="question-number">Câu 8</div>
+
+            <div class="question-text">
+              The government plans to ______ more public transport stations.
+            </div>
+
+            <div class="options">
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Put up with = chịu đựng. Không phù hợp với việc xây dựng trạm giao thông.',
+                  )
+                "
+              >
+                A. put up with
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    true,
+                    'Set up = thành lập hoặc xây dựng. Chính phủ dự định xây dựng thêm các trạm giao thông công cộng.',
+                  )
+                "
+              >
+                B. set up
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Move out = chuyển đi. Không phù hợp với public transport stations.',
+                  )
+                "
+              >
+                C. move out
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Drop off = đưa ai đó đến một nơi. Không phù hợp với việc xây dựng trạm.',
+                  )
+                "
+              >
+                D. drop off
+              </button>
+            </div>
+
+            <div class="feedback"></div>
+          </div>
+
+          <!-- 9 -->
+
+          <div class="question-card">
+            <div class="question-number">Câu 9</div>
+
+            <div class="question-text">
+              Traffic usually ______ during rush hour.
+            </div>
+
+            <div class="options">
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Pick up = đón ai đó. Không phù hợp với traffic trong câu này.',
+                  )
+                "
+              >
+                A. picks up
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    true,
+                    'Builds up = tăng lên hoặc ùn lại. Traffic builds up during rush hour = Ùn tắc giao thông tăng lên vào giờ cao điểm.',
+                  )
+                "
+              >
+                B. builds up
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Move out = chuyển đi. Không phù hợp với traffic.',
+                  )
+                "
+              >
+                C. moves out
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Set up = thành lập hoặc xây dựng. Không phù hợp với traffic.',
+                  )
+                "
+              >
+                D. sets up
+              </button>
+            </div>
+
+            <div class="feedback"></div>
+          </div>
+
+          <!-- 10 -->
+
+          <div class="question-card">
+            <div class="question-number">Câu 10</div>
+
+            <div class="question-text">
+              The old buildings were ______ to make room for a new shopping
+              centre.
+            </div>
+
+            <div class="options">
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    true,
+                    'Torn down = bị phá dỡ. Các tòa nhà cũ bị phá dỡ để nhường chỗ cho trung tâm mua sắm mới.',
+                  )
+                "
+              >
+                A. torn down
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Picked up = được đón hoặc nhặt lên. Không phù hợp với buildings.',
+                  )
+                "
+              >
+                B. picked up
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Moved into = chuyển vào sống. Không phù hợp với old buildings trong câu này.',
+                  )
+                "
+              >
+                C. moved into
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Put up with = chịu đựng. Không phù hợp với old buildings.',
+                  )
+                "
+              >
+                D. put up with
+              </button>
+            </div>
+
+            <div class="feedback"></div>
+          </div>
+        </section>
+
+        <!-- =========================
+           BÀI 5
+      ========================= -->
+
+        <section class="practice-section">
+          <div class="page-number">PART 2 • PHRASAL VERBS</div>
+
+          <h1>Bài 5. Điền phrasal verb thích hợp</h1>
+
+          <div class="question-card">
+            <h3>Word Box</h3>
+
+            <div class="info-box">
+              move into • move out • get around • pick up • drop off • put up
+              with • deal with • cut down on • set up • build up
+            </div>
+
+            <h3>Đáp án</h3>
+
+            <p>1. <strong>move into</strong></p>
+
+            <p>2. <strong>build up</strong></p>
+
+            <p>3. <strong>pick up</strong></p>
+
+            <p>4. <strong>get around</strong></p>
+
+            <p>5. <strong>deal with</strong></p>
+
+            <p>6. <strong>cut down on</strong></p>
+
+            <p>7. <strong>move out</strong></p>
+
+            <p>8. <strong>set up</strong></p>
+
+            <p>9. <strong>put up with</strong></p>
+
+            <p>10. <strong>drop off</strong></p>
+
+            <div class="tip-box">
+              💡 Hãy thử tự làm trước khi xem đáp án nhé!
+            </div>
+          </div>
+        </section>
+
+        <!-- =========================
+           BÀI 6
+      ========================= -->
+
+        <section class="practice-section">
+          <div class="page-number">PART 3 • MIXED PRACTICE 🔥</div>
+
+          <h1>Bài 6. Chọn đáp án đúng</h1>
+
+          <!-- 1 -->
+
+          <div class="question-card">
+            <div class="question-number">Câu 1</div>
+
+            <div class="question-text">
+              The more people ______ into the city, the more traffic ______ up.
+            </div>
+
+            <div class="options">
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là C. move into / builds. Move into = chuyển vào, builds up = ùn tắc hoặc tăng lên.',
+                  )
+                "
+              >
+                A. move / builds
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là C. move into / builds. Move out mang nghĩa chuyển đi, trái với ý nghĩa của câu.',
+                  )
+                "
+              >
+                B. move out / picks
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    true,
+                    'Đáp án đúng là C. move into / builds. The more people move into the city, the more traffic builds up.',
+                  )
+                "
+              >
+                C. move into / builds
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là C. move into / builds. Pick up và move không phù hợp với ngữ cảnh.',
+                  )
+                "
+              >
+                D. pick up / moves
+              </button>
+            </div>
+
+            <div class="feedback"></div>
+          </div>
+
+          <!-- 2 -->
+
+          <div class="question-card">
+            <div class="question-number">Câu 2</div>
+
+            <div class="question-text">
+              The ______ expensive city life becomes, the harder it is to ______
+              the high cost of living.
+            </div>
+
+            <div class="options">
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    true,
+                    'Đáp án đúng là A. more / put up with. The more expensive... = càng đắt đỏ; put up with = chịu đựng.',
+                  )
+                "
+              >
+                A. more / put up with
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là A. more / put up with. Most không phù hợp với cấu trúc so sánh kép.',
+                  )
+                "
+              >
+                B. most / deal with
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là A. more / put up with. Move into = chuyển vào, không phù hợp với high cost of living.',
+                  )
+                "
+              >
+                C. more / move into
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là A. more / put up with. Much không tạo dạng so sánh hơn cho expensive.',
+                  )
+                "
+              >
+                D. much / set up
+              </button>
+            </div>
+
+            <div class="feedback"></div>
+          </div>
+
+          <!-- 3 -->
+
+          <div class="question-card">
+            <div class="question-number">Câu 3</div>
+
+            <div class="question-text">
+              The more convenient public transport becomes, the ______ people
+              ______ on private cars.
+            </div>
+
+            <div class="options">
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là B. fewer / rely. Câu nói rằng càng thuận tiện giao thông công cộng thì càng ít người phụ thuộc vào ô tô cá nhân.',
+                  )
+                "
+              >
+                A. more / cut down
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    true,
+                    'Đáp án đúng là B. fewer / rely. Fewer people = ít người hơn; rely on = phụ thuộc vào.',
+                  )
+                "
+              >
+                B. fewer / rely
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là B. fewer / rely. Move out không phù hợp với private cars.',
+                  )
+                "
+              >
+                C. less / move out
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là B. fewer / rely. Put up không thể đứng một mình trong cấu trúc này.',
+                  )
+                "
+              >
+                D. more / put up
+              </button>
+            </div>
+
+            <div class="feedback"></div>
+          </div>
+
+          <!-- 4 -->
+
+          <div class="question-card">
+            <div class="question-number">Câu 4</div>
+
+            <div class="question-text">
+              The ______ the population grows, the ______ pressure there is on
+              housing.
+            </div>
+
+            <div class="options">
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    true,
+                    'Đáp án đúng là A. faster / greater. Dân số càng tăng nhanh thì áp lực lên nhà ở càng lớn.',
+                  )
+                "
+              >
+                A. faster / greater
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là A. faster / greater. Không dùng so sánh nhất fastest / greatest trong cấu trúc này.',
+                  )
+                "
+              >
+                B. fastest / greatest
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là A. faster / greater. Không nói more fast / more great trong trường hợp này.',
+                  )
+                "
+              >
+                C. more fast / more great
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là A. faster / greater. Great có dạng so sánh hơn là greater.',
+                  )
+                "
+              >
+                D. faster / more great
+              </button>
+            </div>
+
+            <div class="feedback"></div>
+          </div>
+
+          <!-- 5 -->
+
+          <div class="question-card">
+            <div class="question-number">Câu 5</div>
+
+            <div class="question-text">
+              The sooner the government ______ the problem, the easier it will
+              be to solve it.
+            </div>
+
+            <div class="options">
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    true,
+                    'Đáp án đúng là A. deals with. Deal with = giải quyết. Cấu trúc: The sooner..., the easier....',
+                  )
+                "
+              >
+                A. deals with
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Move into = chuyển vào. Không phù hợp với the problem.',
+                  )
+                "
+              >
+                B. moves into
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Pick up = đón hoặc nhặt lên. Không phù hợp với the problem.',
+                  )
+                "
+              >
+                C. picks up
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Drop off = đưa ai đó đến một nơi. Không phù hợp với the problem.',
+                  )
+                "
+              >
+                D. drops off
+              </button>
+            </div>
+
+            <div class="feedback"></div>
+          </div>
+
+          <!-- 6 -->
+
+          <div class="question-card">
+            <div class="question-number">Câu 6</div>
+
+            <div class="question-text">
+              The more people use public transport, the ______ traffic
+              congestion there is.
+            </div>
+
+            <div class="options">
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là B. less. Traffic congestion là danh từ không đếm được.',
+                  )
+                "
+              >
+                A. more
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    true,
+                    'Đáp án đúng là B. less. Càng nhiều người dùng phương tiện công cộng thì càng ít tắc đường.',
+                  )
+                "
+              >
+                B. less
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là B. less. Fewer dùng với danh từ đếm được số nhiều, trong khi traffic congestion là không đếm được.',
+                  )
+                "
+              >
+                C. fewer
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là B. less. Most là so sánh nhất, không phù hợp với cấu trúc này.',
+                  )
+                "
+              >
+                D. most
+              </button>
+            </div>
+
+            <div class="feedback"></div>
+          </div>
+
+          <!-- 7 -->
+
+          <div class="question-card">
+            <div class="question-number">Câu 7</div>
+
+            <div class="question-text">
+              The ______ a city becomes, the more people want to ______ it.
+            </div>
+
+            <div class="options">
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    true,
+                    'Đáp án đúng là A. bigger / move into. Thành phố càng lớn thì càng nhiều người muốn chuyển vào đó.',
+                  )
+                "
+              >
+                A. bigger / move into
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là A. bigger / move into. Biggest là so sánh nhất và move out mang nghĩa chuyển đi.',
+                  )
+                "
+              >
+                B. biggest / move out
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là A. bigger / move into. Không nói more big trong trường hợp này.',
+                  )
+                "
+              >
+                C. more big / get around
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Đáp án đúng là A. bigger / move into. Cấu trúc cần so sánh hơn bigger và move into.',
+                  )
+                "
+              >
+                D. big / pick up
+              </button>
+            </div>
+
+            <div class="feedback"></div>
+          </div>
+
+          <!-- 8 -->
+
+          <div class="question-card">
+            <div class="question-number">Câu 8</div>
+
+            <div class="question-text">
+              The more private cars people use, the more traffic ______ during
+              rush hour.
+            </div>
+
+            <div class="options">
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Move out = chuyển đi. Không phù hợp với traffic.',
+                  )
+                "
+              >
+                A. moves out
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    true,
+                    'Builds up = tăng lên hoặc ùn lại. Càng nhiều ô tô cá nhân thì giao thông càng ùn tắc vào giờ cao điểm.',
+                  )
+                "
+              >
+                B. builds up
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Set up = thành lập hoặc xây dựng. Không phù hợp với traffic.',
+                  )
+                "
+              >
+                C. sets up
+              </button>
+
+              <button
+                class="option-btn"
+                onclick="
+                  checkAnswer(
+                    this,
+                    false,
+                    'Drops off = đưa ai đó đến một nơi. Không phù hợp với traffic.',
+                  )
+                "
+              >
+                D. drops off
+              </button>
+            </div>
+
+            <div class="feedback"></div>
+          </div>
+        </section>
+
+        <!-- =========================
+           KẾT QUẢ
+      ========================= -->
+
+        <section class="practice-section">
+          <div class="hero">
+            <div class="page-number">PRACTICE COMPLETE</div>
+
+            <h1>🎉 Hoàn thành bài tập!</h1>
+
+            <p>Em đã hoàn thành phần luyện tập City Life.</p>
+          </div>
+
+          <div class="score-box">
+            <div>🏆 Điểm của bạn</div>
+
+            <div class="score-number" id="scoreNumber">0 / 26</div>
+
+            <div class="score-message" id="scoreMessage">
+              Hãy hoàn thành các câu hỏi trắc nghiệm để xem điểm.
+            </div>
+
+            <button class="restart-btn" onclick="restartQuiz()">
+              🔄 Làm lại bài
+            </button>
+          </div>
+
+          <div class="home-section">
+            <a href="course2.html" class="home-btn"> 📚 Quay lại bài giảng </a>
+
+            <br />
+
+            <a href="course2.html" class="home-btn"> 🏠 Về trang chủ </a>
+          </div>
+        </section>
+
+        <!-- =========================
+           NAVIGATION
+      ========================= -->
+
+        <div class="navigation">
+          <button
+            class="nav-btn prev-btn"
+            id="prevBtn"
+            onclick="previousSection()"
+          >
+            ← Quay lại
+          </button>
+
+          <button class="nav-btn next-btn" id="nextBtn" onclick="nextSection()">
+            Tiếp theo →
+          </button>
+        </div>
+      </main>
+    </div>
+
+    <!-- =========================
+       JAVASCRIPT
+  ========================= -->
+
+    <script>
+      // =========================
+      // SECTION NAVIGATION
+      // =========================
+
+      const sections = document.querySelectorAll(".practice-section");
+
+      const sectionButtons = document.querySelectorAll(".section-btn");
+
+      const prevBtn = document.getElementById("prevBtn");
+
+      const nextBtn = document.getElementById("nextBtn");
+
+      const progressBar = document.getElementById("progressBar");
+
+      let currentSection = 0;
+
+      // =========================
+      // SCORE
+      // =========================
+
+      let score = 0;
+
+      let answeredQuestions = 0;
+
+      const totalQuestions = 26;
+
+      // =========================
+      // HIỂN THỊ SECTION
+      // =========================
+
+      function showSection(index) {
+        if (index < 0) {
+          index = 0;
+        }
+
+        if (index >= sections.length) {
+          index = sections.length - 1;
+        }
+
+        currentSection = index;
+
+        sections.forEach((section) => {
+          section.classList.remove("active");
+        });
+
+        sections[currentSection].classList.add("active");
+
+        sectionButtons.forEach((button) => {
+          button.classList.remove("active");
+        });
+
+        if (sectionButtons[currentSection]) {
+          sectionButtons[currentSection].classList.add("active");
+        }
+
+        // Progress
+
+        const progress = ((currentSection + 1) / sections.length) * 100;
+
+        progressBar.style.width = progress + "%";
+
+        // Navigation
+
+        prevBtn.disabled = currentSection === 0;
+
+        if (currentSection === sections.length - 1) {
+          nextBtn.style.display = "none";
+
+          updateScore();
+        } else {
+          nextBtn.style.display = "block";
+        }
+
+        window.scrollTo({
+          top: 0,
+
+          behavior: "smooth",
+        });
+      }
+
+      // =========================
+      // NEXT
+      // =========================
+
+      function nextSection() {
+        if (currentSection < sections.length - 1) {
+          showSection(currentSection + 1);
+        }
+      }
+
+      // =========================
+      // PREVIOUS
+      // =========================
+
+      function previousSection() {
+        if (currentSection > 0) {
+          showSection(currentSection - 1);
+        }
+      }
+
+      // =========================
+      // SIDEBAR
+      // =========================
+
+      function goToSection(index) {
+        showSection(index);
+      }
+
+      // =========================
+      // CHECK ANSWER
+      // =========================
+
+      function checkAnswer(button, isCorrect, explanation) {
+        const card = button.closest(".question-card");
+
+        const buttons = card.querySelectorAll(".option-btn");
+
+        const feedback = card.querySelector(".feedback");
+
+        // Không cho chọn lại
+
+        buttons.forEach((btn) => {
+          btn.disabled = true;
+        });
+
+        // Đánh dấu đáp án
+
+        if (isCorrect) {
+          button.classList.add("correct");
+
+          feedback.classList.add("correct-feedback");
+
+          feedback.innerHTML = `
+          <div class="feedback-title">
+            ✅ Chính xác!
+          </div>
+
+          <div class="feedback-explanation">
+            ${explanation}
+          </div>
+        `;
+
+          score++;
+        } else {
+          button.classList.add("wrong");
+
+          feedback.classList.add("wrong-feedback");
+
+          feedback.innerHTML = `
+          <div class="feedback-title">
+            ❌ Chưa chính xác!
+          </div>
+
+          <div class="feedback-explanation">
+            ${explanation}
+          </div>
+        `;
+
+          // Tìm đáp án đúng
+
+          buttons.forEach((btn) => {
+            const onclickText = btn.getAttribute("onclick");
+
+            if (onclickText && onclickText.includes("true,")) {
+              btn.classList.add("correct");
+            }
+          });
+        }
+
+        feedback.classList.add("show");
+
+        answeredQuestions++;
+      }
+
+      // =========================
+      // SHOW REWRITE ANSWER
+      // =========================
+
+      function showRewrite(button) {
+        const answerBox = button.nextElementSibling;
+
+        if (answerBox.style.display === "block") {
+          answerBox.style.display = "none";
+
+          button.innerHTML = "👁️ Xem đáp án";
+        } else {
+          answerBox.style.display = "block";
+
+          button.innerHTML = "🙈 Ẩn đáp án";
+        }
+      }
+
+      // =========================
+      // UPDATE SCORE
+      // =========================
+
+      function updateScore() {
+        const scoreNumber = document.getElementById("scoreNumber");
+
+        const scoreMessage = document.getElementById("scoreMessage");
+
+        scoreNumber.innerText = score + " / " + totalQuestions;
+
+        const percentage = Math.round((score / totalQuestions) * 100);
+
+        if (percentage >= 90) {
+          scoreMessage.innerText = "🌟 Xuất sắc! Em đã nắm rất chắc kiến thức.";
+        } else if (percentage >= 75) {
+          scoreMessage.innerText = "👏 Rất tốt! Em đã hiểu khá chắc bài học.";
+        } else if (percentage >= 50) {
+          scoreMessage.innerText =
+            "💪 Khá tốt! Hãy xem lại những câu sai và thử lại nhé.";
+        } else {
+          scoreMessage.innerText =
+            "📚 Em nên ôn lại bài giảng rồi làm lại bài tập nhé.";
+        }
+      }
+
+      // =========================
+      // RESTART
+      // =========================
+
+      function restartQuiz() {
+        location.reload();
+      }
+
+      // =========================
+      // KEYBOARD
+      // =========================
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "ArrowRight") {
+          nextSection();
+        }
+
+        if (event.key === "ArrowLeft") {
+          previousSection();
+        }
+      });
+
+      // =========================
+      // INITIALIZE
+      // =========================
+
+      showSection(0);
+    </script>
+  </body>
+</html>
+```

@@ -1,0 +1,1326 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Wh-words + To-infinitive & Phrasal Verbs | Hyvoria English</title>
+
+    <meta
+      name="description"
+      content="Bài giảng tiếng Anh về Wh-words + to-infinitive và Phrasal Verbs chủ đề Local Community."
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: #f6f8fc;
+        color: #263238;
+        line-height: 1.7;
+      }
+
+      /* =========================
+       HEADER
+    ========================= */
+
+      header {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        padding: 18px 7%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .logo {
+        font-size: 24px;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+      }
+
+      .lesson-label {
+        font-size: 14px;
+        opacity: 0.9;
+      }
+
+      /* =========================
+       PROGRESS BAR
+    ========================= */
+
+      .progress-container {
+        height: 5px;
+        background: #e5e7eb;
+        position: sticky;
+        top: 67px;
+        z-index: 999;
+      }
+
+      .progress-bar {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #667eea, #764ba2);
+        transition: width 0.4s ease;
+      }
+
+      /* =========================
+       MAIN
+    ========================= */
+
+      main {
+        max-width: 1050px;
+        margin: 40px auto;
+        padding: 0 20px 80px;
+      }
+
+      /* =========================
+       LESSON NAVIGATION
+    ========================= */
+
+      .lesson-nav {
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+        padding: 10px 0 20px;
+        margin-bottom: 20px;
+      }
+
+      .lesson-nav button {
+        white-space: nowrap;
+        border: none;
+        background: white;
+        color: #667eea;
+        border: 1px solid #e2e8f0;
+        padding: 9px 16px;
+        border-radius: 30px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: 0.3s;
+      }
+
+      .lesson-nav button:hover {
+        background: #667eea;
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      .lesson-nav button.active {
+        background: #667eea;
+        color: white;
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+      }
+
+      /* =========================
+       SLIDE
+    ========================= */
+
+      .slide {
+        display: none;
+        background: white;
+        border-radius: 24px;
+        padding: 45px;
+        box-shadow: 0 10px 35px rgba(30, 41, 59, 0.08);
+        min-height: 600px;
+        animation: fadeIn 0.4s ease;
+      }
+
+      .slide.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* =========================
+       TYPOGRAPHY
+    ========================= */
+
+      .slide-number {
+        display: inline-block;
+        background: #eef2ff;
+        color: #667eea;
+        padding: 5px 13px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 700;
+        margin-bottom: 15px;
+      }
+
+      h1 {
+        font-size: 38px;
+        line-height: 1.25;
+        color: #1e293b;
+        margin-bottom: 20px;
+      }
+
+      h2 {
+        font-size: 30px;
+        color: #4338ca;
+        margin-bottom: 20px;
+      }
+
+      h3 {
+        font-size: 21px;
+        color: #334155;
+        margin: 25px 0 12px;
+      }
+
+      p {
+        margin-bottom: 14px;
+      }
+
+      .subtitle {
+        font-size: 18px;
+        color: #64748b;
+        margin-bottom: 30px;
+      }
+
+      /* =========================
+       FORMULA BOX
+    ========================= */
+
+      .formula {
+        background: linear-gradient(135deg, #eef2ff, #f5f3ff);
+        border-left: 5px solid #667eea;
+        padding: 22px;
+        border-radius: 12px;
+        margin: 20px 0;
+        font-size: 19px;
+        font-weight: 700;
+        color: #3730a3;
+      }
+
+      /* =========================
+       EXAMPLE BOX
+    ========================= */
+
+      .example {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 15px;
+        padding: 20px;
+        margin: 15px 0;
+      }
+
+      .example strong {
+        color: #4338ca;
+      }
+
+      .translation {
+        color: #64748b;
+        font-style: italic;
+        margin-top: 6px;
+      }
+
+      /* =========================
+       TABLE
+    ========================= */
+
+      .table-wrapper {
+        overflow-x: auto;
+        margin: 20px 0;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 600px;
+      }
+
+      th {
+        background: #667eea;
+        color: white;
+        padding: 14px;
+        text-align: left;
+      }
+
+      td {
+        padding: 14px;
+        border-bottom: 1px solid #e2e8f0;
+      }
+
+      tr:nth-child(even) {
+        background: #f8fafc;
+      }
+
+      /* =========================
+       TIP BOX
+    ========================= */
+
+      .tip {
+        background: #ecfdf5;
+        border-left: 5px solid #10b981;
+        padding: 20px;
+        border-radius: 12px;
+        margin: 20px 0;
+      }
+
+      .warning {
+        background: #fff7ed;
+        border-left: 5px solid #f97316;
+        padding: 20px;
+        border-radius: 12px;
+        margin: 20px 0;
+      }
+
+      .danger {
+        background: #fef2f2;
+        border-left: 5px solid #ef4444;
+        padding: 20px;
+        border-radius: 12px;
+        margin: 20px 0;
+      }
+
+      /* =========================
+       PHRASAL VERB CARDS
+    ========================= */
+
+      .phrasal-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .phrasal-card {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        padding: 20px;
+        border-radius: 15px;
+        transition: 0.3s;
+      }
+
+      .phrasal-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      }
+
+      .phrasal-card h3 {
+        color: #667eea;
+        margin-top: 0;
+      }
+
+      .meaning {
+        font-weight: 600;
+        color: #334155;
+        margin-bottom: 8px;
+      }
+
+      /* =========================
+       WRONG / CORRECT
+    ========================= */
+
+      .wrong {
+        color: #dc2626;
+        font-weight: 600;
+      }
+
+      .correct {
+        color: #059669;
+        font-weight: 600;
+      }
+
+      /* =========================
+       NAVIGATION BUTTONS
+    ========================= */
+
+      .navigation {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 30px;
+        gap: 15px;
+      }
+
+      .nav-btn {
+        border: none;
+        padding: 13px 25px;
+        border-radius: 12px;
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: 700;
+        transition: 0.3s;
+      }
+
+      .prev-btn {
+        background: #e2e8f0;
+        color: #334155;
+      }
+
+      .next-btn {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+      }
+
+      .nav-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 7px 15px rgba(0, 0, 0, 0.12);
+      }
+
+      /* =========================
+       EXERCISE CTA
+    ========================= */
+
+      .exercise-box {
+        text-align: center;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        padding: 40px 25px;
+        border-radius: 20px;
+        margin-top: 35px;
+      }
+
+      .exercise-box h2 {
+        color: white;
+      }
+
+      .exercise-box p {
+        opacity: 0.9;
+        margin-bottom: 25px;
+      }
+
+      .exercise-btn {
+        display: inline-block;
+        text-decoration: none;
+        background: white;
+        color: #667eea;
+        padding: 14px 28px;
+        border-radius: 12px;
+        font-weight: 800;
+        transition: 0.3s;
+      }
+
+      .exercise-btn:hover {
+        transform: scale(1.05);
+      }
+
+      /* =========================
+       MOBILE
+    ========================= */
+
+      @media (max-width: 700px) {
+        header {
+          padding: 15px 5%;
+        }
+
+        .logo {
+          font-size: 20px;
+        }
+
+        .lesson-label {
+          display: none;
+        }
+
+        main {
+          margin-top: 25px;
+        }
+
+        .slide {
+          padding: 25px 20px;
+          border-radius: 18px;
+          min-height: 500px;
+        }
+
+        h1 {
+          font-size: 30px;
+        }
+
+        h2 {
+          font-size: 25px;
+        }
+
+        .phrasal-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .navigation {
+          flex-direction: column;
+        }
+
+        .nav-btn {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- =========================
+       HEADER
+  ========================= -->
+
+    <header>
+      <div class="logo">Hyvoria English</div>
+      <div class="lesson-label">Grammar Lesson • Local Community</div>
+    </header>
+
+    <!-- PROGRESS BAR -->
+
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <main>
+      <!-- =========================
+         QUICK NAVIGATION
+    ========================= -->
+
+      <div class="lesson-nav">
+        <button onclick="goToSlide(0)">Overview</button>
+
+        <button onclick="goToSlide(1)">Wh-words</button>
+
+        <button onclick="goToSlide(2)">Why use it?</button>
+
+        <button onclick="goToSlide(3)">Quick Review</button>
+
+        <button onclick="goToSlide(4)">Phrasal Verbs</button>
+
+        <button onclick="goToSlide(5)">Local Community</button>
+
+        <button onclick="goToSlide(6)">More Phrasal Verbs</button>
+
+        <button onclick="goToSlide(7)">Combine</button>
+
+        <button onclick="goToSlide(8)">Exercise</button>
+      </div>
+
+      <!-- =========================
+         SLIDE 1
+    ========================= -->
+
+      <section class="slide active">
+        <span class="slide-number">01 / 09</span>
+
+        <h1>Wh-words + To-infinitive<br />& Phrasal Verbs</h1>
+
+        <p class="subtitle">Grammar Lesson • Topic: Local Community</p>
+
+        <div class="formula">
+          🎯 Today's lesson
+          <br /><br />
+          1. Wh-word + to-infinitive
+          <br />
+          2. Phrasal verbs
+          <br />
+          3. Combining both structures
+        </div>
+
+        <div class="tip">
+          💡 <strong>Learning goal:</strong>
+          By the end of this lesson, you will be able to use Wh-word +
+          to-infinitive and common phrasal verbs related to the topic of Local
+          Community.
+        </div>
+
+        <div class="navigation">
+          <button class="nav-btn prev-btn" onclick="goToSlide(0)">
+            ← Bắt đầu
+          </button>
+
+          <button class="nav-btn next-btn" onclick="nextSlide()">
+            Tiếp theo →
+          </button>
+        </div>
+      </section>
+
+      <!-- =========================
+         SLIDE 2
+    ========================= -->
+
+      <section class="slide">
+        <span class="slide-number">02 / 09</span>
+
+        <h2>1. Wh-word + To-infinitive</h2>
+
+        <p>
+          Ta dùng <strong>Wh-word + to + V nguyên mẫu</strong>
+          để diễn tả việc không biết, chưa quyết định hoặc cần biết nên làm gì,
+          đi đâu, khi nào hoặc làm thế nào.
+        </p>
+
+        <div class="formula">Wh-word + to + V (bare infinitive)</div>
+
+        <div class="table-wrapper">
+          <table>
+            <tr>
+              <th>Wh-word</th>
+              <th>Ý nghĩa</th>
+              <th>Ví dụ</th>
+            </tr>
+
+            <tr>
+              <td><strong>what + to V</strong></td>
+              <td>làm gì / cái gì</td>
+              <td>I don't know what to do.</td>
+            </tr>
+
+            <tr>
+              <td><strong>where + to V</strong></td>
+              <td>ở đâu / đến đâu</td>
+              <td>She doesn't know where to go.</td>
+            </tr>
+
+            <tr>
+              <td><strong>when + to V</strong></td>
+              <td>khi nào</td>
+              <td>We haven't decided when to start.</td>
+            </tr>
+
+            <tr>
+              <td><strong>how + to V</strong></td>
+              <td>làm thế nào</td>
+              <td>He knows how to help.</td>
+            </tr>
+
+            <tr>
+              <td><strong>which + to V</strong></td>
+              <td>cái nào / lựa chọn nào</td>
+              <td>I don't know which to choose.</td>
+            </tr>
+
+            <tr>
+              <td><strong>who + to V</strong></td>
+              <td>nên chọn ai / hỏi ai</td>
+              <td>She doesn't know who to ask.</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="example">
+          <strong>I don't know what to do.</strong>
+
+          <div class="translation">= Tôi không biết phải làm gì.</div>
+        </div>
+
+        <div class="example">
+          <strong>Can you show me how to get to the community centre?</strong>
+
+          <div class="translation">
+            = Bạn có thể chỉ cho tôi cách đi đến trung tâm cộng đồng không?
+          </div>
+        </div>
+
+        <div class="navigation">
+          <button class="nav-btn prev-btn" onclick="prevSlide()">
+            ← Quay lại
+          </button>
+
+          <button class="nav-btn next-btn" onclick="nextSlide()">
+            Tiếp theo →
+          </button>
+        </div>
+      </section>
+
+      <!-- =========================
+         SLIDE 3
+    ========================= -->
+
+      <section class="slide">
+        <span class="slide-number">03 / 09</span>
+
+        <h2>2. Tại sao dùng Wh-word + to V?</h2>
+
+        <p>
+          Cấu trúc này thường được dùng để rút gọn một mệnh đề có
+          <strong>chủ ngữ + should</strong>.
+        </p>
+
+        <div class="formula">
+          Wh-word + S + should + V
+          <br />
+          ↓
+          <br />
+          Wh-word + to + V
+        </div>
+
+        <div class="example">
+          <strong>I don't know what I should do.</strong>
+
+          <br />
+
+          ↓
+
+          <br />
+
+          <strong>I don't know what to do.</strong>
+
+          <div class="translation">Hai câu có nghĩa gần như tương đương.</div>
+        </div>
+
+        <h3>Ví dụ chuyển đổi</h3>
+
+        <div class="example">
+          <strong>WHERE</strong>
+
+          <p>We don't know where we should hold the meeting.</p>
+
+          <p>→ We don't know <strong>where to hold</strong> the meeting.</p>
+        </div>
+
+        <div class="example">
+          <strong>WHEN</strong>
+
+          <p>They haven't decided when they should organize the event.</p>
+
+          <p>
+            → They haven't decided <strong>when to organize</strong> the event.
+          </p>
+        </div>
+
+        <div class="example">
+          <strong>HOW</strong>
+
+          <p>She doesn't know how she can help the community.</p>
+
+          <p>→ She doesn't know <strong>how to help</strong> the community.</p>
+        </div>
+
+        <div class="example">
+          <strong>WHICH</strong>
+
+          <p>He hasn't decided which project he should join.</p>
+
+          <p>→ He hasn't decided <strong>which project to join</strong>.</p>
+        </div>
+
+        <div class="navigation">
+          <button class="nav-btn prev-btn" onclick="prevSlide()">
+            ← Quay lại
+          </button>
+
+          <button class="nav-btn next-btn" onclick="nextSlide()">
+            Tiếp theo →
+          </button>
+        </div>
+      </section>
+
+      <!-- =========================
+         SLIDE 4
+    ========================= -->
+
+      <section class="slide">
+        <span class="slide-number">04 / 09</span>
+
+        <h2>3. Quick Review</h2>
+
+        <p>Hãy ghi nhớ những cụm từ quan trọng sau:</p>
+
+        <div class="table-wrapper">
+          <table>
+            <tr>
+              <th>Cấu trúc</th>
+              <th>Nghĩa</th>
+              <th>Ví dụ</th>
+            </tr>
+
+            <tr>
+              <td><strong>what to do</strong></td>
+              <td>làm gì</td>
+              <td>I don't know what to do.</td>
+            </tr>
+
+            <tr>
+              <td><strong>where to go</strong></td>
+              <td>đi đâu</td>
+              <td>She doesn't know where to go.</td>
+            </tr>
+
+            <tr>
+              <td><strong>when to start</strong></td>
+              <td>bắt đầu khi nào</td>
+              <td>We haven't decided when to start.</td>
+            </tr>
+
+            <tr>
+              <td><strong>how to help</strong></td>
+              <td>giúp như thế nào</td>
+              <td>He knows how to help.</td>
+            </tr>
+
+            <tr>
+              <td><strong>which to choose</strong></td>
+              <td>chọn cái nào</td>
+              <td>I don't know which to choose.</td>
+            </tr>
+
+            <tr>
+              <td><strong>who to ask</strong></td>
+              <td>hỏi ai</td>
+              <td>She doesn't know who to ask.</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="warning">
+          ⚠️ <strong>Lưu ý:</strong>
+
+          <p class="wrong">❌ I don't know what to do it.</p>
+
+          <p>
+            Vì <strong>what</strong> đã đóng vai trò tân ngữ của động từ
+            <strong>do</strong>.
+          </p>
+
+          <p class="correct">✅ I don't know what to do.</p>
+        </div>
+
+        <div class="navigation">
+          <button class="nav-btn prev-btn" onclick="prevSlide()">
+            ← Quay lại
+          </button>
+
+          <button class="nav-btn next-btn" onclick="nextSlide()">
+            Tiếp theo →
+          </button>
+        </div>
+      </section>
+
+      <!-- =========================
+         SLIDE 5
+    ========================= -->
+
+      <section class="slide">
+        <span class="slide-number">05 / 09</span>
+
+        <h2>4. Phrasal Verbs</h2>
+
+        <p>
+          <strong>Phrasal verb = Verb + Particle</strong>
+        </p>
+
+        <p>
+          Khi ghép lại, nghĩa của cụm động từ có thể khác hoàn toàn nghĩa của
+          động từ ban đầu.
+        </p>
+
+        <div class="formula">
+          look = nhìn
+
+          <br /><br />
+
+          look after = chăm sóc
+
+          <br />
+
+          look into = điều tra / xem xét
+
+          <br />
+
+          look for = tìm kiếm
+
+          <br />
+
+          look up = tra cứu
+        </div>
+
+        <div class="tip">
+          💡 <strong>Tip:</strong>
+
+          Đừng cố dịch từng từ riêng lẻ. Hãy học phrasal verb như một cụm từ
+          hoàn chỉnh.
+        </div>
+
+        <h3>Ví dụ</h3>
+
+        <div class="example">
+          <strong>look after</strong> → chăm sóc
+
+          <br />
+
+          Volunteers look after elderly people.
+
+          <div class="translation">
+            Tình nguyện viên chăm sóc người cao tuổi.
+          </div>
+        </div>
+
+        <div class="example">
+          <strong>look into</strong> → điều tra / xem xét
+
+          <br />
+
+          The local council is looking into the problem.
+
+          <div class="translation">
+            Hội đồng địa phương đang xem xét vấn đề.
+          </div>
+        </div>
+
+        <div class="navigation">
+          <button class="nav-btn prev-btn" onclick="prevSlide()">
+            ← Quay lại
+          </button>
+
+          <button class="nav-btn next-btn" onclick="nextSlide()">
+            Tiếp theo →
+          </button>
+        </div>
+      </section>
+
+      <!-- =========================
+         SLIDE 6
+    ========================= -->
+
+      <section class="slide">
+        <span class="slide-number">06 / 09</span>
+
+        <h2>5. Phrasal Verbs: Local Community</h2>
+
+        <div class="phrasal-grid">
+          <div class="phrasal-card">
+            <h3>SET UP</h3>
+
+            <div class="meaning">thành lập / thiết lập</div>
+
+            <p>The local council set up a new community centre.</p>
+
+            <small> set up a charity • set up a food bank </small>
+          </div>
+
+          <div class="phrasal-card">
+            <h3>CLEAN UP</h3>
+
+            <div class="meaning">dọn dẹp</div>
+
+            <p>Volunteers cleaned up the local park.</p>
+
+            <small> clean up the streets • clean up the neighbourhood </small>
+          </div>
+
+          <div class="phrasal-card">
+            <h3>PICK UP</h3>
+
+            <div class="meaning">nhặt lên / thu gom</div>
+
+            <p>The students picked up litter in the park.</p>
+
+            <small>
+              clean up = dọn dẹp nói chung
+              <br />
+              pick up = nhặt / thu gom
+            </small>
+          </div>
+
+          <div class="phrasal-card">
+            <h3>LOOK AFTER</h3>
+
+            <div class="meaning">chăm sóc</div>
+
+            <p>Volunteers look after elderly people.</p>
+
+            <small> children • elderly people • vulnerable people </small>
+          </div>
+
+          <div class="phrasal-card">
+            <h3>LOOK INTO</h3>
+
+            <div class="meaning">điều tra / xem xét</div>
+
+            <p>The authorities are looking into the cause of the pollution.</p>
+          </div>
+
+          <div class="phrasal-card">
+            <h3>GIVE AWAY</h3>
+
+            <div class="meaning">cho / tặng miễn phí</div>
+
+            <p>The charity gave away clothes to poor families.</p>
+          </div>
+
+          <div class="phrasal-card">
+            <h3>TAKE PART IN</h3>
+
+            <div class="meaning">tham gia</div>
+
+            <p>Many students took part in the clean-up campaign.</p>
+
+            <small> + Noun / V-ing </small>
+          </div>
+
+          <div class="phrasal-card">
+            <h3>GET INVOLVED IN</h3>
+
+            <div class="meaning">tích cực tham gia</div>
+
+            <p>Young people should get involved in community activities.</p>
+          </div>
+
+          <div class="phrasal-card">
+            <h3>CUT DOWN ON</h3>
+
+            <div class="meaning">cắt giảm</div>
+
+            <p>We should cut down on plastic waste.</p>
+          </div>
+
+          <div class="phrasal-card">
+            <h3>CARRY OUT</h3>
+
+            <div class="meaning">tiến hành / thực hiện</div>
+
+            <p>The students carried out a survey about pollution.</p>
+
+            <small> carry out a survey • research • study • project </small>
+          </div>
+        </div>
+
+        <div class="navigation">
+          <button class="nav-btn prev-btn" onclick="prevSlide()">
+            ← Quay lại
+          </button>
+
+          <button class="nav-btn next-btn" onclick="nextSlide()">
+            Tiếp theo →
+          </button>
+        </div>
+      </section>
+
+      <!-- =========================
+         SLIDE 7
+    ========================= -->
+
+      <section class="slide">
+        <span class="slide-number">07 / 09</span>
+
+        <h2>6. More Phrasal Verbs</h2>
+
+        <div class="phrasal-grid">
+          <div class="phrasal-card">
+            <h3>BRING UP</h3>
+
+            <div class="meaning">đề cập / nêu ra</div>
+
+            <p>She brought up the problem of traffic congestion.</p>
+          </div>
+
+          <div class="phrasal-card">
+            <h3>CALL FOR</h3>
+
+            <div class="meaning">kêu gọi / yêu cầu</div>
+
+            <p>The residents called for stricter environmental regulations.</p>
+          </div>
+
+          <div class="phrasal-card">
+            <h3>FIND OUT</h3>
+
+            <div class="meaning">tìm ra / tìm hiểu</div>
+
+            <p>We need to find out how to join the programme.</p>
+          </div>
+
+          <div class="phrasal-card">
+            <h3>JOIN IN</h3>
+
+            <div class="meaning">tham gia cùng</div>
+
+            <p>Would you like to join in the community event?</p>
+          </div>
+        </div>
+
+        <div class="tip">
+          💡 <strong>Remember:</strong>
+
+          Hãy học cả phrasal verb và từ đi kèm với nó.
+
+          <br /><br />
+
+          carry out → a survey
+
+          <br />
+
+          take part in → a campaign
+
+          <br />
+
+          look after → elderly people
+
+          <br />
+
+          cut down on → plastic waste
+        </div>
+
+        <div class="navigation">
+          <button class="nav-btn prev-btn" onclick="prevSlide()">
+            ← Quay lại
+          </button>
+
+          <button class="nav-btn next-btn" onclick="nextSlide()">
+            Tiếp theo →
+          </button>
+        </div>
+      </section>
+
+      <!-- =========================
+         SLIDE 8
+    ========================= -->
+
+      <section class="slide">
+        <span class="slide-number">08 / 09</span>
+
+        <h2>7. Combining Both Structures</h2>
+
+        <p>Đây là dạng kết hợp giữa:</p>
+
+        <div class="formula">
+          Wh-word + to-infinitive
+          <br />
+          +
+          <br />
+          Phrasal verb
+        </div>
+
+        <div class="example">
+          <strong>
+            I don't know how to get involved in community activities.
+          </strong>
+
+          <div class="translation">
+            Tôi không biết làm thế nào để tham gia vào các hoạt động cộng đồng.
+          </div>
+
+          <br />
+
+          <strong>how to get involved in</strong>
+
+          <br />
+
+          → Wh-word + to-infinitive + phrasal verb
+        </div>
+
+        <div class="example">
+          <strong> She hasn't decided which charity to take part in. </strong>
+
+          <div class="translation">
+            Cô ấy chưa quyết định sẽ tham gia tổ chức từ thiện nào.
+          </div>
+        </div>
+
+        <div class="example">
+          <strong> We don't know how to clean up the park. </strong>
+
+          <div class="translation">
+            Chúng tôi không biết làm thế nào để dọn dẹp công viên.
+          </div>
+        </div>
+
+        <div class="example">
+          <strong>
+            They haven't decided where to set up the new community centre.
+          </strong>
+
+          <div class="translation">
+            Họ chưa quyết định nên xây dựng trung tâm cộng đồng mới ở đâu.
+          </div>
+        </div>
+
+        <div class="example">
+          <strong> I don't know who to ask for help. </strong>
+
+          <div class="translation">Tôi không biết nên nhờ ai giúp đỡ.</div>
+        </div>
+
+        <div class="tip">
+          🎯 <strong>Exam tip:</strong>
+
+          Khi gặp dạng bài này, hãy xác định:
+
+          <br /><br />
+
+          ① Wh-word → what / where / when / how / which / who
+
+          <br />
+
+          ② Theo sau là <strong>to + V</strong>
+
+          <br />
+
+          ③ Kiểm tra xem phần sau có phải là một
+          <strong>phrasal verb</strong> hay không.
+        </div>
+
+        <div class="navigation">
+          <button class="nav-btn prev-btn" onclick="prevSlide()">
+            ← Quay lại
+          </button>
+
+          <button class="nav-btn next-btn" onclick="nextSlide()">
+            Tiếp theo →
+          </button>
+        </div>
+      </section>
+
+      <!-- =========================
+         SLIDE 9
+    ========================= -->
+
+      <section class="slide">
+        <span class="slide-number">09 / 09</span>
+
+        <h2>🎉 Lesson Complete!</h2>
+
+        <p class="subtitle">Bạn đã hoàn thành bài giảng.</p>
+
+        <div class="formula">
+          📌 Remember:
+
+          <br /><br />
+
+          Wh-word + to + V
+
+          <br /><br />
+
+          Phrasal Verb = Verb + Particle
+
+          <br /><br />
+
+          Wh-word + to-infinitive + Phrasal Verb
+        </div>
+
+        <div class="tip">
+          ✅ Bạn đã học:
+
+          <br /><br />
+
+          • Cách sử dụng Wh-word + to-infinitive
+
+          <br />
+
+          • Cách rút gọn mệnh đề với should
+
+          <br />
+
+          • Các phrasal verbs chủ đề Local Community
+
+          <br />
+
+          • Cách kết hợp hai chủ điểm trong câu
+        </div>
+
+        <div class="exercise-box">
+          <h2>Ready to practise?</h2>
+
+          <p>Hãy làm bài tập để kiểm tra mức độ hiểu bài của bạn!</p>
+
+          <a href="quiz1.html" class="exercise-btn"> 📝 Làm bài tập ngay → </a>
+        </div>
+
+        <div class="navigation">
+          <button class="nav-btn prev-btn" onclick="prevSlide()">
+            ← Xem lại
+          </button>
+
+          <button class="nav-btn next-btn" onclick="goToSlide(0)">
+            🔄 Học lại từ đầu
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <!-- =========================
+       JAVASCRIPT
+  ========================= -->
+
+    <script>
+      let currentSlide = 0;
+
+      const slides = document.querySelectorAll(".slide");
+
+      const navButtons = document.querySelectorAll(".lesson-nav button");
+
+      const progressBar = document.getElementById("progressBar");
+
+      function showSlide(index) {
+        if (index < 0) {
+          index = 0;
+        }
+
+        if (index >= slides.length) {
+          index = slides.length - 1;
+        }
+
+        currentSlide = index;
+
+        // Hiện slide hiện tại
+
+        slides.forEach((slide, i) => {
+          slide.classList.toggle("active", i === currentSlide);
+        });
+
+        // Active navigation button
+
+        navButtons.forEach((button, i) => {
+          button.classList.toggle("active", i === currentSlide);
+        });
+
+        // Update progress
+
+        const progress = ((currentSlide + 1) / slides.length) * 100;
+
+        progressBar.style.width = progress + "%";
+
+        // Scroll lên đầu
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+
+      function nextSlide() {
+        if (currentSlide < slides.length - 1) {
+          showSlide(currentSlide + 1);
+        }
+      }
+
+      function prevSlide() {
+        if (currentSlide > 0) {
+          showSlide(currentSlide - 1);
+        }
+      }
+
+      function goToSlide(index) {
+        showSlide(index);
+      }
+
+      // Keyboard navigation
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "ArrowRight") {
+          nextSlide();
+        }
+
+        if (event.key === "ArrowLeft") {
+          prevSlide();
+        }
+      });
+
+      // Hiển thị slide đầu tiên
+
+      showSlide(0);
+    </script>
+  </body>
+</html>

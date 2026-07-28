@@ -1,0 +1,2918 @@
+```html
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Healthy Living for Teens – Practice</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Nunito", sans-serif;
+        background: #f5f7fb;
+        color: #28323c;
+        min-height: 100vh;
+      }
+
+      /* =========================
+       HEADER
+    ========================= */
+
+      header {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        padding: 18px 7%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+      }
+
+      .logo {
+        font-family: "Baloo 2", cursive;
+        font-size: 28px;
+        font-weight: 800;
+      }
+
+      .lesson-label {
+        font-size: 15px;
+        font-weight: 700;
+      }
+
+      /* =========================
+       PROGRESS
+    ========================= */
+
+      .progress-container {
+        height: 7px;
+        background: #e4e7ec;
+        position: sticky;
+        top: 70px;
+        z-index: 99;
+      }
+
+      .progress-bar {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #ff9a9e, #fad0c4);
+        transition: width 0.4s ease;
+      }
+
+      /* =========================
+       MAIN
+    ========================= */
+
+      main {
+        max-width: 1050px;
+        margin: 40px auto;
+        padding: 0 20px 100px;
+      }
+
+      .part {
+        display: none;
+        background: white;
+        border-radius: 25px;
+        padding: 40px;
+        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+        animation: fadeIn 0.4s ease;
+      }
+
+      .part.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* =========================
+       TITLES
+    ========================= */
+
+      h1 {
+        font-family: "Baloo 2", cursive;
+        font-size: 42px;
+        color: #5b4bdb;
+        text-align: center;
+        margin-bottom: 8px;
+      }
+
+      h2 {
+        font-family: "Baloo 2", cursive;
+        font-size: 32px;
+        color: #5b4bdb;
+        margin-bottom: 25px;
+      }
+
+      h3 {
+        font-family: "Baloo 2", cursive;
+        font-size: 25px;
+        color: #764ba2;
+        margin: 28px 0 15px;
+      }
+
+      p {
+        font-size: 17px;
+        line-height: 1.7;
+        margin-bottom: 15px;
+      }
+
+      .subtitle {
+        text-align: center;
+        color: #69737d;
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 35px;
+      }
+
+      /* =========================
+       QUESTION
+    ========================= */
+
+      .question {
+        background: #faf9ff;
+        border: 1px solid #e5e1ff;
+        border-radius: 18px;
+        padding: 23px;
+        margin: 20px 0;
+      }
+
+      .question-text {
+        font-size: 18px;
+        font-weight: 800;
+        line-height: 1.7;
+        margin-bottom: 15px;
+      }
+
+      .options {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .option {
+        background: white;
+        border: 2px solid #e5e7ee;
+        color: #333;
+        padding: 13px 16px;
+        border-radius: 12px;
+        text-align: left;
+        font-family: "Nunito", sans-serif;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+
+      .option:hover {
+        border-color: #6c5ce7;
+        background: #f7f6ff;
+        transform: translateY(-2px);
+      }
+
+      .option.correct {
+        background: #e8f8ef;
+        border-color: #2eaf68;
+        color: #187543;
+      }
+
+      .option.incorrect {
+        background: #fff0f0;
+        border-color: #e05252;
+        color: #b52e2e;
+      }
+
+      .option:disabled {
+        cursor: default;
+      }
+
+      /* =========================
+       FEEDBACK
+    ========================= */
+
+      .feedback {
+        display: none;
+        margin-top: 15px;
+        padding: 16px 18px;
+        border-radius: 12px;
+        line-height: 1.6;
+        font-size: 15px;
+      }
+
+      .feedback.show {
+        display: block;
+      }
+
+      .feedback.correct-feedback {
+        background: #e8f8ef;
+        color: #176b3c;
+        border-left: 5px solid #2eaf68;
+      }
+
+      .feedback.incorrect-feedback {
+        background: #fff0f0;
+        color: #9d2929;
+        border-left: 5px solid #e05252;
+      }
+
+      /* =========================
+       INPUT EXERCISES
+    ========================= */
+
+      .input-question {
+        background: #faf9ff;
+        border: 1px solid #e5e1ff;
+        border-radius: 18px;
+        padding: 23px;
+        margin: 20px 0;
+      }
+
+      .answer-input {
+        width: 100%;
+        padding: 13px 15px;
+        border: 2px solid #dddfea;
+        border-radius: 12px;
+        font-family: "Nunito", sans-serif;
+        font-size: 16px;
+        outline: none;
+        margin-top: 12px;
+      }
+
+      .answer-input:focus {
+        border-color: #6c5ce7;
+      }
+
+      .check-btn {
+        background: #6c5ce7;
+        color: white;
+        border: none;
+        padding: 11px 20px;
+        border-radius: 25px;
+        font-family: "Nunito", sans-serif;
+        font-weight: 800;
+        cursor: pointer;
+        margin-top: 12px;
+      }
+
+      .check-btn:hover {
+        transform: translateY(-2px);
+      }
+
+      /* =========================
+       INFO
+    ========================= */
+
+      .info-box {
+        background: #f2efff;
+        border-left: 6px solid #6c5ce7;
+        border-radius: 14px;
+        padding: 18px 22px;
+        margin: 20px 0;
+      }
+
+      .example {
+        background: white;
+        padding: 12px;
+        border-radius: 10px;
+        margin-top: 10px;
+        font-weight: 700;
+      }
+
+      /* =========================
+       NAVIGATION
+    ========================= */
+
+      .navigation {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 35px;
+        gap: 15px;
+      }
+
+      .nav-btn {
+        border: none;
+        padding: 14px 25px;
+        border-radius: 30px;
+        font-family: "Nunito", sans-serif;
+        font-size: 16px;
+        font-weight: 800;
+        cursor: pointer;
+        transition: 0.25s;
+      }
+
+      .prev-btn {
+        background: #ececf4;
+        color: #555;
+      }
+
+      .next-btn {
+        background: #6c5ce7;
+        color: white;
+        margin-left: auto;
+      }
+
+      .nav-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+      }
+
+      /* =========================
+       SCORE
+    ========================= */
+
+      .score-box {
+        background: #f2efff;
+        border-radius: 20px;
+        padding: 30px;
+        text-align: center;
+        margin: 25px 0;
+      }
+
+      .score-number {
+        font-family: "Baloo 2", cursive;
+        font-size: 50px;
+        color: #5b4bdb;
+        font-weight: 800;
+      }
+
+      /* =========================
+       FINAL
+    ========================= */
+
+      .final {
+        text-align: center;
+      }
+
+      .final-icon {
+        font-size: 70px;
+        margin-bottom: 15px;
+      }
+
+      .home-btn {
+        display: inline-block;
+        background: #6c5ce7;
+        color: white;
+        text-decoration: none;
+        padding: 15px 30px;
+        border-radius: 30px;
+        font-weight: 800;
+        margin: 8px;
+      }
+
+      .retry-btn {
+        background: #ececf4;
+        color: #555;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 30px;
+        font-family: "Nunito", sans-serif;
+        font-weight: 800;
+        cursor: pointer;
+        margin: 8px;
+      }
+
+      /* =========================
+       RESPONSIVE
+    ========================= */
+
+      @media (max-width: 700px) {
+        header {
+          padding: 15px 5%;
+          flex-direction: column;
+          gap: 3px;
+        }
+
+        .logo {
+          font-size: 24px;
+        }
+
+        .lesson-label {
+          font-size: 13px;
+        }
+
+        .progress-container {
+          top: 86px;
+        }
+
+        .part {
+          padding: 25px 18px;
+          border-radius: 18px;
+        }
+
+        h1 {
+          font-size: 32px;
+        }
+
+        h2 {
+          font-size: 27px;
+        }
+
+        .options {
+          grid-template-columns: 1fr;
+        }
+
+        .navigation {
+          flex-direction: column;
+        }
+
+        .next-btn {
+          margin-left: 0;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- ==================================================
+     HEADER
+================================================== -->
+
+    <header>
+      <div class="logo">Hyvoria English</div>
+
+      <div class="lesson-label">Practice • Healthy Living for Teens</div>
+    </header>
+
+    <!-- ==================================================
+     PROGRESS BAR
+================================================== -->
+
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <main>
+      <!-- ==================================================
+     PART 1
+================================================== -->
+
+      <section class="part active">
+        <h1>🥗 HEALTHY LIVING FOR TEENS</h1>
+
+        <p class="subtitle">PART 1 • INDIRECT QUESTIONS</p>
+
+        <h2>Bài 1. Chọn đáp án đúng</h2>
+
+        <!-- Q1 -->
+
+        <div class="question">
+          <div class="question-text">
+            1. I don't know ______ I should eat for breakfast.
+          </div>
+
+          <div class="options">
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  true,
+                  'Đáp án đúng là A. what. Câu hỏi gián tiếp: what + S + V → what I should eat.',
+                )
+              "
+            >
+              A. what
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là A. what. What hỏi về đồ ăn / thứ cần ăn.',
+                )
+              "
+            >
+              B. where
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là A. what. Where dùng để hỏi địa điểm.',
+                )
+              "
+            >
+              C. when
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là A. what. Who dùng để hỏi người.',
+                )
+              "
+            >
+              D. who
+            </button>
+          </div>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- Q2 -->
+
+        <div class="question">
+          <div class="question-text">
+            2. She asked me where ______ exercise.
+          </div>
+
+          <div class="options">
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là C. I could. Câu hỏi gián tiếp dùng trật tự S + V, không đảo trợ động từ.',
+                )
+              "
+            >
+              A. did I
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là C. I could. Không dùng did I vì câu hỏi gián tiếp không đảo trợ động từ.',
+                )
+              "
+            >
+              B. I did
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  true,
+                  'Chính xác! Câu đúng là: She asked me where I could exercise. Câu hỏi gián tiếp dùng trật tự S + V.',
+                )
+              "
+            >
+              C. I could
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là C. I could. Không đảo could và I trong câu hỏi gián tiếp.',
+                )
+              "
+            >
+              D. could I
+            </button>
+          </div>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- Q3 -->
+
+        <div class="question">
+          <div class="question-text">
+            3. My mother asked me why ______ so tired.
+          </div>
+
+          <div class="options">
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là B. I was. Câu hỏi gián tiếp dùng S + V: why I was so tired.',
+                )
+              "
+            >
+              A. was I
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  true,
+                  'Chính xác! Why I was so tired là trật tự đúng của câu hỏi gián tiếp và có lùi thì am → was.',
+                )
+              "
+            >
+              B. I was
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là B. I was. Cần lùi thì am → was vì động từ tường thuật ở quá khứ.',
+                )
+              "
+            >
+              C. am I
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là B. I was. Cần lùi thì am → was trong ngữ cảnh này.',
+                )
+              "
+            >
+              D. I am
+            </button>
+          </div>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- Q4 -->
+
+        <div class="question">
+          <div class="question-text">
+            4. I don't know ______ I can reduce stress.
+          </div>
+
+          <div class="options">
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là C. how. How hỏi về cách thức: how I can reduce stress.',
+                )
+              "
+            >
+              A. what
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là C. how. Where dùng để hỏi địa điểm.',
+                )
+              "
+            >
+              B. where
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  true,
+                  'Chính xác! How I can reduce stress = tôi có thể giảm căng thẳng bằng cách nào.',
+                )
+              "
+            >
+              C. how
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là C. how. Who dùng để hỏi người.',
+                )
+              "
+            >
+              D. who
+            </button>
+          </div>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- Q5 -->
+
+        <div class="question">
+          <div class="question-text">
+            5. He asked me ______ I got enough sleep.
+          </div>
+
+          <div class="options">
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là B. if. Đây là câu hỏi Yes/No nên dùng if hoặc whether.',
+                )
+              "
+            >
+              A. what
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  true,
+                  'Chính xác! Câu hỏi Yes/No → if/whether. He asked me if I got enough sleep.',
+                )
+              "
+            >
+              B. if
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là B. if. Where dùng để hỏi địa điểm.',
+                )
+              "
+            >
+              C. where
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là B. if. Why dùng để hỏi lý do.',
+                )
+              "
+            >
+              D. why
+            </button>
+          </div>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- Q6 -->
+
+        <div class="question">
+          <div class="question-text">
+            6. She wanted to know ______ I had eaten breakfast.
+          </div>
+
+          <div class="options">
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là C. whether. Đây là câu hỏi Yes/No nên dùng whether hoặc if.',
+                )
+              "
+            >
+              A. what
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là C. whether. What dùng để hỏi về sự vật.',
+                )
+              "
+            >
+              B. where
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  true,
+                  'Chính xác! Whether có thể dùng trong câu hỏi Yes/No gián tiếp.',
+                )
+              "
+            >
+              C. whether
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là C. whether. Why dùng để hỏi lý do.',
+                )
+              "
+            >
+              D. why
+            </button>
+          </div>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- Q7 -->
+
+        <div class="question">
+          <div class="question-text">
+            7. I wonder ______ teenagers should exercise regularly.
+          </div>
+
+          <div class="options">
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  true,
+                  'Chính xác! Why teenagers should exercise regularly = tại sao thanh thiếu niên nên tập thể dục thường xuyên.',
+                )
+              "
+            >
+              A. why
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là A. why. Where dùng để hỏi địa điểm.',
+                )
+              "
+            >
+              B. where
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là A. why. Who dùng để hỏi người.',
+                )
+              "
+            >
+              C. who
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là A. why. Which cần đi với danh từ hoặc lựa chọn cụ thể.',
+                )
+              "
+            >
+              D. which
+            </button>
+          </div>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- Q8 -->
+
+        <div class="question">
+          <div class="question-text">
+            8. He asked me what ______ to stay healthy.
+          </div>
+
+          <div class="options">
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là B. I should do. Câu hỏi gián tiếp dùng S + modal verb + V.',
+                )
+              "
+            >
+              A. should I do
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  true,
+                  'Chính xác! What I should do = tôi nên làm gì. Không đảo should và I.',
+                )
+              "
+            >
+              B. I should do
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là B. I should do. Không dùng did I do trong câu hỏi gián tiếp này.',
+                )
+              "
+            >
+              C. did I do
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là B. I should do. Trật tự đúng là S + modal + V.',
+                )
+              "
+            >
+              D. I do should
+            </button>
+          </div>
+
+          <div class="feedback"></div>
+        </div>
+
+        <div class="navigation">
+          <button class="nav-btn prev-btn" onclick="prevPart()" disabled>
+            ← Quay lại
+          </button>
+
+          <button class="nav-btn next-btn" onclick="nextPart()">
+            Tiếp theo →
+          </button>
+        </div>
+      </section>
+
+      <!-- ==================================================
+     PART 2 – WRITING
+================================================== -->
+
+      <section class="part">
+        <h2>PART 1 • Bài 2. Chuyển câu hỏi trực tiếp</h2>
+
+        <div class="info-box">
+          <strong>📌 Remember:</strong>
+
+          <p>
+            Câu hỏi gián tiếp dùng trật tự:
+            <strong>Question word + S + V</strong>
+          </p>
+
+          <div class="example">
+            "Where do you exercise?" → She asked me where I exercised.
+          </div>
+        </div>
+
+        <div class="input-question">
+          <p class="question-text">
+            1. "What do you usually eat for dinner?"
+            <br />
+            → My mother asked me...
+          </p>
+
+          <input
+            class="answer-input"
+            data-answer="what I usually ate for dinner"
+            placeholder="Type your answer..."
+          />
+
+          <button class="check-btn" onclick="checkText(this)">
+            Check Answer
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <div class="input-question">
+          <p class="question-text">
+            2. "Where do you exercise?"
+            <br />
+            → She asked me...
+          </p>
+
+          <input
+            class="answer-input"
+            data-answer="where I exercised"
+            placeholder="Type your answer..."
+          />
+
+          <button class="check-btn" onclick="checkText(this)">
+            Check Answer
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <div class="input-question">
+          <p class="question-text">
+            3. "Why are you so tired?"
+            <br />
+            → My friend asked me...
+          </p>
+
+          <input
+            class="answer-input"
+            data-answer="why I was so tired"
+            placeholder="Type your answer..."
+          />
+
+          <button class="check-btn" onclick="checkText(this)">
+            Check Answer
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <div class="input-question">
+          <p class="question-text">
+            4. "How can I reduce stress?"
+            <br />
+            → He asked me...
+          </p>
+
+          <input
+            class="answer-input"
+            data-answer="how I could reduce stress"
+            placeholder="Type your answer..."
+          />
+
+          <button class="check-btn" onclick="checkText(this)">
+            Check Answer
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <div class="input-question">
+          <p class="question-text">
+            5. "When do you usually go to bed?"
+            <br />
+            → She asked me...
+          </p>
+
+          <input
+            class="answer-input"
+            data-answer="when I usually went to bed"
+            placeholder="Type your answer..."
+          />
+
+          <button class="check-btn" onclick="checkText(this)">
+            Check Answer
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <div class="input-question">
+          <p class="question-text">
+            6. "Which sport do you like?"
+            <br />
+            → He asked me...
+          </p>
+
+          <input
+            class="answer-input"
+            data-answer="which sport I liked"
+            placeholder="Type your answer..."
+          />
+
+          <button class="check-btn" onclick="checkText(this)">
+            Check Answer
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <div class="navigation">
+          <button class="nav-btn prev-btn" onclick="prevPart()">
+            ← Quay lại
+          </button>
+
+          <button class="nav-btn next-btn" onclick="nextPart()">
+            Tiếp theo →
+          </button>
+        </div>
+      </section>
+
+      <!-- ==================================================
+     PART 3 – IF / WHETHER
+================================================== -->
+
+      <section class="part">
+        <h2>PART 2 • Bài 3. IF / WHETHER</h2>
+
+        <div class="info-box">
+          <strong>📌 Remember:</strong>
+
+          <p>
+            Yes/No Question →
+            <strong>if / whether + S + V</strong>
+          </p>
+        </div>
+
+        <div class="input-question">
+          <p class="question-text">
+            1. "Do you eat vegetables every day?"
+            <br />
+            → My mother asked me...
+          </p>
+
+          <input
+            class="answer-input"
+            data-answer="if I ate vegetables every day"
+            placeholder="Type your answer..."
+          />
+
+          <button class="check-btn" onclick="checkText(this)">
+            Check Answer
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <div class="input-question">
+          <p class="question-text">
+            2. "Are you feeling stressed?"
+            <br />
+            → She asked me...
+          </p>
+
+          <input
+            class="answer-input"
+            data-answer="if I was feeling stressed"
+            placeholder="Type your answer..."
+          />
+
+          <button class="check-btn" onclick="checkText(this)">
+            Check Answer
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <div class="input-question">
+          <p class="question-text">
+            3. "Can you sleep well at night?"
+            <br />
+            → He asked me...
+          </p>
+
+          <input
+            class="answer-input"
+            data-answer="if I could sleep well at night"
+            placeholder="Type your answer..."
+          />
+
+          <button class="check-btn" onclick="checkText(this)">
+            Check Answer
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <div class="input-question">
+          <p class="question-text">
+            4. "Have you eaten breakfast?"
+            <br />
+            → My mother asked me...
+          </p>
+
+          <input
+            class="answer-input"
+            data-answer="if I had eaten breakfast"
+            placeholder="Type your answer..."
+          />
+
+          <button class="check-btn" onclick="checkText(this)">
+            Check Answer
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <div class="input-question">
+          <p class="question-text">
+            5. "Will you exercise tomorrow?"
+            <br />
+            → She asked me...
+          </p>
+
+          <input
+            class="answer-input"
+            data-answer="if I would exercise the next day"
+            placeholder="Type your answer..."
+          />
+
+          <button class="check-btn" onclick="checkText(this)">
+            Check Answer
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <div class="input-question">
+          <p class="question-text">
+            6. "Did you go for a walk yesterday?"
+            <br />
+            → He asked me...
+          </p>
+
+          <input
+            class="answer-input"
+            data-answer="if I had gone for a walk the day before"
+            placeholder="Type your answer..."
+          />
+
+          <button class="check-btn" onclick="checkText(this)">
+            Check Answer
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <div class="navigation">
+          <button class="nav-btn prev-btn" onclick="prevPart()">
+            ← Quay lại
+          </button>
+
+          <button class="nav-btn next-btn" onclick="nextPart()">
+            Tiếp theo →
+          </button>
+        </div>
+      </section>
+
+      <!-- ==================================================
+     PART 4 – BACKSHIFT
+================================================== -->
+
+      <section class="part">
+        <h2>PART 3 • Bài 4. BACKSHIFT – LÙI THÌ</h2>
+
+        <!-- 1 -->
+
+        <div class="question">
+          <div class="question-text">
+            1. "Do you eat healthy food?" → She asked me if I ______ healthy
+            food.
+          </div>
+
+          <div class="options">
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là B. ate. Present Simple → Past Simple khi lùi thì.',
+                )
+              "
+            >
+              A. eat
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  true,
+                  'Chính xác! Do you eat → if I ate. Present Simple lùi thành Past Simple.',
+                )
+              "
+            >
+              B. ate
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là B. ate. Have eaten là Present Perfect, không phù hợp.',
+                )
+              "
+            >
+              C. had eaten
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là B. ate. Không dùng Present Perfect trong câu này.',
+                )
+              "
+            >
+              D. have eaten
+            </button>
+          </div>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- 2 -->
+
+        <div class="question">
+          <div class="question-text">
+            2. "Are you exercising regularly?" → He asked me if I ______
+            regularly.
+          </div>
+
+          <div class="options">
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là C. was exercising. Present Continuous → Past Continuous.',
+                )
+              "
+            >
+              A. exercise
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là C. was exercising. Không dùng Past Simple vì câu gốc là Present Continuous.',
+                )
+              "
+            >
+              B. exercised
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  true,
+                  'Chính xác! Are exercising → was exercising.',
+                )
+              "
+            >
+              C. was exercising
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là C. was exercising. Past Perfect không phù hợp với câu gốc.',
+                )
+              "
+            >
+              D. had exercised
+            </button>
+          </div>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- 3 -->
+
+        <div class="question">
+          <div class="question-text">
+            3. "Have you eaten breakfast?" → My mother asked me if I ______
+            breakfast.
+          </div>
+
+          <div class="options">
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là C. had eaten. Present Perfect → Past Perfect.',
+                )
+              "
+            >
+              A. ate
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là C. had eaten. Have eaten cần lùi thành had eaten.',
+                )
+              "
+            >
+              B. have eaten
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(this, true, 'Chính xác! Have eaten → had eaten.')
+              "
+            >
+              C. had eaten
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là C. had eaten. Was eating là Past Continuous.',
+                )
+              "
+            >
+              D. was eating
+            </button>
+          </div>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- 4 -->
+
+        <div class="question">
+          <div class="question-text">
+            4. "Did you exercise yesterday?" → She asked me if I ______ the day
+            before.
+          </div>
+
+          <div class="options">
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là B. had exercised. Past Simple → Past Perfect.',
+                )
+              "
+            >
+              A. exercised
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  true,
+                  'Chính xác! Did exercise → had exercised và yesterday → the day before.',
+                )
+              "
+            >
+              B. had exercised
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(this, false, 'Đáp án đúng là B. had exercised.')
+              "
+            >
+              C. have exercised
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là B. had exercised. Câu gốc không phải Continuous.',
+                )
+              "
+            >
+              D. was exercising
+            </button>
+          </div>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- 5 -->
+
+        <div class="question">
+          <div class="question-text">
+            5. "Will you go running tomorrow?" → He asked me if I ______ running
+            the next day.
+          </div>
+
+          <div class="options">
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là B. would go. Will → would khi lùi thì.',
+                )
+              "
+            >
+              A. will go
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  true,
+                  'Chính xác! Will → would và tomorrow → the next day.',
+                )
+              "
+            >
+              B. would go
+            </button>
+
+            <button
+              class="option"
+              onclick="checkMCQ(this, false, 'Đáp án đúng là B. would go.')"
+            >
+              C. went
+            </button>
+
+            <button
+              class="option"
+              onclick="checkMCQ(this, false, 'Đáp án đúng là B. would go.')"
+            >
+              D. had gone
+            </button>
+          </div>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- 6 -->
+
+        <div class="question">
+          <div class="question-text">
+            6. "Can you reduce stress?" → She asked me if I ______ reduce
+            stress.
+          </div>
+
+          <div class="options">
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là B. could. Can → could khi lùi thì.',
+                )
+              "
+            >
+              A. can
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  true,
+                  'Chính xác! Can → could trong câu hỏi gián tiếp khi lùi thì.',
+                )
+              "
+            >
+              B. could
+            </button>
+
+            <button
+              class="option"
+              onclick="checkMCQ(this, false, 'Đáp án đúng là B. could.')"
+            >
+              C. will
+            </button>
+
+            <button
+              class="option"
+              onclick="checkMCQ(this, false, 'Đáp án đúng là B. could.')"
+            >
+              D. would
+            </button>
+          </div>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- 7 -->
+
+        <div class="question">
+          <div class="question-text">
+            7. "May I leave early?" → He asked if he ______ leave early.
+          </div>
+
+          <div class="options">
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là C. might. May → might khi lùi thì.',
+                )
+              "
+            >
+              A. may
+            </button>
+
+            <button
+              class="option"
+              onclick="checkMCQ(this, false, 'Đáp án đúng là C. might.')"
+            >
+              B. can
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(this, true, 'Chính xác! May → might khi lùi thì.')
+              "
+            >
+              C. might
+            </button>
+
+            <button
+              class="option"
+              onclick="checkMCQ(this, false, 'Đáp án đúng là C. might.')"
+            >
+              D. would
+            </button>
+          </div>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- 8 -->
+
+        <div class="question">
+          <div class="question-text">
+            8. "Must I follow this diet?" → She asked if she ______ follow that
+            diet.
+          </div>
+
+          <div class="options">
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là C. had to. Must khi diễn tả nghĩa vụ thường lùi thành had to.',
+                )
+              "
+            >
+              A. must
+            </button>
+
+            <button
+              class="option"
+              onclick="checkMCQ(this, false, 'Đáp án đúng là C. had to.')"
+            >
+              B. should
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  true,
+                  'Chính xác! Must → had to khi diễn tả nghĩa vụ trong câu tường thuật.',
+                )
+              "
+            >
+              C. had to
+            </button>
+
+            <button
+              class="option"
+              onclick="checkMCQ(this, false, 'Đáp án đúng là C. had to.')"
+            >
+              D. could
+            </button>
+          </div>
+
+          <div class="feedback"></div>
+        </div>
+
+        <div class="navigation">
+          <button class="nav-btn prev-btn" onclick="prevPart()">
+            ← Quay lại
+          </button>
+
+          <button class="nav-btn next-btn" onclick="nextPart()">
+            Tiếp theo →
+          </button>
+        </div>
+      </section>
+
+      <!-- ==================================================
+     PART 5 – MODAL VERBS
+================================================== -->
+
+      <section class="part">
+        <h2>PART 4 • Bài 5. MODAL VERBS</h2>
+
+        <!-- 1 -->
+
+        <div class="question">
+          <div class="question-text">
+            1. Teenagers ______ get enough sleep every night.
+          </div>
+
+          <div class="options">
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  true,
+                  'Chính xác! Should được dùng để đưa ra lời khuyên.',
+                )
+              "
+            >
+              A. should
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là A. should. Teenagers nên ngủ đủ giấc.',
+                )
+              "
+            >
+              B. shouldn't
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là A. should. Mustn’t diễn tả sự cấm đoán.',
+                )
+              "
+            >
+              C. mustn't
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là A. should. Might diễn tả khả năng.',
+                )
+              "
+            >
+              D. might
+            </button>
+          </div>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- 2 -->
+
+        <div class="question">
+          <div class="question-text">
+            2. You ______ eat too much junk food. It isn't good for your health.
+          </div>
+
+          <div class="options">
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là B. shouldn’t. Câu này đưa ra lời khuyên không nên ăn quá nhiều đồ ăn nhanh.',
+                )
+              "
+            >
+              A. should
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(this, true, 'Chính xác! Shouldn’t = không nên.')
+              "
+            >
+              B. shouldn't
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là B. shouldn’t. Can không diễn tả lời khuyên trong câu này.',
+                )
+              "
+            >
+              C. can
+            </button>
+
+            <button
+              class="option"
+              onclick="checkMCQ(this, false, 'Đáp án đúng là B. shouldn’t.')"
+            >
+              D. may
+            </button>
+          </div>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- 3 -->
+
+        <div class="question">
+          <div class="question-text">3. You ______ smoke in a hospital.</div>
+
+          <div class="options">
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là C. mustn’t. Hút thuốc trong bệnh viện là điều bị cấm.',
+                )
+              "
+            >
+              A. don't have to
+            </button>
+
+            <button
+              class="option"
+              onclick="checkMCQ(this, false, 'Đáp án đúng là C. mustn’t.')"
+            >
+              B. shouldn't
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  true,
+                  'Chính xác! Mustn’t = không được phép / bị cấm.',
+                )
+              "
+            >
+              C. mustn't
+            </button>
+
+            <button
+              class="option"
+              onclick="checkMCQ(this, false, 'Đáp án đúng là C. mustn’t.')"
+            >
+              D. could
+            </button>
+          </div>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- 4 -->
+
+        <div class="question">
+          <div class="question-text">
+            4. Students ______ follow the school rules.
+          </div>
+
+          <div class="options">
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  true,
+                  'Chính xác! Have to diễn tả nghĩa vụ hoặc sự bắt buộc.',
+                )
+              "
+            >
+              A. have to
+            </button>
+
+            <button
+              class="option"
+              onclick="checkMCQ(this, false, 'Đáp án đúng là A. have to.')"
+            >
+              B. might
+            </button>
+
+            <button
+              class="option"
+              onclick="checkMCQ(this, false, 'Đáp án đúng là A. have to.')"
+            >
+              C. could
+            </button>
+
+            <button
+              class="option"
+              onclick="checkMCQ(this, false, 'Đáp án đúng là A. have to.')"
+            >
+              D. may
+            </button>
+          </div>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- 5 -->
+
+        <div class="question">
+          <div class="question-text">
+            5. You ______ exercise for two hours every day. Thirty minutes may
+            be enough.
+          </div>
+
+          <div class="options">
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là B. don’t have to. Câu nói rằng không cần thiết phải tập 2 tiếng mỗi ngày.',
+                )
+              "
+            >
+              A. mustn't
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  true,
+                  'Chính xác! Don’t have to = không cần phải.',
+                )
+              "
+            >
+              B. don't have to
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(this, false, 'Đáp án đúng là B. don’t have to.')
+              "
+            >
+              C. shouldn't
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(this, false, 'Đáp án đúng là B. don’t have to.')
+              "
+            >
+              D. can't
+            </button>
+          </div>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- 6 -->
+
+        <div class="question">
+          <div class="question-text">
+            6. If you feel stressed, you ______ try meditation.
+          </div>
+
+          <div class="options">
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là B. could. Could được dùng để đưa ra một gợi ý nhẹ nhàng.',
+                )
+              "
+            >
+              A. mustn't
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  true,
+                  'Chính xác! Could = có thể thử, mang tính gợi ý.',
+                )
+              "
+            >
+              B. could
+            </button>
+
+            <button
+              class="option"
+              onclick="checkMCQ(this, false, 'Đáp án đúng là B. could.')"
+            >
+              C. have to
+            </button>
+
+            <button
+              class="option"
+              onclick="checkMCQ(this, false, 'Đáp án đúng là B. could.')"
+            >
+              D. shouldn't
+            </button>
+          </div>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- 7 -->
+
+        <div class="question">
+          <div class="question-text">
+            7. Lack of sleep ______ affect your concentration.
+          </div>
+
+          <div class="options">
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là C. might. Might diễn tả khả năng có thể xảy ra.',
+                )
+              "
+            >
+              A. mustn't
+            </button>
+
+            <button
+              class="option"
+              onclick="checkMCQ(this, false, 'Đáp án đúng là C. might.')"
+            >
+              B. don't have to
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  true,
+                  'Chính xác! Might affect = có thể ảnh hưởng.',
+                )
+              "
+            >
+              C. might
+            </button>
+
+            <button
+              class="option"
+              onclick="checkMCQ(this, false, 'Đáp án đúng là C. might.')"
+            >
+              D. should
+            </button>
+          </div>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- 8 -->
+
+        <div class="question">
+          <div class="question-text">
+            8. You ______ drink enough water to stay healthy.
+          </div>
+
+          <div class="options">
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  true,
+                  'Chính xác! Should = nên. Bạn nên uống đủ nước để khỏe mạnh.',
+                )
+              "
+            >
+              A. should
+            </button>
+
+            <button
+              class="option"
+              onclick="checkMCQ(this, false, 'Đáp án đúng là A. should.')"
+            >
+              B. shouldn't
+            </button>
+
+            <button
+              class="option"
+              onclick="checkMCQ(this, false, 'Đáp án đúng là A. should.')"
+            >
+              C. mightn't
+            </button>
+
+            <button
+              class="option"
+              onclick="checkMCQ(this, false, 'Đáp án đúng là A. should.')"
+            >
+              D. mustn't
+            </button>
+          </div>
+
+          <div class="feedback"></div>
+        </div>
+
+        <div class="navigation">
+          <button class="nav-btn prev-btn" onclick="prevPart()">
+            ← Quay lại
+          </button>
+
+          <button class="nav-btn next-btn" onclick="nextPart()">
+            Tiếp theo →
+          </button>
+        </div>
+      </section>
+
+      <!-- ==================================================
+     PART 6 – MIXED PRACTICE
+================================================== -->
+
+      <section class="part">
+        <h2>🔥 PART 5 • MIXED PRACTICE</h2>
+
+        <p class="subtitle">Indirect Questions + Backshift + Modal Verbs</p>
+
+        <div class="question">
+          <div class="question-text">
+            1. My mother asked me ______ I got enough sleep.
+          </div>
+
+          <div class="options">
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là B. if. Đây là câu hỏi Yes/No.',
+                )
+              "
+            >
+              A. what
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(this, true, 'Chính xác! Yes/No question → if/whether.')
+              "
+            >
+              B. if
+            </button>
+
+            <button
+              class="option"
+              onclick="checkMCQ(this, false, 'Đáp án đúng là B. if.')"
+            >
+              C. where
+            </button>
+
+            <button
+              class="option"
+              onclick="checkMCQ(this, false, 'Đáp án đúng là B. if.')"
+            >
+              D. why
+            </button>
+          </div>
+
+          <div class="feedback"></div>
+        </div>
+
+        <div class="question">
+          <div class="question-text">2. She asked me why ______ so tired.</div>
+
+          <div class="options">
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là B. I was. Câu hỏi gián tiếp không đảo chủ ngữ và động từ.',
+                )
+              "
+            >
+              A. was I
+            </button>
+
+            <button
+              class="option"
+              onclick="checkMCQ(this, true, 'Chính xác! Why I was so tired.')"
+            >
+              B. I was
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là B. I was. Cần lùi am → was.',
+                )
+              "
+            >
+              C. am I
+            </button>
+
+            <button
+              class="option"
+              onclick="checkMCQ(this, false, 'Đáp án đúng là B. I was.')"
+            >
+              D. I am
+            </button>
+          </div>
+
+          <div class="feedback"></div>
+        </div>
+
+        <div class="question">
+          <div class="question-text">
+            3. "Can you reduce your screen time?" → He asked me if I ______
+            reduce my screen time.
+          </div>
+
+          <div class="options">
+            <button
+              class="option"
+              onclick="
+                checkMCQ(this, false, 'Đáp án đúng là B. could. Can → could.')
+              "
+            >
+              A. can
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  true,
+                  'Chính xác! Can → could trong câu hỏi gián tiếp.',
+                )
+              "
+            >
+              B. could
+            </button>
+
+            <button
+              class="option"
+              onclick="checkMCQ(this, false, 'Đáp án đúng là B. could.')"
+            >
+              C. will
+            </button>
+
+            <button
+              class="option"
+              onclick="checkMCQ(this, false, 'Đáp án đúng là B. could.')"
+            >
+              D. may
+            </button>
+          </div>
+
+          <div class="feedback"></div>
+        </div>
+
+        <div class="question">
+          <div class="question-text">
+            4. Teenagers ______ spend too much time on their phones before going
+            to bed.
+          </div>
+
+          <div class="options">
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là B. shouldn’t. Đây là lời khuyên không nên làm.',
+                )
+              "
+            >
+              A. should
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  true,
+                  'Chính xác! Teenagers shouldn’t spend too much time on phones before bed.',
+                )
+              "
+            >
+              B. shouldn't
+            </button>
+
+            <button
+              class="option"
+              onclick="checkMCQ(this, false, 'Đáp án đúng là B. shouldn’t.')"
+            >
+              C. must
+            </button>
+
+            <button
+              class="option"
+              onclick="checkMCQ(this, false, 'Đáp án đúng là B. shouldn’t.')"
+            >
+              D. can
+            </button>
+          </div>
+
+          <div class="feedback"></div>
+        </div>
+
+        <div class="question">
+          <div class="question-text">
+            5. "Where do you exercise?" → She asked me where ______.
+          </div>
+
+          <div class="options">
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là B. I exercised. Câu hỏi gián tiếp dùng S + V.',
+                )
+              "
+            >
+              A. did I exercise
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  true,
+                  'Chính xác! Where I exercised. Do exercise → exercised.',
+                )
+              "
+            >
+              B. I exercised
+            </button>
+
+            <button
+              class="option"
+              onclick="checkMCQ(this, false, 'Đáp án đúng là B. I exercised.')"
+            >
+              C. I exercise did
+            </button>
+
+            <button
+              class="option"
+              onclick="checkMCQ(this, false, 'Đáp án đúng là B. I exercised.')"
+            >
+              D. exercise I
+            </button>
+          </div>
+
+          <div class="feedback"></div>
+        </div>
+
+        <div class="question">
+          <div class="question-text">
+            6. You ______ eat a balanced diet to stay healthy.
+          </div>
+
+          <div class="options">
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  true,
+                  'Chính xác! Should = nên, dùng để đưa ra lời khuyên.',
+                )
+              "
+            >
+              A. should
+            </button>
+
+            <button
+              class="option"
+              onclick="checkMCQ(this, false, 'Đáp án đúng là A. should.')"
+            >
+              B. mustn't
+            </button>
+
+            <button
+              class="option"
+              onclick="checkMCQ(this, false, 'Đáp án đúng là A. should.')"
+            >
+              C. might
+            </button>
+
+            <button
+              class="option"
+              onclick="checkMCQ(this, false, 'Đáp án đúng là A. should.')"
+            >
+              D. don't have to
+            </button>
+          </div>
+
+          <div class="feedback"></div>
+        </div>
+
+        <div class="question">
+          <div class="question-text">
+            7. "Have you eaten breakfast?" → My mother asked me if I ______
+            breakfast.
+          </div>
+
+          <div class="options">
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là C. had eaten. Present Perfect → Past Perfect.',
+                )
+              "
+            >
+              A. ate
+            </button>
+
+            <button
+              class="option"
+              onclick="checkMCQ(this, false, 'Đáp án đúng là C. had eaten.')"
+            >
+              B. eat
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(this, true, 'Chính xác! Have eaten → had eaten.')
+              "
+            >
+              C. had eaten
+            </button>
+
+            <button
+              class="option"
+              onclick="checkMCQ(this, false, 'Đáp án đúng là C. had eaten.')"
+            >
+              D. have eaten
+            </button>
+          </div>
+
+          <div class="feedback"></div>
+        </div>
+
+        <div class="question">
+          <div class="question-text">
+            8. You ______ exercise every day. You can exercise three or four
+            times a week.
+          </div>
+
+          <div class="options">
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là B. don’t have to. Không cần thiết phải tập mỗi ngày.',
+                )
+              "
+            >
+              A. mustn't
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  true,
+                  'Chính xác! Don’t have to = không cần phải.',
+                )
+              "
+            >
+              B. don't have to
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(this, false, 'Đáp án đúng là B. don’t have to.')
+              "
+            >
+              C. shouldn't
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(this, false, 'Đáp án đúng là B. don’t have to.')
+              "
+            >
+              D. can't
+            </button>
+          </div>
+
+          <div class="feedback"></div>
+        </div>
+
+        <div class="question">
+          <div class="question-text">
+            9. "Why are you staying up late?" → My father asked me why I ______
+            up late.
+          </div>
+
+          <div class="options">
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là B. was staying. Present Continuous → Past Continuous.',
+                )
+              "
+            >
+              A. am staying
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(this, true, 'Chính xác! Are staying → was staying.')
+              "
+            >
+              B. was staying
+            </button>
+
+            <button
+              class="option"
+              onclick="checkMCQ(this, false, 'Đáp án đúng là B. was staying.')"
+            >
+              C. stayed
+            </button>
+
+            <button
+              class="option"
+              onclick="checkMCQ(this, false, 'Đáp án đúng là B. was staying.')"
+            >
+              D. had stayed
+            </button>
+          </div>
+
+          <div class="feedback"></div>
+        </div>
+
+        <div class="question">
+          <div class="question-text">
+            10. If you feel stressed, you ______ talk to someone you trust.
+          </div>
+
+          <div class="options">
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  false,
+                  'Đáp án đúng là B. could. Could được dùng để đưa ra lời gợi ý.',
+                )
+              "
+            >
+              A. mustn't
+            </button>
+
+            <button
+              class="option"
+              onclick="
+                checkMCQ(
+                  this,
+                  true,
+                  'Chính xác! Could talk = có thể nói chuyện với ai đó, mang tính gợi ý.',
+                )
+              "
+            >
+              B. could
+            </button>
+
+            <button
+              class="option"
+              onclick="checkMCQ(this, false, 'Đáp án đúng là B. could.')"
+            >
+              C. have to
+            </button>
+
+            <button
+              class="option"
+              onclick="checkMCQ(this, false, 'Đáp án đúng là B. could.')"
+            >
+              D. mightn't
+            </button>
+          </div>
+
+          <div class="feedback"></div>
+        </div>
+
+        <div class="navigation">
+          <button class="nav-btn prev-btn" onclick="prevPart()">
+            ← Quay lại
+          </button>
+
+          <button class="nav-btn next-btn" onclick="nextPart()">
+            Tiếp theo →
+          </button>
+        </div>
+      </section>
+
+      <!-- ==================================================
+     PART 7 – FINAL
+================================================== -->
+
+      <section class="part">
+        <div class="final">
+          <div class="final-icon">🎉</div>
+
+          <h1>Great Job!</h1>
+
+          <p class="subtitle">
+            Bạn đã hoàn thành phần bài tập Healthy Living for Teens!
+          </p>
+
+          <div class="score-box">
+            <p>
+              Hãy xem lại những phần bạn còn chưa chắc chắn và thử làm lại để
+              củng cố kiến thức nhé!
+            </p>
+          </div>
+
+          <a href="course3.html" class="home-btn"> 🏠 Về trang chủ </a>
+
+          <button class="retry-btn" onclick="restartPractice()">
+            🔄 Làm lại bài
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      /* ==========================================
+     PART NAVIGATION
+  ========================================== */
+
+      const parts = document.querySelectorAll(".part");
+
+      const progressBar = document.getElementById("progressBar");
+
+      let currentPart = 0;
+
+      function showPart(index) {
+        parts.forEach((part, i) => {
+          part.classList.toggle("active", i === index);
+        });
+
+        currentPart = index;
+
+        const progress = (currentPart / (parts.length - 1)) * 100;
+
+        progressBar.style.width = progress + "%";
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+
+      function nextPart() {
+        if (currentPart < parts.length - 1) {
+          showPart(currentPart + 1);
+        }
+      }
+
+      function prevPart() {
+        if (currentPart > 0) {
+          showPart(currentPart - 1);
+        }
+      }
+
+      /* ==========================================
+     MULTIPLE CHOICE
+  ========================================== */
+
+      function checkMCQ(selectedButton, isCorrect, explanation) {
+        const question = selectedButton.closest(".question");
+
+        const buttons = question.querySelectorAll(".option");
+
+        const feedback = question.querySelector(".feedback");
+
+        // Prevent clicking again
+
+        buttons.forEach((button) => {
+          button.disabled = true;
+        });
+
+        if (isCorrect) {
+          selectedButton.classList.add("correct");
+
+          feedback.className = "feedback show correct-feedback";
+
+          feedback.innerHTML = "✅ <strong>Correct!</strong><br>" + explanation;
+        } else {
+          selectedButton.classList.add("incorrect");
+
+          feedback.className = "feedback show incorrect-feedback";
+
+          feedback.innerHTML =
+            "❌ <strong>Incorrect!</strong><br>" + explanation;
+        }
+      }
+
+      /* ==========================================
+     TEXT ANSWERS
+  ========================================== */
+
+      function normalizeText(text) {
+        return text
+          .toLowerCase()
+          .trim()
+          .replace(/[.!?]+$/g, "")
+          .replace(/\s+/g, " ");
+      }
+
+      function checkText(button) {
+        const container = button.closest(".input-question");
+
+        const input = container.querySelector(".answer-input");
+
+        const feedback = container.querySelector(".feedback");
+
+        const correctAnswer = normalizeText(input.dataset.answer);
+
+        const userAnswer = normalizeText(input.value);
+
+        if (!userAnswer) {
+          feedback.className = "feedback show incorrect-feedback";
+
+          feedback.innerHTML = "⚠️ <strong>Please enter your answer.</strong>";
+
+          return;
+        }
+
+        if (userAnswer === correctAnswer) {
+          feedback.className = "feedback show correct-feedback";
+
+          feedback.innerHTML =
+            "✅ <strong>Correct!</strong><br>" + "Your answer is correct.";
+
+          input.style.borderColor = "#2eaf68";
+        } else {
+          feedback.className = "feedback show incorrect-feedback";
+
+          feedback.innerHTML =
+            "❌ <strong>Not quite.</strong><br>" +
+            "Đáp án tham khảo: <strong>" +
+            input.dataset.answer +
+            "</strong>";
+
+          input.style.borderColor = "#e05252";
+        }
+      }
+
+      /* ==========================================
+     RESTART
+  ========================================== */
+
+      function restartPractice() {
+        // Reset navigation
+
+        showPart(0);
+
+        // Reset MCQ
+
+        document.querySelectorAll(".option").forEach((button) => {
+          button.disabled = false;
+
+          button.classList.remove("correct", "incorrect");
+        });
+
+        // Reset feedback
+
+        document.querySelectorAll(".feedback").forEach((feedback) => {
+          feedback.className = "feedback";
+
+          feedback.innerHTML = "";
+        });
+
+        // Reset inputs
+
+        document.querySelectorAll(".answer-input").forEach((input) => {
+          input.value = "";
+
+          input.style.borderColor = "#dddfea";
+        });
+      }
+
+      // Start
+
+      showPart(0);
+    </script>
+  </body>
+</html>
+```

@@ -1,0 +1,2099 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Wh-words & Phrasal Verbs | Exercises | Hyvoria English</title>
+
+    <meta
+      name="description"
+      content="Practice exercises on Wh-words + to-infinitive and Phrasal Verbs."
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: #f6f8fc;
+        color: #263238;
+        line-height: 1.7;
+      }
+
+      /* =========================
+       HEADER
+    ========================= */
+
+      header {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        padding: 18px 7%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .logo {
+        font-size: 24px;
+        font-weight: 800;
+      }
+
+      .lesson-label {
+        font-size: 14px;
+        opacity: 0.9;
+      }
+
+      /* =========================
+       PROGRESS
+    ========================= */
+
+      .progress-container {
+        height: 5px;
+        background: #e5e7eb;
+        position: sticky;
+        top: 67px;
+        z-index: 999;
+      }
+
+      .progress-bar {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #667eea, #764ba2);
+        transition: width 0.4s ease;
+      }
+
+      /* =========================
+       MAIN
+    ========================= */
+
+      main {
+        max-width: 1050px;
+        margin: 35px auto;
+        padding: 0 20px 80px;
+      }
+
+      /* =========================
+       TOP NAV
+    ========================= */
+
+      .top-links {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 25px;
+      }
+
+      .top-link {
+        text-decoration: none;
+        background: white;
+        color: #667eea;
+        padding: 10px 18px;
+        border-radius: 10px;
+        font-weight: 700;
+        border: 1px solid #e2e8f0;
+        transition: 0.3s;
+      }
+
+      .top-link:hover {
+        background: #667eea;
+        color: white;
+      }
+
+      /* =========================
+       SECTION NAVIGATION
+    ========================= */
+
+      .section-nav {
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+        padding-bottom: 15px;
+        margin-bottom: 20px;
+      }
+
+      .section-nav button {
+        white-space: nowrap;
+        border: 1px solid #e2e8f0;
+        background: white;
+        color: #667eea;
+        padding: 9px 15px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: 700;
+        transition: 0.3s;
+      }
+
+      .section-nav button:hover,
+      .section-nav button.active {
+        background: #667eea;
+        color: white;
+      }
+
+      /* =========================
+       EXERCISE SECTION
+    ========================= */
+
+      .exercise-section {
+        display: none;
+        background: white;
+        padding: 40px;
+        border-radius: 24px;
+        box-shadow: 0 10px 35px rgba(30, 41, 59, 0.08);
+        animation: fadeIn 0.4s ease;
+      }
+
+      .exercise-section.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .section-number {
+        display: inline-block;
+        background: #eef2ff;
+        color: #667eea;
+        padding: 5px 13px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 700;
+        margin-bottom: 12px;
+      }
+
+      h1 {
+        font-size: 34px;
+        color: #1e293b;
+        margin-bottom: 10px;
+      }
+
+      h2 {
+        font-size: 28px;
+        color: #4338ca;
+        margin-bottom: 12px;
+      }
+
+      .instruction {
+        color: #64748b;
+        margin-bottom: 30px;
+      }
+
+      /* =========================
+       QUESTIONS
+    ========================= */
+
+      .question {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        padding: 20px;
+        border-radius: 15px;
+        margin-bottom: 16px;
+      }
+
+      .question-number {
+        color: #667eea;
+        font-weight: 800;
+        margin-right: 5px;
+      }
+
+      /* =========================
+       TEXT INPUT
+    ========================= */
+
+      .text-answer {
+        width: 100%;
+        border: none;
+        border-bottom: 2px solid #cbd5e1;
+        background: transparent;
+        padding: 8px 5px;
+        font-size: 16px;
+        outline: none;
+        margin-top: 8px;
+        transition: 0.3s;
+      }
+
+      .text-answer:focus {
+        border-bottom-color: #667eea;
+      }
+
+      /* =========================
+       MCQ
+    ========================= */
+
+      .options {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin-top: 15px;
+      }
+
+      .option {
+        background: white;
+        border: 1px solid #cbd5e1;
+        padding: 12px 15px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.25s;
+      }
+
+      .option:hover {
+        border-color: #667eea;
+        background: #eef2ff;
+      }
+
+      .option.selected {
+        background: #eef2ff;
+        border-color: #667eea;
+        color: #4338ca;
+        font-weight: 700;
+      }
+
+      /* =========================
+       CHECK RESULT
+    ========================= */
+
+      .correct {
+        border-color: #10b981 !important;
+        background: #ecfdf5 !important;
+      }
+
+      .incorrect {
+        border-color: #ef4444 !important;
+        background: #fef2f2 !important;
+      }
+
+      .result {
+        display: none;
+        margin-top: 25px;
+        padding: 20px;
+        border-radius: 15px;
+        background: #eef2ff;
+        color: #3730a3;
+        font-weight: 700;
+        text-align: center;
+      }
+
+      /* =========================
+       MATCHING
+    ========================= */
+
+      .matching-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px 30px;
+        margin-top: 20px;
+      }
+
+      .matching-item {
+        background: #f8fafc;
+        padding: 12px 15px;
+        border-radius: 10px;
+        border: 1px solid #e2e8f0;
+      }
+
+      .matching-item select {
+        float: right;
+        padding: 5px;
+        border-radius: 6px;
+        border: 1px solid #cbd5e1;
+      }
+
+      /* =========================
+       NAVIGATION
+    ========================= */
+
+      .navigation {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+        margin-top: 30px;
+      }
+
+      .nav-btn {
+        border: none;
+        padding: 13px 25px;
+        border-radius: 12px;
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: 700;
+        transition: 0.3s;
+      }
+
+      .prev-btn {
+        background: #e2e8f0;
+        color: #334155;
+      }
+
+      .next-btn {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+      }
+
+      .check-btn {
+        background: #10b981;
+        color: white;
+      }
+
+      .nav-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 7px 15px rgba(0, 0, 0, 0.12);
+      }
+
+      /* =========================
+       FINAL BOX
+    ========================= */
+
+      .final-box {
+        text-align: center;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        padding: 40px 25px;
+        border-radius: 20px;
+        margin-top: 30px;
+      }
+
+      .final-box h2 {
+        color: white;
+      }
+
+      .final-box p {
+        margin-bottom: 25px;
+      }
+
+      .final-btn {
+        display: inline-block;
+        background: white;
+        color: #667eea;
+        text-decoration: none;
+        padding: 13px 25px;
+        border-radius: 12px;
+        font-weight: 800;
+        margin: 5px;
+        transition: 0.3s;
+      }
+
+      .final-btn:hover {
+        transform: scale(1.05);
+      }
+
+      /* =========================
+       MOBILE
+    ========================= */
+
+      @media (max-width: 700px) {
+        header {
+          padding: 15px 5%;
+        }
+
+        .logo {
+          font-size: 20px;
+        }
+
+        .lesson-label {
+          display: none;
+        }
+
+        .exercise-section {
+          padding: 25px 20px;
+          border-radius: 18px;
+        }
+
+        h1 {
+          font-size: 29px;
+        }
+
+        h2 {
+          font-size: 24px;
+        }
+
+        .options {
+          grid-template-columns: 1fr;
+        }
+
+        .matching-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .navigation {
+          flex-direction: column;
+        }
+
+        .nav-btn {
+          width: 100%;
+        }
+
+        .top-links {
+          flex-direction: column;
+        }
+      }
+      /* =========================
+   ANSWER EXPLANATION
+========================= */
+
+      .answer-explanation {
+        display: none;
+        margin-top: 12px;
+        padding: 14px 18px;
+        background: #f5f7ff;
+        border-left: 4px solid #6c63ff;
+        border-radius: 10px;
+        line-height: 1.7;
+        animation: explanationFade 0.3s ease;
+      }
+
+      .answer-explanation.show {
+        display: block;
+      }
+
+      .answer-explanation .answer-title {
+        font-weight: 700;
+        color: #4f46e5;
+        margin-bottom: 5px;
+      }
+
+      .answer-explanation .explanation-text {
+        color: #444;
+      }
+
+      @keyframes explanationFade {
+        from {
+          opacity: 0;
+          transform: translateY(-5px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- =========================
+     HEADER
+========================= -->
+
+    <header>
+      <div class="logo">Hyvoria English</div>
+
+      <div class="lesson-label">Practice • Local Community</div>
+    </header>
+
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <main>
+      <!-- =========================
+     TOP LINKS
+     THAY LINK TẠI ĐÂY
+========================= -->
+
+      <div class="top-links">
+        <a href="course1.html" class="top-link"> ← Quay lại bài giảng </a>
+
+        <a href="course1.html" class="top-link"> 🏠 Trang chủ </a>
+      </div>
+
+      <!-- =========================
+     SECTION NAVIGATION
+========================= -->
+
+      <div class="section-nav">
+        <button onclick="goToSection(0)">I. Wh-words</button>
+
+        <button onclick="goToSection(1)">II. Phrasal Verbs</button>
+
+        <button onclick="goToSection(2)">III. Rewrite</button>
+
+        <button onclick="goToSection(3)">IV. Complete</button>
+
+        <button onclick="goToSection(4)">V. Multiple Choice</button>
+
+        <button onclick="goToSection(5)">VI. Transformation</button>
+
+        <button onclick="goToSection(6)">VII. Vocabulary</button>
+      </div>
+
+      <!-- =====================================================
+     I. WH-WORDS
+===================================================== -->
+
+      <section class="exercise-section active">
+        <span class="section-number"> SECTION 01 </span>
+
+        <h2>I. Wh-words + to-infinitive</h2>
+
+        <p class="instruction">
+          Complete the sentences with:
+          <strong>what – where – when – how – who – which</strong>
+        </p>
+
+        <div class="question">
+          <span class="question-number">1.</span>
+
+          The volunteers haven't decided
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="when"
+            placeholder="Your answer..."
+          />
+          to organize the charity event yet.
+        </div>
+
+        <div class="question">
+          <span class="question-number">2.</span>
+
+          Could you show me
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="how"
+            placeholder="Your answer..."
+          />
+          to get to the nearest community centre?
+        </div>
+
+        <div class="question">
+          <span class="question-number">3.</span>
+
+          We don't know
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="who"
+            placeholder="Your answer..."
+          />
+          to invite to speak at the neighbourhood meeting.
+        </div>
+
+        <div class="question">
+          <span class="question-number">4.</span>
+
+          The residents are discussing
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="what"
+            placeholder="Your answer..."
+          />
+          to do about the increasing amount of rubbish.
+        </div>
+
+        <div class="question">
+          <span class="question-number">5.</span>
+
+          I'm not sure
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="which"
+            placeholder="Your answer..."
+          />
+          to choose between the two local projects.
+        </div>
+
+        <div class="question">
+          <span class="question-number">6.</span>
+
+          The young volunteers need to learn
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="how"
+            placeholder="Your answer..."
+          />
+          to communicate effectively with elderly residents.
+        </div>
+
+        <div class="question">
+          <span class="question-number">7.</span>
+
+          Do you know
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="where"
+            placeholder="Your answer..."
+          />
+          to hold the annual community festival?
+        </div>
+
+        <div class="question">
+          <span class="question-number">8.</span>
+
+          The committee hasn't decided
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="when"
+            placeholder="Your answer..."
+          />
+          to start the clean-up campaign.
+        </div>
+
+        <div class="question">
+          <span class="question-number">9.</span>
+
+          She couldn't decide
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="who"
+            placeholder="Your answer..."
+          />
+          to ask for help.
+        </div>
+
+        <div class="question">
+          <span class="question-number">10.</span>
+
+          The local council is considering
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="how"
+            placeholder="Your answer..."
+          />
+          to improve public transport.
+        </div>
+
+        <div class="navigation">
+          <button class="nav-btn prev-btn" onclick="goToSection(0)">←</button>
+
+          <button class="nav-btn check-btn" onclick="checkInputs(0)">
+            ✓ Check Answers
+          </button>
+
+          <button class="nav-btn next-btn" onclick="nextSection()">
+            Tiếp theo →
+          </button>
+        </div>
+
+        <div class="result" id="result0"></div>
+      </section>
+
+      <!-- =====================================================
+     II. PHRASAL VERBS
+===================================================== -->
+
+      <section class="exercise-section">
+        <span class="section-number"> SECTION 02 </span>
+
+        <h2>II. Phrasal Verbs – Local Community</h2>
+
+        <p class="instruction">Choose the correct phrasal verb.</p>
+
+        <div class="tip">
+          <strong>Word bank:</strong>
+          clean up – set up – look after – take part in – give away – pick up –
+          carry out – look into – get involved in – cut down on
+        </div>
+
+        <div class="question">
+          1. Hundreds of residents
+
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="took part in"
+            placeholder="Your answer..."
+          />
+
+          the neighbourhood clean-up campaign last Sunday.
+        </div>
+
+        <div class="question">
+          2. The charity organization
+
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="set up"
+            placeholder="Your answer..."
+          />
+
+          a free food bank for low-income families.
+        </div>
+
+        <div class="question">
+          3. Volunteers regularly
+
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="look after"
+            placeholder="Your answer..."
+          />
+
+          elderly people who live alone.
+        </div>
+
+        <div class="question">
+          4. The local council promised to
+
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="look into"
+            placeholder="Your answer..."
+          />
+
+          the problem of illegal dumping.
+        </div>
+
+        <div class="question">
+          5. We should
+
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="cut down on"
+            placeholder="Your answer..."
+          />
+
+          the amount of plastic waste we produce.
+        </div>
+
+        <div class="question">
+          6. Students are encouraged to
+
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="get involved in"
+            placeholder="Your answer..."
+          />
+
+          community service projects.
+        </div>
+
+        <div class="question">
+          7. The volunteers spent the morning
+
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="picking up"
+            placeholder="Your answer..."
+          />
+
+          rubbish in the local park.
+        </div>
+
+        <div class="question">
+          8. The environmental group is planning to
+
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="carry out"
+            placeholder="Your answer..."
+          />
+
+          a survey about air pollution.
+        </div>
+
+        <div class="question">
+          9. Many families
+
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="gave away"
+            placeholder="Your answer..."
+          />
+
+          clothes and books they no longer need.
+        </div>
+
+        <div class="question">
+          10. Local residents worked together to
+
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="clean up"
+            placeholder="Your answer..."
+          />
+
+          the streets after the festival.
+        </div>
+
+        <div class="navigation">
+          <button class="nav-btn prev-btn" onclick="prevSection()">
+            ← Quay lại
+          </button>
+
+          <button class="nav-btn check-btn" onclick="checkInputs(1)">
+            ✓ Check Answers
+          </button>
+
+          <button class="nav-btn next-btn" onclick="nextSection()">
+            Tiếp theo →
+          </button>
+        </div>
+
+        <div class="result" id="result1"></div>
+      </section>
+
+      <!-- =====================================================
+     III. REWRITE
+===================================================== -->
+
+      <section class="exercise-section">
+        <span class="section-number"> SECTION 03 </span>
+
+        <h2>III. Rewrite the Sentences</h2>
+
+        <p class="instruction">
+          Rewrite the sentences using
+          <strong>Wh-word + to-infinitive</strong>.
+        </p>
+
+        <div class="question">
+          <strong>Example:</strong>
+
+          <p>I don't know what I should do to help my community.</p>
+
+          <p>
+            → I don't know <strong>what to do</strong> to help my community.
+          </p>
+        </div>
+
+        <div class="question">
+          <p>
+            1. We don't know where we should hold the neighbourhood meeting.
+          </p>
+
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="where to hold the neighbourhood meeting"
+            placeholder="Write your answer..."
+          />
+        </div>
+
+        <div class="question">
+          <p>2. She hasn't decided which project she should join.</p>
+
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="which project to join"
+            placeholder="Write your answer..."
+          />
+        </div>
+
+        <div class="question">
+          <p>3. Could you tell me how I can volunteer at the local shelter?</p>
+
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="how to volunteer at the local shelter"
+            placeholder="Write your answer..."
+          />
+        </div>
+
+        <div class="question">
+          <p>
+            4. They are discussing what they should do to reduce traffic
+            congestion.
+          </p>
+
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="what to do to reduce traffic congestion"
+            placeholder="Write your answer..."
+          />
+        </div>
+
+        <div class="question">
+          <p>
+            5. I don't know who I should contact about the broken street lights.
+          </p>
+
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="who to contact about the broken street lights"
+            placeholder="Write your answer..."
+          />
+        </div>
+
+        <div class="question">
+          <p>
+            6. The students haven't decided when they should organize the
+            charity event.
+          </p>
+
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="when to organize the charity event"
+            placeholder="Write your answer..."
+          />
+        </div>
+
+        <div class="question">
+          <p>7. He doesn't know which organization he should work with.</p>
+
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="which organization to work with"
+            placeholder="Write your answer..."
+          />
+        </div>
+
+        <div class="question">
+          <p>
+            8. We need to find out how we can raise money for the community
+            centre.
+          </p>
+
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="how to raise money for the community centre"
+            placeholder="Write your answer..."
+          />
+        </div>
+
+        <div class="navigation">
+          <button class="nav-btn prev-btn" onclick="prevSection()">
+            ← Quay lại
+          </button>
+
+          <button class="nav-btn check-btn" onclick="checkInputs(2)">
+            ✓ Check Answers
+          </button>
+
+          <button class="nav-btn next-btn" onclick="nextSection()">
+            Tiếp theo →
+          </button>
+        </div>
+
+        <div class="result" id="result2"></div>
+      </section>
+
+      <!-- =====================================================
+     IV. COMPLETE
+===================================================== -->
+
+      <section class="exercise-section">
+        <span class="section-number"> SECTION 04 </span>
+
+        <h2>IV. Complete the Sentences</h2>
+
+        <p class="instruction">
+          Complete the sentences with the correct form of the phrasal verbs.
+        </p>
+
+        <div class="tip">
+          <strong>Use:</strong>
+
+          bring up – call for – clean up – cut down on – get involved in – look
+          after – look into – pick up – set up – take part in
+        </div>
+
+        <div class="question">
+          1. During the meeting, several residents
+
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="brought up"
+            placeholder="Your answer..."
+          />
+
+          the problem of noise pollution.
+        </div>
+
+        <div class="question">
+          2. The campaign
+
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="called for"
+            placeholder="Your answer..."
+          />
+
+          stricter regulations on illegal dumping.
+        </div>
+
+        <div class="question">
+          3. The volunteers
+
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="cleaned up"
+            placeholder="Your answer..."
+          />
+
+          the park after the community festival.
+        </div>
+
+        <div class="question">
+          4. The government is encouraging people to
+
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="cut down on"
+            placeholder="Your answer..."
+          />
+
+          single-use plastic.
+        </div>
+
+        <div class="question">
+          5. More young people should
+
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="get involved in"
+            placeholder="Your answer..."
+          />
+
+          local community activities.
+        </div>
+
+        <div class="question">
+          6. The charity has
+
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="set up"
+            placeholder="Your answer..."
+          />
+
+          a new programme to support homeless people.
+        </div>
+
+        <div class="question">
+          7. The children
+
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="picked up"
+            placeholder="Your answer..."
+          />
+
+          rubbish around the lake.
+        </div>
+
+        <div class="question">
+          8. The council promised to
+
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="look into"
+            placeholder="Your answer..."
+          />
+
+          complaints about the poor condition of the roads.
+        </div>
+
+        <div class="question">
+          9. Many teenagers
+
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="took part in"
+            placeholder="Your answer..."
+          />
+
+          the annual charity run.
+        </div>
+
+        <div class="question">
+          10. Volunteers
+
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="look after"
+            placeholder="Your answer..."
+          />
+
+          elderly people who need help.
+        </div>
+
+        <div class="navigation">
+          <button class="nav-btn prev-btn" onclick="prevSection()">
+            ← Quay lại
+          </button>
+
+          <button class="nav-btn check-btn" onclick="checkInputs(3)">
+            ✓ Check Answers
+          </button>
+
+          <button class="nav-btn next-btn" onclick="nextSection()">
+            Tiếp theo →
+          </button>
+        </div>
+
+        <div class="result" id="result3"></div>
+      </section>
+
+      <!-- =====================================================
+     V. MULTIPLE CHOICE
+===================================================== -->
+
+      <section class="exercise-section">
+        <span class="section-number"> SECTION 05 </span>
+
+        <h2>🧠 V. Multiple Choice – Mixed Practice</h2>
+
+        <p class="instruction">Choose the best answer A, B, C, or D.</p>
+
+        <div class="question mcq">
+          <p>
+            <strong>1.</strong>
+            I don't know __________ to help the homeless people.
+          </p>
+
+          <div class="options">
+            <div class="option" data-answer="A">A. what</div>
+
+            <div class="option" data-answer="B">B. how</div>
+
+            <div class="option" data-answer="C">C. who</div>
+
+            <div class="option" data-answer="D">D. which</div>
+          </div>
+
+          <input type="hidden" data-correct="B" />
+        </div>
+
+        <div class="question mcq">
+          <p>
+            <strong>2.</strong>
+            The local residents decided to __________ a community garden.
+          </p>
+
+          <div class="options">
+            <div class="option" data-answer="A">A. set up</div>
+
+            <div class="option" data-answer="B">B. look into</div>
+
+            <div class="option" data-answer="C">C. give away</div>
+
+            <div class="option" data-answer="D">D. pick up</div>
+          </div>
+
+          <input type="hidden" data-correct="A" />
+        </div>
+
+        <div class="question mcq">
+          <p>
+            <strong>3.</strong>
+            Could you tell me __________ to contact?
+          </p>
+
+          <div class="options">
+            <div class="option" data-answer="A">A. what</div>
+
+            <div class="option" data-answer="B">B. where</div>
+
+            <div class="option" data-answer="C">C. who</div>
+
+            <div class="option" data-answer="D">D. how</div>
+          </div>
+
+          <input type="hidden" data-correct="C" />
+        </div>
+
+        <div class="question mcq">
+          <p>
+            <strong>4.</strong>
+            Many students __________ the neighbourhood clean-up campaign.
+          </p>
+
+          <div class="options">
+            <div class="option" data-answer="A">A. took part in</div>
+
+            <div class="option" data-answer="B">B. looked after</div>
+
+            <div class="option" data-answer="C">C. cut down on</div>
+
+            <div class="option" data-answer="D">D. gave away</div>
+          </div>
+
+          <input type="hidden" data-correct="A" />
+        </div>
+
+        <div class="question mcq">
+          <p>
+            <strong>5.</strong>
+            We haven't decided __________ to organize the charity concert.
+          </p>
+
+          <div class="options">
+            <div class="option" data-answer="A">A. who</div>
+
+            <div class="option" data-answer="B">B. when</div>
+
+            <div class="option" data-answer="C">C. which</div>
+
+            <div class="option" data-answer="D">D. what</div>
+          </div>
+
+          <input type="hidden" data-correct="B" />
+        </div>
+
+        <div class="question mcq">
+          <p>
+            <strong>6.</strong>
+            The authorities are __________ the causes of water pollution.
+          </p>
+
+          <div class="options">
+            <div class="option" data-answer="A">A. setting up</div>
+
+            <div class="option" data-answer="B">B. looking into</div>
+
+            <div class="option" data-answer="C">C. picking up</div>
+
+            <div class="option" data-answer="D">D. giving away</div>
+          </div>
+
+          <input type="hidden" data-correct="B" />
+        </div>
+
+        <div class="question mcq">
+          <p>
+            <strong>7.</strong>
+            She isn't sure __________ project to join.
+          </p>
+
+          <div class="options">
+            <div class="option" data-answer="A">A. what</div>
+
+            <div class="option" data-answer="B">B. how</div>
+
+            <div class="option" data-answer="C">C. which</div>
+
+            <div class="option" data-answer="D">D. where</div>
+          </div>
+
+          <input type="hidden" data-correct="C" />
+        </div>
+
+        <div class="question mcq">
+          <p>
+            <strong>8.</strong>
+            The community needs to __________ the amount of household waste.
+          </p>
+
+          <div class="options">
+            <div class="option" data-answer="A">A. look after</div>
+
+            <div class="option" data-answer="B">B. take part in</div>
+
+            <div class="option" data-answer="C">C. cut down on</div>
+
+            <div class="option" data-answer="D">D. set up</div>
+          </div>
+
+          <input type="hidden" data-correct="C" />
+        </div>
+
+        <div class="question mcq">
+          <p>
+            <strong>9.</strong>
+            Do you know __________ to get to the recycling centre?
+          </p>
+
+          <div class="options">
+            <div class="option" data-answer="A">A. how</div>
+
+            <div class="option" data-answer="B">B. what</div>
+
+            <div class="option" data-answer="C">C. who</div>
+
+            <div class="option" data-answer="D">D. which</div>
+          </div>
+
+          <input type="hidden" data-correct="A" />
+        </div>
+
+        <div class="question mcq">
+          <p>
+            <strong>10.</strong>
+            The charity organization regularly __________ food and clothes.
+          </p>
+
+          <div class="options">
+            <div class="option" data-answer="A">A. brings up</div>
+
+            <div class="option" data-answer="B">B. gives away</div>
+
+            <div class="option" data-answer="C">C. looks into</div>
+
+            <div class="option" data-answer="D">D. calls for</div>
+          </div>
+
+          <input type="hidden" data-correct="B" />
+        </div>
+
+        <div class="navigation">
+          <button class="nav-btn prev-btn" onclick="prevSection()">
+            ← Quay lại
+          </button>
+
+          <button class="nav-btn check-btn" onclick="checkMCQ()">
+            ✓ Check Answers
+          </button>
+
+          <button class="nav-btn next-btn" onclick="nextSection()">
+            Tiếp theo →
+          </button>
+        </div>
+
+        <div class="result" id="result4"></div>
+      </section>
+
+      <!-- =====================================================
+     VI. TRANSFORMATION
+===================================================== -->
+
+      <section class="exercise-section">
+        <span class="section-number"> SECTION 06 </span>
+
+        <h2>✍️ VI. Sentence Transformation – Advanced</h2>
+
+        <p class="instruction">
+          Rewrite the sentences without changing their meaning.
+        </p>
+
+        <div class="question">
+          <p>1. I don't know what I should say at the community meeting.</p>
+
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="what to say at the community meeting"
+            placeholder="Write your answer..."
+          />
+        </div>
+
+        <div class="question">
+          <p>
+            2. The local council established a new recycling centre last year.
+          </p>
+
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="set up a new recycling centre last year"
+            placeholder="Write your answer..."
+          />
+        </div>
+
+        <div class="question">
+          <p>
+            3. The residents are investigating the cause of the unpleasant
+            smell.
+          </p>
+
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="are looking into the cause of the unpleasant smell"
+            placeholder="Write your answer..."
+          />
+        </div>
+
+        <div class="question">
+          <p>
+            4. She hasn't decided which volunteer programme she should join.
+          </p>
+
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="which volunteer programme to join"
+            placeholder="Write your answer..."
+          />
+        </div>
+
+        <div class="question">
+          <p>5. The students collected rubbish from the beach.</p>
+
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="picked up rubbish from the beach"
+            placeholder="Write your answer..."
+          />
+        </div>
+
+        <div class="question">
+          <p>
+            6. The charity established a food bank for disadvantaged families.
+          </p>
+
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="set up a food bank for disadvantaged families"
+            placeholder="Write your answer..."
+          />
+        </div>
+
+        <div class="question">
+          <p>7. We don't know where we should put the donated books.</p>
+
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="where to put the donated books"
+            placeholder="Write your answer..."
+          />
+        </div>
+
+        <div class="question">
+          <p>
+            8. The government wants people to reduce their dependence on private
+            vehicles.
+          </p>
+
+          <input
+            type="text"
+            class="text-answer"
+            data-answer="cut down on their dependence on private vehicles"
+            placeholder="Write your answer..."
+          />
+        </div>
+
+        <div class="navigation">
+          <button class="nav-btn prev-btn" onclick="prevSection()">
+            ← Quay lại
+          </button>
+
+          <button class="nav-btn check-btn" onclick="checkInputs(5)">
+            ✓ Check Answers
+          </button>
+
+          <button class="nav-btn next-btn" onclick="nextSection()">
+            Tiếp theo →
+          </button>
+        </div>
+
+        <div class="result" id="result5"></div>
+      </section>
+
+      <!-- =====================================================
+     VII. VOCABULARY
+===================================================== -->
+
+      <section class="exercise-section">
+        <span class="section-number"> SECTION 07 </span>
+
+        <h2>⭐ Vocabulary Challenge</h2>
+
+        <p class="instruction">Nối từ / cụm từ với nghĩa phù hợp.</p>
+
+        <div class="matching-grid">
+          <div class="matching-item">
+            1. neighbourhood
+
+            <select data-answer="F">
+              <option value="">Choose</option>
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+              <option value="D">D</option>
+              <option value="E">E</option>
+              <option value="F">F</option>
+              <option value="G">G</option>
+              <option value="H">H</option>
+              <option value="I">I</option>
+              <option value="J">J</option>
+            </select>
+          </div>
+
+          <div class="matching-item">
+            2. community centre
+
+            <select data-answer="H">
+              <option value="">Choose</option>
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+              <option value="D">D</option>
+              <option value="E">E</option>
+              <option value="F">F</option>
+              <option value="G">G</option>
+              <option value="H">H</option>
+              <option value="I">I</option>
+              <option value="J">J</option>
+            </select>
+          </div>
+
+          <div class="matching-item">
+            3. local council
+
+            <select data-answer="C">
+              <option value="">Choose</option>
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+              <option value="D">D</option>
+              <option value="E">E</option>
+              <option value="F">F</option>
+              <option value="G">G</option>
+              <option value="H">H</option>
+              <option value="I">I</option>
+              <option value="J">J</option>
+            </select>
+          </div>
+
+          <div class="matching-item">
+            4. volunteer
+
+            <select data-answer="A">
+              <option value="">Choose</option>
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+              <option value="D">D</option>
+              <option value="E">E</option>
+              <option value="F">F</option>
+              <option value="G">G</option>
+              <option value="H">H</option>
+              <option value="I">I</option>
+              <option value="J">J</option>
+            </select>
+          </div>
+
+          <div class="matching-item">
+            5. fundraising
+
+            <select data-answer="E">
+              <option value="">Choose</option>
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+              <option value="D">D</option>
+              <option value="E">E</option>
+              <option value="F">F</option>
+              <option value="G">G</option>
+              <option value="H">H</option>
+              <option value="I">I</option>
+              <option value="J">J</option>
+            </select>
+          </div>
+
+          <div class="matching-item">
+            6. disadvantaged
+
+            <select data-answer="J">
+              <option value="">Choose</option>
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+              <option value="D">D</option>
+              <option value="E">E</option>
+              <option value="F">F</option>
+              <option value="G">G</option>
+              <option value="H">H</option>
+              <option value="I">I</option>
+              <option value="J">J</option>
+            </select>
+          </div>
+
+          <div class="matching-item">
+            7. public facilities
+
+            <select data-answer="I">
+              <option value="">Choose</option>
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+              <option value="D">D</option>
+              <option value="E">E</option>
+              <option value="F">F</option>
+              <option value="G">G</option>
+              <option value="H">H</option>
+              <option value="I">I</option>
+              <option value="J">J</option>
+            </select>
+          </div>
+
+          <div class="matching-item">
+            8. litter
+
+            <select data-answer="D">
+              <option value="">Choose</option>
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+              <option value="D">D</option>
+              <option value="E">E</option>
+              <option value="F">F</option>
+              <option value="G">G</option>
+              <option value="H">H</option>
+              <option value="I">I</option>
+              <option value="J">J</option>
+            </select>
+          </div>
+
+          <div class="matching-item">
+            9. charity event
+
+            <select data-answer="G">
+              <option value="">Choose</option>
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+              <option value="D">D</option>
+              <option value="E">E</option>
+              <option value="F">F</option>
+              <option value="G">G</option>
+              <option value="H">H</option>
+              <option value="I">I</option>
+              <option value="J">J</option>
+            </select>
+          </div>
+
+          <div class="matching-item">
+            10. community service
+
+            <select data-answer="B">
+              <option value="">Choose</option>
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+              <option value="D">D</option>
+              <option value="E">E</option>
+              <option value="F">F</option>
+              <option value="G">G</option>
+              <option value="H">H</option>
+              <option value="I">I</option>
+              <option value="J">J</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="tip" style="margin-top: 25px">
+          <strong>Meanings:</strong>
+
+          <br /><br />
+
+          A. người tình nguyện
+
+          <br />
+          B. dịch vụ phục vụ cộng đồng
+
+          <br />
+          C. hội đồng địa phương
+
+          <br />
+          D. rác thải vứt bừa bãi
+
+          <br />
+          E. hoạt động gây quỹ
+
+          <br />
+          F. khu dân cư
+
+          <br />
+          G. sự kiện từ thiện
+
+          <br />
+          H. trung tâm cộng đồng
+
+          <br />
+          I. cơ sở vật chất công cộng
+
+          <br />
+          J. có hoàn cảnh khó khăn
+        </div>
+
+        <div class="navigation">
+          <button class="nav-btn prev-btn" onclick="prevSection()">
+            ← Quay lại
+          </button>
+
+          <button class="nav-btn check-btn" onclick="checkVocabulary()">
+            ✓ Check Answers
+          </button>
+
+          <button class="nav-btn next-btn" onclick="nextSection()">
+            Hoàn thành →
+          </button>
+        </div>
+
+        <div class="result" id="result6"></div>
+
+        <div class="final-box">
+          <h2>🎉 Great Job!</h2>
+
+          <p>You have completed all the exercises!</p>
+
+          <a href="course1.html" class="final-btn"> 📖 Xem lại bài giảng </a>
+
+          <a href="course1.html" class="final-btn"> 🏠 Về trang chủ </a>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      let currentSection = 0;
+
+      const sections = document.querySelectorAll(".exercise-section");
+
+      const sectionButtons = document.querySelectorAll(".section-nav button");
+
+      const progressBar = document.getElementById("progressBar");
+
+      function showSection(index) {
+        if (index < 0) {
+          index = 0;
+        }
+
+        if (index >= sections.length) {
+          index = sections.length - 1;
+        }
+
+        currentSection = index;
+
+        sections.forEach((section, i) => {
+          section.classList.toggle("active", i === currentSection);
+        });
+
+        sectionButtons.forEach((button, i) => {
+          button.classList.toggle("active", i === currentSection);
+        });
+
+        const progress = ((currentSection + 1) / sections.length) * 100;
+
+        progressBar.style.width = progress + "%";
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+
+      function nextSection() {
+        if (currentSection < sections.length - 1) {
+          showSection(currentSection + 1);
+        }
+      }
+
+      function prevSection() {
+        if (currentSection > 0) {
+          showSection(currentSection - 1);
+        }
+      }
+
+      function goToSection(index) {
+        showSection(index);
+      }
+
+      /* =========================
+     TEXT INPUT CHECK
+  ========================= */
+
+      function checkInputs(sectionIndex) {
+        const section =
+          document.querySelectorAll(".exercise-section")[sectionIndex];
+
+        const inputs = section.querySelectorAll(".text-answer");
+
+        let correct = 0;
+
+        inputs.forEach((input, index) => {
+          const userAnswer = input.value.trim().toLowerCase();
+          const correctAnswer = input.dataset.answer.trim().toLowerCase();
+
+          // Xóa trạng thái cũ
+          input.classList.remove("correct", "incorrect");
+
+          // Tạo hoặc tìm phần giải thích
+          let explanation = input.parentElement.querySelector(
+            ".answer-explanation",
+          );
+
+          if (!explanation) {
+            explanation = document.createElement("div");
+            explanation.className = "answer-explanation";
+
+            input.parentElement.appendChild(explanation);
+          }
+
+          if (userAnswer === correctAnswer) {
+            correct++;
+
+            input.classList.add("correct");
+
+            explanation.innerHTML = `
+        <div class="answer-title">
+          ✅ Correct!
+        </div>
+
+        <div class="explanation-text">
+          <strong>Answer:</strong> ${input.dataset.answer}
+          <br>
+          ${getExplanation(sectionIndex, index)}
+        </div>
+      `;
+          } else {
+            input.classList.add("incorrect");
+
+            explanation.innerHTML = `
+        <div class="answer-title">
+          ❌ Not quite!
+        </div>
+
+        <div class="explanation-text">
+          <strong>Correct answer:</strong> ${input.dataset.answer}
+          <br>
+          ${getExplanation(sectionIndex, index)}
+        </div>
+      `;
+          }
+
+          explanation.classList.add("show");
+        });
+
+        const result = section.querySelector(".result");
+
+        if (result) {
+          result.innerHTML = `
+      <strong>Result:</strong> ${correct} / ${inputs.length} correct
+    `;
+        }
+      }
+      function getExplanation(sectionIndex, questionIndex) {
+        const explanations = {
+          /* =========================
+       SECTION 01
+       WH-WORDS + TO-INFINITIVE
+    ========================= */
+
+          0: [
+            "Dùng <strong>when + to-infinitive</strong> vì câu hỏi đang đề cập đến thời điểm tổ chức sự kiện từ thiện. <strong>When to organize</strong> có nghĩa là 'khi nào nên tổ chức'.",
+
+            "Dùng <strong>how + to-infinitive</strong> để diễn tả cách thức hoặc phương pháp đi đến một địa điểm. <strong>How to get to</strong> có nghĩa là 'cách đi đến'.",
+
+            "Dùng <strong>who + to-infinitive</strong> vì câu hỏi muốn biết nên mời người nào phát biểu. <strong>Who to invite</strong> có nghĩa là 'nên mời ai'.",
+
+            "Dùng <strong>what + to-infinitive</strong> vì <strong>what to do</strong> có nghĩa là 'nên làm gì'. <strong>What</strong> đóng vai trò là tân ngữ của động từ <strong>do</strong>, vì vậy không cần thêm một tân ngữ khác sau <strong>do</strong>.",
+
+            "Dùng <strong>which + to-infinitive</strong> khi cần lựa chọn giữa hai hoặc nhiều phương án cụ thể. <strong>Which to choose</strong> có nghĩa là 'nên chọn cái nào'.",
+
+            "Dùng <strong>how + to-infinitive</strong> để diễn tả cách thức giao tiếp hiệu quả với người cao tuổi. <strong>How to communicate</strong> có nghĩa là 'cách giao tiếp như thế nào'.",
+
+            "Dùng <strong>where + to-infinitive</strong> vì câu hỏi đề cập đến địa điểm tổ chức lễ hội cộng đồng. <strong>Where to hold</strong> có nghĩa là 'nên tổ chức ở đâu'.",
+
+            "Dùng <strong>when + to-infinitive</strong> vì câu hỏi đề cập đến thời điểm bắt đầu chiến dịch dọn dẹp. <strong>When to start</strong> có nghĩa là 'khi nào nên bắt đầu'.",
+
+            "Dùng <strong>who + to-infinitive</strong> vì câu hỏi muốn biết nên nhờ hoặc hỏi người nào để được giúp đỡ. <strong>Who to ask</strong> có nghĩa là 'nên hỏi ai'.",
+
+            "Dùng <strong>how + to-infinitive</strong> vì câu hỏi muốn biết cách cải thiện hệ thống giao thông công cộng. <strong>How to improve</strong> có nghĩa là 'làm thế nào để cải thiện'.",
+          ],
+
+          /* =========================
+       SECTION 02
+       PHRASAL VERBS
+    ========================= */
+
+          1: [
+            "<strong>Take part in</strong> có nghĩa là 'tham gia'. Cụm từ này được dùng khi nói về việc tham gia một hoạt động hoặc sự kiện. Ở đây, người dân đã tham gia chiến dịch dọn dẹp khu dân cư.",
+
+            "<strong>Set up</strong> có nghĩa là 'thành lập, thiết lập'. Ở đây, tổ chức từ thiện thành lập một ngân hàng thực phẩm miễn phí cho các gia đình có thu nhập thấp.",
+
+            "<strong>Look after</strong> có nghĩa là 'chăm sóc'. Cụm từ này phù hợp vì các tình nguyện viên chăm sóc những người cao tuổi sống một mình.",
+
+            "<strong>Look into</strong> có nghĩa là 'điều tra, xem xét kỹ'. Cụm từ này thường được dùng khi chính quyền hoặc một tổ chức điều tra một vấn đề hoặc nguyên nhân của một vấn đề.",
+
+            "<strong>Cut down on</strong> có nghĩa là 'cắt giảm'. Ở đây, chúng ta cần cắt giảm lượng rác thải nhựa mà chúng ta tạo ra.",
+
+            "<strong>Get involved in</strong> có nghĩa là 'tham gia tích cực vào'. Cụm từ này nhấn mạnh sự tham gia chủ động vào các dự án hoặc hoạt động cộng đồng.",
+
+            "<strong>Pick up</strong> có nghĩa là 'nhặt lên, thu gom'. Cụm từ này phù hợp khi nói về việc nhặt rác hoặc thu gom rác từ mặt đất.",
+
+            "<strong>Carry out</strong> có nghĩa là 'tiến hành, thực hiện'. Cụm từ này thường đi với các danh từ như <strong>a survey</strong> (một cuộc khảo sát), <strong>research</strong> (nghiên cứu) hoặc <strong>a study</strong> (một nghiên cứu).",
+
+            "<strong>Give away</strong> có nghĩa là 'cho, tặng miễn phí'. Ở đây, các gia đình tặng quần áo và sách mà họ không còn cần cho những trẻ em nghèo.",
+
+            "<strong>Clean up</strong> có nghĩa là 'dọn dẹp, làm sạch'. Cụm từ này được dùng khi nói về việc làm cho một địa điểm trở nên sạch sẽ bằng cách loại bỏ rác hoặc bụi bẩn.",
+          ],
+
+          /* =========================
+       SECTION 03
+       REWRITE
+    ========================= */
+
+          2: [
+            "Câu gốc có cấu trúc <strong>where + we should + V</strong>. Khi rút gọn thành <strong>Wh-word + to-infinitive</strong>, ta đổi <strong>where we should hold</strong> thành <strong>where to hold</strong>.",
+
+            "Câu gốc có cấu trúc <strong>which project + she should + V</strong>. Ta rút gọn thành <strong>which project to join</strong>. Nghĩa của câu không thay đổi.",
+
+            "Câu gốc dùng <strong>how I can volunteer</strong>. Ta có thể rút gọn thành <strong>how to volunteer</strong>, trong đó <strong>how + to + V</strong> diễn tả cách thức thực hiện một hành động.",
+
+            "Câu gốc có cấu trúc <strong>what they should do</strong>. Ta rút gọn thành <strong>what to do</strong>, có nghĩa là 'nên làm gì'.",
+
+            "Câu gốc có cấu trúc <strong>who I should contact</strong>. Ta rút gọn thành <strong>who to contact</strong>, có nghĩa là 'nên liên hệ với ai'.",
+
+            "Câu gốc có cấu trúc <strong>when they should organize</strong>. Ta rút gọn thành <strong>when to organize</strong>, có nghĩa là 'khi nào nên tổ chức'.",
+
+            "Câu gốc có cấu trúc <strong>which organization he should work with</strong>. Ta rút gọn thành <strong>which organization to work with</strong>, có nghĩa là 'nên làm việc với tổ chức nào'.",
+
+            "Câu gốc có cấu trúc <strong>how we can raise money</strong>. Ta rút gọn thành <strong>how to raise money</strong>, có nghĩa là 'làm thế nào để gây quỹ'.",
+          ],
+
+          /* =========================
+       SECTION 04
+       PHRASAL VERBS
+    ========================= */
+
+          3: [
+            "<strong>Bring up</strong> có nghĩa là 'đề cập, nêu ra'. Cụm từ này được dùng khi ai đó đưa một vấn đề ra để thảo luận trong một cuộc họp hoặc cuộc trò chuyện.",
+
+            "<strong>Call for</strong> có nghĩa là 'kêu gọi, yêu cầu'. Ở đây, chiến dịch kêu gọi các quy định nghiêm ngặt hơn đối với việc đổ rác trái phép.",
+
+            "<strong>Clean up</strong> có nghĩa là 'dọn dẹp, làm sạch'. Cụm từ này phù hợp với việc các tình nguyện viên dọn dẹp công viên sau lễ hội cộng đồng.",
+
+            "<strong>Cut down on</strong> có nghĩa là 'cắt giảm'. Cụm từ này thường được dùng khi muốn giảm lượng hoặc mức độ của một thứ gì đó, ví dụ: <strong>cut down on plastic</strong> = cắt giảm việc sử dụng nhựa.",
+
+            "<strong>Get involved in</strong> có nghĩa là 'tích cực tham gia vào'. Cụm từ này nhấn mạnh việc tham gia chủ động vào các hoạt động cộng đồng.",
+
+            "<strong>Set up</strong> có nghĩa là 'thành lập, thiết lập'. Trong câu này, tổ chức từ thiện đã thành lập một chương trình mới để hỗ trợ người vô gia cư.",
+
+            "<strong>Pick up</strong> có nghĩa là 'nhặt lên, thu gom'. Ở đây, các em học sinh nhặt rác xung quanh hồ trong một dự án môi trường.",
+
+            "<strong>Look into</strong> có nghĩa là 'điều tra, xem xét'. Hội đồng địa phương sẽ điều tra các khiếu nại liên quan đến tình trạng đường sá.",
+
+            "<strong>Take part in</strong> có nghĩa là 'tham gia'. Cụm từ này được dùng khi nói về việc tham gia một sự kiện hoặc hoạt động, chẳng hạn như một cuộc chạy từ thiện.",
+
+            "<strong>Look after</strong> có nghĩa là 'chăm sóc'. Trong câu này, các tình nguyện viên chăm sóc những người cao tuổi cần được hỗ trợ trong các hoạt động hằng ngày.",
+          ],
+        };
+
+        return explanations[sectionIndex] &&
+          explanations[sectionIndex][questionIndex]
+          ? explanations[sectionIndex][questionIndex]
+          : "Hãy xem lại cấu trúc ngữ pháp hoặc phrasal verb được sử dụng trong câu này.";
+      }
+
+      /* =========================
+     MCQ
+  ========================= */
+
+      document.querySelectorAll(".mcq .option").forEach((option) => {
+        option.addEventListener("click", function () {
+          const parent = this.closest(".mcq");
+
+          parent
+            .querySelectorAll(".option")
+            .forEach((opt) => opt.classList.remove("selected"));
+
+          this.classList.add("selected");
+        });
+      });
+
+      function checkMCQ() {
+        const questions = sections[4].querySelectorAll(".mcq");
+
+        let score = 0;
+
+        questions.forEach((question) => {
+          const selected = question.querySelector(".option.selected");
+
+          const correct =
+            question.querySelector("[data-correct]").dataset.correct;
+
+          question
+            .querySelectorAll(".option")
+            .forEach((option) =>
+              option.classList.remove("correct", "incorrect"),
+            );
+
+          if (selected) {
+            if (selected.dataset.answer === correct) {
+              selected.classList.add("correct");
+
+              score++;
+            } else {
+              selected.classList.add("incorrect");
+            }
+          }
+        });
+
+        const result = document.getElementById("result4");
+
+        result.style.display = "block";
+
+        result.innerHTML = `🧠 Your score: ${score} / ${questions.length}`;
+      }
+
+      /* =========================
+     VOCABULARY CHECK
+  ========================= */
+
+      function checkVocabulary() {
+        const selects = sections[6].querySelectorAll("select");
+
+        let score = 0;
+
+        selects.forEach((select) => {
+          select.classList.remove("correct", "incorrect");
+
+          if (select.value === select.dataset.answer) {
+            select.classList.add("correct");
+
+            score++;
+          } else {
+            select.classList.add("incorrect");
+          }
+        });
+
+        const result = document.getElementById("result6");
+
+        result.style.display = "block";
+
+        result.innerHTML = `⭐ Vocabulary score: ${score} / ${selects.length}`;
+      }
+
+      /* =========================
+     START
+  ========================= */
+
+      showSection(0);
+    </script>
+  </body>
+</html>
