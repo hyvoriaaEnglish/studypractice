@@ -1,0 +1,1569 @@
+```html
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Word Form Practice - Hyvoria English</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: linear-gradient(135deg, #eef2ff, #f8fafc);
+        color: #1e293b;
+        min-height: 100vh;
+      }
+
+      /* HEADER */
+      header {
+        background: white;
+        padding: 22px 30px;
+        box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+
+      .header-content {
+        max-width: 1000px;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 23px;
+        font-weight: 700;
+        color: #4f46e5;
+      }
+
+      .level {
+        background: #eef2ff;
+        color: #4338ca;
+        padding: 8px 15px;
+        border-radius: 20px;
+        font-weight: 600;
+      }
+
+      /* MAIN */
+      main {
+        max-width: 1000px;
+        margin: 35px auto;
+        padding: 0 20px 60px;
+      }
+
+      .intro {
+        background: white;
+        padding: 35px;
+        border-radius: 20px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.07);
+        margin-bottom: 25px;
+        text-align: center;
+      }
+
+      .intro h1 {
+        color: #4f46e5;
+        font-size: 34px;
+        margin-bottom: 12px;
+      }
+
+      .intro p {
+        color: #64748b;
+        font-size: 17px;
+        line-height: 1.6;
+      }
+
+      .section-title {
+        background: #4f46e5;
+        color: white;
+        padding: 18px 25px;
+        border-radius: 14px;
+        margin: 30px 0 20px;
+        font-size: 22px;
+      }
+
+      /* QUESTION CARD */
+      .question {
+        background: white;
+        padding: 25px;
+        border-radius: 16px;
+        margin-bottom: 20px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+      }
+
+      .question-number {
+        color: #4f46e5;
+        font-weight: 700;
+        font-size: 18px;
+        margin-bottom: 12px;
+      }
+
+      .question-text {
+        font-size: 17px;
+        line-height: 1.7;
+        margin-bottom: 18px;
+      }
+
+      /* OPTIONS */
+      .options {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .option {
+        background: #f8fafc;
+        border: 2px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 13px 16px;
+        cursor: pointer;
+        font-size: 16px;
+        text-align: left;
+        transition: 0.2s;
+      }
+
+      .option:hover {
+        border-color: #818cf8;
+        background: #eef2ff;
+      }
+
+      .option.correct {
+        background: #dcfce7;
+        border-color: #22c55e;
+        color: #166534;
+      }
+
+      .option.wrong {
+        background: #fee2e2;
+        border-color: #ef4444;
+        color: #991b1b;
+      }
+
+      .option.disabled {
+        cursor: default;
+      }
+
+      /* FEEDBACK */
+      .feedback {
+        display: none;
+        margin-top: 18px;
+        padding: 16px 18px;
+        border-radius: 10px;
+        line-height: 1.7;
+      }
+
+      .feedback.show {
+        display: block;
+      }
+
+      .feedback.correct-feedback {
+        background: #ecfdf5;
+        border-left: 5px solid #22c55e;
+        color: #166534;
+      }
+
+      .feedback.wrong-feedback {
+        background: #fef2f2;
+        border-left: 5px solid #ef4444;
+        color: #991b1b;
+      }
+
+      .feedback strong {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      /* INPUT */
+      .answer-input {
+        width: 100%;
+        max-width: 450px;
+        padding: 13px 15px;
+        border: 2px solid #cbd5e1;
+        border-radius: 10px;
+        font-size: 16px;
+        outline: none;
+      }
+
+      .answer-input:focus {
+        border-color: #6366f1;
+      }
+
+      .check-btn {
+        margin-top: 12px;
+        padding: 11px 22px;
+        border: none;
+        border-radius: 9px;
+        background: #4f46e5;
+        color: white;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .check-btn:hover {
+        background: #3730a3;
+      }
+
+      .check-btn:disabled {
+        background: #94a3b8;
+        cursor: default;
+      }
+
+      /* SCORE */
+      .score-box {
+        display: none;
+        background: white;
+        padding: 35px;
+        border-radius: 20px;
+        text-align: center;
+        margin-top: 30px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+      }
+
+      .score-box.show {
+        display: block;
+      }
+
+      .score-box h2 {
+        color: #4f46e5;
+        margin-bottom: 15px;
+      }
+
+      .score-number {
+        font-size: 42px;
+        font-weight: 700;
+        color: #4338ca;
+        margin: 15px 0;
+      }
+
+      .score-message {
+        font-size: 18px;
+        color: #64748b;
+      }
+
+      /* ACTION BUTTONS */
+      .submit-container {
+        text-align: center;
+        margin: 35px 0;
+      }
+
+      .submit-btn,
+      .reset-btn {
+        padding: 15px 30px;
+        border: none;
+        border-radius: 12px;
+        color: white;
+        font-size: 17px;
+        font-weight: 700;
+        cursor: pointer;
+        margin: 5px;
+      }
+
+      .submit-btn {
+        background: #4f46e5;
+      }
+
+      .submit-btn:hover {
+        background: #3730a3;
+      }
+
+      .reset-btn {
+        background: #64748b;
+      }
+
+      .reset-btn:hover {
+        background: #475569;
+      }
+
+      /* BOTTOM NAV */
+      .bottom-nav {
+        display: flex;
+        gap: 15px;
+        max-width: 1000px;
+        margin: 20px auto 50px;
+        padding: 0 20px;
+      }
+
+      .bottom-nav a {
+        flex: 1;
+        text-align: center;
+        padding: 15px 20px;
+        text-decoration: none;
+        border-radius: 12px;
+        font-weight: 700;
+        transition: 0.2s;
+      }
+
+      .lesson-btn {
+        background: #e2e8f0;
+        color: #334155;
+      }
+
+      .home-btn {
+        background: #c7d2fe;
+        color: #3730a3;
+      }
+
+      .bottom-nav a:hover {
+        transform: translateY(-2px);
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 700px) {
+        header {
+          padding: 18px 15px;
+        }
+
+        .header-content {
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        main {
+          padding: 0 15px 40px;
+        }
+
+        .intro {
+          padding: 25px 20px;
+        }
+
+        .intro h1 {
+          font-size: 28px;
+        }
+
+        .options {
+          grid-template-columns: 1fr;
+        }
+
+        .question {
+          padding: 20px;
+        }
+
+        .bottom-nav {
+          flex-direction: column;
+          padding: 0 15px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="header-content">
+        <div class="logo">Hyvoria English</div>
+        <div class="level">WORD FORM | A2–B2</div>
+      </div>
+    </header>
+
+    <main>
+      <!-- INTRO -->
+      <div class="intro">
+        <h1>WORD FORM PRACTICE</h1>
+
+        <p>
+          Bài luyện tập gồm 30 câu:
+          <br />
+          <strong>15 câu trắc nghiệm</strong> +
+          <strong>15 câu tự điền từ</strong>
+        </p>
+
+        <p style="margin-top: 10px">
+          Chọn hoặc nhập đáp án để xem ngay kết quả và giải thích bằng tiếng
+          Việt.
+        </p>
+      </div>
+
+      <!-- PART 1 -->
+      <div class="section-title">PART 1 – MULTIPLE CHOICE (15 QUESTIONS)</div>
+
+      <!-- Q1 -->
+      <div class="question" data-correct="B">
+        <div class="question-number">Question 1</div>
+
+        <div class="question-text">
+          The rapid __________ of technology has changed the way we communicate.
+          <strong>(DEVELOP)</strong>
+        </div>
+
+        <div class="options">
+          <button class="option" onclick="checkMC(this, 'B')">
+            A. develop
+          </button>
+
+          <button class="option" onclick="checkMC(this, 'B')">
+            B. development
+          </button>
+
+          <button class="option" onclick="checkMC(this, 'B')">
+            C. developed
+          </button>
+
+          <button class="option" onclick="checkMC(this, 'B')">
+            D. developing
+          </button>
+        </div>
+
+        <div class="feedback">
+          <strong></strong>
+          <span></span>
+        </div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="question" data-correct="C">
+        <div class="question-number">Question 2</div>
+
+        <div class="question-text">
+          She answered all the questions __________ and got a high score.
+        </div>
+
+        <div class="options">
+          <button class="option" onclick="checkMC(this, 'C')">
+            A. correct
+          </button>
+
+          <button class="option" onclick="checkMC(this, 'C')">
+            B. correction
+          </button>
+
+          <button class="option" onclick="checkMC(this, 'C')">
+            C. correctly
+          </button>
+
+          <button class="option" onclick="checkMC(this, 'C')">
+            D. correctness
+          </button>
+        </div>
+
+        <div class="feedback">
+          <strong></strong>
+          <span></span>
+        </div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="question" data-correct="B">
+        <div class="question-number">Question 3</div>
+
+        <div class="question-text">
+          Regular exercise is very __________ for both physical and mental
+          health.
+        </div>
+
+        <div class="options">
+          <button class="option" onclick="checkMC(this, 'B')">
+            A. benefit
+          </button>
+
+          <button class="option" onclick="checkMC(this, 'B')">
+            B. beneficial
+          </button>
+
+          <button class="option" onclick="checkMC(this, 'B')">
+            C. beneficially
+          </button>
+
+          <button class="option" onclick="checkMC(this, 'B')">
+            D. benefits
+          </button>
+        </div>
+
+        <div class="feedback">
+          <strong></strong>
+          <span></span>
+        </div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="question" data-correct="C">
+        <div class="question-number">Question 4</div>
+
+        <div class="question-text">
+          The students were very __________ about the school trip.
+        </div>
+
+        <div class="options">
+          <button class="option" onclick="checkMC(this, 'C')">A. excite</button>
+
+          <button class="option" onclick="checkMC(this, 'C')">
+            B. excitement
+          </button>
+
+          <button class="option" onclick="checkMC(this, 'C')">
+            C. excited
+          </button>
+
+          <button class="option" onclick="checkMC(this, 'C')">
+            D. exciting
+          </button>
+        </div>
+
+        <div class="feedback">
+          <strong></strong>
+          <span></span>
+        </div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="question" data-correct="B">
+        <div class="question-number">Question 5</div>
+
+        <div class="question-text">
+          The documentary was so __________ that I watched it twice.
+        </div>
+
+        <div class="options">
+          <button class="option" onclick="checkMC(this, 'B')">
+            A. interested
+          </button>
+
+          <button class="option" onclick="checkMC(this, 'B')">
+            B. interesting
+          </button>
+
+          <button class="option" onclick="checkMC(this, 'B')">
+            C. interest
+          </button>
+
+          <button class="option" onclick="checkMC(this, 'B')">
+            D. interestingly
+          </button>
+        </div>
+
+        <div class="feedback">
+          <strong></strong>
+          <span></span>
+        </div>
+      </div>
+
+      <!-- Q6 -->
+      <div class="question" data-correct="C">
+        <div class="question-number">Question 6</div>
+
+        <div class="question-text">
+          We should take action to protect the natural __________.
+        </div>
+
+        <div class="options">
+          <button class="option" onclick="checkMC(this, 'C')">
+            A. environmental
+          </button>
+
+          <button class="option" onclick="checkMC(this, 'C')">
+            B. environmentally
+          </button>
+
+          <button class="option" onclick="checkMC(this, 'C')">
+            C. environment
+          </button>
+
+          <button class="option" onclick="checkMC(this, 'C')">
+            D. environmentalist
+          </button>
+        </div>
+
+        <div class="feedback">
+          <strong></strong>
+          <span></span>
+        </div>
+      </div>
+
+      <!-- Q7 -->
+      <div class="question" data-correct="C">
+        <div class="question-number">Question 7</div>
+
+        <div class="question-text">
+          He completed the project __________ despite having very little time.
+        </div>
+
+        <div class="options">
+          <button class="option" onclick="checkMC(this, 'C')">
+            A. success
+          </button>
+
+          <button class="option" onclick="checkMC(this, 'C')">
+            B. successful
+          </button>
+
+          <button class="option" onclick="checkMC(this, 'C')">
+            C. successfully
+          </button>
+
+          <button class="option" onclick="checkMC(this, 'C')">
+            D. succeed
+          </button>
+        </div>
+
+        <div class="feedback">
+          <strong></strong>
+          <span></span>
+        </div>
+      </div>
+
+      <!-- Q8 -->
+      <div class="question" data-correct="C">
+        <div class="question-number">Question 8</div>
+
+        <div class="question-text">
+          It is __________ to leave your phone on during an important meeting.
+        </div>
+
+        <div class="options">
+          <button class="option" onclick="checkMC(this, 'C')">A. polite</button>
+
+          <button class="option" onclick="checkMC(this, 'C')">
+            B. politely
+          </button>
+
+          <button class="option" onclick="checkMC(this, 'C')">
+            C. impolite
+          </button>
+
+          <button class="option" onclick="checkMC(this, 'C')">
+            D. politeness
+          </button>
+        </div>
+
+        <div class="feedback">
+          <strong></strong>
+          <span></span>
+        </div>
+      </div>
+
+      <!-- Q9 -->
+      <div class="question" data-correct="B">
+        <div class="question-number">Question 9</div>
+
+        <div class="question-text">
+          The teacher gave us some very __________ advice before the exam.
+        </div>
+
+        <div class="options">
+          <button class="option" onclick="checkMC(this, 'B')">A. use</button>
+
+          <button class="option" onclick="checkMC(this, 'B')">B. useful</button>
+
+          <button class="option" onclick="checkMC(this, 'B')">
+            C. uselessly
+          </button>
+
+          <button class="option" onclick="checkMC(this, 'B')">
+            D. usefulness
+          </button>
+        </div>
+
+        <div class="feedback">
+          <strong></strong>
+          <span></span>
+        </div>
+      </div>
+
+      <!-- Q10 -->
+      <div class="question" data-correct="B">
+        <div class="question-number">Question 10</div>
+
+        <div class="question-text">
+          The new library provides students with a comfortable place for
+          __________.
+        </div>
+
+        <div class="options">
+          <button class="option" onclick="checkMC(this, 'B')">A. study</button>
+
+          <button class="option" onclick="checkMC(this, 'B')">
+            B. studying
+          </button>
+
+          <button class="option" onclick="checkMC(this, 'B')">
+            C. studied
+          </button>
+
+          <button class="option" onclick="checkMC(this, 'B')">
+            D. studies
+          </button>
+        </div>
+
+        <div class="feedback">
+          <strong></strong>
+          <span></span>
+        </div>
+      </div>
+
+      <!-- Q11 -->
+      <div class="question" data-correct="B">
+        <div class="question-number">Question 11</div>
+
+        <div class="question-text">
+          Her __________ to the competition surprised everyone.
+        </div>
+
+        <div class="options">
+          <button class="option" onclick="checkMC(this, 'B')">A. decide</button>
+
+          <button class="option" onclick="checkMC(this, 'B')">
+            B. decision
+          </button>
+
+          <button class="option" onclick="checkMC(this, 'B')">
+            C. decisive
+          </button>
+
+          <button class="option" onclick="checkMC(this, 'B')">
+            D. decisively
+          </button>
+        </div>
+
+        <div class="feedback">
+          <strong></strong>
+          <span></span>
+        </div>
+      </div>
+
+      <!-- Q12 -->
+      <div class="question" data-correct="B">
+        <div class="question-number">Question 12</div>
+
+        <div class="question-text">
+          The government is working to reduce air __________ in big cities.
+        </div>
+
+        <div class="options">
+          <button class="option" onclick="checkMC(this, 'B')">
+            A. pollute
+          </button>
+
+          <button class="option" onclick="checkMC(this, 'B')">
+            B. pollution
+          </button>
+
+          <button class="option" onclick="checkMC(this, 'B')">
+            C. polluted
+          </button>
+
+          <button class="option" onclick="checkMC(this, 'B')">
+            D. polluting
+          </button>
+        </div>
+
+        <div class="feedback">
+          <strong></strong>
+          <span></span>
+        </div>
+      </div>
+
+      <!-- Q13 -->
+      <div class="question" data-correct="C">
+        <div class="question-number">Question 13</div>
+
+        <div class="question-text">
+          The teacher explained the lesson very __________, so everyone
+          understood it.
+        </div>
+
+        <div class="options">
+          <button class="option" onclick="checkMC(this, 'C')">A. clear</button>
+
+          <button class="option" onclick="checkMC(this, 'C')">
+            B. clarity
+          </button>
+
+          <button class="option" onclick="checkMC(this, 'C')">
+            C. clearly
+          </button>
+
+          <button class="option" onclick="checkMC(this, 'C')">
+            D. clearing
+          </button>
+        </div>
+
+        <div class="feedback">
+          <strong></strong>
+          <span></span>
+        </div>
+      </div>
+
+      <!-- Q14 -->
+      <div class="question" data-correct="B">
+        <div class="question-number">Question 14</div>
+
+        <div class="question-text">
+          Many young people are becoming more __________ of environmental
+          problems.
+        </div>
+
+        <div class="options">
+          <button class="option" onclick="checkMC(this, 'B')">
+            A. awareness
+          </button>
+
+          <button class="option" onclick="checkMC(this, 'B')">B. aware</button>
+
+          <button class="option" onclick="checkMC(this, 'B')">
+            C. unaware
+          </button>
+
+          <button class="option" onclick="checkMC(this, 'B')">
+            D. awarenesses
+          </button>
+        </div>
+
+        <div class="feedback">
+          <strong></strong>
+          <span></span>
+        </div>
+      </div>
+
+      <!-- Q15 -->
+      <div class="question" data-correct="C">
+        <div class="question-number">Question 15</div>
+
+        <div class="question-text">
+          The students showed great __________ when they completed the difficult
+          project.
+        </div>
+
+        <div class="options">
+          <button class="option" onclick="checkMC(this, 'C')">
+            A. creative
+          </button>
+
+          <button class="option" onclick="checkMC(this, 'C')">
+            B. creatively
+          </button>
+
+          <button class="option" onclick="checkMC(this, 'C')">
+            C. creativity
+          </button>
+
+          <button class="option" onclick="checkMC(this, 'C')">D. create</button>
+        </div>
+
+        <div class="feedback">
+          <strong></strong>
+          <span></span>
+        </div>
+      </div>
+
+      <!-- PART 2 -->
+      <div class="section-title">
+        PART 2 – WORD FORM: FILL IN THE BLANK (15 QUESTIONS)
+      </div>
+
+      <!-- Q16 -->
+      <div class="question fill-question" data-answer="development">
+        <div class="question-number">Question 16</div>
+
+        <div class="question-text">
+          The __________ of modern technology has made our lives easier.
+          <strong>(DEVELOP)</strong>
+        </div>
+
+        <input
+          class="answer-input"
+          type="text"
+          placeholder="Nhập đáp án của bạn"
+        />
+
+        <br />
+
+        <button class="check-btn" onclick="checkFill(this, 'development')">
+          Kiểm tra
+        </button>
+
+        <div class="feedback">
+          <strong></strong>
+          <span></span>
+        </div>
+      </div>
+
+      <!-- Q17 -->
+      <div class="question fill-question" data-answer="confidently">
+        <div class="question-number">Question 17</div>
+
+        <div class="question-text">
+          She spoke English very __________ during the presentation.
+          <strong>(CONFIDENT)</strong>
+        </div>
+
+        <input
+          class="answer-input"
+          type="text"
+          placeholder="Nhập đáp án của bạn"
+        />
+
+        <br />
+
+        <button class="check-btn" onclick="checkFill(this, 'confidently')">
+          Kiểm tra
+        </button>
+
+        <div class="feedback">
+          <strong></strong>
+          <span></span>
+        </div>
+      </div>
+
+      <!-- Q18 -->
+      <div class="question fill-question" data-answer="healthy">
+        <div class="question-number">Question 18</div>
+
+        <div class="question-text">
+          Regular exercise is important for maintaining a __________ lifestyle.
+          <strong>(HEALTH)</strong>
+        </div>
+
+        <input
+          class="answer-input"
+          type="text"
+          placeholder="Nhập đáp án của bạn"
+        />
+
+        <br />
+
+        <button class="check-btn" onclick="checkFill(this, 'healthy')">
+          Kiểm tra
+        </button>
+
+        <div class="feedback">
+          <strong></strong>
+          <span></span>
+        </div>
+      </div>
+
+      <!-- Q19 -->
+      <div class="question fill-question" data-answer="excited">
+        <div class="question-number">Question 19</div>
+
+        <div class="question-text">
+          The students were extremely __________ when they heard the good news.
+          <strong>(EXCITE)</strong>
+        </div>
+
+        <input
+          class="answer-input"
+          type="text"
+          placeholder="Nhập đáp án của bạn"
+        />
+
+        <br />
+
+        <button class="check-btn" onclick="checkFill(this, 'excited')">
+          Kiểm tra
+        </button>
+
+        <div class="feedback">
+          <strong></strong>
+          <span></span>
+        </div>
+      </div>
+
+      <!-- Q20 -->
+      <div class="question fill-question" data-answer="careful">
+        <div class="question-number">Question 20</div>
+
+        <div class="question-text">
+          We should be more __________ when using electricity and water.
+          <strong>(CARE)</strong>
+        </div>
+
+        <input
+          class="answer-input"
+          type="text"
+          placeholder="Nhập đáp án của bạn"
+        />
+
+        <br />
+
+        <button class="check-btn" onclick="checkFill(this, 'careful')">
+          Kiểm tra
+        </button>
+
+        <div class="feedback">
+          <strong></strong>
+          <span></span>
+        </div>
+      </div>
+
+      <!-- Q21 -->
+      <div class="question fill-question" data-answer="benefits">
+        <div class="question-number">Question 21</div>
+
+        <div class="question-text">
+          The Internet has brought many __________ to our daily lives.
+          <strong>(BENEFIT)</strong>
+        </div>
+
+        <input
+          class="answer-input"
+          type="text"
+          placeholder="Nhập đáp án của bạn"
+        />
+
+        <br />
+
+        <button class="check-btn" onclick="checkFill(this, 'benefits')">
+          Kiểm tra
+        </button>
+
+        <div class="feedback">
+          <strong></strong>
+          <span></span>
+        </div>
+      </div>
+
+      <!-- Q22 -->
+      <div class="question fill-question" data-answer="difference">
+        <div class="question-number">Question 22</div>
+
+        <div class="question-text">
+          The teacher asked us to explain the __________ between the two ideas.
+          <strong>(DIFFER)</strong>
+        </div>
+
+        <input
+          class="answer-input"
+          type="text"
+          placeholder="Nhập đáp án của bạn"
+        />
+
+        <br />
+
+        <button class="check-btn" onclick="checkFill(this, 'difference')">
+          Kiểm tra
+        </button>
+
+        <div class="feedback">
+          <strong></strong>
+          <span></span>
+        </div>
+      </div>
+
+      <!-- Q23 -->
+      <div class="question fill-question" data-answer="success">
+        <div class="question-number">Question 23</div>
+
+        <div class="question-text">
+          His hard work led to great __________ in his studies.
+          <strong>(SUCCEED)</strong>
+        </div>
+
+        <input
+          class="answer-input"
+          type="text"
+          placeholder="Nhập đáp án của bạn"
+        />
+
+        <br />
+
+        <button class="check-btn" onclick="checkFill(this, 'success')">
+          Kiểm tra
+        </button>
+
+        <div class="feedback">
+          <strong></strong>
+          <span></span>
+        </div>
+      </div>
+
+      <!-- Q24 -->
+      <div class="question fill-question" data-answer="unrealistic">
+        <div class="question-number">Question 24</div>
+
+        <div class="question-text">
+          It is __________ to expect everyone to agree with you all the time.
+          <strong>(REAL)</strong>
+        </div>
+
+        <input
+          class="answer-input"
+          type="text"
+          placeholder="Nhập đáp án của bạn"
+        />
+
+        <br />
+
+        <button class="check-btn" onclick="checkFill(this, 'unrealistic')">
+          Kiểm tra
+        </button>
+
+        <div class="feedback">
+          <strong></strong>
+          <span></span>
+        </div>
+      </div>
+
+      <!-- Q25 -->
+      <div class="question fill-question" data-answer="environmental">
+        <div class="question-number">Question 25</div>
+
+        <div class="question-text">
+          The school organized an __________ activity to encourage students to
+          protect nature.
+          <strong>(ENVIRONMENT)</strong>
+        </div>
+
+        <input
+          class="answer-input"
+          type="text"
+          placeholder="Nhập đáp án của bạn"
+        />
+
+        <br />
+
+        <button class="check-btn" onclick="checkFill(this, 'environmental')">
+          Kiểm tra
+        </button>
+
+        <div class="feedback">
+          <strong></strong>
+          <span></span>
+        </div>
+      </div>
+
+      <!-- Q26 -->
+      <div class="question fill-question" data-answer="impressive">
+        <div class="question-number">Question 26</div>
+
+        <div class="question-text">
+          She gave a very __________ speech about the importance of education.
+          <strong>(IMPRESS)</strong>
+        </div>
+
+        <input
+          class="answer-input"
+          type="text"
+          placeholder="Nhập đáp án của bạn"
+        />
+
+        <br />
+
+        <button class="check-btn" onclick="checkFill(this, 'impressive')">
+          Kiểm tra
+        </button>
+
+        <div class="feedback">
+          <strong></strong>
+          <span></span>
+        </div>
+      </div>
+
+      <!-- Q27 -->
+      <div class="question fill-question" data-answer="improved">
+        <div class="question-number">Question 27</div>
+
+        <div class="question-text">
+          The new invention has greatly __________ the lives of people in rural
+          areas.
+          <strong>(IMPROVEMENT)</strong>
+        </div>
+
+        <input
+          class="answer-input"
+          type="text"
+          placeholder="Nhập đáp án của bạn"
+        />
+
+        <br />
+
+        <button class="check-btn" onclick="checkFill(this, 'improved')">
+          Kiểm tra
+        </button>
+
+        <div class="feedback">
+          <strong></strong>
+          <span></span>
+        </div>
+      </div>
+
+      <!-- Q28 -->
+      <div class="question fill-question" data-answer="irresponsible">
+        <div class="question-number">Question 28</div>
+
+        <div class="question-text">
+          He was punished because of his __________ behavior.
+          <strong>(RESPONSIBLE)</strong>
+        </div>
+
+        <input
+          class="answer-input"
+          type="text"
+          placeholder="Nhập đáp án của bạn"
+        />
+
+        <br />
+
+        <button class="check-btn" onclick="checkFill(this, 'irresponsible')">
+          Kiểm tra
+        </button>
+
+        <div class="feedback">
+          <strong></strong>
+          <span></span>
+        </div>
+      </div>
+
+      <!-- Q29 -->
+      <div class="question fill-question" data-answer="carefully">
+        <div class="question-number">Question 29</div>
+
+        <div class="question-text">
+          The students listened __________ to the teacher's instructions.
+          <strong>(CARE)</strong>
+        </div>
+
+        <input
+          class="answer-input"
+          type="text"
+          placeholder="Nhập đáp án của bạn"
+        />
+
+        <br />
+
+        <button class="check-btn" onclick="checkFill(this, 'carefully')">
+          Kiểm tra
+        </button>
+
+        <div class="feedback">
+          <strong></strong>
+          <span></span>
+        </div>
+      </div>
+
+      <!-- Q30 -->
+      <div class="question fill-question" data-answer="successfully">
+        <div class="question-number">Question 30</div>
+
+        <div class="question-text">
+          The project was completed __________ thanks to the cooperation of all
+          team members.
+          <strong>(SUCCESS)</strong>
+        </div>
+
+        <input
+          class="answer-input"
+          type="text"
+          placeholder="Nhập đáp án của bạn"
+        />
+
+        <br />
+
+        <button class="check-btn" onclick="checkFill(this, 'successfully')">
+          Kiểm tra
+        </button>
+
+        <div class="feedback">
+          <strong></strong>
+          <span></span>
+        </div>
+      </div>
+
+      <!-- SUBMIT -->
+      <div class="submit-container">
+        <button class="submit-btn" onclick="calculateScore()">
+          📊 Nộp bài & Xem điểm
+        </button>
+
+        <button class="reset-btn" onclick="resetQuiz()">🔄 Làm lại</button>
+      </div>
+
+      <!-- SCORE -->
+      <div class="score-box" id="scoreBox">
+        <h2>KẾT QUẢ BÀI LÀM</h2>
+
+        <div class="score-number" id="scoreNumber">0 / 30</div>
+
+        <div class="score-message" id="scoreMessage"></div>
+      </div>
+    </main>
+
+    <!-- BOTTOM NAVIGATION -->
+    <div class="bottom-nav">
+      <a href="course11.html" class="lesson-btn"> ← Về bài giảng </a>
+
+      <a href="course11.html" class="home-btn"> ⌂ Trang chủ </a>
+    </div>
+
+    <script>
+      let mcCorrect = 0;
+      let fillCorrect = 0;
+
+      let answeredMC = new Set();
+      let answeredFill = new Set();
+
+      /* =========================
+       GIẢI THÍCH 15 CÂU TRẮC NGHIỆM
+    ========================= */
+
+      const mcExplanations = {
+        1: "Đáp án đúng là development. Sau tính từ rapid cần một danh từ. Development có nghĩa là sự phát triển.",
+
+        2: "Đáp án đúng là correctly. Từ này bổ nghĩa cho động từ answered nên cần trạng từ. Correctly có nghĩa là một cách chính xác.",
+
+        3: "Đáp án đúng là beneficial. Sau very cần một tính từ. Beneficial có nghĩa là có lợi, có ích.",
+
+        4: "Đáp án đúng là excited. Câu nói về cảm xúc của các học sinh nên dùng tính từ đuôi -ed. Excited có nghĩa là cảm thấy phấn khích.",
+
+        5: "Đáp án đúng là interesting. Bộ phim tài liệu là nguyên nhân tạo ra cảm giác thú vị nên dùng tính từ đuôi -ing.",
+
+        6: "Đáp án đúng là environment. Sau tính từ natural cần một danh từ. Environment có nghĩa là môi trường.",
+
+        7: "Đáp án đúng là successfully. Từ này bổ nghĩa cho động từ completed nên cần trạng từ. Successfully có nghĩa là thành công.",
+
+        8: "Đáp án đúng là impolite. Câu nói về việc để điện thoại bật trong một cuộc họp quan trọng là một hành động bất lịch sự. Impolite là tính từ mang nghĩa không lịch sự.",
+
+        9: "Đáp án đúng là useful. Sau very và trước danh từ advice cần một tính từ. Useful có nghĩa là hữu ích.",
+
+        10: "Đáp án đúng là studying. Sau giới từ for, trong cấu trúc chỉ mục đích, ta dùng danh động từ V-ing. Studying có nghĩa là việc học.",
+
+        11: "Đáp án đúng là decision. Sau tính từ sở hữu Her cần một danh từ. Decision có nghĩa là quyết định.",
+
+        12: "Đáp án đúng là pollution. Sau cụm air cần danh từ chỉ sự ô nhiễm. Pollution có nghĩa là sự ô nhiễm.",
+
+        13: "Đáp án đúng là clearly. Từ này bổ nghĩa cho động từ explained nên cần trạng từ. Clearly có nghĩa là một cách rõ ràng.",
+
+        14: "Đáp án đúng là aware. Cấu trúc đúng là become/be + aware of something, nghĩa là nhận thức được điều gì.",
+
+        15: "Đáp án đúng là creativity. Sau great cần một danh từ. Creativity có nghĩa là sự sáng tạo.",
+      };
+
+      /* =========================
+       KIỂM TRA TRẮC NGHIỆM
+    ========================= */
+
+      function checkMC(button, correctAnswer) {
+        const question = button.closest(".question");
+
+        if (question.classList.contains("answered")) {
+          return;
+        }
+
+        question.classList.add("answered");
+
+        const buttons = question.querySelectorAll(".option");
+
+        buttons.forEach((btn) => {
+          btn.classList.add("disabled");
+        });
+
+        const selectedAnswer = button.textContent.trim().charAt(0);
+
+        const questionNumber = parseInt(
+          question
+            .querySelector(".question-number")
+            .textContent.replace(/\D/g, ""),
+        );
+
+        const feedback = question.querySelector(".feedback");
+
+        const feedbackTitle = feedback.querySelector("strong");
+
+        const feedbackText = feedback.querySelector("span");
+
+        if (selectedAnswer === correctAnswer) {
+          button.classList.add("correct");
+
+          feedback.classList.add("show", "correct-feedback");
+
+          feedbackTitle.textContent = "✓ Chính xác!";
+
+          feedbackText.textContent = mcExplanations[questionNumber];
+
+          mcCorrect++;
+        } else {
+          button.classList.add("wrong");
+
+          buttons.forEach((btn) => {
+            if (btn.textContent.trim().charAt(0) === correctAnswer) {
+              btn.classList.add("correct");
+            }
+          });
+
+          feedback.classList.add("show", "wrong-feedback");
+
+          feedbackTitle.textContent = "✗ Chưa chính xác!";
+
+          feedbackText.textContent =
+            mcExplanations[questionNumber] +
+            " Hãy chú ý đến vị trí của từ trong câu để xác định từ loại.";
+        }
+
+        answeredMC.add(questionNumber);
+      }
+
+      /* =========================
+       GIẢI THÍCH PHẦN TỰ ĐIỀN
+    ========================= */
+
+      const fillExplanations = {
+        16: "Development là danh từ của develop. Sau mạo từ The và tính từ rapid cần một danh từ.",
+
+        17: "Confidently là trạng từ của confident. Từ này bổ nghĩa cho động từ spoke nên cần trạng từ.",
+
+        18: "Healthy là tính từ của health. Cấu trúc healthy lifestyle nghĩa là lối sống lành mạnh.",
+
+        19: "Excited là tính từ đuôi -ed, dùng để mô tả cảm xúc của con người. Các học sinh cảm thấy phấn khích.",
+
+        20: "Careful là tính từ của care. Sau be more cần một tính từ. Careful có nghĩa là cẩn thận.",
+
+        21: "Benefits là danh từ số nhiều của benefit. Sau many cần danh từ số nhiều.",
+
+        22: "Difference là danh từ của differ. Cấu trúc the difference between A and B nghĩa là sự khác biệt giữa A và B.",
+
+        23: "Success là danh từ của succeed. Sau great cần một danh từ. Success có nghĩa là sự thành công.",
+
+        24: "Unrealistic là tính từ mang nghĩa không thực tế. Nội dung câu cho thấy việc mong mọi người luôn đồng ý với mình là điều không thực tế.",
+
+        25: "Environmental là tính từ của environment. Cụm environmental activity nghĩa là hoạt động liên quan đến môi trường.",
+
+        26: "Impressive là tính từ của impress. Sau very và trước danh từ speech cần một tính từ. Impressive có nghĩa là ấn tượng.",
+
+        27: "Improved là dạng quá khứ phân từ của improve. Sau has greatly cần động từ ở dạng phân từ II để tạo thì hiện tại hoàn thành.",
+
+        28: "Irresponsible là tính từ mang nghĩa vô trách nhiệm. Nó bổ nghĩa cho danh từ behavior.",
+
+        29: "Carefully là trạng từ của careful. Từ này bổ nghĩa cho động từ listened nên cần trạng từ.",
+
+        30: "Successfully là trạng từ của success. Từ này bổ nghĩa cho động từ completed nên cần trạng từ.",
+      };
+
+      /* =========================
+       KIỂM TRA TỰ ĐIỀN
+    ========================= */
+
+      function checkFill(button, correctAnswer) {
+        const question = button.closest(".fill-question");
+
+        if (question.classList.contains("answered")) {
+          return;
+        }
+
+        const input = question.querySelector(".answer-input");
+
+        const userAnswer = input.value.trim().toLowerCase();
+
+        if (userAnswer === "") {
+          alert("Vui lòng nhập đáp án trước khi kiểm tra.");
+
+          input.focus();
+
+          return;
+        }
+
+        const questionNumber = parseInt(
+          question
+            .querySelector(".question-number")
+            .textContent.replace(/\D/g, ""),
+        );
+
+        const feedback = question.querySelector(".feedback");
+
+        const feedbackTitle = feedback.querySelector("strong");
+
+        const feedbackText = feedback.querySelector("span");
+
+        question.classList.add("answered");
+
+        input.disabled = true;
+
+        button.disabled = true;
+
+        if (userAnswer === correctAnswer) {
+          input.style.borderColor = "#22c55e";
+
+          feedback.classList.add("show", "correct-feedback");
+
+          feedbackTitle.textContent = "✓ Chính xác!";
+
+          feedbackText.textContent = fillExplanations[questionNumber];
+
+          fillCorrect++;
+        } else {
+          input.style.borderColor = "#ef4444";
+
+          feedback.classList.add("show", "wrong-feedback");
+
+          feedbackTitle.textContent = "✗ Chưa chính xác!";
+
+          feedbackText.textContent =
+            "Đáp án đúng là: " +
+            correctAnswer +
+            ". " +
+            fillExplanations[questionNumber];
+        }
+
+        answeredFill.add(questionNumber);
+      }
+
+      /* =========================
+       TÍNH ĐIỂM
+    ========================= */
+
+      function calculateScore() {
+        const totalAnswered = answeredMC.size + answeredFill.size;
+
+        if (totalAnswered < 30) {
+          alert(
+            "Bạn chưa hoàn thành tất cả 30 câu. " +
+              "Hãy làm hết bài trước khi xem điểm.",
+          );
+
+          return;
+        }
+
+        const totalScore = mcCorrect + fillCorrect;
+
+        const percentage = Math.round((totalScore / 30) * 100);
+
+        const scoreBox = document.getElementById("scoreBox");
+
+        const scoreNumber = document.getElementById("scoreNumber");
+
+        const scoreMessage = document.getElementById("scoreMessage");
+
+        scoreNumber.textContent = totalScore + " / 30";
+
+        if (percentage >= 90) {
+          scoreMessage.textContent =
+            "Xuất sắc! Bạn đã nắm rất vững kiến thức Word Form.";
+        } else if (percentage >= 75) {
+          scoreMessage.textContent =
+            "Rất tốt! Bạn đã hiểu khá chắc cách sử dụng Word Form.";
+        } else if (percentage >= 60) {
+          scoreMessage.textContent =
+            "Khá tốt! Hãy xem lại các dạng từ và luyện thêm.";
+        } else {
+          scoreMessage.textContent =
+            "Bạn nên xem lại bài giảng và luyện tập thêm về Word Form.";
+        }
+
+        scoreBox.classList.add("show");
+
+        scoreBox.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }
+
+      /* =========================
+       LÀM LẠI
+    ========================= */
+
+      function resetQuiz() {
+        if (!confirm("Bạn có chắc muốn làm lại toàn bộ bài không?")) {
+          return;
+        }
+
+        location.reload();
+      }
+    </script>
+  </body>
+</html>
+```

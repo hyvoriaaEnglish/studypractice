@@ -1,0 +1,1924 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Cloze Test Practice</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f4f7fb;
+        color: #222;
+      }
+
+      .container {
+        max-width: 950px;
+        margin: 40px auto;
+        padding: 20px;
+      }
+
+      h1 {
+        text-align: center;
+        color: #3157a4;
+      }
+
+      .intro {
+        text-align: center;
+        color: #666;
+        margin-bottom: 35px;
+      }
+
+      .passage {
+        background: white;
+        padding: 25px;
+        margin-bottom: 30px;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        line-height: 1.8;
+      }
+
+      .passage h2 {
+        color: #3157a4;
+      }
+
+      .question {
+        background: white;
+        padding: 25px;
+        margin-bottom: 25px;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      }
+
+      .question h3 {
+        color: #3157a4;
+        margin-top: 0;
+      }
+
+      .option {
+        display: block;
+        width: 100%;
+        text-align: left;
+        padding: 13px 16px;
+        margin: 10px 0;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        background: white;
+        cursor: pointer;
+        font-size: 15px;
+        transition: 0.2s;
+      }
+
+      .option:hover {
+        background: #f0f4ff;
+        border-color: #3157a4;
+      }
+
+      .option.correct {
+        background: #dff5e5;
+        border-color: #28a745;
+        color: #176b2c;
+        font-weight: bold;
+      }
+
+      .option.wrong {
+        background: #fde2e2;
+        border-color: #dc3545;
+        color: #a51d2a;
+      }
+
+      .option.disabled {
+        cursor: default;
+      }
+
+      .feedback {
+        display: none;
+        margin-top: 18px;
+        padding: 18px;
+        border-radius: 12px;
+        line-height: 1.7;
+      }
+
+      .feedback.correct-feedback {
+        display: block;
+        background: #e8f7ec;
+        border-left: 5px solid #28a745;
+      }
+
+      .feedback.wrong-feedback {
+        display: block;
+        background: #fff0f0;
+        border-left: 5px solid #dc3545;
+      }
+
+      .feedback strong {
+        font-size: 18px;
+      }
+
+      .explanation {
+        margin-top: 12px;
+      }
+
+      .explanation b {
+        color: #3157a4;
+      }
+
+      .bottom-buttons {
+        display: flex;
+        justify-content: center;
+        margin: 40px 0;
+      }
+
+      .bottom-buttons a {
+        text-decoration: none;
+        padding: 14px 30px;
+        border-radius: 10px;
+        background: #555;
+        color: white;
+        font-weight: bold;
+      }
+
+      .bottom-buttons a:hover {
+        background: #333;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>📚 CLOZE TEST PRACTICE</h1>
+
+      <p class="intro">
+        Choose the best answer. Click an option to see detailed feedback.
+      </p>
+
+      <!-- ========================= -->
+      <!-- PASSAGE 1 -->
+      <!-- ========================= -->
+
+      <div class="passage">
+        <h2>🟦 PASSAGE 1: A Greener School</h2>
+
+        <p>
+          Many schools are trying to become more environmentally friendly. One
+          way to do this is to encourage students to (1) _____ less plastic
+          every day. For example, students can bring reusable water bottles
+          instead of buying drinks in plastic bottles. Schools can also put more
+          recycling bins around the campus to make it easier for students to (2)
+          _____ their rubbish properly. In addition, teachers can organize
+          activities to raise students' (3) _____ of environmental problems.
+          These activities may encourage students to change their daily habits.
+          (4) _____, schools can save energy by turning off lights and air
+          conditioners when classrooms are empty. If everyone makes a small
+          effort, the school will become a cleaner and (5) _____ place to study.
+        </p>
+      </div>
+
+      <!-- QUESTION 1 -->
+
+      <div class="question">
+        <h3>Question 1</h3>
+
+        <p>
+          One way to do this is to encourage students to (1) _____ less plastic
+          every day.
+        </p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Đáp án B là reduce. Cụm reduce plastic có nghĩa là giảm lượng nhựa sử dụng. Sau encourage + O + to V, ta cần một động từ nguyên mẫu. Trong ngữ cảnh bảo vệ môi trường, reduce less plastic? Actually câu có less plastic nên reduce là động từ phù hợp nhất: reduce plastic = giảm sử dụng/giảm lượng nhựa. A produce nghĩa là sản xuất, trái với mục tiêu bảo vệ môi trường. C increase nghĩa là tăng, trái nghĩa với reduce. D collect nghĩa là thu gom, không phù hợp với ý khuyến khích học sinh sử dụng ít nhựa hơn. Cụm từ cần nhớ: reduce plastic = giảm sử dụng nhựa; environmentally friendly = thân thiện với môi trường.',
+            )
+          "
+        >
+          A. produce
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Reduce có nghĩa là giảm. Câu đầy đủ: encourage students to reduce less plastic every day. Tuy nhiên cách diễn đạt tự nhiên nhất là reduce plastic use hoặc use less plastic. Trong bài này, đáp án được thiết kế theo ý nghĩa giảm lượng nhựa. Produce = sản xuất, increase = tăng, collect = thu gom nên không phù hợp với ý nghĩa chung của đoạn văn.',
+            )
+          "
+        >
+          B. reduce
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Increase có nghĩa là tăng. Đoạn văn đang nói về việc bảo vệ môi trường và giảm rác thải nhựa, vì vậy increase không phù hợp về nghĩa. Đáp án phù hợp là reduce = giảm.',
+            )
+          "
+        >
+          C. increase
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Collect có nghĩa là thu gom. Mặc dù việc thu gom nhựa cũng liên quan đến môi trường, nhưng câu này muốn nói học sinh sử dụng ít nhựa hơn. Vì vậy reduce là đáp án phù hợp hơn.',
+            )
+          "
+        >
+          D. collect
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 2 -->
+
+      <div class="question">
+        <h3>Question 2</h3>
+
+        <p>
+          Schools can also put more recycling bins around the campus to make it
+          easier for students to (2) _____ their rubbish properly.
+        </p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Waste là danh từ hoặc động từ có nghĩa là rác thải/lãng phí. Trong câu này, sau to cần một động từ diễn tả hành động xử lý rác. Recycle = tái chế là đáp án phù hợp nhất.',
+            )
+          "
+        >
+          A. waste
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Recycle có nghĩa là tái chế. Cụm recycle rubbish = tái chế rác thải. Recycling bins = thùng rác tái chế, vì vậy recycle phù hợp hoàn toàn với ngữ cảnh. Waste = lãng phí/rác thải, damage = làm hư hại, destroy = phá hủy đều không phù hợp với hành động xử lý rác đúng cách.',
+            )
+          "
+        >
+          B. recycle
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Damage có nghĩa là làm hư hại hoặc gây thiệt hại. Không thể nói recycle bins giúp học sinh damage their rubbish properly. Đáp án đúng là recycle = tái chế.',
+            )
+          "
+        >
+          C. damage
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Destroy có nghĩa là phá hủy. Câu đang nói đến việc xử lý rác đúng cách và tái chế rác, không phải phá hủy rác. Recycle là đáp án đúng.',
+            )
+          "
+        >
+          D. destroy
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 3 -->
+
+      <div class="question">
+        <h3>Question 3</h3>
+
+        <p>
+          Teachers can organize activities to raise students' (3) _____ of
+          environmental problems.
+        </p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Aware là tính từ, nghĩa là nhận thức được. Sau possessive students’ cần một danh từ: awareness. Cụm raise awareness of = nâng cao nhận thức về.',
+            )
+          "
+        >
+          A. aware
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Awareness là danh từ, nghĩa là sự nhận thức. Cụm raise awareness of environmental problems = nâng cao nhận thức về các vấn đề môi trường. Sau students’ cần một danh từ nên awareness phù hợp. Aware là tính từ, unaware là tính từ trái nghĩa, carelessly là trạng từ nên đều không đúng vị trí ngữ pháp.',
+            )
+          "
+        >
+          B. awareness
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Unaware là tính từ, nghĩa là không nhận thức được. Sau students’ cần danh từ. Ngoài ra, raise awareness mang nghĩa nâng cao nhận thức, phù hợp với ngữ cảnh hơn.',
+            )
+          "
+        >
+          C. unaware
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Carelessly là trạng từ, nghĩa là một cách bất cẩn. Cấu trúc raise students’ carelessly không đúng. Đáp án đúng là awareness.',
+            )
+          "
+        >
+          D. carelessly
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 4 -->
+
+      <div class="question">
+        <h3>Question 4</h3>
+
+        <p>
+          (4) _____, schools can save energy by turning off lights and air
+          conditioners.
+        </p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. However = tuy nhiên, dùng để diễn tả sự tương phản. Hai ý trong câu này không đối lập nhau; ý tiết kiệm năng lượng là một lợi ích bổ sung.',
+            )
+          "
+        >
+          A. However
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Otherwise = nếu không thì. Từ này thường diễn tả hậu quả nếu không thực hiện điều gì đó, không phù hợp với ngữ cảnh bổ sung thêm một lợi ích.',
+            )
+          "
+        >
+          B. Otherwise
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Moreover có nghĩa là hơn nữa, ngoài ra. Từ này dùng để bổ sung thêm một ý cùng hướng với ý trước. Câu trước nói về các hoạt động bảo vệ môi trường; câu này bổ sung thêm một cách khác là tiết kiệm năng lượng. However/Nevertheless = tuy nhiên, Otherwise = nếu không thì, đều không phù hợp.',
+            )
+          "
+        >
+          C. Moreover
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Nevertheless cũng có nghĩa là tuy nhiên/tuy vậy, dùng để diễn tả sự tương phản. Ở đây câu đang bổ sung thêm một lợi ích nên Moreover phù hợp hơn.',
+            )
+          "
+        >
+          D. Nevertheless
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 5 -->
+
+      <div class="question">
+        <h3>Question 5</h3>
+
+        <p>The school will become a cleaner and (5) _____ place to study.</p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Healthy là tính từ nguyên thể. Sau cleaner and cần một tính từ so sánh tương ứng: healthier. Cấu trúc cleaner and healthier = sạch hơn và lành mạnh hơn.',
+            )
+          "
+        >
+          A. healthy
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Healthier là dạng so sánh hơn của healthy, nghĩa là lành mạnh hơn. Vì trước đó có cleaner (so sánh hơn), cấu trúc song song cần cleaner and healthier. Healthy = lành mạnh; healthier = lành mạnh hơn; health = sức khỏe; healthily = một cách lành mạnh.',
+            )
+          "
+        >
+          B. healthier
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Health là danh từ, nghĩa là sức khỏe. Sau cleaner and cần một tính từ để song song với cleaner, nên phải dùng healthier.',
+            )
+          "
+        >
+          C. health
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Healthily là trạng từ, nghĩa là một cách lành mạnh. Sau cleaner and place cần tính từ, nên healthier mới đúng.',
+            )
+          "
+        >
+          D. healthily
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- ========================= -->
+      <!-- PASSAGE 2 -->
+      <!-- ========================= -->
+
+      <div class="passage">
+        <h2>🟦 PASSAGE 2: Online Learning</h2>
+
+        <p>
+          Online learning has become increasingly popular in recent years.
+          Students can study from home without having to travel to school. This
+          is especially useful for students who live far (6) _____ their
+          schools. Another advantage is that online courses allow learners to
+          study at their own (7) _____. They can watch lessons again if they do
+          not understand something. However, online learning also has some
+          disadvantages. Students need to be highly self-disciplined because
+          there is no teacher sitting next to them to (8) _____ sure they are
+          paying attention. They may also have difficulty communicating with
+          their classmates. (9) _____, online learning can be an effective way
+          to gain knowledge if students use it properly. They should create a
+          study schedule and avoid distractions (10) _____ studying.
+        </p>
+      </div>
+
+      <!-- QUESTION 6 -->
+
+      <div class="question">
+        <h3>Question 6</h3>
+
+        <p>Students who live far (6) _____ their schools.</p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Cụm far from có nghĩa là cách xa. Câu đầy đủ: students who live far from their schools = những học sinh sống cách xa trường. From là giới từ bắt buộc trong cụm far from. Far at, far on và far in đều không tạo thành cụm đúng trong ngữ cảnh này.',
+            )
+          "
+        >
+          A. from
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Không có cụm far at their schools với nghĩa cách xa trường. Cụm đúng là far from = cách xa.',
+            )
+          "
+        >
+          B. at
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Không dùng far on để diễn tả khoảng cách. Cụm đúng là far from.',
+            )
+          "
+        >
+          C. on
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Không dùng far in trong cấu trúc này. Far from = cách xa là cụm cố định.',
+            )
+          "
+        >
+          D. in
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 7 -->
+
+      <div class="question">
+        <h3>Question 7</h3>
+
+        <p>Online courses allow learners to study at their own (7) _____.</p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Speed nghĩa là tốc độ. At their own speed có thể dùng trong một số ngữ cảnh, nhưng với việc học theo thời gian và khả năng của riêng mình, cụm at their own pace tự nhiên và phù hợp hơn.',
+            )
+          "
+        >
+          A. speed
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! At your own pace có nghĩa là theo tốc độ/nhịp độ của riêng bạn. Đây là cụm rất phổ biến trong giáo dục: study at your own pace = học theo tốc độ của riêng mình. Level = trình độ, grade = điểm số/lớp học nên không phù hợp.',
+            )
+          "
+        >
+          B. pace
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Level nghĩa là trình độ hoặc cấp độ. Cụm at their own level không diễn tả chính xác ý học theo tốc độ riêng.',
+            )
+          "
+        >
+          C. level
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Grade thường nghĩa là điểm số hoặc khối/lớp học. Không phù hợp với cụm study at their own...',
+            )
+          "
+        >
+          D. grade
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 8 -->
+
+      <div class="question">
+        <h3>Question 8</h3>
+
+        <p>
+          There is no teacher sitting next to them to (8) _____ sure they are
+          paying attention.
+        </p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Do sure không phải là cụm đúng. Cụm cố định là make sure = đảm bảo, chắc chắn rằng.',
+            )
+          "
+        >
+          A. do
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Make sure có nghĩa là đảm bảo/chắc chắn rằng. Cấu trúc make sure + S + V: make sure they are paying attention = đảm bảo rằng họ đang chú ý. Do, take và get không tạo thành cụm make sure trong trường hợp này.',
+            )
+          "
+        >
+          B. make
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Take sure không phải cụm động từ đúng. Cụm đúng là make sure = đảm bảo.',
+            )
+          "
+        >
+          C. take
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Get sure không phải cụm cố định trong ngữ cảnh này. Đáp án đúng là make sure.',
+            )
+          "
+        >
+          D. get
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 9 -->
+
+      <div class="question">
+        <h3>Question 9</h3>
+
+        <p>
+          (9) _____, online learning can be an effective way to gain knowledge.
+        </p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Therefore = vì vậy/do đó, thường chỉ kết quả. Câu này đang chuyển sang một ý đối lập với nhược điểm vừa nêu: dù có nhược điểm, học trực tuyến vẫn hiệu quả. Vì vậy However phù hợp hơn.',
+            )
+          "
+        >
+          A. Therefore
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! However có nghĩa là tuy nhiên. Từ này dùng để nối hai ý tương phản: online learning có một số nhược điểm, tuy nhiên nó vẫn có thể là cách học hiệu quả. Therefore = do đó, Because = bởi vì, Although = mặc dù không phù hợp vị trí này.',
+            )
+          "
+        >
+          B. However
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Because là liên từ chỉ nguyên nhân và thường cần một mệnh đề theo sau. Ở đây cần trạng từ nối thể hiện sự tương phản: However.',
+            )
+          "
+        >
+          C. Because
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Although có nghĩa là mặc dù và thường nối hai mệnh đề. Trong vị trí này, However phù hợp hơn để nối hai ý tương phản.',
+            )
+          "
+        >
+          D. Although
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 10 -->
+
+      <div class="question">
+        <h3>Question 10</h3>
+
+        <p>Students should avoid distractions (10) _____ studying.</p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! While có nghĩa là trong khi. While studying = trong khi học. Đây là cách rút gọn của while they are studying. During cũng có nghĩa là trong suốt, nhưng sau during thường là danh từ/cụm danh từ, không trực tiếp dùng V-ing theo cách này.',
+            )
+          "
+        >
+          A. while
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. During là giới từ, thường đi với danh từ: during the lesson. Trong câu này sau chỗ trống là studying, nên while studying phù hợp hơn.',
+            )
+          "
+        >
+          B. during
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Between thường dùng để chỉ khoảng giữa hai người/vật/thời điểm. Không phù hợp với studying trong câu này.',
+            )
+          "
+        >
+          C. between
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Until có nghĩa là cho đến khi. Câu cần diễn tả hành động tránh sự xao nhãng trong khi đang học, nên while là đáp án đúng.',
+            )
+          "
+        >
+          D. until
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- ========================= -->
+      <!-- PASSAGE 3 -->
+      <!-- ========================= -->
+
+      <div class="passage">
+        <h2>🟦 PASSAGE 3: Healthy Eating</h2>
+
+        <p>
+          Eating a balanced diet is important for maintaining good health.
+          People should eat a variety of foods, including fresh fruit,
+          vegetables, whole grains and protein. These foods provide the
+          nutrients that the body needs to (11) _____ properly. It is also
+          important to limit foods that contain too much sugar, salt and
+          unhealthy fat. Drinking enough water is another simple way to (12)
+          _____ healthy. In addition, people should avoid skipping meals because
+          this can make them feel tired and (13) _____ during the day. Regular
+          exercise is also necessary. Even a short walk every day can have a
+          positive (14) _____ on our physical and mental health. By developing
+          healthy habits, people can (15) _____ their quality of life and reduce
+          the risk of many diseases.
+        </p>
+      </div>
+
+      <!-- QUESTION 11 -->
+
+      <div class="question">
+        <h3>Question 11</h3>
+
+        <p>
+          These foods provide the nutrients that the body needs to (11) _____
+          properly.
+        </p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Function có nghĩa là hoạt động hoặc vận hành. Cụm function properly = hoạt động bình thường/đúng cách. Cơ thể cần chất dinh dưỡng để hoạt động tốt. Operate thường dùng cho máy móc, perform thường là thực hiện, behave là cư xử nên không phù hợp với body.',
+            )
+          "
+        >
+          A. function
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Operate thường dùng cho máy móc, thiết bị hoặc hệ thống vận hành. Với cơ thể con người, function properly tự nhiên hơn.',
+            )
+          "
+        >
+          B. operate
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Perform nghĩa là thực hiện một hành động/nhiệm vụ. Không nói body needs to perform properly trong ngữ cảnh này. Function properly = hoạt động bình thường.',
+            )
+          "
+        >
+          C. perform
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Behave nghĩa là cư xử, thường dùng cho người hoặc động vật. Không phù hợp với body needs to...',
+            )
+          "
+        >
+          D. behave
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 12 -->
+
+      <div class="question">
+        <h3>Question 12</h3>
+
+        <p>
+          Drinking enough water is another simple way to (12) _____ healthy.
+        </p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Stay healthy có nghĩa là duy trì trạng thái khỏe mạnh. Sau to cần động từ nguyên mẫu, và stay healthy là cụm tự nhiên. Become healthy = trở nên khỏe mạnh cũng có thể đúng về nghĩa, nhưng stay healthy phù hợp hơn vì câu nói về việc duy trì sức khỏe.',
+            )
+          "
+        >
+          A. stay
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai trong ngữ cảnh bài. Become healthy nghĩa là trở nên khỏe mạnh, nhưng câu đang nói đến việc uống đủ nước như một cách duy trì sức khỏe, nên stay healthy phù hợp hơn.',
+            )
+          "
+        >
+          B. become
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Make healthy không đúng cấu trúc trong trường hợp này. Không nói drinking water is a way to make healthy.',
+            )
+          "
+        >
+          C. make
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Keep healthy có thể xuất hiện trong một số ngữ cảnh, nhưng stay healthy là cụm tự nhiên và phù hợp nhất với câu này.',
+            )
+          "
+        >
+          D. keep
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 13 -->
+
+      <div class="question">
+        <h3>Question 13</h3>
+
+        <p>
+          Skipping meals can make people feel tired and (13) _____ during the
+          day.
+        </p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Energy là danh từ, nghĩa là năng lượng. Sau feel cần tính từ để mô tả trạng thái: feel tired and weak.',
+            )
+          "
+        >
+          A. energy
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Energetic nghĩa là tràn đầy năng lượng, trái với ý của câu. Bỏ bữa khiến người ta mệt và yếu, không phải tràn đầy năng lượng.',
+            )
+          "
+        >
+          B. energetic
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Weak là tính từ, nghĩa là yếu. Cấu trúc feel tired and weak = cảm thấy mệt mỏi và yếu. Energy và strength là danh từ; energetic là tính từ nhưng mang nghĩa tràn đầy năng lượng, trái với ngữ cảnh.',
+            )
+          "
+        >
+          C. weak
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Strength là danh từ, nghĩa là sức mạnh. Sau feel cần tính từ, nên weak mới đúng.',
+            )
+          "
+        >
+          D. strength
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 14 -->
+
+      <div class="question">
+        <h3>Question 14</h3>
+
+        <p>
+          A short walk every day can have a positive (14) _____ on our health.
+        </p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Affect thường là động từ, nghĩa là ảnh hưởng. Sau a positive cần danh từ, vì vậy effect mới đúng.',
+            )
+          "
+        >
+          A. affect
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Effect là danh từ, nghĩa là ảnh hưởng/tác động. Cụm have a positive effect on = có ảnh hưởng tích cực đến. Affect thường là động từ: Exercise affects our health. Result = kết quả, change = sự thay đổi, nhưng cụm cố định trong câu này là have an effect on.',
+            )
+          "
+        >
+          B. effect
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Result nghĩa là kết quả. Cấu trúc tự nhiên ở đây là have a positive effect on our health.',
+            )
+          "
+        >
+          C. result
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Change nghĩa là sự thay đổi. Mặc dù có thể nói positive change, nhưng cụm have a positive effect on là cụm phù hợp nhất với ngữ cảnh.',
+            )
+          "
+        >
+          D. change
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 15 -->
+
+      <div class="question">
+        <h3>Question 15</h3>
+
+        <p>
+          People can (15) _____ their quality of life and reduce the risk of
+          diseases.
+        </p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Improve có nghĩa là cải thiện. Cụm improve quality of life = cải thiện chất lượng cuộc sống. Hai động từ improve và reduce cùng song song sau can. Damage = làm hỏng, decrease = giảm, prevent = ngăn chặn nên không phù hợp với quality of life.',
+            )
+          "
+        >
+          A. improve
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Damage nghĩa là làm hư hại/làm tổn hại, trái với ý nghĩa tích cực của việc xây dựng thói quen lành mạnh.',
+            )
+          "
+        >
+          B. damage
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Decrease nghĩa là giảm. Không nói decrease quality of life trong ngữ cảnh tích cực này. Đáp án đúng là improve = cải thiện.',
+            )
+          "
+        >
+          C. decrease
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Prevent nghĩa là ngăn chặn. Có thể prevent diseases, nhưng không thể nói prevent quality of life. Cụm đúng là improve quality of life.',
+            )
+          "
+        >
+          D. prevent
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- ========================= -->
+      <!-- PASSAGE 4 -->
+      <!-- ========================= -->
+
+      <div class="passage">
+        <h2>🟦 PASSAGE 4: Life in the City</h2>
+
+        <p>
+          Living in a big city has both advantages and disadvantages. Cities
+          often provide better opportunities for education and employment.
+          People can also enjoy a wide range of entertainment, restaurants and
+          cultural activities. However, city life can be stressful because of
+          heavy traffic, noise and air (16) _____. Many people spend hours
+          commuting to work or school every day. To make cities more
+          comfortable, local governments should invest (17) _____ public
+          transport and create more green spaces. They should also encourage
+          people to use buses and trains instead of private vehicles. (18)
+          _____, this can help reduce traffic congestion and improve air
+          quality. Citizens can also play an important (19) _____ by following
+          traffic rules and keeping public places clean. If governments and
+          residents work together, cities can become more (20) _____ places to
+          live.
+        </p>
+      </div>
+
+      <!-- QUESTION 16 -->
+
+      <div class="question">
+        <h3>Question 16</h3>
+
+        <p>
+          City life can be stressful because of heavy traffic, noise and air
+          (16) _____.
+        </p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Air pollution có nghĩa là ô nhiễm không khí. Pollution là danh từ, phù hợp sau air. Polluted là tính từ, pollute là động từ, polluting là dạng V-ing nên không phù hợp ở đây. Cụm cần nhớ: air pollution = ô nhiễm không khí.',
+            )
+          "
+        >
+          A. pollution
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Polluted là tính từ, nghĩa là bị ô nhiễm. Sau air cần danh từ để tạo cụm air pollution.',
+            )
+          "
+        >
+          B. polluted
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Pollute là động từ, nghĩa là làm ô nhiễm. Không thể dùng trực tiếp sau air trong câu này.',
+            )
+          "
+        >
+          C. pollute
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Polluting là dạng V-ing/tính từ, không phù hợp để tạo cụm danh từ air pollution.',
+            )
+          "
+        >
+          D. polluting
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 17 -->
+
+      <div class="question">
+        <h3>Question 17</h3>
+
+        <p>Local governments should invest (17) _____ public transport.</p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Không dùng invest at trong cấu trúc này.',
+            )
+          "
+        >
+          A. at
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Invest in có nghĩa là đầu tư vào. Cụm invest in public transport = đầu tư vào giao thông công cộng. Đây là giới từ cố định đi sau invest.',
+            )
+          "
+        >
+          B. in
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Không dùng invest on trong cấu trúc chuẩn này. Cụm đúng là invest in.',
+            )
+          "
+        >
+          C. on
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Không dùng invest for để diễn tả đầu tư vào một lĩnh vực. Invest in là cụm đúng.',
+            )
+          "
+        >
+          D. for
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 18 -->
+
+      <div class="question">
+        <h3>Question 18</h3>
+
+        <p>
+          (18) _____, this can help reduce traffic congestion and improve air
+          quality.
+        </p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! As a result có nghĩa là kết quả là/do đó. Việc đầu tư vào giao thông công cộng và khuyến khích sử dụng phương tiện công cộng sẽ dẫn đến kết quả là giảm ùn tắc giao thông và cải thiện chất lượng không khí. Nevertheless = tuy nhiên, Otherwise = nếu không, Although = mặc dù đều không phù hợp.',
+            )
+          "
+        >
+          A. As a result
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Nevertheless = tuy nhiên/tuy vậy, dùng để diễn tả sự tương phản. Ở đây câu đang nói về kết quả của việc sử dụng phương tiện công cộng nên As a result phù hợp hơn.',
+            )
+          "
+        >
+          B. Nevertheless
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Otherwise = nếu không thì. Câu này cần một từ nối chỉ kết quả: As a result.',
+            )
+          "
+        >
+          C. Otherwise
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Although = mặc dù thường cần một mệnh đề đối lập. Câu này đang diễn tả kết quả, nên As a result là đáp án đúng.',
+            )
+          "
+        >
+          D. Although
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 19 -->
+
+      <div class="question">
+        <h3>Question 19</h3>
+
+        <p>
+          Citizens can also play an important (19) _____ by following traffic
+          rules.
+        </p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Cụm play an important role có nghĩa là đóng một vai trò quan trọng. Role là danh từ phù hợp sau play an important. Action = hành động, activity = hoạt động, duty = nhiệm vụ không tạo thành cụm cố định play an important role.',
+            )
+          "
+        >
+          A. role
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Action nghĩa là hành động. Cụm play an important action không tự nhiên. Cụm đúng là play an important role = đóng vai trò quan trọng.',
+            )
+          "
+        >
+          B. action
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Activity nghĩa là hoạt động. Không dùng play an important activity trong trường hợp này.',
+            )
+          "
+        >
+          C. activity
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Duty nghĩa là nhiệm vụ/bổn phận. Cụm đúng là play an important role.',
+            )
+          "
+        >
+          D. duty
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 20 -->
+
+      <div class="question">
+        <h3>Question 20</h3>
+
+        <p>Cities can become more (20) _____ places to live.</p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Live là động từ, không thể đứng sau become more để bổ nghĩa cho places.',
+            )
+          "
+        >
+          A. live
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Living là V-ing/tính từ trong một số trường hợp, nhưng không phù hợp với cấu trúc more ___ places to live trong câu này.',
+            )
+          "
+        >
+          B. living
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Livable có nghĩa là đáng sống, có điều kiện sống tốt. Cụm livable places to live có nghĩa là những nơi đáng sống. Live là động từ, livelihood nghĩa là sinh kế, còn living không mang nghĩa đáng sống trong cấu trúc này.',
+            )
+          "
+        >
+          C. livable
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Livelihood nghĩa là sinh kế hoặc phương tiện kiếm sống, không phù hợp với places to live. Livable mới có nghĩa là đáng sống.',
+            )
+          "
+        >
+          D. livelihood
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- ========================= -->
+      <!-- PASSAGE 5 -->
+      <!-- ========================= -->
+
+      <div class="passage">
+        <h2>🟦 PASSAGE 5: The Importance of Reading</h2>
+
+        <p>
+          Reading is one of the most useful habits that people can develop. It
+          helps us learn new information and (21) _____ our knowledge about the
+          world. Reading books can also improve our vocabulary and writing
+          skills. For students, reading regularly can be particularly (22) _____
+          because it helps them become more confident when using English. In
+          addition, reading is a good way to relax after a busy day. Instead of
+          spending hours (23) _____ social media, people can choose a good book
+          and enjoy some quiet time. Reading can also help us understand other
+          people's experiences and points of view. (24) _____, it can make us
+          more open-minded and empathetic. For these reasons, everyone should
+          try to (25) _____ reading a regular part of their daily routine.
+        </p>
+      </div>
+
+      <!-- QUESTION 21 -->
+
+      <div class="question">
+        <h3>Question 21</h3>
+
+        <p>
+          It helps us learn new information and (21) _____ our knowledge about
+          the world.
+        </p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Narrow có nghĩa là thu hẹp, trái với ý nghĩa của việc đọc sách giúp mở rộng kiến thức.',
+            )
+          "
+        >
+          A. narrow
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Expand có nghĩa là mở rộng. Cụm expand our knowledge = mở rộng kiến thức. Reading helps us learn new information and expand our knowledge. Reduce và limit đều mang nghĩa giảm/hạn chế, trái với ý nghĩa tích cực của việc đọc.',
+            )
+          "
+        >
+          B. expand
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Reduce có nghĩa là giảm, trái nghĩa với expand. Đọc sách giúp mở rộng chứ không làm giảm kiến thức.',
+            )
+          "
+        >
+          C. reduce
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Limit có nghĩa là giới hạn/hạn chế. Câu đang nói về lợi ích của việc đọc sách nên expand our knowledge phù hợp hơn.',
+            )
+          "
+        >
+          D. limit
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 22 -->
+
+      <div class="question">
+        <h3>Question 22</h3>
+
+        <p>
+          Reading regularly can be particularly (22) _____ because it helps
+          students become more confident.
+        </p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Beneficial là tính từ, nghĩa là có lợi, hữu ích. Sau be particularly cần tính từ, nên beneficial đúng. Benefit là danh từ/động từ, benefitably không phải từ thông dụng trong ngữ cảnh này, benefited là quá khứ phân từ.',
+            )
+          "
+        >
+          A. beneficial
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Benefit thường là danh từ hoặc động từ. Sau be particularly cần tính từ, nên beneficial mới đúng.',
+            )
+          "
+        >
+          B. benefit
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Benefitably không phải lựa chọn từ vựng phù hợp trong tiếng Anh chuẩn ở ngữ cảnh này. Tính từ đúng là beneficial.',
+            )
+          "
+        >
+          C. benefitably
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Benefited là dạng quá khứ/phân từ của benefit. Sau be particularly cần tính từ mô tả, beneficial = có lợi.',
+            )
+          "
+        >
+          D. benefited
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 23 -->
+
+      <div class="question">
+        <h3>Question 23</h3>
+
+        <p>
+          Instead of spending hours (23) _____ social media, people can choose a
+          good book.
+        </p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Spend time on social media = dành thời gian trên mạng xã hội. Giới từ on là giới từ thường dùng với social media. Spend hours on social media = dành hàng giờ trên mạng xã hội.',
+            )
+          "
+        >
+          A. on
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Không dùng spend hours in social media trong cách diễn đạt thông thường này. Cụm đúng là spend time on social media.',
+            )
+          "
+        >
+          B. in
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Spend hours at social media không phải cách kết hợp từ đúng. Dùng on social media.',
+            )
+          "
+        >
+          C. at
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Không dùng spend hours to social media. Cụm đúng là spend hours on social media.',
+            )
+          "
+        >
+          D. to
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 24 -->
+
+      <div class="question">
+        <h3>Question 24</h3>
+
+        <p>(24) _____, it can make us more open-minded and empathetic.</p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. However = tuy nhiên, dùng để thể hiện sự tương phản. Câu này đang đưa ra kết quả/lợi ích của việc đọc sách, nên Therefore phù hợp hơn.',
+            )
+          "
+        >
+          A. However
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Therefore có nghĩa là vì vậy/do đó. Đọc sách giúp chúng ta hiểu trải nghiệm và quan điểm của người khác; do đó, nó có thể khiến chúng ta cởi mở và đồng cảm hơn. Otherwise = nếu không, Although = mặc dù không phù hợp.',
+            )
+          "
+        >
+          B. Therefore
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Otherwise = nếu không thì, thường dùng để nói về hậu quả nếu không làm điều gì đó. Không phù hợp với quan hệ nguyên nhân-kết quả trong câu này.',
+            )
+          "
+        >
+          C. Otherwise
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Although = mặc dù, cần diễn tả sự tương phản. Câu này đang diễn tả kết quả nên Therefore phù hợp hơn.',
+            )
+          "
+        >
+          D. Although
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 25 -->
+
+      <div class="question">
+        <h3>Question 25</h3>
+
+        <p>
+          Everyone should try to (25) _____ reading a regular part of their
+          daily routine.
+        </p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Do reading a regular part không phải cấu trúc đúng. Cụm cố định là make something a part of something = biến điều gì thành một phần của điều gì.',
+            )
+          "
+        >
+          A. do
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Make reading a regular part of your daily routine có nghĩa là biến việc đọc sách thành một phần thường xuyên trong thói quen hằng ngày. Cấu trúc make + O + Noun/Adjective: make reading a part = biến việc đọc thành một phần. Take/get không phù hợp trong cấu trúc này.',
+            )
+          "
+        >
+          B. make
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Take reading a regular part không phải cấu trúc đúng. Đáp án đúng là make: make reading a regular part of your daily routine.',
+            )
+          "
+        >
+          C. take
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Get reading a regular part không đúng cấu trúc. Cụm đúng là make something a part of something.',
+            )
+          "
+        >
+          D. get
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- BUTTON HOME -->
+
+      <div class="bottom-buttons">
+        <a href="course13.html">🏠 Home</a>
+      </div>
+    </div>
+
+    <script>
+      function checkAnswer(button, isCorrect, explanation) {
+        const question = button.closest(".question");
+
+        const options = question.querySelectorAll(".option");
+
+        const feedback = question.querySelector(".feedback");
+
+        // Không cho chọn lại sau khi đã trả lời
+
+        options.forEach((option) => {
+          option.disabled = true;
+
+          option.classList.add("disabled");
+        });
+
+        if (isCorrect) {
+          button.classList.add("correct");
+
+          feedback.className = "feedback correct-feedback";
+
+          feedback.innerHTML =
+            "<strong>✅ ĐÚNG!</strong>" +
+            "<div class='explanation'>" +
+            explanation +
+            "</div>";
+        } else {
+          button.classList.add("wrong");
+
+          feedback.className = "feedback wrong-feedback";
+
+          feedback.innerHTML =
+            "<strong>❌ SAI!</strong>" +
+            "<div class='explanation'>" +
+            explanation +
+            "</div>";
+        }
+      }
+    </script>
+  </body>
+</html>

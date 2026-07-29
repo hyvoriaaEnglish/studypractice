@@ -1,0 +1,3091 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Quiz 55 Phrasal Verbs B1-B2</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #eef2ff, #f8fafc);
+        color: #1e293b;
+        padding: 30px 15px;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: auto;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
+        overflow: hidden;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #4f46e5, #7c3aed);
+        color: white;
+        text-align: center;
+        padding: 30px 20px;
+      }
+
+      .header h1 {
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        opacity: 0.9;
+      }
+
+      .progress-container {
+        height: 8px;
+        background: #e5e7eb;
+      }
+
+      .progress-bar {
+        height: 100%;
+        width: 0%;
+        background: #22c55e;
+        transition: 0.3s;
+      }
+
+      .quiz {
+        padding: 30px;
+      }
+
+      .question {
+        background: #f8fafc;
+        border-radius: 15px;
+        padding: 22px;
+        margin-bottom: 25px;
+        border: 1px solid #e5e7eb;
+      }
+
+      .question h3 {
+        color: #4f46e5;
+        margin-bottom: 12px;
+      }
+
+      .question p {
+        font-size: 17px;
+        line-height: 1.6;
+        margin-bottom: 15px;
+      }
+
+      .option {
+        display: block;
+        width: 100%;
+        text-align: left;
+        background: white;
+        border: 2px solid #e5e7eb;
+        margin: 10px 0;
+        padding: 13px 15px;
+        border-radius: 9px;
+        cursor: pointer;
+        font-size: 15px;
+        transition: 0.2s;
+      }
+
+      .option:hover {
+        border-color: #4f46e5;
+        background: #eef2ff;
+      }
+
+      .option.correct {
+        background: #dcfce7;
+        border-color: #16a34a;
+        color: #166534;
+      }
+
+      .option.wrong {
+        background: #fee2e2;
+        border-color: #dc2626;
+        color: #991b1b;
+      }
+
+      .option:disabled {
+        cursor: not-allowed;
+      }
+
+      .feedback {
+        display: none;
+        margin-top: 15px;
+        padding: 15px;
+        border-radius: 10px;
+        line-height: 1.6;
+        background: #eef2ff;
+      }
+
+      .feedback.show {
+        display: block;
+      }
+
+      .result {
+        display: none;
+        margin: 30px;
+        padding: 25px;
+        text-align: center;
+        border-radius: 15px;
+        background: #f8fafc;
+      }
+
+      .result.show {
+        display: block;
+      }
+
+      .result h2 {
+        color: #4f46e5;
+        margin-bottom: 15px;
+      }
+
+      .home-btn,
+      .lesson-btn,
+      .retry-btn {
+        border: none;
+        padding: 13px 22px;
+        border-radius: 10px;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        margin: 8px;
+      }
+
+      .home-btn {
+        background: #0f172a;
+      }
+
+      .lesson-btn {
+        background: #4f46e5;
+      }
+
+      .retry-btn {
+        background: #16a34a;
+      }
+
+      @media (max-width: 600px) {
+        .quiz {
+          padding: 15px;
+        }
+
+        .question {
+          padding: 17px;
+        }
+
+        .question p {
+          font-size: 15px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>📝 Phrasal Verbs Quiz</h1>
+        <p>55 câu trắc nghiệm – Trình độ B1–B2</p>
+      </div>
+
+      <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+
+      <div class="quiz" id="quiz">
+        <!-- QUESTION 1 -->
+        <div class="question">
+          <h3>Question 1</h3>
+          <p>I usually ______ at 6 a.m. every morning.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Wake up = thức dậy. Câu có nghĩa: Tôi thường thức dậy lúc 6 giờ sáng mỗi ngày.',
+              )
+            "
+          >
+            A. wake up
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Get up cũng có nghĩa là ra khỏi giường, nhưng trong câu này đáp án được chọn là wake up = thức dậy.',
+              )
+            "
+          >
+            B. give up
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Look up = tra cứu thông tin, không phù hợp với ngữ cảnh nói về thói quen buổi sáng.',
+              )
+            "
+          >
+            C. look up
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Take off = cởi ra hoặc máy bay cất cánh, không phù hợp với câu.',
+              )
+            "
+          >
+            D. take off
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 2 -->
+        <div class="question">
+          <h3>Question 2</h3>
+          <p>Please ______ the lights before you leave the room.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Turn on = bật, trái nghĩa với ý cần tắt đèn.',
+              )
+            "
+          >
+            A. turn on
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Turn off = tắt. Câu có nghĩa: Hãy tắt đèn trước khi rời khỏi phòng.',
+              )
+            "
+          >
+            B. turn off
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Put on = mặc hoặc đeo một thứ gì đó.',
+              )
+            "
+          >
+            C. put on
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Pick up = nhặt lên hoặc đón ai đó.',
+              )
+            "
+          >
+            D. pick up
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 3 -->
+        <div class="question">
+          <h3>Question 3</h3>
+          <p>Don't forget to ______ your homework tomorrow.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Write down = ghi chép lại, không có nghĩa là nộp bài.',
+              )
+            "
+          >
+            A. write down
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Hand in = nộp bài hoặc nộp tài liệu. Câu có nghĩa: Đừng quên nộp bài tập vào ngày mai.',
+              )
+            "
+          >
+            B. hand in
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Find out = phát hiện hoặc tìm ra thông tin.',
+              )
+            "
+          >
+            C. find out
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Look up = tra cứu thông tin, thường dùng với từ điển hoặc Internet.',
+              )
+            "
+          >
+            D. look up
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 4 -->
+        <div class="question">
+          <h3>Question 4</h3>
+          <p>She ______ a brilliant idea for the school project.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Give up = từ bỏ, mang nghĩa ngược với việc nghĩ ra một ý tưởng.',
+              )
+            "
+          >
+            A. gave up
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Come up with = nghĩ ra, đưa ra một ý tưởng hoặc giải pháp. Câu có nghĩa: Cô ấy đã nghĩ ra một ý tưởng tuyệt vời cho dự án trường học.',
+              )
+            "
+          >
+            B. came up with
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Fell behind = tụt lại phía sau, không phù hợp với ý nghĩ ra ý tưởng.',
+              )
+            "
+          >
+            C. fell behind
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Ran out of = hết hoặc cạn kiệt một thứ gì đó.',
+              )
+            "
+          >
+            D. ran out of
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 5 -->
+        <div class="question">
+          <h3>Question 5</h3>
+          <p>My sister and I usually ______ each other very well.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Get along with = hòa thuận với ai. Câu có nghĩa: Tôi và chị/em gái thường rất hòa thuận với nhau.',
+              )
+            "
+          >
+            A. get along with
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Fall out with = cãi nhau hoặc bất hòa với ai, trái nghĩa với ngữ cảnh.',
+              )
+            "
+          >
+            B. fall out with
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Break up = chia tay, thường dùng cho các mối quan hệ tình cảm.',
+              )
+            "
+          >
+            C. break up
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Put off = trì hoãn, không liên quan đến quan hệ hòa thuận.',
+              )
+            "
+          >
+            D. put off
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 6 -->
+        <div class="question">
+          <h3>Question 6</h3>
+          <p>We have ______ sugar, so we need to buy some more.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Look for = tìm kiếm, không diễn tả việc một thứ đã hết.',
+              )
+            "
+          >
+            A. looked for
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Run out of = hết, cạn kiệt. Câu có nghĩa: Chúng ta đã hết đường nên cần mua thêm.',
+              )
+            "
+          >
+            B. run out of
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Turn into = biến thành một thứ khác.',
+              )
+            "
+          >
+            C. turned into
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Got over = vượt qua một khó khăn hoặc cảm xúc tiêu cực.',
+              )
+            "
+          >
+            D. got over
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 7 -->
+        <div class="question">
+          <h3>Question 7</h3>
+          <p>She is ______ her keys. She can't find them anywhere.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Look for = tìm kiếm. Câu có nghĩa: Cô ấy đang tìm chìa khóa nhưng không thể tìm thấy chúng ở đâu cả.',
+              )
+            "
+          >
+            A. looking for
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Looking after = chăm sóc ai hoặc vật nuôi.',
+              )
+            "
+          >
+            B. looking after
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Looking up = tra cứu thông tin.')
+            "
+          >
+            C. looking up
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Looking forward to = mong đợi điều gì đó trong tương lai.',
+              )
+            "
+          >
+            D. looking forward to
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 8 -->
+        <div class="question">
+          <h3>Question 8</h3>
+          <p>Can you ______ my little brother while I am away?</p>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Look for = tìm kiếm.')"
+          >
+            A. look for
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Look after = chăm sóc. Câu có nghĩa: Bạn có thể chăm sóc em trai tôi khi tôi đi vắng không?',
+              )
+            "
+          >
+            B. look after
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Look up = tra cứu thông tin.')
+            "
+          >
+            C. look up
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Look into = điều tra hoặc xem xét kỹ một vấn đề, không phải chăm sóc.',
+              )
+            "
+          >
+            D. look into
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 9 -->
+        <div class="question">
+          <h3>Question 9</h3>
+          <p>We should ______ this problem before it gets worse.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Deal with = giải quyết hoặc xử lý một vấn đề. Câu có nghĩa: Chúng ta nên giải quyết vấn đề này trước khi nó trở nên tồi tệ hơn.',
+              )
+            "
+          >
+            A. deal with
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Give up = từ bỏ, không phù hợp với việc giải quyết vấn đề.',
+              )
+            "
+          >
+            B. give up
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Put on = mặc hoặc đeo.')"
+          >
+            C. put on
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Grow up = lớn lên.')"
+          >
+            D. grow up
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 10 -->
+        <div class="question">
+          <h3>Question 10</h3>
+          <p>They ______ early to avoid the traffic.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Set off = khởi hành. Câu có nghĩa: Họ khởi hành sớm để tránh tắc đường.',
+              )
+            "
+          >
+            A. set off
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Check out = trả phòng hoặc kiểm tra/xem xét một thứ gì đó.',
+              )
+            "
+          >
+            B. checked out
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Got off = xuống xe hoặc tàu.')
+            "
+          >
+            C. got off
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Came back = quay trở lại.')"
+          >
+            D. came back
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 11 -->
+        <div class="question">
+          <h3>Question 11</h3>
+          <p>He needs to ______ the report before the meeting.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Go over = xem xét hoặc kiểm tra kỹ một tài liệu, nội dung. Câu có nghĩa: Anh ấy cần xem lại báo cáo trước cuộc họp.',
+              )
+            "
+          >
+            A. go over
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Go away = rời đi hoặc đi xa.')
+            "
+          >
+            B. go away
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Give up = từ bỏ.')"
+          >
+            C. give up
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Break up = chia tay hoặc làm gián đoạn.',
+              )
+            "
+          >
+            D. break up
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 12 -->
+        <div class="question">
+          <h3>Question 12</h3>
+          <p>
+            I don't know the meaning of this word. I'll ______ it ______ in the
+            dictionary.
+          </p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Look up = tra cứu thông tin, đặc biệt là từ trong từ điển. Cấu trúc: look up + something.',
+              )
+            "
+          >
+            A. look / up
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Look after = chăm sóc, không dùng để tra nghĩa từ.',
+              )
+            "
+          >
+            B. look / after
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Look for = tìm kiếm một người hoặc vật.',
+              )
+            "
+          >
+            C. look / for
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Look forward to = mong đợi, không có nghĩa là tra cứu.',
+              )
+            "
+          >
+            D. look / forward to
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 13 -->
+        <div class="question">
+          <h3>Question 13</h3>
+          <p>Don't ______ your homework until the last minute.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Carry out = thực hiện một kế hoạch hoặc nhiệm vụ.',
+              )
+            "
+          >
+            A. carry out
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Put off = trì hoãn. Câu có nghĩa: Đừng trì hoãn bài tập đến phút cuối cùng.',
+              )
+            "
+          >
+            B. put off
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Pick up = nhặt lên hoặc đón ai.')
+            "
+          >
+            C. pick up
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Take off = cởi ra hoặc cất cánh.')
+            "
+          >
+            D. take off
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 14 -->
+        <div class="question">
+          <h3>Question 14</h3>
+          <p>After the argument, they decided to ______.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Fall out = cãi nhau hoặc bất hòa, không phải làm hòa.',
+              )
+            "
+          >
+            A. fall out
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Make up = làm hòa sau khi cãi nhau. Câu có nghĩa: Sau cuộc tranh cãi, họ quyết định làm hòa.',
+              )
+            "
+          >
+            B. make up
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Break down = hỏng hoặc suy sụp.')
+            "
+          >
+            C. break down
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Move on = bước tiếp, chuyển sang một giai đoạn mới.',
+              )
+            "
+          >
+            D. move on
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 15 -->
+        <div class="question">
+          <h3>Question 15</h3>
+          <p>We need to ______ a solution to this problem.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Run out of = hết hoặc cạn kiệt.')
+            "
+          >
+            A. run out of
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Come up with = nghĩ ra hoặc đưa ra một ý tưởng, giải pháp. Câu có nghĩa: Chúng ta cần nghĩ ra một giải pháp cho vấn đề này.',
+              )
+            "
+          >
+            B. come up with
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Get off = xuống xe hoặc tàu.')
+            "
+          >
+            C. get off
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Put on = mặc hoặc đeo.')"
+          >
+            D. put on
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 16 -->
+        <div class="question">
+          <h3>Question 16</h3>
+          <p>She finally ______ her fear of speaking in public.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Get over = vượt qua một nỗi sợ, khó khăn hoặc cảm xúc tiêu cực. Câu có nghĩa: Cuối cùng cô ấy đã vượt qua nỗi sợ nói trước công chúng.',
+              )
+            "
+          >
+            A. got over
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Got on = lên xe hoặc tàu; cũng có thể dùng trong get on with = hòa thuận với.',
+              )
+            "
+          >
+            B. got on
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Got off = xuống xe hoặc tàu.')
+            "
+          >
+            C. got off
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Got up = đứng dậy hoặc ra khỏi giường.',
+              )
+            "
+          >
+            D. got up
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 17 -->
+        <div class="question">
+          <h3>Question 17</h3>
+          <p>Please ______ your shoes before entering the house.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Put on = mặc hoặc đeo vào.')
+            "
+          >
+            A. put on
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Take off = cởi ra. Câu có nghĩa: Hãy cởi giày trước khi vào nhà.',
+              )
+            "
+          >
+            B. take off
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Turn off = tắt thiết bị hoặc đèn.')
+            "
+          >
+            C. turn off
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Pick up = nhặt lên hoặc đón ai.')
+            "
+          >
+            D. pick up
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 18 -->
+        <div class="question">
+          <h3>Question 18</h3>
+          <p>Can you ______ me ______ at the station at 6 p.m.?</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Pick someone up = đón ai đó. Câu có nghĩa: Bạn có thể đón tôi ở ga lúc 6 giờ tối không?',
+              )
+            "
+          >
+            A. pick / up
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Drop off = đưa ai đó đến một địa điểm rồi để họ xuống, không mang nghĩa đón.',
+              )
+            "
+          >
+            B. drop / off
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Look / after = chăm sóc ai đó.')
+            "
+          >
+            C. look / after
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Take / off = cởi ra hoặc cất cánh.',
+              )
+            "
+          >
+            D. take / off
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 19 -->
+        <div class="question">
+          <h3>Question 19</h3>
+          <p>The old car suddenly ______ on the way home.</p>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Turned into = biến thành.')"
+          >
+            A. turned into
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Break down = bị hỏng, đặc biệt thường dùng cho xe cộ hoặc máy móc. Câu có nghĩa: Chiếc xe cũ đột nhiên bị hỏng trên đường về nhà.',
+              )
+            "
+          >
+            B. broke down
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Grew up = lớn lên.')"
+          >
+            C. grew up
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Set off = khởi hành.')"
+          >
+            D. set off
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 20 -->
+        <div class="question">
+          <h3>Question 20</h3>
+          <p>
+            Young people often find it difficult to ______ the latest
+            technology.
+          </p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Keep up with = theo kịp một sự thay đổi hoặc xu hướng. Câu có nghĩa: Người trẻ thường thấy khó theo kịp công nghệ mới nhất.',
+              )
+            "
+          >
+            A. keep up with
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Fall behind = tụt lại phía sau, trái nghĩa với việc theo kịp.',
+              )
+            "
+          >
+            B. fall behind
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Give up = từ bỏ.')"
+          >
+            C. give up
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Run out of = hết hoặc cạn kiệt.')
+            "
+          >
+            D. run out of
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 21 -->
+        <div class="question">
+          <h3>Question 21</h3>
+          <p>He ______ his younger brother when their parents are at work.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Look after = chăm sóc. Câu có nghĩa: Cậu ấy chăm sóc em trai khi bố mẹ đi làm.',
+              )
+            "
+          >
+            A. looks after
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Looks for = tìm kiếm.')"
+          >
+            B. looks for
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Looks up = tra cứu.')"
+          >
+            C. looks up
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Looks forward to = mong đợi.')
+            "
+          >
+            D. looks forward to
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 22 -->
+        <div class="question">
+          <h3>Question 22</h3>
+          <p>We should ______ plastic bags to protect the environment.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Cut down on = cắt giảm việc sử dụng một thứ gì đó. Câu có nghĩa: Chúng ta nên cắt giảm túi nhựa để bảo vệ môi trường.',
+              )
+            "
+          >
+            A. cut down on
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Turn into = biến thành.')"
+          >
+            B. turn into
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Pick up = nhặt lên hoặc đón ai.')
+            "
+          >
+            C. pick up
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Give out = phát hoặc phân phát.')
+            "
+          >
+            D. give out
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 23 -->
+        <div class="question">
+          <h3>Question 23</h3>
+          <p>The teacher ______ the worksheets to the students.</p>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Gave up = từ bỏ.')"
+          >
+            A. gave up
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Give out = phát hoặc phân phát. Câu có nghĩa: Giáo viên phát các phiếu bài tập cho học sinh.',
+              )
+            "
+          >
+            B. gave out
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Gave away = cho đi hoặc tặng miễn phí.',
+              )
+            "
+          >
+            C. gave away
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Gave back = trả lại.')"
+          >
+            D. gave back
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 24 -->
+        <div class="question">
+          <h3>Question 24</h3>
+          <p>She promised to ______ smoking for her health.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Give up = từ bỏ một thói quen hoặc hoạt động. Give up smoking = bỏ hút thuốc.',
+              )
+            "
+          >
+            A. give up
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Give out = phát hoặc phân phát.')
+            "
+          >
+            B. give out
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Give back = trả lại.')"
+          >
+            C. give back
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Give away = cho đi hoặc tặng.')
+            "
+          >
+            D. give away
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 25 -->
+        <div class="question">
+          <h3>Question 25</h3>
+          <p>I am really ______ my summer holiday.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Look forward to = mong đợi. Sau to trong cụm này dùng danh từ hoặc V-ing. Câu có nghĩa: Tôi thực sự mong đợi kỳ nghỉ hè.',
+              )
+            "
+          >
+            A. looking forward to
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Look for = tìm kiếm, không có nghĩa là mong đợi. Đáp án đúng là look forward to = mong đợi.',
+              )
+            "
+          >
+            B. looking for
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Looking after = chăm sóc.')"
+          >
+            C. looking after
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Looking up = tra cứu.')"
+          >
+            D. looking up
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 26 -->
+        <div class="question">
+          <h3>Question 26</h3>
+          <p>The students need to ______ the experiment carefully.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Carry out = thực hiện, tiến hành một nhiệm vụ hoặc thí nghiệm. Câu có nghĩa: Học sinh cần tiến hành thí nghiệm một cách cẩn thận.',
+              )
+            "
+          >
+            A. carry out
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Put off = trì hoãn.')"
+          >
+            B. put off
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Look after = chăm sóc.')"
+          >
+            C. look after
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Break up = chia tay hoặc làm gián đoạn.',
+              )
+            "
+          >
+            D. break up
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 27 -->
+        <div class="question">
+          <h3>Question 27</h3>
+          <p>She had to ______ the meeting because she was ill.</p>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Carry out = thực hiện.')"
+          >
+            A. carry out
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Put off = trì hoãn hoặc dời lại. Câu có nghĩa: Cô ấy phải hoãn cuộc họp vì bị ốm.',
+              )
+            "
+          >
+            B. put off
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Pick up = nhặt hoặc đón.')"
+          >
+            C. pick up
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Turn on = bật.')"
+          >
+            D. turn on
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 28 -->
+        <div class="question">
+          <h3>Question 28</h3>
+          <p>Could you ______ this word in the dictionary?</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Look up = tra cứu một từ hoặc thông tin trong từ điển, sách hoặc Internet.',
+              )
+            "
+          >
+            A. look up
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Look after = chăm sóc.')"
+          >
+            B. look after
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Look forward to = mong đợi.')
+            "
+          >
+            C. look forward to
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Look for = tìm kiếm một người hoặc vật.',
+              )
+            "
+          >
+            D. look for
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 29 -->
+        <div class="question">
+          <h3>Question 29</h3>
+          <p>We need to ______ why the computer isn't working.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Find out = tìm ra hoặc phát hiện thông tin. Câu có nghĩa: Chúng ta cần tìm ra tại sao máy tính không hoạt động.',
+              )
+            "
+          >
+            A. find out
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Give up = từ bỏ.')"
+          >
+            B. give up
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Take off = cởi ra hoặc cất cánh.')
+            "
+          >
+            C. take off
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Get off = xuống xe hoặc tàu.')
+            "
+          >
+            D. get off
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 30 -->
+        <div class="question">
+          <h3>Question 30</h3>
+          <p>
+            He is trying to ______ his classmates after missing several lessons.
+          </p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Catch up with = bắt kịp ai hoặc một nhóm sau khi bị tụt lại. Câu có nghĩa: Cậu ấy đang cố bắt kịp các bạn cùng lớp sau khi nghỉ nhiều tiết học.',
+              )
+            "
+          >
+            A. catch up with
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Fall behind = tụt lại phía sau.')
+            "
+          >
+            B. fall behind
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Break down = hỏng hoặc suy sụp.')
+            "
+          >
+            C. break down
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Turn into = biến thành.')"
+          >
+            D. turn into
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 31 -->
+        <div class="question">
+          <h3>Question 31</h3>
+          <p>If you don't study regularly, you may ______ your classmates.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Catch up with = bắt kịp, trái nghĩa với ý tụt lại.',
+              )
+            "
+          >
+            A. catch up with
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Fall behind = tụt lại phía sau. Câu có nghĩa: Nếu bạn không học thường xuyên, bạn có thể tụt lại phía sau các bạn cùng lớp.',
+              )
+            "
+          >
+            B. fall behind
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Keep up with = theo kịp.')"
+          >
+            C. keep up with
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Move on = bước tiếp hoặc chuyển sang điều mới.',
+              )
+            "
+          >
+            D. move on
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 32 -->
+        <div class="question">
+          <h3>Question 32</h3>
+          <p>Can you ______ a way to solve this problem?</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Figure out = tìm ra hoặc hiểu được cách giải quyết một vấn đề. Câu có nghĩa: Bạn có thể tìm ra cách giải quyết vấn đề này không?',
+              )
+            "
+          >
+            A. figure out
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Give up = từ bỏ.')"
+          >
+            B. give up
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Put on = mặc hoặc đeo.')"
+          >
+            C. put on
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Go away = rời đi hoặc đi xa.')
+            "
+          >
+            D. go away
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 33 -->
+        <div class="question">
+          <h3>Question 33</h3>
+          <p>He needs to ______ his stress before it affects his health.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Cope with = đối phó hoặc להתמודד với một vấn đề khó khăn. Câu có nghĩa: Anh ấy cần đối phó với căng thẳng trước khi nó ảnh hưởng đến sức khỏe.',
+              )
+            "
+          >
+            A. cope with
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Look up = tra cứu.')"
+          >
+            B. look up
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Take off = cởi ra hoặc cất cánh.')
+            "
+          >
+            C. take off
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Pick up = nhặt hoặc đón.')"
+          >
+            D. pick up
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 34 -->
+        <div class="question">
+          <h3>Question 34</h3>
+          <p>She doesn't ______ her new classmates very well.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Get on with = hòa thuận với ai. Đây là cách dùng tương đương với get along with.',
+              )
+            "
+          >
+            A. get on with
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Get off = xuống xe hoặc tàu.')
+            "
+          >
+            B. get off
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Get over = vượt qua một khó khăn hoặc cảm xúc.',
+              )
+            "
+          >
+            C. get over
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Get up = thức dậy hoặc đứng dậy.')
+            "
+          >
+            D. get up
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 35 -->
+        <div class="question">
+          <h3>Question 35</h3>
+          <p>The plane will ______ at 8 a.m.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Take off = cất cánh khi nói về máy bay. Câu có nghĩa: Máy bay sẽ cất cánh lúc 8 giờ sáng.',
+              )
+            "
+          >
+            A. take off
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Put on = mặc hoặc đeo.')"
+          >
+            B. put on
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Get off = xuống xe hoặc tàu.')
+            "
+          >
+            C. get off
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Turn off = tắt.')"
+          >
+            D. turn off
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 36 -->
+        <div class="question">
+          <h3>Question 36</h3>
+          <p>We need to ______ at 5 a.m. to catch the early train.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Get up = ra khỏi giường hoặc thức dậy. Câu có nghĩa: Chúng ta cần dậy lúc 5 giờ sáng để bắt chuyến tàu sớm.',
+              )
+            "
+          >
+            A. get up
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Get off = xuống xe hoặc tàu.')
+            "
+          >
+            B. get off
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Get over = vượt qua.')"
+          >
+            C. get over
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Get on = lên xe hoặc tàu.')"
+          >
+            D. get on
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 37 -->
+        <div class="question">
+          <h3>Question 37</h3>
+          <p>We need to ______ the train before it leaves.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Get on = lên xe, tàu hoặc phương tiện giao thông. Câu có nghĩa: Chúng ta cần lên tàu trước khi nó rời đi.',
+              )
+            "
+          >
+            A. get on
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Get off = xuống xe hoặc tàu.')
+            "
+          >
+            B. get off
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Set off = khởi hành.')"
+          >
+            C. set off
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Check out = trả phòng hoặc kiểm tra.',
+              )
+            "
+          >
+            D. check out
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 38 -->
+        <div class="question">
+          <h3>Question 38</h3>
+          <p>We need to ______ of the hotel by noon.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Check out = làm thủ tục trả phòng khách sạn. Câu có nghĩa: Chúng ta cần trả phòng khách sạn trước buổi trưa.',
+              )
+            "
+          >
+            A. check out
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Check in = làm thủ tục nhận phòng hoặc lên máy bay.',
+              )
+            "
+          >
+            B. check in
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Set off = khởi hành.')"
+          >
+            C. set off
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Pick up = đón hoặc nhặt lên.')
+            "
+          >
+            D. pick up
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 39 -->
+        <div class="question">
+          <h3>Question 39</h3>
+          <p>We arrived at the airport and immediately ______.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Check in = làm thủ tục tại sân bay hoặc nhận phòng khách sạn. Trong ngữ cảnh sân bay, check in là làm thủ tục trước chuyến bay.',
+              )
+            "
+          >
+            A. checked in
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Checked out = trả phòng khách sạn.',
+              )
+            "
+          >
+            B. checked out
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Got off = xuống phương tiện.')
+            "
+          >
+            C. got off
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Set off = khởi hành.')"
+          >
+            D. set off
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 40 -->
+        <div class="question">
+          <h3>Question 40</h3>
+          <p>She was born in Hanoi but ______ in Hai Phong.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Grow up = lớn lên. Câu có nghĩa: Cô ấy sinh ra ở Hà Nội nhưng lớn lên ở Hải Phòng.',
+              )
+            "
+          >
+            A. grew up
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Gave up = từ bỏ.')"
+          >
+            B. gave up
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Turned into = biến thành.')"
+          >
+            C. turned into
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Moved on = bước tiếp hoặc chuyển sang điều mới.',
+              )
+            "
+          >
+            D. moved on
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 41 -->
+        <div class="question">
+          <h3>Question 41</h3>
+          <p>The company has ______ several changes in recent years.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Bring about = gây ra hoặc đem lại một sự thay đổi. Câu có nghĩa: Công ty đã đem lại nhiều thay đổi trong những năm gần đây.',
+              )
+            "
+          >
+            A. brought about
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Brought up = đề cập hoặc nuôi dưỡng trẻ em.',
+              )
+            "
+          >
+            B. brought up
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Broken down = bị hỏng hoặc suy sụp.',
+              )
+            "
+          >
+            C. broken down
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Given up = từ bỏ.')"
+          >
+            D. given up
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 42 -->
+        <div class="question">
+          <h3>Question 42</h3>
+          <p>The little caterpillar will ______ a beautiful butterfly.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Turn into = biến thành. Câu có nghĩa: Con sâu nhỏ sẽ biến thành một con bướm xinh đẹp.',
+              )
+            "
+          >
+            A. turn into
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Turn off = tắt thiết bị.')"
+          >
+            B. turn off
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Turn on = bật thiết bị.')"
+          >
+            C. turn on
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Turn up = tăng âm lượng hoặc tăng mức độ.',
+              )
+            "
+          >
+            D. turn up
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 43 -->
+        <div class="question">
+          <h3>Question 43</h3>
+          <p>It's time to ______ and focus on the future.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Move on = bước tiếp, tiếp tục cuộc sống hoặc chuyển sang một giai đoạn mới. Câu có nghĩa: Đã đến lúc bước tiếp và tập trung vào tương lai.',
+              )
+            "
+          >
+            A. move on
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Move out = chuyển ra khỏi nhà.')
+            "
+          >
+            B. move out
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Give up = từ bỏ.')"
+          >
+            C. give up
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Go away = rời đi hoặc đi xa.')
+            "
+          >
+            D. go away
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 44 -->
+        <div class="question">
+          <h3>Question 44</h3>
+          <p>Could you ______ me ______ at school? I'm running late.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Drop someone off = đưa ai đó đến một địa điểm rồi cho họ xuống. Câu có nghĩa: Bạn có thể đưa tôi đến trường không? Tôi đang bị muộn.',
+              )
+            "
+          >
+            A. drop / off
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Pick someone up = đón ai đó, thường là đón bằng phương tiện.',
+              )
+            "
+          >
+            B. pick / up
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Look / after = chăm sóc.')"
+          >
+            C. look / after
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Get / over = vượt qua.')"
+          >
+            D. get / over
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 45 -->
+        <div class="question">
+          <h3>Question 45</h3>
+          <p>
+            My parents always encourage me not to ______ when things become
+            difficult.
+          </p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Give up = từ bỏ. Câu có nghĩa: Bố mẹ luôn động viên tôi không được bỏ cuộc khi mọi thứ trở nên khó khăn.',
+              )
+            "
+          >
+            A. give up
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Carry out = thực hiện.')"
+          >
+            B. carry out
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Look up = tra cứu.')"
+          >
+            C. look up
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Set off = khởi hành.')"
+          >
+            D. set off
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 46 -->
+        <div class="question">
+          <h3>Question 46</h3>
+          <p>We need to ______ the issue before making a decision.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Sort out = giải quyết hoặc sắp xếp một vấn đề. Câu có nghĩa: Chúng ta cần giải quyết vấn đề trước khi đưa ra quyết định.',
+              )
+            "
+          >
+            A. sort out
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Take off = cởi ra hoặc cất cánh.')
+            "
+          >
+            B. take off
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Put on = mặc hoặc đeo.')"
+          >
+            C. put on
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Get on = lên xe hoặc tàu.')"
+          >
+            D. get on
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 47 -->
+        <div class="question">
+          <h3>Question 47</h3>
+          <p>He couldn't ______ the pressure of his new job.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Cope with = đối phó với, chịu đựng và xử lý một tình huống khó khăn. Câu có nghĩa: Anh ấy không thể đối phó với áp lực của công việc mới.',
+              )
+            "
+          >
+            A. cope with
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Look for = tìm kiếm.')"
+          >
+            B. look for
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Turn into = biến thành.')"
+          >
+            C. turn into
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Pick up = nhặt hoặc đón.')"
+          >
+            D. pick up
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 48 -->
+        <div class="question">
+          <h3>Question 48</h3>
+          <p>We should ______ our use of electricity to save energy.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Cut down on = cắt giảm lượng sử dụng một thứ gì đó. Câu có nghĩa: Chúng ta nên cắt giảm việc sử dụng điện để tiết kiệm năng lượng.',
+              )
+            "
+          >
+            A. cut down on
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Give up = từ bỏ hoàn toàn, không phù hợp bằng cut down on trong ngữ cảnh giảm mức sử dụng.',
+              )
+            "
+          >
+            B. give up
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Pick up = nhặt lên hoặc đón.')
+            "
+          >
+            C. pick up
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Bring up = đề cập hoặc nuôi dưỡng.',
+              )
+            "
+          >
+            D. bring up
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 49 -->
+        <div class="question">
+          <h3>Question 49</h3>
+          <p>She ______ the topic of climate change during the discussion.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Bring up = đề cập hoặc đưa một chủ đề vào cuộc trò chuyện. Câu có nghĩa: Cô ấy đã đề cập đến chủ đề biến đổi khí hậu trong cuộc thảo luận.',
+              )
+            "
+          >
+            A. brought up
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Brought about = gây ra hoặc đem lại một sự thay đổi.',
+              )
+            "
+          >
+            B. brought about
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Broke down = bị hỏng hoặc suy sụp.',
+              )
+            "
+          >
+            C. broke down
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Came back = quay trở lại.')"
+          >
+            D. came back
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 50 -->
+        <div class="question">
+          <h3>Question 50</h3>
+          <p>
+            I need to ______ with my old friend because we haven't talked for
+            years.
+          </p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Get in touch with = liên lạc hoặc giữ liên lạc với ai. Câu có nghĩa: Tôi cần liên lạc lại với người bạn cũ vì chúng tôi đã nhiều năm không nói chuyện.',
+              )
+            "
+          >
+            A. get in touch
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Get over = vượt qua.')"
+          >
+            B. get over
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Get off = xuống xe hoặc tàu.')
+            "
+          >
+            C. get off
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Get up = thức dậy hoặc đứng dậy.')
+            "
+          >
+            D. get up
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 51 -->
+        <div class="question">
+          <h3>Question 51</h3>
+          <p>
+            After years of hard work, she finally ______ how to solve the
+            problem.
+          </p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Give up = từ bỏ, không phù hợp với việc tìm ra cách giải quyết vấn đề.',
+              )
+            "
+          >
+            A. gave up
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Work out = tìm ra cách giải quyết hoặc tìm ra đáp án. Câu có nghĩa: Sau nhiều năm làm việc chăm chỉ, cuối cùng cô ấy đã tìm ra cách giải quyết vấn đề.',
+              )
+            "
+          >
+            B. worked out
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Run out of = hết hoặc cạn kiệt một thứ gì đó.',
+              )
+            "
+          >
+            C. ran out of
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Fall behind = tụt lại phía sau.')
+            "
+          >
+            D. fell behind
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 52 -->
+        <div class="question">
+          <h3>Question 52</h3>
+          <p>Don't ______ the opportunity to learn something new.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Miss out on = bỏ lỡ một cơ hội hoặc trải nghiệm. Câu có nghĩa: Đừng bỏ lỡ cơ hội học điều gì đó mới. Đây là phrasal verb mở rộng rất phổ biến ở B1–B2.',
+              )
+            "
+          >
+            A. miss out on
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Put off = trì hoãn.')"
+          >
+            B. put off
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Turn off = tắt.')"
+          >
+            C. turn off
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Take off = cởi ra hoặc cất cánh.')
+            "
+          >
+            D. take off
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 53 -->
+        <div class="question">
+          <h3>Question 53</h3>
+          <p>The teacher asked us to ______ the important information.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Write down = ghi lại. Câu có nghĩa: Giáo viên yêu cầu chúng tôi ghi lại thông tin quan trọng.',
+              )
+            "
+          >
+            A. write down
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Throw away = vứt bỏ.')"
+          >
+            B. throw away
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Give up = từ bỏ.')"
+          >
+            C. give up
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Turn off = tắt.')"
+          >
+            D. turn off
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 54 -->
+        <div class="question">
+          <h3>Question 54</h3>
+          <p>After the holiday, we had to ______ to our normal routine.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Get back = quay trở lại. Câu có nghĩa: Sau kỳ nghỉ, chúng tôi phải quay lại thói quen bình thường.',
+              )
+            "
+          >
+            A. get back
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Give up = từ bỏ.')"
+          >
+            B. give up
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Take off = cởi ra hoặc cất cánh.')
+            "
+          >
+            C. take off
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(this, false, 'Sai. Break down = hỏng hoặc suy sụp.')
+            "
+          >
+            D. break down
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+
+        <!-- QUESTION 55 -->
+        <div class="question">
+          <h3>Question 55</h3>
+          <p>We should ______ our old clothes instead of throwing them away.</p>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'Đúng! Give away = cho hoặc tặng đồ cho người khác. Câu có nghĩa: Chúng ta nên tặng quần áo cũ thay vì vứt chúng đi.',
+              )
+            "
+          >
+            A. give away
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(this, false, 'Sai. Give up = từ bỏ.')"
+          >
+            B. give up
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Give out = phát hoặc phân phát, thường dùng khi một người phát đồ cho nhiều người.',
+              )
+            "
+          >
+            C. give out
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'Sai. Give back = trả lại cho người sở hữu.',
+              )
+            "
+          >
+            D. give back
+          </button>
+
+          <div class="feedback"></div>
+        </div>
+      </div>
+
+      <!-- RESULT -->
+      <div class="result" id="result">
+        <h2>🎉 Kết quả bài làm</h2>
+
+        <p id="scoreText"></p>
+
+        <p id="message"></p>
+
+        <br />
+
+        <button class="home-btn" onclick="goHome()">🏠 Home</button>
+
+        <button class="lesson-btn" onclick="goLesson()">
+          📚 Xem lại bài giảng
+        </button>
+
+        <button class="retry-btn" onclick="retryQuiz()">🔄 Làm lại</button>
+      </div>
+    </div>
+
+    <script>
+      let score = 0;
+      let answered = 0;
+
+      const totalQuestions = 55;
+
+      function checkAnswer(button, isCorrect, explanation) {
+        const question = button.closest(".question");
+
+        const buttons = question.querySelectorAll(".option");
+
+        const feedback = question.querySelector(".feedback");
+
+        // Không cho trả lời lại
+        if (question.dataset.answered === "true") {
+          return;
+        }
+
+        question.dataset.answered = "true";
+
+        answered++;
+
+        // Khóa toàn bộ đáp án
+        buttons.forEach((btn) => {
+          btn.disabled = true;
+        });
+
+        if (isCorrect) {
+          button.classList.add("correct");
+
+          score++;
+
+          feedback.innerHTML = "✅ <b>ĐÚNG!</b><br><br>" + explanation;
+        } else {
+          button.classList.add("wrong");
+
+          feedback.innerHTML = "❌ <b>SAI!</b><br><br>" + explanation;
+
+          // Tìm đáp án đúng
+          buttons.forEach((btn) => {
+            const onclickText = btn.getAttribute("onclick");
+
+            if (onclickText && onclickText.includes("true")) {
+              btn.classList.add("correct");
+            }
+          });
+        }
+
+        feedback.classList.add("show");
+
+        updateProgress();
+
+        if (answered === totalQuestions) {
+          setTimeout(showResult, 700);
+        }
+      }
+
+      function updateProgress() {
+        const progress = (answered / totalQuestions) * 100;
+
+        document.getElementById("progressBar").style.width = progress + "%";
+      }
+
+      function showResult() {
+        const result = document.getElementById("result");
+
+        const scoreText = document.getElementById("scoreText");
+
+        const message = document.getElementById("message");
+
+        scoreText.innerHTML =
+          "Bạn trả lời đúng <b>" + score + "/" + totalQuestions + "</b> câu.";
+
+        if (score >= 50) {
+          message.innerHTML =
+            "🏆 Xuất sắc! Bạn đã nắm rất chắc các Phrasal Verbs B1–B2.";
+        } else if (score >= 40) {
+          message.innerHTML =
+            "👏 Rất tốt! Bạn đã có nền tảng khá vững. Hãy ôn lại những câu sai.";
+        } else if (score >= 30) {
+          message.innerHTML =
+            "💪 Khá tốt! Bạn nên xem lại bài giảng và luyện tập thêm.";
+        } else {
+          message.innerHTML =
+            "📚 Bạn nên học lại bài giảng 55 Phrasal Verbs và làm bài lại.";
+        }
+
+        result.classList.add("show");
+
+        result.scrollIntoView({
+          behavior: "smooth",
+        });
+      }
+
+      function retryQuiz() {
+        location.reload();
+      }
+
+      function goHome() {
+        window.location.href = "course15.html";
+      }
+
+      function goLesson() {
+        window.location.href = "course15.html";
+      }
+    </script>
+  </body>
+</html>

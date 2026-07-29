@@ -1,0 +1,887 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>55 Phrasal Verbs B1-B2</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #eef2ff, #f8fafc);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #1e293b;
+      }
+
+      .container {
+        width: 92%;
+        max-width: 950px;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
+        overflow: hidden;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #4f46e5, #7c3aed);
+        color: white;
+        padding: 25px;
+        text-align: center;
+      }
+
+      .header h1 {
+        font-size: 28px;
+        margin-bottom: 8px;
+      }
+
+      .header p {
+        font-size: 16px;
+        opacity: 0.9;
+      }
+
+      .progress-container {
+        height: 8px;
+        background: #e5e7eb;
+      }
+
+      .progress-bar {
+        height: 100%;
+        width: 0%;
+        background: #8b5cf6;
+        transition: 0.3s;
+      }
+
+      .slide {
+        display: none;
+        padding: 40px;
+        min-height: 500px;
+        animation: fadeIn 0.4s ease;
+      }
+
+      .slide.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateX(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .slide h2 {
+        color: #4f46e5;
+        margin-bottom: 20px;
+        font-size: 25px;
+      }
+
+      .slide h3 {
+        color: #7c3aed;
+        margin: 20px 0 10px;
+      }
+
+      .slide p {
+        line-height: 1.7;
+        margin-bottom: 12px;
+      }
+
+      .slide ul {
+        margin: 15px 0 20px 25px;
+        line-height: 1.9;
+      }
+
+      .intro-box {
+        background: #eef2ff;
+        padding: 20px;
+        border-left: 5px solid #4f46e5;
+        border-radius: 10px;
+        margin: 20px 0;
+      }
+
+      .example {
+        background: #f8fafc;
+        border-left: 4px solid #8b5cf6;
+        padding: 15px;
+        margin: 12px 0;
+        border-radius: 8px;
+      }
+
+      .example strong {
+        color: #4f46e5;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+        font-size: 15px;
+      }
+
+      th {
+        background: #4f46e5;
+        color: white;
+        padding: 12px;
+        text-align: left;
+      }
+
+      td {
+        padding: 11px;
+        border-bottom: 1px solid #e5e7eb;
+      }
+
+      tr:nth-child(even) {
+        background: #f8fafc;
+      }
+
+      .highlight {
+        color: #7c3aed;
+        font-weight: bold;
+      }
+
+      .note {
+        background: #fff7ed;
+        border-left: 5px solid #f97316;
+        padding: 15px;
+        margin: 20px 0;
+        border-radius: 8px;
+      }
+
+      .footer {
+        padding: 20px;
+        border-top: 1px solid #e5e7eb;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .nav-buttons {
+        display: flex;
+        gap: 10px;
+      }
+
+      button {
+        border: none;
+        padding: 12px 22px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: bold;
+        transition: 0.2s;
+      }
+
+      button:hover {
+        transform: translateY(-2px);
+      }
+
+      .prev-btn {
+        background: #e5e7eb;
+        color: #1e293b;
+      }
+
+      .next-btn {
+        background: #4f46e5;
+        color: white;
+      }
+
+      .home-btn {
+        background: #0f172a;
+        color: white;
+      }
+
+      .quiz-btn {
+        background: #16a34a;
+        color: white;
+      }
+
+      .slide-number {
+        font-weight: bold;
+        color: #64748b;
+      }
+
+      @media (max-width: 700px) {
+        .slide {
+          padding: 25px 18px;
+          min-height: 550px;
+        }
+
+        .header h1 {
+          font-size: 22px;
+        }
+
+        table {
+          font-size: 13px;
+        }
+
+        .footer {
+          flex-direction: column;
+        }
+
+        .nav-buttons {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .nav-buttons button {
+          flex: 1;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>📚 55 Phrasal Verbs phổ biến B1–B2</h1>
+        <p>English Vocabulary Lesson</p>
+      </div>
+
+      <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+
+      <!-- SLIDE 1 -->
+      <div class="slide active">
+        <h2>📖 Phrasal Verb là gì?</h2>
+
+        <div class="intro-box">
+          <p>
+            <b>Phrasal verb</b> = Động từ + một tiểu từ (adverb/preposition).
+          </p>
+        </div>
+
+        <p>Nghĩa của phrasal verb thường khác với nghĩa của động từ gốc.</p>
+
+        <div class="example">
+          <strong>give</strong> = cho<br />
+          <strong>give up</strong> = từ bỏ
+        </div>
+
+        <div class="example">
+          <strong>look</strong> = nhìn<br />
+          <strong>look after</strong> = chăm sóc
+        </div>
+
+        <div class="note">
+          💡 Phrasal verbs xuất hiện rất nhiều trong bài đọc, bài nghe và bài
+          thi tiếng Anh.
+        </div>
+      </div>
+
+      <!-- SLIDE 2 -->
+      <div class="slide">
+        <h2>🟦 Daily Life – Cuộc sống hằng ngày</h2>
+
+        <table>
+          <tr>
+            <th>Phrasal Verb</th>
+            <th>Nghĩa</th>
+          </tr>
+          <tr>
+            <td>wake up</td>
+            <td>thức dậy</td>
+          </tr>
+          <tr>
+            <td>get up</td>
+            <td>ra khỏi giường</td>
+          </tr>
+          <tr>
+            <td>put on</td>
+            <td>mặc, đeo</td>
+          </tr>
+          <tr>
+            <td>take off</td>
+            <td>cởi ra; máy bay cất cánh</td>
+          </tr>
+          <tr>
+            <td>turn on</td>
+            <td>bật</td>
+          </tr>
+          <tr>
+            <td>turn off</td>
+            <td>tắt</td>
+          </tr>
+          <tr>
+            <td>pick up</td>
+            <td>nhặt lên; đón ai</td>
+          </tr>
+          <tr>
+            <td>throw away</td>
+            <td>vứt bỏ</td>
+          </tr>
+          <tr>
+            <td>clean up</td>
+            <td>dọn dẹp</td>
+          </tr>
+          <tr>
+            <td>tidy up</td>
+            <td>sắp xếp, dọn gọn</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- SLIDE 3 -->
+      <div class="slide">
+        <h2>🟦 Daily Life – Examples</h2>
+
+        <div class="example">
+          <strong>I usually wake up at 6 a.m.</strong><br />
+          → Tôi thường thức dậy lúc 6 giờ sáng.
+        </div>
+
+        <div class="example">
+          <strong>Please turn off the lights before leaving.</strong><br />
+          → Hãy tắt đèn trước khi rời đi.
+        </div>
+
+        <div class="example">
+          <strong>She picked up the book from the floor.</strong><br />
+          → Cô ấy nhặt quyển sách từ trên sàn.
+        </div>
+
+        <div class="example">
+          <strong>Don't throw away those old photos.</strong><br />
+          → Đừng vứt những bức ảnh cũ đó đi.
+        </div>
+      </div>
+
+      <!-- SLIDE 4 -->
+      <div class="slide">
+        <h2>🟩 Study & Work – Học tập và công việc</h2>
+
+        <table>
+          <tr>
+            <th>Phrasal Verb</th>
+            <th>Nghĩa</th>
+          </tr>
+          <tr>
+            <td>find out</td>
+            <td>tìm ra, phát hiện</td>
+          </tr>
+          <tr>
+            <td>look up</td>
+            <td>tra cứu</td>
+          </tr>
+          <tr>
+            <td>write down</td>
+            <td>ghi lại</td>
+          </tr>
+          <tr>
+            <td>hand in</td>
+            <td>nộp bài</td>
+          </tr>
+          <tr>
+            <td>go over</td>
+            <td>xem xét, ôn lại</td>
+          </tr>
+          <tr>
+            <td>catch up with</td>
+            <td>bắt kịp</td>
+          </tr>
+          <tr>
+            <td>fall behind</td>
+            <td>tụt lại phía sau</td>
+          </tr>
+          <tr>
+            <td>work out</td>
+            <td>tìm ra cách giải</td>
+          </tr>
+          <tr>
+            <td>carry out</td>
+            <td>thực hiện</td>
+          </tr>
+          <tr>
+            <td>come up with</td>
+            <td>nghĩ ra, đề xuất</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- SLIDE 5 -->
+      <div class="slide">
+        <h2>🟩 Study & Work – Examples</h2>
+
+        <div class="example">
+          <strong>I need to look up this word in the dictionary.</strong><br />
+          → Tôi cần tra từ này trong từ điển.
+        </div>
+
+        <div class="example">
+          <strong>Don't forget to hand in your homework.</strong><br />
+          → Đừng quên nộp bài tập về nhà.
+        </div>
+
+        <div class="example">
+          <strong>She came up with a great idea.</strong><br />
+          → Cô ấy đã nghĩ ra một ý tưởng tuyệt vời.
+        </div>
+
+        <div class="example">
+          <strong>The scientists carried out an experiment.</strong><br />
+          → Các nhà khoa học đã tiến hành một thí nghiệm.
+        </div>
+      </div>
+
+      <!-- SLIDE 6 -->
+      <div class="slide">
+        <h2>🟨 Communication & Relationships</h2>
+
+        <table>
+          <tr>
+            <th>Phrasal Verb</th>
+            <th>Nghĩa</th>
+          </tr>
+          <tr>
+            <td>get along with</td>
+            <td>hòa thuận với</td>
+          </tr>
+          <tr>
+            <td>get on with</td>
+            <td>hòa thuận với</td>
+          </tr>
+          <tr>
+            <td>fall out with</td>
+            <td>cãi nhau, bất hòa với</td>
+          </tr>
+          <tr>
+            <td>make up</td>
+            <td>làm hòa</td>
+          </tr>
+          <tr>
+            <td>break up</td>
+            <td>chia tay</td>
+          </tr>
+          <tr>
+            <td>bring up</td>
+            <td>đề cập; nuôi dưỡng</td>
+          </tr>
+          <tr>
+            <td>look after</td>
+            <td>chăm sóc</td>
+          </tr>
+          <tr>
+            <td>look for</td>
+            <td>tìm kiếm</td>
+          </tr>
+          <tr>
+            <td>look forward to</td>
+            <td>mong đợi</td>
+          </tr>
+          <tr>
+            <td>get in touch with</td>
+            <td>liên lạc với</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- SLIDE 7 -->
+      <div class="slide">
+        <h2>🟨 Communication – Examples</h2>
+
+        <div class="example">
+          <strong>I get along well with my classmates.</strong><br />
+          → Tôi hòa thuận với các bạn cùng lớp.
+        </div>
+
+        <div class="example">
+          <strong>She fell out with her best friend.</strong><br />
+          → Cô ấy đã cãi nhau với bạn thân.
+        </div>
+
+        <div class="example">
+          <strong>They argued yesterday, but they made up today.</strong><br />
+          → Họ đã cãi nhau hôm qua nhưng hôm nay đã làm hòa.
+        </div>
+
+        <div class="note">
+          ⚠️ <b>look forward to + V-ing</b><br /><br />
+          ✅ I look forward to <b>meeting</b> you.<br />
+          ❌ I look forward to meet you.
+        </div>
+      </div>
+
+      <!-- SLIDE 8 -->
+      <div class="slide">
+        <h2>🟧 Problems & Decisions</h2>
+
+        <table>
+          <tr>
+            <th>Phrasal Verb</th>
+            <th>Nghĩa</th>
+          </tr>
+          <tr>
+            <td>give up</td>
+            <td>từ bỏ</td>
+          </tr>
+          <tr>
+            <td>deal with</td>
+            <td>giải quyết, xử lý</td>
+          </tr>
+          <tr>
+            <td>cope with</td>
+            <td>đối phó với</td>
+          </tr>
+          <tr>
+            <td>run out of</td>
+            <td>hết, cạn kiệt</td>
+          </tr>
+          <tr>
+            <td>put off</td>
+            <td>trì hoãn</td>
+          </tr>
+          <tr>
+            <td>sort out</td>
+            <td>giải quyết, sắp xếp</td>
+          </tr>
+          <tr>
+            <td>figure out</td>
+            <td>hiểu ra, tìm ra cách</td>
+          </tr>
+          <tr>
+            <td>get over</td>
+            <td>vượt qua</td>
+          </tr>
+          <tr>
+            <td>break down</td>
+            <td>hỏng; suy sụp</td>
+          </tr>
+          <tr>
+            <td>cut down on</td>
+            <td>cắt giảm</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- SLIDE 9 -->
+      <div class="slide">
+        <h2>🟧 Problems – Examples</h2>
+
+        <div class="example">
+          <strong>Don't give up your dreams.</strong><br />
+          → Đừng từ bỏ ước mơ của bạn.
+        </div>
+
+        <div class="example">
+          <strong>We have run out of milk.</strong><br />
+          → Chúng ta đã hết sữa.
+        </div>
+
+        <div class="example">
+          <strong>You shouldn't put off your homework.</strong><br />
+          → Bạn không nên trì hoãn bài tập.
+        </div>
+
+        <div class="example">
+          <strong>I can't figure out how to solve this problem.</strong><br />
+          → Tôi không thể tìm ra cách giải quyết vấn đề này.
+        </div>
+
+        <div class="example">
+          <strong>She is trying to get over her disappointment.</strong><br />
+          → Cô ấy đang cố vượt qua sự thất vọng.
+        </div>
+      </div>
+
+      <!-- SLIDE 10 -->
+      <div class="slide">
+        <h2>🟥 Movement & Travel</h2>
+
+        <table>
+          <tr>
+            <th>Phrasal Verb</th>
+            <th>Nghĩa</th>
+          </tr>
+          <tr>
+            <td>set off</td>
+            <td>khởi hành</td>
+          </tr>
+          <tr>
+            <td>check in</td>
+            <td>làm thủ tục nhận phòng/lên máy bay</td>
+          </tr>
+          <tr>
+            <td>check out</td>
+            <td>trả phòng</td>
+          </tr>
+          <tr>
+            <td>get on</td>
+            <td>lên xe/tàu</td>
+          </tr>
+          <tr>
+            <td>get off</td>
+            <td>xuống xe/tàu</td>
+          </tr>
+          <tr>
+            <td>drop off</td>
+            <td>đưa ai đến; thả xuống</td>
+          </tr>
+          <tr>
+            <td>pick up</td>
+            <td>đón ai</td>
+          </tr>
+          <tr>
+            <td>stop over</td>
+            <td>dừng chân giữa hành trình</td>
+          </tr>
+          <tr>
+            <td>come back</td>
+            <td>quay trở lại</td>
+          </tr>
+          <tr>
+            <td>go away</td>
+            <td>đi xa, rời đi</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- SLIDE 11 -->
+      <div class="slide">
+        <h2>🟥 Travel – Examples</h2>
+
+        <div class="example">
+          <strong>We set off early in the morning.</strong><br />
+          → Chúng tôi khởi hành từ sáng sớm.
+        </div>
+
+        <div class="example">
+          <strong>What time do we need to check in?</strong><br />
+          → Chúng ta cần làm thủ tục lúc mấy giờ?
+        </div>
+
+        <div class="example">
+          <strong>I got off the bus at the next stop.</strong><br />
+          → Tôi xuống xe buýt ở trạm tiếp theo.
+        </div>
+
+        <div class="example">
+          <strong>I'll pick you up at 7 p.m.</strong><br />
+          → Tôi sẽ đón bạn lúc 7 giờ tối.
+        </div>
+      </div>
+
+      <!-- SLIDE 12 -->
+      <div class="slide">
+        <h2>🟪 Change & Progress</h2>
+
+        <table>
+          <tr>
+            <th>Phrasal Verb</th>
+            <th>Nghĩa</th>
+          </tr>
+          <tr>
+            <td>grow up</td>
+            <td>lớn lên</td>
+          </tr>
+          <tr>
+            <td>bring about</td>
+            <td>gây ra, đem lại</td>
+          </tr>
+          <tr>
+            <td>turn into</td>
+            <td>biến thành</td>
+          </tr>
+          <tr>
+            <td>keep up with</td>
+            <td>theo kịp</td>
+          </tr>
+          <tr>
+            <td>move on</td>
+            <td>tiếp tục tiến lên</td>
+          </tr>
+        </table>
+
+        <div class="example">
+          <strong>I grew up in a small town.</strong><br />
+          → Tôi lớn lên ở một thị trấn nhỏ.
+        </div>
+
+        <div class="example">
+          <strong>Technology has brought about many changes.</strong><br />
+          → Công nghệ đã mang lại nhiều thay đổi.
+        </div>
+      </div>
+
+      <!-- SLIDE 13 -->
+      <div class="slide">
+        <h2>⭐ 10 Phrasal Verbs cần nhớ nhất</h2>
+
+        <ol style="line-height: 2; margin-left: 25px">
+          <li><b>give up</b> → từ bỏ</li>
+          <li><b>look after</b> → chăm sóc</li>
+          <li><b>look for</b> → tìm kiếm</li>
+          <li><b>look forward to</b> → mong đợi</li>
+          <li><b>find out</b> → phát hiện, tìm ra</li>
+          <li><b>get along with</b> → hòa thuận với</li>
+          <li><b>deal with</b> → giải quyết</li>
+          <li><b>run out of</b> → hết</li>
+          <li><b>put off</b> → trì hoãn</li>
+          <li><b>come up with</b> → nghĩ ra</li>
+        </ol>
+
+        <div class="note">
+          💡 Hãy học phrasal verb theo cả cụm và đặt câu thay vì chỉ học nghĩa
+          tiếng Việt.
+        </div>
+      </div>
+
+      <!-- SLIDE 14 -->
+      <div class="slide">
+        <h2>⚠️ Những cặp dễ nhầm</h2>
+
+        <div class="example">
+          <strong>look for</strong> = tìm kiếm<br />
+          <strong>look after</strong> = chăm sóc
+        </div>
+
+        <div class="example">
+          <strong>put on</strong> = mặc vào<br />
+          <strong>take off</strong> = cởi ra
+        </div>
+
+        <div class="example">
+          <strong>get on</strong> = lên xe/tàu<br />
+          <strong>get off</strong> = xuống xe/tàu
+        </div>
+
+        <div class="example">
+          <strong>look up</strong> = tra cứu thông tin<br />
+          <strong>look for</strong> = tìm kiếm người/vật
+        </div>
+
+        <div class="example">
+          <strong>give up</strong> = từ bỏ<br />
+          <strong>give out</strong> = phát, phân phát
+        </div>
+      </div>
+
+      <!-- SLIDE 15 -->
+      <div class="slide">
+        <h2>🎯 Mẹo học Phrasal Verbs</h2>
+
+        <p>Đừng chỉ học:</p>
+
+        <div class="example">
+          <b>give up = từ bỏ</b>
+        </div>
+
+        <p>Hãy học theo cụm và ngữ cảnh:</p>
+
+        <div class="example">
+          <b>give up a bad habit</b> = từ bỏ một thói quen xấu
+        </div>
+
+        <div class="example"><b>give up smoking</b> = bỏ hút thuốc</div>
+
+        <div class="example"><b>give up your dream</b> = từ bỏ ước mơ</div>
+
+        <div class="intro-box">
+          🎉 Bạn đã hoàn thành bài giảng 55 Phrasal Verbs B1–B2!
+          <br /><br />
+          Hãy làm bài tập để kiểm tra mức độ ghi nhớ.
+        </div>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="footer">
+        <button class="home-btn" onclick="goHome()">🏠 Home</button>
+
+        <div class="nav-buttons">
+          <button class="prev-btn" onclick="prevSlide()">← Về</button>
+
+          <span class="slide-number" id="slideNumber"> Slide 1 / 15 </span>
+
+          <button class="next-btn" onclick="nextSlide()">Sang →</button>
+        </div>
+
+        <button class="quiz-btn" onclick="goQuiz()">📝 Làm bài tập</button>
+      </div>
+    </div>
+
+    <script>
+      let currentSlide = 0;
+
+      const slides = document.querySelectorAll(".slide");
+      const slideNumber = document.getElementById("slideNumber");
+      const progressBar = document.getElementById("progressBar");
+
+      function showSlide(index) {
+        if (index < 0) {
+          index = 0;
+        }
+
+        if (index >= slides.length) {
+          index = slides.length - 1;
+        }
+
+        currentSlide = index;
+
+        slides.forEach((slide, i) => {
+          slide.classList.remove("active");
+
+          if (i === currentSlide) {
+            slide.classList.add("active");
+          }
+        });
+
+        slideNumber.textContent =
+          "Slide " + (currentSlide + 1) + " / " + slides.length;
+
+        let progress = ((currentSlide + 1) / slides.length) * 100;
+
+        progressBar.style.width = progress + "%";
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+
+      function nextSlide() {
+        if (currentSlide < slides.length - 1) {
+          showSlide(currentSlide + 1);
+        }
+      }
+
+      function prevSlide() {
+        if (currentSlide > 0) {
+          showSlide(currentSlide - 1);
+        }
+      }
+
+      function goHome() {
+        window.location.href = "course15.html";
+      }
+
+      function goQuiz() {
+        window.location.href = "quiz15.html";
+      }
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "ArrowRight") {
+          nextSlide();
+        }
+
+        if (event.key === "ArrowLeft") {
+          prevSlide();
+        }
+      });
+
+      showSlide(0);
+    </script>
+  </body>
+</html>

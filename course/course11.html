@@ -1,0 +1,1217 @@
+```html
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Word Form - Hyvoria English</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: linear-gradient(135deg, #eef2ff, #f8fafc);
+        color: #1e293b;
+        min-height: 100vh;
+      }
+
+      /* HEADER */
+      header {
+        height: 70px;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 35px;
+        box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+
+      .logo {
+        font-size: 22px;
+        font-weight: 700;
+        color: #4f46e5;
+      }
+
+      .lesson-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #64748b;
+      }
+
+      /* PROGRESS */
+      .progress-container {
+        width: 100%;
+        height: 5px;
+        background: #e2e8f0;
+      }
+
+      .progress-bar {
+        height: 100%;
+        width: 0%;
+        background: #4f46e5;
+        transition: width 0.3s ease;
+      }
+
+      /* MAIN */
+      main {
+        max-width: 1000px;
+        margin: 35px auto;
+        padding: 0 20px;
+      }
+
+      .slide {
+        display: none;
+        background: white;
+        min-height: 590px;
+        border-radius: 20px;
+        padding: 45px 55px;
+        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+        animation: fadeIn 0.35s ease;
+      }
+
+      .slide.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateX(15px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      /* TYPOGRAPHY */
+      h1 {
+        color: #4f46e5;
+        font-size: 36px;
+        margin-bottom: 15px;
+      }
+
+      h2 {
+        color: #4338ca;
+        font-size: 28px;
+        margin-bottom: 25px;
+        border-bottom: 3px solid #e0e7ff;
+        padding-bottom: 12px;
+      }
+
+      h3 {
+        color: #3730a3;
+        margin: 20px 0 10px;
+      }
+
+      p {
+        font-size: 17px;
+        line-height: 1.7;
+        margin-bottom: 15px;
+      }
+
+      ul {
+        margin: 15px 0 20px 25px;
+      }
+
+      li {
+        font-size: 17px;
+        line-height: 1.8;
+        margin-bottom: 5px;
+      }
+
+      /* COVER */
+      .cover {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+
+      .cover h1 {
+        font-size: 48px;
+      }
+
+      .cover .subtitle {
+        font-size: 21px;
+        color: #64748b;
+        margin-top: 10px;
+      }
+
+      .badge {
+        display: inline-block;
+        margin-top: 25px;
+        padding: 8px 20px;
+        background: #eef2ff;
+        color: #4f46e5;
+        border-radius: 30px;
+        font-weight: 600;
+      }
+
+      /* BOX */
+      .box {
+        background: #f8fafc;
+        border-left: 5px solid #4f46e5;
+        padding: 18px 22px;
+        border-radius: 10px;
+        margin: 18px 0;
+      }
+
+      .example {
+        background: #eef2ff;
+        padding: 18px 22px;
+        border-radius: 12px;
+        margin: 15px 0;
+      }
+
+      .answer {
+        color: #4338ca;
+        font-weight: 700;
+      }
+
+      .warning {
+        background: #fff7ed;
+        border-left: 5px solid #f97316;
+        padding: 18px 22px;
+        border-radius: 10px;
+        margin: 20px 0;
+      }
+
+      .tip {
+        background: #ecfdf5;
+        border-left: 5px solid #10b981;
+        padding: 18px 22px;
+        border-radius: 10px;
+        margin: 20px 0;
+      }
+
+      /* TABLE */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 16px;
+      }
+
+      th {
+        background: #4f46e5;
+        color: white;
+        padding: 12px;
+        text-align: left;
+      }
+
+      td {
+        padding: 12px;
+        border-bottom: 1px solid #e2e8f0;
+      }
+
+      tr:nth-child(even) {
+        background: #f8fafc;
+      }
+
+      /* NAVIGATION */
+      .navigation {
+        max-width: 1000px;
+        margin: 20px auto;
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .nav-btn {
+        border: none;
+        padding: 13px 25px;
+        border-radius: 10px;
+        background: #4f46e5;
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+
+      .nav-btn:hover {
+        background: #3730a3;
+        transform: translateY(-2px);
+      }
+
+      .nav-btn:disabled {
+        background: #cbd5e1;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .slide-counter {
+        font-weight: 600;
+        color: #64748b;
+      }
+
+      /* BOTTOM BUTTONS */
+      .bottom-actions {
+        display: none;
+        max-width: 1000px;
+        margin: 30px auto 50px;
+        padding: 0 20px;
+        gap: 15px;
+      }
+
+      .bottom-actions.show {
+        display: flex;
+      }
+
+      .home-btn,
+      .quiz-btn {
+        flex: 1;
+        text-align: center;
+        text-decoration: none;
+        padding: 16px 20px;
+        border-radius: 12px;
+        font-size: 17px;
+        font-weight: 700;
+        transition: 0.2s;
+      }
+
+      .home-btn {
+        background: #e2e8f0;
+        color: #334155;
+      }
+
+      .quiz-btn {
+        background: #4f46e5;
+        color: white;
+      }
+
+      .home-btn:hover,
+      .quiz-btn:hover {
+        transform: translateY(-2px);
+        opacity: 0.9;
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 700px) {
+        header {
+          padding: 0 15px;
+        }
+
+        .lesson-title {
+          display: none;
+        }
+
+        main {
+          margin: 20px auto;
+        }
+
+        .slide {
+          padding: 30px 22px;
+          min-height: 600px;
+        }
+
+        h1 {
+          font-size: 30px;
+        }
+
+        h2 {
+          font-size: 24px;
+        }
+
+        .cover h1 {
+          font-size: 38px;
+        }
+
+        p,
+        li {
+          font-size: 16px;
+        }
+
+        table {
+          font-size: 14px;
+        }
+
+        th,
+        td {
+          padding: 8px;
+        }
+
+        .navigation {
+          padding: 0 15px;
+        }
+
+        .nav-btn {
+          padding: 11px 16px;
+        }
+
+        .bottom-actions {
+          flex-direction: column;
+          padding: 0 15px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="logo">Hyvoria English</div>
+      <div class="lesson-title">WORD FORM – DẠNG TỪ</div>
+    </header>
+
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <main>
+      <!-- SLIDE 1 -->
+      <section class="slide active cover">
+        <h1>WORD FORM</h1>
+        <p class="subtitle">Dạng từ trong tiếng Anh</p>
+
+        <div class="badge">Grammar & Vocabulary | B1–B2</div>
+
+        <div class="box" style="margin-top: 35px; text-align: left">
+          <strong>Mục tiêu bài học:</strong>
+          <ul>
+            <li>Nhận biết 4 loại từ cơ bản.</li>
+            <li>Xác định loại từ cần điền trong câu.</li>
+            <li>Biến đổi từ gốc thành dạng phù hợp.</li>
+            <li>Tránh các bẫy thường gặp trong bài Word Form.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- SLIDE 2 -->
+      <section class="slide">
+        <h2>1. Word Form là gì?</h2>
+
+        <p>
+          <strong>Word Form</strong> là dạng bài yêu cầu chúng ta biến đổi một
+          từ gốc thành dạng từ phù hợp với vị trí và ngữ cảnh trong câu.
+        </p>
+
+        <div class="example">
+          <p>She is a very __________ student. (SUCCESS)</p>
+
+          <p>
+            → She is a very
+            <span class="answer">successful</span> student.
+          </p>
+        </div>
+
+        <h3>4 loại từ cơ bản</h3>
+
+        <table>
+          <tr>
+            <th>Loại từ</th>
+            <th>Tiếng Anh</th>
+            <th>Ví dụ</th>
+          </tr>
+          <tr>
+            <td>Danh từ</td>
+            <td>Noun (N)</td>
+            <td>success</td>
+          </tr>
+          <tr>
+            <td>Động từ</td>
+            <td>Verb (V)</td>
+            <td>succeed</td>
+          </tr>
+          <tr>
+            <td>Tính từ</td>
+            <td>Adjective (Adj)</td>
+            <td>successful</td>
+          </tr>
+          <tr>
+            <td>Trạng từ</td>
+            <td>Adverb (Adv)</td>
+            <td>successfully</td>
+          </tr>
+        </table>
+      </section>
+
+      <!-- SLIDE 3 -->
+      <section class="slide">
+        <h2>2. Danh từ – Noun</h2>
+
+        <p>
+          Danh từ dùng để chỉ người, vật, sự việc, khái niệm hoặc hành động.
+        </p>
+
+        <h3>Một số hậu tố thường gặp</h3>
+
+        <table>
+          <tr>
+            <th>Hậu tố</th>
+            <th>Ví dụ</th>
+          </tr>
+          <tr>
+            <td>-tion / -sion</td>
+            <td>education, decision</td>
+          </tr>
+          <tr>
+            <td>-ment</td>
+            <td>development, achievement</td>
+          </tr>
+          <tr>
+            <td>-ness</td>
+            <td>happiness, kindness</td>
+          </tr>
+          <tr>
+            <td>-ity</td>
+            <td>ability, popularity</td>
+          </tr>
+          <tr>
+            <td>-ance / -ence</td>
+            <td>importance, difference</td>
+          </tr>
+          <tr>
+            <td>-er / -or</td>
+            <td>teacher, actor</td>
+          </tr>
+          <tr>
+            <td>-ist</td>
+            <td>scientist, artist</td>
+          </tr>
+        </table>
+
+        <div class="example">
+          Education is very important for young people.
+          <br /><br />
+          His <span class="answer">achievement</span> surprised everyone.
+        </div>
+      </section>
+
+      <!-- SLIDE 4 -->
+      <section class="slide">
+        <h2>3. Động từ – Verb</h2>
+
+        <p>Động từ diễn tả hành động, trạng thái hoặc sự việc xảy ra.</p>
+
+        <h3>Một số hậu tố thường gặp</h3>
+
+        <table>
+          <tr>
+            <th>Hậu tố</th>
+            <th>Ví dụ</th>
+          </tr>
+          <tr>
+            <td>-ize / -ise</td>
+            <td>modernize, organize</td>
+          </tr>
+          <tr>
+            <td>-ify</td>
+            <td>simplify, beautify</td>
+          </tr>
+          <tr>
+            <td>-en</td>
+            <td>strengthen, widen</td>
+          </tr>
+        </table>
+
+        <div class="example">
+          The government wants to <span class="answer">modernize</span>
+          the education system.
+          <br /><br />
+          Regular exercise can <span class="answer">strengthen</span>
+          your body.
+        </div>
+
+        <div class="warning">
+          ⚠️ Không phải tất cả động từ đều có hậu tố.
+          <br /><br />
+          Ví dụ: succeed, decide, improve, develop, educate.
+        </div>
+      </section>
+
+      <!-- SLIDE 5 -->
+      <section class="slide">
+        <h2>4. Tính từ – Adjective</h2>
+
+        <p>Tính từ dùng để mô tả người, vật, sự việc hoặc tính chất.</p>
+
+        <h3>Các hậu tố phổ biến</h3>
+
+        <table>
+          <tr>
+            <th>Hậu tố</th>
+            <th>Ví dụ</th>
+          </tr>
+          <tr>
+            <td>-ful</td>
+            <td>useful, successful</td>
+          </tr>
+          <tr>
+            <td>-less</td>
+            <td>useless, careless</td>
+          </tr>
+          <tr>
+            <td>-ous</td>
+            <td>dangerous, famous</td>
+          </tr>
+          <tr>
+            <td>-al</td>
+            <td>educational, environmental</td>
+          </tr>
+          <tr>
+            <td>-ive</td>
+            <td>effective, attractive</td>
+          </tr>
+          <tr>
+            <td>-able / -ible</td>
+            <td>comfortable, possible</td>
+          </tr>
+          <tr>
+            <td>-ic</td>
+            <td>economic, scientific</td>
+          </tr>
+        </table>
+
+        <div class="example">
+          This book is very <span class="answer">useful</span>. <br /><br />
+          The documentary was very <span class="answer">interesting</span>.
+        </div>
+      </section>
+
+      <!-- SLIDE 6 -->
+      <section class="slide">
+        <h2>5. Trạng từ – Adverb</h2>
+
+        <p>
+          Trạng từ thường bổ nghĩa cho động từ, tính từ, trạng từ khác hoặc cả
+          câu.
+        </p>
+
+        <div class="box">
+          <strong>Công thức phổ biến:</strong>
+          <br /><br />
+          Adjective + <strong>-ly</strong> → Adverb
+        </div>
+
+        <table>
+          <tr>
+            <th>Adjective</th>
+            <th>Adverb</th>
+          </tr>
+          <tr>
+            <td>careful</td>
+            <td>carefully</td>
+          </tr>
+          <tr>
+            <td>quick</td>
+            <td>quickly</td>
+          </tr>
+          <tr>
+            <td>successful</td>
+            <td>successfully</td>
+          </tr>
+          <tr>
+            <td>happy</td>
+            <td>happily</td>
+          </tr>
+        </table>
+
+        <div class="example">
+          She speaks English <span class="answer">fluently</span>. <br /><br />
+          He completed the task <span class="answer">successfully</span>.
+        </div>
+
+        <div class="warning">
+          ⚠️ Một số trạng từ đặc biệt:
+          <br /><br />
+          good → well &nbsp; | &nbsp; fast → fast &nbsp; | &nbsp; hard → hard
+          &nbsp; | &nbsp; late → late
+        </div>
+      </section>
+
+      <!-- SLIDE 7 -->
+      <section class="slide">
+        <h2>6. Cách xác định dạng từ</h2>
+
+        <h3>① Sau mạo từ → thường là Danh từ</h3>
+
+        <div class="example">
+          The <span class="answer">development</span> of technology has changed
+          our lives.
+        </div>
+
+        <h3>② Sau tính từ → thường là Danh từ</h3>
+
+        <div class="example">
+          an important <span class="answer">decision</span>
+        </div>
+
+        <h3>③ Sau động từ → có thể là Trạng từ</h3>
+
+        <div class="example">
+          He answered the question <span class="answer">correctly</span>.
+        </div>
+
+        <h3>④ Sau "be" → thường là Tính từ</h3>
+
+        <div class="example">
+          She is <span class="answer">successful</span>.
+        </div>
+      </section>
+
+      <!-- SLIDE 8 -->
+      <section class="slide">
+        <h2>7. Các cấu trúc quan trọng</h2>
+
+        <div class="box">
+          <strong>too + Adjective</strong>
+          <br /><br />
+          The test is too <span class="answer">difficult</span> for me.
+        </div>
+
+        <div class="box">
+          <strong>so + Adjective + that</strong>
+          <br /><br />
+          The movie was so <span class="answer">interesting</span>
+          that I watched it twice.
+        </div>
+
+        <div class="box">
+          <strong>such + (a/an) + Adjective + Noun + that</strong>
+          <br /><br />
+          It was such an <span class="answer">interesting movie</span>
+          that I watched it twice.
+        </div>
+
+        <div class="box">
+          <strong>very + Adjective / Adverb</strong>
+          <br /><br />
+          She is very <span class="answer">careful</span>.
+          <br />
+          He works very <span class="answer">carefully</span>.
+        </div>
+      </section>
+
+      <!-- SLIDE 9 -->
+      <section class="slide">
+        <h2>8. Phân biệt -ED và -ING</h2>
+
+        <div class="box">
+          <strong>-ED → Cảm xúc của người</strong>
+          <br /><br />
+          I am <span class="answer">interested</span> in English.
+          <br />
+          She was <span class="answer">bored</span> with the lesson.
+        </div>
+
+        <div class="box">
+          <strong>-ING → Tính chất của sự vật / sự việc</strong>
+          <br /><br />
+          The lesson is <span class="answer">interesting</span>.
+          <br />
+          The movie is <span class="answer">boring</span>.
+        </div>
+
+        <div class="tip">
+          💡 Mẹo nhớ:
+          <br /><br />
+          <strong>Người → -ED</strong>
+          <br />
+          <strong>Vật / sự việc → -ING</strong>
+        </div>
+
+        <div class="example">
+          I am <span class="answer">bored</span> because the movie is
+          <span class="answer">boring</span>.
+        </div>
+      </section>
+
+      <!-- SLIDE 10 -->
+      <section class="slide">
+        <h2>9. Phân biệt -FUL và -LESS</h2>
+
+        <table>
+          <tr>
+            <th>-FUL = CÓ / ĐẦY</th>
+            <th>-LESS = KHÔNG CÓ / THIẾU</th>
+          </tr>
+          <tr>
+            <td>useful</td>
+            <td>useless</td>
+          </tr>
+          <tr>
+            <td>helpful</td>
+            <td>helpless</td>
+          </tr>
+          <tr>
+            <td>careful</td>
+            <td>careless</td>
+          </tr>
+          <tr>
+            <td>successful</td>
+            <td>unsuccessful</td>
+          </tr>
+          <tr>
+            <td>meaningful</td>
+            <td>meaningless</td>
+          </tr>
+        </table>
+
+        <div class="example">
+          This information is very <span class="answer">useful</span>.
+          <br /><br />
+          It is <span class="answer">useless</span> to argue with him.
+        </div>
+
+        <div class="warning">
+          ⚠️ Không phải từ nào thêm -less cũng tạo thành một từ thông dụng. Hãy
+          học theo từng word family.
+        </div>
+      </section>
+
+      <!-- SLIDE 11 -->
+      <section class="slide">
+        <h2>10. Tiền tố phủ định</h2>
+
+        <table>
+          <tr>
+            <th>Tiền tố</th>
+            <th>Ví dụ</th>
+          </tr>
+          <tr>
+            <td>un-</td>
+            <td>unhappy, unfair</td>
+          </tr>
+          <tr>
+            <td>in-</td>
+            <td>incorrect, inactive</td>
+          </tr>
+          <tr>
+            <td>im-</td>
+            <td>impossible, impolite</td>
+          </tr>
+          <tr>
+            <td>il-</td>
+            <td>illegal, illogical</td>
+          </tr>
+          <tr>
+            <td>ir-</td>
+            <td>irregular, irresponsible</td>
+          </tr>
+          <tr>
+            <td>dis-</td>
+            <td>dishonest, disagree</td>
+          </tr>
+          <tr>
+            <td>mis-</td>
+            <td>misunderstand, mislead</td>
+          </tr>
+        </table>
+
+        <div class="example">
+          It is <span class="answer">impossible</span> to finish everything in
+          five minutes. <br /><br />
+          This answer is <span class="answer">incorrect</span>.
+        </div>
+
+        <div class="warning">
+          ⚠️ Cần học theo word family vì không phải từ nào cũng có thể thêm tiền
+          tố phủ định tùy ý.
+        </div>
+      </section>
+
+      <!-- SLIDE 12 -->
+      <section class="slide">
+        <h2>11. Những Word Families quan trọng</h2>
+
+        <h3>SUCCESS</h3>
+
+        <table>
+          <tr>
+            <th>Verb</th>
+            <th>Noun</th>
+            <th>Adjective</th>
+            <th>Adverb</th>
+          </tr>
+          <tr>
+            <td>succeed</td>
+            <td>success</td>
+            <td>successful</td>
+            <td>successfully</td>
+          </tr>
+        </table>
+
+        <h3>DIFFER</h3>
+
+        <table>
+          <tr>
+            <th>Verb</th>
+            <th>Noun</th>
+            <th>Adjective</th>
+            <th>Adverb</th>
+          </tr>
+          <tr>
+            <td>differ</td>
+            <td>difference</td>
+            <td>different</td>
+            <td>differently</td>
+          </tr>
+        </table>
+
+        <h3>EDUCATE</h3>
+
+        <table>
+          <tr>
+            <th>Verb</th>
+            <th>Noun</th>
+            <th>Adjective</th>
+          </tr>
+          <tr>
+            <td>educate</td>
+            <td>education</td>
+            <td>educational</td>
+          </tr>
+        </table>
+      </section>
+
+      <!-- SLIDE 13 -->
+      <section class="slide">
+        <h2>12. Word Families nâng cao</h2>
+
+        <h3>DEVELOP</h3>
+
+        <div class="example">
+          develop → development
+          <br /><br />
+          developed = phát triển
+          <br />
+          developing = đang phát triển
+        </div>
+
+        <h3>ENVIRONMENT</h3>
+
+        <div class="example">
+          environment → environmental → environmentalist
+        </div>
+
+        <h3>CREATE</h3>
+
+        <div class="example">
+          create → creation → creative → creativity → creatively
+        </div>
+
+        <div class="tip">
+          💡 Hãy học từ theo <strong>word family</strong> thay vì chỉ học từng
+          từ riêng lẻ. Điều này giúp bạn xử lý nhanh hơn các câu Word Form trong
+          bài thi.
+        </div>
+      </section>
+
+      <!-- SLIDE 14 -->
+      <section class="slide">
+        <h2>13. Những bẫy thường gặp</h2>
+
+        <h3>Bẫy 1: Sau "be" không phải lúc nào cũng là tính từ</h3>
+
+        <div class="example">
+          She is a <span class="answer">teacher</span>. → Noun <br /><br />
+          She is <span class="answer">successful</span>. → Adjective
+        </div>
+
+        <h3>Bẫy 2: Có "-ly" nhưng không phải trạng từ</h3>
+
+        <div class="example">friendly, lovely, lonely, lively, likely</div>
+
+        <h3>Bẫy 3: Hard ≠ Hardly</h3>
+
+        <div class="example">
+          He works <span class="answer">hard</span>. → Anh ấy làm việc chăm chỉ.
+          <br /><br />
+          He <span class="answer">hardly</span> works. → Anh ấy hầu như không
+          làm việc.
+        </div>
+
+        <h3>Bẫy 4: Late ≠ Lately</h3>
+
+        <div class="example">
+          He arrived <span class="answer">late</span>.
+          <br />
+          I haven't seen him <span class="answer">lately</span>.
+        </div>
+      </section>
+
+      <!-- SLIDE 15 -->
+      <section class="slide">
+        <h2>14. Quy trình làm bài Word Form</h2>
+
+        <div class="box">
+          <h3>Bước 1</h3>
+          Xác định vị trí của từ cần điền.
+        </div>
+
+        <div class="box">
+          <h3>Bước 2</h3>
+          Xác định loại từ cần dùng: Noun, Verb, Adjective hay Adverb.
+        </div>
+
+        <div class="box">
+          <h3>Bước 3</h3>
+          Xác định nghĩa tích cực hoặc tiêu cực.
+        </div>
+
+        <div class="box">
+          <h3>Bước 4</h3>
+          Kiểm tra số ít / số nhiều nếu cần.
+        </div>
+
+        <div class="box">
+          <h3>Bước 5</h3>
+          Chọn hậu tố hoặc tiền tố phù hợp.
+        </div>
+
+        <div class="box">
+          <h3>Bước 6</h3>
+          Đọc lại toàn bộ câu để kiểm tra.
+        </div>
+      </section>
+
+      <!-- SLIDE 16 -->
+      <section class="slide">
+        <h2>15. Ví dụ áp dụng</h2>
+
+        <div class="example">
+          The rapid __________ of technology has changed our lives. (DEVELOP)
+        </div>
+
+        <h3>Bước 1: Xác định vị trí</h3>
+
+        <p>
+          rapid + ______
+          <br />
+          → Sau tính từ cần một danh từ.
+        </p>
+
+        <h3>Bước 2: Xác định nghĩa</h3>
+
+        <p>"sự phát triển của công nghệ"</p>
+
+        <h3>Bước 3: Chọn dạng từ</h3>
+
+        <p>develop → <span class="answer">development</span></p>
+
+        <div class="example">
+          The rapid <span class="answer">development</span> of technology has
+          changed our lives.
+        </div>
+      </section>
+
+      <!-- SLIDE 17 -->
+      <section class="slide">
+        <h2>16. Mẹo làm bài thi</h2>
+
+        <div class="tip">
+          <strong>Đừng biến đổi từ ngay lập tức!</strong>
+        </div>
+
+        <p>Hãy làm theo thứ tự:</p>
+
+        <div class="box">
+          <strong>1.</strong> Nhìn từ đứng trước <br /><br />
+          ↓
+          <br /><br />
+          <strong>2.</strong> Nhìn từ đứng sau <br /><br />
+          ↓
+          <br /><br />
+          <strong>3.</strong> Xác định loại từ <br /><br />
+          ↓
+          <br /><br />
+          <strong>4.</strong> Xác định nghĩa <br /><br />
+          ↓
+          <br /><br />
+          <strong>5.</strong> Biến đổi từ gốc <br /><br />
+          ↓
+          <br /><br />
+          <strong>6.</strong> Đọc lại toàn câu
+        </div>
+      </section>
+
+      <!-- SLIDE 18 -->
+      <section class="slide">
+        <h2>17. Tóm tắt siêu nhanh</h2>
+
+        <table>
+          <tr>
+            <th>Dấu hiệu</th>
+            <th>Dạng từ thường cần</th>
+          </tr>
+          <tr>
+            <td>a / an / the</td>
+            <td>Noun</td>
+          </tr>
+          <tr>
+            <td>Adjective + ___</td>
+            <td>Noun</td>
+          </tr>
+          <tr>
+            <td>Possessive + ___</td>
+            <td>Noun</td>
+          </tr>
+          <tr>
+            <td>be + ___</td>
+            <td>Adjective / Noun</td>
+          </tr>
+          <tr>
+            <td>linking verb + ___</td>
+            <td>Adjective</td>
+          </tr>
+          <tr>
+            <td>very + ___</td>
+            <td>Adjective / Adverb</td>
+          </tr>
+          <tr>
+            <td>Verb + ___</td>
+            <td>Adverb</td>
+          </tr>
+          <tr>
+            <td>modal verb + ___</td>
+            <td>Verb</td>
+          </tr>
+          <tr>
+            <td>to + ___</td>
+            <td>Verb</td>
+          </tr>
+          <tr>
+            <td>preposition + ___</td>
+            <td>Noun / V-ing</td>
+          </tr>
+          <tr>
+            <td>___ + Noun</td>
+            <td>Adjective</td>
+          </tr>
+          <tr>
+            <td>___ + Adjective</td>
+            <td>Adverb</td>
+          </tr>
+        </table>
+
+        <div class="tip">
+          <strong>CÔNG THỨC VÀNG:</strong>
+          <br /><br />
+          Nhìn từ đứng trước + nhìn từ đứng sau + xác định nghĩa của câu → xác
+          định loại từ → biến đổi từ gốc.
+        </div>
+      </section>
+
+      <!-- SLIDE 19 -->
+      <section class="slide cover">
+        <h1>🎉 HOÀN THÀNH!</h1>
+
+        <p class="subtitle">Bạn đã hoàn thành bài giảng Word Form.</p>
+
+        <div class="box" style="text-align: left; margin-top: 30px">
+          <strong>Bây giờ hãy luyện tập:</strong>
+          <ul>
+            <li>Nhận diện loại từ.</li>
+            <li>Biến đổi Word Family.</li>
+            <li>Hoàn thành các câu Word Form.</li>
+            <li>Luyện tập với các dạng bài thi thực tế.</li>
+          </ul>
+        </div>
+
+        <p style="margin-top: 25px; font-weight: 600">Chúc bạn học tốt!</p>
+      </section>
+    </main>
+
+    <!-- NAVIGATION -->
+    <div class="navigation">
+      <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">
+        ← Về
+      </button>
+
+      <div class="slide-counter" id="slideCounter">Slide 1 / 19</div>
+
+      <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">
+        Sang →
+      </button>
+    </div>
+
+    <!-- BOTTOM ACTIONS -->
+    <div class="bottom-actions" id="bottomActions">
+      <a href="course11.html" class="home-btn"> ⌂ Trang chủ </a>
+
+      <a href="quiz11.html" class="quiz-btn"> 📝 Làm bài tập </a>
+    </div>
+
+    <script>
+      let currentSlide = 0;
+
+      const slides = document.querySelectorAll(".slide");
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+      const slideCounter = document.getElementById("slideCounter");
+      const progressBar = document.getElementById("progressBar");
+      const bottomActions = document.getElementById("bottomActions");
+
+      const totalSlides = slides.length;
+
+      function showSlide(index) {
+        if (index < 0) {
+          index = 0;
+        }
+
+        if (index >= totalSlides) {
+          index = totalSlides - 1;
+        }
+
+        currentSlide = index;
+
+        slides.forEach((slide, i) => {
+          slide.classList.toggle("active", i === currentSlide);
+        });
+
+        slideCounter.textContent = `Slide ${currentSlide + 1} / ${totalSlides}`;
+
+        const progress = ((currentSlide + 1) / totalSlides) * 100;
+
+        progressBar.style.width = progress + "%";
+
+        prevBtn.disabled = currentSlide === 0;
+
+        if (currentSlide === totalSlides - 1) {
+          nextBtn.disabled = true;
+          bottomActions.classList.add("show");
+        } else {
+          nextBtn.disabled = false;
+          bottomActions.classList.remove("show");
+        }
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+
+      function changeSlide(direction) {
+        showSlide(currentSlide + direction);
+      }
+
+      // Điều khiển bằng bàn phím
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "ArrowLeft") {
+          changeSlide(-1);
+        }
+
+        if (event.key === "ArrowRight") {
+          changeSlide(1);
+        }
+      });
+
+      // Khởi tạo
+      showSlide(0);
+    </script>
+  </body>
+</html>
+```

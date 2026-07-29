@@ -1,0 +1,1908 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sentence Transformation Practice</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f4f7fb;
+        color: #222;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 20px;
+      }
+
+      h1 {
+        text-align: center;
+        color: #3157a4;
+        margin-bottom: 10px;
+      }
+
+      .intro {
+        text-align: center;
+        color: #666;
+        margin-bottom: 30px;
+      }
+
+      .question {
+        background: white;
+        padding: 25px;
+        margin-bottom: 25px;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      }
+
+      .question h3 {
+        color: #3157a4;
+        margin-top: 0;
+      }
+
+      .option {
+        display: block;
+        width: 100%;
+        text-align: left;
+        padding: 13px 16px;
+        margin: 10px 0;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        background: #fff;
+        cursor: pointer;
+        font-size: 15px;
+        transition: 0.2s;
+      }
+
+      .option:hover {
+        background: #f0f4ff;
+        border-color: #3157a4;
+      }
+
+      .option.correct {
+        background: #dff5e5;
+        border-color: #28a745;
+        color: #176b2c;
+        font-weight: bold;
+      }
+
+      .option.wrong {
+        background: #fde2e2;
+        border-color: #dc3545;
+        color: #a51d2a;
+      }
+
+      .option.disabled {
+        cursor: default;
+      }
+
+      .feedback {
+        display: none;
+        margin-top: 15px;
+        padding: 15px;
+        border-radius: 10px;
+        line-height: 1.6;
+      }
+
+      .feedback.correct-feedback {
+        display: block;
+        background: #e8f7ec;
+        color: #176b2c;
+      }
+
+      .feedback.wrong-feedback {
+        display: block;
+        background: #fff0f0;
+        color: #a51d2a;
+      }
+
+      .explanation {
+        margin-top: 8px;
+        color: #333;
+      }
+
+      .bottom-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin: 40px 0;
+      }
+
+      .bottom-buttons a {
+        text-decoration: none;
+        padding: 14px 30px;
+        border-radius: 10px;
+        color: white;
+        font-weight: bold;
+      }
+
+      .home-btn {
+        background: #555;
+      }
+
+      .home-btn:hover {
+        background: #333;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>📚 SENTENCE TRANSFORMATION PRACTICE</h1>
+      <p class="intro">
+        Choose the best answer. Click an option to see the result and
+        explanation.
+      </p>
+
+      <!-- QUESTION 1 -->
+      <div class="question">
+        <h3>Question 1</h3>
+        <p><b>Hurry up, or you will miss the bus.</b></p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Câu có cấu trúc V..., or + S + will + V. Có thể chuyển thành If + S + don’t/doesn’t + V, S + will + V.',
+            )
+          "
+        >
+          A. If you don't hurry up, you will miss the bus.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Unless đã mang nghĩa phủ định nên không dùng theo cách này. Câu đúng là If you don’t hurry up, you will miss the bus.',
+            )
+          "
+        >
+          B. Unless you hurry up, you won't miss the bus.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(this, false, 'Sai. Câu này có nghĩa ngược với câu gốc.')
+          "
+        >
+          C. If you hurry up, you will miss the bus.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Không dùng Unless + don’t trong cấu trúc này.',
+            )
+          "
+        >
+          D. Unless you don't hurry up, you will miss the bus.
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 2 -->
+      <div class="question">
+        <h3>Question 2</h3>
+        <p><b>If you don't study harder, you won't pass the exam.</b></p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Unless = If...not. Vì vậy If you don’t study harder = Unless you study harder.',
+            )
+          "
+        >
+          A. Unless you study harder, you won't pass the exam.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Unless không đi với don’t trong trường hợp này.',
+            )
+          "
+        >
+          B. Unless you don't study harder, you will pass the exam.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(this, false, 'Sai. Câu này có nghĩa ngược với câu gốc.')
+          "
+        >
+          C. If you study harder, you won't pass the exam.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(this, false, 'Sai. Câu này có nghĩa ngược với câu gốc.')
+          "
+        >
+          D. Unless you study harder, you will pass the exam.
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 3 -->
+      <div class="question">
+        <h3>Question 3</h3>
+        <p>
+          <b
+            >If people use public transport more, the environment will become
+            cleaner.</b
+          >
+        </p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Câu diễn tả mối quan hệ càng... càng... nên dùng The more..., the + comparative...',
+            )
+          "
+        >
+          A. The more people use public transport, the cleaner the environment
+          will become.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Ý nghĩa của câu này không phù hợp với câu gốc.',
+            )
+          "
+        >
+          B. The more people use public transport, the more polluted the
+          environment will become.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Cấu trúc so sánh kép không được sử dụng đúng.',
+            )
+          "
+        >
+          C. The cleaner people use public transport, the more environment
+          becomes.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Câu không đúng cấu trúc so sánh kép.',
+            )
+          "
+        >
+          D. The more public transport people use, the pollution becomes.
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 4 -->
+      <div class="question">
+        <h3>Question 4</h3>
+        <p>
+          <b
+            >If you practice speaking English more, you will become more
+            confident.</b
+          >
+        </p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! The more + S + V, the more + adjective + S + V: Càng luyện tập nhiều, bạn càng tự tin.',
+            )
+          "
+        >
+          A. The more you practice speaking English, the more confident you will
+          become.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Hai vế của cấu trúc so sánh kép không được sắp xếp đúng.',
+            )
+          "
+        >
+          B. The more confident you practice, the more English you speak.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(this, false, 'Sai. Nghĩa câu bị ngược với câu gốc.')
+          "
+        >
+          C. The more you practice speaking English, the less confident you
+          become.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Cấu trúc so sánh kép chưa chính xác.',
+            )
+          "
+        >
+          D. The more English you practice, the confident you will become.
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 5 -->
+      <div class="question">
+        <h3>Question 5</h3>
+        <p><b>Although Tom was tired, he continued working.</b></p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Although + S + be + adjective có thể chuyển thành Despite + being + adjective.',
+            )
+          "
+        >
+          A. Despite being tired, Tom continued working.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Despite không đi trực tiếp với một mệnh đề S + V.',
+            )
+          "
+        >
+          B. Despite Tom was tired, he continued working.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Because mang nghĩa nguyên nhân, không phải tương phản.',
+            )
+          "
+        >
+          C. Because Tom was tired, he continued working.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. In spite of phải đi với danh từ hoặc V-ing, không đi trực tiếp với S + V.',
+            )
+          "
+        >
+          D. In spite Tom was tired, he continued working.
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 6 -->
+      <div class="question">
+        <h3>Question 6</h3>
+        <p><b>Although the weather was bad, they went camping.</b></p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Although the weather was bad = Despite the bad weather. Despite đi với cụm danh từ.',
+            )
+          "
+        >
+          A. Despite the bad weather, they went camping.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Despite không đi trực tiếp với mệnh đề S + V.',
+            )
+          "
+        >
+          B. Despite the weather was bad, they went camping.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(this, false, 'Sai. Câu này trái nghĩa với câu gốc.')
+          "
+        >
+          C. In spite the bad weather, they didn't go camping.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Because of diễn tả nguyên nhân, không diễn tả sự tương phản.',
+            )
+          "
+        >
+          D. Because of the bad weather, they went camping.
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 7 -->
+      <div class="question">
+        <h3>Question 7</h3>
+        <p>
+          <b>Despite being very busy, Sarah helps her parents every day.</b>
+        </p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Despite being very busy = Although Sarah is very busy.',
+            )
+          "
+        >
+          A. Although Sarah is very busy, she helps her parents every day.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Thì của câu không phù hợp với câu gốc.',
+            )
+          "
+        >
+          B. Although Sarah was very busy, she helped her parents every day.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Because diễn tả nguyên nhân, không phải sự tương phản.',
+            )
+          "
+        >
+          C. Because Sarah is very busy, she helps her parents every day.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Despite không đi trực tiếp với S + V.',
+            )
+          "
+        >
+          D. Despite Sarah is very busy, she helps her parents every day.
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 8 -->
+      <div class="question">
+        <h3>Question 8</h3>
+        <p><b>In spite of the heavy rain, we went to school.</b></p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! In spite of the heavy rain = Although it rained heavily. Hai cấu trúc đều diễn tả sự tương phản.',
+            )
+          "
+        >
+          A. Although it rained heavily, we went to school.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(this, false, 'Sai. Câu này có nghĩa trái với câu gốc.')
+          "
+        >
+          B. Although it was raining heavily, we didn't go to school.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Because diễn tả nguyên nhân, không thay thế được In spite of.',
+            )
+          "
+        >
+          C. Because it rained heavily, we went to school.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Despite không đi trực tiếp với mệnh đề S + V.',
+            )
+          "
+        >
+          D. Despite it was raining heavily, we went to school.
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 9 -->
+      <div class="question">
+        <h3>Question 9</h3>
+        <p><b>"What time does the train leave?" Peter asked me.</b></p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Câu hỏi tường thuật không đảo trợ động từ.',
+            )
+          "
+        >
+          A. Peter asked me what time did the train leave.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Câu hỏi tường thuật có dạng WH-word + S + V. Does leave được lùi thành left.',
+            )
+          "
+        >
+          B. Peter asked me what time the train left.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Câu hỏi tường thuật không giữ cấu trúc đảo ngữ của câu hỏi trực tiếp.',
+            )
+          "
+        >
+          C. Peter asked me what time does the train leave.
+        </button>
+
+        <button
+          class="option"
+          onclick="checkAnswer(this, false, 'Sai. Cấu trúc câu không đúng.')"
+        >
+          D. Peter asked me what did the train leave.
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 10 -->
+      <div class="question">
+        <h3>Question 10</h3>
+        <p><b>"Where do you live?" she asked him.</b></p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Không đảo trợ động từ trong câu hỏi tường thuật.',
+            )
+          "
+        >
+          A. She asked him where did he live.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(this, true, 'Đúng! Where + S + V: where he lived.')
+          "
+        >
+          B. She asked him where he lived.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Không dùng cấu trúc câu hỏi trực tiếp trong câu hỏi tường thuật.',
+            )
+          "
+        >
+          C. She asked him where does he live.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Trong ngữ cảnh này, động từ thường được lùi thì từ live thành lived.',
+            )
+          "
+        >
+          D. She asked him where he lives.
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 11 -->
+      <div class="question">
+        <h3>Question 11</h3>
+        <p><b>"Why are you late?" the teacher asked Tom.</b></p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Không đảo động từ to be trong câu hỏi tường thuật.',
+            )
+          "
+        >
+          A. The teacher asked Tom why was he late.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Why + S + V: why he was late. Are được lùi thành was.',
+            )
+          "
+        >
+          B. The teacher asked Tom why he was late.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Câu hỏi tường thuật không dùng cấu trúc đảo ngữ.',
+            )
+          "
+        >
+          C. The teacher asked Tom why is he late.
+        </button>
+
+        <button
+          class="option"
+          onclick="checkAnswer(this, false, 'Sai. Câu thiếu động từ to be.')"
+        >
+          D. The teacher asked Tom why he late.
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 12 -->
+      <div class="question">
+        <h3>Question 12</h3>
+        <p><b>"What should I buy for my mother?" Anna wondered.</b></p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Câu hỏi tường thuật không đảo should lên trước chủ ngữ.',
+            )
+          "
+        >
+          A. Anna wondered what should she buy for her mother.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! What + S + should + V. I đổi thành she và my đổi thành her.',
+            )
+          "
+        >
+          B. Anna wondered what she should buy for her mother.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(this, false, 'Sai. Cấu trúc và thì không phù hợp.')
+          "
+        >
+          C. Anna wondered what did she buy for her mother.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Should I buy được chuyển thành she should buy.',
+            )
+          "
+        >
+          D. Anna wondered what she buys for her mother.
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 13 -->
+      <div class="question">
+        <h3>Question 13</h3>
+        <p><b>It was a very interesting book, so I read it twice.</b></p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Với danh từ số ít đếm được: such + a/an + adjective + noun + that.',
+            )
+          "
+        >
+          A. It was such an interesting book that I read it twice.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Không dùng so + a/an + adjective + noun.',
+            )
+          "
+        >
+          B. It was so an interesting book that I read it twice.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Book là danh từ số ít đếm được nên cần có a/an.',
+            )
+          "
+        >
+          C. It was such interesting book that I read it twice.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Cấu trúc too...to không phù hợp với câu gốc.',
+            )
+          "
+        >
+          D. It was too an interesting book that I read it twice.
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 14 -->
+      <div class="question">
+        <h3>Question 14</h3>
+        <p><b>The film was so boring that we left early.</b></p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Danh từ số ít film cần có a trước tính từ.',
+            )
+          "
+        >
+          A. It was such boring film that we left early.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! So + adjective + that có thể chuyển thành such + a/an + adjective + noun + that.',
+            )
+          "
+        >
+          B. It was such a boring film that we left early.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Không dùng such + a/an theo thứ tự này.',
+            )
+          "
+        >
+          C. It was so a boring film that we left early.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(this, false, 'Sai. Cấu trúc too...to không phù hợp.')
+          "
+        >
+          D. It was too boring film that we left early.
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 15 -->
+      <div class="question">
+        <h3>Question 15</h3>
+        <p>
+          <b
+            >The restaurant was so expensive that we couldn't afford to eat
+            there.</b
+          >
+        </p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Restaurant là danh từ số ít đếm được nên cần a/an.',
+            )
+          "
+        >
+          A. It was such expensive restaurant that we couldn't afford to eat
+          there.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Không dùng so + an + adjective + noun.',
+            )
+          "
+        >
+          B. It was so an expensive restaurant that we couldn't afford to eat
+          there.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! So expensive = such an expensive restaurant. Đây là cấu trúc chuyển đổi so...that ↔ such...that.',
+            )
+          "
+        >
+          C. It was such an expensive restaurant that we couldn't afford to eat
+          there.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Cấu trúc too...to không phù hợp với câu gốc.',
+            )
+          "
+        >
+          D. It was too an expensive restaurant that we couldn't afford to eat
+          there.
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 16 -->
+      <div class="question">
+        <h3>Question 16</h3>
+        <p>
+          <b>The weather was so beautiful that we decided to have a picnic.</b>
+        </p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Weather là danh từ không đếm được nên dùng such + adjective + uncountable noun, không dùng a.',
+            )
+          "
+        >
+          A. It was such beautiful weather that we decided to have a picnic.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Weather là danh từ không đếm được nên không dùng a.',
+            )
+          "
+        >
+          B. It was such a beautiful weather that we decided to have a picnic.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Không dùng so + a + adjective + noun.',
+            )
+          "
+        >
+          C. It was so a beautiful weather that we decided to have a picnic.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(this, false, 'Sai. Cấu trúc too...to không phù hợp.')
+          "
+        >
+          D. It was too beautiful weather that we decided to have a picnic.
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 17 -->
+      <div class="question">
+        <h3>Question 17</h3>
+        <p><b>Students who study regularly often get good results.</b></p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Trong mệnh đề quan hệ không xác định, who dùng để thay thế cho người. Dấu phẩy được sử dụng để bổ sung thông tin.',
+            )
+          "
+        >
+          A. Students, who study regularly, often get good results.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Which dùng cho vật, không dùng cho người.',
+            )
+          "
+        >
+          B. Students, which study regularly, often get good results.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Whom thường đóng vai trò tân ngữ, không làm chủ ngữ trong mệnh đề này.',
+            )
+          "
+        >
+          C. Students, whom study regularly, often get good results.
+        </button>
+
+        <button
+          class="option"
+          onclick="checkAnswer(this, false, 'Sai. Where dùng để chỉ nơi chốn.')"
+        >
+          D. Students, where study regularly, often get good results.
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 18 -->
+      <div class="question">
+        <h3>Question 18</h3>
+        <p><b>The girl is my cousin. She won the first prize.</b></p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Which dùng cho vật, không dùng cho người.',
+            )
+          "
+        >
+          A. The girl which won the first prize is my cousin.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Who dùng để thay thế cho người và làm chủ ngữ trong mệnh đề quan hệ.',
+            )
+          "
+        >
+          B. The girl who won the first prize is my cousin.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Whom dùng cho tân ngữ, trong câu này đại từ quan hệ đóng vai trò chủ ngữ.',
+            )
+          "
+        >
+          C. The girl whom won the first prize is my cousin.
+        </button>
+
+        <button
+          class="option"
+          onclick="checkAnswer(this, false, 'Sai. Where dùng để chỉ nơi chốn.')"
+        >
+          D. The girl where won the first prize is my cousin.
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 19 -->
+      <div class="question">
+        <h3>Question 19</h3>
+        <p><b>The man helped me yesterday. He is a doctor.</b></p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Who thay thế cho He và làm chủ ngữ của mệnh đề quan hệ.',
+            )
+          "
+        >
+          A. The man who helped me yesterday is a doctor.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Which không dùng để thay thế cho người.',
+            )
+          "
+        >
+          B. The man which helped me yesterday is a doctor.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Whom không làm chủ ngữ trong mệnh đề quan hệ này.',
+            )
+          "
+        >
+          C. The man whom helped me yesterday is a doctor.
+        </button>
+
+        <button
+          class="option"
+          onclick="checkAnswer(this, false, 'Sai. Where dùng cho địa điểm.')"
+        >
+          D. The man where helped me yesterday is a doctor.
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 20 -->
+      <div class="question">
+        <h3>Question 20</h3>
+        <p><b>The books are very useful. They are on the table.</b></p>
+
+        <button
+          class="option"
+          onclick="checkAnswer(this, false, 'Sai. Who dùng để chỉ người.')"
+        >
+          A. The books who are on the table are very useful.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(this, false, 'Sai. Whom dùng cho người làm tân ngữ.')
+          "
+        >
+          B. The books whom are on the table are very useful.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Which dùng để thay thế cho vật, ở đây thay cho the books.',
+            )
+          "
+        >
+          C. The books which are on the table are very useful.
+        </button>
+
+        <button
+          class="option"
+          onclick="checkAnswer(this, false, 'Sai. Where dùng để chỉ nơi chốn.')"
+        >
+          D. The books where are on the table are very useful.
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 21 -->
+      <div class="question">
+        <h3>Question 21</h3>
+        <p><b>Mr. Smith wishes he had more free time.</b></p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Wish ở hiện tại diễn tả điều trái với hiện tại nên dùng quá khứ đơn: had.',
+            )
+          "
+        >
+          A. Mr. Smith wishes he has more free time.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Cấu trúc wish ở đây không dùng will để diễn tả điều ước trái với hiện tại.',
+            )
+          "
+        >
+          B. Mr. Smith wishes he will have more free time.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Chủ ngữ Mr. Smith là số ít nên động từ phải là wishes.',
+            )
+          "
+        >
+          C. Mr. Smith wish he had more free time.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Wish + S + V2/ed dùng để diễn tả điều ước trái với thực tế ở hiện tại.',
+            )
+          "
+        >
+          D. Mr. Smith wishes he had more free time.
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 22 -->
+      <div class="question">
+        <h3>Question 22</h3>
+        <p><b>I don't have a bigger house. I wish I did.</b></p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Sau wish để nói điều trái với hiện tại, động từ phải lùi về quá khứ.',
+            )
+          "
+        >
+          A. I wish I have a bigger house.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! I don’t have → I wish I had. Đây là wish ở hiện tại.',
+            )
+          "
+        >
+          B. I wish I had a bigger house.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Không dùng will trong cấu trúc wish này.',
+            )
+          "
+        >
+          C. I wish I will have a bigger house.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Không dùng thì hiện tại tiếp diễn trong cấu trúc này.',
+            )
+          "
+        >
+          D. I wish I am having a bigger house.
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 23 -->
+      <div class="question">
+        <h3>Question 23</h3>
+        <p>
+          <b>She doesn't know how to speak French. She wishes she could.</b>
+        </p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Could không được chuyển thành can trong câu điều ước này.',
+            )
+          "
+        >
+          A. She wishes she can speak French.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Wish + could + V diễn tả mong muốn có khả năng làm điều gì đó nhưng hiện tại chưa thể.',
+            )
+          "
+        >
+          B. She wishes she could speak French.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Wish ở đây cần could để diễn tả mong muốn có khả năng.',
+            )
+          "
+        >
+          C. She wishes she speaks French.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Will không phù hợp với ý nghĩa của câu gốc.',
+            )
+          "
+        >
+          D. She wishes she will speak French.
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 24 -->
+      <div class="question">
+        <h3>Question 24</h3>
+        <p><b>John regrets not having more time to travel.</b></p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Wish ở hiện tại cần dùng quá khứ đơn: had.',
+            )
+          "
+        >
+          A. John wishes he has more time to travel.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Regrets not having more time có thể viết lại thành wishes he had more time. Đây là điều ước trái với hiện tại.',
+            )
+          "
+        >
+          B. John wishes he had more time to travel.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Không dùng will trong cấu trúc wish để diễn tả điều trái với hiện tại.',
+            )
+          "
+        >
+          C. John wishes he will have more time to travel.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Could không diễn tả đúng ý nghĩa có nhiều thời gian hơn.',
+            )
+          "
+        >
+          D. John wishes he can have more time to travel.
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 25 -->
+      <div class="question">
+        <h3>Question 25</h3>
+        <p><b>Who will look after your dog when you are away?</b></p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Look after và take care of đều có nghĩa là chăm sóc.',
+            )
+          "
+        >
+          A. Who will take care of your dog when you are away?
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Sau when trong mệnh đề chỉ thời gian nói về tương lai, dùng hiện tại đơn, không dùng will.',
+            )
+          "
+        >
+          B. Who takes care of your dog when you will be away?
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Câu gốc nói về tương lai với will look after, nên không dùng took care of.',
+            )
+          "
+        >
+          C. Who took care of your dog when you are away?
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Cấu trúc đúng là take care of, không phải take care + tân ngữ.',
+            )
+          "
+        >
+          D. Who will take care your dog when you are away?
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 26 -->
+      <div class="question">
+        <h3>Question 26</h3>
+        <p>
+          <b>Who will look after the children when their parents are away?</b>
+        </p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Look after = take care of. Sau when dùng hiện tại đơn: are away.',
+            )
+          "
+        >
+          A. Who will take care of the children when their parents are away?
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Không dùng will trong mệnh đề bắt đầu bằng when chỉ thời gian tương lai.',
+            )
+          "
+        >
+          B. Who takes care of the children when their parents will be away?
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Took care of là quá khứ, không phù hợp với will look after.',
+            )
+          "
+        >
+          C. Who took care of the children when their parents are away?
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Phải dùng take care of, không phải take care + tân ngữ.',
+            )
+          "
+        >
+          D. Who will take care the children when their parents are away?
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 27 -->
+      <div class="question">
+        <h3>Question 27</h3>
+        <p><b>Unless you leave now, you will be late for school.</b></p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(this, false, 'Sai. Câu này có nghĩa ngược với câu gốc.')
+          "
+        >
+          A. If you leave now, you will be late for school.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Unless you leave now = If you don’t leave now.',
+            )
+          "
+        >
+          B. If you don't leave now, you will be late for school.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Đây là câu điều kiện loại 2, không phù hợp với câu gốc.',
+            )
+          "
+        >
+          C. If you didn't leave now, you would be late for school.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(this, false, 'Sai. Câu này có nghĩa ngược với câu gốc.')
+          "
+        >
+          D. If you leave now, you won't be late for school.
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 28 -->
+      <div class="question">
+        <h3>Question 28</h3>
+        <p><b>If you eat more vegetables, you will become healthier.</b></p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Cấu trúc so sánh kép: The more + noun + S + V, the + comparative adjective + S + V.',
+            )
+          "
+        >
+          A. The more vegetables you eat, the healthier you will become.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(this, false, 'Sai. Cấu trúc và nghĩa không đúng.')
+          "
+        >
+          B. The healthier vegetables you eat, the more you become.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Cấu trúc so sánh kép không chính xác.',
+            )
+          "
+        >
+          C. The more healthy you eat vegetables, the healthier you become.
+        </button>
+
+        <button
+          class="option"
+          onclick="checkAnswer(this, false, 'Sai. Nghĩa câu trái với câu gốc.')"
+        >
+          D. The more vegetables you eat, the less healthy you become.
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 29 -->
+      <div class="question">
+        <h3>Question 29</h3>
+        <p><b>Although he was ill, he went to work.</b></p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Phải dùng Despite + noun hoặc V-ing. Không dùng Despite of.',
+            )
+          "
+        >
+          A. Despite of his illness, he went to work.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Although he was ill = Despite his illness. Despite + noun.',
+            )
+          "
+        >
+          B. Despite his illness, he went to work.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Despite không đi trực tiếp với mệnh đề S + V.',
+            )
+          "
+        >
+          C. Despite he was ill, he went to work.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. In spite of phải có of: In spite of + noun/V-ing.',
+            )
+          "
+        >
+          D. In spite he was ill, he went to work.
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 30 -->
+      <div class="question">
+        <h3>Question 30</h3>
+        <p><b>"How can I improve my English?" Mai asked her teacher.</b></p>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Câu hỏi tường thuật không đảo can lên trước chủ ngữ.',
+            )
+          "
+        >
+          A. Mai asked her teacher how could she improve her English.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              true,
+              'Đúng! Câu hỏi tường thuật có dạng How + S + could + V. Can lùi thành could và I đổi thành she.',
+            )
+          "
+        >
+          B. Mai asked her teacher how she could improve her English.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(
+              this,
+              false,
+              'Sai. Không giữ cấu trúc câu hỏi trực tiếp trong câu hỏi tường thuật.',
+            )
+          "
+        >
+          C. Mai asked her teacher how can she improve her English.
+        </button>
+
+        <button
+          class="option"
+          onclick="
+            checkAnswer(this, false, 'Sai. Không dùng did trong cấu trúc này.')
+          "
+        >
+          D. Mai asked her teacher how did she improve her English.
+        </button>
+
+        <div class="feedback"></div>
+      </div>
+
+      <div class="bottom-buttons">
+        <a href="course12.html" class="home-btn">🏠 Home</a>
+      </div>
+    </div>
+
+    <script>
+      function checkAnswer(button, isCorrect, explanation) {
+        const question = button.closest(".question");
+        const options = question.querySelectorAll(".option");
+        const feedback = question.querySelector(".feedback");
+
+        // Không cho chọn lại sau khi đã trả lời
+        options.forEach((option) => {
+          option.classList.add("disabled");
+          option.disabled = true;
+        });
+
+        if (isCorrect) {
+          button.classList.add("correct");
+
+          feedback.className = "feedback correct-feedback";
+          feedback.innerHTML =
+            "<strong>✅ ĐÚNG!</strong>" +
+            "<div class='explanation'>" +
+            explanation +
+            "</div>";
+        } else {
+          button.classList.add("wrong");
+
+          feedback.className = "feedback wrong-feedback";
+          feedback.innerHTML =
+            "<strong>❌ SAI!</strong>" +
+            "<div class='explanation'>" +
+            explanation +
+            "</div>";
+        }
+      }
+    </script>
+  </body>
+</html>
