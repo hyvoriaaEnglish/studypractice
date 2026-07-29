@@ -7,19 +7,24 @@
       async
       src="https://www.googletagmanager.com/gtag/js?id=G-KPVH86TY3X"
     ></script>
+
+    ```
     <script>
       window.dataLayer = window.dataLayer || [];
+
       function gtag() {
         dataLayer.push(arguments);
       }
+
       gtag("js", new Date());
 
       gtag("config", "G-KPVH86TY3X");
     </script>
+
     <meta charset="UTF-8" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    ```
     <title>Hyvoria English - English Learning Website</title>
 
     <meta
@@ -66,7 +71,7 @@
       }
 
       /* =========================
-     NÚT ĐĂNG NHẬP / ĐĂNG KÝ
+     NÚT ACCOUNT / ĐĂNG NHẬP / ĐĂNG KÝ
   ========================= */
 
       .account-menu {
@@ -86,13 +91,26 @@
         border-radius: 8px;
         font-size: 15px;
         transition: 0.3s;
+        white-space: nowrap;
       }
+
+      /* Account */
+
+      .account-page-btn {
+        color: #211c1e;
+        border: 1px solid #211c1e;
+        background: #fdf1f3;
+      }
+
+      /* Đăng nhập */
 
       .login-btn {
         color: #211c1e;
         border: 1px solid #211c1e;
         background: white;
       }
+
+      /* Đăng ký */
 
       .register-btn {
         color: white;
@@ -182,6 +200,7 @@
         .account-menu {
           top: 15px;
           right: 15px;
+          gap: 6px;
         }
 
         .shopping {
@@ -190,8 +209,8 @@
         }
 
         .account-btn {
-          padding: 8px 12px;
-          font-size: 13px;
+          padding: 8px 10px;
+          font-size: 12px;
         }
 
         .btn {
@@ -215,11 +234,19 @@
     </a>
 
     <!-- =========================
-     ĐĂNG NHẬP / ĐĂNG KÝ
+     ACCOUNT / ĐĂNG NHẬP / ĐĂNG KÝ
 ========================= -->
 
     <div class="account-menu">
+      <!-- ACCOUNT -->
+
+      <a href="account.html" class="account-btn account-page-btn"> Account </a>
+
+      <!-- ĐĂNG NHẬP -->
+
       <a href="login.html" class="account-btn login-btn"> Đăng nhập </a>
+
+      <!-- ĐĂNG KÝ -->
 
       <a href="register.html" class="account-btn register-btn"> Đăng ký </a>
     </div>
@@ -233,7 +260,7 @@
 
       <a href="mainn/hello.html" class="btn btn-light"> Tiếng Anh Đại Trà </a>
 
-      <a href="mainn/thptqg.html" class="btn btn-dark">Ôn THPTQG</a>
+      <a href="mainn/thptqg.html" class="btn btn-dark"> Ôn THPTQG </a>
     </div>
     ```
   </body>
