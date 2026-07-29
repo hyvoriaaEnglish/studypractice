@@ -1,3 +1,4 @@
+console.log("ACCOUNT.JS IS RUNNING");
 // ==========================================
 // ACCOUNT PAGE
 // ==========================================
@@ -83,21 +84,21 @@ async function loadStudyData() {
     return;
   }
 
+  console.log("Current User ID:", currentUser.id);
+
   const { data, error } = await supabaseClient
-
     .from("study_sessions")
-
     .select("*")
-
     .eq("user_id", currentUser.id)
-
     .order("study_date", {
       ascending: false,
     });
 
+  console.log("Study Data:", data);
+  console.log("Study Error:", error);
+
   if (error) {
     console.error("Error:", error);
-
     return;
   }
 
