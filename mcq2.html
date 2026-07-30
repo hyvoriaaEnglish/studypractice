@@ -1,0 +1,912 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>English Quiz 31-65</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: linear-gradient(135deg, #eef2ff, #f8fafc);
+        color: #1e293b;
+        min-height: 100vh;
+      }
+
+      .container {
+        width: min(950px, 92%);
+        margin: 40px auto;
+        padding-bottom: 60px;
+      }
+
+      /* HEADER */
+      .header {
+        background: linear-gradient(135deg, #4f46e5, #7c3aed);
+        color: white;
+        padding: 35px 30px;
+        border-radius: 24px;
+        box-shadow: 0 15px 35px rgba(79, 70, 229, 0.25);
+        margin-bottom: 25px;
+      }
+
+      .header h1 {
+        margin: 0 0 10px;
+        font-size: 32px;
+      }
+
+      .header p {
+        margin: 0;
+        opacity: 0.9;
+        line-height: 1.6;
+      }
+
+      /* PROGRESS */
+      .progress-box {
+        background: white;
+        padding: 18px 22px;
+        border-radius: 16px;
+        margin-bottom: 25px;
+        box-shadow: 0 5px 20px rgba(15, 23, 42, 0.08);
+      }
+
+      .progress-info {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        font-weight: 600;
+        font-size: 14px;
+      }
+
+      .progress-bar {
+        width: 100%;
+        height: 10px;
+        background: #e2e8f0;
+        border-radius: 20px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        width: 0%;
+        height: 100%;
+        background: linear-gradient(90deg, #4f46e5, #8b5cf6);
+        transition: width 0.3s ease;
+      }
+
+      /* INSTRUCTION */
+      .instruction {
+        background: #fff7ed;
+        border-left: 6px solid #f97316;
+        padding: 20px 24px;
+        border-radius: 14px;
+        margin-bottom: 25px;
+      }
+
+      .instruction h2 {
+        margin-top: 0;
+        color: #c2410c;
+      }
+
+      .instruction p {
+        margin-bottom: 0;
+        line-height: 1.6;
+      }
+
+      /* QUESTION */
+      .question {
+        background: white;
+        padding: 25px;
+        margin-bottom: 22px;
+        border-radius: 18px;
+        box-shadow: 0 6px 20px rgba(15, 23, 42, 0.08);
+        border: 2px solid transparent;
+        transition: 0.25s ease;
+      }
+
+      .question:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(15, 23, 42, 0.1);
+      }
+
+      .question-title {
+        font-size: 17px;
+        line-height: 1.7;
+        margin: 0 0 18px;
+        color: #0f172a;
+      }
+
+      /* OPTIONS */
+      .options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .option {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        width: 100%;
+        padding: 14px 16px;
+        background: #f8fafc;
+        border: 2px solid #e2e8f0;
+        border-radius: 12px;
+        cursor: pointer;
+        text-align: left;
+        font-size: 15px;
+        color: #334155;
+        transition: all 0.2s ease;
+      }
+
+      .option:hover:not(:disabled) {
+        background: #eef2ff;
+        border-color: #6366f1;
+        transform: translateX(3px);
+      }
+
+      .option-letter {
+        min-width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: #e2e8f0;
+        font-weight: bold;
+        color: #475569;
+      }
+
+      .option.correct {
+        background: #dcfce7;
+        border-color: #22c55e;
+        color: #166534;
+      }
+
+      .option.correct .option-letter {
+        background: #22c55e;
+        color: white;
+      }
+
+      .option.wrong {
+        background: #fee2e2;
+        border-color: #ef4444;
+        color: #991b1b;
+      }
+
+      .option.wrong .option-letter {
+        background: #ef4444;
+        color: white;
+      }
+
+      .option:disabled {
+        cursor: default;
+      }
+
+      /* FEEDBACK */
+      .feedback {
+        display: none;
+        margin-top: 18px;
+        padding: 16px 18px;
+        border-radius: 12px;
+        line-height: 1.6;
+        font-size: 15px;
+      }
+
+      .feedback.show {
+        display: block;
+      }
+
+      .feedback.correct-feedback {
+        background: #f0fdf4;
+        border-left: 5px solid #22c55e;
+        color: #166534;
+      }
+
+      .feedback.wrong-feedback {
+        background: #fff1f2;
+        border-left: 5px solid #ef4444;
+        color: #9f1239;
+      }
+
+      .feedback strong {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      /* SUBMIT */
+      .submit-wrapper {
+        text-align: center;
+        margin-top: 35px;
+      }
+
+      .submit-btn {
+        border: none;
+        background: linear-gradient(135deg, #4f46e5, #7c3aed);
+        color: white;
+        padding: 15px 45px;
+        font-size: 17px;
+        font-weight: bold;
+        border-radius: 14px;
+        cursor: pointer;
+        box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
+        transition: 0.25s ease;
+      }
+
+      .submit-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 25px rgba(79, 70, 229, 0.4);
+      }
+
+      /* SCORE */
+      #score {
+        display: none;
+        margin-top: 25px;
+        padding: 25px;
+        background: white;
+        border-radius: 18px;
+        text-align: center;
+        box-shadow: 0 8px 25px rgba(15, 23, 42, 0.1);
+      }
+
+      #score.show {
+        display: block;
+      }
+
+      .score-number {
+        font-size: 40px;
+        font-weight: 800;
+        color: #4f46e5;
+        margin: 10px 0;
+      }
+
+      .score-message {
+        font-size: 17px;
+        color: #475569;
+      }
+
+      /* MOBILE */
+      @media (max-width: 600px) {
+        .container {
+          width: 94%;
+          margin: 20px auto;
+        }
+
+        .header {
+          padding: 25px 20px;
+          border-radius: 18px;
+        }
+
+        .header h1 {
+          font-size: 25px;
+        }
+
+        .question {
+          padding: 18px;
+          border-radius: 15px;
+        }
+
+        .question-title {
+          font-size: 15px;
+        }
+
+        .option {
+          padding: 12px;
+          font-size: 14px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- HEADER -->
+
+      <div class="header">
+        <h1>📚 English Quiz 31–65</h1>
+        <p>
+          Test your knowledge of advanced vocabulary, idioms, phrasal verbs, and
+          grammar.
+        </p>
+      </div>
+
+      <!-- PROGRESS -->
+
+      <div class="progress-box">
+        <div class="progress-info">
+          <span>Progress</span>
+          <span id="progressText"> 0 / 35 answered </span>
+        </div>
+
+        ```
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        ```
+      </div>
+
+      <!-- INSTRUCTION -->
+
+      <div class="instruction">
+        <h2>Choose the correct answer.</h2>
+
+        ```
+        <p>
+          Click an answer to receive immediate feedback. You will see whether
+          your answer is correct, the correct answer if you are wrong, and an
+          explanation.
+        </p>
+        ```
+      </div>
+
+      <!-- QUIZ -->
+
+      <div id="quiz"></div>
+
+      <!-- SUBMIT -->
+
+      <div class="submit-wrapper">
+        <button class="submit-btn" onclick="checkAnswers()">Submit Quiz</button>
+      </div>
+
+      <!-- SCORE -->
+
+      <div id="score"></div>
+    </div>
+
+    <script>
+      const questions = [
+        {
+          q: "31. Not being able to find my phone number is a pretty ________ excuse for not contacting me.",
+          options: ["A. fragile", "B. frail", "C. feeble", "D. faint"],
+          answer: 2,
+          explanation:
+            "Feeble means weak or unconvincing. A 'feeble excuse' is an excuse that is not convincing or believable.",
+        },
+
+        {
+          q: "32. The new airport was constructed in the ________ of fierce opposition from environmentalists.",
+          options: ["A. face", "B. teeth", "C. tooth and nail", "D. fangs"],
+          answer: 0,
+          explanation:
+            "The expression 'in the face of' means despite or in spite of something, especially opposition or difficulty.",
+        },
+
+        {
+          q: "33. According to the ________ of the contract...",
+          options: ["A. laws", "B. rules", "C. terms", "D. details"],
+          answer: 2,
+          explanation:
+            "'The terms of a contract' refers to the conditions and requirements stated in an agreement.",
+        },
+
+        {
+          q: "34. She wasn’t allowed into the country, ________ because her parents aren’t in order.",
+          options: [
+            "A. subsequently",
+            "B. presumably",
+            "C. admittedly",
+            "D. paradoxically",
+          ],
+          answer: 1,
+          explanation:
+            "Presumably means 'probably' or 'it is assumed that'. It is used when something is believed to be true based on the available information.",
+        },
+
+        {
+          q: "35. Both of the jobs I’ve been offered are fantastic opportunities – I’m in such ________!",
+          options: [
+            "A. a dwelling",
+            "B. a grudge",
+            "C. an array",
+            "D. a quandary",
+          ],
+          answer: 3,
+          explanation:
+            "A quandary is a difficult situation in which you have to make a difficult choice. Since both jobs are attractive, the speaker cannot decide which one to choose.",
+        },
+
+        {
+          q: "36. The Red Cross is ________ an international aid organization.",
+          options: [
+            "A. intriguingly",
+            "B. intrusively",
+            "C. intrinsically",
+            "D. intrepidly",
+          ],
+          answer: 2,
+          explanation:
+            "Intrinsically means naturally or essentially. The sentence means that the Red Cross is essentially an international aid organization.",
+        },
+
+        {
+          q: "37. I should sail _____ the exam.",
+          options: ["A. through", "B. toward", "C. forward", "D. about"],
+          answer: 0,
+          explanation:
+            "To 'sail through' an exam means to pass it easily and successfully.",
+        },
+
+        {
+          q: "38. Dave didn't understand what Miss Smith was getting _____ so he asked her to explain it again.",
+          options: ["A. on", "B. in", "C. at", "D. to"],
+          answer: 2,
+          explanation:
+            "'What someone is getting at' means what they are trying to say or imply.",
+        },
+
+        {
+          q: "39. I was taken _____.",
+          options: ["A. out", "B. along", "C. aback", "D. up"],
+          answer: 2,
+          explanation:
+            "The expression 'be taken aback' means to be very surprised or shocked by something unexpected.",
+        },
+
+        {
+          q: "40. I would like to _____ a request.",
+          options: [
+            "A. put in for",
+            "B. put up with",
+            "C. put out",
+            "D. go out to",
+          ],
+          answer: 0,
+          explanation:
+            "'Put in for' means to formally request or apply for something.",
+        },
+
+        {
+          q: "41. She managed to _____.",
+          options: [
+            "A. laugh at it",
+            "B. laugh on it",
+            "C. laugh it off",
+            "D. laugh it out",
+          ],
+          answer: 2,
+          explanation:
+            "'Laugh something off' means to treat something as unimportant or not serious by laughing about it.",
+        },
+
+        {
+          q: "42. My boss is biased _____ me, which explains why I'll never get promoted if I stay with this company.",
+          options: ["A. aback", "B. against", "C. forward", "D. through"],
+          answer: 1,
+          explanation:
+            "'Biased against someone' means having an unfairly negative attitude or opinion toward that person.",
+        },
+
+        {
+          q: "43. She has a real aptitude _____ photographing. Her photographs are so impressive.",
+          options: ["A. after", "B. of", "C. with", "D. for"],
+          answer: 3,
+          explanation:
+            "The correct collocation is 'have an aptitude for something', meaning to have a natural ability or talent for it.",
+        },
+
+        {
+          q: "44. We are _____ very good terms _____ our neighbor.",
+          options: ["A. in/of", "B. in/with", "C. on/of", "D. on/with"],
+          answer: 3,
+          explanation:
+            "The correct expression is 'be on good terms with someone', meaning to have a friendly relationship with that person.",
+        },
+
+        {
+          q: "45. Old Mr. Brown's condition looks very serious and it is doubtful if he will _____.",
+          options: [
+            "A. pull through",
+            "B. pull up",
+            "C. pull back",
+            "D. pull out",
+          ],
+          answer: 0,
+          explanation:
+            "'Pull through' means to survive a serious illness or difficult situation.",
+        },
+
+        {
+          q: "46. Despite all the interruptions, he _____ with his work.",
+          options: [
+            "A. stuck at",
+            "B. held on",
+            "C. hung out",
+            "D. pressed on",
+          ],
+          answer: 3,
+          explanation:
+            "'Press on' means to continue doing something despite difficulties or interruptions.",
+        },
+
+        {
+          q: "47. I'm a ________ sleeper - the slightest noise wakes me up.",
+          options: ["A. swallow", "B. short", "C. sound", "D. light"],
+          answer: 3,
+          explanation:
+            "A 'light sleeper' is someone who wakes up easily when there is a small noise or disturbance.",
+        },
+
+        {
+          q: "48. The uphill stages of the race will really sort the ________ from ________.",
+          options: [
+            "A. sheep/the goats",
+            "B. chalks/cheese",
+            "C. lions/rabbits",
+            "D. dogs/cats",
+          ],
+          answer: 0,
+          explanation:
+            "'Separate the sheep from the goats' means to distinguish the stronger or better people from the weaker or less capable ones.",
+        },
+
+        {
+          q: "49. Instead of defending traditional values, the church frequently seems ________ and irresolute.",
+          options: [
+            "A. far-fetched",
+            "B. strong-willed",
+            "C. weak-kneed",
+            "D. long-awaited",
+          ],
+          answer: 2,
+          explanation:
+            "'Weak-kneed' describes someone who lacks courage, confidence, or determination.",
+        },
+
+        {
+          q: "50. Could you work on Saturday, ________?",
+          options: [
+            "A. if it isn't necessary",
+            "B. should the need arise",
+            "C. if the need rises",
+            "D. should the need rise",
+          ],
+          answer: 1,
+          explanation:
+            "'Should the need arise' is a formal conditional expression meaning 'if the need arises' or 'if it becomes necessary'.",
+        },
+
+        {
+          q: "51. Do you think England will win?",
+          options: [
+            "A. I doubt so",
+            "B. I doubt it",
+            "C. I don't doubt",
+            "D. No, I doubt",
+          ],
+          answer: 1,
+          explanation:
+            "The correct expression is 'I doubt it', meaning 'I don't think it is likely to happen'.",
+        },
+
+        {
+          q: "52. The city ________ to recommend it.",
+          options: [
+            "A. has little",
+            "B. doesn't have",
+            "C. hasn't got",
+            "D. isn't having",
+          ],
+          answer: 0,
+          explanation:
+            "'Have little to recommend it' means that the city has very few attractive or positive qualities.",
+        },
+
+        {
+          q: "53. ________ to save the child from drowning, she nearly lost her own life.",
+          options: [
+            "A. Owing to attempting",
+            "B. By attempting",
+            "C. Wherefor attempting",
+            "D. In attempting",
+          ],
+          answer: 3,
+          explanation:
+            "'In attempting to do something' means while trying to do something. Here, she nearly lost her life while trying to save the child.",
+        },
+
+        {
+          q: "54. Under its new conductor, ________ an international reputation.",
+          options: [
+            "A. the orchestra has established",
+            "B. has the orchestra established",
+            "C. the orchestra has been established",
+            "D. has the orchestra been established",
+          ],
+          answer: 1,
+          explanation:
+            "This question appears to use inversion after an introductory phrase. The intended answer is 'has the orchestra established', although the sentence is somewhat formal and unusual.",
+        },
+
+        {
+          q: "55. His handwriting is like ______.",
+          options: [
+            "A. the writing a much younger child",
+            "B. a much younger child",
+            "C. that of a much younger child",
+            "D. that a much younger child wrote it",
+          ],
+          answer: 2,
+          explanation:
+            "'That of' replaces 'the handwriting of' and avoids repetition. Therefore, 'that of a much younger child' is correct.",
+        },
+
+        {
+          q: "56. I like to travel but, ________, I'm very fond of my home.",
+          options: [
+            "A. then again",
+            "B. so there",
+            "C. otherwise",
+            "D. or else",
+          ],
+          answer: 0,
+          explanation:
+            "'Then again' is used to introduce a contrasting or additional point that should also be considered.",
+        },
+
+        {
+          q: "57. I won't have those kids ________ all over my flowerbeds.",
+          options: ["A. run", "B. ran", "C. running", "D. to run"],
+          answer: 2,
+          explanation:
+            "With 'have' meaning to allow or tolerate, the structure 'have someone doing something' can describe an ongoing unwanted activity. Here, 'running' is correct.",
+        },
+
+        {
+          q: "58. I got food ________ at that cheap little seafood restaurant.",
+          options: ["A. poison", "B. poisoned", "C. to poison", "D. poisoning"],
+          answer: 3,
+          explanation:
+            "The intended phrase is 'get food poisoning'. However, none of the options is grammatically correct. The original question should be corrected to: 'I got food poisoning at that cheap little seafood restaurant.'",
+        },
+
+        {
+          q: "59. His new song caught ______ right away and entered the top ten the week after its release.",
+          options: ["A. on", "B. up", "C. off", "D. over"],
+          answer: 0,
+          explanation: "'Catch on' means to become popular or widely accepted.",
+        },
+
+        {
+          q: "60. I'm really thirsty. I could do ______ a cup of tea.",
+          options: ["A. for", "B. at", "C. on", "D. with"],
+          answer: 3,
+          explanation:
+            "'Could do with something' means to want or need something, especially because it would be useful or enjoyable.",
+        },
+
+        {
+          q: "61. To avoid an argument, she fell ______ her husband's plans.",
+          options: ["A. in for", "B. in with", "C. out of", "D. away from"],
+          answer: 1,
+          explanation:
+            "'Fall in with someone's plans' means to agree with or accept someone's plans.",
+        },
+
+        {
+          q: "62. I only get ______ watching TV when the children are in bed.",
+          options: ["A. out of", "B. off with", "C. round to", "D. on with"],
+          answer: 2,
+          explanation:
+            "'Get round to doing something' means to finally find time to do something that you have delayed.",
+        },
+
+        {
+          q: "63. They offered to buy her a BMW but she's holding _______ a Porsche.",
+          options: ["A. out for", "B. out on", "C. back with", "D. up with"],
+          answer: 0,
+          explanation:
+            "'Hold out for something' means to refuse to accept less because you are waiting for the thing you really want.",
+        },
+
+        {
+          q: "64. If we keep _______ the plan exactly, we're certain to succeed.",
+          options: ["A. up", "B. on", "C. to", "D. with"],
+          answer: 2,
+          explanation:
+            "'Keep to a plan' means to follow or continue following the plan without changing it.",
+        },
+
+        {
+          q: "65. When they heard the fire alarm, the audience made _______ the exit.",
+          options: ["A. into", "B. up", "C. over", "D. for"],
+          answer: 3,
+          explanation:
+            "'Make for somewhere' means to move toward a particular place, especially quickly.",
+        },
+      ];
+
+      const quiz = document.getElementById("quiz");
+
+      let answered = 0;
+      let score = 0;
+
+      /* CREATE QUESTIONS */
+
+      questions.forEach((item, index) => {
+        const questionDiv = document.createElement("div");
+
+        questionDiv.className = "question";
+
+        const title = document.createElement("p");
+
+        title.className = "question-title";
+
+        title.innerHTML = `<b>${item.q}</b>`;
+
+        questionDiv.appendChild(title);
+
+        const optionsDiv = document.createElement("div");
+
+        optionsDiv.className = "options";
+
+        item.options.forEach((option, i) => {
+          const button = document.createElement("button");
+
+          button.className = "option";
+
+          button.type = "button";
+
+          button.innerHTML = `
+          <span class="option-letter">
+            ${String.fromCharCode(65 + i)}
+          </span>
+
+          <span>
+            ${option.substring(3)}
+          </span>
+        `;
+
+          button.onclick = function () {
+            selectAnswer(index, i, questionDiv);
+          };
+
+          optionsDiv.appendChild(button);
+        });
+
+        questionDiv.appendChild(optionsDiv);
+
+        const feedback = document.createElement("div");
+
+        feedback.className = "feedback";
+
+        questionDiv.appendChild(feedback);
+
+        quiz.appendChild(questionDiv);
+      });
+
+      /* SELECT ANSWER */
+
+      function selectAnswer(questionIndex, selectedIndex, questionDiv) {
+        if (questionDiv.dataset.answered === "true") {
+          return;
+        }
+
+        questionDiv.dataset.answered = "true";
+
+        answered++;
+
+        const question = questions[questionIndex];
+
+        const buttons = questionDiv.querySelectorAll(".option");
+
+        const feedback = questionDiv.querySelector(".feedback");
+
+        buttons.forEach((button) => {
+          button.disabled = true;
+        });
+
+        /* CORRECT */
+
+        if (selectedIndex === question.answer) {
+          score++;
+
+          buttons[selectedIndex].classList.add("correct");
+
+          feedback.classList.add("show", "correct-feedback");
+
+          feedback.innerHTML = `
+      <strong>✅ Correct!</strong>
+
+      ${question.explanation}
+    `;
+        } else {
+
+        /* WRONG */
+          buttons[selectedIndex].classList.add("wrong");
+
+          buttons[question.answer].classList.add("correct");
+
+          feedback.classList.add("show", "wrong-feedback");
+
+          feedback.innerHTML = `
+      <strong>❌ Incorrect!</strong>
+
+      The correct answer is:
+
+      <b>
+        ${question.options[question.answer]}
+      </b>
+
+      <br><br>
+
+      ${question.explanation}
+    `;
+        }
+
+        updateProgress();
+      }
+
+      /* PROGRESS */
+
+      function updateProgress() {
+        const percentage = (answered / questions.length) * 100;
+
+        document.getElementById("progressFill").style.width = `${percentage}%`;
+
+        document.getElementById("progressText").textContent =
+          `${answered} / ${questions.length} answered`;
+      }
+
+      /* CHECK SCORE */
+
+      function checkAnswers() {
+        const scoreBox = document.getElementById("score");
+
+        const percentage = (score / questions.length) * 100;
+
+        let message;
+
+        if (percentage >= 90) {
+          message = "🏆 Excellent! Your English knowledge is outstanding.";
+        } else if (percentage >= 75) {
+          message = "🎉 Great job! You have a strong command of English.";
+        } else if (percentage >= 60) {
+          message =
+            "👍 Good effort! Review the explanations and keep practicing.";
+        } else {
+          message =
+            "📚 Keep practicing! Review the vocabulary, phrasal verbs, and grammar carefully.";
+        }
+
+        scoreBox.innerHTML = `
+
+    <h2>🎯 Your Result</h2>
+
+    <div class="score-number">
+      ${score}/${questions.length}
+    </div>
+
+    <div class="score-message">
+      ${message}
+    </div>
+
+    <p>
+      You answered
+      <b>${answered}</b>
+      out of
+      <b>${questions.length}</b>
+      questions.
+    </p>
+
+  `;
+
+        scoreBox.classList.add("show");
+
+        scoreBox.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }
+    </script>
+
+    <!-- STUDY TRACKER -->
+
+    <script src="/study-tracker.js"></script>
+  </body>
+</html>

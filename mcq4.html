@@ -1,0 +1,820 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    ```
+    <title>English Quiz 84-101</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: linear-gradient(135deg, #eef2ff, #f8fafc);
+        color: #1e293b;
+        min-height: 100vh;
+      }
+
+      .container {
+        width: min(950px, 92%);
+        margin: 40px auto;
+        padding-bottom: 60px;
+      }
+
+      /* HEADER */
+
+      .header {
+        background: linear-gradient(135deg, #4f46e5, #7c3aed);
+        color: white;
+        padding: 35px 30px;
+        border-radius: 24px;
+        box-shadow: 0 15px 35px rgba(79, 70, 229, 0.25);
+        margin-bottom: 25px;
+      }
+
+      .header h1 {
+        margin: 0 0 10px;
+        font-size: 32px;
+      }
+
+      .header p {
+        margin: 0;
+        opacity: 0.9;
+        line-height: 1.6;
+      }
+
+      /* PROGRESS */
+
+      .progress-box {
+        background: white;
+        padding: 18px 22px;
+        border-radius: 16px;
+        margin-bottom: 25px;
+        box-shadow: 0 5px 20px rgba(15, 23, 42, 0.08);
+      }
+
+      .progress-info {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        font-weight: 600;
+        font-size: 14px;
+      }
+
+      .progress-bar {
+        width: 100%;
+        height: 10px;
+        background: #e2e8f0;
+        border-radius: 20px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        width: 0%;
+        height: 100%;
+        background: linear-gradient(90deg, #4f46e5, #8b5cf6);
+        transition: width 0.3s ease;
+      }
+
+      /* INSTRUCTION */
+
+      .instruction {
+        background: #fff7ed;
+        border-left: 6px solid #f97316;
+        padding: 20px 24px;
+        border-radius: 14px;
+        margin-bottom: 25px;
+      }
+
+      .instruction h2 {
+        margin-top: 0;
+        color: #c2410c;
+      }
+
+      .instruction p {
+        margin-bottom: 0;
+        line-height: 1.6;
+      }
+
+      /* QUESTION */
+
+      .question {
+        background: white;
+        padding: 25px;
+        margin-bottom: 22px;
+        border-radius: 18px;
+        box-shadow: 0 6px 20px rgba(15, 23, 42, 0.08);
+        border: 2px solid transparent;
+        transition: 0.25s ease;
+      }
+
+      .question:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(15, 23, 42, 0.1);
+      }
+
+      .question-title {
+        font-size: 17px;
+        line-height: 1.7;
+        margin: 0 0 18px;
+        color: #0f172a;
+      }
+
+      /* OPTIONS */
+
+      .options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .option {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        width: 100%;
+        padding: 14px 16px;
+        background: #f8fafc;
+        border: 2px solid #e2e8f0;
+        border-radius: 12px;
+        cursor: pointer;
+        text-align: left;
+        font-size: 15px;
+        color: #334155;
+        transition: all 0.2s ease;
+      }
+
+      .option:hover:not(:disabled) {
+        background: #eef2ff;
+        border-color: #6366f1;
+        transform: translateX(3px);
+      }
+
+      .option-letter {
+        min-width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: #e2e8f0;
+        font-weight: bold;
+        color: #475569;
+      }
+
+      /* CORRECT */
+
+      .option.correct {
+        background: #dcfce7;
+        border-color: #22c55e;
+        color: #166534;
+      }
+
+      .option.correct .option-letter {
+        background: #22c55e;
+        color: white;
+      }
+
+      /* WRONG */
+
+      .option.wrong {
+        background: #fee2e2;
+        border-color: #ef4444;
+        color: #991b1b;
+      }
+
+      .option.wrong .option-letter {
+        background: #ef4444;
+        color: white;
+      }
+
+      .option:disabled {
+        cursor: default;
+      }
+
+      /* FEEDBACK */
+
+      .feedback {
+        display: none;
+        margin-top: 18px;
+        padding: 16px 18px;
+        border-radius: 12px;
+        line-height: 1.6;
+        font-size: 15px;
+      }
+
+      .feedback.show {
+        display: block;
+      }
+
+      .feedback.correct-feedback {
+        background: #f0fdf4;
+        border-left: 5px solid #22c55e;
+        color: #166534;
+      }
+
+      .feedback.wrong-feedback {
+        background: #fff1f2;
+        border-left: 5px solid #ef4444;
+        color: #9f1239;
+      }
+
+      .feedback strong {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      /* SUBMIT */
+
+      .submit-wrapper {
+        text-align: center;
+        margin-top: 35px;
+      }
+
+      .submit-btn {
+        border: none;
+        background: linear-gradient(135deg, #4f46e5, #7c3aed);
+        color: white;
+        padding: 15px 45px;
+        font-size: 17px;
+        font-weight: bold;
+        border-radius: 14px;
+        cursor: pointer;
+        box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
+        transition: 0.25s ease;
+      }
+
+      .submit-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 25px rgba(79, 70, 229, 0.4);
+      }
+
+      /* SCORE */
+
+      #score {
+        display: none;
+        margin-top: 25px;
+        padding: 25px;
+        background: white;
+        border-radius: 18px;
+        text-align: center;
+        box-shadow: 0 8px 25px rgba(15, 23, 42, 0.1);
+      }
+
+      #score.show {
+        display: block;
+      }
+
+      .score-number {
+        font-size: 40px;
+        font-weight: 800;
+        color: #4f46e5;
+        margin: 10px 0;
+      }
+
+      .score-message {
+        font-size: 17px;
+        color: #475569;
+      }
+
+      /* MOBILE */
+
+      @media (max-width: 600px) {
+        .container {
+          width: 94%;
+          margin: 20px auto;
+        }
+
+        .header {
+          padding: 25px 20px;
+          border-radius: 18px;
+        }
+
+        .header h1 {
+          font-size: 25px;
+        }
+
+        .question {
+          padding: 18px;
+          border-radius: 15px;
+        }
+
+        .question-title {
+          font-size: 15px;
+        }
+
+        .option {
+          padding: 12px;
+          font-size: 14px;
+        }
+      }
+    </style>
+    ```
+  </head>
+
+  <body>
+    ```
+    <div class="container">
+      <!-- HEADER -->
+
+      <div class="header">
+        <h1>📚 English Quiz 84–101</h1>
+
+        <p>
+          Test your knowledge of advanced vocabulary, phrasal verbs, idioms, and
+          English grammar.
+        </p>
+      </div>
+
+      <!-- PROGRESS -->
+
+      <div class="progress-box">
+        <div class="progress-info">
+          <span> Progress </span>
+
+          <span id="progressText"> 0 / 18 answered </span>
+        </div>
+
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+
+      <!-- INSTRUCTION -->
+
+      <div class="instruction">
+        <h2>Choose the correct answer.</h2>
+
+        <p>
+          Click an answer to receive immediate feedback. You will see whether
+          your answer is correct, the correct answer if you are wrong, and an
+          explanation.
+        </p>
+      </div>
+
+      <!-- QUIZ -->
+
+      <div id="quiz"></div>
+
+      <!-- SUBMIT -->
+
+      <div class="submit-wrapper">
+        <button class="submit-btn" onclick="checkAnswers()">Submit Quiz</button>
+      </div>
+
+      <!-- SCORE -->
+
+      <div id="score"></div>
+    </div>
+
+    <script>
+      const questions = [
+        {
+          q: "84. A new __________ of programs on wildlife will be shown on Channel 4 in the autumn.",
+
+          a: ["episode", "series", "serial", "sequel"],
+
+          correct: 1,
+
+          explanation:
+            "'Series' refers to a group of television programmes that are related to one another and shown over a period of time.",
+        },
+
+        {
+          q: "85. As I boarded the train, I was suddenly __________ by the arm and ushered towards a first-class carriage.",
+
+          a: ["clutched", "grabbed", "caught", "plucked"],
+
+          correct: 1,
+
+          explanation:
+            "'Grabbed by the arm' means seized or held suddenly and firmly by the arm. It is the most natural collocation in this context.",
+        },
+
+        {
+          q: "86. There has been a lot of __________ surrounding the government's proposed scheme.",
+
+          a: ["controversy", "consent", "conformity", "consequence"],
+
+          correct: 0,
+
+          explanation:
+            "'Controversy' means public disagreement or strong argument about something, especially a political or social issue.",
+        },
+
+        {
+          q: "87. The local authorities need to __________ down on illegal parking.",
+
+          a: ["hit", "move", "force", "crack"],
+
+          correct: 3,
+
+          explanation:
+            "'Crack down on' means to take strong action to stop or prevent illegal or unacceptable activities.",
+        },
+
+        {
+          q: "88. My uncle pulled a few __________ and got me a job.",
+
+          a: ["ropes", "strings", "threads", "chords"],
+
+          correct: 1,
+
+          explanation:
+            "'Pull some strings' means to use personal influence or important connections to get something done.",
+        },
+
+        {
+          q: "89. If I didn't have to work tonight, __________",
+
+          a: [
+            "I'd be able to relax now",
+            "I am able to relax now",
+            "I'll be able to relax now",
+            "I would have been able to relax",
+          ],
+
+          correct: 0,
+
+          explanation:
+            "This is a second conditional structure: 'If + past simple, would + base verb'. The sentence describes an unreal or hypothetical situation in the present.",
+        },
+
+        {
+          q: "90. The one person most responsible for making New York City a center of furniture design... __________ cabinetmaker Duncan Phyfe.",
+
+          a: [
+            "was the hardworking",
+            "through his hard work",
+            "he was hardworking",
+            "by working hard, the",
+          ],
+
+          correct: 0,
+
+          explanation:
+            "The sentence needs a main verb after the subject. 'Was the hardworking cabinetmaker Duncan Phyfe' correctly identifies the person responsible.",
+        },
+
+        {
+          q: "91. __________ a language family is a group of languages with a common origin...",
+
+          a: [
+            "What linguists call",
+            "It is called by linguists",
+            "Linguists call it",
+            "What do linguists call",
+          ],
+
+          correct: 0,
+
+          explanation:
+            "'What linguists call a language family' forms a noun clause functioning as the subject of the sentence.",
+        },
+
+        {
+          q: "92. __________ because of the complexity of his writing...",
+
+          a: ["It may be", "Perhaps", "Besides", "Why is it"],
+
+          correct: 1,
+
+          explanation:
+            "'Perhaps' means 'possibly' or 'maybe'. It can be used to introduce a possible explanation.",
+        },
+
+        {
+          q: "93. First performed in 1976, __________",
+
+          a: [
+            "William Lane wrote...",
+            "the life of Emily Dickinson was...",
+            "William Lane's one-character play The Belle of Amherst was...",
+            "there was only one character...",
+          ],
+
+          correct: 2,
+
+          explanation:
+            "The introductory phrase 'First performed in 1976' must logically modify something that can be performed. A play can be performed, so 'William Lane's one-character play...' is correct.",
+        },
+
+        {
+          q: "94. Two dead bodies were __________ from the wreckage.",
+
+          a: ["recovered", "saved", "salvaged", "liberated"],
+
+          correct: 0,
+
+          explanation:
+            "'Recovered' is commonly used when bodies or people are found and removed from the remains of an accident or disaster.",
+        },
+
+        {
+          q: "95. He was not __________ to taking on all the extra responsibilities.",
+
+          a: ["hesitant", "unenthusiastic", "reluctant", "averse"],
+
+          correct: 3,
+
+          explanation:
+            "The correct collocation is 'averse to something', meaning strongly opposed to or unwilling to accept something.",
+        },
+
+        {
+          q: "96. The Red Cross is __________ an international aid organization.",
+
+          a: ["intriguingly", "intrusively", "intrinsically", "intrepidly"],
+
+          correct: 2,
+
+          explanation:
+            "'Intrinsically' means essentially or by its very nature. The sentence describes what the Red Cross essentially is.",
+        },
+
+        {
+          q: "97. The quality papers are a different __________ of fish from the gutter press.",
+
+          a: ["pan", "basket", "box", "kettle"],
+
+          correct: 3,
+
+          explanation:
+            "'A different kettle of fish' is an idiom meaning a completely different type of thing or situation.",
+        },
+
+        {
+          q: "98. As a result of __________, the price of new cars has risen dramatically.",
+
+          a: ["Inflation", "escalation", "distension", "extension"],
+
+          correct: 0,
+
+          explanation:
+            "'Inflation' is a general increase in prices over time, which can cause the cost of goods such as cars to rise.",
+        },
+
+        {
+          q: "99. __________ types of insects that pollinate plants.",
+
+          a: [
+            "Not only are the bees",
+            "Bees are not the only",
+            "Not the only bees are",
+            "Bees are not only the",
+          ],
+
+          correct: 1,
+
+          explanation:
+            "The correct structure is 'Bees are not the only types of insects that pollinate plants.' This means bees are one of several types of insects that perform this function.",
+        },
+
+        {
+          q: "100. The geographic position of North America, __________ in the early days...",
+
+          a: [
+            "laying..., isolating it",
+            "isolating it as it lay...",
+            "lying..., isolated it",
+            "isolating it... as it lied",
+          ],
+
+          correct: 1,
+
+          explanation:
+            "'As it lay' correctly describes the geographical position of North America, while 'isolating it' expresses the resulting effect.",
+        },
+
+        {
+          q: "101. Not until the Triassic Period __________.",
+
+          a: [
+            "that the first primitive mammals did develop",
+            "did the first primitive mammals develop",
+            "did develop the first primitive mammals",
+            "the first primitive mammals developed",
+          ],
+
+          correct: 1,
+
+          explanation:
+            "After a negative or limiting expression such as 'Not until...', English requires subject-auxiliary inversion: 'Not until... did the first primitive mammals develop.'",
+        },
+      ];
+
+      const quiz = document.getElementById("quiz");
+
+      let answered = 0;
+
+      let score = 0;
+
+      /* CREATE QUESTIONS */
+
+      questions.forEach((item, index) => {
+        const questionDiv = document.createElement("div");
+
+        questionDiv.className = "question";
+
+        const title = document.createElement("p");
+
+        title.className = "question-title";
+
+        title.innerHTML = `<b>${item.q}</b>`;
+
+        questionDiv.appendChild(title);
+
+        const optionsDiv = document.createElement("div");
+
+        optionsDiv.className = "options";
+
+        item.a.forEach((choice, i) => {
+          const button = document.createElement("button");
+
+          button.className = "option";
+
+          button.type = "button";
+
+          button.innerHTML = `
+
+            <span class="option-letter">
+
+              ${String.fromCharCode(65 + i)}
+
+            </span>
+
+            <span>
+              ${choice}
+            </span>
+
+          `;
+
+          button.onclick = function () {
+            selectAnswer(index, i, questionDiv);
+          };
+
+          optionsDiv.appendChild(button);
+        });
+
+        questionDiv.appendChild(optionsDiv);
+
+        const feedback = document.createElement("div");
+
+        feedback.className = "feedback";
+
+        questionDiv.appendChild(feedback);
+
+        quiz.appendChild(questionDiv);
+      });
+
+      /* SELECT ANSWER */
+
+      function selectAnswer(questionIndex, selectedIndex, questionDiv) {
+        if (questionDiv.dataset.answered === "true") {
+          return;
+        }
+
+        questionDiv.dataset.answered = "true";
+
+        answered++;
+
+        const question = questions[questionIndex];
+
+        const buttons = questionDiv.querySelectorAll(".option");
+
+        const feedback = questionDiv.querySelector(".feedback");
+
+        /* DISABLE OPTIONS */
+
+        buttons.forEach((button) => {
+          button.disabled = true;
+        });
+
+        /* CORRECT */
+
+        if (selectedIndex === question.correct) {
+          score++;
+
+          buttons[selectedIndex].classList.add("correct");
+
+          feedback.classList.add("show", "correct-feedback");
+
+          feedback.innerHTML = `
+
+        <strong>
+          ✅ Correct!
+        </strong>
+
+        ${question.explanation}
+
+      `;
+        } else {
+
+        /* WRONG */
+          buttons[selectedIndex].classList.add("wrong");
+
+          buttons[question.correct].classList.add("correct");
+
+          feedback.classList.add("show", "wrong-feedback");
+
+          feedback.innerHTML = `
+
+        <strong>
+          ❌ Incorrect!
+        </strong>
+
+        The correct answer is:
+
+        <b>
+          ${String.fromCharCode(65 + question.correct)}. ${
+            question.a[question.correct]
+          }
+        </b>
+
+        <br><br>
+
+        ${question.explanation}
+
+      `;
+        }
+
+        updateProgress();
+      }
+
+      /* UPDATE PROGRESS */
+
+      function updateProgress() {
+        const percentage = (answered / questions.length) * 100;
+
+        document.getElementById("progressFill").style.width = `${percentage}%`;
+
+        document.getElementById("progressText").textContent =
+          `${answered} / ${questions.length} answered`;
+      }
+
+      /* CHECK SCORE */
+
+      function checkAnswers() {
+        const scoreBox = document.getElementById("score");
+
+        const percentage = (score / questions.length) * 100;
+
+        let message;
+
+        if (percentage >= 90) {
+          message = "🏆 Excellent! Your English knowledge is outstanding.";
+        } else if (percentage >= 75) {
+          message = "🎉 Great job! You have a strong command of English.";
+        } else if (percentage >= 60) {
+          message =
+            "👍 Good effort! Review the explanations and keep practicing.";
+        } else {
+          message =
+            "📚 Keep practicing! Review the vocabulary and grammar carefully.";
+        }
+
+        scoreBox.innerHTML = `
+
+      <h2>
+        🎯 Your Result
+      </h2>
+
+      <div class="score-number">
+        ${score}/${questions.length}
+      </div>
+
+      <div class="score-message">
+        ${message}
+      </div>
+
+      <p>
+        You answered
+        <b>${answered}</b>
+        out of
+        <b>${questions.length}</b>
+        questions.
+      </p>
+
+    `;
+
+        scoreBox.classList.add("show");
+
+        scoreBox.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }
+    </script>
+
+    <!-- STUDY TRACKER -->
+
+    <script src="/study-tracker.js"></script>
+    ```
+  </body>
+</html>
