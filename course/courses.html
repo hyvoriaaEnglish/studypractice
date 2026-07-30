@@ -1,0 +1,811 @@
+```html
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Khóa học | Hyvoria English</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* =========================
+       RESET
+    ========================= */
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* =========================
+       BODY
+    ========================= */
+
+      body {
+        font-family: "Be Vietnam Pro", sans-serif;
+
+        min-height: 100vh;
+
+        color: #3d4868;
+
+        background:
+          radial-gradient(
+            circle at 10% 10%,
+            rgba(255, 190, 220, 0.35),
+            transparent 30%
+          ),
+          radial-gradient(
+            circle at 90% 20%,
+            rgba(170, 215, 255, 0.35),
+            transparent 30%
+          ),
+          linear-gradient(135deg, #fff7fb, #f4f9ff);
+      }
+
+      /* =========================
+       HEADER
+    ========================= */
+
+      header {
+        width: 100%;
+
+        padding: 18px 7%;
+
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        position: sticky;
+
+        top: 0;
+
+        z-index: 100;
+
+        background: rgba(255, 255, 255, 0.75);
+
+        backdrop-filter: blur(15px);
+
+        -webkit-backdrop-filter: blur(15px);
+
+        border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+      }
+
+      /* =========================
+       LOGO
+    ========================= */
+
+      .logo {
+        display: flex;
+
+        align-items: center;
+
+        gap: 12px;
+
+        text-decoration: none;
+
+        color: #3d4868;
+      }
+
+      .logo-icon {
+        width: 45px;
+
+        height: 45px;
+
+        border-radius: 15px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        font-size: 22px;
+
+        background: linear-gradient(135deg, #ffb7d8, #a9d9ff);
+
+        box-shadow: 0 8px 25px rgba(150, 180, 230, 0.2);
+      }
+
+      .logo-text {
+        font-size: 20px;
+
+        font-weight: 800;
+
+        letter-spacing: -0.5px;
+      }
+
+      /* =========================
+       HOME BUTTON
+    ========================= */
+
+      .home-btn {
+        text-decoration: none;
+
+        color: #65718e;
+
+        background: white;
+
+        padding: 10px 18px;
+
+        border-radius: 14px;
+
+        font-size: 13px;
+
+        font-weight: 600;
+
+        box-shadow: 0 6px 20px rgba(100, 130, 180, 0.1);
+
+        transition: 0.3s;
+      }
+
+      .home-btn:hover {
+        transform: translateY(-2px);
+
+        color: #df78aa;
+
+        background: #fff0f7;
+      }
+
+      /* =========================
+       HERO
+    ========================= */
+
+      .hero {
+        max-width: 1100px;
+
+        margin: auto;
+
+        padding: 70px 25px 45px;
+
+        text-align: center;
+      }
+
+      .hero-badge {
+        display: inline-block;
+
+        padding: 8px 18px;
+
+        margin-bottom: 20px;
+
+        border-radius: 50px;
+
+        background: rgba(255, 255, 255, 0.8);
+
+        color: #dc7baa;
+
+        font-size: 12px;
+
+        font-weight: 700;
+
+        box-shadow: 0 5px 20px rgba(100, 130, 180, 0.08);
+      }
+
+      .hero h1 {
+        font-size: clamp(34px, 5vw, 55px);
+
+        line-height: 1.2;
+
+        font-weight: 800;
+
+        color: #354269;
+
+        margin-bottom: 18px;
+      }
+
+      .hero h1 span {
+        background: linear-gradient(90deg, #e986b5, #7bb9ec);
+
+        background-clip: text;
+
+        -webkit-background-clip: text;
+
+        color: transparent;
+
+        -webkit-text-fill-color: transparent;
+      }
+
+      .hero p {
+        max-width: 650px;
+
+        margin: auto;
+
+        color: #7d89a3;
+
+        font-size: 15px;
+
+        line-height: 1.8;
+      }
+
+      /* =========================
+       COURSE SECTION
+    ========================= */
+
+      .course-section {
+        max-width: 1100px;
+
+        margin: auto;
+
+        padding: 20px 25px 80px;
+      }
+
+      .section-title {
+        text-align: center;
+
+        margin-bottom: 35px;
+      }
+
+      .section-title h2 {
+        color: #3d496d;
+
+        font-size: 27px;
+
+        margin-bottom: 8px;
+      }
+
+      .section-title p {
+        color: #8a95aa;
+
+        font-size: 13px;
+      }
+
+      /* =========================
+       COURSE CARD
+    ========================= */
+
+      .course-grid {
+        display: grid;
+
+        grid-template-columns: repeat(3, 1fr);
+
+        gap: 25px;
+      }
+
+      .course-card {
+        position: relative;
+
+        background: rgba(255, 255, 255, 0.85);
+
+        border: 1px solid rgba(255, 255, 255, 0.9);
+
+        border-radius: 27px;
+
+        padding: 30px;
+
+        overflow: hidden;
+
+        box-shadow: 0 12px 40px rgba(80, 110, 160, 0.08);
+
+        transition:
+          transform 0.35s,
+          box-shadow 0.35s;
+      }
+
+      .course-card:hover {
+        transform: translateY(-8px);
+
+        box-shadow: 0 20px 50px rgba(80, 110, 160, 0.15);
+      }
+
+      /* DECORATION */
+
+      .course-card::before {
+        content: "";
+
+        position: absolute;
+
+        width: 120px;
+
+        height: 120px;
+
+        border-radius: 50%;
+
+        background: #ffe1ee;
+
+        top: -50px;
+
+        right: -45px;
+
+        opacity: 0.8;
+      }
+
+      .course-card::after {
+        content: "";
+
+        position: absolute;
+
+        width: 80px;
+
+        height: 80px;
+
+        border-radius: 50%;
+
+        background: #dff2ff;
+
+        bottom: -40px;
+
+        left: -30px;
+
+        opacity: 0.7;
+      }
+
+      .course-content {
+        position: relative;
+
+        z-index: 2;
+      }
+
+      /* =========================
+       ICON
+    ========================= */
+
+      .course-icon {
+        width: 58px;
+
+        height: 58px;
+
+        border-radius: 18px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        font-size: 27px;
+
+        margin-bottom: 20px;
+
+        background: linear-gradient(135deg, #ffc2de, #acdfff);
+
+        box-shadow: 0 8px 20px rgba(120, 160, 220, 0.15);
+      }
+
+      /* =========================
+       COURSE TITLE
+    ========================= */
+
+      .course-card h3 {
+        color: #3d496c;
+
+        font-size: 21px;
+
+        margin-bottom: 10px;
+      }
+
+      .course-card .description {
+        color: #7f8ba3;
+
+        font-size: 13px;
+
+        line-height: 1.7;
+
+        margin-bottom: 20px;
+      }
+
+      /* =========================
+       COURSE INFO
+    ========================= */
+
+      .course-info {
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 10px;
+
+        margin-bottom: 23px;
+      }
+
+      .info-item {
+        display: flex;
+
+        align-items: center;
+
+        gap: 9px;
+
+        color: #687590;
+
+        font-size: 13px;
+      }
+
+      .info-icon {
+        width: 28px;
+
+        height: 28px;
+
+        border-radius: 9px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        background: #fff0f7;
+
+        font-size: 14px;
+      }
+
+      /* =========================
+       PRICE
+    ========================= */
+
+      .price-box {
+        display: flex;
+
+        align-items: flex-end;
+
+        gap: 7px;
+
+        margin-bottom: 20px;
+      }
+
+      .price {
+        font-size: 27px;
+
+        font-weight: 800;
+
+        color: #df76aa;
+      }
+
+      .price-label {
+        color: #929caf;
+
+        font-size: 12px;
+
+        margin-bottom: 5px;
+      }
+
+      /* =========================
+       BUTTON
+    ========================= */
+
+      .detail-btn {
+        width: 100%;
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+
+        gap: 8px;
+
+        text-decoration: none;
+
+        padding: 14px;
+
+        border-radius: 15px;
+
+        background: linear-gradient(90deg, #e986b5, #7bb9ec);
+
+        color: white;
+
+        font-size: 14px;
+
+        font-weight: 700;
+
+        box-shadow: 0 8px 20px rgba(120, 160, 220, 0.2);
+
+        transition: 0.3s;
+      }
+
+      .detail-btn:hover {
+        transform: translateY(-2px);
+
+        box-shadow: 0 12px 28px rgba(120, 160, 220, 0.3);
+      }
+
+      /* =========================
+       COMING SOON
+    ========================= */
+
+      .coming-soon {
+        opacity: 0.7;
+      }
+
+      .coming-soon .course-icon {
+        background: linear-gradient(135deg, #e8eefa, #f9e8f1);
+      }
+
+      .coming-label {
+        display: inline-block;
+
+        padding: 6px 12px;
+
+        border-radius: 20px;
+
+        background: #f0f3f8;
+
+        color: #8994a9;
+
+        font-size: 11px;
+
+        font-weight: 600;
+
+        margin-bottom: 15px;
+      }
+
+      /* =========================
+       FOOTER
+    ========================= */
+
+      footer {
+        text-align: center;
+
+        padding: 30px 20px;
+
+        background: rgba(255, 255, 255, 0.55);
+
+        color: #8b96aa;
+
+        font-size: 13px;
+      }
+
+      footer strong {
+        color: #df7eac;
+      }
+
+      /* =========================
+       RESPONSIVE
+    ========================= */
+
+      @media (max-width: 900px) {
+        .course-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 600px) {
+        header {
+          padding: 15px 5%;
+        }
+
+        .logo-text {
+          font-size: 17px;
+        }
+
+        .home-btn {
+          padding: 9px 13px;
+
+          font-size: 12px;
+        }
+
+        .hero {
+          padding: 55px 20px 35px;
+        }
+
+        .hero h1 {
+          font-size: 36px;
+        }
+
+        .course-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .course-section {
+          padding: 20px 60px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- =========================
+       HEADER
+  ========================= -->
+
+    <header>
+      <a href="trangchu.html" class="logo">
+        <div class="logo-icon">🌸</div>
+
+        <div class="logo-text">Hyvoria English</div>
+      </a>
+
+      <a href="trangchu.html" class="home-btn"> 🏠 Trang chủ </a>
+    </header>
+
+    <!-- =========================
+       HERO
+  ========================= -->
+
+    <section class="hero">
+      <div class="hero-badge">✨ HYVORIA ENGLISH COURSES</div>
+
+      <h1>
+        Khóa học
+        <span> dành cho bạn </span>
+      </h1>
+
+      <p>
+        Khám phá các khóa học được thiết kế để giúp bạn xây dựng nền tảng tiếng
+        Anh, nâng cao kiến thức và chinh phục mục tiêu của mình.
+      </p>
+    </section>
+
+    <!-- =========================
+       COURSE SECTION
+  ========================= -->
+
+    <section class="course-section">
+      <div class="section-title">
+        <h2>📚 Các khóa học</h2>
+
+        <p>Chọn khóa học phù hợp với mục tiêu của bạn</p>
+      </div>
+
+      <div class="course-grid">
+        <!-- =====================
+           COURSE 1
+      ====================== -->
+
+        <div class="course-card">
+          <div class="course-content">
+            <div class="course-icon">🎓</div>
+
+            <h3>Khóa học Tiếng Anh 1</h3>
+
+            <p class="description">
+              Chương trình học toàn diện giúp bạn củng cố kiến thức tiếng Anh và
+              từng bước nâng cao khả năng làm bài.
+            </p>
+
+            <div class="course-info">
+              <div class="info-item">
+                <div class="info-icon">📚</div>
+
+                <span> 16 Courses </span>
+              </div>
+
+              <div class="info-item">
+                <div class="info-icon">🔄</div>
+
+                <span> 3 Revision </span>
+              </div>
+
+              <div class="info-item">
+                <div class="info-icon">🔓</div>
+
+                <span> Truy cập toàn bộ khóa học </span>
+              </div>
+            </div>
+
+            <div class="price-box">
+              <div class="price">199.000 VND</div>
+
+              <div class="price-label">/ trọn khóa</div>
+            </div>
+
+            <a href="course-detail-1.html" class="detail-btn">
+              Xem chi tiết
+
+              <span> → </span>
+            </a>
+          </div>
+        </div>
+
+        <!-- =====================
+           COURSE 2
+      ====================== -->
+
+        <div class="course-card coming-soon">
+          <div class="course-content">
+            <div class="course-icon">🌷</div>
+
+            <span class="coming-label"> COMING SOON </span>
+
+            <h3>Khóa học Tiếng Anh 2</h3>
+
+            <p class="description">
+              Một chương trình học mới đang được Hyvoria English phát triển.
+            </p>
+
+            <div class="course-info">
+              <div class="info-item">
+                <div class="info-icon">✨</div>
+
+                <span> Nội dung mới </span>
+              </div>
+
+              <div class="info-item">
+                <div class="info-icon">📖</div>
+
+                <span> Bài học chuyên sâu </span>
+              </div>
+            </div>
+
+            <div class="price-box">
+              <div class="price">Coming Soon</div>
+            </div>
+
+            <a
+              href="#"
+              class="detail-btn"
+              onclick="
+                alert('Khóa học này sẽ sớm được ra mắt!');
+                return false;
+              "
+            >
+              Sắp ra mắt
+
+              <span> ✨ </span>
+            </a>
+          </div>
+        </div>
+
+        <!-- =====================
+           COURSE 3
+      ====================== -->
+
+        <div class="course-card coming-soon">
+          <div class="course-content">
+            <div class="course-icon">🌸</div>
+
+            <span class="coming-label"> COMING SOON </span>
+
+            <h3>Khóa học Tiếng Anh 3</h3>
+
+            <p class="description">
+              Những nội dung học tập mới sẽ được cập nhật trong thời gian tới.
+            </p>
+
+            <div class="course-info">
+              <div class="info-item">
+                <div class="info-icon">🎯</div>
+
+                <span> Nội dung thực tế </span>
+              </div>
+
+              <div class="info-item">
+                <div class="info-icon">🚀</div>
+
+                <span> Phát triển kỹ năng </span>
+              </div>
+            </div>
+
+            <div class="price-box">
+              <div class="price">Coming Soon</div>
+            </div>
+
+            <a
+              href="#"
+              class="detail-btn"
+              onclick="
+                alert('Khóa học này sẽ sớm được ra mắt!');
+                return false;
+              "
+            >
+              Sắp ra mắt
+
+              <span> ✨ </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+       FOOTER
+  ========================= -->
+
+    <footer>
+      <p>
+        Made with 💗 for
+
+        <strong> Hyvoria English </strong>
+      </p>
+
+      <p style="margin-top: 8px">Keep learning. Keep growing. ✨</p>
+    </footer>
+  </body>
+</html>
+```

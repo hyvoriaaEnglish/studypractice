@@ -1,0 +1,2549 @@
+<!doctype html>
+
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Pronunciation Practice -ED & -S/-ES</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f4f7fb;
+        color: #1e293b;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: auto;
+        padding: 25px 15px 60px;
+      }
+
+      /* HEADER */
+
+      .header {
+        background: white;
+        padding: 30px;
+        border-radius: 18px;
+        text-align: center;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        margin-bottom: 20px;
+      }
+
+      .header h1 {
+        color: #2563eb;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        color: #64748b;
+      }
+
+      /* SCORE */
+
+      .score-box {
+        background: white;
+        padding: 18px 20px;
+        border-radius: 14px;
+        margin-bottom: 25px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+      }
+
+      .score-info {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+
+      .progress {
+        height: 10px;
+        background: #e2e8f0;
+        border-radius: 20px;
+        overflow: hidden;
+      }
+
+      .progress-bar {
+        height: 100%;
+        width: 0%;
+        background: #2563eb;
+        transition: 0.3s;
+      }
+
+      /* SECTION */
+
+      .section-title {
+        background: #2563eb;
+        color: white;
+        padding: 18px 20px;
+        border-radius: 12px;
+        margin: 30px 0 20px;
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      /* QUESTION */
+
+      .question {
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        margin-bottom: 20px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+      }
+
+      .question h3 {
+        margin-top: 0;
+        margin-bottom: 18px;
+        font-size: 18px;
+      }
+
+      /* OPTIONS */
+
+      .options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .option {
+        width: 100%;
+        padding: 13px 16px;
+        text-align: left;
+        background: white;
+        border: 2px solid #e2e8f0;
+        border-radius: 9px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: 0.2s;
+      }
+
+      .option:hover:not(:disabled) {
+        border-color: #2563eb;
+        background: #eff6ff;
+      }
+
+      .option:disabled {
+        cursor: not-allowed;
+      }
+
+      .option.correct {
+        background: #dcfce7;
+        border-color: #22c55e;
+        color: #166534;
+        font-weight: bold;
+      }
+
+      .option.wrong {
+        background: #fee2e2;
+        border-color: #ef4444;
+        color: #991b1b;
+        font-weight: bold;
+      }
+
+      .option.correct-answer {
+        background: #dcfce7;
+        border-color: #22c55e;
+      }
+
+      /* FEEDBACK */
+
+      .feedback {
+        display: none;
+        margin-top: 18px;
+        padding: 16px;
+        border-radius: 10px;
+        line-height: 1.7;
+      }
+
+      .feedback.show {
+        display: block;
+      }
+
+      .feedback.correct-feedback {
+        background: #f0fdf4;
+        border-left: 5px solid #22c55e;
+      }
+
+      .feedback.wrong-feedback {
+        background: #fff1f2;
+        border-left: 5px solid #ef4444;
+      }
+
+      .feedback-title {
+        font-weight: bold;
+        font-size: 17px;
+        margin-bottom: 6px;
+      }
+
+      /* RESULT */
+
+      .result {
+        display: none;
+        background: white;
+        padding: 35px 25px;
+        border-radius: 18px;
+        text-align: center;
+        margin-top: 35px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+      }
+
+      .result.show {
+        display: block;
+      }
+
+      .result h2 {
+        color: #2563eb;
+      }
+
+      .final-score {
+        font-size: 42px;
+        font-weight: bold;
+        color: #2563eb;
+        margin: 15px 0;
+      }
+
+      .pass {
+        color: #16a34a;
+        font-weight: bold;
+        font-size: 18px;
+      }
+
+      .fail {
+        color: #dc2626;
+        font-weight: bold;
+        font-size: 18px;
+      }
+
+      /* BUTTONS */
+
+      .buttons {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 25px;
+      }
+
+      .buttons a,
+      .buttons button {
+        padding: 13px 22px;
+        border-radius: 10px;
+        border: none;
+        text-decoration: none;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 15px;
+      }
+
+      .home-btn {
+        background: #e2e8f0;
+        color: #1e293b;
+      }
+
+      .lesson-btn {
+        background: #2563eb;
+        color: white;
+      }
+
+      .restart-btn {
+        background: #16a34a;
+        color: white;
+      }
+
+      /* MOBILE */
+
+      @media (max-width: 600px) {
+        .container {
+          padding: 15px 10px 40px;
+        }
+
+        .header {
+          padding: 25px 15px;
+        }
+
+        .header h1 {
+          font-size: 24px;
+        }
+
+        .question {
+          padding: 20px 15px;
+        }
+
+        .buttons {
+          flex-direction: column;
+        }
+
+        .buttons a,
+        .buttons button {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      ```
+      <!-- HEADER -->
+
+      <div class="header">
+        <h1>📝 Pronunciation Practice</h1>
+
+        <p>Phát âm đuôi <strong>-ED</strong> và <strong>-S/-ES</strong></p>
+
+        <p>Chọn từ có phần đuôi được phát âm khác với các từ còn lại.</p>
+
+        <p>🎯 Mục tiêu: Đạt ít nhất <strong>23/28 câu</strong></p>
+      </div>
+
+      <!-- SCORE -->
+
+      <div class="score-box">
+        <div class="score-info">
+          <span>
+            Đã làm:
+            <span id="answered">0</span>/28
+          </span>
+
+          <span>
+            Điểm:
+            <span id="score">0</span>/28
+          </span>
+        </div>
+
+        <div class="progress">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+      </div>
+
+      <!-- ========================= -->
+      <!-- PART I -->
+      <!-- ========================= -->
+
+      <div class="section-title">🔵 PART I – PRONUNCIATION OF -ED</div>
+
+      <!-- QUESTION 1 -->
+
+      <div class="question">
+        <h3>
+          Question 1. Choose the word whose -ED ending is pronounced
+          differently.
+        </h3>
+
+        <div class="options">
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'B. played',
+                'wanted /ɪd/, needed /ɪd/, started /ɪd/. The -ED ending is pronounced /ɪd/ because the base words end in /t/ or /d/.',
+              )
+            "
+          >
+            A. wanted
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'B. played',
+                'played is pronounced /pleɪd/. The -ED ending is /d/ because the word ends in the vowel sound /eɪ/.',
+              )
+            "
+          >
+            B. played
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'B. played',
+                'needed ends in /d/, so the -ED ending is pronounced /ɪd/.',
+              )
+            "
+          >
+            C. needed
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'B. played',
+                'started ends in /t/, so the -ED ending is pronounced /ɪd/.',
+              )
+            "
+          >
+            D. started
+          </button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 2 -->
+
+      <div class="question">
+        <h3>
+          Question 2. Choose the word whose -ED ending is pronounced
+          differently.
+        </h3>
+
+        <div class="options">
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. played',
+                'washed ends in the voiceless sound /ʃ/, so -ED is pronounced /t/.',
+              )
+            "
+          >
+            A. washed
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. played',
+                'watched ends in /tʃ/, so -ED is pronounced /t/.',
+              )
+            "
+          >
+            B. watched
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'C. played',
+                'played ends in the vowel sound /eɪ/, so -ED is pronounced /d/.',
+              )
+            "
+          >
+            C. played
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. played',
+                'looked ends in the voiceless sound /k/, so -ED is pronounced /t/.',
+              )
+            "
+          >
+            D. looked
+          </button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 3 -->
+
+      <div class="question">
+        <h3>
+          Question 3. Choose the word whose -ED ending is pronounced
+          differently.
+        </h3>
+
+        <div class="options">
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. worked',
+                'loved ends in the voiced sound /v/, so -ED is pronounced /d/.',
+              )
+            "
+          >
+            A. loved
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. worked',
+                'cleaned ends in the voiced sound /n/, so -ED is pronounced /d/.',
+              )
+            "
+          >
+            B. cleaned
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'C. worked',
+                'worked ends in the voiceless sound /k/, so -ED is pronounced /t/.',
+              )
+            "
+          >
+            C. worked
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. worked',
+                'opened ends in the voiced sound /n/, so -ED is pronounced /d/.',
+              )
+            "
+          >
+            D. opened
+          </button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 4 -->
+
+      <div class="question">
+        <h3>
+          Question 4. Choose the word whose -ED ending is pronounced
+          differently.
+        </h3>
+
+        <div class="options">
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. called',
+                'stopped ends in /p/, so -ED is pronounced /t/.',
+              )
+            "
+          >
+            A. stopped
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. called',
+                'laughed ends in /f/, so -ED is pronounced /t/.',
+              )
+            "
+          >
+            B. laughed
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'C. called',
+                'called ends in the voiced sound /l/, so -ED is pronounced /d/.',
+              )
+            "
+          >
+            C. called
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. called',
+                'washed ends in /ʃ/, so -ED is pronounced /t/.',
+              )
+            "
+          >
+            D. washed
+          </button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 5 -->
+
+      <div class="question">
+        <h3>
+          Question 5. Choose the word whose -ED ending is pronounced
+          differently.
+        </h3>
+
+        <div class="options">
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. lived',
+                'decided ends in /d/, so -ED is pronounced /ɪd/.',
+              )
+            "
+          >
+            A. decided
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. lived',
+                'invited ends in /t/, so -ED is pronounced /ɪd/.',
+              )
+            "
+          >
+            B. invited
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'C. lived',
+                'lived ends in /v/, a voiced sound, so -ED is pronounced /d/.',
+              )
+            "
+          >
+            C. lived
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. lived',
+                'started ends in /t/, so -ED is pronounced /ɪd/.',
+              )
+            "
+          >
+            D. started
+          </button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 6 -->
+
+      <div class="question">
+        <h3>
+          Question 6. Choose the word whose -ED ending is pronounced
+          differently.
+        </h3>
+
+        <div class="options">
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. arrived',
+                'helped ends in /p/, so -ED is pronounced /t/.',
+              )
+            "
+          >
+            A. helped
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. arrived',
+                'missed ends in /s/, so -ED is pronounced /t/.',
+              )
+            "
+          >
+            B. missed
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'C. arrived',
+                'arrived ends in /v/, a voiced sound, so -ED is pronounced /d/.',
+              )
+            "
+          >
+            C. arrived
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. arrived',
+                'cooked ends in /k/, so -ED is pronounced /t/.',
+              )
+            "
+          >
+            D. cooked
+          </button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 7 -->
+
+      <div class="question">
+        <h3>
+          Question 7. Choose the word whose -ED ending is pronounced
+          differently.
+        </h3>
+
+        <div class="options">
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'B. watched',
+                'played ends in a vowel sound, so -ED is pronounced /d/.',
+              )
+            "
+          >
+            A. played
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'B. watched',
+                'watched ends in /tʃ/, a voiceless sound, so -ED is pronounced /t/.',
+              )
+            "
+          >
+            B. watched
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'B. watched',
+                'cleaned ends in /n/, so -ED is pronounced /d/.',
+              )
+            "
+          >
+            C. cleaned
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'B. watched',
+                'opened ends in /n/, so -ED is pronounced /d/.',
+              )
+            "
+          >
+            D. opened
+          </button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 8 -->
+
+      <div class="question">
+        <h3>
+          Question 8. Choose the word whose -ED ending is pronounced
+          differently.
+        </h3>
+
+        <div class="options">
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. worked',
+                'needed ends in /d/, so -ED is pronounced /ɪd/.',
+              )
+            "
+          >
+            A. needed
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. worked',
+                'wanted ends in /t/, so -ED is pronounced /ɪd/.',
+              )
+            "
+          >
+            B. wanted
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'C. worked',
+                'worked ends in /k/, so -ED is pronounced /t/.',
+              )
+            "
+          >
+            C. worked
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. worked',
+                'started ends in /t/, so -ED is pronounced /ɪd/.',
+              )
+            "
+          >
+            D. started
+          </button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 9 -->
+
+      <div class="question">
+        <h3>
+          Question 9. Choose the word whose -ED ending is pronounced
+          differently.
+        </h3>
+
+        <div class="options">
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. laughed',
+                'lived ends in /v/, so -ED is pronounced /d/.',
+              )
+            "
+          >
+            A. lived
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. laughed',
+                'loved ends in /v/, so -ED is pronounced /d/.',
+              )
+            "
+          >
+            B. loved
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'C. laughed',
+                'laughed ends in /f/, a voiceless sound, so -ED is pronounced /t/.',
+              )
+            "
+          >
+            C. laughed
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. laughed',
+                'played ends in a vowel sound, so -ED is pronounced /d/.',
+              )
+            "
+          >
+            D. played
+          </button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 10 -->
+
+      <div class="question">
+        <h3>
+          Question 10. Choose the word whose -ED ending is pronounced
+          differently.
+        </h3>
+
+        <div class="options">
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. visited',
+                'looked ends in /k/, so -ED is pronounced /t/.',
+              )
+            "
+          >
+            A. looked
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. visited',
+                'washed ends in /ʃ/, so -ED is pronounced /t/.',
+              )
+            "
+          >
+            B. washed
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'C. visited',
+                'visited ends in /t/, so -ED is pronounced /ɪd/.',
+              )
+            "
+          >
+            C. visited
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. visited',
+                'stopped ends in /p/, so -ED is pronounced /t/.',
+              )
+            "
+          >
+            D. stopped
+          </button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 11 -->
+
+      <div class="question">
+        <h3>
+          Question 11. Choose the word whose -ED ending is pronounced
+          differently.
+        </h3>
+
+        <div class="options">
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. asked',
+                'called ends in /l/, so -ED is pronounced /d/.',
+              )
+            "
+          >
+            A. called
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. asked',
+                'allowed ends in a vowel sound, so -ED is pronounced /d/.',
+              )
+            "
+          >
+            B. allowed
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'C. asked',
+                'asked ends in /k/, so -ED is pronounced /t/.',
+              )
+            "
+          >
+            C. asked
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. asked',
+                'learned ends in /n/, so -ED is pronounced /d/.',
+              )
+            "
+          >
+            D. learned
+          </button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 12 -->
+
+      <div class="question">
+        <h3>
+          Question 12. Choose the word whose -ED ending is pronounced
+          differently.
+        </h3>
+
+        <div class="options">
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. decided',
+                'fixed ends in /k/, so -ED is pronounced /t/.',
+              )
+            "
+          >
+            A. fixed
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. decided',
+                'watched ends in /tʃ/, so -ED is pronounced /t/.',
+              )
+            "
+          >
+            B. watched
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'C. decided',
+                'decided ends in /d/, so -ED is pronounced /ɪd/.',
+              )
+            "
+          >
+            C. decided
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. decided',
+                'washed ends in /ʃ/, so -ED is pronounced /t/.',
+              )
+            "
+          >
+            D. washed
+          </button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 13 -->
+
+      <div class="question">
+        <h3>
+          Question 13. Choose the word whose -ED ending is pronounced
+          differently.
+        </h3>
+
+        <div class="options">
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'D. wanted',
+                'opened ends in /n/, so -ED is pronounced /d/.',
+              )
+            "
+          >
+            A. opened
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'D. wanted',
+                'arrived ends in /v/, so -ED is pronounced /d/.',
+              )
+            "
+          >
+            B. arrived
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'D. wanted',
+                'played ends in a vowel sound, so -ED is pronounced /d/.',
+              )
+            "
+          >
+            C. played
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'D. wanted',
+                'wanted ends in /t/, so -ED is pronounced /ɪd/.',
+              )
+            "
+          >
+            D. wanted
+          </button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 14 -->
+
+      <div class="question">
+        <h3>
+          Question 14. Choose the word whose -ED ending is pronounced
+          differently.
+        </h3>
+
+        <div class="options">
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'D. loved',
+                'started ends in /t/, so -ED is pronounced /ɪd/.',
+              )
+            "
+          >
+            A. started
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'D. loved',
+                'needed ends in /d/, so -ED is pronounced /ɪd/.',
+              )
+            "
+          >
+            B. needed
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'D. loved',
+                'invited ends in /t/, so -ED is pronounced /ɪd/.',
+              )
+            "
+          >
+            C. invited
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'D. loved',
+                'loved ends in /v/, a voiced sound, so -ED is pronounced /d/.',
+              )
+            "
+          >
+            D. loved
+          </button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- ========================= -->
+      <!-- PART II -->
+      <!-- ========================= -->
+
+      <div class="section-title">🟢 PART II – PRONUNCIATION OF -S/-ES</div>
+
+      <!-- QUESTION 15 -->
+
+      <div class="question">
+        <h3>
+          Question 15. Choose the word whose -S/-ES ending is pronounced
+          differently.
+        </h3>
+
+        <div class="options">
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. dogs',
+                'books ends in /k/, so -S is pronounced /s/.',
+              )
+            "
+          >
+            A. books
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. dogs',
+                'cats ends in /t/, so -S is pronounced /s/.',
+              )
+            "
+          >
+            B. cats
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'C. dogs',
+                'dogs ends in /g/, a voiced sound, so -S is pronounced /z/.',
+              )
+            "
+          >
+            C. dogs
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. dogs',
+                'cups ends in /p/, so -S is pronounced /s/.',
+              )
+            "
+          >
+            D. cups
+          </button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 16 -->
+
+      <div class="question">
+        <h3>
+          Question 16. Choose the word whose -S/-ES ending is pronounced
+          differently.
+        </h3>
+
+        <div class="options">
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'D. books',
+                'pens ends in /n/, so -S is pronounced /z/.',
+              )
+            "
+          >
+            A. pens
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'D. books',
+                'rooms ends in /m/, so -S is pronounced /z/.',
+              )
+            "
+          >
+            B. rooms
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'D. books',
+                'cars ends in a vowel sound, so -S is pronounced /z/.',
+              )
+            "
+          >
+            C. cars
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'D. books',
+                'books ends in /k/, a voiceless sound, so -S is pronounced /s/.',
+              )
+            "
+          >
+            D. books
+          </button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 17 -->
+
+      <div class="question">
+        <h3>
+          Question 17. Choose the word whose -S/-ES ending is pronounced
+          differently.
+        </h3>
+
+        <div class="options">
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. plays',
+                'watches ends in /tʃ/, so -ES is pronounced /ɪz/.',
+              )
+            "
+          >
+            A. watches
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. plays',
+                'washes ends in /ʃ/, so -ES is pronounced /ɪz/.',
+              )
+            "
+          >
+            B. washes
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'C. plays',
+                'plays ends in a vowel sound, so -S is pronounced /z/.',
+              )
+            "
+          >
+            C. plays
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. plays',
+                'boxes ends in /s/, so -ES is pronounced /ɪz/.',
+              )
+            "
+          >
+            D. boxes
+          </button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 18 -->
+
+      <div class="question">
+        <h3>
+          Question 18. Choose the word whose -S/-ES ending is pronounced
+          differently.
+        </h3>
+
+        <div class="options">
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. dogs',
+                'buses ends in /s/, so -ES is pronounced /ɪz/.',
+              )
+            "
+          >
+            A. buses
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. dogs',
+                'classes ends in /s/, so -ES is pronounced /ɪz/.',
+              )
+            "
+          >
+            B. classes
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'C. dogs',
+                'dogs ends in /g/, a voiced sound, so -S is pronounced /z/.',
+              )
+            "
+          >
+            C. dogs
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. dogs',
+                'quizzes ends in /z/, so -ES is pronounced /ɪz/.',
+              )
+            "
+          >
+            D. quizzes
+          </button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 19 -->
+
+      <div class="question">
+        <h3>
+          Question 19. Choose the word whose -S/-ES ending is pronounced
+          differently.
+        </h3>
+
+        <div class="options">
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. loves',
+                'laughs ends in /f/, so -S is pronounced /s/.',
+              )
+            "
+          >
+            A. laughs
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. loves',
+                'stops ends in /p/, so -S is pronounced /s/.',
+              )
+            "
+          >
+            B. stops
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'C. loves',
+                'loves ends in /v/, a voiced sound, so -S is pronounced /z/.',
+              )
+            "
+          >
+            C. loves
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. loves',
+                'cooks ends in /k/, so -S is pronounced /s/.',
+              )
+            "
+          >
+            D. cooks
+          </button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 20 -->
+
+      <div class="question">
+        <h3>
+          Question 20. Choose the word whose -S/-ES ending is pronounced
+          differently.
+        </h3>
+
+        <div class="options">
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. works',
+                'plays ends in a vowel sound, so -S is pronounced /z/.',
+              )
+            "
+          >
+            A. plays
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. works',
+                'reads ends in /d/, so -S is pronounced /z/.',
+              )
+            "
+          >
+            B. reads
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'C. works',
+                'works ends in /k/, so -S is pronounced /s/.',
+              )
+            "
+          >
+            C. works
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. works',
+                'lives ends in /v/, so -S is pronounced /z/.',
+              )
+            "
+          >
+            D. lives
+          </button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 21 -->
+
+      <div class="question">
+        <h3>
+          Question 21. Choose the word whose -S/-ES ending is pronounced
+          differently.
+        </h3>
+
+        <div class="options">
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. reads',
+                'teaches ends in /tʃ/, so -ES is pronounced /ɪz/.',
+              )
+            "
+          >
+            A. teaches
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. reads',
+                'catches ends in /tʃ/, so -ES is pronounced /ɪz/.',
+              )
+            "
+          >
+            B. catches
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'C. reads',
+                'reads ends in /d/, a voiced sound, so -S is pronounced /z/.',
+              )
+            "
+          >
+            C. reads
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. reads',
+                'watches ends in /tʃ/, so -ES is pronounced /ɪz/.',
+              )
+            "
+          >
+            D. watches
+          </button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 22 -->
+
+      <div class="question">
+        <h3>
+          Question 22. Choose the word whose -S/-ES ending is pronounced
+          differently.
+        </h3>
+
+        <div class="options">
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'B. dogs',
+                'cats ends in /t/, so -S is pronounced /s/.',
+              )
+            "
+          >
+            A. cats
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'B. dogs',
+                'dogs ends in /g/, a voiced sound, so -S is pronounced /z/.',
+              )
+            "
+          >
+            B. dogs
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'B. dogs',
+                'books ends in /k/, so -S is pronounced /s/.',
+              )
+            "
+          >
+            C. books
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'B. dogs',
+                'maps ends in /p/, so -S is pronounced /s/.',
+              )
+            "
+          >
+            D. maps
+          </button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 23 -->
+
+      <div class="question">
+        <h3>
+          Question 23. Choose the word whose -S/-ES ending is pronounced
+          differently.
+        </h3>
+
+        <div class="options">
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'D. pens',
+                'houses is pronounced with /ɪz/.',
+              )
+            "
+          >
+            A. houses
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'D. pens',
+                'classes is pronounced with /ɪz/.',
+              )
+            "
+          >
+            B. classes
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'D. pens',
+                'bridges is pronounced with /ɪz/.',
+              )
+            "
+          >
+            C. bridges
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'D. pens',
+                'pens ends in /n/, a voiced sound, so -S is pronounced /z/.',
+              )
+            "
+          >
+            D. pens
+          </button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 24 -->
+
+      <div class="question">
+        <h3>
+          Question 24. Choose the word whose -S/-ES ending is pronounced
+          differently.
+        </h3>
+
+        <div class="options">
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. needs',
+                'likes ends in /k/, so -S is pronounced /s/.',
+              )
+            "
+          >
+            A. likes
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. needs',
+                'wants ends in /t/, so -S is pronounced /s/.',
+              )
+            "
+          >
+            B. wants
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'C. needs',
+                'needs ends in /d/, a voiced sound, so -S is pronounced /z/.',
+              )
+            "
+          >
+            C. needs
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. needs',
+                'helps ends in /p/, so -S is pronounced /s/.',
+              )
+            "
+          >
+            D. helps
+          </button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 25 -->
+
+      <div class="question">
+        <h3>
+          Question 25. Choose the word whose -S/-ES ending is pronounced
+          differently.
+        </h3>
+
+        <div class="options">
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'D. rooms',
+                'boxes ends in /s/, so -ES is pronounced /ɪz/.',
+              )
+            "
+          >
+            A. boxes
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'D. rooms',
+                'buses ends in /s/, so -ES is pronounced /ɪz/.',
+              )
+            "
+          >
+            B. buses
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'D. rooms',
+                'watches ends in /tʃ/, so -ES is pronounced /ɪz/.',
+              )
+            "
+          >
+            C. watches
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'D. rooms',
+                'rooms ends in /m/, a voiced sound, so -S is pronounced /z/.',
+              )
+            "
+          >
+            D. rooms
+          </button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 26 -->
+
+      <div class="question">
+        <h3>
+          Question 26. Choose the word whose -S/-ES ending is pronounced
+          differently.
+        </h3>
+
+        <div class="options">
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. books',
+                'boys ends in a vowel sound, so -S is pronounced /z/.',
+              )
+            "
+          >
+            A. boys
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. books',
+                'girls ends in /l/, so -S is pronounced /z/.',
+              )
+            "
+          >
+            B. girls
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'C. books',
+                'books ends in /k/, so -S is pronounced /s/.',
+              )
+            "
+          >
+            C. books
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. books',
+                'toys ends in a vowel sound, so -S is pronounced /z/.',
+              )
+            "
+          >
+            D. toys
+          </button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 27 -->
+
+      <div class="question">
+        <h3>
+          Question 27. Choose the word whose -S/-ES ending is pronounced
+          differently.
+        </h3>
+
+        <div class="options">
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'D. plays',
+                'washes ends in /ʃ/, so -ES is pronounced /ɪz/.',
+              )
+            "
+          >
+            A. washes
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'D. plays',
+                'misses ends in /s/, so -ES is pronounced /ɪz/.',
+              )
+            "
+          >
+            B. misses
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'D. plays',
+                'fixes ends in /s/, so -ES is pronounced /ɪz/.',
+              )
+            "
+          >
+            C. fixes
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'D. plays',
+                'plays ends in a vowel sound, so -S is pronounced /z/.',
+              )
+            "
+          >
+            D. plays
+          </button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- QUESTION 28 -->
+
+      <div class="question">
+        <h3>
+          Question 28. Choose the word whose -S/-ES ending is pronounced
+          differently.
+        </h3>
+
+        <div class="options">
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. cars',
+                'cups ends in /p/, so -S is pronounced /s/.',
+              )
+            "
+          >
+            A. cups
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. cars',
+                'roofs ends in /f/, so -S is pronounced /s/.',
+              )
+            "
+          >
+            B. roofs
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                true,
+                'C. cars',
+                'cars ends in a vowel sound, so -S is pronounced /z/.',
+              )
+            "
+          >
+            C. cars
+          </button>
+
+          <button
+            class="option"
+            onclick="
+              checkAnswer(
+                this,
+                false,
+                'C. cars',
+                'laughs ends in /f/, so -S is pronounced /s/.',
+              )
+            "
+          >
+            D. laughs
+          </button>
+        </div>
+
+        <div class="feedback"></div>
+      </div>
+
+      <!-- RESULT -->
+
+      <div class="result" id="result">
+        <h2>🏆 Kết quả bài tập</h2>
+
+        <div class="final-score"><span id="finalScore">0</span>/28</div>
+
+        <p id="resultMessage"></p>
+
+        <div class="buttons">
+          <!-- NÚT HOME -->
+
+          <a href="course16.html" class="home-btn"> 🏠 Về trang khóa học </a>
+
+          <!-- ĐỔI LINK BÀI GIẢNG Ở ĐÂY -->
+
+          <a href="YOUR-LESSON-LINK.html" class="lesson-btn">
+            📚 Xem lại bài giảng
+          </a>
+
+          <!-- LÀM LẠI -->
+
+          <button class="restart-btn" onclick="restartQuiz()">
+            🔄 Làm lại bài
+          </button>
+        </div>
+      </div>
+      ```
+    </div>
+
+    <script>
+      let score = 0;
+
+      let answered = 0;
+
+      const totalQuestions = 28;
+
+      const passScore = 23;
+
+      /* =========================
+   CHECK ANSWER
+========================= */
+
+      function checkAnswer(button, isCorrect, correctAnswer, explanation) {
+        const question = button.closest(".question");
+
+        /* Không cho trả lời lại */
+
+        if (question.dataset.answered === "true") {
+          return;
+        }
+
+        question.dataset.answered = "true";
+
+        answered++;
+
+        /* Lấy tất cả option */
+
+        const options = question.querySelectorAll(".option");
+
+        /* Khóa tất cả option */
+
+        options.forEach((option) => {
+          option.disabled = true;
+        });
+
+        /* Đúng */
+
+        if (isCorrect) {
+          button.classList.add("correct");
+
+          score++;
+        } else {
+
+        /* Sai */
+          button.classList.add("wrong");
+
+          /* Tìm và highlight đáp án đúng */
+
+          options.forEach((option) => {
+            const text = option.textContent.trim();
+
+            const answerLetter = correctAnswer.charAt(0);
+
+            if (text.startsWith(answerLetter + ".")) {
+              option.classList.add("correct-answer");
+            }
+          });
+        }
+
+        /* Feedback */
+
+        const feedback = question.querySelector(".feedback");
+
+        if (isCorrect) {
+          feedback.className = "feedback show correct-feedback";
+
+          feedback.innerHTML = `
+
+            <div class="feedback-title">
+                ✅ Chính xác!
+            </div>
+
+            <div>
+                ${explanation}
+            </div>
+
+        `;
+        } else {
+          feedback.className = "feedback show wrong-feedback";
+
+          feedback.innerHTML = `
+
+            <div class="feedback-title">
+                ❌ Chưa chính xác!
+            </div>
+
+            <div>
+                <strong>
+                    Đáp án đúng:
+                    ${correctAnswer}
+                </strong>
+            </div>
+
+            <div>
+                ${explanation}
+            </div>
+
+        `;
+        }
+
+        updateScore();
+      }
+
+      /* =========================
+   UPDATE SCORE
+========================= */
+
+      function updateScore() {
+        document.getElementById("score").textContent = score;
+
+        document.getElementById("answered").textContent = answered;
+
+        const percent = (answered / totalQuestions) * 100;
+
+        document.getElementById("progressBar").style.width = percent + "%";
+
+        /* Hoàn thành */
+
+        if (answered === totalQuestions) {
+          showResult();
+        }
+      }
+
+      /* =========================
+   SHOW RESULT
+========================= */
+
+      function showResult() {
+        const result = document.getElementById("result");
+
+        const finalScore = document.getElementById("finalScore");
+
+        const resultMessage = document.getElementById("resultMessage");
+
+        finalScore.textContent = score;
+
+        if (score >= passScore) {
+          resultMessage.innerHTML = `
+
+            <span class="pass">
+
+                🎉 Chúc mừng!
+
+                <br><br>
+
+                Bạn đã đạt
+                ${score}/28 câu.
+
+                <br>
+
+                Bạn đã hoàn thành bài tập
+                với yêu cầu tối thiểu
+                ${passScore}/28.
+
+            </span>
+
+        `;
+        } else {
+          resultMessage.innerHTML = `
+
+            <span class="fail">
+
+                ❌ Bạn chưa đạt yêu cầu.
+
+                <br><br>
+
+                Bạn đạt
+                ${score}/28 câu.
+
+                <br>
+
+                Cần đạt ít nhất
+                ${passScore}/28 câu.
+
+                <br>
+
+                Hãy xem lại bài giảng
+                và làm lại bài nhé!
+
+            </span>
+
+        `;
+        }
+
+        result.classList.add("show");
+
+        /* Cuộn đến kết quả */
+
+        setTimeout(() => {
+          result.scrollIntoView({
+            behavior: "smooth",
+          });
+        }, 300);
+      }
+
+      /* =========================
+   RESTART QUIZ
+========================= */
+
+      function restartQuiz() {
+        score = 0;
+
+        answered = 0;
+
+        const questions = document.querySelectorAll(".question");
+
+        questions.forEach((question) => {
+          question.dataset.answered = "false";
+
+          const options = question.querySelectorAll(".option");
+
+          options.forEach((option) => {
+            option.disabled = false;
+
+            option.classList.remove("correct", "wrong", "correct-answer");
+          });
+
+          const feedback = question.querySelector(".feedback");
+
+          feedback.className = "feedback";
+
+          feedback.innerHTML = "";
+        });
+
+        /* Ẩn kết quả */
+
+        document.getElementById("result").classList.remove("show");
+
+        updateScore();
+
+        /* Về đầu trang */
+
+        window.scrollTo({
+          top: 0,
+
+          behavior: "smooth",
+        });
+      }
+
+      /* =========================
+   INITIALIZE
+========================= */
+
+      document.querySelectorAll(".question").forEach((question) => {
+        question.dataset.answered = "false";
+      });
+    </script>
+  </body>
+</html>

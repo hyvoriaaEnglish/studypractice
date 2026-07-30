@@ -1,0 +1,649 @@
+```html
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Hyvoria English | Courses</title>
+
+    <meta
+      name="description"
+      content="Hyvoria English - Khóa học tiếng Anh trực tuyến"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Be Vietnam Pro", sans-serif;
+        background: linear-gradient(
+          135deg,
+          #fff5fa 0%,
+          #f3f8ff 50%,
+          #fdf4ff 100%
+        );
+        color: #34405c;
+        min-height: 100vh;
+      }
+
+      /* =========================
+       HEADER
+    ========================= */
+
+      header {
+        width: 100%;
+        padding: 18px 7%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+        color: #3c4770;
+      }
+
+      .logo-icon {
+        width: 45px;
+        height: 45px;
+        border-radius: 15px;
+        background: linear-gradient(135deg, #ffb6d9, #a9d8ff);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        box-shadow: 0 7px 20px rgba(160, 190, 240, 0.25);
+      }
+
+      .logo-text {
+        font-size: 20px;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+      }
+
+      .home-btn {
+        text-decoration: none;
+        color: #536080;
+        background: #ffffff;
+        padding: 10px 18px;
+        border-radius: 14px;
+        font-size: 14px;
+        font-weight: 600;
+        box-shadow: 0 5px 18px rgba(90, 120, 170, 0.1);
+        transition: 0.3s;
+      }
+
+      .home-btn:hover {
+        transform: translateY(-2px);
+        background: #fff0f7;
+        color: #e779ad;
+      }
+
+      /* =========================
+       HERO
+    ========================= */
+
+      .hero {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 70px 25px 50px;
+        text-align: center;
+      }
+
+      .hero-badge {
+        display: inline-block;
+        background: rgba(255, 255, 255, 0.8);
+        color: #df79a8;
+        padding: 8px 18px;
+        border-radius: 50px;
+        font-size: 13px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        box-shadow: 0 5px 20px rgba(120, 150, 200, 0.1);
+      }
+
+      .hero h1 {
+        font-size: clamp(34px, 5vw, 58px);
+        line-height: 1.2;
+        color: #354269;
+        margin-bottom: 18px;
+        font-weight: 800;
+      }
+
+      .hero h1 span {
+        background: linear-gradient(90deg, #e986b5, #7bb9ec);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .hero p {
+        max-width: 650px;
+        margin: auto;
+        color: #71809e;
+        font-size: 16px;
+        line-height: 1.8;
+      }
+
+      /* =========================
+       COURSE SECTION
+    ========================= */
+
+      .section {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 25px;
+      }
+
+      .section-title {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 28px;
+      }
+
+      .section-title-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 15px;
+        background: linear-gradient(135deg, #ffd1e6, #c5e6ff);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+      }
+
+      .section-title h2 {
+        color: #3e4b70;
+        font-size: 25px;
+      }
+
+      .section-title p {
+        font-size: 13px;
+        color: #8995ae;
+        margin-top: 3px;
+      }
+
+      /* =========================
+       COURSE GRID
+    ========================= */
+
+      .course-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+      }
+
+      .course-card {
+        position: relative;
+        background: rgba(255, 255, 255, 0.78);
+        border: 1px solid rgba(255, 255, 255, 0.9);
+        border-radius: 24px;
+        padding: 25px;
+        min-height: 220px;
+        box-shadow: 0 10px 35px rgba(87, 115, 160, 0.08);
+        transition: 0.35s ease;
+        overflow: hidden;
+      }
+
+      .course-card::before {
+        content: "";
+        position: absolute;
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+        background: #ffe1ef;
+        top: -35px;
+        right: -30px;
+        opacity: 0.7;
+      }
+
+      .course-card:nth-child(even)::before {
+        background: #d9efff;
+      }
+
+      .course-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 18px 45px rgba(90, 120, 170, 0.15);
+      }
+
+      .course-number {
+        position: relative;
+        z-index: 2;
+        width: 42px;
+        height: 42px;
+        border-radius: 13px;
+        background: linear-gradient(135deg, #ffb8d7, #9fd5f7);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        font-size: 16px;
+        margin-bottom: 22px;
+      }
+
+      .course-card h3 {
+        position: relative;
+        z-index: 2;
+        color: #3d4a6d;
+        font-size: 17px;
+        margin-bottom: 9px;
+      }
+
+      .course-card p {
+        position: relative;
+        z-index: 2;
+        color: #8a96ad;
+        font-size: 13px;
+        line-height: 1.6;
+        margin-bottom: 20px;
+      }
+
+      .course-link {
+        position: relative;
+        z-index: 2;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        text-decoration: none;
+        color: #df78aa;
+        font-size: 13px;
+        font-weight: 700;
+        transition: 0.3s;
+      }
+
+      .course-card:nth-child(even) .course-link {
+        color: #579bd4;
+      }
+
+      .course-link:hover {
+        gap: 10px;
+      }
+
+      /* =========================
+       REVISE SECTION
+    ========================= */
+
+      .revise-section {
+        margin-top: 65px;
+        margin-bottom: 70px;
+      }
+
+      .revise-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+      }
+
+      .revise-card {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 225, 239, 0.85),
+          rgba(218, 239, 255, 0.85)
+        );
+        border-radius: 25px;
+        padding: 28px;
+        border: 1px solid rgba(255, 255, 255, 0.9);
+        box-shadow: 0 10px 35px rgba(87, 115, 160, 0.08);
+        transition: 0.35s;
+      }
+
+      .revise-card:hover {
+        transform: translateY(-7px);
+        box-shadow: 0 18px 45px rgba(90, 120, 170, 0.15);
+      }
+
+      .revise-icon {
+        font-size: 30px;
+        margin-bottom: 18px;
+      }
+
+      .revise-card h3 {
+        color: #3c4b70;
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+
+      .revise-card p {
+        color: #71809b;
+        font-size: 13px;
+        line-height: 1.7;
+        margin-bottom: 20px;
+      }
+
+      .revise-btn {
+        display: inline-block;
+        text-decoration: none;
+        background: white;
+        color: #5c78a8;
+        padding: 10px 17px;
+        border-radius: 12px;
+        font-size: 13px;
+        font-weight: 700;
+        transition: 0.3s;
+      }
+
+      .revise-btn:hover {
+        background: #ffffff;
+        transform: scale(1.04);
+      }
+
+      /* =========================
+       FOOTER
+    ========================= */
+
+      footer {
+        text-align: center;
+        padding: 30px 20px;
+        background: rgba(255, 255, 255, 0.55);
+        color: #8b97ae;
+        font-size: 13px;
+      }
+
+      footer strong {
+        color: #df7eac;
+      }
+
+      /* =========================
+       RESPONSIVE
+    ========================= */
+
+      @media (max-width: 1000px) {
+        .course-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      @media (max-width: 750px) {
+        header {
+          padding: 15px 5%;
+        }
+
+        .course-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .revise-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero {
+          padding-top: 50px;
+        }
+      }
+
+      @media (max-width: 500px) {
+        .logo-text {
+          font-size: 17px;
+        }
+
+        .home-btn {
+          padding: 9px 13px;
+          font-size: 12px;
+        }
+
+        .course-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero h1 {
+          font-size: 35px;
+        }
+
+        .hero p {
+          font-size: 14px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- HEADER -->
+    <header>
+      <a href="trangchu.html" class="logo">
+        <div class="logo-icon">🌸</div>
+        <div class="logo-text">Hyvoria English</div>
+      </a>
+
+      <a href="trangchu.html" class="home-btn"> 🏠 Trang chủ </a>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-badge">✨ YOUR ENGLISH LEARNING JOURNEY</div>
+
+      <h1>
+        Khám phá các <span>khóa học</span>
+        của bạn
+      </h1>
+
+      <p>
+        Chào mừng bạn đến với hệ thống học tiếng Anh của Hyvoria English. Hãy
+        chọn một khóa học để bắt đầu hành trình chinh phục tiếng Anh theo cách
+        của riêng bạn.
+      </p>
+    </section>
+
+    <!-- COURSES -->
+    <section class="section">
+      <div class="section-title">
+        <div class="section-title-icon">📚</div>
+
+        <div>
+          <h2>Khóa học của bạn</h2>
+          <p>16 khóa học được thiết kế dành cho hành trình học tập của bạn</p>
+        </div>
+      </div>
+
+      <div class="course-grid">
+        <!-- COURSE 1 -->
+        <div class="course-card">
+          <div class="course-number">01</div>
+          <h3>Course 1</h3>
+          <p>Bắt đầu hành trình học tiếng Anh của bạn.</p>
+          <a href="course1.html" class="course-link"> Học ngay → </a>
+        </div>
+
+        <!-- COURSE 2 -->
+        <div class="course-card">
+          <div class="course-number">02</div>
+          <h3>Course 2</h3>
+          <p>Tiếp tục nâng cao kiến thức và kỹ năng.</p>
+          <a href="course2.html" class="course-link"> Học ngay → </a>
+        </div>
+
+        <!-- COURSE 3 -->
+        <div class="course-card">
+          <div class="course-number">03</div>
+          <h3>Course 3</h3>
+          <p>Khám phá những kiến thức tiếng Anh mới.</p>
+          <a href="course3.html" class="course-link"> Học ngay → </a>
+        </div>
+
+        <!-- COURSE 4 -->
+        <div class="course-card">
+          <div class="course-number">04</div>
+          <h3>Course 4</h3>
+          <p>Tiếp tục hành trình chinh phục tiếng Anh.</p>
+          <a href="course4.html" class="course-link"> Học ngay → </a>
+        </div>
+
+        <!-- COURSE 5 -->
+        <div class="course-card">
+          <div class="course-number">05</div>
+          <h3>Course 5</h3>
+          <p>Củng cố nền tảng và phát triển kỹ năng.</p>
+          <a href="course5.html" class="course-link"> Học ngay → </a>
+        </div>
+
+        <!-- COURSE 6 -->
+        <div class="course-card">
+          <div class="course-number">06</div>
+          <h3>Course 6</h3>
+          <p>Nâng cao khả năng sử dụng tiếng Anh.</p>
+          <a href="course6.html" class="course-link"> Học ngay → </a>
+        </div>
+
+        <!-- COURSE 7 -->
+        <div class="course-card">
+          <div class="course-number">07</div>
+          <h3>Course 7</h3>
+          <p>Chinh phục những kiến thức nâng cao hơn.</p>
+          <a href="course7.html" class="course-link"> Học ngay → </a>
+        </div>
+
+        <!-- COURSE 8 -->
+        <div class="course-card">
+          <div class="course-number">08</div>
+          <h3>Course 8</h3>
+          <p>Phát triển toàn diện các kỹ năng tiếng Anh.</p>
+          <a href="course8.html" class="course-link"> Học ngay → </a>
+        </div>
+
+        <!-- COURSE 9 -->
+        <div class="course-card">
+          <div class="course-number">09</div>
+          <h3>Course 9</h3>
+          <p>Tiếp tục nâng cấp trình độ tiếng Anh.</p>
+          <a href="course9.html" class="course-link"> Học ngay → </a>
+        </div>
+
+        <!-- COURSE 10 -->
+        <div class="course-card">
+          <div class="course-number">10</div>
+          <h3>Course 10</h3>
+          <p>Ôn luyện và củng cố kiến thức quan trọng.</p>
+          <a href="course10.html" class="course-link"> Học ngay → </a>
+        </div>
+
+        <!-- COURSE 11 -->
+        <div class="course-card">
+          <div class="course-number">11</div>
+          <h3>Course 11</h3>
+          <p>Nâng cao khả năng tư duy và sử dụng ngôn ngữ.</p>
+          <a href="course11.html" class="course-link"> Học ngay → </a>
+        </div>
+
+        <!-- COURSE 12 -->
+        <div class="course-card">
+          <div class="course-number">12</div>
+          <h3>Course 12</h3>
+          <p>Tiếp tục khám phá những chủ đề mới.</p>
+          <a href="course12.html" class="course-link"> Học ngay → </a>
+        </div>
+
+        <!-- COURSE 13 -->
+        <div class="course-card">
+          <div class="course-number">13</div>
+          <h3>Course 13</h3>
+          <p>Phát triển kiến thức tiếng Anh chuyên sâu.</p>
+          <a href="course13.html" class="course-link"> Học ngay → </a>
+        </div>
+
+        <!-- COURSE 14 -->
+        <div class="course-card">
+          <div class="course-number">14</div>
+          <h3>Course 14</h3>
+          <p>Rèn luyện và nâng cao khả năng làm bài.</p>
+          <a href="course14.html" class="course-link"> Học ngay → </a>
+        </div>
+
+        <!-- COURSE 15 -->
+        <div class="course-card">
+          <div class="course-number">15</div>
+          <h3>Course 15</h3>
+          <p>Tiến gần hơn đến mục tiêu tiếng Anh của bạn.</p>
+          <a href="course15.html" class="course-link"> Học ngay → </a>
+        </div>
+
+        <!-- COURSE 16 -->
+        <div class="course-card">
+          <div class="course-number">16</div>
+          <h3>Course 16</h3>
+          <p>Hoàn thành hành trình khóa học chính.</p>
+          <a href="course16.html" class="course-link"> Học ngay → </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVISE -->
+    <section class="section revise-section">
+      <div class="section-title">
+        <div class="section-title-icon">🔄</div>
+
+        <div>
+          <h2>Revision Zone</h2>
+          <p>Ôn tập kiến thức và kiểm tra sự tiến bộ của bạn</p>
+        </div>
+      </div>
+
+      <div class="revise-grid">
+        <!-- REVISE 1 -->
+        <div class="revise-card">
+          <div class="revise-icon">📝</div>
+
+          <h3>Revision 1</h3>
+
+          <p>Ôn tập các kiến thức đã học và củng cố nền tảng.</p>
+
+          <a href="revise1.html" class="revise-btn"> Bắt đầu ôn tập → </a>
+        </div>
+
+        <!-- REVISE 2 -->
+        <div class="revise-card">
+          <div class="revise-icon">🎯</div>
+
+          <h3>Revision 2</h3>
+
+          <p>Kiểm tra mức độ ghi nhớ và khả năng vận dụng kiến thức.</p>
+
+          <a href="revise2.html" class="revise-btn"> Bắt đầu ôn tập → </a>
+        </div>
+
+        <!-- REVISE 3 -->
+        <div class="revise-card">
+          <div class="revise-icon">🏆</div>
+
+          <h3>Revision 3</h3>
+
+          <p>Tổng ôn và thử thách bản thân với những kiến thức đã học.</p>
+
+          <a href="revise3.html" class="revise-btn"> Bắt đầu ôn tập → </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>
+        Made with 💗 for
+        <strong>Hyvoria English</strong>
+      </p>
+
+      <p style="margin-top: 8px">Keep learning. Keep growing. ✨</p>
+    </footer>
+  </body>
+</html>
+```
