@@ -1,9 +1,5 @@
 console.log("ACCOUNT.JS IS RUNNING");
 
-// ==========================================
-// ACCOUNT PAGE
-// ==========================================
-
 let currentUser = null;
 
 // ==========================================
@@ -13,7 +9,14 @@ let currentUser = null;
 async function getCurrentUser() {
   const { data, error } = await supabaseClient.auth.getUser();
 
-  if (error || !data.user) {
+  if (error) {
+    console.error("Get user error:", error);
+    window.location.href = "login.html";
+    return null;
+  }
+
+  if (!data.user) {
+    console.log("No logged-in user.");
     window.location.href = "login.html";
     return null;
   }
@@ -67,16 +70,24 @@ async function loadProfile() {
   currentUser = await getCurrentUser();
 
   if (!currentUser) {
-    return;
+    return false;
   }
 
-  document.getElementById("userEmail").textContent = currentUser.email || "";
+  const emailElement = document.getElementById("userEmail");
+
+  const nameElement = document.getElementById("userName");
+
+  if (emailElement) {
+    emailElement.textContent = currentUser.email || "";
+  }
 
   const fullName = currentUser.user_metadata?.full_name;
 
-  if (fullName) {
-    document.getElementById("userName").textContent = fullName;
+  if (fullName && nameElement) {
+    nameElement.textContent = fullName;
   }
+
+  return true;
 }
 
 // ==========================================
@@ -85,6 +96,7 @@ async function loadProfile() {
 
 async function loadStudyData() {
   if (!currentUser) {
+    console.log("No current user. Cannot load study data.");
     return;
   }
 
@@ -106,6 +118,14 @@ async function loadStudyData() {
 
   if (error) {
     console.error("Error loading study data:", error);
+
+    const historyList = document.getElementById("historyList");
+
+    if (historyList) {
+      historyList.innerHTML =
+        '<p class="loading">Could not load study history.</p>';
+    }
+
     return;
   }
 
@@ -117,39 +137,37 @@ async function loadStudyData() {
 // ==========================================
 
 function updateStatistics(data) {
+  console.log("Updating statistics:", data);
+
   const today = new Date().toISOString().split("T")[0];
 
   let todaySeconds = 0;
 
   let totalSeconds = 0;
 
-  data.forEach((row) => {
+  data.forEach(function (row) {
     const seconds = Number(row.duration_seconds) || 0;
 
-    ```
-totalSeconds += seconds;
+    totalSeconds += seconds;
 
-if (row.study_date === today) {
-  todaySeconds += seconds;
-}
-```;
+    if (row.study_date === today) {
+      todaySeconds += seconds;
+    }
   });
 
-  // Today's Study Time
+  const todayElement = document.getElementById("todayTime");
 
-  document.getElementById("todayTime").textContent =
-    formatStudyTime(todaySeconds);
+  const totalElement = document.getElementById("totalTime");
 
-  // Total Study Time
+  if (todayElement) {
+    todayElement.textContent = formatStudyTime(todaySeconds);
+  }
 
-  document.getElementById("totalTime").textContent =
-    formatStudyTime(totalSeconds);
-
-  // Study Streak
+  if (totalElement) {
+    totalElement.textContent = formatStudyTime(totalSeconds);
+  }
 
   calculateStreak(data);
-
-  // Study History
 
   displayHistory(data);
 }
@@ -159,18 +177,30 @@ if (row.study_date === today) {
 // ==========================================
 
 function calculateStreak(data) {
+  const streakElement = document.getElementById("streak");
+
+  if (!streakElement) {
+    return;
+  }
+
   const studyDates = data
-    .filter((row) => Number(row.duration_seconds) > 0)
-    .map((row) => row.study_date);
+    .filter(function (row) {
+      return Number(row.duration_seconds) > 0;
+    })
+    .map(function (row) {
+      return row.study_date;
+    });
 
   if (studyDates.length === 0) {
-    document.getElementById("streak").textContent = "0 days";
+    streakElement.textContent = "0 days";
     return;
   }
 
   const uniqueDates = [...new Set(studyDates)];
 
-  uniqueDates.sort((a, b) => new Date(b) - new Date(a));
+  uniqueDates.sort(function (a, b) {
+    return new Date(b) - new Date(a);
+  });
 
   let streak = 0;
 
@@ -180,83 +210,103 @@ function calculateStreak(data) {
 
   const todayString = checkDate.toISOString().split("T")[0];
 
-  // Nếu hôm nay chưa học,
-  // kiểm tra từ ngày hôm qua
-
   if (uniqueDates[0] !== todayString) {
     checkDate.setDate(checkDate.getDate() - 1);
   }
 
   for (const dateString of uniqueDates) {
-    const expected = checkDate.toISOString().split("T")[0];
+    const expectedDate = checkDate.toISOString().split("T")[0];
 
-    ```
-if (dateString === expected) {
-  streak++;
+    if (dateString === expectedDate) {
+      streak++;
 
-  checkDate.setDate(
-    checkDate.getDate() - 1
-  );
-} else {
-  break;
-}
-```;
+      checkDate.setDate(checkDate.getDate() - 1);
+    } else {
+      break;
+    }
   }
 
-  document.getElementById("streak").textContent = streak + " days";
+  streakElement.textContent = streak + " days";
 }
 
 // ==========================================
-// DISPLAY HISTORY
+// DISPLAY STUDY HISTORY
 // ==========================================
 
 function displayHistory(data) {
+  console.log("Displaying history:", data);
+
   const historyList = document.getElementById("historyList");
 
   if (!historyList) {
-    return;
-  }
-
-  if (data.length === 0) {
-    historyList.innerHTML = '<p class="loading">No study history yet.</p>';
+    console.error("Cannot find #historyList in account.html");
 
     return;
   }
 
-  // Show last 7 days
-  const recentData = data.slice(0, 7);
+  // Xóa Loading...
 
   historyList.innerHTML = "";
 
-  recentData.forEach((row) => {
+  // Không có dữ liệu
+
+  if (!data || data.length === 0) {
+    const emptyMessage = document.createElement("p");
+
+    emptyMessage.className = "loading";
+
+    emptyMessage.textContent = "No study history yet.";
+
+    historyList.appendChild(emptyMessage);
+
+    return;
+  }
+
+  // Chỉ hiển thị 7 ngày gần nhất
+
+  const recentData = data.slice(0, 7);
+
+  recentData.forEach(function (row) {
     const div = document.createElement("div");
 
     div.className = "history-row";
 
+    // Ngày
+
     const dateSpan = document.createElement("span");
+
     dateSpan.textContent = formatDate(row.study_date);
 
+    // Thời gian
+
     const timeSpan = document.createElement("span");
+
     timeSpan.className = "history-time";
+
     timeSpan.textContent = formatStudyTime(row.duration_seconds);
 
+    // Thêm vào dòng
+
     div.appendChild(dateSpan);
+
     div.appendChild(timeSpan);
+
+    // Thêm dòng vào lịch sử
 
     historyList.appendChild(div);
   });
+
+  console.log("Study history displayed successfully.");
 }
 
 // ==========================================
-// AUTO REFRESH AFTER STUDY TRACKER SAVES
+// AUTO REFRESH WHEN TRACKER SAVES
 // ==========================================
 
 window.addEventListener("studyTimeUpdated", async function () {
-  console.log("Study time changed. Refreshing account data...");
+  console.log("Study time updated. Refreshing account...");
 
-  ```
-await loadStudyData();
-```;
+  await loadStudyData();
 });
 
 // ==========================================
@@ -271,20 +321,30 @@ if (logoutBtn) {
 
     if (error) {
       console.error("Logout error:", error);
+
       return;
     }
 
     window.location.href = "login.html";
   });
 }
+
 // ==========================================
-// INITIALIZE
+// INITIALIZE ACCOUNT
 // ==========================================
 
 async function initializeAccount() {
-  await loadProfile();
+  console.log("Initializing account...");
+
+  const userLoaded = await loadProfile();
+
+  if (!userLoaded) {
+    return;
+  }
 
   await loadStudyData();
+
+  console.log("Account initialized successfully.");
 }
 
 initializeAccount();
