@@ -1,7 +1,9 @@
+```html
 <!doctype html>
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Đăng ký tài khoản - Hyvoria English</title>
@@ -79,59 +81,62 @@
 
       <div class="login-link">
         Đã có tài khoản?
-        <a href="login.html">Đăng nhập</a>
+        <a href="login.html"> Đăng nhập </a>
       </div>
     </div>
 
-    <script type="module">
-      import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+    <!-- =========================
+         SUPABASE
+    ========================== -->
 
-      // =====================================
-      // THAY 2 GIÁ TRỊ NÀY BẰNG CỦA BẠN
-      // =====================================
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-      const SUPABASE_URL = "https://hojyicohcqqknfwgfkct.supabase.co";
+    <script src="supabase-config.js"></script>
 
-      const SUPABASE_KEY = "sb_publishable_HDrjvHHHC40fqAv4s61XLA_Vp38jiAn";
+    <!-- =========================
+         REGISTER
+    ========================== -->
 
-      // KẾT NỐI SUPABASE
-
-      const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
-
-      // =====================================
-      // XỬ LÝ ĐĂNG KÝ
-      // =====================================
-
+    <script>
       document
         .getElementById("registerBtn")
-        .addEventListener("click", async () => {
+        .addEventListener("click", async function () {
           const email = document.getElementById("email").value.trim();
 
           const password = document.getElementById("password").value;
 
+          const message = document.getElementById("message");
+
           // Kiểm tra bỏ trống
 
           if (!email || !password) {
-            document.getElementById("message").textContent =
-              "Vui lòng nhập email và mật khẩu.";
+            message.textContent = "Vui lòng nhập email và mật khẩu.";
 
             return;
           }
 
-          // Gửi thông tin đăng ký lên Supabase
+          // Đăng ký tài khoản
 
-          const { data, error } = await supabase.auth.signUp({
+          const { data, error } = await supabaseClient.auth.signUp({
             email: email,
+
             password: password,
           });
 
+          // Nếu có lỗi
+
           if (error) {
-            document.getElementById("message").textContent = error.message;
+            message.textContent = error.message;
+
             return;
           }
 
-          window.location.href = "index.html";
+          // Đăng ký thành công
+
+          message.textContent =
+            "Đăng ký thành công! Vui lòng kiểm tra email để xác nhận tài khoản.";
         });
     </script>
   </body>
 </html>
+```
