@@ -1,33 +1,354 @@
 <!doctype html>
+
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    ```
     <title>Vocabulary Quiz 1</title>
 
-    <link rel="stylesheet" href="style.css" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: linear-gradient(135deg, #eef2ff, #f8fafc);
+        color: #1e293b;
+        min-height: 100vh;
+      }
+
+      .container {
+        width: min(950px, 92%);
+        margin: 40px auto;
+        padding-bottom: 50px;
+      }
+
+      /* HEADER */
+      .header {
+        background: linear-gradient(135deg, #4f46e5, #7c3aed);
+        color: white;
+        padding: 35px 30px;
+        border-radius: 24px;
+        box-shadow: 0 15px 35px rgba(79, 70, 229, 0.25);
+        margin-bottom: 25px;
+      }
+
+      .header h1 {
+        margin: 0 0 10px;
+        font-size: 32px;
+      }
+
+      .header p {
+        margin: 0;
+        opacity: 0.9;
+        line-height: 1.6;
+      }
+
+      /* PROGRESS */
+      .progress-box {
+        background: white;
+        padding: 18px 22px;
+        border-radius: 16px;
+        margin-bottom: 25px;
+        box-shadow: 0 5px 20px rgba(15, 23, 42, 0.08);
+      }
+
+      .progress-info {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        font-weight: 600;
+        font-size: 14px;
+      }
+
+      .progress-bar {
+        width: 100%;
+        height: 10px;
+        background: #e2e8f0;
+        border-radius: 20px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        width: 0%;
+        height: 100%;
+        background: linear-gradient(90deg, #4f46e5, #8b5cf6);
+        transition: width 0.3s ease;
+      }
+
+      /* INSTRUCTION */
+      .instruction {
+        background: #fff7ed;
+        border-left: 6px solid #f97316;
+        padding: 20px 24px;
+        border-radius: 14px;
+        margin-bottom: 25px;
+      }
+
+      .instruction h2 {
+        margin-top: 0;
+        color: #c2410c;
+      }
+
+      .instruction p {
+        margin-bottom: 0;
+        line-height: 1.6;
+      }
+
+      /* QUESTION */
+      .question {
+        background: white;
+        padding: 25px;
+        margin-bottom: 22px;
+        border-radius: 18px;
+        box-shadow: 0 6px 20px rgba(15, 23, 42, 0.08);
+        border: 2px solid transparent;
+        transition: 0.25s ease;
+      }
+
+      .question:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(15, 23, 42, 0.1);
+      }
+
+      .question-title {
+        font-size: 17px;
+        line-height: 1.7;
+        margin: 0 0 18px;
+        color: #0f172a;
+      }
+
+      /* OPTIONS */
+      .options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .option {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        width: 100%;
+        padding: 14px 16px;
+        background: #f8fafc;
+        border: 2px solid #e2e8f0;
+        border-radius: 12px;
+        cursor: pointer;
+        text-align: left;
+        font-size: 15px;
+        color: #334155;
+        transition: all 0.2s ease;
+      }
+
+      .option:hover:not(:disabled) {
+        background: #eef2ff;
+        border-color: #6366f1;
+        transform: translateX(3px);
+      }
+
+      .option-letter {
+        min-width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: #e2e8f0;
+        font-weight: bold;
+        color: #475569;
+      }
+
+      .option.correct {
+        background: #dcfce7;
+        border-color: #22c55e;
+        color: #166534;
+      }
+
+      .option.correct .option-letter {
+        background: #22c55e;
+        color: white;
+      }
+
+      .option.wrong {
+        background: #fee2e2;
+        border-color: #ef4444;
+        color: #991b1b;
+      }
+
+      .option.wrong .option-letter {
+        background: #ef4444;
+        color: white;
+      }
+
+      .option:disabled {
+        cursor: default;
+      }
+
+      /* FEEDBACK */
+      .feedback {
+        display: none;
+        margin-top: 18px;
+        padding: 16px 18px;
+        border-radius: 12px;
+        line-height: 1.6;
+        font-size: 15px;
+      }
+
+      .feedback.show {
+        display: block;
+      }
+
+      .feedback.correct-feedback {
+        background: #f0fdf4;
+        border-left: 5px solid #22c55e;
+        color: #166534;
+      }
+
+      .feedback.wrong-feedback {
+        background: #fff1f2;
+        border-left: 5px solid #ef4444;
+        color: #9f1239;
+      }
+
+      .feedback strong {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      /* SUBMIT */
+      .submit-wrapper {
+        text-align: center;
+        margin-top: 35px;
+      }
+
+      .submit-btn {
+        border: none;
+        background: linear-gradient(135deg, #4f46e5, #7c3aed);
+        color: white;
+        padding: 15px 45px;
+        font-size: 17px;
+        font-weight: bold;
+        border-radius: 14px;
+        cursor: pointer;
+        box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
+        transition: 0.25s ease;
+      }
+
+      .submit-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 25px rgba(79, 70, 229, 0.4);
+      }
+
+      /* RESULT */
+      #result {
+        display: none;
+        margin-top: 25px;
+        padding: 25px;
+        background: white;
+        border-radius: 18px;
+        text-align: center;
+        box-shadow: 0 8px 25px rgba(15, 23, 42, 0.1);
+      }
+
+      #result.show {
+        display: block;
+      }
+
+      .score-number {
+        font-size: 40px;
+        font-weight: 800;
+        color: #4f46e5;
+        margin: 10px 0;
+      }
+
+      .score-message {
+        font-size: 17px;
+        color: #475569;
+      }
+
+      /* MOBILE */
+      @media (max-width: 600px) {
+        .container {
+          width: 94%;
+          margin: 20px auto;
+        }
+
+        .header {
+          padding: 25px 20px;
+          border-radius: 18px;
+        }
+
+        .header h1 {
+          font-size: 25px;
+        }
+
+        .question {
+          padding: 18px;
+          border-radius: 15px;
+        }
+
+        .question-title {
+          font-size: 15px;
+        }
+
+        .option {
+          padding: 12px;
+          font-size: 14px;
+        }
+      }
+    </style>
+    ```
   </head>
 
   <body>
     <div class="container">
-      <h1>Vocabulary Quiz 1</h1>
-
-      <div
-        class="passage"
-        style="background: #fff8e1; border-left: 6px solid #ff9800"
-      >
-        <h2>Choose the correct answer.</h2>
+      ```
+      <!-- HEADER -->
+      <div class="header">
+        <h1>📚 Vocabulary Quiz 1</h1>
         <p>
-          Select the best option (A, B, C, or D) for each question, then click
-          <b>Submit</b> to check your score.
+          Test your vocabulary, collocations, idioms, and advanced English
+          usage.
         </p>
       </div>
 
+      <!-- PROGRESS -->
+      <div class="progress-box">
+        <div class="progress-info">
+          <span>Progress</span>
+          <span id="progressText">0 / 30 answered</span>
+        </div>
+
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+
+      <!-- INSTRUCTION -->
+      <div class="instruction">
+        <h2>Choose the correct answer.</h2>
+
+        <p>
+          Select the best option (A, B, C, or D). You will receive immediate
+          feedback with an explanation after choosing an answer.
+        </p>
+      </div>
+
+      <!-- QUIZ -->
       <div id="quiz"></div>
 
-      <button onclick="checkAnswers()">Submit</button>
+      <!-- SUBMIT -->
+      <div class="submit-wrapper">
+        <button class="submit-btn" onclick="checkAnswers()">Submit Quiz</button>
+      </div>
 
-      <h2 id="result"></h2>
+      <!-- RESULT -->
+      <div id="result"></div>
     </div>
 
     <script>
@@ -36,48 +357,64 @@
           q: "1. His personal problems seem to have been ________ him from his work lately.",
           a: ["disrupting", "disturbing", "distracting", "dispersing"],
           correct: 2,
+          explanation:
+            "Distract someone from something means to prevent someone from concentrating on or giving attention to something. Here, his personal problems are preventing him from focusing on his work.",
         },
 
         {
           q: "2. He was a very ________ man; one day he would be happy, the next miserable.",
           a: ["uncontrollable", "uneven", "temperamental", "dispirited"],
           correct: 2,
+          explanation:
+            "Temperamental describes someone whose mood or behavior changes frequently and unpredictably.",
         },
 
         {
           q: "3. This cloth ________ very thin.",
           a: ["touches", "holds", "feels", "handles"],
           correct: 2,
+          explanation:
+            "Feel can describe the way something seems when you touch it. 'This cloth feels very thin' means the cloth has a thin texture.",
         },
 
         {
           q: "4. After all this time, John should take the bull by the horns and ask Mary to marry him.",
           a: ["continue", "be secretive", "buy a bull", "be determined"],
           correct: 3,
+          explanation:
+            "To take the bull by the horns means to face a difficult situation directly and take decisive action. Therefore, 'be determined' is the closest answer.",
         },
 
         {
           q: "5. I've had a ________ of misfortune.",
           a: ["success", "continuation", "repetition", "succession"],
           correct: 3,
+          explanation:
+            "A succession of events means a series of events that happen one after another. Therefore, 'a succession of misfortune' means a series of unfortunate events.",
         },
 
         {
           q: "6. The music aroused an ________ feeling of homesickness in him.",
           a: ["intense", "intentional", "intensive", "intended"],
           correct: 0,
+          explanation:
+            "Intense means very strong or extreme. The phrase 'an intense feeling of homesickness' is a natural collocation.",
         },
 
         {
           q: "7. What are the main ________ of this illness?",
           a: ["traces", "symptoms", "emblems", "tokens"],
           correct: 1,
+          explanation:
+            "Symptoms are physical or mental signs that indicate the presence of an illness or disease.",
         },
 
         {
           q: "8. After accident the injured cyclist was in great ________.",
           a: ["agony", "pain", "suffering", "hurt"],
           correct: 0,
+          explanation:
+            "Agony means extreme physical or emotional pain. The expression 'in great agony' is a strong and natural collocation.",
         },
 
         {
@@ -89,18 +426,24 @@
             "wanted to continue",
           ],
           correct: 2,
+          explanation:
+            "To stand your ground means to refuse to change your position or opinion, even when other people try to persuade you.",
         },
 
         {
           q: "10. He said, '________ while the iron is hot.'",
           a: ["Strike", "Beat", "Hit", "Pound"],
           correct: 0,
+          explanation:
+            "The idiom is 'Strike while the iron is hot', meaning to take advantage of an opportunity while conditions are favorable.",
         },
 
         {
           q: "11. Everything looks very positive for the company, ________ the current investors do not default on their agreements.",
           a: ["assuming that", "whether", "whereas", "as if"],
           correct: 0,
+          explanation:
+            "'Assuming that' means 'if we accept that something is true'. It introduces a condition or assumption.",
         },
 
         {
@@ -112,6 +455,8 @@
             "Then / to die",
           ],
           correct: 3,
+          explanation:
+            "This question appears to contain a grammatical or formatting error in the original source. Among the given choices, none forms a fully natural sentence. The item should be revised before being used in a formal test.",
         },
 
         {
@@ -123,6 +468,8 @@
             "more than Henry Ford...",
           ],
           correct: 2,
+          explanation:
+            "After a comparative structure such as 'no man had more effect', the correct construction is 'than did Henry Ford'. The auxiliary 'did' is used because of inversion in the comparative clause.",
         },
 
         {
@@ -134,6 +481,8 @@
             "they receive no money for it",
           ],
           correct: 2,
+          explanation:
+            "'For which work they receive no money' functions as a relative clause referring to the work of picking the fruit. The wording is formal and somewhat unusual.",
         },
 
         {
@@ -145,12 +494,16 @@
             "had I realized",
           ],
           correct: 0,
+          explanation:
+            "The structure is 'It was not until + time/clause + that + subject + verb'. Therefore, 'that I realized' is correct.",
         },
 
         {
           q: "16. I would rather ________ my holiday in Egypt than in Turkey.",
           a: ["take", "had taken", "to have taken", "have taken"],
           correct: 0,
+          explanation:
+            "After 'would rather' for a present or future preference, use the bare infinitive: 'would rather take'.",
         },
 
         {
@@ -162,6 +515,8 @@
             "The weather was such",
           ],
           correct: 3,
+          explanation:
+            "The original question is problematic because 'The weather was such that...' normally requires a following clause. The intended structure is likely 'Such was the terrible weather that we decided to cancel the polo match.'",
         },
 
         {
@@ -173,6 +528,8 @@
             "was able to help",
           ],
           correct: 1,
+          explanation:
+            "'Could have helped' expresses a past possibility or ability that was not used because the speaker was not informed.",
         },
 
         {
@@ -184,6 +541,8 @@
             "As badly wounded he was",
           ],
           correct: 1,
+          explanation:
+            "'Adjective + as + subject + verb' is an inverted concessive structure. 'Badly wounded as he was' means 'Although he was badly wounded'.",
         },
 
         {
@@ -195,102 +554,275 @@
             "was long himself considered",
           ],
           correct: 2,
+          explanation:
+            "'Long considered himself' is the correct word order. The adverb 'long' comes before the past participle 'considered' in this construction.",
         },
 
         {
           q: "21. A new computer has been produced, which will _______ all previous models.",
           a: ["overdo", "supersede", "excel", "overwhelm"],
           correct: 1,
+          explanation:
+            "Supersede means to replace something because it is newer or better. A new computer may supersede previous models.",
         },
 
         {
           q: "22. Most teenagers go through a rebellious _______ for a few years.",
           a: ["stint", "span", "duration", "phase"],
           correct: 3,
+          explanation:
+            "A phase is a period or stage in someone's development or life. 'A rebellious phase' is a common expression.",
         },
 
         {
           q: "23. The match _______ in the darkness.",
           a: ["glared", "flared", "glowed", "gleamed"],
           correct: 1,
+          explanation:
+            "A match flares when it suddenly burns brightly, especially just after being lit.",
         },
 
         {
           q: "24. The use of vitamin _______ and herbs has become increasingly popular.",
           a: ["components", "materials", "ingredients", "supplements"],
           correct: 3,
+          explanation:
+            "Vitamin supplements are products containing vitamins that people take to improve or maintain their health.",
         },
 
         {
           q: "25. As a matter of _______, we have six security guards on the premises.",
           a: ["wisdom", "prudence", "foresight", "acumen"],
           correct: 1,
+          explanation:
+            "Prudence means carefulness and good judgment, especially when planning for possible problems. Having security guards can be described as a matter of prudence.",
         },
 
         {
           q: "26. She marched into the shop, as bold as _______, and demanded her money back.",
           a: ["bass", "grass", "brass", "glass"],
           correct: 2,
+          explanation:
+            "The idiom 'as bold as brass' describes someone who behaves confidently and without embarrassment.",
         },
 
         {
           q: "27. All his hard work ________ in great success.",
           a: ["accounted", "culminated", "merged", "succumbed"],
           correct: 1,
+          explanation:
+            "'Culminate in' means to end or result in a particular final outcome. His hard work culminated in great success.",
         },
 
         {
           q: "28. She's certainly a ________ writer.",
           a: ["fruitful", "prolific", "fertile", "successful"],
           correct: 1,
+          explanation:
+            "A prolific writer produces a large amount of written work. This is the most appropriate word in this context.",
         },
 
         {
           q: "29. The contemporary dialogue struck a slightly ________ note.",
           a: ["disembodied", "discordant", "dismissive", "disconcerting"],
           correct: 1,
+          explanation:
+            "Discordant means conflicting, inconsistent, or not fitting well with something else. A dialogue can strike a discordant note when it feels out of harmony with the surrounding context.",
         },
 
         {
           q: "30. We decided to celebrate by going out and painting the town ________.",
           a: ["red", "purple", "gold", "brown"],
           correct: 0,
+          explanation:
+            "The idiom 'paint the town red' means to go out and have an exciting, enjoyable time, usually involving celebrations or nightlife.",
         },
       ];
 
       const quiz = document.getElementById("quiz");
 
+      let answered = 0;
+      let score = 0;
+
+      /* CREATE QUIZ */
       questions.forEach((item, index) => {
-        let html = `<div class="question">
-<p><b>${item.q}</b></p>`;
+        const questionDiv = document.createElement("div");
+
+        questionDiv.className = "question";
+
+        questionDiv.id = `question-${index}`;
+
+        const title = document.createElement("p");
+
+        title.className = "question-title";
+
+        title.innerHTML = `<b>${item.q}</b>`;
+
+        questionDiv.appendChild(title);
+
+        const optionsDiv = document.createElement("div");
+
+        optionsDiv.className = "options";
 
         item.a.forEach((choice, i) => {
-          html += `
-<label>
-<input type="radio" name="q${index}" value="${i}">
-${String.fromCharCode(65 + i)}. ${choice}
-</label><br>`;
+          const button = document.createElement("button");
+
+          button.className = "option";
+
+          button.type = "button";
+
+          button.dataset.index = i;
+
+          button.innerHTML = `
+        <span class="option-letter">
+          ${String.fromCharCode(65 + i)}
+        </span>
+
+        <span>
+          ${choice}
+        </span>
+      `;
+
+          button.onclick = function () {
+            selectAnswer(index, i, questionDiv);
+          };
+
+          optionsDiv.appendChild(button);
         });
 
-        html += "</div>";
+        questionDiv.appendChild(optionsDiv);
 
-        quiz.innerHTML += html;
+        const feedback = document.createElement("div");
+
+        feedback.className = "feedback";
+
+        feedback.id = `feedback-${index}`;
+
+        questionDiv.appendChild(feedback);
+
+        quiz.appendChild(questionDiv);
       });
 
-      function checkAnswers() {
-        let score = 0;
+      /* SELECT ANSWER */
+      function selectAnswer(questionIndex, selectedIndex, questionDiv) {
+        const question = questions[questionIndex];
 
-        questions.forEach((q, index) => {
-          const ans = document.querySelector(`input[name="q${index}"]:checked`);
+        const buttons = questionDiv.querySelectorAll(".option");
 
-          if (ans && Number(ans.value) === q.correct) {
-            score++;
-          }
+        // Prevent changing answer
+        if (questionDiv.dataset.answered === "true") {
+          return;
+        }
+
+        questionDiv.dataset.answered = "true";
+
+        answered++;
+
+        // Disable all buttons
+        buttons.forEach((button) => {
+          button.disabled = true;
         });
 
-        document.getElementById("result").innerHTML =
-          `You got <b>${score}/${questions.length}</b> correct!`;
+        const selectedButton = buttons[selectedIndex];
+
+        const correctButton = buttons[question.correct];
+
+        const feedback = questionDiv.querySelector(".feedback");
+
+        // CORRECT
+        if (selectedIndex === question.correct) {
+          score++;
+
+          selectedButton.classList.add("correct");
+
+          feedback.classList.add("show", "correct-feedback");
+
+          feedback.innerHTML = `
+        <strong>✅ Correct!</strong>
+        ${question.explanation}
+      `;
+        }
+
+        // WRONG
+        else {
+          selectedButton.classList.add("wrong");
+
+          correctButton.classList.add("correct");
+
+          feedback.classList.add("show", "wrong-feedback");
+
+          feedback.innerHTML = `
+        <strong>❌ Incorrect!</strong>
+        The correct answer is
+        <b>${String.fromCharCode(
+          65 + question.correct,
+        )}. ${question.a[question.correct]}</b>.
+        <br><br>
+        ${question.explanation}
+      `;
+        }
+
+        updateProgress();
+      }
+
+      /* UPDATE PROGRESS */
+      function updateProgress() {
+        const percentage = (answered / questions.length) * 100;
+
+        document.getElementById("progressFill").style.width = `${percentage}%`;
+
+        document.getElementById("progressText").textContent =
+          `${answered} / ${questions.length} answered`;
+      }
+
+      /* SUBMIT */
+      function checkAnswers() {
+        const result = document.getElementById("result");
+
+        let message = "";
+
+        const percentage = (score / questions.length) * 100;
+
+        if (percentage >= 90) {
+          message = "🏆 Excellent! Your vocabulary knowledge is outstanding.";
+        } else if (percentage >= 75) {
+          message = "🎉 Great job! You have a strong vocabulary foundation.";
+        } else if (percentage >= 60) {
+          message = "👍 Good effort! Review the explanations and try again.";
+        } else {
+          message =
+            "📚 Keep practicing! Review the vocabulary and explanations carefully.";
+        }
+
+        result.innerHTML = `
+      <h2>🎯 Your Result</h2>
+
+      <div class="score-number">
+        ${score}/${questions.length}
+      </div>
+
+      <div class="score-message">
+        ${message}
+      </div>
+
+      <p>
+        You answered
+        <b>${answered}</b>
+        out of
+        <b>${questions.length}</b>
+        questions.
+      </p>
+    `;
+
+        result.classList.add("show");
+
+        result.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
       }
     </script>
+    <script src="/study-tracker.js"></script>
+    ```
   </body>
 </html>
