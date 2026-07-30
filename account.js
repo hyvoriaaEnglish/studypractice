@@ -1,4 +1,5 @@
 console.log("ACCOUNT.JS IS RUNNING");
+
 // ==========================================
 // ACCOUNT PAGE
 // ==========================================
@@ -14,7 +15,6 @@ async function getCurrentUser() {
 
   if (error || !data.user) {
     window.location.href = "login.html";
-
     return null;
   }
 
@@ -26,17 +26,23 @@ async function getCurrentUser() {
 // ==========================================
 
 function formatStudyTime(totalSeconds) {
-  totalSeconds = Math.floor(totalSeconds || 0);
+  totalSeconds = Math.floor(Number(totalSeconds) || 0);
 
   const hours = Math.floor(totalSeconds / 3600);
 
   const minutes = Math.floor((totalSeconds % 3600) / 60);
 
+  const seconds = totalSeconds % 60;
+
   if (hours > 0) {
     return hours + "h " + minutes + "m";
   }
 
-  return minutes + "m";
+  if (minutes > 0) {
+    return minutes + "m " + seconds + "s";
+  }
+
+  return seconds + "s";
 }
 
 // ==========================================
@@ -48,9 +54,7 @@ function formatDate(dateString) {
 
   return date.toLocaleDateString("en-GB", {
     day: "2-digit",
-
     month: "2-digit",
-
     year: "numeric",
   });
 }
@@ -66,7 +70,7 @@ async function loadProfile() {
     return;
   }
 
-  document.getElementById("userEmail").textContent = currentUser.email;
+  document.getElementById("userEmail").textContent = currentUser.email || "";
 
   const fullName = currentUser.user_metadata?.full_name;
 
@@ -84,6 +88,8 @@ async function loadStudyData() {
     return;
   }
 
+  console.log("Loading study data...");
+
   console.log("Current User ID:", currentUser.id);
 
   const { data, error } = await supabaseClient
@@ -95,14 +101,15 @@ async function loadStudyData() {
     });
 
   console.log("Study Data:", data);
+
   console.log("Study Error:", error);
 
   if (error) {
-    console.error("Error:", error);
+    console.error("Error loading study data:", error);
     return;
   }
 
-  updateStatistics(data);
+  updateStatistics(data || []);
 }
 
 // ==========================================
@@ -119,20 +126,30 @@ function updateStatistics(data) {
   data.forEach((row) => {
     const seconds = Number(row.duration_seconds) || 0;
 
-    totalSeconds += seconds;
+    ```
+totalSeconds += seconds;
 
-    if (row.study_date === today) {
-      todaySeconds = seconds;
-    }
+if (row.study_date === today) {
+  todaySeconds += seconds;
+}
+```;
   });
+
+  // Today's Study Time
 
   document.getElementById("todayTime").textContent =
     formatStudyTime(todaySeconds);
 
+  // Total Study Time
+
   document.getElementById("totalTime").textContent =
     formatStudyTime(totalSeconds);
 
+  // Study Streak
+
   calculateStreak(data);
+
+  // Study History
 
   displayHistory(data);
 }
@@ -143,14 +160,11 @@ function updateStatistics(data) {
 
 function calculateStreak(data) {
   const studyDates = data
-
-    .filter((row) => row.duration_seconds > 0)
-
+    .filter((row) => Number(row.duration_seconds) > 0)
     .map((row) => row.study_date);
 
   if (studyDates.length === 0) {
     document.getElementById("streak").textContent = "0 days";
-
     return;
   }
 
@@ -162,14 +176,12 @@ function calculateStreak(data) {
 
   let checkDate = new Date();
 
-  // Remove time
-
   checkDate.setHours(0, 0, 0, 0);
 
-  // If user hasn't studied today,
-  // check if they studied yesterday
-
   const todayString = checkDate.toISOString().split("T")[0];
+
+  // Nếu hôm nay chưa học,
+  // kiểm tra từ ngày hôm qua
 
   if (uniqueDates[0] !== todayString) {
     checkDate.setDate(checkDate.getDate() - 1);
@@ -178,13 +190,17 @@ function calculateStreak(data) {
   for (const dateString of uniqueDates) {
     const expected = checkDate.toISOString().split("T")[0];
 
-    if (dateString === expected) {
-      streak++;
+    ```
+if (dateString === expected) {
+  streak++;
 
-      checkDate.setDate(checkDate.getDate() - 1);
-    } else {
-      break;
-    }
+  checkDate.setDate(
+    checkDate.getDate() - 1
+  );
+} else {
+  break;
+}
+```;
   }
 
   document.getElementById("streak").textContent = streak + " days";
@@ -197,22 +213,17 @@ function calculateStreak(data) {
 function displayHistory(data) {
   const historyList = document.getElementById("historyList");
 
+  if (!historyList) {
+    return;
+  }
+
   if (data.length === 0) {
-    historyList.innerHTML = `
-
-            <p class="loading">
-
-                No study history yet.
-
-            </p>
-
-        `;
+    historyList.innerHTML = '<p class="loading">No study history yet.</p>';
 
     return;
   }
 
   // Show last 7 days
-
   const recentData = data.slice(0, 7);
 
   historyList.innerHTML = "";
@@ -222,45 +233,50 @@ function displayHistory(data) {
 
     div.className = "history-row";
 
-    div.innerHTML = `
+    const dateSpan = document.createElement("span");
+    dateSpan.textContent = formatDate(row.study_date);
 
-                <span>
+    const timeSpan = document.createElement("span");
+    timeSpan.className = "history-time";
+    timeSpan.textContent = formatStudyTime(row.duration_seconds);
 
-                    ${formatDate(row.study_date)}
-
-                </span>
-
-
-                <span class="history-time">
-
-                    ${formatStudyTime(row.duration_seconds)}
-
-                </span>
-
-            `;
+    div.appendChild(dateSpan);
+    div.appendChild(timeSpan);
 
     historyList.appendChild(div);
   });
 }
 
 // ==========================================
+// AUTO REFRESH AFTER STUDY TRACKER SAVES
+// ==========================================
+
+window.addEventListener("studyTimeUpdated", async function () {
+  console.log("Study time changed. Refreshing account data...");
+
+  ```
+await loadStudyData();
+```;
+});
+
+// ==========================================
 // LOGOUT
 // ==========================================
 
-document
-  .getElementById("logoutBtn")
-  .addEventListener("click", async function () {
+const logoutBtn = document.getElementById("logoutBtn");
+
+if (logoutBtn) {
+  logoutBtn.addEventListener("click", async function () {
     const { error } = await supabaseClient.auth.signOut();
 
     if (error) {
-      console.error(error);
-
+      console.error("Logout error:", error);
       return;
     }
 
     window.location.href = "login.html";
   });
-
+}
 // ==========================================
 // INITIALIZE
 // ==========================================
