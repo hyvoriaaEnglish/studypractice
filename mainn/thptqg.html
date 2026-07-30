@@ -1,17 +1,18 @@
 <!doctype html>
+
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
 
-    <!-- Giúp giao diện hiển thị đẹp trên điện thoại -->
+    ```
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>THPTQG</title>
 
     <style>
-      /* ==================================================
-       1. RESET CSS
-    ================================================== */
+      /* =====================================================
+     RESET
+  ===================================================== */
 
       * {
         margin: 0;
@@ -19,32 +20,83 @@
         box-sizing: border-box;
       }
 
-      /* ==================================================
-       2. BODY
-    ================================================== */
+      /* =====================================================
+     BODY
+  ===================================================== */
 
       body {
-        width: 100%;
         min-height: 100vh;
 
-        background-color: #ffffff;
+        font-family: "Segoe UI", Arial, Helvetica, sans-serif;
 
-        font-family: Arial, Helvetica, sans-serif;
+        color: #5c4936;
+
+        background:
+          radial-gradient(
+            circle at 10% 10%,
+            rgba(255, 255, 255, 0.85),
+            transparent 25%
+          ),
+          radial-gradient(
+            circle at 90% 20%,
+            rgba(255, 255, 255, 0.7),
+            transparent 25%
+          ),
+          linear-gradient(135deg, #fff1c9 0%, #ffe0ad 45%, #ffd0b5 100%);
 
         overflow-x: hidden;
 
         position: relative;
       }
 
-      /* ==================================================
-       3. KHU VỰC CHỨA TẤT CẢ NGÔI SAO
-    ================================================== */
+      /* =====================================================
+     DECORATIVE BACKGROUND CIRCLES
+  ===================================================== */
+
+      body::before {
+        content: "";
+
+        position: fixed;
+
+        width: 260px;
+        height: 260px;
+
+        border-radius: 50%;
+
+        background: rgba(255, 255, 255, 0.25);
+
+        top: -80px;
+        right: -70px;
+
+        pointer-events: none;
+      }
+
+      body::after {
+        content: "";
+
+        position: fixed;
+
+        width: 200px;
+        height: 200px;
+
+        border-radius: 50%;
+
+        background: rgba(255, 255, 255, 0.25);
+
+        bottom: -70px;
+        left: -60px;
+
+        pointer-events: none;
+      }
+
+      /* =====================================================
+     STARS / DECORATION
+  ===================================================== */
 
       .stars {
         position: fixed;
 
-        top: 0;
-        left: 0;
+        inset: 0;
 
         width: 100%;
         height: 100%;
@@ -54,169 +106,143 @@
         z-index: 1;
       }
 
-      /* ==================================================
-       4. NGÔI SAO
-    ================================================== */
-
       .star {
         position: absolute;
 
-        color: #f5a9b7;
+        color: #f2a65a;
 
-        opacity: 0.55;
+        opacity: 0.45;
 
         font-size: 30px;
 
         animation: floating 4s ease-in-out infinite;
       }
 
-      /* Ngôi sao số 1 */
-
       .star:nth-child(1) {
-        top: -15px;
-        left: 7%;
+        top: 5%;
+        left: 8%;
 
-        font-size: 45px;
+        font-size: 42px;
       }
 
-      /* Ngôi sao số 2 */
-
       .star:nth-child(2) {
-        top: 7%;
+        top: 12%;
         left: 25%;
+
+        font-size: 25px;
+      }
+
+      .star:nth-child(3) {
+        top: 4%;
+        left: 48%;
 
         font-size: 30px;
       }
 
-      /* Ngôi sao số 3 */
+      .star:nth-child(4) {
+        top: 10%;
+        right: 25%;
 
-      .star:nth-child(3) {
-        top: 2%;
-        left: 47%;
+        font-size: 24px;
+      }
+
+      .star:nth-child(5) {
+        top: 18%;
+        right: 7%;
+
+        font-size: 40px;
+      }
+
+      .star:nth-child(6) {
+        top: 35%;
+        left: 10%;
 
         font-size: 28px;
       }
 
-      /* Ngôi sao số 4 */
+      .star:nth-child(7) {
+        top: 40%;
+        right: 12%;
 
-      .star:nth-child(4) {
-        top: 7%;
-        right: 25%;
+        font-size: 35px;
+      }
+
+      .star:nth-child(8) {
+        top: 62%;
+        left: 5%;
+
+        font-size: 40px;
+      }
+
+      .star:nth-child(9) {
+        top: 65%;
+        right: 7%;
 
         font-size: 30px;
       }
 
-      /* Ngôi sao số 5 */
+      .star:nth-child(10) {
+        bottom: 15%;
+        left: 25%;
 
-      .star:nth-child(5) {
-        top: 15%;
-        right: 6%;
+        font-size: 25px;
+      }
+
+      .star:nth-child(11) {
+        bottom: 5%;
+        left: 48%;
 
         font-size: 38px;
       }
 
-      /* Ngôi sao số 6 */
-
-      .star:nth-child(6) {
-        top: 31%;
-        left: 20%;
-
-        font-size: 40px;
-      }
-
-      /* Ngôi sao số 7 */
-
-      .star:nth-child(7) {
-        top: 33%;
-        right: 16%;
-
-        font-size: 28px;
-      }
-
-      /* Ngôi sao số 8 */
-
-      .star:nth-child(8) {
-        top: 58%;
-        left: 2%;
-
-        font-size: 46px;
-      }
-
-      /* Ngôi sao số 9 */
-
-      .star:nth-child(9) {
-        top: 64%;
-        right: 12%;
-
-        font-size: 43px;
-      }
-
-      /* Ngôi sao số 10 */
-
-      .star:nth-child(10) {
-        bottom: 13%;
-        left: 30%;
-
-        font-size: 28px;
-      }
-
-      /* Ngôi sao số 11 */
-
-      .star:nth-child(11) {
-        bottom: 3%;
-        left: 48%;
-
-        font-size: 40px;
-      }
-
-      /* Ngôi sao số 12 */
-
       .star:nth-child(12) {
-        bottom: 7%;
-        right: 24%;
+        bottom: 10%;
+        right: 25%;
 
         font-size: 25px;
       }
-
-      /* Ngôi sao số 13 */
 
       .star:nth-child(13) {
-        bottom: 8%;
+        bottom: 7%;
         right: 8%;
 
-        font-size: 25px;
+        font-size: 30px;
       }
 
-      /* ==================================================
-       5. HIỆU ỨNG CHUYỂN ĐỘNG CHO NGÔI SAO
-    ================================================== */
+      /* =====================================================
+     FLOATING ANIMATION
+  ===================================================== */
 
       @keyframes floating {
         0% {
-          transform: translateY(0px);
+          transform: translateY(0px) rotate(0deg);
         }
 
         50% {
-          transform: translateY(-7px);
+          transform: translateY(-8px) rotate(5deg);
         }
 
         100% {
-          transform: translateY(0px);
+          transform: translateY(0px) rotate(0deg);
         }
       }
 
-      /* ==================================================
-       6. KHU VỰC CHÍNH
-    ================================================== */
+      /* =====================================================
+     MAIN CONTAINER
+  ===================================================== */
 
       .container {
         position: relative;
 
         z-index: 10;
 
-        width: 100%;
+        width: 92%;
+
+        max-width: 850px;
 
         min-height: 100vh;
+
+        margin: 0 auto;
 
         display: flex;
 
@@ -224,21 +250,73 @@
 
         align-items: center;
 
-        padding-top: 60px;
+        justify-content: center;
 
-        gap: 52px;
+        padding: 60px 20px 70px;
+
+        gap: 25px;
       }
 
-      /* ==================================================
-       7. CÁC Ô LINK
-    ================================================== */
+      /* =====================================================
+     HEADER
+  ===================================================== */
+
+      .header {
+        text-align: center;
+
+        margin-bottom: 15px;
+      }
+
+      .header h1 {
+        display: inline-block;
+
+        padding: 14px 30px;
+
+        border-radius: 22px;
+
+        background: rgba(255, 255, 255, 0.75);
+
+        backdrop-filter: blur(10px);
+
+        border: 2px solid rgba(255, 255, 255, 0.8);
+
+        box-shadow: 0 10px 30px rgba(180, 120, 50, 0.12);
+
+        font-size: clamp(38px, 6vw, 58px);
+
+        font-weight: 800;
+
+        background: linear-gradient(90deg, #e98b35, #f2a65a, #e9b949);
+
+        -webkit-background-clip: text;
+
+        -webkit-text-fill-color: transparent;
+
+        background-clip: text;
+      }
+
+      .header p {
+        margin-top: 10px;
+
+        color: #876d4f;
+
+        font-size: 18px;
+
+        font-weight: 600;
+      }
+
+      /* =====================================================
+     LINK BOX
+  ===================================================== */
 
       .link-box {
-        width: 260px;
+        width: 100%;
 
-        height: 112px;
+        max-width: 480px;
 
-        background-color: #f8c8cc;
+        min-height: 105px;
+
+        padding: 20px 30px;
 
         display: flex;
 
@@ -246,170 +324,235 @@
 
         justify-content: center;
 
+        text-align: center;
+
         text-decoration: none;
 
-        color: #222222;
+        border-radius: 25px;
 
-        font-size: 32px;
+        font-size: 28px;
 
-        font-weight: 400;
+        font-weight: 800;
 
-        transition: all 0.3s ease;
+        color: #654b32;
+
+        position: relative;
+
+        overflow: hidden;
+
+        border: 2px solid rgba(255, 255, 255, 0.7);
+
+        box-shadow: 0 12px 30px rgba(180, 120, 50, 0.13);
+
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
       }
 
-      /* ==================================================
-       8. HIỆU ỨNG KHI DI CHUỘT VÀO Ô LINK
-    ================================================== */
+      /* =====================================================
+     DECORATIVE CIRCLES INSIDE BOX
+  ===================================================== */
+
+      .link-box::before {
+        content: "";
+
+        position: absolute;
+
+        width: 120px;
+        height: 120px;
+
+        border-radius: 50%;
+
+        background: rgba(255, 255, 255, 0.35);
+
+        top: -55px;
+        right: -30px;
+
+        transition: transform 0.3s ease;
+      }
+
+      .link-box::after {
+        content: "";
+
+        position: absolute;
+
+        width: 65px;
+        height: 65px;
+
+        border-radius: 50%;
+
+        background: rgba(255, 255, 255, 0.3);
+
+        bottom: -25px;
+        left: -15px;
+      }
 
       .link-box:hover {
-        transform: scale(1.05);
+        transform: translateY(-8px) scale(1.02);
 
-        background-color: #f5b9c0;
-
-        box-shadow: 0 8px 20px rgba(240, 150, 165, 0.25);
+        box-shadow: 0 20px 40px rgba(180, 120, 50, 0.2);
       }
 
-      /* ==================================================
-       9. Ô "..."
-    ================================================== */
-
-      .more-box {
-        width: 130px;
-
-        height: 123px;
-
-        background-color: #f8c8cc;
-
-        display: flex;
-
-        align-items: center;
-
-        justify-content: center;
-
-        text-decoration: none;
-
-        color: #222222;
-
-        font-size: 32px;
-
-        transition: all 0.3s ease;
+      .link-box:hover::before {
+        transform: scale(1.3);
       }
 
-      /* Hiệu ứng hover */
+      /* =====================================================
+     DIFFERENT COLORS
+  ===================================================== */
 
-      .more-box:hover {
-        transform: scale(1.05);
-
-        background-color: #f5b9c0;
-
-        box-shadow: 0 8px 20px rgba(240, 150, 165, 0.25);
+      .link-box:nth-of-type(1) {
+        background: linear-gradient(135deg, #ffd28f, #ffe8bd);
       }
 
-      /* ==================================================
-       10. RESPONSIVE - ĐIỆN THOẠI
-    ================================================== */
+      .link-box:nth-of-type(2) {
+        background: linear-gradient(135deg, #ffb979, #ffd2a8);
+      }
 
-      @media (max-width: 600px) {
+      .link-box:nth-of-type(3) {
+        background: linear-gradient(135deg, #ffe09c, #fff0c7);
+      }
+
+      /* =====================================================
+     RESPONSIVE - TABLET
+  ===================================================== */
+
+      @media (max-width: 700px) {
         .container {
-          padding-top: 40px;
+          padding: 45px 15px 60px;
+        }
 
-          gap: 35px;
+        .header h1 {
+          font-size: 42px;
+
+          padding: 12px 25px;
+        }
+
+        .header p {
+          font-size: 16px;
         }
 
         .link-box {
-          width: 230px;
+          max-width: 400px;
 
-          height: 90px;
+          min-height: 90px;
 
-          font-size: 27px;
+          font-size: 25px;
+        }
+      }
+
+      /* =====================================================
+     RESPONSIVE - MOBILE
+  ===================================================== */
+
+      @media (max-width: 500px) {
+        .container {
+          gap: 20px;
+
+          justify-content: flex-start;
+
+          padding-top: 50px;
         }
 
-        .more-box {
-          width: 110px;
+        .header {
+          margin-bottom: 20px;
+        }
 
-          height: 100px;
+        .header h1 {
+          font-size: 36px;
+        }
+
+        .header p {
+          font-size: 15px;
+        }
+
+        .link-box {
+          min-height: 85px;
+
+          font-size: 22px;
+
+          border-radius: 22px;
+
+          padding: 15px 20px;
         }
 
         .star {
-          transform: scale(0.8);
+          transform: scale(0.75);
+        }
+      }
+
+      /* =====================================================
+     SMALL MOBILE
+  ===================================================== */
+
+      @media (max-width: 350px) {
+        .header h1 {
+          font-size: 31px;
+        }
+
+        .link-box {
+          font-size: 20px;
+
+          min-height: 80px;
         }
       }
     </style>
+    ```
   </head>
 
   <body>
-    <!-- ==================================================
-       PHẦN NGÔI SAO TRANG TRÍ
-  ================================================== -->
+    ```
+    <!-- =====================================================
+     DECORATIVE STARS
+===================================================== -->
 
     <div class="stars">
       <div class="star">★</div>
-
       <div class="star">★</div>
-
       <div class="star">★</div>
-
       <div class="star">★</div>
-
       <div class="star">★</div>
-
       <div class="star">★</div>
-
       <div class="star">★</div>
-
       <div class="star">★</div>
-
       <div class="star">★</div>
-
       <div class="star">★</div>
-
       <div class="star">★</div>
-
       <div class="star">★</div>
-
       <div class="star">★</div>
     </div>
 
-    <!-- ==================================================
-       PHẦN NỘI DUNG CHÍNH
-  ================================================== -->
+    <!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
 
     <main class="container">
-      <!-- ==================================================
-         Ô LINK 1
-    ================================================== -->
+      <!-- HEADER -->
+
+      <div class="header">
+        <h1>THPTQG</h1>
+
+        <p>Luyện tập các dạng bài Tiếng Anh THPTQG</p>
+      </div>
+
+      <!-- CONVERSATION -->
 
       <a href="conv.html" class="link-box"> Phần hội thoại </a>
 
-      <!-- ==================================================
-         Ô LINK 2
-    ================================================== -->
+      <!-- GUIDED CLOZE -->
 
       <a href="guidedcloze.html" class="link-box"> Phần bài đọc điền từ </a>
 
-      <!-- ==================================================
-         Ô LINK 3
-    ================================================== -->
+      <!-- READING -->
 
       <a href="readqg.html" class="link-box"> Phần đọc hiểu 10 câu </a>
     </main>
 
-    <!-- ==================================================
-       JAVASCRIPT
-  ================================================== -->
+    <!-- =====================================================
+     STUDY TRACKER
+===================================================== -->
 
-    <script>
-      // Lấy tất cả các ô link
-
-      const linkBoxes = document.querySelectorAll(".link-box, .more-box");
-
-      // Thêm hiệu ứng khi click
-
-      linkBoxes.forEach(function (box) {
-        box.addEventListener("click", function () {
-          console.log("Bạn vừa click vào:", this.innerText);
-        });
-      });
-    </script>
+    <script src="/study-tracker.js"></script>
+    ```
   </body>
 </html>

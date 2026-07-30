@@ -1,299 +1,441 @@
 <!doctype html>
+
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    ```
     <title>Tiếng Anh Chuyên</title>
 
     <style>
+      * {
+        box-sizing: border-box;
+      }
+
       body {
         margin: 0;
-        font-family: Arial, Helvetica, sans-serif;
+        min-height: 100vh;
+        font-family: "Segoe UI", Arial, Helvetica, sans-serif;
 
-        background: linear-gradient(135deg, #ffd4e6, #f7c7ff);
+        background:
+          radial-gradient(
+            circle at 10% 10%,
+            rgba(255, 255, 255, 0.8),
+            transparent 25%
+          ),
+          radial-gradient(
+            circle at 90% 20%,
+            rgba(255, 255, 255, 0.7),
+            transparent 25%
+          ),
+          linear-gradient(135deg, #ffdce9 0%, #e8e0ff 45%, #cfeeff 100%);
+
+        color: #3f4057;
       }
+
+      /* =========================
+     CONTAINER
+  ========================= */
 
       .container {
-        max-width: 1200px;
-        width: 95%;
+        max-width: 1250px;
+        width: 92%;
         margin: auto;
-        padding: 40px;
+        padding: 45px 0 70px;
       }
 
-      .back {
-        display: inline-block;
-        padding: 15px 40px;
-        border-radius: 40px;
-        background: #ff6f91;
-        color: white;
-        text-decoration: none;
-        font-size: 28px;
-        font-weight: bold;
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        margin-bottom: 40px;
+      /* =========================
+     HEADER
+  ========================= */
+
+      .header {
+        text-align: center;
+        margin-bottom: 45px;
       }
+
+      .header h1 {
+        margin: 0 0 12px;
+
+        font-size: clamp(38px, 6vw, 64px);
+        font-weight: 800;
+
+        background: linear-gradient(90deg, #ed719b, #a47de5, #65aee8);
+
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .header p {
+        margin: 0;
+
+        font-size: 20px;
+        color: #696b85;
+        font-weight: 500;
+      }
+
+      /* =========================
+     BACK BUTTON
+  ========================= */
+
+      .back {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+
+        padding: 13px 25px;
+        margin-bottom: 35px;
+
+        border-radius: 50px;
+
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(10px);
+
+        color: #6c6f9b;
+
+        text-decoration: none;
+
+        font-size: 18px;
+        font-weight: 700;
+
+        border: 2px solid rgba(255, 255, 255, 0.8);
+
+        box-shadow: 0 8px 25px rgba(104, 100, 160, 0.12);
+
+        transition: all 0.3s ease;
+      }
+
+      .back:hover {
+        transform: translateX(-5px);
+
+        background: white;
+
+        color: #ed719b;
+
+        box-shadow: 0 12px 30px rgba(104, 100, 160, 0.18);
+      }
+
+      /* =========================
+     GRID
+  ========================= */
 
       .grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-        gap: 35px;
+
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+        gap: 28px;
       }
 
+      /* =========================
+     CARD
+  ========================= */
+
       .card {
-        height: 260px;
-
-        background: #ffd9e6;
-
-        border-radius: 15px;
-
         position: relative;
 
-        transition: 0.3s;
+        min-height: 220px;
+
+        border-radius: 28px;
+
+        overflow: hidden;
 
         cursor: pointer;
 
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        background: linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.8),
+          rgba(255, 255, 255, 0.45)
+        );
+
+        border: 2px solid rgba(255, 255, 255, 0.75);
+
+        box-shadow: 0 12px 35px rgba(94, 91, 140, 0.13);
+
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+
+      .card::before {
+        content: "";
+
+        position: absolute;
+
+        width: 150px;
+        height: 150px;
+
+        border-radius: 50%;
+
+        background: rgba(255, 255, 255, 0.35);
+
+        top: -60px;
+        right: -40px;
+      }
+
+      .card::after {
+        content: "";
+
+        position: absolute;
+
+        width: 90px;
+        height: 90px;
+
+        border-radius: 50%;
+
+        background: rgba(255, 255, 255, 0.3);
+
+        bottom: -35px;
+        left: -25px;
       }
 
       .card:hover {
-        transform: translateY(-8px);
+        transform: translateY(-10px) scale(1.02);
+
+        box-shadow: 0 20px 45px rgba(94, 91, 140, 0.2);
       }
+
+      /* =========================
+     CARD COLOR VARIATIONS
+  ========================= */
+
+      .card:nth-child(4n + 1) {
+        background: linear-gradient(135deg, #ffd9e8, #ffeaf3);
+      }
+
+      .card:nth-child(4n + 2) {
+        background: linear-gradient(135deg, #d9edff, #eaf6ff);
+      }
+
+      .card:nth-child(4n + 3) {
+        background: linear-gradient(135deg, #e6ddff, #f2edff);
+      }
+
+      .card:nth-child(4n + 4) {
+        background: linear-gradient(135deg, #d7f3f1, #e9fbfa);
+      }
+
+      /* =========================
+     TITLE
+  ========================= */
 
       .title {
-        background: white;
-
-        display: inline-block;
-
-        padding: 18px 22px;
-
-        font-size: 30px;
-
         position: absolute;
 
-        top: 40px;
+        top: 50%;
+        left: 25px;
+        right: 25px;
 
-        left: 20px;
+        transform: translateY(-50%) rotate(-2deg);
 
-        right: 20px;
+        padding: 22px 15px;
+
+        border-radius: 18px;
+
+        background: rgba(255, 255, 255, 0.82);
+
+        backdrop-filter: blur(8px);
 
         text-align: center;
 
-        transform: rotate(-2deg);
+        color: #4d4f6d;
+
+        font-size: 25px;
+        line-height: 1.35;
+
+        font-weight: 800;
+
+        box-shadow: 0 8px 20px rgba(80, 80, 120, 0.08);
+
+        transition:
+          transform 0.3s ease,
+          background 0.3s ease;
       }
 
-      .counter {
-        position: absolute;
+      .card:hover .title {
+        transform: translateY(-50%) rotate(0deg) scale(1.03);
 
-        bottom: 20px;
-
-        left: 20px;
-
-        right: 20px;
-
-        background: #322324;
-
-        color: white;
-
-        padding: 15px;
-
-        font-size: 24px;
-
-        text-align: center;
+        background: rgba(255, 255, 255, 0.95);
       }
+
+      /* =========================
+     FULL CARD LINK
+  ========================= */
 
       .card a {
         position: absolute;
 
         inset: 0;
+
+        z-index: 10;
+      }
+
+      /* =========================
+     MOBILE
+  ========================= */
+
+      @media (max-width: 600px) {
+        .container {
+          width: 90%;
+          padding-top: 30px;
+        }
+
+        .header {
+          margin-bottom: 30px;
+        }
+
+        .header h1 {
+          font-size: 40px;
+        }
+
+        .header p {
+          font-size: 16px;
+        }
+
+        .back {
+          font-size: 16px;
+          padding: 11px 20px;
+        }
+
+        .grid {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+
+        .card {
+          min-height: 190px;
+        }
+
+        .title {
+          font-size: 23px;
+        }
       }
     </style>
+    ```
   </head>
 
   <body>
     <div class="container">
+      ```
+      <!-- HEADER -->
+
+      <div class="header">
+        <h1>Tiếng Anh Chuyên</h1>
+
+        <p>Luyện tập và chinh phục các dạng bài Tiếng Anh chuyên</p>
+      </div>
+
+      <!-- BACK BUTTON -->
+
       <a class="back" href="../index.html"> ← Quay lại trang chủ </a>
+
+      <!-- COURSE GRID -->
 
       <div class="grid">
         <div class="card">
-          <a href="read.html" onclick="increase('reading')"></a>
-
+          <a href="read.html"></a>
           <div class="title">Phần Reading</div>
-
-          <div class="counter">
-            Lượt làm bài:
-            <span id="reading">0</span>
-          </div>
         </div>
-        <div class="card">
-          <a href="local.html" onclick="increase('local')"></a>
 
+        <div class="card">
+          <a href="local.html"></a>
           <div class="title">
             Đề Chuyên<br />
             các tỉnh
           </div>
+        </div>
 
-          <div class="counter">
-            Lượt làm bài:
-            <span id="local">0</span>
+        <div class="card">
+          <a href="mcq.html"></a>
+          <div class="title">
+            Phần trắc nghiệm<br />
+            ABCD 1
           </div>
         </div>
 
         <div class="card">
-          <a href="mcq.html" onclick="increase('mcq1')"></a>
-
-          <div class="title">Phần trắc nghiệm<br />abcd 1</div>
-
-          <div class="counter">
-            Lượt làm bài:
-            <span id="mcq1">0</span>
+          <a href="mcq2.html"></a>
+          <div class="title">
+            Phần trắc nghiệm<br />
+            ABCD 2
           </div>
         </div>
 
         <div class="card">
-          <a href="mcq2.html" onclick="increase('mcq2')"></a>
-
-          <div class="title">Phần trắc nghiệm<br />abcd 2</div>
-
-          <div class="counter">
-            Lượt làm bài:
-            <span id="mcq2">0</span>
+          <a href="mcq3.html"></a>
+          <div class="title">
+            Phần trắc nghiệm<br />
+            ABCD 3
           </div>
         </div>
 
         <div class="card">
-          <a href="mcq3.html" onclick="increase('mcq3')"></a>
-
-          <div class="title">Phần trắc nghiệm<br />abcd 3</div>
-
-          <div class="counter">
-            Lượt làm bài:
-            <span id="mcq3">0</span>
-          </div>
-        </div>
-        <div class="card">
-          <a href="mcq4.html" onclick="increase('mcq4')"></a>
-
-          <div class="title">Phần trắc nghiệm<br />abcd 4</div>
-
-          <div class="counter">
-            Lượt làm bài:
-            <span id="mcq4">0</span>
-          </div>
-        </div>
-        <div class="card">
-          <a href="mcq5.html" onclick="increase('mcq5')"></a>
-
-          <div class="title">Phần trắc nghiệm<br />abcd 5</div>
-
-          <div class="counter">
-            Lượt làm bài:
-            <span id="mcq5">0</span>
-          </div>
-        </div>
-        <div class="card">
-          <a href="mcq6.html" onclick="increase('mcq6')"></a>
-
-          <div class="title">Phần trắc nghiệm<br />abcd 6</div>
-
-          <div class="counter">
-            Lượt làm bài:
-            <span id="mcq6">0</span>
+          <a href="mcq4.html"></a>
+          <div class="title">
+            Phần trắc nghiệm<br />
+            ABCD 4
           </div>
         </div>
 
         <div class="card">
-          <a href="../wf.html" onclick="increase('wf')"></a>
-
-          <div class="title">WordForm<br />và chia động từ</div>
-
-          <div class="counter">
-            Lượt làm bài:
-            <span id="wf">0</span>
+          <a href="mcq5.html"></a>
+          <div class="title">
+            Phần trắc nghiệm<br />
+            ABCD 5
           </div>
         </div>
 
         <div class="card">
-          <a href="../vocab2.html" onclick="increase('idiom')"></a>
-
-          <div class="title">Thành Ngữ<br />Tục Ngữ</div>
-
-          <div class="counter">
-            Lượt làm bài:
-            <span id="idiom">0</span>
+          <a href="mcq6.html"></a>
+          <div class="title">
+            Phần trắc nghiệm<br />
+            ABCD 6
           </div>
         </div>
 
         <div class="card">
-          <a href="wf2.html" onclick="increase('wf2')"></a>
-
-          <div class="title">WordForm<br />(nâng cao)</div>
-
-          <div class="counter">
-            Lượt làm bài:
-            <span id="wf2">0</span>
+          <a href="../wf.html"></a>
+          <div class="title">
+            WordForm<br />
+            và chia động từ
           </div>
         </div>
+
         <div class="card">
-          <a href="wf3.html" onclick="increase('wf3')"></a>
-
-          <div class="title">WordForm 3<br />(nâng cao)</div>
-
-          <div class="counter">
-            Lượt làm bài:
-            <span id="wf3">0</span>
+          <a href="../vocab2.html"></a>
+          <div class="title">
+            Thành Ngữ<br />
+            Tục Ngữ
           </div>
         </div>
-        <div class="card">
-          <a href="grammar.html" onclick="increase('grammar')"></a>
 
+        <div class="card">
+          <a href="wf2.html"></a>
+          <div class="title">
+            WordForm<br />
+            (nâng cao)
+          </div>
+        </div>
+
+        <div class="card">
+          <a href="wf3.html"></a>
+          <div class="title">
+            WordForm 3<br />
+            (nâng cao)
+          </div>
+        </div>
+
+        <div class="card">
+          <a href="grammar.html"></a>
           <div class="title">Ngữ Pháp</div>
-
-          <div class="counter">
-            Lượt làm bài:
-            <span id="grammar">0</span>
-          </div>
         </div>
       </div>
     </div>
 
-    <script>
-      function increase(name) {
-        let n = localStorage.getItem(name);
+    <!-- STUDY TRACKER -->
 
-        if (n == null) n = 0;
-
-        n++;
-
-        localStorage.setItem(name, n);
-
-        document.getElementById(name).innerHTML = n;
-      }
-
-      window.onload = function () {
-        let ids = [
-          "reading",
-          "local",
-          "mcq1",
-          "mcq2",
-          "mcq3",
-          "mcq4",
-          "mcq5",
-          "wf",
-          "idiom",
-          "wf2",
-          "wf3",
-          "grammar",
-        ];
-
-        ids.forEach(function (id) {
-          let n = localStorage.getItem(id);
-
-          if (n == null) n = 0;
-
-          document.getElementById(id).innerHTML = n;
-        });
-      };
-    </script>
+    <script src="/study-tracker.js"></script>
+    ```
   </body>
 </html>
