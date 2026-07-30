@@ -18,54 +18,29 @@ let isSaving = false;
 
 async function initializeStudyTracker() {
   try {
-    ```
-const {
-  data,
-  error
-} = await supabaseClient.auth.getUser();
+    const { data, error } = await supabaseClient.auth.getUser();
 
+    if (error) {
+      console.error("Cannot get user:", error);
 
-if (error) {
+      return;
+    }
 
-  console.error(
-    "Cannot get user:",
-    error
-  );
+    trackerUser = data.user;
 
-  return;
+    if (!trackerUser) {
+      console.log("No logged-in user. Tracker stopped.");
 
-}
+      return;
+    }
 
+    console.log("Study tracker started:", trackerUser.email);
 
-trackerUser = data.user;
+    console.log("Tracker User ID:", trackerUser.id);
 
-
-if (!trackerUser) {
-
-  console.log(
-    "No logged-in user. Tracker stopped."
-  );
-
-  return;
-
-}
-
-
-console.log(
-  "Study tracker started:",
-  trackerUser.email
-);
-
-
-startTracking();
-```;
+    startTracking();
   } catch (error) {
-    ```
-console.error(
-  "Tracker initialization error:",
-  error
-);
-```;
+    console.error("Tracker initialization error:", error);
   }
 }
 
@@ -99,9 +74,7 @@ function startTracking() {
 
 function updateStudyTime() {
   if (!isTracking || !trackerUser || !lastTimestamp) {
-    ```
-return;
-```;
+    return;
   }
 
   const now = Date.now();
@@ -109,10 +82,7 @@ return;
   const elapsed = Math.floor((now - lastTimestamp) / 1000);
 
   if (elapsed > 0 && elapsed <= 10) {
-    ```
-studySeconds +=
-  elapsed;
-```;
+    studySeconds += elapsed;
   }
 
   lastTimestamp = now;
@@ -124,9 +94,7 @@ studySeconds +=
 
 async function saveStudyTime() {
   if (!trackerUser || studySeconds <= 0 || isSaving) {
-    ```
-return;
-```;
+    return;
   }
 
   // Cập nhật thời gian
@@ -135,18 +103,16 @@ return;
   updateStudyTime();
 
   if (studySeconds <= 0) {
-    ```
-return;
-```;
+    return;
   }
 
   isSaving = true;
 
-  // Lấy số giây cần lưu
+  // Số giây cần lưu
 
   const secondsToSave = studySeconds;
 
-  // Tạm reset bộ đếm
+  // Reset bộ đếm tạm thời
 
   studySeconds = 0;
 
@@ -155,182 +121,90 @@ return;
   const today = new Date().toISOString().split("T")[0];
 
   try {
-    ```
-console.log(
-  "Saving study time:",
-  secondsToSave,
-  "seconds"
-);
+    console.log("Saving study time:", secondsToSave, "seconds");
 
+    console.log("Saving for User ID:", trackerUser.id);
 
-// ==================================
-// TÌM DỮ LIỆU HÔM NAY
-// ==================================
+    // ==========================================
+    // TÌM DỮ LIỆU HÔM NAY
+    // ==========================================
 
-const {
-  data: existingRecord,
-  error: selectError
-} =
-  await supabaseClient
+    const { data: existingRecord, error: selectError } = await supabaseClient
 
-    .from(
-      "study_sessions"
-    )
+      .from("study_sessions")
 
-    .select(
-      "id, duration_seconds"
-    )
+      .select("id, user_id, study_date, duration_seconds")
 
-    .eq(
-      "user_id",
-      trackerUser.id
-    )
+      .eq("user_id", trackerUser.id)
 
-    .eq(
-      "study_date",
-      today
-    )
+      .eq("study_date", today)
 
-    .maybeSingle();
+      .maybeSingle();
 
+    if (selectError) {
+      throw selectError;
+    }
 
-if (selectError) {
+    // ==========================================
+    // ĐÃ CÓ DỮ LIỆU HÔM NAY
+    // ==========================================
 
-  throw selectError;
+    if (existingRecord) {
+      const newDuration =
+        Number(existingRecord.duration_seconds || 0) + secondsToSave;
 
-}
+      const { error: updateError } = await supabaseClient
 
+        .from("study_sessions")
 
-// ==================================
-// ĐÃ CÓ DỮ LIỆU HÔM NAY
-// ==================================
+        .update({
+          duration_seconds: newDuration,
 
-if (
-  existingRecord
-) {
+          updated_at: new Date().toISOString(),
+        })
 
+        .eq("id", existingRecord.id);
 
-  const newDuration =
+      if (updateError) {
+        throw updateError;
+      }
 
-    Number(
-      existingRecord.duration_seconds
-    ) +
+      console.log("Study time updated:", newDuration, "seconds");
+    }
 
-    secondsToSave;
+    // ==========================================
+    // CHƯA CÓ DỮ LIỆU HÔM NAY
+    // ==========================================
+    else {
+      const { data: insertedData, error: insertError } = await supabaseClient
 
+        .from("study_sessions")
 
-  const {
-    error: updateError
-  } =
+        .insert({
+          user_id: trackerUser.id,
 
-    await supabaseClient
+          study_date: today,
 
-      .from(
-        "study_sessions"
-      )
+          duration_seconds: secondsToSave,
+        })
 
-      .update({
+        .select();
 
-        duration_seconds:
-          newDuration,
+      if (insertError) {
+        throw insertError;
+      }
 
-        updated_at:
-          new Date()
-            .toISOString()
-
-      })
-
-      .eq(
-        "id",
-        existingRecord.id
-      );
-
-
-  if (
-    updateError
-  ) {
-
-    throw updateError;
-
-  }
-
-
-  console.log(
-    "Study time updated:",
-    newDuration,
-    "seconds"
-  );
-
-}
-
-
-// ==================================
-// CHƯA CÓ DỮ LIỆU HÔM NAY
-// ==================================
-
-else {
-
-
-  const {
-    error: insertError
-  } =
-
-    await supabaseClient
-
-      .from(
-        "study_sessions"
-      )
-
-      .insert({
-
-        user_id:
-          trackerUser.id,
-
-        study_date:
-          today,
-
-        duration_seconds:
-          secondsToSave
-
-      });
-
-
-  if (
-    insertError
-  ) {
-
-    throw insertError;
-
-  }
-
-
-  console.log(
-    "New study session created:",
-    secondsToSave,
-    "seconds"
-  );
-
-}
-```;
+      console.log("New study session created:", insertedData);
+    }
   } catch (error) {
-    ```
-console.error(
-  "Could not save study time:",
-  error
-);
+    console.error("Could not save study time:", error);
 
+    // Nếu lưu thất bại
+    // trả lại thời gian
 
-// Nếu lưu thất bại
-// trả lại thời gian
-
-studySeconds +=
-  secondsToSave;
-```;
+    studySeconds += secondsToSave;
   } finally {
-    ```
-isSaving =
-  false;
-```;
+    isSaving = false;
   }
 }
 
@@ -342,52 +216,26 @@ document.addEventListener(
   "visibilitychange",
 
   async function () {
-    ```
-// Người dùng rời tab
+    // Người dùng rời tab
 
-if (
-  document.visibilityState ===
-  "hidden"
-) {
+    if (document.visibilityState === "hidden") {
+      updateStudyTime();
 
+      isTracking = false;
 
-  updateStudyTime();
+      await saveStudyTime();
 
+      console.log("Study tracker paused.");
+    }
 
-  isTracking =
-    false;
+    // Người dùng quay lại tab
+    else {
+      lastTimestamp = Date.now();
 
+      isTracking = true;
 
-  await saveStudyTime();
-
-
-  console.log(
-    "Study tracker paused."
-  );
-
-
-}
-
-
-// Người dùng quay lại tab
-
-else {
-
-
-  lastTimestamp =
-    Date.now();
-
-
-  isTracking =
-    true;
-
-
-  console.log(
-    "Study tracker resumed."
-  );
-
-}
-```;
+      console.log("Study tracker resumed.");
+    }
   },
 );
 
@@ -399,15 +247,12 @@ window.addEventListener(
   "pagehide",
 
   function () {
-    ```
-updateStudyTime();
+    updateStudyTime();
 
+    // Cố gắng lưu thời gian
+    // trước khi rời trang
 
-// Không thể await
-// trong pagehide
-
-saveStudyTime();
-```;
+    saveStudyTime();
   },
 );
 
