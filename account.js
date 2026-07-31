@@ -308,6 +308,129 @@ window.addEventListener("studyTimeUpdated", async function () {
 
   await loadStudyData();
 });
+// ==========================================
+// LOAD MY COURSES
+// ==========================================
+
+async function loadMyCourses() {
+  if (!currentUser) return;
+
+  const coursesContainer = document.getElementById("myCourses");
+
+  if (!coursesContainer) {
+    console.error("Cannot find #myCourses");
+    return;
+  }
+
+  const { data, error } = await supabaseClient
+    .from("user_courses")
+    .select("course_id")
+    .eq("user_id", currentUser.id);
+
+  console.log("My Courses:", data);
+  console.log("Course Error:", error);
+
+  if (error) {
+    console.error("Error loading courses:", error);
+
+    coursesContainer.innerHTML =
+      '<p class="loading">Could not load your courses.</p>';
+
+    return;
+  }
+
+  if (!data || data.length === 0) {
+    coursesContainer.innerHTML =
+      '<p class="loading">You have not purchased any courses yet.</p>';
+
+    return;
+  }
+
+  coursesContainer.innerHTML = "";
+
+  data.forEach(function (item) {
+    const courseDiv = document.createElement("div");
+
+    courseDiv.className = "history-row";
+
+    courseDiv.innerHTML = `
+      <div>
+        <strong>English Course</strong>
+      </div>
+
+      <a
+        href="${item.course_id}.html"
+        class="home-btn"
+      >
+        Start Learning
+      </a>
+    `;
+
+    coursesContainer.appendChild(courseDiv);
+  });
+}
+
+// Lấy các khóa học user đã được cấp quyền
+const { data, error } = await supabaseClient
+  .from("user_courses")
+  .select(
+    `
+      course_id,
+      courses (
+        id,
+        name
+      )
+    `,
+  )
+  .eq("user_id", currentUser.id);
+
+console.log("My Courses:", data);
+console.log("Course Error:", error);
+
+if (error) {
+  console.error("Error loading courses:", error);
+
+  coursesContainer.innerHTML =
+    '<p class="loading">Could not load your courses.</p>';
+
+  return;
+}
+
+coursesContainer.innerHTML = "";
+
+if (!data || data.length === 0) {
+  coursesContainer.innerHTML =
+    '<p class="loading">You have not purchased any courses yet.</p>';
+
+  return;
+}
+
+data.forEach(function (item) {
+  const course = item.courses;
+
+  if (!course) {
+    return;
+  }
+
+  const courseDiv = document.createElement("div");
+
+  courseDiv.className = "history-row";
+
+  courseDiv.innerHTML = `
+      <div>
+        <strong>${course.name}</strong>
+      </div>
+
+      <a
+        href="course-1.html"
+        class="home-btn"
+      >
+        Start Learning
+      </a>
+    `;
+
+  coursesContainer.appendChild(courseDiv);
+});
 
 // ==========================================
 // LOGOUT
@@ -344,7 +467,7 @@ async function initializeAccount() {
 
   await loadStudyData();
 
+  await loadMyCourses();
+
   console.log("Account initialized successfully.");
 }
-
-initializeAccount();
