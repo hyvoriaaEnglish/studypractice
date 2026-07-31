@@ -373,11 +373,11 @@ async function loadMyCourses() {
       </div>
 
       <a
-        href="${item.course_id}.html"
-        class="home-btn"
-      >
-        Start Learning
-      </a>
+  href="/course/trangchu2.html"
+  class="home-btn"
+>
+  Start Learning
+</a>
     `;
 
     coursesContainer.appendChild(courseDiv);
