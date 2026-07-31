@@ -260,7 +260,9 @@
         <br /><br />
 
         Sau khi thanh toán thành công, hệ thống sẽ tự động xác nhận giao dịch và
-        mở khóa khóa học cho tài khoản của bạn.
+        mở khóa khóa học cho tài khoản của bạn, bấm vào mục account để vào khóa
+        học<br />Lưu Ý: sau khi thanh toán đợi từ 5 phút hoặc 30 phút để cập
+        nhật đơn hàng
       </div>
 
       <button id="paymentBtn">Tôi đã hiểu thông tin thanh toán</button>
@@ -281,6 +283,7 @@
       const orderCodeElement = document.getElementById("orderCode");
       const transferContentElement = document.getElementById("transferContent");
       const messageElement = document.getElementById("message");
+      const orderStatusElement = document.getElementById("orderStatus");
 
       function generateOrderCode() {
         const randomPart = Math.random()
@@ -347,6 +350,38 @@
           }
 
           console.log("Order đã tạo:", data);
+          // Theo dõi trạng thái thanh toán
+          const checkPayment = setInterval(async () => {
+            const { data: currentOrder, error: checkError } =
+              await supabaseClient
+                .from("orders")
+                .select("status")
+                .eq("id", data.id)
+                .single();
+
+            if (checkError) {
+              console.error("Lỗi kiểm tra thanh toán:", checkError);
+              return;
+            }
+
+            console.log("Trạng thái hiện tại:", currentOrder.status);
+
+            if (currentOrder.status === "paid") {
+              clearInterval(checkPayment);
+
+              orderStatusElement.textContent = "Thanh toán thành công";
+
+              messageElement.style.color = "#4d8a68";
+
+              messageElement.textContent =
+                "🎉 Thanh toán thành công! Khóa học đã được mở khóa.";
+
+              // Chờ 2 giây rồi chuyển sang trang chủ
+              setTimeout(() => {
+                window.location.href = "trangchu2.html";
+              }, 2000);
+            }
+          }, 5000);
 
           messageElement.style.color = "#4d8a68";
           messageElement.textContent =
