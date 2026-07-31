@@ -73,6 +73,9 @@ async function loadProfile() {
     return false;
   }
 
+  console.log("Current User ID:", currentUser.id);
+  console.log("Current User Email:", currentUser.email);
+
   const emailElement = document.getElementById("userEmail");
 
   const nameElement = document.getElementById("userName");
@@ -240,15 +243,10 @@ function displayHistory(data) {
 
   if (!historyList) {
     console.error("Cannot find #historyList in account.html");
-
     return;
   }
 
-  // Xóa Loading...
-
   historyList.innerHTML = "";
-
-  // Không có dữ liệu
 
   if (!data || data.length === 0) {
     const emptyMessage = document.createElement("p");
@@ -300,25 +298,24 @@ function displayHistory(data) {
 }
 
 // ==========================================
-// AUTO REFRESH WHEN TRACKER SAVES
-// ==========================================
-
-window.addEventListener("studyTimeUpdated", async function () {
-  console.log("Study time updated. Refreshing account...");
-
-  await loadStudyData();
-});
-// ==========================================
 // LOAD MY COURSES
 // ==========================================
 
 async function loadMyCourses() {
-  if (!currentUser) return;
+  if (!currentUser) {
+    console.log("No current user. Cannot load courses.");
+    return;
+  }
+
+  console.log("Loading my courses...");
+
+  console.log("Current User ID:", currentUser.id);
 
   const coursesContainer = document.getElementById("myCourses");
 
   if (!coursesContainer) {
-    console.error("Cannot find #myCourses");
+    console.error("Cannot find #myCourses in account.html");
+
     return;
   }
 
@@ -328,7 +325,12 @@ async function loadMyCourses() {
     .eq("user_id", currentUser.id);
 
   console.log("My Courses:", data);
+
   console.log("Course Error:", error);
+
+  // ==========================================
+  // ERROR
+  // ==========================================
 
   if (error) {
     console.error("Error loading courses:", error);
@@ -339,6 +341,10 @@ async function loadMyCourses() {
     return;
   }
 
+  // ==========================================
+  // NO COURSE
+  // ==========================================
+
   if (!data || data.length === 0) {
     coursesContainer.innerHTML =
       '<p class="loading">You have not purchased any courses yet.</p>';
@@ -346,7 +352,15 @@ async function loadMyCourses() {
     return;
   }
 
+  // ==========================================
+  // CLEAR LOADING
+  // ==========================================
+
   coursesContainer.innerHTML = "";
+
+  // ==========================================
+  // DISPLAY COURSES
+  // ==========================================
 
   data.forEach(function (item) {
     const courseDiv = document.createElement("div");
@@ -368,68 +382,18 @@ async function loadMyCourses() {
 
     coursesContainer.appendChild(courseDiv);
   });
+
+  console.log("My courses displayed successfully.");
 }
 
-// Lấy các khóa học user đã được cấp quyền
-const { data, error } = await supabaseClient
-  .from("user_courses")
-  .select(
-    `
-      course_id,
-      courses (
-        id,
-        name
-      )
-    `,
-  )
-  .eq("user_id", currentUser.id);
+// ==========================================
+// AUTO REFRESH WHEN TRACKER SAVES
+// ==========================================
 
-console.log("My Courses:", data);
-console.log("Course Error:", error);
+window.addEventListener("studyTimeUpdated", async function () {
+  console.log("Study time updated. Refreshing account...");
 
-if (error) {
-  console.error("Error loading courses:", error);
-
-  coursesContainer.innerHTML =
-    '<p class="loading">Could not load your courses.</p>';
-
-  return;
-}
-
-coursesContainer.innerHTML = "";
-
-if (!data || data.length === 0) {
-  coursesContainer.innerHTML =
-    '<p class="loading">You have not purchased any courses yet.</p>';
-
-  return;
-}
-
-data.forEach(function (item) {
-  const course = item.courses;
-
-  if (!course) {
-    return;
-  }
-
-  const courseDiv = document.createElement("div");
-
-  courseDiv.className = "history-row";
-
-  courseDiv.innerHTML = `
-      <div>
-        <strong>${course.name}</strong>
-      </div>
-
-      <a
-        href="course-1.html"
-        class="home-btn"
-      >
-        Start Learning
-      </a>
-    `;
-
-  coursesContainer.appendChild(courseDiv);
+  await loadStudyData();
 });
 
 // ==========================================
@@ -465,9 +429,19 @@ async function initializeAccount() {
     return;
   }
 
+  // Load study information
+
   await loadStudyData();
+
+  // Load purchased courses
 
   await loadMyCourses();
 
   console.log("Account initialized successfully.");
 }
+
+// ==========================================
+// START ACCOUNT
+// ==========================================
+
+initializeAccount();
