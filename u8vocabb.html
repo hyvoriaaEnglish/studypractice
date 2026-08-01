@@ -1,0 +1,1038 @@
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Vocabulary Bank - Tourism & Travel</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: linear-gradient(135deg, #eef2ff, #f8fafc);
+        color: #1e293b;
+        min-height: 100vh;
+        padding: 40px 20px;
+      }
+
+      .container {
+        max-width: 1100px;
+        margin: auto;
+      }
+
+      /* HEADER */
+
+      .header {
+        text-align: center;
+        margin-bottom: 35px;
+      }
+
+      .header h1 {
+        font-size: 42px;
+        color: #4338ca;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        color: #64748b;
+        font-size: 17px;
+      }
+
+      /* SEARCH */
+
+      .search-box {
+        margin-bottom: 30px;
+      }
+
+      .search-box input {
+        width: 100%;
+        padding: 17px 20px;
+        border: 2px solid #e2e8f0;
+        border-radius: 14px;
+        font-size: 16px;
+        outline: none;
+        background: white;
+        transition: 0.3s;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      .search-box input:focus {
+        border-color: #6366f1;
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
+      }
+
+      /* VOCABULARY LIST */
+
+      .vocabulary-list {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      .vocab-card {
+        background: white;
+        border-radius: 18px;
+        padding: 24px;
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        gap: 25px;
+        box-shadow: 0 8px 25px rgba(15, 23, 42, 0.07);
+        border: 1px solid #e2e8f0;
+        transition: all 0.3s ease;
+      }
+
+      .vocab-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 15px 35px rgba(79, 70, 229, 0.12);
+        border-color: #c7d2fe;
+      }
+
+      /* WORD SECTION */
+
+      .word-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-right: 1px solid #e2e8f0;
+        padding-right: 20px;
+      }
+
+      .word-number {
+        font-size: 13px;
+        color: #94a3b8;
+        margin-bottom: 5px;
+        font-weight: 600;
+      }
+
+      .word {
+        font-size: 25px;
+        font-weight: 700;
+        color: #4338ca;
+        margin-bottom: 8px;
+      }
+
+      .meaning {
+        color: #475569;
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 1.5;
+      }
+
+      /* EXAMPLE SECTION */
+
+      .example-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .example-label {
+        font-size: 12px;
+        color: #6366f1;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 7px;
+      }
+
+      .example {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #334155;
+        margin-bottom: 8px;
+      }
+
+      .translation {
+        font-size: 15px;
+        color: #64748b;
+        font-style: italic;
+        margin-bottom: 15px;
+        line-height: 1.5;
+      }
+
+      /* SPEAK BUTTON */
+
+      .speak-btn {
+        width: fit-content;
+        border: none;
+        background: #eef2ff;
+        color: #4f46e5;
+        padding: 8px 14px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        transition: 0.2s;
+      }
+
+      .speak-btn:hover {
+        background: #4f46e5;
+        color: white;
+      }
+
+      /* NO RESULT */
+
+      .no-result {
+        display: none;
+        text-align: center;
+        padding: 40px;
+        background: white;
+        border-radius: 15px;
+        color: #64748b;
+      }
+
+      /* FOOTER */
+
+      .footer {
+        text-align: center;
+        margin-top: 35px;
+        color: #94a3b8;
+        font-size: 14px;
+      }
+
+      /* MOBILE */
+
+      @media (max-width: 700px) {
+        body {
+          padding: 25px 12px;
+        }
+
+        .header h1 {
+          font-size: 30px;
+        }
+
+        .header p {
+          font-size: 15px;
+        }
+
+        .vocab-card {
+          grid-template-columns: 1fr;
+          gap: 18px;
+        }
+
+        .word-section {
+          border-right: none;
+          border-bottom: 1px solid #e2e8f0;
+          padding-right: 0;
+          padding-bottom: 18px;
+        }
+
+        .word {
+          font-size: 23px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- HEADER -->
+
+      <div class="header">
+        <h1>✈️ Vocabulary Bank</h1>
+
+        <p>Tourism & Travel • English Vocabulary</p>
+      </div>
+
+      <!-- SEARCH -->
+
+      <div class="search-box">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="🔍 Search vocabulary..."
+        />
+      </div>
+
+      <!-- VOCABULARY LIST -->
+
+      <div class="vocabulary-list" id="vocabularyList">
+        <!-- 1 -->
+
+        <div class="vocab-card" data-word="agency">
+          <div class="word-section">
+            <div class="word-number">01</div>
+
+            <div class="word">agency</div>
+
+            <div class="meaning">đại lý; công ty cung cấp dịch vụ</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              We booked our holiday through a travel agency.
+            </div>
+
+            <div class="translation">
+              Chúng tôi đã đặt kỳ nghỉ thông qua một công ty du lịch.
+            </div>
+
+            <button class="speak-btn" onclick="speak('agency')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 2 -->
+
+        <div class="vocab-card" data-word="agent">
+          <div class="word-section">
+            <div class="word-number">02</div>
+
+            <div class="word">agent</div>
+
+            <div class="meaning">nhân viên đại lý; đại diện</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The travel agent helped us choose the best hotel.
+            </div>
+
+            <div class="translation">
+              Nhân viên đại lý du lịch đã giúp chúng tôi chọn khách sạn tốt
+              nhất.
+            </div>
+
+            <button class="speak-btn" onclick="speak('agent')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 3 -->
+
+        <div class="vocab-card" data-word="brochure">
+          <div class="word-section">
+            <div class="word-number">03</div>
+
+            <div class="word">brochure</div>
+
+            <div class="meaning">tờ rơi; sách giới thiệu</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              I picked up a brochure about local tourist attractions.
+            </div>
+
+            <div class="translation">
+              Tôi đã lấy một tờ giới thiệu về các điểm tham quan địa phương.
+            </div>
+
+            <button class="speak-btn" onclick="speak('brochure')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 4 -->
+
+        <div class="vocab-card" data-word="domestic tourism">
+          <div class="word-section">
+            <div class="word-number">04</div>
+
+            <div class="word">domestic tourism</div>
+
+            <div class="meaning">du lịch trong nước</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Domestic tourism has become increasingly popular in recent years.
+            </div>
+
+            <div class="translation">
+              Du lịch trong nước ngày càng trở nên phổ biến trong những năm gần
+              đây.
+            </div>
+
+            <button class="speak-btn" onclick="speak('domestic tourism')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 5 -->
+
+        <div class="vocab-card" data-word="estimate">
+          <div class="word-section">
+            <div class="word-number">05</div>
+
+            <div class="word">estimate</div>
+
+            <div class="meaning">ước tính; dự tính</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              We estimate that the trip will cost about $500.
+            </div>
+
+            <div class="translation">
+              Chúng tôi ước tính chuyến đi sẽ tốn khoảng 500 đô la.
+            </div>
+
+            <button class="speak-btn" onclick="speak('estimate')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 6 -->
+
+        <div class="vocab-card" data-word="fixed">
+          <div class="word-section">
+            <div class="word-number">06</div>
+
+            <div class="word">fixed</div>
+
+            <div class="meaning">cố định; không thay đổi</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">The tour has a fixed departure time.</div>
+
+            <div class="translation">
+              Chuyến tham quan có thời gian khởi hành cố định.
+            </div>
+
+            <button class="speak-btn" onclick="speak('fixed')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 7 -->
+
+        <div class="vocab-card" data-word="food tourism">
+          <div class="word-section">
+            <div class="word-number">07</div>
+
+            <div class="word">food tourism</div>
+
+            <div class="meaning">du lịch ẩm thực</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Food tourism allows visitors to experience local dishes and
+              traditions.
+            </div>
+
+            <div class="translation">
+              Du lịch ẩm thực cho phép du khách trải nghiệm các món ăn và truyền
+              thống địa phương.
+            </div>
+
+            <button class="speak-btn" onclick="speak('food tourism')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 8 -->
+
+        <div class="vocab-card" data-word="graveyard">
+          <div class="word-section">
+            <div class="word-number">08</div>
+
+            <div class="word">graveyard</div>
+
+            <div class="meaning">nghĩa trang</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The old graveyard is located behind the church.
+            </div>
+
+            <div class="translation">Nghĩa trang cũ nằm phía sau nhà thờ.</div>
+
+            <button class="speak-btn" onclick="speak('graveyard')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 9 -->
+
+        <div class="vocab-card" data-word="holidaymaker">
+          <div class="word-section">
+            <div class="word-number">09</div>
+
+            <div class="word">holidaymaker</div>
+
+            <div class="meaning">người đi nghỉ; khách du lịch</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The beach is crowded with holidaymakers in summer.
+            </div>
+
+            <div class="translation">
+              Bãi biển đông khách du lịch vào mùa hè.
+            </div>
+
+            <button class="speak-btn" onclick="speak('holidaymaker')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 10 -->
+
+        <div class="vocab-card" data-word="homestay">
+          <div class="word-section">
+            <div class="word-number">10</div>
+
+            <div class="word">homestay</div>
+
+            <div class="meaning">
+              nhà dân cho khách du lịch ở; hình thức ở cùng người dân địa phương
+            </div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              We stayed at a homestay to experience local life.
+            </div>
+
+            <div class="translation">
+              Chúng tôi ở homestay để trải nghiệm cuộc sống địa phương.
+            </div>
+
+            <button class="speak-btn" onclick="speak('homestay')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 11 -->
+
+        <div class="vocab-card" data-word="hop-on hop-off">
+          <div class="word-section">
+            <div class="word-number">11</div>
+
+            <div class="word">hop-on hop-off</div>
+
+            <div class="meaning">
+              xe buýt du lịch cho phép lên xuống tự do tại các điểm dừng
+            </div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              We took a hop-on hop-off bus to explore the city.
+            </div>
+
+            <div class="translation">
+              Chúng tôi đi xe buýt hop-on hop-off để khám phá thành phố.
+            </div>
+
+            <button class="speak-btn" onclick="speak('hop-on hop-off')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 12 -->
+
+        <div class="vocab-card" data-word="variety">
+          <div class="word-section">
+            <div class="word-number">12</div>
+
+            <div class="word">variety</div>
+
+            <div class="meaning">sự đa dạng; nhiều loại</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The city offers a wide variety of activities for tourists.
+            </div>
+
+            <div class="translation">
+              Thành phố cung cấp nhiều hoạt động đa dạng cho khách du lịch.
+            </div>
+
+            <button class="speak-btn" onclick="speak('variety')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 13 -->
+
+        <div class="vocab-card" data-word="hunt">
+          <div class="word-section">
+            <div class="word-number">13</div>
+
+            <div class="word">hunt</div>
+
+            <div class="meaning">săn tìm; tìm kiếm</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Tourists often hunt for unique souvenirs when they travel.
+            </div>
+
+            <div class="translation">
+              Khách du lịch thường tìm kiếm những món quà lưu niệm độc đáo khi
+              đi du lịch.
+            </div>
+
+            <button class="speak-btn" onclick="speak('hunt')">🔊 Listen</button>
+          </div>
+        </div>
+
+        <!-- 14 -->
+
+        <div class="vocab-card" data-word="itinerary">
+          <div class="word-section">
+            <div class="word-number">14</div>
+
+            <div class="word">itinerary</div>
+
+            <div class="meaning">lịch trình chuyến đi</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Our itinerary includes visits to three famous museums.
+            </div>
+
+            <div class="translation">
+              Lịch trình của chúng tôi bao gồm chuyến thăm ba bảo tàng nổi
+              tiếng.
+            </div>
+
+            <button class="speak-btn" onclick="speak('itinerary')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 15 -->
+
+        <div class="vocab-card" data-word="loft">
+          <div class="word-section">
+            <div class="word-number">15</div>
+
+            <div class="word">loft</div>
+
+            <div class="meaning">gác xép; căn hộ kiểu gác xép</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              We stayed in a modern loft near the city centre.
+            </div>
+
+            <div class="translation">
+              Chúng tôi ở trong một căn hộ kiểu gác xép hiện đại gần trung tâm
+              thành phố.
+            </div>
+
+            <button class="speak-btn" onclick="speak('loft')">🔊 Listen</button>
+          </div>
+        </div>
+
+        <!-- 16 -->
+
+        <div class="vocab-card" data-word="low season">
+          <div class="word-section">
+            <div class="word-number">16</div>
+
+            <div class="word">low season</div>
+
+            <div class="meaning">mùa thấp điểm</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Hotels often offer cheaper prices during the low season.
+            </div>
+
+            <div class="translation">
+              Các khách sạn thường đưa ra mức giá rẻ hơn vào mùa thấp điểm.
+            </div>
+
+            <button class="speak-btn" onclick="speak('low season')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 17 -->
+
+        <div class="vocab-card" data-word="online app">
+          <div class="word-section">
+            <div class="word-number">17</div>
+
+            <div class="word">online app</div>
+
+            <div class="meaning">ứng dụng trực tuyến</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              You can use an online app to book hotels and flights.
+            </div>
+
+            <div class="translation">
+              Bạn có thể sử dụng ứng dụng trực tuyến để đặt khách sạn và chuyến
+              bay.
+            </div>
+
+            <button class="speak-btn" onclick="speak('online app')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 18 -->
+
+        <div class="vocab-card" data-word="package holiday">
+          <div class="word-section">
+            <div class="word-number">18</div>
+
+            <div class="word">package holiday</div>
+
+            <div class="meaning">kỳ nghỉ trọn gói</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              We booked a package holiday that included flights and
+              accommodation.
+            </div>
+
+            <div class="translation">
+              Chúng tôi đã đặt một kỳ nghỉ trọn gói bao gồm vé máy bay và chỗ ở.
+            </div>
+
+            <button class="speak-btn" onclick="speak('package holiday')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 19 -->
+
+        <div class="vocab-card" data-word="ruinous">
+          <div class="word-section">
+            <div class="word-number">19</div>
+
+            <div class="word">ruinous</div>
+
+            <div class="meaning">gây tổn thất lớn; phá hoại; tàn phá</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The storm had a ruinous effect on the local tourism industry.
+            </div>
+
+            <div class="translation">
+              Cơn bão đã gây ảnh hưởng nghiêm trọng đến ngành du lịch địa
+              phương.
+            </div>
+
+            <button class="speak-btn" onclick="speak('ruinous')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 20 -->
+
+        <div class="vocab-card" data-word="self-guided">
+          <div class="word-section">
+            <div class="word-number">20</div>
+
+            <div class="word">self-guided</div>
+
+            <div class="meaning">tự hướng dẫn; tự tham quan</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              We chose a self-guided tour of the old town.
+            </div>
+
+            <div class="translation">
+              Chúng tôi chọn một chuyến tham quan tự hướng dẫn quanh khu phố cổ.
+            </div>
+
+            <button class="speak-btn" onclick="speak('self-guided')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 21 -->
+
+        <div class="vocab-card" data-word="shopping tourism">
+          <div class="word-section">
+            <div class="word-number">21</div>
+
+            <div class="word">shopping tourism</div>
+
+            <div class="meaning">du lịch mua sắm</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Shopping tourism is popular in major cities around the world.
+            </div>
+
+            <div class="translation">
+              Du lịch mua sắm phổ biến ở các thành phố lớn trên khắp thế giới.
+            </div>
+
+            <button class="speak-btn" onclick="speak('shopping tourism')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 22 -->
+
+        <div class="vocab-card" data-word="smooth">
+          <div class="word-section">
+            <div class="word-number">22</div>
+
+            <div class="word">smooth</div>
+
+            <div class="meaning">suôn sẻ; trôi chảy; êm ái</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The journey was smooth and we arrived on time.
+            </div>
+
+            <div class="translation">
+              Chuyến đi diễn ra suôn sẻ và chúng tôi đã đến đúng giờ.
+            </div>
+
+            <button class="speak-btn" onclick="speak('smooth')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 23 -->
+
+        <div class="vocab-card" data-word="wander">
+          <div class="word-section">
+            <div class="word-number">23</div>
+
+            <div class="word">wander</div>
+
+            <div class="meaning">
+              đi lang thang; đi dạo không mục đích cụ thể
+            </div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              We spent the afternoon wandering around the old town.
+            </div>
+
+            <div class="translation">
+              Chúng tôi dành cả buổi chiều đi dạo quanh khu phố cổ.
+            </div>
+
+            <button class="speak-btn" onclick="speak('wander')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 24 -->
+
+        <div class="vocab-card" data-word="world-famous">
+          <div class="word-section">
+            <div class="word-number">24</div>
+
+            <div class="word">world-famous</div>
+
+            <div class="meaning">nổi tiếng thế giới</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The city is world-famous for its beautiful beaches.
+            </div>
+
+            <div class="translation">
+              Thành phố nổi tiếng thế giới với những bãi biển tuyệt đẹp.
+            </div>
+
+            <button class="speak-btn" onclick="speak('world-famous')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 25 -->
+
+        <div class="vocab-card" data-word="work out">
+          <div class="word-section">
+            <div class="word-number">25</div>
+
+            <div class="word">work out</div>
+
+            <div class="meaning">tìm ra; giải quyết; tính toán</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              We need to work out the best route for our trip.
+            </div>
+
+            <div class="translation">
+              Chúng ta cần tìm ra tuyến đường tốt nhất cho chuyến đi.
+            </div>
+
+            <button class="speak-btn" onclick="speak('work out')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- NO RESULT -->
+
+      <div class="no-result" id="noResult">😕 No vocabulary found.</div>
+
+      <!-- FOOTER -->
+
+      <div class="footer">Vocabulary Bank • Tourism & Travel</div>
+    </div>
+
+    <script>
+      /* =========================
+       SEARCH VOCABULARY
+    ========================= */
+
+      const searchInput = document.getElementById("searchInput");
+
+      const cards = document.querySelectorAll(".vocab-card");
+
+      const noResult = document.getElementById("noResult");
+
+      searchInput.addEventListener("input", function () {
+        const keyword = this.value.toLowerCase().trim();
+
+        let visibleCount = 0;
+
+        cards.forEach((card) => {
+          const word = card.dataset.word.toLowerCase();
+
+          const content = card.innerText.toLowerCase();
+
+          if (word.includes(keyword) || content.includes(keyword)) {
+            card.style.display = "grid";
+
+            visibleCount++;
+          } else {
+            card.style.display = "none";
+          }
+        });
+
+        if (visibleCount === 0) {
+          noResult.style.display = "block";
+        } else {
+          noResult.style.display = "none";
+        }
+      });
+
+      /* =========================
+       TEXT TO SPEECH
+    ========================= */
+
+      function speak(text) {
+        if (!("speechSynthesis" in window)) {
+          alert("Your browser does not support text-to-speech.");
+
+          return;
+        }
+
+        window.speechSynthesis.cancel();
+
+        const utterance = new SpeechSynthesisUtterance(text);
+
+        utterance.lang = "en-US";
+
+        utterance.rate = 0.85;
+
+        utterance.pitch = 1;
+
+        window.speechSynthesis.speak(utterance);
+      }
+    </script>
+  </body>
+</html>
+```

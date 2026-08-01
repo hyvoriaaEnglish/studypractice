@@ -1,0 +1,856 @@
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Vocabulary Bank - Study & Well-being</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: linear-gradient(135deg, #eef2ff, #f8fafc);
+        color: #1e293b;
+        min-height: 100vh;
+        padding: 40px 20px;
+      }
+
+      .container {
+        max-width: 1100px;
+        margin: auto;
+      }
+
+      /* HEADER */
+
+      .header {
+        text-align: center;
+        margin-bottom: 35px;
+      }
+
+      .header h1 {
+        font-size: 42px;
+        color: #4338ca;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        color: #64748b;
+        font-size: 17px;
+      }
+
+      /* SEARCH */
+
+      .search-box {
+        margin-bottom: 30px;
+      }
+
+      .search-box input {
+        width: 100%;
+        padding: 17px 20px;
+        border: 2px solid #e2e8f0;
+        border-radius: 14px;
+        font-size: 16px;
+        outline: none;
+        background: white;
+        transition: 0.3s;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      .search-box input:focus {
+        border-color: #6366f1;
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
+      }
+
+      /* VOCABULARY LIST */
+
+      .vocabulary-list {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      .vocab-card {
+        background: white;
+        border-radius: 18px;
+        padding: 24px;
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        gap: 25px;
+        box-shadow: 0 8px 25px rgba(15, 23, 42, 0.07);
+        border: 1px solid #e2e8f0;
+        transition: all 0.3s ease;
+      }
+
+      .vocab-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 15px 35px rgba(79, 70, 229, 0.12);
+        border-color: #c7d2fe;
+      }
+
+      /* WORD SECTION */
+
+      .word-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-right: 1px solid #e2e8f0;
+        padding-right: 20px;
+      }
+
+      .word-number {
+        font-size: 13px;
+        color: #94a3b8;
+        margin-bottom: 5px;
+        font-weight: 600;
+      }
+
+      .word {
+        font-size: 25px;
+        font-weight: 700;
+        color: #4338ca;
+        margin-bottom: 8px;
+      }
+
+      .meaning {
+        color: #475569;
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 1.5;
+      }
+
+      /* EXAMPLE SECTION */
+
+      .example-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .example-label {
+        font-size: 12px;
+        color: #6366f1;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 7px;
+      }
+
+      .example {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #334155;
+        margin-bottom: 8px;
+      }
+
+      .translation {
+        font-size: 15px;
+        color: #64748b;
+        font-style: italic;
+        margin-bottom: 15px;
+        line-height: 1.5;
+      }
+
+      /* SPEAK BUTTON */
+
+      .speak-btn {
+        width: fit-content;
+        border: none;
+        background: #eef2ff;
+        color: #4f46e5;
+        padding: 8px 14px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        transition: 0.2s;
+      }
+
+      .speak-btn:hover {
+        background: #4f46e5;
+        color: white;
+      }
+
+      /* NO RESULT */
+
+      .no-result {
+        display: none;
+        text-align: center;
+        padding: 40px;
+        background: white;
+        border-radius: 15px;
+        color: #64748b;
+      }
+
+      /* FOOTER */
+
+      .footer {
+        text-align: center;
+        margin-top: 35px;
+        color: #94a3b8;
+        font-size: 14px;
+      }
+
+      /* MOBILE */
+
+      @media (max-width: 700px) {
+        body {
+          padding: 25px 12px;
+        }
+
+        .header h1 {
+          font-size: 30px;
+        }
+
+        .header p {
+          font-size: 15px;
+        }
+
+        .vocab-card {
+          grid-template-columns: 1fr;
+          gap: 18px;
+        }
+
+        .word-section {
+          border-right: none;
+          border-bottom: 1px solid #e2e8f0;
+          padding-right: 0;
+          padding-bottom: 18px;
+        }
+
+        .word {
+          font-size: 23px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- HEADER -->
+
+      <div class="header">
+        <h1>🧠 Vocabulary Bank</h1>
+
+        <p>Study, Stress & Well-being • English Vocabulary</p>
+      </div>
+
+      <!-- SEARCH -->
+
+      <div class="search-box">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="🔍 Search vocabulary..."
+        />
+      </div>
+
+      <!-- VOCABULARY LIST -->
+
+      <div class="vocabulary-list" id="vocabularyList">
+        <!-- 1 -->
+
+        <div class="vocab-card" data-word="accomplish">
+          <div class="word-section">
+            <div class="word-number">01</div>
+
+            <div class="word">accomplish</div>
+
+            <div class="meaning">hoàn thành; đạt được</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">She worked hard to accomplish her goals.</div>
+
+            <div class="translation">
+              Cô ấy đã làm việc chăm chỉ để đạt được mục tiêu của mình.
+            </div>
+
+            <button class="speak-btn" onclick="speak('accomplish')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 2 -->
+
+        <div class="vocab-card" data-word="additional">
+          <div class="word-section">
+            <div class="word-number">02</div>
+
+            <div class="word">additional</div>
+
+            <div class="meaning">thêm; bổ sung</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Students may need additional time to finish the assignment.
+            </div>
+
+            <div class="translation">
+              Học sinh có thể cần thêm thời gian để hoàn thành bài tập.
+            </div>
+
+            <button class="speak-btn" onclick="speak('additional')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 3 -->
+
+        <div class="vocab-card" data-word="anxiety">
+          <div class="word-section">
+            <div class="word-number">03</div>
+
+            <div class="word">anxiety</div>
+
+            <div class="meaning">sự lo âu; sự lo lắng</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Exam anxiety can make it difficult for students to concentrate.
+            </div>
+
+            <div class="translation">
+              Lo lắng về kỳ thi có thể khiến học sinh khó tập trung.
+            </div>
+
+            <button class="speak-btn" onclick="speak('anxiety')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 4 -->
+
+        <div class="vocab-card" data-word="appropriately">
+          <div class="word-section">
+            <div class="word-number">04</div>
+
+            <div class="word">appropriately</div>
+
+            <div class="meaning">một cách phù hợp; thích hợp</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Students should dress appropriately for school.
+            </div>
+
+            <div class="translation">
+              Học sinh nên ăn mặc phù hợp khi đến trường.
+            </div>
+
+            <button class="speak-btn" onclick="speak('appropriately')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 5 -->
+
+        <div class="vocab-card" data-word="assignment">
+          <div class="word-section">
+            <div class="word-number">05</div>
+
+            <div class="word">assignment</div>
+
+            <div class="meaning">bài tập; nhiệm vụ được giao</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              I have to finish my English assignment tonight.
+            </div>
+
+            <div class="translation">
+              Tôi phải hoàn thành bài tập tiếng Anh tối nay.
+            </div>
+
+            <button class="speak-btn" onclick="speak('assignment')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 6 -->
+
+        <div class="vocab-card" data-word="counsellor">
+          <div class="word-section">
+            <div class="word-number">06</div>
+
+            <div class="word">counsellor</div>
+
+            <div class="meaning">cố vấn; chuyên viên tư vấn</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The school counsellor helped me deal with my study problems.
+            </div>
+
+            <div class="translation">
+              Cố vấn học đường đã giúp tôi giải quyết những vấn đề trong học
+              tập.
+            </div>
+
+            <button class="speak-btn" onclick="speak('counsellor')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 7 -->
+
+        <div class="vocab-card" data-word="deadline">
+          <div class="word-section">
+            <div class="word-number">07</div>
+
+            <div class="word">deadline</div>
+
+            <div class="meaning">hạn chót</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The deadline for the project is next Friday.
+            </div>
+
+            <div class="translation">
+              Hạn chót của dự án là thứ Sáu tuần tới.
+            </div>
+
+            <button class="speak-btn" onclick="speak('deadline')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 8 -->
+
+        <div class="vocab-card" data-word="delay">
+          <div class="word-section">
+            <div class="word-number">08</div>
+
+            <div class="word">delay</div>
+
+            <div class="meaning">trì hoãn; sự trì hoãn</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Don't delay your homework until the last minute.
+            </div>
+
+            <div class="translation">
+              Đừng trì hoãn bài tập về nhà cho đến phút cuối cùng.
+            </div>
+
+            <button class="speak-btn" onclick="speak('delay')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 9 -->
+
+        <div class="vocab-card" data-word="distraction">
+          <div class="word-section">
+            <div class="word-number">09</div>
+
+            <div class="word">distraction</div>
+
+            <div class="meaning">sự xao nhãng; điều gây mất tập trung</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Turn off your phone to avoid distractions while studying.
+            </div>
+
+            <div class="translation">
+              Hãy tắt điện thoại để tránh bị xao nhãng khi học.
+            </div>
+
+            <button class="speak-btn" onclick="speak('distraction')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 10 -->
+
+        <div class="vocab-card" data-word="due date">
+          <div class="word-section">
+            <div class="word-number">10</div>
+
+            <div class="word">due date</div>
+
+            <div class="meaning">ngày đến hạn; hạn nộp</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The due date for the assignment is Monday.
+            </div>
+
+            <div class="translation">Hạn nộp bài tập là thứ Hai.</div>
+
+            <button class="speak-btn" onclick="speak('due date')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 11 -->
+
+        <div class="vocab-card" data-word="fattening">
+          <div class="word-section">
+            <div class="word-number">11</div>
+
+            <div class="word">fattening</div>
+
+            <div class="meaning">gây béo; làm tăng cân</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Eating too much fast food can be fattening.
+            </div>
+
+            <div class="translation">
+              Ăn quá nhiều đồ ăn nhanh có thể gây tăng cân.
+            </div>
+
+            <button class="speak-btn" onclick="speak('fattening')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 12 -->
+
+        <div class="vocab-card" data-word="mental">
+          <div class="word-section">
+            <div class="word-number">12</div>
+
+            <div class="word">mental</div>
+
+            <div class="meaning">thuộc về tinh thần; tâm lý</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Regular exercise is good for both physical and mental health.
+            </div>
+
+            <div class="translation">
+              Tập thể dục thường xuyên tốt cho cả sức khỏe thể chất và tinh
+              thần.
+            </div>
+
+            <button class="speak-btn" onclick="speak('mental')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 13 -->
+
+        <div class="vocab-card" data-word="minimise">
+          <div class="word-section">
+            <div class="word-number">13</div>
+
+            <div class="word">minimise</div>
+
+            <div class="meaning">giảm thiểu; hạn chế tối đa</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              We should minimise distractions when preparing for exams.
+            </div>
+
+            <div class="translation">
+              Chúng ta nên giảm thiểu sự xao nhãng khi chuẩn bị cho kỳ thi.
+            </div>
+
+            <button class="speak-btn" onclick="speak('minimise')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 14 -->
+
+        <div class="vocab-card" data-word="mood">
+          <div class="word-section">
+            <div class="word-number">14</div>
+
+            <div class="word">mood</div>
+
+            <div class="meaning">tâm trạng</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">Listening to music can improve my mood.</div>
+
+            <div class="translation">
+              Nghe nhạc có thể cải thiện tâm trạng của tôi.
+            </div>
+
+            <button class="speak-btn" onclick="speak('mood')">🔊 Listen</button>
+          </div>
+        </div>
+
+        <!-- 15 -->
+
+        <div class="vocab-card" data-word="optimistic">
+          <div class="word-section">
+            <div class="word-number">15</div>
+
+            <div class="word">optimistic</div>
+
+            <div class="meaning">lạc quan</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">She remains optimistic about her future.</div>
+
+            <div class="translation">
+              Cô ấy vẫn lạc quan về tương lai của mình.
+            </div>
+
+            <button class="speak-btn" onclick="speak('optimistic')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 16 -->
+
+        <div class="vocab-card" data-word="physical">
+          <div class="word-section">
+            <div class="word-number">16</div>
+
+            <div class="word">physical</div>
+
+            <div class="meaning">thuộc về thể chất; thể chất</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Physical activity is important for a healthy lifestyle.
+            </div>
+
+            <div class="translation">
+              Hoạt động thể chất rất quan trọng đối với một lối sống lành mạnh.
+            </div>
+
+            <button class="speak-btn" onclick="speak('physical')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 17 -->
+
+        <div class="vocab-card" data-word="priority">
+          <div class="word-section">
+            <div class="word-number">17</div>
+
+            <div class="word">priority</div>
+
+            <div class="meaning">sự ưu tiên; điều ưu tiên</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Finishing my homework is my top priority tonight.
+            </div>
+
+            <div class="translation">
+              Hoàn thành bài tập về nhà là ưu tiên hàng đầu của tôi tối nay.
+            </div>
+
+            <button class="speak-btn" onclick="speak('priority')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 18 -->
+
+        <div class="vocab-card" data-word="stress out">
+          <div class="word-section">
+            <div class="word-number">18</div>
+
+            <div class="word">stress out</div>
+
+            <div class="meaning">làm căng thẳng; khiến lo lắng</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Too much homework can stress students out.
+            </div>
+
+            <div class="translation">
+              Quá nhiều bài tập về nhà có thể khiến học sinh căng thẳng.
+            </div>
+
+            <button class="speak-btn" onclick="speak('stress out')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 19 -->
+
+        <div class="vocab-card" data-word="well-balanced">
+          <div class="word-section">
+            <div class="word-number">19</div>
+
+            <div class="word">well-balanced</div>
+
+            <div class="meaning">cân bằng; cân đối</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              A well-balanced lifestyle includes enough sleep, exercise, and
+              relaxation.
+            </div>
+
+            <div class="translation">
+              Một lối sống cân bằng bao gồm ngủ đủ giấc, tập thể dục và thư
+              giãn.
+            </div>
+
+            <button class="speak-btn" onclick="speak('well-balanced')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- NO RESULT -->
+
+      <div class="no-result" id="noResult">😕 No vocabulary found.</div>
+
+      <!-- FOOTER -->
+
+      <div class="footer">Vocabulary Bank • Study & Well-being</div>
+    </div>
+
+    <script>
+      /* =========================
+       SEARCH VOCABULARY
+    ========================= */
+
+      const searchInput = document.getElementById("searchInput");
+
+      const cards = document.querySelectorAll(".vocab-card");
+
+      const noResult = document.getElementById("noResult");
+
+      searchInput.addEventListener("input", function () {
+        const keyword = this.value.toLowerCase().trim();
+
+        let visibleCount = 0;
+
+        cards.forEach((card) => {
+          const word = card.dataset.word.toLowerCase();
+
+          const content = card.innerText.toLowerCase();
+
+          if (word.includes(keyword) || content.includes(keyword)) {
+            card.style.display = "grid";
+
+            visibleCount++;
+          } else {
+            card.style.display = "none";
+          }
+        });
+
+        if (visibleCount === 0) {
+          noResult.style.display = "block";
+        } else {
+          noResult.style.display = "none";
+        }
+      });
+
+      /* =========================
+       TEXT TO SPEECH
+    ========================= */
+
+      function speak(text) {
+        if (!("speechSynthesis" in window)) {
+          alert("Your browser does not support text-to-speech.");
+
+          return;
+        }
+
+        window.speechSynthesis.cancel();
+
+        const utterance = new SpeechSynthesisUtterance(text);
+
+        utterance.lang = "en-US";
+
+        utterance.rate = 0.85;
+
+        utterance.pitch = 1;
+
+        window.speechSynthesis.speak(utterance);
+      }
+    </script>
+  </body>
+</html>
+```

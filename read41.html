@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reading 41 - Cheating in Examinations</title>
+    <style>
+      :root {
+        --bg: #f5f7fb;
+        --card: #fff;
+        --text: #1f2937;
+        --muted: #6b7280;
+        --primary: #6366f1;
+        --primary2: #8b5cf6;
+        --correct: #16a34a;
+        --wrong: #dc2626;
+        --border: #e5e7eb;
+        --shadow: 0 12px 35px rgba(31, 41, 55, 0.08);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: "Be Vietnam Pro", Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.7;
+      }
+      header {
+        background: linear-gradient(135deg, var(--primary), var(--primary2));
+        color: white;
+        padding: 42px 20px 75px;
+        text-align: center;
+      }
+      header h1 {
+        margin: 0 0 8px;
+        font-size: clamp(25px, 4vw, 40px);
+      }
+      header p {
+        margin: 0;
+        opacity: 0.92;
+        font-size: 16px;
+      }
+      .container {
+        max-width: 1050px;
+        margin: -38px auto 50px;
+        padding: 0 18px;
+      }
+      .card {
+        background: var(--card);
+        border-radius: 22px;
+        box-shadow: var(--shadow);
+        padding: 28px;
+        margin-bottom: 22px;
+        border: 1px solid rgba(229, 231, 235, 0.7);
+      }
+      .info {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 18px;
+      }
+      .badge {
+        background: #eef2ff;
+        color: #4f46e5;
+        padding: 7px 13px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 700;
+      }
+      h2 {
+        font-size: 22px;
+        margin-top: 0;
+        color: #312e81;
+      }
+      h3 {
+        font-size: 19px;
+        margin: 0 0 12px;
+      }
+      .reading-text {
+        background: #fafafa;
+        border-left: 5px solid var(--primary);
+        padding: 20px 22px;
+        border-radius: 12px;
+        white-space: normal;
+      }
+      .question {
+        padding: 22px 0;
+        border-bottom: 1px solid var(--border);
+      }
+      .question:last-child {
+        border-bottom: 0;
+      }
+      .question-number {
+        font-weight: 800;
+        color: #4f46e5;
+        margin-bottom: 12px;
+      }
+      .options {
+        display: grid;
+        gap: 10px;
+      }
+      .option {
+        position: relative;
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        border: 1.5px solid var(--border);
+        padding: 12px 15px;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: 0.2s;
+        background: white;
+      }
+      .option:hover {
+        border-color: #a5b4fc;
+        background: #f8f7ff;
+      }
+      .option input {
+        margin-top: 6px;
+        accent-color: var(--primary);
+      }
+      .option.correct {
+        border-color: #86efac;
+        background: #f0fdf4;
+        color: #166534;
+      }
+      .option.wrong {
+        border-color: #fca5a5;
+        background: #fef2f2;
+        color: #991b1b;
+      }
+      .option.disabled {
+        cursor: default;
+      }
+      .feedback {
+        margin-top: 12px;
+        padding: 13px 15px;
+        border-radius: 11px;
+        font-size: 14px;
+        display: none;
+      }
+      .feedback.show {
+        display: block;
+      }
+      .feedback.correct {
+        background: #f0fdf4;
+        color: #166534;
+        border: 1px solid #bbf7d0;
+      }
+      .feedback.wrong {
+        background: #fef2f2;
+        color: #991b1b;
+        border: 1px solid #fecaca;
+      }
+      .explanation {
+        margin-top: 5px;
+      }
+      .result {
+        display: none;
+        text-align: center;
+        padding: 25px;
+        border-radius: 18px;
+        background: linear-gradient(135deg, #eef2ff, #f5f3ff);
+        margin-top: 22px;
+      }
+      .result.show {
+        display: block;
+      }
+      .score {
+        font-size: 34px;
+        font-weight: 900;
+        color: #4f46e5;
+      }
+      button {
+        border: 0;
+        border-radius: 12px;
+        padding: 13px 22px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        background: linear-gradient(135deg, var(--primary), var(--primary2));
+        color: white;
+        box-shadow: 0 7px 18px rgba(99, 102, 241, 0.25);
+        margin: 5px;
+      }
+      button.secondary {
+        background: #e5e7eb;
+        color: #374151;
+        box-shadow: none;
+      }
+      .progress-wrap {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: rgba(255, 255, 255, 0.94);
+        backdrop-filter: blur(10px);
+        padding: 12px 20px;
+        border-bottom: 1px solid var(--border);
+      }
+      .progress-inner {
+        max-width: 1050px;
+        margin: auto;
+      }
+      .progress-top {
+        display: flex;
+        justify-content: space-between;
+        font-size: 13px;
+        font-weight: 700;
+        margin-bottom: 6px;
+      }
+      .progress {
+        height: 8px;
+        background: #e5e7eb;
+        border-radius: 99px;
+        overflow: hidden;
+      }
+      .progress-bar {
+        height: 100%;
+        width: 0;
+        background: linear-gradient(90deg, var(--primary), var(--primary2));
+        transition: 0.3s;
+      }
+      footer {
+        text-align: center;
+        color: var(--muted);
+        padding: 10px 20px 35px;
+        font-size: 13px;
+      }
+      @media (max-width: 600px) {
+        .card {
+          padding: 20px 16px;
+          border-radius: 17px;
+        }
+        header {
+          padding-top: 32px;
+        }
+        .reading-text {
+          padding: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Reading 41</h1>
+      <p>Cheating in Examinations: A Persistent Problem</p>
+      <p>C1–C2 Level • 10 Questions</p>
+    </header>
+
+    <div class="progress-wrap">
+      <div class="progress-inner">
+        <div class="progress-top">
+          <span>Tiến độ làm bài</span>
+          <span id="progressText">0/10</span>
+        </div>
+        <div class="progress">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+      </div>
+    </div>
+
+    <main class="container">
+      <section class="card">
+        <div class="info">
+          <span class="badge">C1–C2</span>
+          <span class="badge">Reading Comprehension</span>
+          <span class="badge">~250 words</span>
+        </div>
+        <h2>📖 Passage</h2>
+        <div class="reading-text">
+          Cheating in examinations has long been a concern for educational
+          institutions around the world. It refers to any dishonest attempt to
+          gain an unfair advantage during an assessment, such as copying
+          answers, using unauthorized materials, or obtaining exam questions in
+          advance. While most students recognize that cheating violates academic
+          rules, some continue to engage in it due to pressure to achieve high
+          grades or fear of failure.
+          <br /><br />
+          Several factors contribute to academic dishonesty. In highly
+          competitive educational environments, students may feel that their
+          future opportunities depend heavily on examination results.
+          Consequently, some individuals become willing to compromise their
+          integrity in pursuit of success. Technological advancements have also
+          created new challenges for schools and universities. Smartphones,
+          smartwatches, and online communication tools can make cheating more
+          difficult to detect, requiring institutions to develop increasingly
+          sophisticated monitoring methods.
+          <br /><br />
+          However, the consequences of cheating often extend beyond academic
+          penalties. Students who rely on dishonest practices may fail to
+          acquire the knowledge and skills that examinations are designed to
+          assess. Furthermore, repeated acts of dishonesty can undermine
+          personal credibility and damage trust within educational communities.
+          For this reason, many educators argue that promoting ethical values is
+          just as important as enforcing strict regulations. Ultimately,
+          academic success is most meaningful when it reflects genuine effort
+          and achievement rather than deception.
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>📝 Questions</h2>
+        <div id="quiz"></div>
+        <div id="result" class="result">
+          <div>🎉 Kết quả của bạn</div>
+          <div class="score" id="score"></div>
+          <p id="message"></p>
+          <button onclick="resetQuiz()">Làm lại bài</button>
+          <button
+            class="secondary"
+            onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+          >
+            Về đầu trang
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <footer>Reading Practice • C1–C2 • Cheating in Examinations</footer>
+
+    <script>
+      const questions = [
+        {
+          q: "What is the main purpose of the passage?",
+          options: [
+            "To explain the causes and consequences of cheating in examinations.",
+            "To argue that examinations should be abolished.",
+            "To compare traditional and modern forms of cheating.",
+            "To describe educational systems around the world.",
+          ],
+          answer: 0,
+          explanation:
+            "The passage discusses why students cheat, how technology creates new challenges, and the educational and personal consequences of academic dishonesty.",
+        },
+        {
+          q: 'The word "unauthorized" in paragraph 1 is closest in meaning to:',
+          options: ["illegal", "unapproved", "expensive", "ineffective"],
+          answer: 1,
+          explanation:
+            '"Unauthorized" means not officially permitted or approved. Therefore, "unapproved" is the closest meaning.',
+        },
+        {
+          q: "According to the passage, some students cheat because they:",
+          options: [
+            "dislike their teachers.",
+            "have access to technology.",
+            "experience pressure to achieve high grades.",
+            "find examinations unimportant.",
+          ],
+          answer: 2,
+          explanation:
+            "The first paragraph explicitly states that some students cheat because of pressure to achieve high grades or fear of failure.",
+        },
+        {
+          q: 'The word "compromise" in paragraph 2 most nearly means:',
+          options: ["protect", "strengthen", "sacrifice or weaken", "evaluate"],
+          answer: 2,
+          explanation:
+            'In the phrase "compromise their integrity," it means to weaken or sacrifice their moral principles in order to pursue success.',
+        },
+        {
+          q: "Which of the following is mentioned as a challenge created by technology?",
+          options: [
+            "Students study less frequently.",
+            "Schools have fewer resources.",
+            "Cheating may become harder to detect.",
+            "Examination questions become easier.",
+          ],
+          answer: 2,
+          explanation:
+            "The passage says smartphones, smartwatches, and online communication tools can make cheating more difficult to detect.",
+        },
+        {
+          q: "Which of the following can be inferred from the passage?",
+          options: [
+            "Academic dishonesty may negatively affect a student's future character.",
+            "Most students regularly cheat in examinations.",
+            "Technology is the only cause of cheating.",
+            "Academic penalties are more serious than all other consequences.",
+          ],
+          answer: 0,
+          explanation:
+            "The passage says repeated dishonesty can undermine personal credibility and integrity, suggesting that cheating may have lasting effects on a student's character and reputation.",
+        },
+        {
+          q: 'The word "credibility" in paragraph 3 is closest in meaning to:',
+          options: [
+            "popularity",
+            "trustworthiness",
+            "intelligence",
+            "confidence",
+          ],
+          answer: 1,
+          explanation: `Credibility refers to the quality of being trusted or believed. Therefore, "trustworthiness" is the closest meaning.`,
+        },
+        {
+          q: "Why does the author mention ethical values in the final paragraph?",
+          options: [
+            "To suggest that preventing cheating requires more than punishment alone.",
+            "To criticize educational institutions.",
+            "To explain examination procedures.",
+            "To compare different cultures.",
+          ],
+          answer: 0,
+          explanation:
+            "The author states that promoting ethical values is just as important as enforcing strict regulations, showing that education in integrity should accompany punishment and monitoring.",
+        },
+        {
+          q: "Which statement would the author most likely agree with?",
+          options: [
+            "High grades justify dishonest behavior.",
+            "Academic success should be based on genuine effort.",
+            "Examinations are the primary cause of dishonesty.",
+            "Technology makes cheating impossible to prevent.",
+          ],
+          answer: 1,
+          explanation:
+            "The final sentence states that academic success is most meaningful when it reflects genuine effort and achievement rather than deception.",
+        },
+        {
+          q: "Which of the following best summarizes the passage?",
+          options: [
+            "Cheating is mainly a technological problem.",
+            "Academic dishonesty is influenced by multiple factors and can have serious educational and personal consequences.",
+            "Students cheat only because of competitive environments.",
+            "Educational institutions should focus exclusively on punishment.",
+          ],
+          answer: 1,
+          explanation:
+            "The passage presents several causes of cheating, including pressure and competition, discusses technological challenges, and explains its broader educational and personal consequences.",
+        },
+      ];
+
+      const quiz = document.getElementById("quiz");
+      let answered = 0;
+      let score = 0;
+
+      function renderQuiz() {
+        quiz.innerHTML = "";
+        questions.forEach((item, index) => {
+          const box = document.createElement("div");
+          box.className = "question";
+          box.innerHTML = `
+            <div class="question-number">Question ${index + 1}</div>
+            <h3>${item.q}</h3>
+            <div class="options">
+              ${item.options
+                .map(
+                  (option, i) => `
+                <label class="option" data-index="${i}">
+                  <input type="radio" name="q${index}" value="${i}">
+                  <span><strong>${String.fromCharCode(65 + i)}.</strong> ${option}</span>
+                </label>
+              `,
+                )
+                .join("")}
+            </div>
+            <div class="feedback" id="feedback${index}"></div>
+          `;
+          quiz.appendChild(box);
+
+          box.querySelectorAll("input").forEach((input) => {
+            input.addEventListener("change", () =>
+              checkAnswer(index, Number(input.value), box),
+            );
+          });
+        });
+      }
+
+      function checkAnswer(index, selected, box) {
+        const inputs = box.querySelectorAll("input");
+        const options = box.querySelectorAll(".option");
+        const feedback = document.getElementById(`feedback${index}`);
+
+        if (box.dataset.answered === "true") return;
+        box.dataset.answered = "true";
+        answered++;
+
+        inputs.forEach((input) => (input.disabled = true));
+        options.forEach((option) => option.classList.add("disabled"));
+
+        options[selected].classList.add(
+          selected === questions[index].answer ? "correct" : "wrong",
+        );
+        options[questions[index].answer].classList.add("correct");
+
+        if (selected === questions[index].answer) {
+          score++;
+          feedback.className = "feedback correct show";
+          feedback.innerHTML = `<strong>✓ Correct!</strong><div class="explanation">${questions[index].explanation}</div>`;
+        } else {
+          feedback.className = "feedback wrong show";
+          feedback.innerHTML = `<strong>✗ Incorrect!</strong> Đáp án đúng: <strong>${String.fromCharCode(65 + questions[index].answer)}. ${questions[index].options[questions[index].answer]}</strong><div class="explanation">${questions[index].explanation}</div>`;
+        }
+
+        updateProgress();
+
+        if (answered === questions.length) {
+          setTimeout(showResult, 500);
+        }
+      }
+
+      function updateProgress() {
+        document.getElementById("progressText").textContent =
+          `${answered}/${questions.length}`;
+        document.getElementById("progressBar").style.width =
+          `${(answered / questions.length) * 100}%`;
+      }
+
+      function showResult() {
+        const result = document.getElementById("result");
+        document.getElementById("score").textContent = `${score}/10`;
+        let message = "";
+        if (score === 10)
+          message =
+            "🏆 Xuất sắc! Bạn đã hoàn thành bài Reading với kết quả tuyệt đối.";
+        else if (score >= 8)
+          message = "🌟 Rất tốt! Khả năng đọc hiểu C1–C2 của bạn đang rất ổn.";
+        else if (score >= 6)
+          message =
+            "👍 Khá tốt! Hãy xem lại phần giải thích của những câu sai.";
+        else
+          message =
+            "📚 Bạn nên đọc lại passage và ôn từ vựng học thuật trước khi làm lại.";
+        document.getElementById("message").textContent = message;
+        result.classList.add("show");
+        result.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+
+      function resetQuiz() {
+        answered = 0;
+        score = 0;
+        document.getElementById("result").classList.remove("show");
+        updateProgress();
+        renderQuiz();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      renderQuiz();
+    </script>
+  </body>
+</html>

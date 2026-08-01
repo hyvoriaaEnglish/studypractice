@@ -1,0 +1,897 @@
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Unit Vocabulary - Cities & Urban Life</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: linear-gradient(135deg, #eef2ff, #f8fafc);
+        color: #1e293b;
+        min-height: 100vh;
+        padding: 40px 20px;
+      }
+
+      .container {
+        max-width: 1100px;
+        margin: auto;
+      }
+
+      /* HEADER */
+
+      .header {
+        text-align: center;
+        margin-bottom: 35px;
+      }
+
+      .header h1 {
+        font-size: 42px;
+        color: #4338ca;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        color: #64748b;
+        font-size: 17px;
+      }
+
+      /* SEARCH */
+
+      .search-box {
+        margin-bottom: 30px;
+      }
+
+      .search-box input {
+        width: 100%;
+        padding: 17px 20px;
+        border: 2px solid #e2e8f0;
+        border-radius: 14px;
+        font-size: 16px;
+        outline: none;
+        background: white;
+        transition: 0.3s;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      .search-box input:focus {
+        border-color: #6366f1;
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
+      }
+
+      /* VOCABULARY LIST */
+
+      .vocabulary-list {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      .vocab-card {
+        background: white;
+        border-radius: 18px;
+        padding: 24px;
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        gap: 25px;
+        box-shadow: 0 8px 25px rgba(15, 23, 42, 0.07);
+        border: 1px solid #e2e8f0;
+        transition: all 0.3s ease;
+      }
+
+      .vocab-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 15px 35px rgba(79, 70, 229, 0.12);
+        border-color: #c7d2fe;
+      }
+
+      /* WORD */
+
+      .word-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-right: 1px solid #e2e8f0;
+        padding-right: 20px;
+      }
+
+      .word-number {
+        font-size: 13px;
+        color: #94a3b8;
+        margin-bottom: 5px;
+        font-weight: 600;
+      }
+
+      .word {
+        font-size: 25px;
+        font-weight: 700;
+        color: #4338ca;
+        margin-bottom: 8px;
+      }
+
+      .meaning {
+        color: #475569;
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 1.5;
+      }
+
+      /* EXAMPLE */
+
+      .example-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .example-label {
+        font-size: 12px;
+        color: #6366f1;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 7px;
+      }
+
+      .example {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #334155;
+        margin-bottom: 8px;
+      }
+
+      .translation {
+        font-size: 15px;
+        color: #64748b;
+        font-style: italic;
+        margin-bottom: 15px;
+        line-height: 1.5;
+      }
+
+      /* SPEAK BUTTON */
+
+      .speak-btn {
+        width: fit-content;
+        border: none;
+        background: #eef2ff;
+        color: #4f46e5;
+        padding: 8px 14px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        transition: 0.2s;
+      }
+
+      .speak-btn:hover {
+        background: #4f46e5;
+        color: white;
+      }
+
+      /* NO RESULT */
+
+      .no-result {
+        display: none;
+        text-align: center;
+        padding: 40px;
+        background: white;
+        border-radius: 15px;
+        color: #64748b;
+      }
+
+      /* FOOTER */
+
+      .footer {
+        text-align: center;
+        margin-top: 35px;
+        color: #94a3b8;
+        font-size: 14px;
+      }
+
+      /* MOBILE */
+
+      @media (max-width: 700px) {
+        body {
+          padding: 25px 12px;
+        }
+
+        .header h1 {
+          font-size: 30px;
+        }
+
+        .header p {
+          font-size: 15px;
+        }
+
+        .vocab-card {
+          grid-template-columns: 1fr;
+          gap: 18px;
+        }
+
+        .word-section {
+          border-right: none;
+          border-bottom: 1px solid #e2e8f0;
+          padding-right: 0;
+          padding-bottom: 18px;
+        }
+
+        .word {
+          font-size: 23px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- HEADER -->
+
+      <div class="header">
+        <h1>🏙️ Vocabulary Bank</h1>
+
+        <p>Cities & Urban Life • English Vocabulary</p>
+      </div>
+
+      <!-- SEARCH -->
+
+      <div class="search-box">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="🔍 Search vocabulary..."
+        />
+      </div>
+
+      <!-- VOCABULARY LIST -->
+
+      <div class="vocabulary-list" id="vocabularyList">
+        <!-- 1 -->
+
+        <div class="vocab-card" data-word="bustling">
+          <div class="word-section">
+            <div class="word-number">01</div>
+
+            <div class="word">bustling</div>
+
+            <div class="meaning">nhộn nhịp; tấp nập</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The city centre is always bustling with people.
+            </div>
+
+            <div class="translation">
+              Trung tâm thành phố luôn nhộn nhịp người qua lại.
+            </div>
+
+            <button class="speak-btn" onclick="speak('bustling')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 2 -->
+
+        <div class="vocab-card" data-word="carry out">
+          <div class="word-section">
+            <div class="word-number">02</div>
+
+            <div class="word">carry out</div>
+
+            <div class="meaning">thực hiện; tiến hành</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The researchers carried out a survey about urban life.
+            </div>
+
+            <div class="translation">
+              Các nhà nghiên cứu đã tiến hành một cuộc khảo sát về cuộc sống đô
+              thị.
+            </div>
+
+            <button class="speak-btn" onclick="speak('carry out')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 3 -->
+
+        <div class="vocab-card" data-word="come down with">
+          <div class="word-section">
+            <div class="word-number">03</div>
+
+            <div class="word">come down with</div>
+
+            <div class="meaning">mắc phải; bị bệnh</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              I came down with a cold after spending a day in the rain.
+            </div>
+
+            <div class="translation">
+              Tôi bị cảm lạnh sau khi ở ngoài trời mưa cả ngày.
+            </div>
+
+            <button class="speak-btn" onclick="speak('come down with')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 4 -->
+
+        <div class="vocab-card" data-word="concrete jungle">
+          <div class="word-section">
+            <div class="word-number">04</div>
+
+            <div class="word">concrete jungle</div>
+
+            <div class="meaning">rừng bê tông; thành phố với nhiều tòa nhà</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Some people find it difficult to relax in a concrete jungle.
+            </div>
+
+            <div class="translation">
+              Một số người cảm thấy khó thư giãn trong một thành phố đầy những
+              tòa nhà.
+            </div>
+
+            <button class="speak-btn" onclick="speak('concrete jungle')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 5 -->
+
+        <div class="vocab-card" data-word="congested">
+          <div class="word-section">
+            <div class="word-number">05</div>
+
+            <div class="word">congested</div>
+
+            <div class="meaning">đông đúc; tắc nghẽn</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The roads are often congested during rush hour.
+            </div>
+
+            <div class="translation">
+              Đường phố thường bị tắc nghẽn vào giờ cao điểm.
+            </div>
+
+            <button class="speak-btn" onclick="speak('congested')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 6 -->
+
+        <div class="vocab-card" data-word="construction">
+          <div class="word-section">
+            <div class="word-number">06</div>
+
+            <div class="word">construction</div>
+
+            <div class="meaning">sự xây dựng; công trình xây dựng</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The construction of the new bridge will take two years.
+            </div>
+
+            <div class="translation">
+              Việc xây dựng cây cầu mới sẽ mất hai năm.
+            </div>
+
+            <button class="speak-btn" onclick="speak('construction')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 7 -->
+
+        <div class="vocab-card" data-word="downtown">
+          <div class="word-section">
+            <div class="word-number">07</div>
+
+            <div class="word">downtown</div>
+
+            <div class="meaning">trung tâm thành phố</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              There are many shops and restaurants downtown.
+            </div>
+
+            <div class="translation">
+              Có rất nhiều cửa hàng và nhà hàng ở trung tâm thành phố.
+            </div>
+
+            <button class="speak-btn" onclick="speak('downtown')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 8 -->
+
+        <div class="vocab-card" data-word="get around">
+          <div class="word-section">
+            <div class="word-number">08</div>
+
+            <div class="word">get around</div>
+
+            <div class="meaning">đi lại; di chuyển</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              It is easy to get around the city by metro.
+            </div>
+
+            <div class="translation">
+              Việc di chuyển quanh thành phố bằng tàu điện ngầm rất dễ dàng.
+            </div>
+
+            <button class="speak-btn" onclick="speak('get around')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 9 -->
+
+        <div class="vocab-card" data-word="hang out">
+          <div class="word-section">
+            <div class="word-number">09</div>
+
+            <div class="word">hang out</div>
+
+            <div class="meaning">đi chơi; dành thời gian thư giãn</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Teenagers often hang out with their friends after school.
+            </div>
+
+            <div class="translation">
+              Thanh thiếu niên thường đi chơi với bạn bè sau giờ học.
+            </div>
+
+            <button class="speak-btn" onclick="speak('hang out')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 10 -->
+
+        <div class="vocab-card" data-word="hygiene">
+          <div class="word-section">
+            <div class="word-number">10</div>
+
+            <div class="word">hygiene</div>
+
+            <div class="meaning">vệ sinh</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Good personal hygiene is important for staying healthy.
+            </div>
+
+            <div class="translation">
+              Vệ sinh cá nhân tốt rất quan trọng để giữ gìn sức khỏe.
+            </div>
+
+            <button class="speak-btn" onclick="speak('hygiene')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 11 -->
+
+        <div class="vocab-card" data-word="itchy">
+          <div class="word-section">
+            <div class="word-number">11</div>
+
+            <div class="word">itchy</div>
+
+            <div class="meaning">ngứa; gây ngứa</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              My skin feels itchy after I use this soap.
+            </div>
+
+            <div class="translation">
+              Da tôi cảm thấy ngứa sau khi tôi sử dụng loại xà phòng này.
+            </div>
+
+            <button class="speak-btn" onclick="speak('itchy')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 12 -->
+
+        <div class="vocab-card" data-word="leftover">
+          <div class="word-section">
+            <div class="word-number">12</div>
+
+            <div class="word">leftover</div>
+
+            <div class="meaning">thức ăn thừa; phần còn lại</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              We had some leftover food from yesterday's dinner.
+            </div>
+
+            <div class="translation">
+              Chúng tôi còn một ít thức ăn thừa từ bữa tối hôm qua.
+            </div>
+
+            <button class="speak-btn" onclick="speak('leftover')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 13 -->
+
+        <div class="vocab-card" data-word="liveable">
+          <div class="word-section">
+            <div class="word-number">13</div>
+
+            <div class="word">liveable</div>
+
+            <div class="meaning">đáng sống; có thể sinh sống được</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The city is becoming more liveable thanks to its green spaces.
+            </div>
+
+            <div class="translation">
+              Thành phố đang trở nên đáng sống hơn nhờ những không gian xanh.
+            </div>
+
+            <button class="speak-btn" onclick="speak('liveable')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 14 -->
+
+        <div class="vocab-card" data-word="metro">
+          <div class="word-section">
+            <div class="word-number">14</div>
+
+            <div class="word">metro</div>
+
+            <div class="meaning">tàu điện ngầm; hệ thống tàu điện</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              I usually take the metro to work because it is fast and
+              convenient.
+            </div>
+
+            <div class="translation">
+              Tôi thường đi tàu điện ngầm đến chỗ làm vì nó nhanh và thuận tiện.
+            </div>
+
+            <button class="speak-btn" onclick="speak('metro')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 15 -->
+
+        <div class="vocab-card" data-word="pricey">
+          <div class="word-section">
+            <div class="word-number">15</div>
+
+            <div class="word">pricey</div>
+
+            <div class="meaning">đắt đỏ; khá đắt</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Restaurants in the city centre can be quite pricey.
+            </div>
+
+            <div class="translation">
+              Các nhà hàng ở trung tâm thành phố có thể khá đắt.
+            </div>
+
+            <button class="speak-btn" onclick="speak('pricey')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 16 -->
+
+        <div class="vocab-card" data-word="process">
+          <div class="word-section">
+            <div class="word-number">16</div>
+
+            <div class="word">process</div>
+
+            <div class="meaning">quá trình; quy trình</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Building a new metro line is a long and complicated process.
+            </div>
+
+            <div class="translation">
+              Xây dựng một tuyến tàu điện ngầm mới là một quá trình dài và phức
+              tạp.
+            </div>
+
+            <button class="speak-btn" onclick="speak('process')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 17 -->
+
+        <div class="vocab-card" data-word="public amenities">
+          <div class="word-section">
+            <div class="word-number">17</div>
+
+            <div class="word">public amenities</div>
+
+            <div class="meaning">tiện ích công cộng</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The city provides many public amenities, including parks and
+              libraries.
+            </div>
+
+            <div class="translation">
+              Thành phố cung cấp nhiều tiện ích công cộng, bao gồm công viên và
+              thư viện.
+            </div>
+
+            <button class="speak-btn" onclick="speak('public amenities')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 18 -->
+
+        <div class="vocab-card" data-word="rush hour">
+          <div class="word-section">
+            <div class="word-number">18</div>
+
+            <div class="word">rush hour</div>
+
+            <div class="meaning">giờ cao điểm</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The roads are extremely busy during rush hour.
+            </div>
+
+            <div class="translation">
+              Đường phố cực kỳ đông đúc vào giờ cao điểm.
+            </div>
+
+            <button class="speak-btn" onclick="speak('rush hour')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 19 -->
+
+        <div class="vocab-card" data-word="sky train">
+          <div class="word-section">
+            <div class="word-number">19</div>
+
+            <div class="word">sky train</div>
+
+            <div class="meaning">tàu điện trên cao</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The sky train is a convenient way to travel around the city.
+            </div>
+
+            <div class="translation">
+              Tàu điện trên cao là một cách thuận tiện để đi lại trong thành
+              phố.
+            </div>
+
+            <button class="speak-btn" onclick="speak('sky train')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 20 -->
+
+        <div class="vocab-card" data-word="underground">
+          <div class="word-section">
+            <div class="word-number">20</div>
+
+            <div class="word">underground</div>
+
+            <div class="meaning">tàu điện ngầm; dưới lòng đất</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Many people use the underground to avoid traffic jams.
+            </div>
+
+            <div class="translation">
+              Nhiều người sử dụng tàu điện ngầm để tránh tắc đường.
+            </div>
+
+            <button class="speak-btn" onclick="speak('underground')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- NO RESULT -->
+
+      <div class="no-result" id="noResult">😕 No vocabulary found.</div>
+
+      <!-- FOOTER -->
+
+      <div class="footer">Vocabulary Bank • Cities & Urban Life</div>
+    </div>
+
+    <script>
+      /* =========================
+       SEARCH VOCABULARY
+    ========================= */
+
+      const searchInput = document.getElementById("searchInput");
+
+      const cards = document.querySelectorAll(".vocab-card");
+
+      const noResult = document.getElementById("noResult");
+
+      searchInput.addEventListener("input", function () {
+        const keyword = this.value.toLowerCase().trim();
+
+        let visibleCount = 0;
+
+        cards.forEach((card) => {
+          const word = card.dataset.word.toLowerCase();
+
+          const content = card.innerText.toLowerCase();
+
+          if (word.includes(keyword) || content.includes(keyword)) {
+            card.style.display = "grid";
+
+            visibleCount++;
+          } else {
+            card.style.display = "none";
+          }
+        });
+
+        if (visibleCount === 0) {
+          noResult.style.display = "block";
+        } else {
+          noResult.style.display = "none";
+        }
+      });
+
+      /* =========================
+       TEXT TO SPEECH
+    ========================= */
+
+      function speak(text) {
+        if (!("speechSynthesis" in window)) {
+          alert("Your browser does not support text-to-speech.");
+
+          return;
+        }
+
+        window.speechSynthesis.cancel();
+
+        const utterance = new SpeechSynthesisUtterance(text);
+
+        utterance.lang = "en-US";
+
+        utterance.rate = 0.85;
+
+        utterance.pitch = 1;
+
+        window.speechSynthesis.speak(utterance);
+      }
+    </script>
+  </body>
+</html>
+```

@@ -1,0 +1,890 @@
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Vocabulary Bank - Culture & Heritage</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: linear-gradient(135deg, #eef2ff, #f8fafc);
+        color: #1e293b;
+        min-height: 100vh;
+        padding: 40px 20px;
+      }
+
+      .container {
+        max-width: 1100px;
+        margin: auto;
+      }
+
+      /* HEADER */
+
+      .header {
+        text-align: center;
+        margin-bottom: 35px;
+      }
+
+      .header h1 {
+        font-size: 42px;
+        color: #4338ca;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        color: #64748b;
+        font-size: 17px;
+      }
+
+      /* SEARCH */
+
+      .search-box {
+        margin-bottom: 30px;
+      }
+
+      .search-box input {
+        width: 100%;
+        padding: 17px 20px;
+        border: 2px solid #e2e8f0;
+        border-radius: 14px;
+        font-size: 16px;
+        outline: none;
+        background: white;
+        transition: 0.3s;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      .search-box input:focus {
+        border-color: #6366f1;
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
+      }
+
+      /* VOCABULARY LIST */
+
+      .vocabulary-list {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      .vocab-card {
+        background: white;
+        border-radius: 18px;
+        padding: 24px;
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        gap: 25px;
+        box-shadow: 0 8px 25px rgba(15, 23, 42, 0.07);
+        border: 1px solid #e2e8f0;
+        transition: all 0.3s ease;
+      }
+
+      .vocab-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 15px 35px rgba(79, 70, 229, 0.12);
+        border-color: #c7d2fe;
+      }
+
+      /* WORD SECTION */
+
+      .word-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-right: 1px solid #e2e8f0;
+        padding-right: 20px;
+      }
+
+      .word-number {
+        font-size: 13px;
+        color: #94a3b8;
+        margin-bottom: 5px;
+        font-weight: 600;
+      }
+
+      .word {
+        font-size: 25px;
+        font-weight: 700;
+        color: #4338ca;
+        margin-bottom: 8px;
+      }
+
+      .meaning {
+        color: #475569;
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 1.5;
+      }
+
+      /* EXAMPLE SECTION */
+
+      .example-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .example-label {
+        font-size: 12px;
+        color: #6366f1;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 7px;
+      }
+
+      .example {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #334155;
+        margin-bottom: 8px;
+      }
+
+      .translation {
+        font-size: 15px;
+        color: #64748b;
+        font-style: italic;
+        margin-bottom: 15px;
+        line-height: 1.5;
+      }
+
+      /* SPEAK BUTTON */
+
+      .speak-btn {
+        width: fit-content;
+        border: none;
+        background: #eef2ff;
+        color: #4f46e5;
+        padding: 8px 14px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        transition: 0.2s;
+      }
+
+      .speak-btn:hover {
+        background: #4f46e5;
+        color: white;
+      }
+
+      /* NO RESULT */
+
+      .no-result {
+        display: none;
+        text-align: center;
+        padding: 40px;
+        background: white;
+        border-radius: 15px;
+        color: #64748b;
+      }
+
+      /* FOOTER */
+
+      .footer {
+        text-align: center;
+        margin-top: 35px;
+        color: #94a3b8;
+        font-size: 14px;
+      }
+
+      /* MOBILE */
+
+      @media (max-width: 700px) {
+        body {
+          padding: 25px 12px;
+        }
+
+        .header h1 {
+          font-size: 30px;
+        }
+
+        .header p {
+          font-size: 15px;
+        }
+
+        .vocab-card {
+          grid-template-columns: 1fr;
+          gap: 18px;
+        }
+
+        .word-section {
+          border-right: none;
+          border-bottom: 1px solid #e2e8f0;
+          padding-right: 0;
+          padding-bottom: 18px;
+        }
+
+        .word {
+          font-size: 23px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- HEADER -->
+
+      <div class="header">
+        <h1>🏛️ Vocabulary Bank</h1>
+
+        <p>Culture, History & Heritage • English Vocabulary</p>
+      </div>
+
+      <!-- SEARCH -->
+
+      <div class="search-box">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="🔍 Search vocabulary..."
+        />
+      </div>
+
+      <!-- VOCABULARY LIST -->
+
+      <div class="vocabulary-list" id="vocabularyList">
+        <!-- 1 -->
+
+        <div class="vocab-card" data-word="ancient">
+          <div class="word-section">
+            <div class="word-number">01</div>
+
+            <div class="word">ancient</div>
+
+            <div class="meaning">cổ đại; cổ xưa</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              We visited an ancient temple during our trip.
+            </div>
+
+            <div class="translation">
+              Chúng tôi đã tham quan một ngôi đền cổ trong chuyến đi.
+            </div>
+
+            <button class="speak-btn" onclick="speak('ancient')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 2 -->
+
+        <div class="vocab-card" data-word="anniversary">
+          <div class="word-section">
+            <div class="word-number">02</div>
+
+            <div class="word">anniversary</div>
+
+            <div class="meaning">ngày kỷ niệm; lễ kỷ niệm</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              We are celebrating the 50th anniversary of the school's founding.
+            </div>
+
+            <div class="translation">
+              Chúng tôi đang kỷ niệm 50 năm ngày thành lập trường.
+            </div>
+
+            <button class="speak-btn" onclick="speak('anniversary')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 3 -->
+
+        <div class="vocab-card" data-word="barefoot">
+          <div class="word-section">
+            <div class="word-number">03</div>
+
+            <div class="word">barefoot</div>
+
+            <div class="meaning">chân trần</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">The children ran barefoot on the beach.</div>
+
+            <div class="translation">
+              Những đứa trẻ chạy chân trần trên bãi biển.
+            </div>
+
+            <button class="speak-btn" onclick="speak('barefoot')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 4 -->
+
+        <div class="vocab-card" data-word="basic">
+          <div class="word-section">
+            <div class="word-number">04</div>
+
+            <div class="word">basic</div>
+
+            <div class="meaning">cơ bản; nền tảng</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Students should learn the basic rules of grammar first.
+            </div>
+
+            <div class="translation">
+              Học sinh nên học những quy tắc ngữ pháp cơ bản trước.
+            </div>
+
+            <button class="speak-btn" onclick="speak('basic')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 5 -->
+
+        <div class="vocab-card" data-word="castle">
+          <div class="word-section">
+            <div class="word-number">05</div>
+
+            <div class="word">castle</div>
+
+            <div class="meaning">lâu đài</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The old castle attracts thousands of tourists every year.
+            </div>
+
+            <div class="translation">
+              Lâu đài cổ thu hút hàng nghìn khách du lịch mỗi năm.
+            </div>
+
+            <button class="speak-btn" onclick="speak('castle')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 6 -->
+
+        <div class="vocab-card" data-word="communal">
+          <div class="word-section">
+            <div class="word-number">06</div>
+
+            <div class="word">communal</div>
+
+            <div class="meaning">thuộc về cộng đồng; chung</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The villagers often gather in the communal house for festivals.
+            </div>
+
+            <div class="translation">
+              Người dân trong làng thường tập trung tại đình làng để tham gia
+              các lễ hội.
+            </div>
+
+            <button class="speak-btn" onclick="speak('communal')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 7 -->
+
+        <div class="vocab-card" data-word="complex">
+          <div class="word-section">
+            <div class="word-number">07</div>
+
+            <div class="word">complex</div>
+
+            <div class="meaning">phức tạp; phức hợp</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The history of this city is long and complex.
+            </div>
+
+            <div class="translation">
+              Lịch sử của thành phố này lâu đời và phức tạp.
+            </div>
+
+            <button class="speak-btn" onclick="speak('complex')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 8 -->
+
+        <div class="vocab-card" data-word="deep-rooted">
+          <div class="word-section">
+            <div class="word-number">08</div>
+
+            <div class="word">deep-rooted</div>
+
+            <div class="meaning">ăn sâu; lâu đời; có nguồn gốc sâu xa</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              This festival is a deep-rooted tradition in the local community.
+            </div>
+
+            <div class="translation">
+              Lễ hội này là một truyền thống lâu đời trong cộng đồng địa phương.
+            </div>
+
+            <button class="speak-btn" onclick="speak('deep-rooted')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 9 -->
+
+        <div class="vocab-card" data-word="face-to-face">
+          <div class="word-section">
+            <div class="word-number">09</div>
+
+            <div class="word">face-to-face</div>
+
+            <div class="meaning">trực tiếp; mặt đối mặt</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Face-to-face communication helps people understand each other
+              better.
+            </div>
+
+            <div class="translation">
+              Giao tiếp trực tiếp giúp mọi người hiểu nhau hơn.
+            </div>
+
+            <button class="speak-btn" onclick="speak('face-to-face')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 10 -->
+
+        <div class="vocab-card" data-word="fish and chips">
+          <div class="word-section">
+            <div class="word-number">10</div>
+
+            <div class="word">fish and chips</div>
+
+            <div class="meaning">cá và khoai tây chiên</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Fish and chips is one of the most famous British dishes.
+            </div>
+
+            <div class="translation">
+              Cá và khoai tây chiên là một trong những món ăn nổi tiếng nhất của
+              Anh.
+            </div>
+
+            <button class="speak-btn" onclick="speak('fish and chips')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 11 -->
+
+        <div class="vocab-card" data-word="found">
+          <div class="word-section">
+            <div class="word-number">11</div>
+
+            <div class="word">found</div>
+
+            <div class="meaning">thành lập; sáng lập</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">The university was founded in 1905.</div>
+
+            <div class="translation">
+              Trường đại học được thành lập vào năm 1905.
+            </div>
+
+            <button class="speak-btn" onclick="speak('found')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 12 -->
+
+        <div class="vocab-card" data-word="generation">
+          <div class="word-section">
+            <div class="word-number">12</div>
+
+            <div class="word">generation</div>
+
+            <div class="meaning">thế hệ</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Traditional skills are passed down from one generation to another.
+            </div>
+
+            <div class="translation">
+              Những kỹ năng truyền thống được truyền từ thế hệ này sang thế hệ
+              khác.
+            </div>
+
+            <button class="speak-btn" onclick="speak('generation')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 13 -->
+
+        <div class="vocab-card" data-word="monument">
+          <div class="word-section">
+            <div class="word-number">13</div>
+
+            <div class="word">monument</div>
+
+            <div class="meaning">tượng đài; đài tưởng niệm</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The monument was built to honour the national heroes.
+            </div>
+
+            <div class="translation">
+              Tượng đài được xây dựng để tôn vinh những vị anh hùng dân tộc.
+            </div>
+
+            <button class="speak-btn" onclick="speak('monument')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 14 -->
+
+        <div class="vocab-card" data-word="observe">
+          <div class="word-section">
+            <div class="word-number">14</div>
+
+            <div class="word">observe</div>
+
+            <div class="meaning">quan sát; tuân thủ; tổ chức kỷ niệm</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              People observe traditional customs during the festival.
+            </div>
+
+            <div class="translation">
+              Mọi người tuân theo các phong tục truyền thống trong lễ hội.
+            </div>
+
+            <button class="speak-btn" onclick="speak('observe')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 15 -->
+
+        <div class="vocab-card" data-word="occupy">
+          <div class="word-section">
+            <div class="word-number">15</div>
+
+            <div class="word">occupy</div>
+
+            <div class="meaning">chiếm; chiếm giữ</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The castle occupies a strategic position on top of the hill.
+            </div>
+
+            <div class="translation">
+              Lâu đài chiếm giữ một vị trí chiến lược trên đỉnh đồi.
+            </div>
+
+            <button class="speak-btn" onclick="speak('occupy')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 16 -->
+
+        <div class="vocab-card" data-word="promote">
+          <div class="word-section">
+            <div class="word-number">16</div>
+
+            <div class="word">promote</div>
+
+            <div class="meaning">thúc đẩy; quảng bá; khuyến khích</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The government wants to promote traditional culture.
+            </div>
+
+            <div class="translation">
+              Chính phủ muốn thúc đẩy và quảng bá văn hóa truyền thống.
+            </div>
+
+            <button class="speak-btn" onclick="speak('promote')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 17 -->
+
+        <div class="vocab-card" data-word="recognise">
+          <div class="word-section">
+            <div class="word-number">17</div>
+
+            <div class="word">recognise</div>
+
+            <div class="meaning">nhận ra; công nhận</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The city is recognised for its rich cultural heritage.
+            </div>
+
+            <div class="translation">
+              Thành phố được công nhận vì có di sản văn hóa phong phú.
+            </div>
+
+            <button class="speak-btn" onclick="speak('recognise')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 18 -->
+
+        <div class="vocab-card" data-word="religious">
+          <div class="word-section">
+            <div class="word-number">18</div>
+
+            <div class="word">religious</div>
+
+            <div class="meaning">thuộc về tôn giáo; tín ngưỡng</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The temple is an important religious site.
+            </div>
+
+            <div class="translation">
+              Ngôi đền là một địa điểm tôn giáo quan trọng.
+            </div>
+
+            <button class="speak-btn" onclick="speak('religious')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 19 -->
+
+        <div class="vocab-card" data-word="structure">
+          <div class="word-section">
+            <div class="word-number">19</div>
+
+            <div class="word">structure</div>
+
+            <div class="meaning">cấu trúc; công trình</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The ancient structure has survived for hundreds of years.
+            </div>
+
+            <div class="translation">
+              Công trình cổ này đã tồn tại hàng trăm năm.
+            </div>
+
+            <button class="speak-btn" onclick="speak('structure')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 20 -->
+
+        <div class="vocab-card" data-word="takeaway">
+          <div class="word-section">
+            <div class="word-number">20</div>
+
+            <div class="word">takeaway</div>
+
+            <div class="meaning">đồ ăn mang đi; thức ăn mua về</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              We ordered a takeaway after visiting the museum.
+            </div>
+
+            <div class="translation">
+              Chúng tôi đã gọi đồ ăn mang đi sau khi tham quan bảo tàng.
+            </div>
+
+            <button class="speak-btn" onclick="speak('takeaway')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- NO RESULT -->
+
+      <div class="no-result" id="noResult">😕 No vocabulary found.</div>
+
+      <!-- FOOTER -->
+
+      <div class="footer">Vocabulary Bank • Culture, History & Heritage</div>
+    </div>
+
+    <script>
+      /* =========================
+       SEARCH VOCABULARY
+    ========================= */
+
+      const searchInput = document.getElementById("searchInput");
+
+      const cards = document.querySelectorAll(".vocab-card");
+
+      const noResult = document.getElementById("noResult");
+
+      searchInput.addEventListener("input", function () {
+        const keyword = this.value.toLowerCase().trim();
+
+        let visibleCount = 0;
+
+        cards.forEach((card) => {
+          const word = card.dataset.word.toLowerCase();
+
+          const content = card.innerText.toLowerCase();
+
+          if (word.includes(keyword) || content.includes(keyword)) {
+            card.style.display = "grid";
+
+            visibleCount++;
+          } else {
+            card.style.display = "none";
+          }
+        });
+
+        if (visibleCount === 0) {
+          noResult.style.display = "block";
+        } else {
+          noResult.style.display = "none";
+        }
+      });
+
+      /* =========================
+       TEXT TO SPEECH
+    ========================= */
+
+      function speak(text) {
+        if (!("speechSynthesis" in window)) {
+          alert("Your browser does not support text-to-speech.");
+
+          return;
+        }
+
+        window.speechSynthesis.cancel();
+
+        const utterance = new SpeechSynthesisUtterance(text);
+
+        utterance.lang = "en-US";
+
+        utterance.rate = 0.85;
+
+        utterance.pitch = 1;
+
+        window.speechSynthesis.speak(utterance);
+      }
+    </script>
+  </body>
+</html>
+```

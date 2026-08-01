@@ -1,0 +1,999 @@
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Vocabulary Bank - Travel & Experiences</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: linear-gradient(135deg, #eef2ff, #f8fafc);
+        color: #1e293b;
+        min-height: 100vh;
+        padding: 40px 20px;
+      }
+
+      .container {
+        max-width: 1100px;
+        margin: auto;
+      }
+
+      /* HEADER */
+
+      .header {
+        text-align: center;
+        margin-bottom: 35px;
+      }
+
+      .header h1 {
+        font-size: 42px;
+        color: #4338ca;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        color: #64748b;
+        font-size: 17px;
+      }
+
+      /* SEARCH */
+
+      .search-box {
+        margin-bottom: 30px;
+      }
+
+      .search-box input {
+        width: 100%;
+        padding: 17px 20px;
+        border: 2px solid #e2e8f0;
+        border-radius: 14px;
+        font-size: 16px;
+        outline: none;
+        background: white;
+        transition: 0.3s;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      .search-box input:focus {
+        border-color: #6366f1;
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
+      }
+
+      /* VOCABULARY LIST */
+
+      .vocabulary-list {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      .vocab-card {
+        background: white;
+        border-radius: 18px;
+        padding: 24px;
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        gap: 25px;
+        box-shadow: 0 8px 25px rgba(15, 23, 42, 0.07);
+        border: 1px solid #e2e8f0;
+        transition: all 0.3s ease;
+      }
+
+      .vocab-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 15px 35px rgba(79, 70, 229, 0.12);
+        border-color: #c7d2fe;
+      }
+
+      /* WORD SECTION */
+
+      .word-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-right: 1px solid #e2e8f0;
+        padding-right: 20px;
+      }
+
+      .word-number {
+        font-size: 13px;
+        color: #94a3b8;
+        margin-bottom: 5px;
+        font-weight: 600;
+      }
+
+      .word {
+        font-size: 25px;
+        font-weight: 700;
+        color: #4338ca;
+        margin-bottom: 8px;
+      }
+
+      .meaning {
+        color: #475569;
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 1.5;
+      }
+
+      /* EXAMPLE SECTION */
+
+      .example-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .example-label {
+        font-size: 12px;
+        color: #6366f1;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 7px;
+      }
+
+      .example {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #334155;
+        margin-bottom: 8px;
+      }
+
+      .translation {
+        font-size: 15px;
+        color: #64748b;
+        font-style: italic;
+        margin-bottom: 15px;
+        line-height: 1.5;
+      }
+
+      /* SPEAK BUTTON */
+
+      .speak-btn {
+        width: fit-content;
+        border: none;
+        background: #eef2ff;
+        color: #4f46e5;
+        padding: 8px 14px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        transition: 0.2s;
+      }
+
+      .speak-btn:hover {
+        background: #4f46e5;
+        color: white;
+      }
+
+      /* NO RESULT */
+
+      .no-result {
+        display: none;
+        text-align: center;
+        padding: 40px;
+        background: white;
+        border-radius: 15px;
+        color: #64748b;
+      }
+
+      /* FOOTER */
+
+      .footer {
+        text-align: center;
+        margin-top: 35px;
+        color: #94a3b8;
+        font-size: 14px;
+      }
+
+      /* MOBILE */
+
+      @media (max-width: 700px) {
+        body {
+          padding: 25px 12px;
+        }
+
+        .header h1 {
+          font-size: 30px;
+        }
+
+        .header p {
+          font-size: 15px;
+        }
+
+        .vocab-card {
+          grid-template-columns: 1fr;
+          gap: 18px;
+        }
+
+        .word-section {
+          border-right: none;
+          border-bottom: 1px solid #e2e8f0;
+          padding-right: 0;
+          padding-bottom: 18px;
+        }
+
+        .word {
+          font-size: 23px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- HEADER -->
+
+      <div class="header">
+        <h1>🌊 Vocabulary Bank</h1>
+
+        <p>Travel, Experiences & Nature • English Vocabulary</p>
+      </div>
+
+      <!-- SEARCH -->
+
+      <div class="search-box">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="🔍 Search vocabulary..."
+        />
+      </div>
+
+      <!-- VOCABULARY LIST -->
+
+      <div class="vocabulary-list" id="vocabularyList">
+        <!-- 1 -->
+
+        <div class="vocab-card" data-word="amazing">
+          <div class="word-section">
+            <div class="word-number">01</div>
+
+            <div class="word">amazing</div>
+
+            <div class="meaning">tuyệt vời; đáng kinh ngạc</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              We had an amazing experience during our trip.
+            </div>
+
+            <div class="translation">
+              Chúng tôi đã có một trải nghiệm tuyệt vời trong chuyến đi.
+            </div>
+
+            <button class="speak-btn" onclick="speak('amazing')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 2 -->
+
+        <div class="vocab-card" data-word="army-like">
+          <div class="word-section">
+            <div class="word-number">02</div>
+
+            <div class="word">army-like</div>
+
+            <div class="meaning">giống quân đội; mang phong cách quân đội</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The performers wore army-like uniforms during the show.
+            </div>
+
+            <div class="translation">
+              Những người biểu diễn mặc đồng phục giống quân đội trong buổi biểu
+              diễn.
+            </div>
+
+            <button class="speak-btn" onclick="speak('army-like')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 3 -->
+
+        <div class="vocab-card" data-word="brilliant">
+          <div class="word-section">
+            <div class="word-number">03</div>
+
+            <div class="word">brilliant</div>
+
+            <div class="meaning">xuất sắc; tuyệt vời; rực rỡ</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The sunset over the sea was absolutely brilliant.
+            </div>
+
+            <div class="translation">
+              Hoàng hôn trên biển thực sự tuyệt đẹp.
+            </div>
+
+            <button class="speak-btn" onclick="speak('brilliant')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 4 -->
+
+        <div class="vocab-card" data-word="campus">
+          <div class="word-section">
+            <div class="word-number">04</div>
+
+            <div class="word">campus</div>
+
+            <div class="meaning">khuôn viên trường đại học hoặc trường học</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The university campus is surrounded by beautiful trees.
+            </div>
+
+            <div class="translation">
+              Khuôn viên trường đại học được bao quanh bởi những hàng cây đẹp.
+            </div>
+
+            <button class="speak-btn" onclick="speak('campus')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 5 -->
+
+        <div class="vocab-card" data-word="confidence">
+          <div class="word-section">
+            <div class="word-number">05</div>
+
+            <div class="word">confidence</div>
+
+            <div class="meaning">sự tự tin; lòng tin</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Travelling alone helped her gain more confidence.
+            </div>
+
+            <div class="translation">
+              Đi du lịch một mình giúp cô ấy trở nên tự tin hơn.
+            </div>
+
+            <button class="speak-btn" onclick="speak('confidence')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 6 -->
+
+        <div class="vocab-card" data-word="coral reef">
+          <div class="word-section">
+            <div class="word-number">06</div>
+
+            <div class="word">coral reef</div>
+
+            <div class="meaning">rạn san hô</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              We saw colourful fish swimming around the coral reef.
+            </div>
+
+            <div class="translation">
+              Chúng tôi nhìn thấy những con cá đầy màu sắc bơi quanh rạn san hô.
+            </div>
+
+            <button class="speak-btn" onclick="speak('coral reef')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 7 -->
+
+        <div class="vocab-card" data-word="eco-tour">
+          <div class="word-section">
+            <div class="word-number">07</div>
+
+            <div class="word">eco-tour</div>
+
+            <div class="meaning">chuyến du lịch sinh thái</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              We joined an eco-tour to learn about the local wildlife.
+            </div>
+
+            <div class="translation">
+              Chúng tôi tham gia một chuyến du lịch sinh thái để tìm hiểu về
+              động vật hoang dã địa phương.
+            </div>
+
+            <button class="speak-btn" onclick="speak('eco-tour')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 8 -->
+
+        <div class="vocab-card" data-word="embarrassing">
+          <div class="word-section">
+            <div class="word-number">08</div>
+
+            <div class="word">embarrassing</div>
+
+            <div class="meaning">xấu hổ; đáng ngượng</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              It was embarrassing when I forgot the performer's name.
+            </div>
+
+            <div class="translation">
+              Thật xấu hổ khi tôi quên tên của người biểu diễn.
+            </div>
+
+            <button class="speak-btn" onclick="speak('embarrassing')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 9 -->
+
+        <div class="vocab-card" data-word="exhilarating">
+          <div class="word-section">
+            <div class="word-number">09</div>
+
+            <div class="word">exhilarating</div>
+
+            <div class="meaning">phấn khích; kích thích; đầy hứng khởi</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">Skydiving was an exhilarating experience.</div>
+
+            <div class="translation">
+              Nhảy dù là một trải nghiệm vô cùng phấn khích.
+            </div>
+
+            <button class="speak-btn" onclick="speak('exhilarating')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 10 -->
+
+        <div class="vocab-card" data-word="experience">
+          <div class="word-section">
+            <div class="word-number">10</div>
+
+            <div class="word">experience</div>
+
+            <div class="meaning">trải nghiệm; kinh nghiệm</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Travelling abroad can be a valuable experience.
+            </div>
+
+            <div class="translation">
+              Đi du lịch nước ngoài có thể là một trải nghiệm quý giá.
+            </div>
+
+            <button class="speak-btn" onclick="speak('experience')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 11 -->
+
+        <div class="vocab-card" data-word="explore">
+          <div class="word-section">
+            <div class="word-number">11</div>
+
+            <div class="word">explore</div>
+
+            <div class="meaning">khám phá; thám hiểm</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              We spent the afternoon exploring the island.
+            </div>
+
+            <div class="translation">
+              Chúng tôi dành cả buổi chiều khám phá hòn đảo.
+            </div>
+
+            <button class="speak-btn" onclick="speak('explore')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 12 -->
+
+        <div class="vocab-card" data-word="fauna">
+          <div class="word-section">
+            <div class="word-number">12</div>
+
+            <div class="word">fauna</div>
+
+            <div class="meaning">hệ động vật; động vật của một khu vực</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The national park is famous for its rich fauna.
+            </div>
+
+            <div class="translation">
+              Vườn quốc gia nổi tiếng với hệ động vật phong phú.
+            </div>
+
+            <button class="speak-btn" onclick="speak('fauna')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 13 -->
+
+        <div class="vocab-card" data-word="flora">
+          <div class="word-section">
+            <div class="word-number">13</div>
+
+            <div class="word">flora</div>
+
+            <div class="meaning">hệ thực vật; thực vật của một khu vực</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">The island has a unique variety of flora.</div>
+
+            <div class="translation">
+              Hòn đảo có một hệ thực vật đa dạng và độc đáo.
+            </div>
+
+            <button class="speak-btn" onclick="speak('flora')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 14 -->
+
+        <div class="vocab-card" data-word="lack">
+          <div class="word-section">
+            <div class="word-number">14</div>
+
+            <div class="word">lack</div>
+
+            <div class="meaning">thiếu; sự thiếu hụt</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The lack of clean water is a serious problem.
+            </div>
+
+            <div class="translation">
+              Việc thiếu nước sạch là một vấn đề nghiêm trọng.
+            </div>
+
+            <button class="speak-btn" onclick="speak('lack')">🔊 Listen</button>
+          </div>
+        </div>
+
+        <!-- 15 -->
+
+        <div class="vocab-card" data-word="learn by rote">
+          <div class="word-section">
+            <div class="word-number">15</div>
+
+            <div class="word">learn by rote</div>
+
+            <div class="meaning">học thuộc lòng; học vẹt</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Students should understand the lesson instead of learning
+              everything by rote.
+            </div>
+
+            <div class="translation">
+              Học sinh nên hiểu bài thay vì học thuộc lòng mọi thứ.
+            </div>
+
+            <button class="speak-btn" onclick="speak('learn by rote')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 16 -->
+
+        <div class="vocab-card" data-word="memorable">
+          <div class="word-section">
+            <div class="word-number">16</div>
+
+            <div class="word">memorable</div>
+
+            <div class="meaning">đáng nhớ</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Our trip to the mountains was a memorable experience.
+            </div>
+
+            <div class="translation">
+              Chuyến đi đến vùng núi của chúng tôi là một trải nghiệm đáng nhớ.
+            </div>
+
+            <button class="speak-btn" onclick="speak('memorable')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 17 -->
+
+        <div class="vocab-card" data-word="performance">
+          <div class="word-section">
+            <div class="word-number">17</div>
+
+            <div class="word">performance</div>
+
+            <div class="meaning">
+              màn trình diễn; buổi biểu diễn; sự thể hiện
+            </div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The traditional dance performance attracted many tourists.
+            </div>
+
+            <div class="translation">
+              Màn trình diễn múa truyền thống thu hút rất nhiều khách du lịch.
+            </div>
+
+            <button class="speak-btn" onclick="speak('performance')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 18 -->
+
+        <div class="vocab-card" data-word="seabed">
+          <div class="word-section">
+            <div class="word-number">18</div>
+
+            <div class="word">seabed</div>
+
+            <div class="meaning">đáy biển</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Divers explored the seabed near the coral reef.
+            </div>
+
+            <div class="translation">
+              Những người lặn biển khám phá đáy biển gần rạn san hô.
+            </div>
+
+            <button class="speak-btn" onclick="speak('seabed')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 19 -->
+
+        <div class="vocab-card" data-word="snorkelling">
+          <div class="word-section">
+            <div class="word-number">19</div>
+
+            <div class="word">snorkelling</div>
+
+            <div class="meaning">hoạt động lặn với ống thở</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Snorkelling is a popular activity on this island.
+            </div>
+
+            <div class="translation">
+              Lặn với ống thở là một hoạt động phổ biến trên hòn đảo này.
+            </div>
+
+            <button class="speak-btn" onclick="speak('snorkelling')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 20 -->
+
+        <div class="vocab-card" data-word="theme">
+          <div class="word-section">
+            <div class="word-number">20</div>
+
+            <div class="word">theme</div>
+
+            <div class="meaning">chủ đề; đề tài</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The theme of the festival was traditional culture.
+            </div>
+
+            <div class="translation">
+              Chủ đề của lễ hội là văn hóa truyền thống.
+            </div>
+
+            <button class="speak-btn" onclick="speak('theme')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 21 -->
+
+        <div class="vocab-card" data-word="thrilling">
+          <div class="word-section">
+            <div class="word-number">21</div>
+
+            <div class="word">thrilling</div>
+
+            <div class="meaning">ly kỳ; hồi hộp; cực kỳ thú vị</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">The roller-coaster ride was thrilling.</div>
+
+            <div class="translation">
+              Chuyến đi tàu lượn siêu tốc thật ly kỳ và phấn khích.
+            </div>
+
+            <button class="speak-btn" onclick="speak('thrilling')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 22 -->
+
+        <div class="vocab-card" data-word="touching">
+          <div class="word-section">
+            <div class="word-number">22</div>
+
+            <div class="word">touching</div>
+
+            <div class="meaning">cảm động; gây xúc động</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The touching story made everyone in the audience emotional.
+            </div>
+
+            <div class="translation">
+              Câu chuyện cảm động khiến mọi người trong khán giả xúc động.
+            </div>
+
+            <button class="speak-btn" onclick="speak('touching')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 23 -->
+
+        <div class="vocab-card" data-word="tribal dance">
+          <div class="word-section">
+            <div class="word-number">23</div>
+
+            <div class="word">tribal dance</div>
+
+            <div class="meaning">điệu múa bộ lạc</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Visitors enjoyed watching a traditional tribal dance.
+            </div>
+
+            <div class="translation">
+              Du khách thích thú khi xem một điệu múa bộ lạc truyền thống.
+            </div>
+
+            <button class="speak-btn" onclick="speak('tribal dance')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 24 -->
+
+        <div class="vocab-card" data-word="unpleasant">
+          <div class="word-section">
+            <div class="word-number">24</div>
+
+            <div class="word">unpleasant</div>
+
+            <div class="meaning">khó chịu; không dễ chịu; không vui</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The unpleasant weather made our trip less enjoyable.
+            </div>
+
+            <div class="translation">
+              Thời tiết khó chịu khiến chuyến đi của chúng tôi kém thú vị hơn.
+            </div>
+
+            <button class="speak-btn" onclick="speak('unpleasant')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- NO RESULT -->
+
+      <div class="no-result" id="noResult">😕 No vocabulary found.</div>
+
+      <!-- FOOTER -->
+
+      <div class="footer">Vocabulary Bank • Travel, Experiences & Nature</div>
+    </div>
+
+    <script>
+      /* =========================
+       SEARCH VOCABULARY
+    ========================= */
+
+      const searchInput = document.getElementById("searchInput");
+
+      const cards = document.querySelectorAll(".vocab-card");
+
+      const noResult = document.getElementById("noResult");
+
+      searchInput.addEventListener("input", function () {
+        const keyword = this.value.toLowerCase().trim();
+
+        let visibleCount = 0;
+
+        cards.forEach((card) => {
+          const word = card.dataset.word.toLowerCase();
+
+          const content = card.innerText.toLowerCase();
+
+          if (word.includes(keyword) || content.includes(keyword)) {
+            card.style.display = "grid";
+
+            visibleCount++;
+          } else {
+            card.style.display = "none";
+          }
+        });
+
+        if (visibleCount === 0) {
+          noResult.style.display = "block";
+        } else {
+          noResult.style.display = "none";
+        }
+      });
+
+      /* =========================
+       TEXT TO SPEECH
+    ========================= */
+
+      function speak(text) {
+        if (!("speechSynthesis" in window)) {
+          alert("Your browser does not support text-to-speech.");
+
+          return;
+        }
+
+        window.speechSynthesis.cancel();
+
+        const utterance = new SpeechSynthesisUtterance(text);
+
+        utterance.lang = "en-US";
+
+        utterance.rate = 0.85;
+
+        utterance.pitch = 1;
+
+        window.speechSynthesis.speak(utterance);
+      }
+    </script>
+  </body>
+</html>
+```

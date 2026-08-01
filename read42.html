@@ -1,0 +1,817 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Reading 42 - The Benefits and Challenges of Self-Studying</title>
+
+    <style>
+      :root {
+        --bg: #f5f7fb;
+        --card: #ffffff;
+        --text: #1f2937;
+        --muted: #6b7280;
+        --primary: #6366f1;
+        --primary2: #8b5cf6;
+        --correct: #16a34a;
+        --wrong: #dc2626;
+        --border: #e5e7eb;
+        --shadow: 0 12px 35px rgba(31, 41, 55, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.7;
+      }
+
+      /* HEADER */
+
+      header {
+        background: linear-gradient(135deg, var(--primary), var(--primary2));
+        color: white;
+        padding: 42px 20px 75px;
+        text-align: center;
+      }
+
+      header h1 {
+        margin: 0 0 8px;
+        font-size: clamp(25px, 4vw, 40px);
+      }
+
+      header p {
+        margin: 0;
+        opacity: 0.92;
+        font-size: 16px;
+      }
+
+      /* MAIN */
+
+      .container {
+        max-width: 1050px;
+        margin: -38px auto 50px;
+        padding: 0 18px;
+      }
+
+      .card {
+        background: var(--card);
+        border-radius: 22px;
+        box-shadow: var(--shadow);
+        padding: 28px;
+        margin-bottom: 22px;
+        border: 1px solid rgba(229, 231, 235, 0.7);
+      }
+
+      /* BADGES */
+
+      .info {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 18px;
+      }
+
+      .badge {
+        background: #eef2ff;
+        color: #4f46e5;
+        padding: 7px 13px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      /* TITLES */
+
+      h2 {
+        font-size: 22px;
+        margin-top: 0;
+        color: #312e81;
+      }
+
+      h3 {
+        font-size: 19px;
+        margin: 0 0 12px;
+      }
+
+      /* READING */
+
+      .reading-text {
+        background: #fafafa;
+        border-left: 5px solid var(--primary);
+        padding: 20px 22px;
+        border-radius: 12px;
+      }
+
+      /* QUESTIONS */
+
+      .question {
+        padding: 22px 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .question:last-child {
+        border-bottom: none;
+      }
+
+      .question-number {
+        font-weight: 800;
+        color: #4f46e5;
+        margin-bottom: 12px;
+      }
+
+      /* OPTIONS */
+
+      .options {
+        display: grid;
+        gap: 10px;
+      }
+
+      .option {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        border: 1.5px solid var(--border);
+        padding: 12px 15px;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: 0.2s;
+        background: white;
+      }
+
+      .option:hover {
+        border-color: #a5b4fc;
+        background: #f8f7ff;
+      }
+
+      .option input {
+        margin-top: 6px;
+        accent-color: var(--primary);
+      }
+
+      .option.correct {
+        border-color: #86efac;
+        background: #f0fdf4;
+        color: #166534;
+      }
+
+      .option.wrong {
+        border-color: #fca5a5;
+        background: #fef2f2;
+        color: #991b1b;
+      }
+
+      .option.disabled {
+        cursor: default;
+      }
+
+      /* FEEDBACK */
+
+      .feedback {
+        margin-top: 12px;
+        padding: 13px 15px;
+        border-radius: 11px;
+        font-size: 14px;
+        display: none;
+      }
+
+      .feedback.show {
+        display: block;
+      }
+
+      .feedback.correct {
+        background: #f0fdf4;
+        color: #166534;
+        border: 1px solid #bbf7d0;
+      }
+
+      .feedback.wrong {
+        background: #fef2f2;
+        color: #991b1b;
+        border: 1px solid #fecaca;
+      }
+
+      .explanation {
+        margin-top: 6px;
+      }
+
+      /* RESULT */
+
+      .result {
+        display: none;
+        text-align: center;
+        padding: 25px;
+        border-radius: 18px;
+        background: linear-gradient(135deg, #eef2ff, #f5f3ff);
+        margin-top: 22px;
+      }
+
+      .result.show {
+        display: block;
+      }
+
+      .score {
+        font-size: 34px;
+        font-weight: 900;
+        color: #4f46e5;
+      }
+
+      /* BUTTON */
+
+      button {
+        border: none;
+        border-radius: 12px;
+        padding: 13px 22px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        background: linear-gradient(135deg, var(--primary), var(--primary2));
+        color: white;
+        box-shadow: 0 7px 18px rgba(99, 102, 241, 0.25);
+        margin: 5px;
+      }
+
+      button.secondary {
+        background: #e5e7eb;
+        color: #374151;
+        box-shadow: none;
+      }
+
+      /* PROGRESS */
+
+      .progress-wrap {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: rgba(255, 255, 255, 0.94);
+        backdrop-filter: blur(10px);
+        padding: 12px 20px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .progress-inner {
+        max-width: 1050px;
+        margin: auto;
+      }
+
+      .progress-top {
+        display: flex;
+        justify-content: space-between;
+        font-size: 13px;
+        font-weight: 700;
+        margin-bottom: 6px;
+      }
+
+      .progress {
+        height: 8px;
+        background: #e5e7eb;
+        border-radius: 99px;
+        overflow: hidden;
+      }
+
+      .progress-bar {
+        height: 100%;
+        width: 0;
+        background: linear-gradient(90deg, var(--primary), var(--primary2));
+        transition: 0.3s;
+      }
+
+      /* FOOTER */
+
+      footer {
+        text-align: center;
+        color: var(--muted);
+        padding: 10px 20px 35px;
+        font-size: 13px;
+      }
+
+      /* MOBILE */
+
+      @media (max-width: 600px) {
+        .card {
+          padding: 20px 16px;
+          border-radius: 17px;
+        }
+
+        header {
+          padding-top: 32px;
+        }
+
+        .reading-text {
+          padding: 16px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- HEADER -->
+
+    <header>
+      <h1>Reading 42</h1>
+
+      <p>The Benefits and Challenges of Self-Studying</p>
+
+      <p>C1–C2 Level • 10 Questions</p>
+    </header>
+
+    <!-- PROGRESS BAR -->
+
+    <div class="progress-wrap">
+      <div class="progress-inner">
+        <div class="progress-top">
+          <span> Tiến độ làm bài </span>
+
+          <span id="progressText"> 0/10 </span>
+        </div>
+
+        <div class="progress">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+      </div>
+    </div>
+
+    <main class="container">
+      <!-- PASSAGE -->
+
+      <section class="card">
+        <div class="info">
+          <span class="badge"> C1–C2 </span>
+
+          <span class="badge"> Reading Comprehension </span>
+
+          <span class="badge"> ~250 words </span>
+        </div>
+
+        <h2>📖 Passage</h2>
+
+        <div class="reading-text">
+          Self-studying has become increasingly popular in recent years, largely
+          due to the abundance of educational resources available online. Unlike
+          traditional classroom learning, self-study allows individuals to
+          determine their own pace, schedule, and learning methods. This
+          flexibility can be particularly advantageous for people who wish to
+          acquire new skills, prepare for examinations, or explore subjects
+          beyond the scope of formal education. As a result, self-directed
+          learning has emerged as an important component of lifelong education.
+
+          <br /><br />
+
+          One of the primary advantages of self-studying is the development of
+          independence. Learners must take responsibility for setting goals,
+          locating reliable materials, and monitoring their own progress. These
+          habits can foster discipline, critical thinking, and problem-solving
+          skills. Furthermore, self-study enables individuals to focus on areas
+          where they require the most improvement rather than following a
+          standardized curriculum designed for a large group of students.
+
+          <br /><br />
+
+          Despite its benefits, self-studying also presents several challenges.
+          Without external supervision, learners may struggle to maintain
+          motivation or manage their time effectively. The vast amount of
+          information available online can also be overwhelming, making it
+          difficult to distinguish credible sources from unreliable ones.
+          Consequently, successful self-study requires not only curiosity and
+          determination but also the ability to evaluate information critically.
+          Ultimately, while self-studying offers considerable freedom, its
+          effectiveness depends largely on the learner's commitment and
+          self-discipline.
+        </div>
+      </section>
+
+      <!-- QUIZ -->
+
+      <section class="card">
+        <h2>📝 Questions</h2>
+
+        <div id="quiz"></div>
+
+        <!-- RESULT -->
+
+        <div id="result" class="result">
+          <div>🎉 Kết quả của bạn</div>
+
+          <div class="score" id="score"></div>
+
+          <p id="message"></p>
+
+          <button onclick="resetQuiz()">Làm lại bài</button>
+
+          <button
+            class="secondary"
+            onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+          >
+            Về đầu trang
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      Reading Practice • C1–C2 • The Benefits and Challenges of Self-Studying
+    </footer>
+
+    <script>
+      const questions = [
+        {
+          q: "What is the main purpose of the passage?",
+
+          options: [
+            "To discuss both the advantages and challenges of self-studying.",
+            "To argue that self-study is superior to classroom learning.",
+            "To explain how online education works.",
+            "To criticize traditional schools.",
+          ],
+
+          answer: 0,
+
+          explanation:
+            "Bài đọc trình bày cả hai mặt của việc tự học: những lợi ích như tính linh hoạt, sự độc lập và kỷ luật, đồng thời đề cập đến các khó khăn như thiếu động lực, quản lý thời gian và đánh giá nguồn thông tin.",
+        },
+
+        {
+          q: 'The word "abundance" in paragraph 1 is closest in meaning to:',
+
+          options: ["shortage", "variety", "large quantity", "quality"],
+
+          answer: 2,
+
+          explanation:
+            '"Abundance" có nghĩa là sự dồi dào hoặc số lượng rất lớn. Trong ngữ cảnh "the abundance of educational resources", từ này chỉ số lượng tài liệu giáo dục rất phong phú và dồi dào.',
+        },
+
+        {
+          q: "According to the passage, self-study is attractive because it:",
+
+          options: [
+            "guarantees academic success.",
+            "allows learners to control their learning process.",
+            "eliminates the need for effort.",
+            "is always cheaper than formal education.",
+          ],
+
+          answer: 1,
+
+          explanation:
+            "Đoạn văn cho biết tự học cho phép người học tự quyết định tốc độ, lịch trình và phương pháp học. Vì vậy, người học có thể chủ động kiểm soát quá trình học tập của mình.",
+        },
+
+        {
+          q: 'The word "advantageous" in paragraph 1 most nearly means:',
+
+          options: ["beneficial", "difficult", "unusual", "temporary"],
+
+          answer: 0,
+
+          explanation:
+            '"Advantageous" có nghĩa là có lợi hoặc mang lại lợi ích. Từ gần nghĩa nhất là "beneficial".',
+        },
+
+        {
+          q: "Which of the following is mentioned as a benefit of self-studying?",
+
+          options: [
+            "Reduced responsibility.",
+            "Improved independence and discipline.",
+            "Constant supervision.",
+            "Easier examinations.",
+          ],
+
+          answer: 1,
+
+          explanation:
+            "Đoạn văn nói rằng tự học giúp phát triển tính độc lập và có thể hình thành tính kỷ luật, tư duy phản biện và kỹ năng giải quyết vấn đề.",
+        },
+
+        {
+          q: "Which of the following can be inferred from the passage?",
+
+          options: [
+            "Self-study may not be suitable for individuals who lack self-motivation.",
+            "Traditional education is becoming obsolete.",
+            "Online information is generally reliable.",
+            "Self-study requires little planning.",
+          ],
+
+          answer: 0,
+
+          explanation:
+            "Có thể suy ra rằng những người thiếu khả năng tự tạo động lực có thể gặp khó khăn khi tự học, vì đoạn văn nhấn mạnh rằng người học phải tự duy trì động lực, quản lý thời gian và có tính cam kết.",
+        },
+
+        {
+          q: 'The word "credible" in paragraph 3 is closest in meaning to:',
+
+          options: ["popular", "accessible", "trustworthy", "detailed"],
+
+          answer: 2,
+
+          explanation:
+            '"Credible" có nghĩa là đáng tin cậy hoặc có thể được tin tưởng. Vì vậy, đáp án gần nghĩa nhất là "trustworthy".',
+        },
+
+        {
+          q: "Why does the author mention the large amount of online information?",
+
+          options: [
+            "To demonstrate the growth of the internet.",
+            "To explain a challenge faced by self-learners.",
+            "To encourage people to study online.",
+            "To compare books and websites.",
+          ],
+
+          answer: 1,
+
+          explanation:
+            "Tác giả đề cập đến lượng thông tin khổng lồ trên mạng để chỉ ra một khó khăn của người tự học: họ có thể bị quá tải và khó phân biệt nguồn đáng tin cậy với nguồn không đáng tin.",
+        },
+
+        {
+          q: "Which statement would the author most likely agree with?",
+
+          options: [
+            "Self-study is effective only for highly intelligent people.",
+            "Motivation and critical thinking are important for successful self-study.",
+            "Learners should avoid online resources.",
+            "Classroom learning is unnecessary.",
+          ],
+
+          answer: 1,
+
+          explanation:
+            "Tác giả cho rằng tự học hiệu quả đòi hỏi sự tò mò, quyết tâm, khả năng đánh giá thông tin một cách có tư duy phản biện và tính kỷ luật. Vì vậy, động lực và tư duy phản biện là rất quan trọng.",
+        },
+
+        {
+          q: "Which of the following best summarizes the passage?",
+
+          options: [
+            "Self-studying provides flexibility and encourages independence, but it also requires motivation and the ability to evaluate information effectively.",
+            "Online learning is replacing all traditional education.",
+            "Self-study is mainly useful for exam preparation.",
+            "The internet has eliminated the challenges of learning.",
+          ],
+
+          answer: 0,
+
+          explanation:
+            "Đây là phần tóm tắt đầy đủ nhất: tự học mang lại sự linh hoạt và thúc đẩy tính độc lập, nhưng đồng thời đòi hỏi người học phải có động lực, tính kỷ luật và khả năng đánh giá thông tin một cách hiệu quả.",
+        },
+      ];
+
+      const quiz = document.getElementById("quiz");
+
+      let answered = 0;
+
+      let score = 0;
+
+      /* HIỂN THỊ CÂU HỎI */
+
+      function renderQuiz() {
+        quiz.innerHTML = "";
+
+        questions.forEach((item, index) => {
+          const box = document.createElement("div");
+
+          box.className = "question";
+
+          box.innerHTML = `
+
+        <div class="question-number">
+
+          Question ${index + 1}
+
+        </div>
+
+
+        <h3>
+
+          ${item.q}
+
+        </h3>
+
+
+        <div class="options">
+
+          ${item.options
+            .map(
+              (option, i) => `
+
+              <label
+                class="option"
+                data-index="${i}"
+              >
+
+                <input
+                  type="radio"
+                  name="q${index}"
+                  value="${i}"
+                >
+
+                <span>
+
+                  <strong>
+                    ${String.fromCharCode(65 + i)}.
+                  </strong>
+
+                  ${option}
+
+                </span>
+
+              </label>
+
+            `,
+            )
+            .join("")}
+
+        </div>
+
+
+        <div
+          class="feedback"
+          id="feedback${index}"
+        ></div>
+
+      `;
+
+          quiz.appendChild(box);
+
+          box.querySelectorAll("input").forEach((input) => {
+            input.addEventListener("change", () => {
+              checkAnswer(index, Number(input.value), box);
+            });
+          });
+        });
+      }
+
+      /* KIỂM TRA ĐÁP ÁN */
+
+      function checkAnswer(index, selected, box) {
+        const inputs = box.querySelectorAll("input");
+
+        const options = box.querySelectorAll(".option");
+
+        const feedback = document.getElementById(`feedback${index}`);
+
+        /* Không cho chọn lại */
+
+        if (box.dataset.answered === "true") {
+          return;
+        }
+
+        box.dataset.answered = "true";
+
+        answered++;
+
+        inputs.forEach((input) => {
+          input.disabled = true;
+        });
+
+        options.forEach((option) => {
+          option.classList.add("disabled");
+        });
+
+        /* ĐÚNG */
+
+        if (selected === questions[index].answer) {
+          score++;
+
+          options[selected].classList.add("correct");
+
+          feedback.className = "feedback correct show";
+
+          feedback.innerHTML = `
+
+      <strong>
+        ✓ Chính xác!
+      </strong>
+
+      <div class="explanation">
+
+        ${questions[index].explanation}
+
+      </div>
+
+    `;
+        } else {
+
+        /* SAI */
+          options[selected].classList.add("wrong");
+
+          options[questions[index].answer].classList.add("correct");
+
+          feedback.className = "feedback wrong show";
+
+          feedback.innerHTML = `
+
+      <strong>
+        ✗ Chưa chính xác!
+      </strong>
+
+      <div>
+
+        Đáp án đúng:
+
+        <strong>
+
+          ${String.fromCharCode(65 + questions[index].answer)}.
+
+          ${questions[index].options[questions[index].answer]}
+
+        </strong>
+
+      </div>
+
+
+      <div class="explanation">
+
+        ${questions[index].explanation}
+
+      </div>
+
+    `;
+        }
+
+        updateProgress();
+
+        /* HOÀN THÀNH */
+
+        if (answered === questions.length) {
+          setTimeout(showResult, 500);
+        }
+      }
+
+      /* CẬP NHẬT TIẾN ĐỘ */
+
+      function updateProgress() {
+        document.getElementById("progressText").textContent =
+          `${answered}/${questions.length}`;
+
+        document.getElementById("progressBar").style.width = `${
+          (answered / questions.length) * 100
+        }%`;
+      }
+
+      /* HIỆN KẾT QUẢ */
+
+      function showResult() {
+        const result = document.getElementById("result");
+
+        document.getElementById("score").textContent = `${score}/10`;
+
+        let message = "";
+
+        if (score === 10) {
+          message = "🏆 Xuất sắc! Bạn đã đạt điểm tuyệt đối.";
+        } else if (score >= 8) {
+          message = "🌟 Rất tốt! Khả năng đọc hiểu C1–C2 của bạn rất ổn.";
+        } else if (score >= 6) {
+          message = "👍 Khá tốt! Hãy xem lại phần giải thích của các câu sai.";
+        } else {
+          message =
+            "📚 Bạn nên đọc lại bài đọc, ôn từ vựng và xem kỹ phần giải thích trước khi làm lại.";
+        }
+
+        document.getElementById("message").textContent = message;
+
+        result.classList.add("show");
+
+        result.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }
+
+      /* LÀM LẠI */
+
+      function resetQuiz() {
+        answered = 0;
+
+        score = 0;
+
+        document.getElementById("result").classList.remove("show");
+
+        updateProgress();
+
+        renderQuiz();
+
+        window.scrollTo({
+          top: 0,
+
+          behavior: "smooth",
+        });
+      }
+
+      /* CHẠY QUIZ */
+
+      renderQuiz();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,919 @@
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Vocabulary Bank - Family & Lifestyle</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: linear-gradient(135deg, #eef2ff, #f8fafc);
+        color: #1e293b;
+        min-height: 100vh;
+        padding: 40px 20px;
+      }
+
+      .container {
+        max-width: 1100px;
+        margin: auto;
+      }
+
+      /* HEADER */
+
+      .header {
+        text-align: center;
+        margin-bottom: 35px;
+      }
+
+      .header h1 {
+        font-size: 42px;
+        color: #4338ca;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        color: #64748b;
+        font-size: 17px;
+      }
+
+      /* SEARCH */
+
+      .search-box {
+        margin-bottom: 30px;
+      }
+
+      .search-box input {
+        width: 100%;
+        padding: 17px 20px;
+        border: 2px solid #e2e8f0;
+        border-radius: 14px;
+        font-size: 16px;
+        outline: none;
+        background: white;
+        transition: 0.3s;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      .search-box input:focus {
+        border-color: #6366f1;
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
+      }
+
+      /* VOCABULARY LIST */
+
+      .vocabulary-list {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      .vocab-card {
+        background: white;
+        border-radius: 18px;
+        padding: 24px;
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        gap: 25px;
+        box-shadow: 0 8px 25px rgba(15, 23, 42, 0.07);
+        border: 1px solid #e2e8f0;
+        transition: all 0.3s ease;
+      }
+
+      .vocab-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 15px 35px rgba(79, 70, 229, 0.12);
+        border-color: #c7d2fe;
+      }
+
+      /* WORD SECTION */
+
+      .word-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-right: 1px solid #e2e8f0;
+        padding-right: 20px;
+      }
+
+      .word-number {
+        font-size: 13px;
+        color: #94a3b8;
+        margin-bottom: 5px;
+        font-weight: 600;
+      }
+
+      .word {
+        font-size: 25px;
+        font-weight: 700;
+        color: #4338ca;
+        margin-bottom: 8px;
+      }
+
+      .meaning {
+        color: #475569;
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 1.5;
+      }
+
+      /* EXAMPLE SECTION */
+
+      .example-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .example-label {
+        font-size: 12px;
+        color: #6366f1;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 7px;
+      }
+
+      .example {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #334155;
+        margin-bottom: 8px;
+      }
+
+      .translation {
+        font-size: 15px;
+        color: #64748b;
+        font-style: italic;
+        margin-bottom: 15px;
+        line-height: 1.5;
+      }
+
+      /* SPEAK BUTTON */
+
+      .speak-btn {
+        width: fit-content;
+        border: none;
+        background: #eef2ff;
+        color: #4f46e5;
+        padding: 8px 14px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        transition: 0.2s;
+      }
+
+      .speak-btn:hover {
+        background: #4f46e5;
+        color: white;
+      }
+
+      /* NO RESULT */
+
+      .no-result {
+        display: none;
+        text-align: center;
+        padding: 40px;
+        background: white;
+        border-radius: 15px;
+        color: #64748b;
+      }
+
+      /* FOOTER */
+
+      .footer {
+        text-align: center;
+        margin-top: 35px;
+        color: #94a3b8;
+        font-size: 14px;
+      }
+
+      /* MOBILE */
+
+      @media (max-width: 700px) {
+        body {
+          padding: 25px 12px;
+        }
+
+        .header h1 {
+          font-size: 30px;
+        }
+
+        .header p {
+          font-size: 15px;
+        }
+
+        .vocab-card {
+          grid-template-columns: 1fr;
+          gap: 18px;
+        }
+
+        .word-section {
+          border-right: none;
+          border-bottom: 1px solid #e2e8f0;
+          padding-right: 0;
+          padding-bottom: 18px;
+        }
+
+        .word {
+          font-size: 23px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- HEADER -->
+
+      <div class="header">
+        <h1>👨‍👩‍👧‍👦 Vocabulary Bank</h1>
+
+        <p>Family, Lifestyle & Society • English Vocabulary</p>
+      </div>
+
+      <!-- SEARCH -->
+
+      <div class="search-box">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="🔍 Search vocabulary..."
+        />
+      </div>
+
+      <!-- VOCABULARY LIST -->
+
+      <div class="vocabulary-list" id="vocabularyList">
+        <!-- 1 -->
+
+        <div class="vocab-card" data-word="democratic">
+          <div class="word-section">
+            <div class="word-number">01</div>
+
+            <div class="word">democratic</div>
+
+            <div class="meaning">thuộc về dân chủ; dân chủ</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The country is working towards a more democratic society.
+            </div>
+
+            <div class="translation">
+              Đất nước đang hướng tới một xã hội dân chủ hơn.
+            </div>
+
+            <button class="speak-btn" onclick="speak('democratic')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 2 -->
+
+        <div class="vocab-card" data-word="dependent">
+          <div class="word-section">
+            <div class="word-number">02</div>
+
+            <div class="word">dependent</div>
+
+            <div class="meaning">phụ thuộc; lệ thuộc</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Young children are dependent on their parents for support.
+            </div>
+
+            <div class="translation">
+              Trẻ nhỏ phụ thuộc vào cha mẹ để được hỗ trợ.
+            </div>
+
+            <button class="speak-btn" onclick="speak('dependent')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 3 -->
+
+        <div class="vocab-card" data-word="dye">
+          <div class="word-section">
+            <div class="word-number">03</div>
+
+            <div class="word">dye</div>
+
+            <div class="meaning">nhuộm; thuốc nhuộm</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              She decided to dye her hair a different colour.
+            </div>
+
+            <div class="translation">
+              Cô ấy quyết định nhuộm tóc thành một màu khác.
+            </div>
+
+            <button class="speak-btn" onclick="speak('dye')">🔊 Listen</button>
+          </div>
+        </div>
+
+        <!-- 4 -->
+
+        <div class="vocab-card" data-word="extended">
+          <div class="word-section">
+            <div class="word-number">04</div>
+
+            <div class="word">extended</div>
+
+            <div class="meaning">mở rộng; kéo dài; (gia đình) nhiều thế hệ</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              She comes from an extended family with grandparents and cousins.
+            </div>
+
+            <div class="translation">
+              Cô ấy xuất thân từ một gia đình nhiều thế hệ có ông bà và anh chị
+              em họ.
+            </div>
+
+            <button class="speak-btn" onclick="speak('extended')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 5 -->
+
+        <div class="vocab-card" data-word="family-oriented">
+          <div class="word-section">
+            <div class="word-number">05</div>
+
+            <div class="word">family-oriented</div>
+
+            <div class="meaning">coi trọng gia đình; hướng về gia đình</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              My parents are very family-oriented and enjoy spending time
+              together.
+            </div>
+
+            <div class="translation">
+              Bố mẹ tôi rất coi trọng gia đình và thích dành thời gian bên nhau.
+            </div>
+
+            <button class="speak-btn" onclick="speak('family-oriented')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 6 -->
+
+        <div class="vocab-card" data-word="gap">
+          <div class="word-section">
+            <div class="word-number">06</div>
+
+            <div class="word">gap</div>
+
+            <div class="meaning">khoảng cách; khoảng trống; sự chênh lệch</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              There is a generation gap between parents and their children.
+            </div>
+
+            <div class="translation">
+              Có một khoảng cách thế hệ giữa cha mẹ và con cái.
+            </div>
+
+            <button class="speak-btn" onclick="speak('gap')">🔊 Listen</button>
+          </div>
+        </div>
+
+        <!-- 7 -->
+
+        <div class="vocab-card" data-word="generation">
+          <div class="word-section">
+            <div class="word-number">07</div>
+
+            <div class="word">generation</div>
+
+            <div class="meaning">thế hệ</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Each generation has its own values and traditions.
+            </div>
+
+            <div class="translation">
+              Mỗi thế hệ có những giá trị và truyền thống riêng.
+            </div>
+
+            <button class="speak-btn" onclick="speak('generation')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 8 -->
+
+        <div class="vocab-card" data-word="household">
+          <div class="word-section">
+            <div class="word-number">08</div>
+
+            <div class="word">household</div>
+
+            <div class="meaning">
+              hộ gia đình; gia đình cùng sống trong một nhà
+            </div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Every household should try to reduce its use of plastic.
+            </div>
+
+            <div class="translation">
+              Mỗi hộ gia đình nên cố gắng giảm việc sử dụng nhựa.
+            </div>
+
+            <button class="speak-btn" onclick="speak('household')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 9 -->
+
+        <div class="vocab-card" data-word="lifestyle">
+          <div class="word-section">
+            <div class="word-number">09</div>
+
+            <div class="word">lifestyle</div>
+
+            <div class="meaning">lối sống; phong cách sống</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              A healthy lifestyle includes regular exercise and a balanced diet.
+            </div>
+
+            <div class="translation">
+              Một lối sống lành mạnh bao gồm tập thể dục thường xuyên và chế độ
+              ăn cân bằng.
+            </div>
+
+            <button class="speak-btn" onclick="speak('lifestyle')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 10 -->
+
+        <div class="vocab-card" data-word="memorise">
+          <div class="word-section">
+            <div class="word-number">10</div>
+
+            <div class="word">memorise</div>
+
+            <div class="meaning">ghi nhớ; học thuộc lòng</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              I need to memorise these new English words before the test.
+            </div>
+
+            <div class="translation">
+              Tôi cần học thuộc những từ tiếng Anh mới này trước bài kiểm tra.
+            </div>
+
+            <button class="speak-btn" onclick="speak('memorise')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 11 -->
+
+        <div class="vocab-card" data-word="monk">
+          <div class="word-section">
+            <div class="word-number">11</div>
+
+            <div class="word">monk</div>
+
+            <div class="meaning">nhà sư</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The monk spent many years studying and practising meditation.
+            </div>
+
+            <div class="translation">
+              Nhà sư đã dành nhiều năm học tập và thực hành thiền định.
+            </div>
+
+            <button class="speak-btn" onclick="speak('monk')">🔊 Listen</button>
+          </div>
+        </div>
+
+        <!-- 12 -->
+
+        <div class="vocab-card" data-word="nuclear">
+          <div class="word-section">
+            <div class="word-number">12</div>
+
+            <div class="word">nuclear</div>
+
+            <div class="meaning">
+              thuộc về hạt nhân; (gia đình) gia đình hạt nhân
+            </div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              A nuclear family usually consists of parents and their children.
+            </div>
+
+            <div class="translation">
+              Gia đình hạt nhân thường gồm cha mẹ và con cái.
+            </div>
+
+            <button class="speak-btn" onclick="speak('nuclear')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 13 -->
+
+        <div class="vocab-card" data-word="opportunity">
+          <div class="word-section">
+            <div class="word-number">13</div>
+
+            <div class="word">opportunity</div>
+
+            <div class="meaning">cơ hội</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Studying abroad gives students an opportunity to experience a new
+              culture.
+            </div>
+
+            <div class="translation">
+              Du học mang đến cho học sinh cơ hội trải nghiệm một nền văn hóa
+              mới.
+            </div>
+
+            <button class="speak-btn" onclick="speak('opportunity')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 14 -->
+
+        <div class="vocab-card" data-word="popularity">
+          <div class="word-section">
+            <div class="word-number">14</div>
+
+            <div class="word">popularity</div>
+
+            <div class="meaning">sự phổ biến; mức độ được yêu thích</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The popularity of online learning has increased rapidly.
+            </div>
+
+            <div class="translation">
+              Sự phổ biến của việc học trực tuyến đã tăng nhanh chóng.
+            </div>
+
+            <button class="speak-btn" onclick="speak('popularity')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 15 -->
+
+        <div class="vocab-card" data-word="privacy">
+          <div class="word-section">
+            <div class="word-number">15</div>
+
+            <div class="word">privacy</div>
+
+            <div class="meaning">sự riêng tư; quyền riêng tư</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Everyone should have the right to privacy.
+            </div>
+
+            <div class="translation">
+              Mọi người đều nên có quyền được riêng tư.
+            </div>
+
+            <button class="speak-btn" onclick="speak('privacy')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 16 -->
+
+        <div class="vocab-card" data-word="promise">
+          <div class="word-section">
+            <div class="word-number">16</div>
+
+            <div class="word">promise</div>
+
+            <div class="meaning">lời hứa; hứa</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              I promise to help my parents with the housework.
+            </div>
+
+            <div class="translation">Tôi hứa sẽ giúp bố mẹ làm việc nhà.</div>
+
+            <button class="speak-btn" onclick="speak('promise')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 17 -->
+
+        <div class="vocab-card" data-word="pursue">
+          <div class="word-section">
+            <div class="word-number">17</div>
+
+            <div class="word">pursue</div>
+
+            <div class="meaning">theo đuổi; tiếp tục thực hiện</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              She decided to pursue her dream of becoming a doctor.
+            </div>
+
+            <div class="translation">
+              Cô ấy quyết định theo đuổi ước mơ trở thành bác sĩ.
+            </div>
+
+            <button class="speak-btn" onclick="speak('pursue')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 18 -->
+
+        <div class="vocab-card" data-word="replace">
+          <div class="word-section">
+            <div class="word-number">18</div>
+
+            <div class="word">replace</div>
+
+            <div class="meaning">thay thế; thay</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Technology cannot completely replace face-to-face communication.
+            </div>
+
+            <div class="translation">
+              Công nghệ không thể hoàn toàn thay thế giao tiếp trực tiếp.
+            </div>
+
+            <button class="speak-btn" onclick="speak('replace')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 19 -->
+
+        <div class="vocab-card" data-word="take notes">
+          <div class="word-section">
+            <div class="word-number">19</div>
+
+            <div class="word">take notes</div>
+
+            <div class="meaning">ghi chép; ghi chú</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Students should take notes during important lessons.
+            </div>
+
+            <div class="translation">
+              Học sinh nên ghi chép trong những tiết học quan trọng.
+            </div>
+
+            <button class="speak-btn" onclick="speak('take notes')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 20 -->
+
+        <div class="vocab-card" data-word="trend">
+          <div class="word-section">
+            <div class="word-number">20</div>
+
+            <div class="word">trend</div>
+
+            <div class="meaning">xu hướng</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              There is a growing trend towards healthier lifestyles.
+            </div>
+
+            <div class="translation">
+              Có một xu hướng ngày càng tăng hướng tới lối sống lành mạnh hơn.
+            </div>
+
+            <button class="speak-btn" onclick="speak('trend')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 21 -->
+
+        <div class="vocab-card" data-word="western">
+          <div class="word-section">
+            <div class="word-number">21</div>
+
+            <div class="word">western</div>
+
+            <div class="meaning">thuộc phương Tây; phương Tây</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Western lifestyles have influenced young people in many countries.
+            </div>
+
+            <div class="translation">
+              Lối sống phương Tây đã ảnh hưởng đến giới trẻ ở nhiều quốc gia.
+            </div>
+
+            <button class="speak-btn" onclick="speak('western')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- NO RESULT -->
+
+      <div class="no-result" id="noResult">😕 No vocabulary found.</div>
+
+      <!-- FOOTER -->
+
+      <div class="footer">Vocabulary Bank • Family, Lifestyle & Society</div>
+    </div>
+
+    <script>
+      /* =========================
+       SEARCH VOCABULARY
+    ========================= */
+
+      const searchInput = document.getElementById("searchInput");
+
+      const cards = document.querySelectorAll(".vocab-card");
+
+      const noResult = document.getElementById("noResult");
+
+      searchInput.addEventListener("input", function () {
+        const keyword = this.value.toLowerCase().trim();
+
+        let visibleCount = 0;
+
+        cards.forEach((card) => {
+          const word = card.dataset.word.toLowerCase();
+
+          const content = card.innerText.toLowerCase();
+
+          if (word.includes(keyword) || content.includes(keyword)) {
+            card.style.display = "grid";
+
+            visibleCount++;
+          } else {
+            card.style.display = "none";
+          }
+        });
+
+        if (visibleCount === 0) {
+          noResult.style.display = "block";
+        } else {
+          noResult.style.display = "none";
+        }
+      });
+
+      /* =========================
+       TEXT TO SPEECH
+    ========================= */
+
+      function speak(text) {
+        if (!("speechSynthesis" in window)) {
+          alert("Your browser does not support text-to-speech.");
+
+          return;
+        }
+
+        window.speechSynthesis.cancel();
+
+        const utterance = new SpeechSynthesisUtterance(text);
+
+        utterance.lang = "en-US";
+
+        utterance.rate = 0.85;
+
+        utterance.pitch = 1;
+
+        window.speechSynthesis.speak(utterance);
+      }
+    </script>
+  </body>
+</html>
+```
