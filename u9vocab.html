@@ -1,0 +1,1000 @@
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Vocabulary List</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: linear-gradient(135deg, #eef2ff, #f8fafc);
+        color: #1e293b;
+        min-height: 100vh;
+        padding: 40px 20px;
+      }
+
+      .container {
+        max-width: 1100px;
+        margin: auto;
+      }
+
+      /* HEADER */
+
+      .header {
+        text-align: center;
+        margin-bottom: 35px;
+      }
+
+      .header h1 {
+        font-size: 42px;
+        color: #4338ca;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        color: #64748b;
+        font-size: 17px;
+      }
+
+      /* SEARCH */
+
+      .search-box {
+        margin-bottom: 30px;
+        position: relative;
+      }
+
+      .search-box input {
+        width: 100%;
+        padding: 17px 20px;
+        border: 2px solid #e2e8f0;
+        border-radius: 14px;
+        font-size: 16px;
+        outline: none;
+        background: white;
+        transition: 0.3s;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      .search-box input:focus {
+        border-color: #6366f1;
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
+      }
+
+      /* VOCABULARY CARD */
+
+      .vocabulary-list {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      .vocab-card {
+        background: white;
+        border-radius: 18px;
+        padding: 24px;
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        gap: 25px;
+        box-shadow: 0 8px 25px rgba(15, 23, 42, 0.07);
+        border: 1px solid #e2e8f0;
+        transition: all 0.3s ease;
+      }
+
+      .vocab-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 15px 35px rgba(79, 70, 229, 0.12);
+        border-color: #c7d2fe;
+      }
+
+      /* LEFT */
+
+      .word-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-right: 1px solid #e2e8f0;
+        padding-right: 20px;
+      }
+
+      .word-number {
+        font-size: 13px;
+        color: #94a3b8;
+        margin-bottom: 5px;
+        font-weight: 600;
+      }
+
+      .word {
+        font-size: 25px;
+        font-weight: 700;
+        color: #4338ca;
+        margin-bottom: 8px;
+      }
+
+      .meaning {
+        color: #475569;
+        font-size: 15px;
+        font-weight: 500;
+      }
+
+      /* RIGHT */
+
+      .example-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .example-label {
+        font-size: 12px;
+        color: #6366f1;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 7px;
+      }
+
+      .example {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #334155;
+        margin-bottom: 8px;
+      }
+
+      .translation {
+        font-size: 15px;
+        color: #64748b;
+        font-style: italic;
+        margin-bottom: 15px;
+      }
+
+      /* SPEAKER BUTTON */
+
+      .speak-btn {
+        width: fit-content;
+        border: none;
+        background: #eef2ff;
+        color: #4f46e5;
+        padding: 8px 14px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        transition: 0.2s;
+      }
+
+      .speak-btn:hover {
+        background: #4f46e5;
+        color: white;
+      }
+
+      /* NO RESULT */
+
+      .no-result {
+        display: none;
+        text-align: center;
+        padding: 40px;
+        background: white;
+        border-radius: 15px;
+        color: #64748b;
+      }
+
+      /* FOOTER */
+
+      .footer {
+        text-align: center;
+        margin-top: 35px;
+        color: #94a3b8;
+        font-size: 14px;
+      }
+
+      /* MOBILE */
+
+      @media (max-width: 700px) {
+        body {
+          padding: 25px 12px;
+        }
+
+        .header h1 {
+          font-size: 30px;
+        }
+
+        .header p {
+          font-size: 15px;
+        }
+
+        .vocab-card {
+          grid-template-columns: 1fr;
+          gap: 18px;
+        }
+
+        .word-section {
+          border-right: none;
+          border-bottom: 1px solid #e2e8f0;
+          padding-right: 0;
+          padding-bottom: 18px;
+        }
+
+        .word {
+          font-size: 23px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- HEADER -->
+
+      <div class="header">
+        <h1>📚 Vocabulary Bank</h1>
+
+        <p>English Vocabulary • Vietnamese Meaning • Example Sentences</p>
+      </div>
+
+      <!-- SEARCH -->
+
+      <div class="search-box">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="🔍 Search vocabulary..."
+        />
+      </div>
+
+      <!-- VOCABULARY LIST -->
+
+      <div class="vocabulary-list" id="vocabularyList">
+        <!-- 1 -->
+
+        <div class="vocab-card" data-word="bilingual">
+          <div class="word-section">
+            <div class="word-number">01</div>
+
+            <div class="word">bilingual</div>
+
+            <div class="meaning">song ngữ; biết sử dụng hai ngôn ngữ</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              She is bilingual and can speak English and Vietnamese fluently.
+            </div>
+
+            <div class="translation">
+              Cô ấy là người nói song ngữ và có thể nói tiếng Anh và tiếng Việt
+              trôi chảy.
+            </div>
+
+            <button class="speak-btn" onclick="speak('bilingual')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 2 -->
+
+        <div class="vocab-card" data-word="borrowed">
+          <div class="word-section">
+            <div class="word-number">02</div>
+
+            <div class="word">borrowed</div>
+
+            <div class="meaning">đã mượn</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              I borrowed a book from my friend yesterday.
+            </div>
+
+            <div class="translation">
+              Tôi đã mượn một quyển sách từ bạn tôi ngày hôm qua.
+            </div>
+
+            <button class="speak-btn" onclick="speak('borrowed')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 3 -->
+
+        <div class="vocab-card" data-word="concentric">
+          <div class="word-section">
+            <div class="word-number">03</div>
+
+            <div class="word">concentric</div>
+
+            <div class="meaning">đồng tâm</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The diagram contains three concentric circles.
+            </div>
+
+            <div class="translation">Biểu đồ chứa ba vòng tròn đồng tâm.</div>
+
+            <button class="speak-btn" onclick="speak('concentric')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 4 -->
+
+        <div class="vocab-card" data-word="consist">
+          <div class="word-section">
+            <div class="word-number">04</div>
+
+            <div class="word">consist</div>
+
+            <div class="meaning">bao gồm; gồm có</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">The course consists of ten lessons.</div>
+
+            <div class="translation">Khóa học bao gồm mười bài học.</div>
+
+            <button class="speak-btn" onclick="speak('consist')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 5 -->
+
+        <div class="vocab-card" data-word="copy">
+          <div class="word-section">
+            <div class="word-number">05</div>
+
+            <div class="word">copy</div>
+
+            <div class="meaning">sao chép; chép lại</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Don't copy your friend's answers during the exam.
+            </div>
+
+            <div class="translation">
+              Đừng chép đáp án của bạn trong khi thi.
+            </div>
+
+            <button class="speak-btn" onclick="speak('copy')">🔊 Listen</button>
+          </div>
+        </div>
+
+        <!-- 6 -->
+
+        <div class="vocab-card" data-word="establish">
+          <div class="word-section">
+            <div class="word-number">06</div>
+
+            <div class="word">establish</div>
+
+            <div class="meaning">thành lập; thiết lập</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">The university was established in 1950.</div>
+
+            <div class="translation">
+              Trường đại học được thành lập vào năm 1950.
+            </div>
+
+            <button class="speak-btn" onclick="speak('establish')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 7 -->
+
+        <div class="vocab-card" data-word="exchange student">
+          <div class="word-section">
+            <div class="word-number">07</div>
+
+            <div class="word">exchange student</div>
+
+            <div class="meaning">học sinh / sinh viên trao đổi</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">She went to Japan as an exchange student.</div>
+
+            <div class="translation">
+              Cô ấy đến Nhật Bản với tư cách là một sinh viên trao đổi.
+            </div>
+
+            <button class="speak-btn" onclick="speak('exchange student')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 8 -->
+
+        <div class="vocab-card" data-word="expanding circle">
+          <div class="word-section">
+            <div class="word-number">08</div>
+
+            <div class="word">expanding circle</div>
+
+            <div class="meaning">Vòng tròn mở rộng</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Vietnam is generally considered part of the Expanding Circle.
+            </div>
+
+            <div class="translation">
+              Việt Nam thường được xem là một phần của Vòng tròn mở rộng.
+            </div>
+
+            <button class="speak-btn" onclick="speak('expanding circle')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 9 -->
+
+        <div class="vocab-card" data-word="first language">
+          <div class="word-section">
+            <div class="word-number">09</div>
+
+            <div class="word">first language</div>
+
+            <div class="meaning">ngôn ngữ đầu tiên; tiếng mẹ đẻ</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">Vietnamese is my first language.</div>
+
+            <div class="translation">
+              Tiếng Việt là ngôn ngữ đầu tiên của tôi.
+            </div>
+
+            <button class="speak-btn" onclick="speak('first language')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 10 -->
+
+        <div class="vocab-card" data-word="fluent">
+          <div class="word-section">
+            <div class="word-number">10</div>
+
+            <div class="word">fluent</div>
+
+            <div class="meaning">trôi chảy; lưu loát</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              She is fluent in English and can communicate confidently.
+            </div>
+
+            <div class="translation">
+              Cô ấy nói tiếng Anh trôi chảy và có thể giao tiếp tự tin.
+            </div>
+
+            <button class="speak-btn" onclick="speak('fluent')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 11 -->
+
+        <div class="vocab-card" data-word="go over">
+          <div class="word-section">
+            <div class="word-number">11</div>
+
+            <div class="word">go over</div>
+
+            <div class="meaning">xem lại; ôn lại</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Let's go over the vocabulary before the test.
+            </div>
+
+            <div class="translation">
+              Hãy cùng ôn lại từ vựng trước bài kiểm tra.
+            </div>
+
+            <button class="speak-btn" onclick="speak('go over')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 12 -->
+
+        <div class="vocab-card" data-word="immigrant">
+          <div class="word-section">
+            <div class="word-number">12</div>
+
+            <div class="word">immigrant</div>
+
+            <div class="meaning">người nhập cư</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              His grandparents were immigrants from Europe.
+            </div>
+
+            <div class="translation">
+              Ông bà của anh ấy là những người nhập cư từ châu Âu.
+            </div>
+
+            <button class="speak-btn" onclick="speak('immigrant')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 13 -->
+
+        <div class="vocab-card" data-word="inner circle">
+          <div class="word-section">
+            <div class="word-number">13</div>
+
+            <div class="word">inner circle</div>
+
+            <div class="meaning">Vòng tròn bên trong</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The UK and the USA belong to the Inner Circle.
+            </div>
+
+            <div class="translation">
+              Vương quốc Anh và Hoa Kỳ thuộc Vòng tròn bên trong.
+            </div>
+
+            <button class="speak-btn" onclick="speak('inner circle')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 14 -->
+
+        <div class="vocab-card" data-word="look up">
+          <div class="word-section">
+            <div class="word-number">14</div>
+
+            <div class="word">look up</div>
+
+            <div class="meaning">tra cứu</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              I looked up the new word in the dictionary.
+            </div>
+
+            <div class="translation">Tôi đã tra từ mới trong từ điển.</div>
+
+            <button class="speak-btn" onclick="speak('look up')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 15 -->
+
+        <div class="vocab-card" data-word="mean">
+          <div class="word-section">
+            <div class="word-number">15</div>
+
+            <div class="word">mean</div>
+
+            <div class="meaning">có nghĩa là</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">What does this word mean?</div>
+
+            <div class="translation">Từ này có nghĩa là gì?</div>
+
+            <button class="speak-btn" onclick="speak('mean')">🔊 Listen</button>
+          </div>
+        </div>
+
+        <!-- 16 -->
+
+        <div class="vocab-card" data-word="model">
+          <div class="word-section">
+            <div class="word-number">16</div>
+
+            <div class="word">model</div>
+
+            <div class="meaning">hình mẫu; mô hình</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The teacher is a good model for her students.
+            </div>
+
+            <div class="translation">
+              Giáo viên là một hình mẫu tốt cho học sinh của mình.
+            </div>
+
+            <button class="speak-btn" onclick="speak('model')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 17 -->
+
+        <div class="vocab-card" data-word="official language">
+          <div class="word-section">
+            <div class="word-number">17</div>
+
+            <div class="word">official language</div>
+
+            <div class="meaning">ngôn ngữ chính thức</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              English is an official language in many countries.
+            </div>
+
+            <div class="translation">
+              Tiếng Anh là ngôn ngữ chính thức ở nhiều quốc gia.
+            </div>
+
+            <button class="speak-btn" onclick="speak('official language')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 18 -->
+
+        <div class="vocab-card" data-word="outer circle">
+          <div class="word-section">
+            <div class="word-number">18</div>
+
+            <div class="word">outer circle</div>
+
+            <div class="meaning">Vòng tròn bên ngoài</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              India and Singapore are often placed in the Outer Circle.
+            </div>
+
+            <div class="translation">
+              Ấn Độ và Singapore thường được xếp vào Vòng tròn bên ngoài.
+            </div>
+
+            <button class="speak-btn" onclick="speak('outer circle')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 19 -->
+
+        <div class="vocab-card" data-word="pick up">
+          <div class="word-section">
+            <div class="word-number">19</div>
+
+            <div class="word">pick up</div>
+
+            <div class="meaning">học được; tiếp thu một cách tự nhiên</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              She picked up some Spanish while travelling.
+            </div>
+
+            <div class="translation">
+              Cô ấy đã học được một chút tiếng Tây Ban Nha trong khi đi du lịch.
+            </div>
+
+            <button class="speak-btn" onclick="speak('pick up')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 20 -->
+
+        <div class="vocab-card" data-word="propose">
+          <div class="word-section">
+            <div class="word-number">20</div>
+
+            <div class="word">propose</div>
+
+            <div class="meaning">đề xuất; đề nghị</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">The researchers proposed a new theory.</div>
+
+            <div class="translation">
+              Các nhà nghiên cứu đã đề xuất một lý thuyết mới.
+            </div>
+
+            <button class="speak-btn" onclick="speak('propose')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 21 -->
+
+        <div class="vocab-card" data-word="second language">
+          <div class="word-section">
+            <div class="word-number">21</div>
+
+            <div class="word">second language</div>
+
+            <div class="meaning">ngôn ngữ thứ hai</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">English is my second language.</div>
+
+            <div class="translation">
+              Tiếng Anh là ngôn ngữ thứ hai của tôi.
+            </div>
+
+            <button class="speak-btn" onclick="speak('second language')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 22 -->
+
+        <div class="vocab-card" data-word="standard">
+          <div class="word-section">
+            <div class="word-number">22</div>
+
+            <div class="word">standard</div>
+
+            <div class="meaning">tiêu chuẩn; chuẩn mực</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Standard English is commonly used in formal education.
+            </div>
+
+            <div class="translation">
+              Tiếng Anh chuẩn thường được sử dụng trong giáo dục chính thức.
+            </div>
+
+            <button class="speak-btn" onclick="speak('standard')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 23 -->
+
+        <div class="vocab-card" data-word="translate">
+          <div class="word-section">
+            <div class="word-number">23</div>
+
+            <div class="word">translate</div>
+
+            <div class="meaning">dịch; biên dịch</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Can you translate this sentence into Vietnamese?
+            </div>
+
+            <div class="translation">
+              Bạn có thể dịch câu này sang tiếng Việt không?
+            </div>
+
+            <button class="speak-btn" onclick="speak('translate')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 24 -->
+
+        <div class="vocab-card" data-word="variety">
+          <div class="word-section">
+            <div class="word-number">24</div>
+
+            <div class="word">variety</div>
+
+            <div class="meaning">sự đa dạng; biến thể</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              There are many varieties of English around the world.
+            </div>
+
+            <div class="translation">
+              Có nhiều biến thể tiếng Anh trên khắp thế giới.
+            </div>
+
+            <button class="speak-btn" onclick="speak('variety')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 25 -->
+
+        <div class="vocab-card" data-word="vocabulary">
+          <div class="word-section">
+            <div class="word-number">25</div>
+
+            <div class="word">vocabulary</div>
+
+            <div class="meaning">từ vựng</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Reading regularly can help you improve your vocabulary.
+            </div>
+
+            <div class="translation">
+              Đọc sách thường xuyên có thể giúp bạn cải thiện vốn từ vựng.
+            </div>
+
+            <button class="speak-btn" onclick="speak('vocabulary')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="no-result" id="noResult">😕 No vocabulary found.</div>
+
+      <div class="footer">Vocabulary Bank • Learn • Review • Practice</div>
+    </div>
+
+    <script>
+      /* =========================
+     SEARCH VOCABULARY
+  ========================= */
+
+      const searchInput = document.getElementById("searchInput");
+
+      const cards = document.querySelectorAll(".vocab-card");
+
+      const noResult = document.getElementById("noResult");
+
+      searchInput.addEventListener("input", function () {
+        const keyword = this.value.toLowerCase().trim();
+
+        let visibleCount = 0;
+
+        cards.forEach((card) => {
+          const word = card.dataset.word.toLowerCase();
+
+          const content = card.innerText.toLowerCase();
+
+          if (word.includes(keyword) || content.includes(keyword)) {
+            card.style.display = "grid";
+
+            visibleCount++;
+          } else {
+            card.style.display = "none";
+          }
+        });
+
+        if (visibleCount === 0) {
+          noResult.style.display = "block";
+        } else {
+          noResult.style.display = "none";
+        }
+      });
+
+      /* =========================
+     TEXT TO SPEECH
+  ========================= */
+
+      function speak(text) {
+        if (!("speechSynthesis" in window)) {
+          alert("Your browser does not support text-to-speech.");
+
+          return;
+        }
+
+        window.speechSynthesis.cancel();
+
+        const utterance = new SpeechSynthesisUtterance(text);
+
+        utterance.lang = "en-US";
+
+        utterance.rate = 0.85;
+
+        utterance.pitch = 1;
+
+        window.speechSynthesis.speak(utterance);
+      }
+    </script>
+  </body>
+</html>
+```

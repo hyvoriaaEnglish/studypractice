@@ -1,0 +1,935 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Vocabulary Practice – 36 Questions</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background: #f5f7fb;
+        color: #222;
+        line-height: 1.6;
+        padding: 30px 15px;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        background: white;
+        padding: 35px;
+        border-radius: 18px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+      }
+
+      h1 {
+        text-align: center;
+        color: #4f46e5;
+        margin-bottom: 10px;
+      }
+
+      .subtitle {
+        text-align: center;
+        color: #666;
+        margin-bottom: 30px;
+      }
+
+      .score-box {
+        position: sticky;
+        top: 10px;
+        z-index: 10;
+        background: #4f46e5;
+        color: white;
+        padding: 15px 20px;
+        border-radius: 12px;
+        margin-bottom: 30px;
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+      }
+
+      .part-title {
+        margin-top: 35px;
+        margin-bottom: 20px;
+        padding: 12px 15px;
+        background: #eef2ff;
+        color: #4338ca;
+        border-left: 5px solid #4f46e5;
+        border-radius: 8px;
+      }
+
+      .question {
+        background: #fafafa;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 20px;
+      }
+
+      .question-text {
+        font-weight: bold;
+        margin-bottom: 15px;
+        font-size: 16px;
+      }
+
+      .options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .option {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid #ddd;
+        background: white;
+        border-radius: 8px;
+        cursor: pointer;
+        text-align: left;
+        font-size: 15px;
+        transition: 0.2s;
+      }
+
+      .option:hover:not(:disabled) {
+        border-color: #4f46e5;
+        background: #f5f3ff;
+      }
+
+      .option:disabled {
+        cursor: not-allowed;
+      }
+
+      .option.correct {
+        background: #dcfce7;
+        border-color: #22c55e;
+        color: #166534;
+        font-weight: bold;
+      }
+
+      .option.incorrect {
+        background: #fee2e2;
+        border-color: #ef4444;
+        color: #991b1b;
+        font-weight: bold;
+      }
+
+      .option.show-correct {
+        background: #dcfce7;
+        border-color: #22c55e;
+        color: #166534;
+      }
+
+      .feedback {
+        display: none;
+        margin-top: 15px;
+        padding: 15px;
+        border-radius: 8px;
+        font-size: 14px;
+      }
+
+      .feedback.correct-feedback {
+        display: block;
+        background: #f0fdf4;
+        border-left: 4px solid #22c55e;
+        color: #166534;
+      }
+
+      .feedback.incorrect-feedback {
+        display: block;
+        background: #fef2f2;
+        border-left: 4px solid #ef4444;
+        color: #991b1b;
+      }
+
+      .feedback strong {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      .fill-answer {
+        margin-top: 10px;
+        padding: 12px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        width: 100%;
+        font-size: 15px;
+        outline: none;
+      }
+
+      .fill-answer:focus {
+        border-color: #4f46e5;
+      }
+
+      .check-btn {
+        margin-top: 10px;
+        padding: 10px 18px;
+        background: #4f46e5;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      .check-btn:hover {
+        background: #4338ca;
+      }
+
+      .reset-btn {
+        display: block;
+        margin: 35px auto 0;
+        padding: 14px 30px;
+        background: #111827;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .reset-btn:hover {
+        background: #374151;
+      }
+
+      .instruction {
+        background: #fff7ed;
+        border-left: 4px solid #f97316;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 25px;
+      }
+
+      @media (max-width: 600px) {
+        .container {
+          padding: 20px;
+        }
+
+        body {
+          padding: 15px 8px;
+        }
+
+        h1 {
+          font-size: 25px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>VOCABULARY PRACTICE</h1>
+
+      <p class="subtitle">36 Questions – Vocabulary Practice</p>
+
+      <div class="score-box">Score: <span id="score">0</span> / 36</div>
+
+      <div class="instruction">
+        <strong>Instructions:</strong>
+        Click an answer to check immediately. You will see whether your answer
+        is correct or incorrect, together with an explanation.
+      </div>
+
+      <!-- PART 1 -->
+
+      <h2 class="part-title">Part 1. Choose the correct answer (1–20)</h2>
+
+      <div id="part1"></div>
+
+      <!-- PART 2 -->
+
+      <h2 class="part-title">Part 2. Fill in the blanks (21–28)</h2>
+
+      <div class="instruction">
+        Use the correct word from the box:
+        <br /><br />
+        <strong>
+          second language – standard – translate – variety – vocabulary –
+          exchange – expanding circle – bilingual
+        </strong>
+      </div>
+
+      <div id="part2"></div>
+
+      <!-- PART 3 -->
+
+      <h2 class="part-title">
+        Part 3. Choose the word closest in meaning (29–32)
+      </h2>
+
+      <div id="part3"></div>
+
+      <!-- PART 4 -->
+
+      <h2 class="part-title">
+        Part 4. Complete the sentences with the best vocabulary (33–36)
+      </h2>
+
+      <div id="part4"></div>
+
+      <button class="reset-btn" onclick="resetQuiz()">🔄 Restart Quiz</button>
+    </div>
+
+    <script>
+      let score = 0;
+
+      const questions = [
+        // PART 1
+
+        {
+          id: 1,
+          type: "mcq",
+          question:
+            "English and Vietnamese are ______ languages because they are used by speakers from different linguistic backgrounds.",
+          options: ["A. fluent", "B. bilingual", "C. standard", "D. official"],
+          answer: 1,
+          explanation:
+            "<strong>bilingual</strong> means involving or using two languages. However, note that this sentence is slightly unusual because languages themselves are not normally described as bilingual; a person can be bilingual.",
+        },
+
+        {
+          id: 2,
+          type: "mcq",
+          question:
+            "I ______ my notes from a classmate because I had forgotten to bring my own.",
+          options: [
+            "A. borrowed",
+            "B. copied",
+            "C. translated",
+            "D. established",
+          ],
+          answer: 0,
+          explanation:
+            "<strong>borrowed</strong> means took something temporarily and intended to return it.",
+        },
+
+        {
+          id: 3,
+          type: "mcq",
+          question:
+            "The diagram consists of three ______ circles, one inside another.",
+          options: ["A. outer", "B. expanding", "C. concentric", "D. official"],
+          answer: 2,
+          explanation:
+            "<strong>concentric circles</strong> are circles that share the same center, with one circle inside another.",
+        },
+
+        {
+          id: 4,
+          type: "mcq",
+          question: "The course ______ of ten lessons and two final tests.",
+          options: ["A. expands", "B. consists", "C. proposes", "D. exchanges"],
+          answer: 1,
+          explanation:
+            "<strong>consist of</strong> means to be made up of or composed of something.",
+        },
+
+        {
+          id: 5,
+          type: "mcq",
+          question: "Don't ______ your friend's answers during the exam.",
+          options: ["A. copy", "B. establish", "C. pick up", "D. look up"],
+          answer: 0,
+          explanation:
+            "<strong>copy</strong> means to reproduce someone else's answers. In an exam, copying answers is cheating.",
+        },
+
+        {
+          id: 6,
+          type: "mcq",
+          question:
+            "The university was ______ in 1950 and has become one of the country's most prestigious institutions.",
+          options: [
+            "A. borrowed",
+            "B. established",
+            "C. translated",
+            "D. proposed",
+          ],
+          answer: 1,
+          explanation:
+            "<strong>established</strong> means officially created or founded.",
+        },
+
+        {
+          id: 7,
+          type: "mcq",
+          question:
+            "An ______ usually studies at a school or university in another country for a limited period.",
+          options: [
+            "A. immigrant",
+            "B. exchange student",
+            "C. bilingual",
+            "D. native speaker",
+          ],
+          answer: 1,
+          explanation:
+            "An <strong>exchange student</strong> studies in another country for a temporary period, usually as part of an exchange program.",
+        },
+
+        {
+          id: 8,
+          type: "mcq",
+          question:
+            "As the population grows, the city continues to ______ into surrounding areas.",
+          options: ["A. look up", "B. expand", "C. go over", "D. mean"],
+          answer: 1,
+          explanation:
+            "<strong>expand</strong> means to become larger or increase in size.",
+        },
+
+        {
+          id: 9,
+          type: "mcq",
+          question:
+            "Vietnamese is my ______, while English is my second language.",
+          options: [
+            "A. official language",
+            "B. first language",
+            "C. standard",
+            "D. vocabulary",
+          ],
+          answer: 1,
+          explanation:
+            "Your <strong>first language</strong> is the language you learned first, usually from childhood.",
+        },
+
+        {
+          id: 10,
+          type: "mcq",
+          question:
+            "She speaks English so ______ that people often think she grew up in an English-speaking country.",
+          options: ["A. bilingual", "B. fluent", "C. standard", "D. borrowed"],
+          answer: 1,
+          explanation:
+            "<strong>fluent</strong> means able to speak a language smoothly, easily, and confidently.",
+        },
+
+        {
+          id: 11,
+          type: "mcq",
+          question:
+            "Before the exam, I need to ______ all the grammar points we studied this semester.",
+          options: ["A. pick up", "B. go over", "C. exchange", "D. propose"],
+          answer: 1,
+          explanation:
+            "<strong>go over</strong> means to review or examine something carefully.",
+        },
+
+        {
+          id: 12,
+          type: "mcq",
+          question:
+            "My grandparents came to this country as ______ from another part of the world.",
+          options: [
+            "A. exchange students",
+            "B. immigrants",
+            "C. models",
+            "D. speakers",
+          ],
+          answer: 1,
+          explanation:
+            "<strong>immigrants</strong> are people who move to another country to live there permanently or for a long period.",
+        },
+
+        {
+          id: 13,
+          type: "mcq",
+          question:
+            "In Kachru's Three Circles model, countries where English is traditionally used as a native language belong to the ______ Circle.",
+          options: ["A. Outer", "B. Expanding", "C. Inner", "D. Standard"],
+          answer: 2,
+          explanation:
+            "The <strong>Inner Circle</strong> includes countries where English has traditionally been the primary native language, such as the UK, USA, Canada, Australia, and New Zealand.",
+        },
+
+        {
+          id: 14,
+          type: "mcq",
+          question:
+            "If you don't know the meaning of a word, you can ______ it ______ in a dictionary.",
+          options: [
+            "A. go / over",
+            "B. look / up",
+            "C. pick / up",
+            "D. copy / down",
+          ],
+          answer: 1,
+          explanation:
+            "<strong>look up</strong> means to search for information, especially a word or its meaning in a dictionary.",
+        },
+
+        {
+          id: 15,
+          type: "mcq",
+          question: 'What does the word "bilingual" ______?',
+          options: ["A. establish", "B. consist", "C. mean", "D. translate"],
+          answer: 2,
+          explanation:
+            "<strong>mean</strong> is used to ask about the definition or meaning of a word.",
+        },
+
+        {
+          id: 16,
+          type: "mcq",
+          question:
+            "A teacher can serve as a ______ for students by demonstrating good pronunciation.",
+          options: ["A. model", "B. variety", "C. vocabulary", "D. circle"],
+          answer: 0,
+          explanation:
+            "A <strong>model</strong> is someone or something that can be copied or used as an example.",
+        },
+
+        {
+          id: 17,
+          type: "mcq",
+          question:
+            "English is an ______ language in many countries, but it may not be the first language of the majority of the population.",
+          options: ["A. official", "B. borrowed", "C. fluent", "D. concentric"],
+          answer: 0,
+          explanation:
+            "An <strong>official language</strong> is a language given a special legal status and used by the government or in official communication.",
+        },
+
+        {
+          id: 18,
+          type: "mcq",
+          question:
+            "India and Singapore are often classified as part of the ______ Circle in Kachru's model.",
+          options: ["A. Inner", "B. Outer", "C. Expanding", "D. First"],
+          answer: 1,
+          explanation:
+            "India and Singapore are commonly placed in the <strong>Outer Circle</strong>, where English has an important historical and institutional role.",
+        },
+
+        {
+          id: 19,
+          type: "mcq",
+          question:
+            "Children often ______ new words naturally by listening to people around them.",
+          options: ["A. pick up", "B. go over", "C. establish", "D. translate"],
+          answer: 0,
+          explanation:
+            "<strong>pick up</strong> can mean to learn or acquire something naturally, especially a language or skill.",
+        },
+
+        {
+          id: 20,
+          type: "mcq",
+          question:
+            "The researchers ______ a new theory to explain how languages change over time.",
+          options: ["A. borrowed", "B. proposed", "C. copied", "D. exchanged"],
+          answer: 1,
+          explanation:
+            "<strong>proposed</strong> means suggested an idea, plan, or theory for consideration.",
+        },
+
+        // PART 2
+
+        {
+          id: 21,
+          type: "fill",
+          question:
+            "English is my __________, as I learned it after Vietnamese.",
+          answers: ["second language"],
+          explanation:
+            "<strong>second language</strong> is a language learned after your first language.",
+        },
+
+        {
+          id: 22,
+          type: "fill",
+          question:
+            "A person who can speak two languages fluently is __________.",
+          answers: ["bilingual"],
+          explanation:
+            "<strong>bilingual</strong> describes a person who can use two languages.",
+        },
+
+        {
+          id: 23,
+          type: "fill",
+          question:
+            "Students often __________ ideas and information when working together.",
+          answers: ["exchange"],
+          explanation:
+            "<strong>exchange</strong> means to give and receive something between people.",
+        },
+
+        {
+          id: 24,
+          type: "fill",
+          question:
+            "You need a good range of __________ to achieve a high score in the IELTS Speaking test.",
+          answers: ["vocabulary"],
+          explanation:
+            "<strong>vocabulary</strong> means the words that a person knows and uses.",
+        },
+
+        {
+          id: 25,
+          type: "fill",
+          question:
+            "The teacher asked us to __________ the paragraph from English into Vietnamese.",
+          answers: ["translate"],
+          explanation:
+            "<strong>translate</strong> means to change words or text from one language into another.",
+        },
+
+        {
+          id: 26,
+          type: "fill",
+          question:
+            "There are many __________ of English spoken around the world, including British English and American English.",
+          answers: ["variety", "varieties"],
+          explanation:
+            "<strong>varieties</strong> refers to different forms of a language. The natural sentence is usually 'many varieties of English'.",
+        },
+
+        {
+          id: 27,
+          type: "fill",
+          question:
+            "In Kachru's model, countries where English is mainly learned as a foreign language belong to the __________.",
+          answers: ["expanding circle"],
+          explanation:
+            "The <strong>Expanding Circle</strong> includes countries where English is mainly learned and used as a foreign language.",
+        },
+
+        {
+          id: 28,
+          type: "fill",
+          question:
+            'Standard English is considered the accepted form of English used in formal communication and education. The word "__________" refers to something generally accepted or recognized as a norm.',
+          answers: ["standard"],
+          explanation:
+            "<strong>standard</strong> can describe something accepted as a norm or model.",
+        },
+
+        // PART 3
+
+        {
+          id: 29,
+          type: "mcq",
+          question: 'The word "borrowed" is closest in meaning to:',
+          options: [
+            "A. taken temporarily with the intention of returning",
+            "B. created from nothing",
+            "C. permanently owned",
+            "D. translated into another language",
+          ],
+          answer: 0,
+          explanation:
+            "<strong>borrowed</strong> means taken or received temporarily with the intention of returning it.",
+        },
+
+        {
+          id: 30,
+          type: "mcq",
+          question:
+            'The phrase "look up" in "I looked up the word in a dictionary" means:',
+          options: [
+            "A. search for information",
+            "B. memorize something",
+            "C. repeat something",
+            "D. explain something",
+          ],
+          answer: 0,
+          explanation:
+            "<strong>look up</strong> means to search for information, especially in a dictionary or reference source.",
+        },
+
+        {
+          id: 31,
+          type: "mcq",
+          question:
+            'The phrase "go over" in "Let\'s go over the vocabulary before the test" means:',
+          options: ["A. forget", "B. review", "C. translate", "D. exchange"],
+          answer: 1,
+          explanation:
+            "<strong>go over</strong> means to review or examine something again.",
+        },
+
+        {
+          id: 32,
+          type: "mcq",
+          question:
+            'The phrase "pick up" in "She picked up some Spanish while travelling" means:',
+          options: [
+            "A. learn or acquire informally",
+            "B. write down carefully",
+            "C. teach someone",
+            "D. copy from a book",
+          ],
+          answer: 0,
+          explanation:
+            "<strong>pick up</strong> means to learn or acquire something naturally or informally.",
+        },
+
+        // PART 4
+
+        {
+          id: 33,
+          type: "mcq",
+          question:
+            "The three __________ circles in Kachru's model represent different contexts in which English is used around the world.",
+          options: [
+            "A. concentric",
+            "B. fluent",
+            "C. bilingual",
+            "D. standard",
+          ],
+          answer: 0,
+          explanation:
+            "<strong>concentric circles</strong> are circles that share the same center and are placed one inside another.",
+        },
+
+        {
+          id: 34,
+          type: "mcq",
+          question:
+            "Although English is not her __________, she is completely __________ in it and can communicate with native speakers easily.",
+          options: [
+            "A. vocabulary / official",
+            "B. first language / fluent",
+            "C. official language / bilingual",
+            "D. standard / borrowed",
+          ],
+          answer: 1,
+          explanation:
+            "<strong>first language</strong> is the language learned first, while <strong>fluent</strong> means able to communicate smoothly and easily.",
+        },
+
+        {
+          id: 35,
+          type: "mcq",
+          question:
+            "The government decided to __________ English as one of the country's __________ languages.",
+          options: [
+            "A. copy / second",
+            "B. establish / official",
+            "C. pick up / first",
+            "D. look up / fluent",
+          ],
+          answer: 1,
+          explanation:
+            "<strong>establish</strong> means officially introduce or create, while <strong>official language</strong> is a language recognized for official use.",
+        },
+
+        {
+          id: 36,
+          type: "mcq",
+          question:
+            "An __________ may learn the local language after moving to a new country, while an __________ may study abroad temporarily and then return home.",
+          options: [
+            "A. immigrant / exchange student",
+            "B. exchange student / immigrant",
+            "C. bilingual / immigrant",
+            "D. model / exchange student",
+          ],
+          answer: 0,
+          explanation:
+            "An <strong>immigrant</strong> moves to another country to live there, while an <strong>exchange student</strong> studies abroad temporarily and normally returns home.",
+        },
+      ];
+
+      function createQuestion(question) {
+        const div = document.createElement("div");
+        div.className = "question";
+        div.id = "question-" + question.id;
+
+        const questionText = document.createElement("div");
+        questionText.className = "question-text";
+        questionText.innerHTML = question.id + ". " + question.question;
+
+        div.appendChild(questionText);
+
+        // MULTIPLE CHOICE
+
+        if (question.type === "mcq") {
+          const optionsDiv = document.createElement("div");
+          optionsDiv.className = "options";
+
+          question.options.forEach((option, index) => {
+            const button = document.createElement("button");
+
+            button.className = "option";
+            button.innerHTML = option;
+
+            button.onclick = function () {
+              // Prevent answering again
+              const allButtons = optionsDiv.querySelectorAll(".option");
+
+              allButtons.forEach((btn) => {
+                btn.disabled = true;
+              });
+
+              const feedback = div.querySelector(".feedback");
+
+              if (index === question.answer) {
+                button.classList.add("correct");
+
+                score++;
+
+                updateScore();
+
+                feedback.className = "feedback correct-feedback";
+
+                feedback.innerHTML =
+                  "✅ <strong>Correct!</strong>" + question.explanation;
+              } else {
+                button.classList.add("incorrect");
+
+                allButtons[question.answer].classList.add("show-correct");
+
+                feedback.className = "feedback incorrect-feedback";
+
+                feedback.innerHTML =
+                  "❌ <strong>Incorrect.</strong>" +
+                  "<br><br>" +
+                  "The correct answer is: <strong>" +
+                  question.options[question.answer] +
+                  "</strong>" +
+                  "<br><br>" +
+                  question.explanation;
+              }
+            };
+
+            optionsDiv.appendChild(button);
+          });
+
+          div.appendChild(optionsDiv);
+        }
+
+        // FILL IN THE BLANK
+
+        if (question.type === "fill") {
+          const input = document.createElement("input");
+
+          input.className = "fill-answer";
+
+          input.placeholder = "Type your answer here...";
+
+          const checkButton = document.createElement("button");
+
+          checkButton.className = "check-btn";
+
+          checkButton.innerText = "Check Answer";
+
+          checkButton.onclick = function () {
+            const userAnswer = input.value.trim().toLowerCase();
+
+            if (userAnswer === "") {
+              alert("Please enter an answer.");
+
+              return;
+            }
+
+            input.disabled = true;
+
+            checkButton.disabled = true;
+
+            const correct = question.answers.some(
+              (answer) => userAnswer === answer.toLowerCase(),
+            );
+
+            const feedback = div.querySelector(".feedback");
+
+            if (correct) {
+              score++;
+
+              updateScore();
+
+              feedback.className = "feedback correct-feedback";
+
+              feedback.innerHTML =
+                "✅ <strong>Correct!</strong>" + question.explanation;
+            } else {
+              feedback.className = "feedback incorrect-feedback";
+
+              feedback.innerHTML =
+                "❌ <strong>Incorrect.</strong>" +
+                "<br><br>" +
+                "The correct answer is: <strong>" +
+                question.answers[0] +
+                "</strong>" +
+                "<br><br>" +
+                question.explanation;
+            }
+          };
+
+          div.appendChild(input);
+
+          div.appendChild(checkButton);
+        }
+
+        const feedback = document.createElement("div");
+
+        feedback.className = "feedback";
+
+        div.appendChild(feedback);
+
+        return div;
+      }
+
+      function renderQuestions() {
+        const part1 = document.getElementById("part1");
+
+        const part2 = document.getElementById("part2");
+
+        const part3 = document.getElementById("part3");
+
+        const part4 = document.getElementById("part4");
+
+        questions.forEach((question) => {
+          const element = createQuestion(question);
+
+          if (question.id >= 1 && question.id <= 20) {
+            part1.appendChild(element);
+          } else if (question.id >= 21 && question.id <= 28) {
+            part2.appendChild(element);
+          } else if (question.id >= 29 && question.id <= 32) {
+            part3.appendChild(element);
+          } else if (question.id >= 33 && question.id <= 36) {
+            part4.appendChild(element);
+          }
+        });
+      }
+
+      function updateScore() {
+        document.getElementById("score").innerText = score;
+      }
+
+      function resetQuiz() {
+        score = 0;
+
+        updateScore();
+
+        document.getElementById("part1").innerHTML = "";
+
+        document.getElementById("part2").innerHTML = "";
+
+        document.getElementById("part3").innerHTML = "";
+
+        document.getElementById("part4").innerHTML = "";
+
+        renderQuestions();
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+
+      renderQuestions();
+    </script>
+  </body>
+</html>
