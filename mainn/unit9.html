@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Unit 9 - Vocabulary & Quiz</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+
+        min-height: 100vh;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        padding: 30px 20px;
+
+        background: linear-gradient(
+          135deg,
+          #eef2ff 0%,
+          #f8fafc 50%,
+          #e0e7ff 100%
+        );
+
+        color: #1e293b;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 850px;
+      }
+
+      /* HEADER */
+
+      .header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .header .unit {
+        display: inline-block;
+
+        background: #e0e7ff;
+        color: #4338ca;
+
+        padding: 7px 16px;
+
+        border-radius: 50px;
+
+        font-size: 14px;
+        font-weight: 700;
+
+        margin-bottom: 15px;
+      }
+
+      .header h1 {
+        font-size: 42px;
+        font-weight: 800;
+
+        color: #312e81;
+
+        margin-bottom: 12px;
+      }
+
+      .header p {
+        font-size: 17px;
+        color: #64748b;
+
+        line-height: 1.6;
+      }
+
+      /* CARDS */
+
+      .options {
+        display: grid;
+
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 25px;
+      }
+
+      .card {
+        position: relative;
+
+        text-decoration: none;
+
+        background: white;
+
+        padding: 35px 30px;
+
+        border-radius: 24px;
+
+        border: 1px solid #e2e8f0;
+
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease,
+          border-color 0.3s ease;
+
+        overflow: hidden;
+      }
+
+      .card::before {
+        content: "";
+
+        position: absolute;
+
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 5px;
+
+        background: linear-gradient(90deg, #6366f1, #8b5cf6);
+      }
+
+      .card:hover {
+        transform: translateY(-8px);
+
+        box-shadow: 0 20px 45px rgba(79, 70, 229, 0.18);
+
+        border-color: #c7d2fe;
+      }
+
+      /* ICON */
+
+      .icon {
+        width: 65px;
+        height: 65px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 18px;
+
+        font-size: 32px;
+
+        margin-bottom: 22px;
+
+        background: #eef2ff;
+      }
+
+      /* TEXT */
+
+      .card h2 {
+        font-size: 23px;
+
+        color: #312e81;
+
+        margin-bottom: 10px;
+      }
+
+      .card p {
+        font-size: 15px;
+
+        color: #64748b;
+
+        line-height: 1.6;
+
+        margin-bottom: 25px;
+      }
+
+      /* BUTTON */
+
+      .button {
+        display: inline-flex;
+
+        align-items: center;
+
+        gap: 8px;
+
+        padding: 11px 18px;
+
+        border-radius: 10px;
+
+        background: #4f46e5;
+
+        color: white;
+
+        font-size: 14px;
+
+        font-weight: 700;
+
+        transition: background 0.2s ease;
+      }
+
+      .card:hover .button {
+        background: #4338ca;
+      }
+
+      /* FOOTER */
+
+      .footer {
+        text-align: center;
+
+        margin-top: 35px;
+
+        color: #94a3b8;
+
+        font-size: 14px;
+      }
+
+      /* MOBILE */
+
+      @media (max-width: 650px) {
+        body {
+          padding: 25px 15px;
+        }
+
+        .header h1 {
+          font-size: 32px;
+        }
+
+        .header p {
+          font-size: 15px;
+        }
+
+        .options {
+          grid-template-columns: 1fr;
+        }
+
+        .card {
+          padding: 28px 25px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- HEADER -->
+
+      <div class="header">
+        <div class="unit">UNIT 9</div>
+
+        <h1>📚 Learning Center</h1>
+
+        <p>Choose a learning activity to continue your English practice.</p>
+      </div>
+
+      <!-- OPTIONS -->
+
+      <div class="options">
+        <!-- VOCABULARY -->
+
+        <a href="../u9vocab.html" class="card">
+          <div class="icon">📖</div>
+
+          <h2>Vocabulary</h2>
+
+          <p>
+            Học và ôn tập từ vựng Unit 9 với nghĩa tiếng Việt, câu ví dụ và phát
+            âm.
+          </p>
+
+          <span class="button"> Start Learning → </span>
+        </a>
+
+        <!-- QUIZ -->
+
+        <a href="../u9.html" class="card">
+          <div class="icon">📝</div>
+
+          <h2>Vocabulary Quiz</h2>
+
+          <p>
+            Kiểm tra kiến thức từ vựng thông qua các câu hỏi trắc nghiệm và xem
+            kết quả của bạn.
+          </p>
+
+          <span class="button"> Take the Quiz → </span>
+        </a>
+      </div>
+
+      <!-- FOOTER -->
+
+      <div class="footer">Keep learning • Keep improving 🚀</div>
+    </div>
+  </body>
+</html>
