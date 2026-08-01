@@ -372,10 +372,7 @@ async function loadMyCourses() {
         <strong>English Course</strong>
       </div>
 
-      <a
-  href="/course/trangchu2.html"
-  class="home-btn"
->
+   <a href="course/trangchu2.html" class="home-btn">
   Start Learning
 </a>
     `;
