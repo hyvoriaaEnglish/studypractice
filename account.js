@@ -32,9 +32,7 @@ function formatStudyTime(totalSeconds) {
   totalSeconds = Math.floor(Number(totalSeconds) || 0);
 
   const hours = Math.floor(totalSeconds / 3600);
-
   const minutes = Math.floor((totalSeconds % 3600) / 60);
-
   const seconds = totalSeconds % 60;
 
   if (hours > 0) {
@@ -77,7 +75,6 @@ async function loadProfile() {
   console.log("Current User Email:", currentUser.email);
 
   const emailElement = document.getElementById("userEmail");
-
   const nameElement = document.getElementById("userName");
 
   if (emailElement) {
@@ -104,7 +101,6 @@ async function loadStudyData() {
   }
 
   console.log("Loading study data...");
-
   console.log("Current User ID:", currentUser.id);
 
   const { data, error } = await supabaseClient
@@ -116,20 +112,21 @@ async function loadStudyData() {
     });
 
   console.log("Study Data:", data);
-
   console.log("Study Error:", error);
 
   if (error) {
     console.error("Error loading study data:", error);
 
-    const historyList = document.getElementById("historyList");
+    ```
+const historyList = document.getElementById("historyList");
 
-    if (historyList) {
-      historyList.innerHTML =
-        '<p class="loading">Could not load study history.</p>';
-    }
+if (historyList) {
+  historyList.innerHTML =
+    '<p class="loading">Could not load study history.</p>';
+}
 
-    return;
+return;
+```;
   }
 
   updateStatistics(data || []);
@@ -145,21 +142,21 @@ function updateStatistics(data) {
   const today = new Date().toISOString().split("T")[0];
 
   let todaySeconds = 0;
-
   let totalSeconds = 0;
 
   data.forEach(function (row) {
     const seconds = Number(row.duration_seconds) || 0;
 
-    totalSeconds += seconds;
+    ```
+totalSeconds += seconds;
 
-    if (row.study_date === today) {
-      todaySeconds += seconds;
-    }
+if (row.study_date === today) {
+  todaySeconds += seconds;
+}
+```;
   });
 
   const todayElement = document.getElementById("todayTime");
-
   const totalElement = document.getElementById("totalTime");
 
   if (todayElement) {
@@ -171,7 +168,6 @@ function updateStatistics(data) {
   }
 
   calculateStreak(data);
-
   displayHistory(data);
 }
 
@@ -220,13 +216,15 @@ function calculateStreak(data) {
   for (const dateString of uniqueDates) {
     const expectedDate = checkDate.toISOString().split("T")[0];
 
-    if (dateString === expectedDate) {
-      streak++;
+    ```
+if (dateString === expectedDate) {
+  streak++;
 
-      checkDate.setDate(checkDate.getDate() - 1);
-    } else {
-      break;
-    }
+  checkDate.setDate(checkDate.getDate() - 1);
+} else {
+  break;
+}
+```;
   }
 
   streakElement.textContent = streak + " days";
@@ -251,47 +249,41 @@ function displayHistory(data) {
   if (!data || data.length === 0) {
     const emptyMessage = document.createElement("p");
 
-    emptyMessage.className = "loading";
+    ```
+emptyMessage.className = "loading";
+emptyMessage.textContent = "No study history yet.";
 
-    emptyMessage.textContent = "No study history yet.";
+historyList.appendChild(emptyMessage);
 
-    historyList.appendChild(emptyMessage);
-
-    return;
+return;
+```;
   }
-
-  // Chỉ hiển thị 7 ngày gần nhất
 
   const recentData = data.slice(0, 7);
 
   recentData.forEach(function (row) {
     const div = document.createElement("div");
 
-    div.className = "history-row";
+    ```
+div.className = "history-row";
 
-    // Ngày
+const dateSpan = document.createElement("span");
 
-    const dateSpan = document.createElement("span");
+dateSpan.textContent = formatDate(row.study_date);
 
-    dateSpan.textContent = formatDate(row.study_date);
+const timeSpan = document.createElement("span");
 
-    // Thời gian
+timeSpan.className = "history-time";
 
-    const timeSpan = document.createElement("span");
+timeSpan.textContent = formatStudyTime(
+  row.duration_seconds
+);
 
-    timeSpan.className = "history-time";
+div.appendChild(dateSpan);
+div.appendChild(timeSpan);
 
-    timeSpan.textContent = formatStudyTime(row.duration_seconds);
-
-    // Thêm vào dòng
-
-    div.appendChild(dateSpan);
-
-    div.appendChild(timeSpan);
-
-    // Thêm dòng vào lịch sử
-
-    historyList.appendChild(div);
+historyList.appendChild(div);
+```;
   });
 
   console.log("Study history displayed successfully.");
@@ -308,14 +300,12 @@ async function loadMyCourses() {
   }
 
   console.log("Loading my courses...");
-
   console.log("Current User ID:", currentUser.id);
 
   const coursesContainer = document.getElementById("myCourses");
 
   if (!coursesContainer) {
     console.error("Cannot find #myCourses in account.html");
-
     return;
   }
 
@@ -325,59 +315,70 @@ async function loadMyCourses() {
     .eq("user_id", currentUser.id);
 
   console.log("My Courses:", data);
-
   console.log("Course Error:", error);
-
-  // ==========================================
-  // ERROR
-  // ==========================================
 
   if (error) {
     console.error("Error loading courses:", error);
 
-    coursesContainer.innerHTML =
-      '<p class="loading">Could not load your courses.</p>';
+    ```
+coursesContainer.innerHTML =
+  '<p class="loading">Could not load your courses.</p>';
 
-    return;
+return;
+```;
   }
-
-  // ==========================================
-  // NO COURSE
-  // ==========================================
 
   if (!data || data.length === 0) {
     coursesContainer.innerHTML =
       '<p class="loading">You have not purchased any courses yet.</p>';
 
-    return;
+    ```
+return;
+```;
   }
 
-  // ==========================================
-  // CLEAR LOADING
-  // ==========================================
-
   coursesContainer.innerHTML = "";
-
-  // ==========================================
-  // DISPLAY COURSES
-  // ==========================================
 
   data.forEach(function (item) {
     const courseDiv = document.createElement("div");
 
-    courseDiv.className = "history-row";
+    ```
+courseDiv.className = "history-row";
 
-    courseDiv.innerHTML = `
-      <div>
-        <strong>English Course</strong>
-      </div>
+if (item.course_id === "course-1") {
+  courseDiv.innerHTML =
+    '<div>' +
+      '<strong>📚 Khóa học Tiếng Anh 1</strong>' +
+      '<p>Ôn thi tuyển sinh vào 10</p>' +
+    '</div>' +
+    '<a href="course/trangchu2.html" class="home-btn">' +
+      'Học ngay →' +
+    '</a>';
+}
 
-   <a href="course/trangchu2.html" class="home-btn">
-  Start Learning
-</a>
-    `;
+else if (item.course_id === "course-2") {
+  courseDiv.innerHTML =
+    '<div>' +
+      '<strong>🌷 Khóa học Idiom</strong>' +
+      '<p>262 Idioms + 340+ câu trắc nghiệm</p>' +
+    '</div>' +
+    '<a href="tncourse.html" class="home-btn">' +
+      'Học ngay →' +
+    '</a>';
+}
 
-    coursesContainer.appendChild(courseDiv);
+else {
+  courseDiv.innerHTML =
+    '<div>' +
+      '<strong>📚 Khóa học</strong>' +
+      '<p>Mã khóa học: ' +
+      item.course_id +
+      '</p>' +
+    '</div>';
+}
+
+coursesContainer.appendChild(courseDiv);
+```;
   });
 
   console.log("My courses displayed successfully.");
@@ -390,7 +391,9 @@ async function loadMyCourses() {
 window.addEventListener("studyTimeUpdated", async function () {
   console.log("Study time updated. Refreshing account...");
 
-  await loadStudyData();
+  ```
+await loadStudyData();
+```;
 });
 
 // ==========================================
@@ -426,11 +429,7 @@ async function initializeAccount() {
     return;
   }
 
-  // Load study information
-
   await loadStudyData();
-
-  // Load purchased courses
 
   await loadMyCourses();
 
