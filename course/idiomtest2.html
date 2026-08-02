@@ -1,0 +1,1000 @@
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Idioms Multiple-Choice Test</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: #fff8df;
+        color: #3d3000;
+        min-height: 100vh;
+        padding: 30px 15px;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: auto;
+      }
+
+      /* HEADER */
+      .header {
+        background: linear-gradient(135deg, #f9c900, #ffdf55);
+        padding: 35px 25px;
+        border-radius: 25px;
+        text-align: center;
+        margin-bottom: 25px;
+        box-shadow: 0 10px 30px rgba(180, 130, 0, 0.18);
+      }
+
+      .header h1 {
+        font-size: 32px;
+        color: #4a3800;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        font-size: 16px;
+        color: #665000;
+      }
+
+      /* PROGRESS */
+      .progress-box {
+        background: white;
+        padding: 18px 22px;
+        border-radius: 18px;
+        margin-bottom: 25px;
+        box-shadow: 0 5px 20px rgba(150, 110, 0, 0.1);
+        position: sticky;
+        top: 10px;
+        z-index: 10;
+      }
+
+      .progress-info {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        font-weight: bold;
+        color: #705600;
+      }
+
+      .progress-bar {
+        width: 100%;
+        height: 12px;
+        background: #f1e6b8;
+        border-radius: 20px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        width: 0%;
+        height: 100%;
+        background: linear-gradient(90deg, #e8ad00, #ffd83d);
+        transition: width 0.3s ease;
+      }
+
+      /* QUESTION CARD */
+      .question-card {
+        background: white;
+        border-radius: 22px;
+        padding: 28px;
+        margin-bottom: 22px;
+        box-shadow: 0 7px 25px rgba(150, 110, 0, 0.1);
+        border: 2px solid transparent;
+        transition: 0.3s;
+      }
+
+      .question-card:hover {
+        border-color: #f4ca25;
+      }
+
+      .question-number {
+        display: inline-block;
+        background: #fff0a8;
+        color: #856600;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-weight: bold;
+        font-size: 14px;
+        margin-bottom: 14px;
+      }
+
+      .question {
+        font-size: 18px;
+        line-height: 1.6;
+        font-weight: 600;
+        margin-bottom: 20px;
+      }
+
+      /* ANSWERS */
+      .options {
+        display: grid;
+        gap: 12px;
+      }
+
+      .option {
+        width: 100%;
+        text-align: left;
+        padding: 15px 18px;
+        background: #fffdf2;
+        border: 2px solid #eadb9c;
+        border-radius: 14px;
+        cursor: pointer;
+        font-size: 16px;
+        color: #4b3b00;
+        transition: all 0.2s ease;
+      }
+
+      .option:hover:not(:disabled) {
+        background: #fff5b9;
+        border-color: #e7b900;
+        transform: translateY(-2px);
+      }
+
+      .option:disabled {
+        cursor: default;
+      }
+
+      .option.correct {
+        background: #e8f8e8;
+        border-color: #43a047;
+        color: #236b27;
+        font-weight: bold;
+      }
+
+      .option.wrong {
+        background: #fff0f0;
+        border-color: #e53935;
+        color: #a82020;
+        font-weight: bold;
+      }
+
+      /* RESULT */
+      .feedback {
+        display: none;
+        margin-top: 20px;
+        padding: 18px;
+        border-radius: 15px;
+        line-height: 1.7;
+      }
+
+      .feedback.correct-feedback {
+        display: block;
+        background: #edf9ed;
+        border-left: 5px solid #43a047;
+        color: #28642b;
+      }
+
+      .feedback.wrong-feedback {
+        display: block;
+        background: #fff1f1;
+        border-left: 5px solid #e53935;
+        color: #8d2020;
+      }
+
+      .feedback-title {
+        font-size: 17px;
+        font-weight: bold;
+        margin-bottom: 7px;
+      }
+
+      .explanation {
+        margin-top: 8px;
+      }
+
+      /* FINAL RESULT */
+      .result {
+        display: none;
+        background: linear-gradient(135deg, #f9c900, #ffdf55);
+        padding: 35px;
+        border-radius: 25px;
+        text-align: center;
+        margin-top: 35px;
+        box-shadow: 0 10px 30px rgba(180, 130, 0, 0.2);
+      }
+
+      .result h2 {
+        font-size: 30px;
+        margin-bottom: 12px;
+      }
+
+      .score {
+        font-size: 48px;
+        font-weight: bold;
+        margin: 15px 0;
+        color: #4a3800;
+      }
+
+      .result p {
+        font-size: 18px;
+        margin-bottom: 20px;
+      }
+
+      .restart-btn {
+        border: none;
+        background: #4a3800;
+        color: white;
+        padding: 14px 28px;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+
+      .restart-btn:hover {
+        background: #705600;
+        transform: translateY(-2px);
+      }
+
+      /* MOBILE */
+      @media (max-width: 600px) {
+        body {
+          padding: 15px 10px;
+        }
+
+        .header {
+          padding: 25px 15px;
+        }
+
+        .header h1 {
+          font-size: 25px;
+        }
+
+        .question-card {
+          padding: 20px;
+        }
+
+        .question {
+          font-size: 16px;
+        }
+
+        .option {
+          font-size: 15px;
+          padding: 13px 14px;
+        }
+
+        .score {
+          font-size: 40px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>📝 Idioms Multiple-Choice Test</h1>
+        <p>40 Questions • Choose the best answer • Learn from your mistakes</p>
+      </div>
+
+      <div class="progress-box">
+        <div class="progress-info">
+          <span>📊 Your Progress</span>
+          <span id="progressText">0 / 40 answered</span>
+        </div>
+
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+
+      <div id="quiz"></div>
+
+      <div class="result" id="result">
+        <h2>🎉 Test Completed!</h2>
+
+        <div class="score" id="finalScore">0 / 40</div>
+
+        <p id="resultMessage"></p>
+
+        <button class="restart-btn" onclick="restartQuiz()">
+          🔄 Try Again
+        </button>
+      </div>
+    </div>
+
+    <script>
+      const questions = [
+        {
+          q: "The company gave me __________ when they refused to pay me for all the overtime I had worked.",
+          options: [
+            "a tall order",
+            "a raw deal",
+            "a wet blanket",
+            "a stumbling block",
+          ],
+          answer: 1,
+          explanation:
+            "<b>a raw deal</b> = một sự đối xử bất công / một thỏa thuận không công bằng. Công ty không trả tiền làm thêm giờ nên người nói bị đối xử bất công.",
+        },
+
+        {
+          q: "Whenever I feel depressed, my sister is always there to listen to my problems. She's a great __________.",
+          options: [
+            "shoulder to cry on",
+            "big fish in a small pond",
+            "wet blanket",
+            "tall order",
+          ],
+          answer: 0,
+          explanation:
+            "<b>a shoulder to cry on</b> = người để mình tâm sự, chia sẻ nỗi buồn hoặc khó khăn.",
+        },
+
+        {
+          q: "Being rejected from the university after working so hard felt like __________.",
+          options: [
+            "a baptism of fire",
+            "a slap in the face",
+            "a blessing in disguise",
+            "a port in a storm",
+          ],
+          answer: 1,
+          explanation:
+            "<b>a slap in the face</b> = một cú sốc / sự xúc phạm / sự thất vọng lớn. Bị từ chối sau khi đã nỗ lực rất nhiều khiến người nói cảm thấy bị tổn thương.",
+        },
+
+        {
+          q: "Lack of funding has become a major __________ to the completion of the project.",
+          options: ["stumbling block", "wet blanket", "tall order", "expense"],
+          answer: 0,
+          explanation:
+            "<b>a stumbling block</b> = trở ngại, vật cản khiến một việc khó tiến triển hoặc hoàn thành.",
+        },
+
+        {
+          q: "Getting all the students to agree on one plan will be __________.",
+          options: [
+            "a big fish in a small pond",
+            "a tall order",
+            "a baptism of fire",
+            "a raw deal",
+          ],
+          answer: 1,
+          explanation:
+            "<b>a tall order</b> = một yêu cầu hoặc nhiệm vụ rất khó thực hiện.",
+        },
+
+        {
+          q: "Don't invite Tom to the party. He's such __________ and always ruins everyone's fun.",
+          options: [
+            "a big fish",
+            "a wet blanket",
+            "a shoulder to cry on",
+            "a tall order",
+          ],
+          answer: 1,
+          explanation:
+            "<b>a wet blanket</b> = người làm mất vui, người luôn khiến không khí trở nên kém hào hứng.",
+        },
+
+        {
+          q: "I used to think I didn't need my old friends, but now that we've moved apart, I realize that __________.",
+          options: [
+            "absence makes the heart grow fonder",
+            "any port is a storm",
+            "all shapes make the heart grow",
+            "odds are against us",
+          ],
+          answer: 0,
+          explanation:
+            "<b>absence makes the heart grow fonder</b> = xa cách khiến người ta càng nhớ và yêu quý nhau hơn.",
+        },
+
+        {
+          q: "Don't shout at him! You're only __________ and making the argument worse.",
+          options: [
+            "adding fuel to the fire",
+            "adding insult to injury",
+            "at each other's throats",
+            "at the expense of him",
+          ],
+          answer: 0,
+          explanation:
+            "<b>add fuel to the fire</b> = đổ thêm dầu vào lửa, làm một tình huống vốn đã tệ trở nên tồi tệ hơn.",
+        },
+
+        {
+          q: "Against __________, the small team managed to win the national championship.",
+          options: [
+            "all at once",
+            "all the odds",
+            "all shapes and sizes",
+            "all over the place",
+          ],
+          answer: 1,
+          explanation:
+            "<b>against all the odds</b> = bất chấp mọi khó khăn / mặc dù khả năng thành công rất thấp.",
+        },
+
+        {
+          q: "The lights suddenly went out, and __________ the entire building became completely dark.",
+          options: [
+            "at the eleventh hour",
+            "all at once",
+            "at close quarters",
+            "back and forth",
+          ],
+          answer: 1,
+          explanation: "<b>all at once</b> = tất cả cùng một lúc, đột ngột.",
+        },
+
+        {
+          q: "I was already embarrassed about falling off the stage, and then John laughed at me. That really __________.",
+          options: [
+            "added fuel to the fire",
+            "added insult to injury",
+            "put me at stake",
+            "made me a wet blanket",
+          ],
+          answer: 1,
+          explanation:
+            "<b>add insult to injury</b> = đã tệ còn làm cho tình hình tệ hơn. Người nói đã xấu hổ nhưng John còn cười nhạo.",
+        },
+
+        {
+          q: "Her books and clothes were __________, so it took her hours to clean her room.",
+          options: [
+            "at close quarters",
+            "all over the place",
+            "back and forth",
+            "at stake",
+          ],
+          answer: 1,
+          explanation:
+            "<b>all over the place</b> = ở khắp nơi, bừa bộn, không ngăn nắp.",
+        },
+
+        {
+          q: "The shop sells clothes in __________, so everyone can find something that fits.",
+          options: [
+            "all shapes and sizes",
+            "all at once",
+            "all odds",
+            "all quarters",
+          ],
+          answer: 0,
+          explanation:
+            "<b>all shapes and sizes</b> = đủ mọi hình dạng và kích cỡ.",
+        },
+
+        {
+          q: "When you're desperate for somewhere to sleep during a storm, you'll accept almost anywhere. In other words, __________.",
+          options: [
+            "absence makes the heart grow fonder",
+            "any port in a storm",
+            "a tall order",
+            "all shapes and sizes",
+          ],
+          answer: 1,
+          explanation:
+            "<b>any port in a storm</b> = trong hoàn cảnh khó khăn, bất kỳ nơi nào hoặc giải pháp nào cũng có thể chấp nhận được.",
+        },
+
+        {
+          q: "Don't worry about the exam. The summer holiday is just __________.",
+          options: [
+            "at stake",
+            "around the corner",
+            "at first glance",
+            "at close quarters",
+          ],
+          answer: 1,
+          explanation:
+            "<b>around the corner</b> = sắp đến, rất gần trong tương lai.",
+        },
+
+        {
+          q: "After drinking several glasses of champagne, Mark was __________ and could barely walk straight.",
+          options: [
+            "as red as a beetroot",
+            "as high as a kite",
+            "as sick as a parrot",
+            "as thick as thieves",
+          ],
+          answer: 1,
+          explanation:
+            "<b>as high as a kite</b> = rất phấn khích hoặc ở trạng thái lâng lâng, thường do rượu hoặc chất kích thích.",
+        },
+
+        {
+          q: "After running five kilometers in the hot sun, his face was __________.",
+          options: [
+            "as red as a beetroot",
+            "as high as a kite",
+            "as sick as a parrot",
+            "as thick as thieves",
+          ],
+          answer: 0,
+          explanation:
+            "<b>as red as a beetroot</b> = đỏ bừng, thường do nóng, xấu hổ hoặc vận động mạnh.",
+        },
+
+        {
+          q: "After losing the final match, the footballer was __________.",
+          options: [
+            "as red as a beetroot",
+            "as sick as a parrot",
+            "as high as a kite",
+            "as thick as thieves",
+          ],
+          answer: 1,
+          explanation:
+            "<b>as sick as a parrot</b> = cực kỳ thất vọng hoặc buồn bã về một kết quả.",
+        },
+
+        {
+          q: "The two soldiers lived together for months and became very close. They were __________.",
+          options: [
+            "at each other's throats",
+            "as thick as thieves",
+            "at odds",
+            "back and forth",
+          ],
+          answer: 1,
+          explanation:
+            "<b>as thick as thieves</b> = cực kỳ thân thiết, rất gần gũi và thường làm mọi thứ cùng nhau.",
+        },
+
+        {
+          q: "The two politicians are constantly arguing and seem to be __________.",
+          options: [
+            "as thick as thieves",
+            "at each other's throats",
+            "at stake",
+            "around the corner",
+          ],
+          answer: 1,
+          explanation:
+            "<b>at each other's throats</b> = luôn tranh cãi hoặc đối đầu gay gắt với nhau.",
+        },
+
+        {
+          q: "The two teams are working __________ in order to finish the project on time.",
+          options: [
+            "at each other's throats",
+            "back and forth",
+            "at the expense",
+            "at close quarters",
+          ],
+          answer: 1,
+          explanation:
+            "<b>back and forth</b> = qua lại, tới lui. Trong ngữ cảnh này mô tả sự trao đổi hoặc làm việc qua lại.",
+        },
+
+        {
+          q: "__________, the building looked ordinary, but once I went inside, I was amazed by its beautiful interior.",
+          options: [
+            "At close quarters",
+            "At first glance",
+            "At the drop of a hat",
+            "At stake",
+          ],
+          answer: 1,
+          explanation:
+            "<b>at first glance</b> = thoạt nhìn, ngay từ cái nhìn đầu tiên.",
+        },
+
+        {
+          q: "His political views __________ those of his colleagues, so they often disagree.",
+          options: [
+            "are at odds with",
+            "are around the corner",
+            "are at stake",
+            "are behind the wheel",
+          ],
+          answer: 0,
+          explanation:
+            "<b>be at odds with</b> = bất đồng, trái ngược với ai hoặc điều gì.",
+        },
+
+        {
+          q: "The future of the company is __________ if we don't find new investors soon.",
+          options: [
+            "at the back of your mind",
+            "at stake",
+            "at close quarters",
+            "at first glance",
+          ],
+          answer: 1,
+          explanation:
+            "<b>at stake</b> = đang bị đe dọa, có nguy cơ mất hoặc thất bại.",
+        },
+
+        {
+          q: "Even when I'm busy, the problem is always __________.",
+          options: [
+            "at the back of my mind",
+            "at the drop of my hat",
+            "around the corner",
+            "at stake",
+          ],
+          answer: 0,
+          explanation:
+            "<b>at the back of my mind</b> = luôn hiện hữu trong suy nghĩ, dù không phải lúc nào cũng nghĩ trực tiếp về nó.",
+        },
+
+        {
+          q: "Sarah is extremely spontaneous. She'll travel abroad __________.",
+          options: [
+            "at the eleventh hour",
+            "at the drop of a hat",
+            "at first glance",
+            "at close quarters",
+          ],
+          answer: 1,
+          explanation:
+            "<b>at the drop of a hat</b> = ngay lập tức, không cần chuẩn bị nhiều, rất sẵn sàng làm điều gì đó.",
+        },
+
+        {
+          q: "We were running out of time, but __________, the manager approved our proposal.",
+          options: [
+            "at the drop of a hat",
+            "at the eleventh hour",
+            "at first glance",
+            "around the corner",
+          ],
+          answer: 1,
+          explanation:
+            "<b>at the eleventh hour</b> = vào phút chót, ngay trước khi quá muộn.",
+        },
+
+        {
+          q: "The company increased its profits __________ the well-being of its workers.",
+          options: [
+            "at stake",
+            "at the expense of",
+            "at the back of",
+            "at close quarters",
+          ],
+          answer: 1,
+          explanation:
+            "<b>at the expense of</b> = bằng cách gây tổn hại hoặc hy sinh lợi ích của một người/điều gì khác.",
+        },
+
+        {
+          q: "You shouldn't use your phone while you're __________.",
+          options: [
+            "at the expense",
+            "behind the wheel",
+            "at the drop of the hat",
+            "at first glance",
+          ],
+          answer: 1,
+          explanation: "<b>behind the wheel</b> = đang lái xe.",
+        },
+
+        {
+          q: "With modern technology, you can control your entire smart home __________.",
+          options: [
+            "at the push of a button",
+            "at the eleventh hour",
+            "at close quarters",
+            "back and forth",
+          ],
+          answer: 0,
+          explanation:
+            "<b>at the push of a button</b> = chỉ bằng một thao tác nhấn nút.",
+        },
+
+        {
+          q: "The two children kept running __________ between the living room and the garden.",
+          options: ["at stake", "back and forth", "at odds", "all at once"],
+          answer: 1,
+          explanation:
+            "<b>back and forth</b> = đi đi lại lại, qua lại giữa hai nơi.",
+        },
+
+        {
+          q: "My first day working in the emergency department was a real __________. I had to deal with difficult situations immediately.",
+          options: ["tall order", "baptism of fire", "wet blanket", "raw deal"],
+          answer: 1,
+          explanation:
+            "<b>a baptism of fire</b> = một trải nghiệm khó khăn đầu tiên, qua đó buộc phải học cách đối phó với tình huống thực tế ngay lập tức.",
+        },
+
+        {
+          q: "Despite being young, Emma is very successful in her small town. She's a __________.",
+          options: [
+            "big fish in a small pond",
+            "wet blanket",
+            "shoulder to cry on",
+            "stumbling block",
+          ],
+          answer: 0,
+          explanation:
+            "<b>a big fish in a small pond</b> = một người có vị trí hoặc tầm ảnh hưởng lớn trong một môi trường nhỏ.",
+        },
+
+        {
+          q: "The two brothers are so close that they're __________. They do almost everything together.",
+          options: [
+            "at each other's throats",
+            "as thick as thieves",
+            "at odds with each other",
+            "back and forth",
+          ],
+          answer: 1,
+          explanation:
+            "<b>as thick as thieves</b> = rất thân thiết, cực kỳ gần gũi với nhau.",
+        },
+
+        {
+          q: "When the teacher asked me to explain my strange behavior, I was completely __________.",
+          options: [
+            "lost for words",
+            "at stake",
+            "at close quarters",
+            "as high as a kite",
+          ],
+          answer: 0,
+          explanation:
+            "<b>lost for words</b> = không biết nói gì, không thể tìm được lời để diễn đạt cảm xúc hoặc phản ứng.",
+        },
+
+        {
+          q: "The two companies have been __________ over the price of the contract for weeks.",
+          options: [
+            "at each other's throats",
+            "all shapes and sizes",
+            "back and forth",
+            "around the corner",
+          ],
+          answer: 2,
+          explanation:
+            "<b>back and forth</b> = qua lại. Ở đây nói về việc hai công ty liên tục trao đổi, thương lượng qua lại về giá hợp đồng.",
+        },
+
+        {
+          q: "The deadline is __________, so we'd better start working on the project now.",
+          options: [
+            "at the back of your mind",
+            "around the corner",
+            "at close quarters",
+            "at first glance",
+          ],
+          answer: 1,
+          explanation:
+            "<b>around the corner</b> = sắp đến rất gần. Deadline sắp tới nên cần bắt đầu làm việc ngay.",
+        },
+
+        {
+          q: "The rescue team was __________ with the survivors, working in an extremely confined space.",
+          options: [
+            "at close quarters",
+            "at the expense",
+            "at odds",
+            "at the drop of a hat",
+          ],
+          answer: 0,
+          explanation:
+            "<b>at close quarters</b> = ở khoảng cách rất gần hoặc trong không gian chật hẹp.",
+        },
+
+        {
+          q: "I didn't know what to say when she suddenly told me she was leaving the country. I was completely __________.",
+          options: [
+            "as sick as a parrot",
+            "lost for words",
+            "as thick as thieves",
+            "at stake",
+          ],
+          answer: 1,
+          explanation:
+            "<b>lost for words</b> = không biết nói gì, không thể diễn đạt được phản ứng của mình.",
+        },
+
+        {
+          q: "The company solved the problem __________, allowing customers to access the service immediately.",
+          options: [
+            "at the push of a button",
+            "against all the odds",
+            "at the expense of",
+            "at the eleventh hour",
+          ],
+          answer: 0,
+          explanation:
+            "<b>at the push of a button</b> = chỉ bằng một lần nhấn nút, rất nhanh chóng và dễ dàng.",
+        },
+      ];
+
+      let answered = 0;
+      let score = 0;
+      let userAnswers = [];
+
+      const quiz = document.getElementById("quiz");
+      const progressText = document.getElementById("progressText");
+      const progressFill = document.getElementById("progressFill");
+      const result = document.getElementById("result");
+      const finalScore = document.getElementById("finalScore");
+      const resultMessage = document.getElementById("resultMessage");
+
+      function loadQuiz() {
+        quiz.innerHTML = "";
+
+        questions.forEach((item, index) => {
+          const card = document.createElement("div");
+          card.className = "question-card";
+
+          card.innerHTML = `
+      <div class="question-number">
+        Question ${index + 1}
+      </div>
+
+      <div class="question">
+        ${item.q}
+      </div>
+
+      <div class="options">
+
+        ${item.options
+          .map(
+            (option, optionIndex) => `
+          <button
+            class="option"
+            onclick="checkAnswer(${index}, ${optionIndex}, this)"
+          >
+            <b>${String.fromCharCode(65 + optionIndex)}.</b>
+            ${option}
+          </button>
+        `,
+          )
+          .join("")}
+
+      </div>
+
+      <div class="feedback" id="feedback-${index}"></div>
+    `;
+
+          quiz.appendChild(card);
+        });
+      }
+
+      function checkAnswer(questionIndex, selectedIndex, clickedButton) {
+        if (userAnswers[questionIndex] !== undefined) {
+          return;
+        }
+
+        userAnswers[questionIndex] = selectedIndex;
+        answered++;
+
+        const question = questions[questionIndex];
+        const buttons = clickedButton.parentElement.querySelectorAll(".option");
+        const feedback = document.getElementById(`feedback-${questionIndex}`);
+
+        buttons.forEach((button) => {
+          button.disabled = true;
+        });
+
+        // Đúng
+        if (selectedIndex === question.answer) {
+          score++;
+
+          clickedButton.classList.add("correct");
+
+          feedback.className = "feedback correct-feedback";
+
+          feedback.innerHTML = `
+      <div class="feedback-title">
+        ✅ Correct!
+      </div>
+
+      <div>
+        Bạn đã chọn đúng: 
+        <b>${String.fromCharCode(65 + question.answer)}. ${question.options[question.answer]}</b>
+      </div>
+
+      <div class="explanation">
+        💡 <b>Giải thích:</b> ${question.explanation}
+      </div>
+    `;
+        }
+
+        // Sai
+        else {
+          clickedButton.classList.add("wrong");
+
+          buttons[question.answer].classList.add("correct");
+
+          feedback.className = "feedback wrong-feedback";
+
+          feedback.innerHTML = `
+      <div class="feedback-title">
+        ❌ Incorrect!
+      </div>
+
+      <div>
+        Bạn chọn:
+        <b>${String.fromCharCode(65 + selectedIndex)}. ${question.options[selectedIndex]}</b>
+      </div>
+
+      <div>
+        Đáp án đúng:
+        <b>${String.fromCharCode(65 + question.answer)}. ${question.options[question.answer]}</b>
+      </div>
+
+      <div class="explanation">
+        💡 <b>Giải thích:</b> ${question.explanation}
+      </div>
+    `;
+        }
+
+        updateProgress();
+
+        if (answered === questions.length) {
+          showResult();
+        }
+      }
+
+      function updateProgress() {
+        progressText.textContent = `${answered} / ${questions.length} answered`;
+
+        const percentage = (answered / questions.length) * 100;
+
+        progressFill.style.width = percentage + "%";
+      }
+
+      function showResult() {
+        result.style.display = "block";
+
+        finalScore.textContent = `${score} / ${questions.length}`;
+
+        let percentage = (score / questions.length) * 100;
+
+        if (percentage >= 90) {
+          resultMessage.textContent = "🏆 Excellent! Bạn nắm idioms rất tốt!";
+        } else if (percentage >= 75) {
+          resultMessage.textContent =
+            "🌟 Great job! Bạn đã hiểu phần lớn các idioms.";
+        } else if (percentage >= 60) {
+          resultMessage.textContent =
+            "👍 Good effort! Hãy ôn lại những idioms bạn đã sai.";
+        } else {
+          resultMessage.textContent =
+            "📚 Keep practicing! Hãy học lại idioms và thử lại nhé.";
+        }
+
+        setTimeout(() => {
+          result.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+          });
+        }, 300);
+      }
+
+      function restartQuiz() {
+        answered = 0;
+        score = 0;
+        userAnswers = [];
+
+        result.style.display = "none";
+
+        progressText.textContent = "0 / 40 answered";
+
+        progressFill.style.width = "0%";
+
+        loadQuiz();
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+
+      loadQuiz();
+    </script>
+  </body>
+</html>
+```

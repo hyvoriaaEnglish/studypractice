@@ -1,0 +1,1218 @@
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Idioms Multiple-Choice Test — 35 Questions</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: #fff5f8;
+        color: #4a2635;
+        min-height: 100vh;
+        padding: 30px 15px;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: auto;
+      }
+
+      /* =========================
+       HEADER
+    ========================= */
+
+      .header {
+        background: linear-gradient(135deg, #f3a6bd, #f8c8d8);
+
+        padding: 35px 25px;
+
+        border-radius: 25px;
+
+        text-align: center;
+
+        margin-bottom: 25px;
+
+        box-shadow: 0 10px 30px rgba(210, 120, 150, 0.2);
+      }
+
+      .header h1 {
+        font-size: 31px;
+        color: #702d4a;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        font-size: 16px;
+        color: #81445c;
+      }
+
+      /* =========================
+       PROGRESS
+    ========================= */
+
+      .progress-box {
+        background: white;
+
+        padding: 18px 22px;
+
+        border-radius: 18px;
+
+        margin-bottom: 25px;
+
+        box-shadow: 0 5px 20px rgba(210, 120, 150, 0.1);
+
+        position: sticky;
+
+        top: 10px;
+
+        z-index: 10;
+      }
+
+      .progress-info {
+        display: flex;
+
+        justify-content: space-between;
+
+        margin-bottom: 10px;
+
+        font-weight: bold;
+
+        color: #b04b70;
+      }
+
+      .progress-bar {
+        width: 100%;
+
+        height: 12px;
+
+        background: #f9e1e9;
+
+        border-radius: 20px;
+
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        width: 0%;
+
+        height: 100%;
+
+        background: linear-gradient(90deg, #e98aaa, #f5b6c9);
+
+        transition: width 0.3s ease;
+      }
+
+      /* =========================
+       QUESTION CARD
+    ========================= */
+
+      .question-card {
+        background: white;
+
+        border-radius: 22px;
+
+        padding: 28px;
+
+        margin-bottom: 22px;
+
+        box-shadow: 0 7px 25px rgba(210, 120, 150, 0.09);
+
+        border: 2px solid transparent;
+
+        transition: 0.3s;
+      }
+
+      .question-card:hover {
+        border-color: #f0a9bf;
+      }
+
+      .question-number {
+        display: inline-block;
+
+        background: #fde4ec;
+
+        color: #b04b70;
+
+        padding: 6px 12px;
+
+        border-radius: 20px;
+
+        font-weight: bold;
+
+        font-size: 14px;
+
+        margin-bottom: 14px;
+      }
+
+      .question {
+        font-size: 18px;
+
+        line-height: 1.6;
+
+        font-weight: 600;
+
+        margin-bottom: 20px;
+      }
+
+      /* =========================
+       OPTIONS
+    ========================= */
+
+      .options {
+        display: grid;
+
+        gap: 12px;
+      }
+
+      .option {
+        width: 100%;
+
+        text-align: left;
+
+        padding: 15px 18px;
+
+        background: #fffafd;
+
+        border: 2px solid #f1d2dc;
+
+        border-radius: 14px;
+
+        cursor: pointer;
+
+        font-size: 16px;
+
+        color: #5a3040;
+
+        transition: all 0.2s ease;
+      }
+
+      .option:hover:not(:disabled) {
+        background: #fff0f5;
+
+        border-color: #e98aaa;
+
+        transform: translateY(-2px);
+      }
+
+      .option:disabled {
+        cursor: default;
+      }
+
+      /* CORRECT ANSWER */
+
+      .option.correct {
+        background: #eaf8ed;
+
+        border-color: #55a866;
+
+        color: #28753a;
+
+        font-weight: bold;
+      }
+
+      /* WRONG ANSWER */
+
+      .option.wrong {
+        background: #fff0f2;
+
+        border-color: #e57373;
+
+        color: #a83232;
+
+        font-weight: bold;
+      }
+
+      /* =========================
+       FEEDBACK
+    ========================= */
+
+      .feedback {
+        display: none;
+
+        margin-top: 20px;
+
+        padding: 18px;
+
+        border-radius: 15px;
+
+        line-height: 1.7;
+      }
+
+      .feedback.correct-feedback {
+        display: block;
+
+        background: #edf9ef;
+
+        border-left: 5px solid #55a866;
+
+        color: #286b35;
+      }
+
+      .feedback.wrong-feedback {
+        display: block;
+
+        background: #fff1f2;
+
+        border-left: 5px solid #e57373;
+
+        color: #8d3030;
+      }
+
+      .feedback-title {
+        font-size: 17px;
+
+        font-weight: bold;
+
+        margin-bottom: 7px;
+      }
+
+      .explanation {
+        margin-top: 8px;
+      }
+
+      /* =========================
+       FINAL RESULT
+    ========================= */
+
+      .result {
+        display: none;
+
+        background: linear-gradient(135deg, #f3a6bd, #f8c8d8);
+
+        color: #702d4a;
+
+        padding: 35px;
+
+        border-radius: 25px;
+
+        text-align: center;
+
+        margin-top: 35px;
+
+        box-shadow: 0 10px 30px rgba(210, 120, 150, 0.25);
+      }
+
+      .result h2 {
+        font-size: 30px;
+
+        margin-bottom: 12px;
+      }
+
+      .score {
+        font-size: 48px;
+
+        font-weight: bold;
+
+        margin: 15px 0;
+      }
+
+      .result p {
+        font-size: 18px;
+
+        margin-bottom: 20px;
+      }
+
+      .restart-btn {
+        border: none;
+
+        background: white;
+
+        color: #b04b70;
+
+        padding: 14px 28px;
+
+        border-radius: 12px;
+
+        font-size: 16px;
+
+        font-weight: bold;
+
+        cursor: pointer;
+
+        transition: 0.2s;
+      }
+
+      .restart-btn:hover {
+        background: #fff0f5;
+
+        transform: translateY(-2px);
+      }
+
+      /* =========================
+       MOBILE
+    ========================= */
+
+      @media (max-width: 600px) {
+        body {
+          padding: 15px 10px;
+        }
+
+        .header {
+          padding: 25px 15px;
+        }
+
+        .header h1 {
+          font-size: 25px;
+        }
+
+        .question-card {
+          padding: 20px;
+        }
+
+        .question {
+          font-size: 16px;
+        }
+
+        .option {
+          font-size: 15px;
+          padding: 13px 14px;
+        }
+
+        .score {
+          font-size: 40px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- HEADER -->
+
+      <div class="header">
+        <h1>📝 Idioms Multiple-Choice Test</h1>
+
+        <p>35 Questions • B2–C1 Level • Choose the best answer</p>
+      </div>
+
+      <!-- PROGRESS -->
+
+      <div class="progress-box">
+        <div class="progress-info">
+          <span> 📊 Your Progress </span>
+
+          <span id="progressText"> 0 / 35 answered </span>
+        </div>
+
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+
+      <!-- QUIZ -->
+
+      <div id="quiz"></div>
+
+      <!-- FINAL RESULT -->
+
+      <div class="result" id="result">
+        <h2>🎉 Test Completed!</h2>
+
+        <div class="score" id="finalScore">0 / 35</div>
+
+        <p id="resultMessage"></p>
+
+        <button class="restart-btn" onclick="restartQuiz()">
+          🔄 Try Again
+        </button>
+      </div>
+    </div>
+
+    <script>
+      /* =========================
+   QUESTIONS
+========================= */
+
+      const questions = [
+        {
+          q: "When the teacher asked me why I had broken the expensive equipment, I was completely __________.",
+          options: [
+            "in the know",
+            "lost for words",
+            "in full swing",
+            "nuts about it",
+          ],
+          answer: 1,
+          explanation:
+            "<b>lost for words</b> = không biết nói gì, không thể tìm được lời để giải thích hoặc diễn đạt cảm xúc.",
+        },
+
+        {
+          q: "In his small hometown, Tom is a __________ because he owns the only successful technology company there.",
+          options: [
+            "tower of strength",
+            "big fish in a small pond",
+            "dead meat",
+            "long haul",
+          ],
+          answer: 1,
+          explanation:
+            "<b>a big fish in a small pond</b> = một người có vị thế hoặc tầm ảnh hưởng lớn trong một môi trường nhỏ.",
+        },
+
+        {
+          q: "Lack of sleep and constant stress can __________, making it difficult to concentrate or stay healthy.",
+          options: [
+            "be your worst enemy",
+            "be in your good books",
+            "be all ears",
+            "be in the same boat",
+          ],
+          answer: 0,
+          explanation:
+            "<b>be your worst enemy</b> = là yếu tố gây hại nghiêm trọng hoặc trở thành trở ngại lớn nhất đối với bạn.",
+        },
+
+        {
+          q: "The two departments were __________ because each thought the other was responsible for the problem.",
+          options: [
+            "in full swing",
+            "at cross-purposes",
+            "in the know",
+            "nuts about each other",
+          ],
+          answer: 1,
+          explanation:
+            "<b>at cross-purposes</b> = hiểu sai ý nhau hoặc hành động với những mục đích khác nhau, khiến hai bên không thể phối hợp.",
+        },
+
+        {
+          q: "Learning a new language fluently is not something you can achieve in a few weeks. It's __________.",
+          options: ["a dead meat", "a long haul", "hot water", "a worst enemy"],
+          answer: 1,
+          explanation:
+            "<b>a long haul</b> = một quá trình dài và đòi hỏi nhiều thời gian, nỗ lực.",
+        },
+
+        {
+          q: "When I was going through a difficult period, my best friend was __________ and always supported me.",
+          options: [
+            "a tower of strength",
+            "a big fish",
+            "a dead meat",
+            "a long haul",
+          ],
+          answer: 0,
+          explanation:
+            "<b>a tower of strength</b> = một người luôn mạnh mẽ, đáng tin cậy và hỗ trợ bạn trong lúc khó khăn.",
+        },
+
+        {
+          q: '"Tell me everything! I\'m __________."',
+          options: [
+            "at loggerheads",
+            "all ears",
+            "in the dark",
+            "in two minds",
+          ],
+          answer: 1,
+          explanation:
+            "<b>all ears</b> = hoàn toàn sẵn sàng lắng nghe, rất muốn nghe điều gì đó.",
+        },
+
+        {
+          q: "The two politicians have been __________ over the proposed changes to the education system.",
+          options: [
+            "at loggerheads",
+            "in the same boat",
+            "in the know",
+            "nuts about each other",
+          ],
+          answer: 0,
+          explanation:
+            "<b>at loggerheads</b> = hoàn toàn bất đồng, thường xuyên tranh cãi hoặc đối đầu với nhau.",
+        },
+
+        {
+          q: "I've tried everything to fix my computer, but nothing works. I'm __________!",
+          options: [
+            "in full swing",
+            "at my wits' end",
+            "in the cards",
+            "in someone's good books",
+          ],
+          answer: 1,
+          explanation:
+            "<b>at my wits' end</b> = hoàn toàn tuyệt vọng hoặc không biết phải làm gì tiếp theo vì đã thử mọi cách.",
+        },
+
+        {
+          q: "If you think John caused the problem, you're __________. He wasn't even in the office that day.",
+          options: [
+            "in the know",
+            "barking up the wrong tree",
+            "in the same boat",
+            "dying for it",
+          ],
+          answer: 1,
+          explanation:
+            "<b>barking up the wrong tree</b> = hiểu sai vấn đề hoặc nhầm người/đối tượng cần trách hay tìm kiếm.",
+        },
+
+        {
+          q: "I don't want to choose between accepting a job I hate and remaining unemployed. I'm __________.",
+          options: [
+            "between the devil and the deep blue sea",
+            "in full swing",
+            "in the know",
+            "nuts about it",
+          ],
+          answer: 0,
+          explanation:
+            "<b>between the devil and the deep blue sea</b> = rơi vào tình thế tiến thoái lưỡng nan, phải lựa chọn giữa hai phương án đều không tốt.",
+        },
+
+        {
+          q: "If you betray your teammates again, you'll be __________.",
+          options: [
+            "a tower of strength",
+            "dead meat",
+            "in the cards",
+            "all ears",
+          ],
+          answer: 1,
+          explanation:
+            "<b>dead meat</b> = gặp rắc rối nghiêm trọng hoặc chắc chắn sẽ bị trừng phạt.",
+        },
+
+        {
+          q: "I'm __________ a cup of coffee. I haven't had one all day.",
+          options: [
+            "green with envy",
+            "dying for",
+            "in line for",
+            "at loggerheads with",
+          ],
+          answer: 1,
+          explanation:
+            "<b>dying for</b> = rất muốn hoặc cực kỳ khao khát điều gì đó.",
+        },
+
+        {
+          q: "Sarah was __________ when she saw her friend's new luxury car.",
+          options: [
+            "green with envy",
+            "in the dark",
+            "at her wits' end",
+            "barking up the wrong tree",
+          ],
+          answer: 0,
+          explanation:
+            "<b>green with envy</b> = cực kỳ ghen tị hoặc đố kỵ với điều người khác có.",
+        },
+
+        {
+          q: "The festival is now __________, with thousands of visitors arriving every day.",
+          options: [
+            "in two minds",
+            "in full swing",
+            "in the dark",
+            "in the same boat",
+          ],
+          answer: 1,
+          explanation:
+            "<b>in full swing</b> = đang diễn ra sôi nổi, ở giai đoạn hoạt động mạnh mẽ nhất.",
+        },
+
+        {
+          q: "Because of her excellent performance, Maria is __________ a promotion.",
+          options: [
+            "in the dark about",
+            "in line for",
+            "at cross-purposes",
+            "in two minds",
+          ],
+          answer: 1,
+          explanation:
+            "<b>in line for</b> = có khả năng hoặc có triển vọng nhận được điều gì đó.",
+        },
+
+        {
+          q: "You'd better apologize to your teacher if you want to stay __________.",
+          options: [
+            "in her good books",
+            "in full swing",
+            "in the same boat",
+            "in hot water",
+          ],
+          answer: 0,
+          explanation:
+            "<b>in someone's good books</b> = được ai đó yêu quý, đánh giá tốt hoặc có thiện cảm.",
+        },
+
+        {
+          q: '"Do you think we\'ll get married next year?"<br>"Who knows? It might be __________."',
+          options: [
+            "in the cards",
+            "in the dark",
+            "in hot water",
+            "at loggerheads",
+          ],
+          answer: 0,
+          explanation:
+            "<b>in the cards</b> = có khả năng xảy ra hoặc có thể trở thành hiện thực trong tương lai.",
+        },
+
+        {
+          q: "I can't decide whether to study abroad or stay here. I'm __________.",
+          options: [
+            "in the know",
+            "in two minds",
+            "in full swing",
+            "in the same boat",
+          ],
+          answer: 1,
+          explanation:
+            "<b>in two minds</b> = không thể quyết định vì đang phân vân giữa hai lựa chọn.",
+        },
+
+        {
+          q: "The manager hasn't told us anything about the company's future plans, so we're completely __________.",
+          options: [
+            "in the know",
+            "in the dark about them",
+            "in someone's good books",
+            "in line for them",
+          ],
+          answer: 1,
+          explanation:
+            "<b>in the dark about</b> = không được biết hoặc không có thông tin về một vấn đề.",
+        },
+
+        {
+          q: "Ask Linda about the upcoming changes. She's __________ and knows exactly what's going on.",
+          options: [
+            "in the know",
+            "at her wits' end",
+            "in two minds",
+            "green with envy",
+          ],
+          answer: 0,
+          explanation:
+            "<b>in the know</b> = được biết thông tin nội bộ hoặc biết rõ điều gì đang xảy ra.",
+        },
+
+        {
+          q: "Don't worry about being the only one who failed the test. We're all __________.",
+          options: [
+            "in full swing",
+            "in the same boat",
+            "in the cards",
+            "in someone's good books",
+          ],
+          answer: 1,
+          explanation:
+            "<b>in the same boat</b> = ở trong cùng một hoàn cảnh hoặc cùng gặp một vấn đề.",
+        },
+
+        {
+          q: "If you keep driving without a license, you're going to __________.",
+          options: [
+            "get into hot water",
+            "be all ears",
+            "be in line for",
+            "be nuts about",
+          ],
+          answer: 0,
+          explanation:
+            "<b>get into hot water</b> = rơi vào tình huống rắc rối hoặc gặp vấn đề nghiêm trọng.",
+        },
+
+        {
+          q: "My brother and I are completely different. We're __________.",
+          options: [
+            "at loggerheads",
+            "like chalk and cheese",
+            "in the same boat",
+            "at cross-purposes",
+          ],
+          answer: 1,
+          explanation:
+            "<b>like chalk and cheese</b> = hoàn toàn khác nhau về tính cách, sở thích hoặc đặc điểm.",
+        },
+
+        {
+          q: "My grandfather is getting __________, but he still goes jogging every morning.",
+          options: [
+            "in full swing",
+            "long in the tooth",
+            "green with envy",
+            "in the know",
+          ],
+          answer: 1,
+          explanation: "<b>long in the tooth</b> = khá lớn tuổi hoặc đã già.",
+        },
+
+        {
+          q: "The situation is extremely serious. This is __________, so everyone needs to remain calm.",
+          options: [
+            "a long haul",
+            "no laughing matter",
+            "a tower of strength",
+            "a big fish",
+          ],
+          answer: 1,
+          explanation:
+            "<b>no laughing matter</b> = một vấn đề nghiêm trọng, không phải chuyện để đùa cợt.",
+        },
+
+        {
+          q: "My little sister is __________ cartoons. She watches them every morning before school.",
+          options: [
+            "nuts about",
+            "in the dark about",
+            "at loggerheads with",
+            "in line for",
+          ],
+          answer: 0,
+          explanation:
+            "<b>nuts about</b> = cực kỳ yêu thích hoặc say mê một điều gì đó.",
+        },
+
+        {
+          q: "The manager and the employees were __________ because they had completely different ideas about what the project required.",
+          options: [
+            "at cross-purposes",
+            "in full swing",
+            "in the know",
+            "in the same boat",
+          ],
+          answer: 0,
+          explanation:
+            "<b>at cross-purposes</b> = không hiểu đúng ý nhau hoặc có những mục đích khác nhau nên không thể phối hợp hiệu quả.",
+        },
+
+        {
+          q: "After being caught cheating in the exam, Tom knew he was __________ when the principal called him into the office.",
+          options: [
+            "all ears",
+            "dead meat",
+            "a tower of strength",
+            "in line for",
+          ],
+          answer: 1,
+          explanation:
+            "<b>dead meat</b> = chắc chắn sẽ gặp rắc rối nghiêm trọng hoặc bị phạt.",
+        },
+
+        {
+          q: "We've been working on this project for six months, and it's going to be a __________ before we finally finish it.",
+          options: ["long haul", "big fish", "dead meat", "hot water"],
+          answer: 0,
+          explanation:
+            "<b>a long haul</b> = một quá trình kéo dài, cần rất nhiều thời gian và kiên trì.",
+        },
+
+        {
+          q: '"Are you free to talk? I have some exciting news!"<br>"Absolutely. I\'m __________."',
+          options: [
+            "in the dark",
+            "all ears",
+            "at loggerheads",
+            "in two minds",
+          ],
+          answer: 1,
+          explanation:
+            "<b>all ears</b> = rất sẵn sàng và háo hức lắng nghe điều gì đó.",
+        },
+
+        {
+          q: "After spending all his savings on a failed business, he found himself __________ and had to ask his family for help.",
+          options: [
+            "in hot water",
+            "in the know",
+            "in someone's good books",
+            "in full swing",
+          ],
+          answer: 0,
+          explanation:
+            "<b>in hot water</b> = đang gặp rắc rối hoặc ở trong một tình huống khó khăn.",
+        },
+
+        {
+          q: "The two sisters are __________. One is extremely outgoing, while the other is very shy and reserved.",
+          options: [
+            "like chalk and cheese",
+            "in the same boat",
+            "at cross-purposes",
+            "nuts about each other",
+          ],
+          answer: 0,
+          explanation:
+            "<b>like chalk and cheese</b> = hoàn toàn trái ngược hoặc rất khác nhau.",
+        },
+
+        {
+          q: "The students are __________ the results of their final exams, which will determine whether they can enter university.",
+          options: [
+            "in the cards",
+            "in line for",
+            "dying for",
+            "in the dark about",
+          ],
+          answer: 1,
+          explanation:
+            "<b>in line for</b> = có khả năng nhận được hoặc đạt được điều gì đó. Ở đây, kết quả sẽ quyết định cơ hội vào đại học.",
+        },
+
+        {
+          q: "I've always __________ classical music, especially piano concerts.",
+          options: [
+            "been barking up the wrong tree",
+            "been nuts about",
+            "been at loggerheads with",
+            "been in hot water",
+          ],
+          answer: 1,
+          explanation:
+            "<b>be nuts about</b> = cực kỳ yêu thích hoặc say mê một điều gì đó.",
+        },
+      ];
+
+      /* =========================
+   VARIABLES
+========================= */
+
+      let answered = 0;
+
+      let score = 0;
+
+      let userAnswers = [];
+
+      const quiz = document.getElementById("quiz");
+
+      const progressText = document.getElementById("progressText");
+
+      const progressFill = document.getElementById("progressFill");
+
+      const result = document.getElementById("result");
+
+      const finalScore = document.getElementById("finalScore");
+
+      const resultMessage = document.getElementById("resultMessage");
+
+      /* =========================
+   LOAD QUIZ
+========================= */
+
+      function loadQuiz() {
+        quiz.innerHTML = "";
+
+        questions.forEach((item, index) => {
+          const card = document.createElement("div");
+
+          card.className = "question-card";
+
+          card.innerHTML = `
+
+        <div class="question-number">
+
+          Question ${index + 1}
+
+        </div>
+
+
+        <div class="question">
+
+          ${item.q}
+
+        </div>
+
+
+        <div class="options">
+
+          ${item.options
+            .map(
+              (option, optionIndex) => `
+
+              <button
+
+                class="option"
+
+                onclick="checkAnswer(
+
+                  ${index},
+
+                  ${optionIndex},
+
+                  this
+
+                )"
+
+              >
+
+                <b>
+
+                  ${String.fromCharCode(65 + optionIndex)}.
+
+                </b>
+
+                ${option}
+
+              </button>
+
+            `,
+            )
+            .join("")}
+
+        </div>
+
+
+        <div
+
+          class="feedback"
+
+          id="feedback-${index}"
+
+        >
+
+        </div>
+
+      `;
+
+          quiz.appendChild(card);
+        });
+      }
+
+      /* =========================
+   CHECK ANSWER
+========================= */
+
+      function checkAnswer(
+        questionIndex,
+
+        selectedIndex,
+
+        clickedButton,
+      ) {
+        /* Prevent changing answer */
+
+        if (userAnswers[questionIndex] !== undefined) {
+          return;
+        }
+
+        userAnswers[questionIndex] = selectedIndex;
+
+        answered++;
+
+        const question = questions[questionIndex];
+
+        const buttons = clickedButton.parentElement.querySelectorAll(".option");
+
+        const feedback = document.getElementById(`feedback-${questionIndex}`);
+
+        /* Disable all buttons */
+
+        buttons.forEach((button) => {
+          button.disabled = true;
+        });
+
+        /* =====================
+     CORRECT
+  ===================== */
+
+        if (selectedIndex === question.answer) {
+          score++;
+
+          clickedButton.classList.add("correct");
+
+          feedback.className = "feedback correct-feedback";
+
+          feedback.innerHTML = `
+
+      <div class="feedback-title">
+
+        ✅ Correct!
+
+      </div>
+
+
+      <div>
+
+        Bạn đã chọn đúng:
+
+        <b>
+
+          ${String.fromCharCode(65 + question.answer)}.
+
+          ${question.options[question.answer]}
+
+        </b>
+
+      </div>
+
+
+      <div class="explanation">
+
+        💡
+
+        <b>Giải thích:</b>
+
+        ${question.explanation}
+
+      </div>
+
+    `;
+        } else {
+
+        /* =====================
+     WRONG
+  ===================== */
+          clickedButton.classList.add("wrong");
+
+          buttons[question.answer].classList.add("correct");
+
+          feedback.className = "feedback wrong-feedback";
+
+          feedback.innerHTML = `
+
+      <div class="feedback-title">
+
+        ❌ Incorrect!
+
+      </div>
+
+
+      <div>
+
+        Bạn chọn:
+
+        <b>
+
+          ${String.fromCharCode(65 + selectedIndex)}.
+
+          ${question.options[selectedIndex]}
+
+        </b>
+
+      </div>
+
+
+      <div>
+
+        Đáp án đúng:
+
+        <b>
+
+          ${String.fromCharCode(65 + question.answer)}.
+
+          ${question.options[question.answer]}
+
+        </b>
+
+      </div>
+
+
+      <div class="explanation">
+
+        💡
+
+        <b>Giải thích:</b>
+
+        ${question.explanation}
+
+      </div>
+
+    `;
+        }
+
+        updateProgress();
+
+        /* Test completed */
+
+        if (answered === questions.length) {
+          showResult();
+        }
+      }
+
+      /* =========================
+   UPDATE PROGRESS
+========================= */
+
+      function updateProgress() {
+        progressText.textContent = `${answered} / ${questions.length} answered`;
+
+        const percentage = (answered / questions.length) * 100;
+
+        progressFill.style.width = percentage + "%";
+      }
+
+      /* =========================
+   SHOW RESULT
+========================= */
+
+      function showResult() {
+        result.style.display = "block";
+
+        finalScore.textContent = `${score} / ${questions.length}`;
+
+        const percentage = (score / questions.length) * 100;
+
+        if (percentage >= 90) {
+          resultMessage.textContent =
+            "🏆 Excellent! Bạn nắm idioms cực kỳ tốt!";
+        } else if (percentage >= 75) {
+          resultMessage.textContent =
+            "🌟 Great job! Bạn đã hiểu phần lớn các idioms.";
+        } else if (percentage >= 60) {
+          resultMessage.textContent =
+            "👍 Good effort! Hãy ôn lại những idioms bạn đã sai.";
+        } else {
+          resultMessage.textContent =
+            "📚 Keep practicing! Hãy học lại idioms và thử lại nhé.";
+        }
+
+        setTimeout(() => {
+          result.scrollIntoView({
+            behavior: "smooth",
+
+            block: "center",
+          });
+        }, 300);
+      }
+
+      /* =========================
+   RESTART
+========================= */
+
+      function restartQuiz() {
+        answered = 0;
+
+        score = 0;
+
+        userAnswers = [];
+
+        result.style.display = "none";
+
+        progressText.textContent = "0 / 35 answered";
+
+        progressFill.style.width = "0%";
+
+        loadQuiz();
+
+        window.scrollTo({
+          top: 0,
+
+          behavior: "smooth",
+        });
+      }
+
+      /* =========================
+   START QUIZ
+========================= */
+
+      loadQuiz();
+    </script>
+  </body>
+</html>
+```

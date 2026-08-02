@@ -1,0 +1,1471 @@
+```html
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Hyvoria English | So That, Such That & Linking Words</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: linear-gradient(135deg, #f4f1ff, #eef7ff);
+        color: #222;
+        line-height: 1.6;
+        padding-bottom: 60px;
+      }
+
+      /* =========================
+       HEADER
+    ========================= */
+
+      header {
+        background: linear-gradient(135deg, #6c5ce7, #8e7cff);
+        color: white;
+        text-align: center;
+        padding: 35px 20px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+      }
+
+      header h1 {
+        font-size: 32px;
+        margin-bottom: 8px;
+      }
+
+      header p {
+        font-size: 16px;
+        opacity: 0.95;
+      }
+
+      /* =========================
+       MAIN CONTAINER
+    ========================= */
+
+      .container {
+        max-width: 950px;
+        margin: 30px auto;
+        padding: 0 15px;
+      }
+
+      /* =========================
+       SCORE BOX
+    ========================= */
+
+      .score-box {
+        background: white;
+        padding: 20px;
+        border-radius: 18px;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+
+        position: sticky;
+        top: 10px;
+        z-index: 10;
+      }
+
+      .score-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        font-weight: bold;
+        margin-bottom: 12px;
+      }
+
+      #score {
+        color: #6c5ce7;
+        font-size: 20px;
+      }
+
+      #progressText {
+        color: #555;
+      }
+
+      .progress-container {
+        width: 100%;
+        height: 12px;
+
+        background: #eeeeee;
+
+        border-radius: 20px;
+        overflow: hidden;
+      }
+
+      #progressBar {
+        width: 0%;
+        height: 100%;
+
+        background: linear-gradient(90deg, #6c5ce7, #00b894);
+
+        transition: width 0.4s ease;
+      }
+
+      /* =========================
+       SECTION
+    ========================= */
+
+      .section {
+        margin-bottom: 40px;
+      }
+
+      .section-title {
+        background: linear-gradient(135deg, #6c5ce7, #8e7cff);
+
+        color: white;
+
+        padding: 20px 22px;
+
+        border-radius: 16px;
+
+        margin-bottom: 20px;
+
+        box-shadow: 0 5px 15px rgba(108, 92, 231, 0.2);
+      }
+
+      .section-title h2 {
+        font-size: 23px;
+        margin-bottom: 4px;
+      }
+
+      .section-title p {
+        opacity: 0.9;
+        font-size: 14px;
+      }
+
+      /* =========================
+       QUESTION
+    ========================= */
+
+      .question {
+        background: white;
+
+        border-radius: 16px;
+
+        padding: 22px;
+
+        margin-bottom: 18px;
+
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+      }
+
+      .question-text {
+        font-weight: bold;
+
+        font-size: 17px;
+
+        margin-bottom: 15px;
+      }
+
+      .options {
+        display: grid;
+        gap: 10px;
+      }
+
+      .option {
+        width: 100%;
+
+        text-align: left;
+
+        padding: 13px 16px;
+
+        border: 2px solid #e5e5e5;
+
+        border-radius: 10px;
+
+        background: #fafafa;
+
+        cursor: pointer;
+
+        font-size: 15px;
+
+        transition: all 0.2s ease;
+      }
+
+      .option:hover:not(:disabled) {
+        border-color: #6c5ce7;
+
+        background: #f4f1ff;
+
+        transform: translateX(3px);
+      }
+
+      .option:disabled {
+        cursor: default;
+      }
+
+      /* =========================
+       CORRECT / WRONG
+    ========================= */
+
+      .option.correct {
+        background: #dff8ea;
+
+        border-color: #00b894;
+
+        color: #087f5b;
+
+        font-weight: bold;
+      }
+
+      .option.wrong {
+        background: #ffe5e5;
+
+        border-color: #ff7675;
+
+        color: #c0392b;
+
+        font-weight: bold;
+      }
+
+      /* =========================
+       FEEDBACK
+    ========================= */
+
+      .feedback {
+        display: none;
+
+        margin-top: 15px;
+
+        padding: 15px;
+
+        border-radius: 10px;
+
+        font-size: 14px;
+      }
+
+      .feedback.show {
+        display: block;
+      }
+
+      .feedback.correct-feedback {
+        background: #e9fff4;
+
+        border-left: 5px solid #00b894;
+      }
+
+      .feedback.wrong-feedback {
+        background: #fff0f0;
+
+        border-left: 5px solid #ff7675;
+      }
+
+      .feedback strong {
+        display: block;
+
+        margin-bottom: 5px;
+
+        font-size: 16px;
+      }
+
+      /* =========================
+       OPEN QUESTIONS
+    ========================= */
+
+      .open-question {
+        background: white;
+
+        border-radius: 16px;
+
+        padding: 22px;
+
+        margin-bottom: 18px;
+
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+      }
+
+      .answer-btn {
+        margin-top: 12px;
+
+        background: #6c5ce7;
+
+        color: white;
+
+        border: none;
+
+        padding: 10px 18px;
+
+        border-radius: 8px;
+
+        cursor: pointer;
+
+        font-weight: bold;
+      }
+
+      .answer-btn:hover {
+        background: #5849d6;
+      }
+
+      .model-answer {
+        display: none;
+
+        margin-top: 15px;
+
+        padding: 15px;
+
+        background: #f4f1ff;
+
+        border-left: 5px solid #6c5ce7;
+
+        border-radius: 8px;
+      }
+
+      .model-answer.show {
+        display: block;
+      }
+
+      /* =========================
+       FINAL RESULT
+    ========================= */
+
+      #finalResult {
+        display: none;
+
+        background: white;
+
+        padding: 30px;
+
+        border-radius: 18px;
+
+        text-align: center;
+
+        margin: 35px 0;
+
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      #finalResult h2 {
+        color: #6c5ce7;
+
+        margin-bottom: 10px;
+      }
+
+      #finalScore {
+        font-size: 18px;
+
+        font-weight: bold;
+      }
+
+      /* =========================
+       RESET
+    ========================= */
+
+      .reset-container {
+        text-align: center;
+
+        margin: 40px 0;
+      }
+
+      #resetBtn {
+        background: #ff7675;
+
+        color: white;
+
+        border: none;
+
+        padding: 13px 30px;
+
+        border-radius: 10px;
+
+        font-size: 16px;
+
+        font-weight: bold;
+
+        cursor: pointer;
+      }
+
+      #resetBtn:hover {
+        background: #e85c5b;
+      }
+
+      /* =========================
+       MOBILE
+    ========================= */
+
+      @media (max-width: 600px) {
+        header h1 {
+          font-size: 25px;
+        }
+
+        .score-top {
+          flex-direction: column;
+
+          align-items: flex-start;
+
+          gap: 5px;
+        }
+
+        .question-text {
+          font-size: 16px;
+        }
+
+        .section-title h2 {
+          font-size: 20px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- =========================
+     HEADER
+========================= -->
+
+    <header>
+      <h1>📚 Grammar & Vocabulary Practice</h1>
+
+      <p>SO...THAT • SUCH...THAT • AFTER • ALTHOUGH • DESPITE • BECAUSE</p>
+
+      <p>B1–B2 Level</p>
+    </header>
+
+    <div class="container">
+      <!-- =========================
+     SCORE
+========================= -->
+
+      <div class="score-box">
+        <div class="score-top">
+          <span>
+            Progress:
+            <span id="progressText"> 0 / 35 </span>
+          </span>
+
+          <span>
+            Score:
+            <span id="score"> 0 </span>
+          </span>
+        </div>
+
+        <div class="progress-container">
+          <div id="progressBar"></div>
+        </div>
+      </div>
+
+      <!-- =========================
+     PART 1
+========================= -->
+
+      <section class="section">
+        <div class="section-title">
+          <h2>🟦 PART 1. SO...THAT & SUCH...THAT</h2>
+
+          <p>Chọn cấu trúc phù hợp</p>
+        </div>
+
+        <div id="part1"></div>
+      </section>
+
+      <!-- =========================
+     PART 2
+========================= -->
+
+      <section class="section">
+        <div class="section-title">
+          <h2>🟩 PART 2. AFTER & BECAUSE</h2>
+
+          <p>Linking words</p>
+        </div>
+
+        <div id="part2"></div>
+      </section>
+
+      <!-- =========================
+     PART 3
+========================= -->
+
+      <section class="section">
+        <div class="section-title">
+          <h2>🟨 PART 3. ALTHOUGH & DESPITE</h2>
+
+          <p>Linking words</p>
+        </div>
+
+        <div id="part3"></div>
+      </section>
+
+      <!-- =========================
+     PART 4
+========================= -->
+
+      <section class="section">
+        <div class="section-title">
+          <h2>🟧 PART 4. SENTENCE TRANSFORMATION</h2>
+
+          <p>Viết lại câu sử dụng từ gợi ý</p>
+        </div>
+
+        <div id="part4"></div>
+      </section>
+
+      <!-- =========================
+     PART 5
+========================= -->
+
+      <section class="section">
+        <div class="section-title">
+          <h2>🟥 PART 5. MIXED B1–B2 VOCABULARY & GRAMMAR</h2>
+
+          <p>Tổng hợp</p>
+        </div>
+
+        <div id="part5"></div>
+      </section>
+
+      <!-- =========================
+     FINAL RESULT
+========================= -->
+
+      <div id="finalResult">
+        <h2>🎉 Quiz Completed!</h2>
+
+        <p id="finalScore"></p>
+      </div>
+
+      <!-- =========================
+     RESET
+========================= -->
+
+      <div class="reset-container">
+        <button id="resetBtn">🔄 Reset Quiz</button>
+      </div>
+    </div>
+
+    <script>
+      /* =====================================================
+   MULTIPLE CHOICE QUESTIONS
+===================================================== */
+
+      const questions = [
+        /* =========================
+   PART 1
+========================= */
+
+        {
+          part: 1,
+
+          q: "1. The lecture was ______ interesting that I took notes throughout the entire session.",
+
+          options: ["A. such", "B. so", "C. such an", "D. too"],
+
+          answer: 1,
+
+          explanation:
+            "Cấu trúc: so + adjective + that. 'interesting' là tính từ → so interesting that.",
+        },
+
+        {
+          part: 1,
+
+          q: "2. It was ______ challenging project that everyone had to work together.",
+
+          options: ["A. so", "B. such", "C. such a", "D. too"],
+
+          answer: 2,
+
+          explanation:
+            "Cấu trúc: such + a/an + adjective + singular countable noun + that → such a challenging project that.",
+        },
+
+        {
+          part: 1,
+
+          q: "3. The instructions were ______ complicated that many students found them difficult to follow.",
+
+          options: ["A. such", "B. so", "C. such a", "D. enough"],
+
+          answer: 1,
+
+          explanation: "Complicated là tính từ → so + adjective + that.",
+        },
+
+        {
+          part: 1,
+
+          q: "4. She gave us ______ useful advice that we were able to solve the problem quickly.",
+
+          options: ["A. so", "B. such", "C. such a", "D. too"],
+
+          answer: 1,
+
+          explanation:
+            "Advice là danh từ không đếm được → such + uncountable noun + that.",
+        },
+
+        {
+          part: 1,
+
+          q: "5. There were ______ many volunteers that the organizers had to turn some people away.",
+
+          options: ["A. such", "B. so", "C. such a", "D. too"],
+
+          answer: 1,
+
+          explanation:
+            "Với many/much: so + many/much + noun + that → so many volunteers that.",
+        },
+
+        {
+          part: 1,
+
+          q: "6. He had ______ little experience that he needed someone to guide him.",
+
+          options: ["A. such", "B. so", "C. such a", "D. very"],
+
+          answer: 1,
+
+          explanation:
+            "Với little/few: so + little/few + noun + that → so little experience that.",
+        },
+
+        {
+          part: 1,
+
+          q: "7. They faced ______ serious difficulties that the project was delayed for several months.",
+
+          options: ["A. so", "B. such", "C. such a", "D. too"],
+
+          answer: 1,
+
+          explanation:
+            "Difficulties là danh từ số nhiều → such + adjective + plural noun + that.",
+        },
+
+        {
+          part: 1,
+
+          q: "8. It was ______ difficult task that even experienced workers struggled to complete it.",
+
+          options: ["A. so", "B. such", "C. such a", "D. too"],
+
+          answer: 2,
+
+          explanation:
+            "Task là danh từ số ít đếm được → such a + adjective + noun + that.",
+        },
+
+        {
+          part: 1,
+
+          q: "9. The city has become ______ crowded that traffic congestion is now a major issue.",
+
+          options: ["A. such", "B. so", "C. such a", "D. too"],
+
+          answer: 1,
+
+          explanation: "Crowded là tính từ → so + adjective + that.",
+        },
+
+        {
+          part: 1,
+
+          q: "10. She is ______ responsible student that her teachers always trust her.",
+
+          options: ["A. so", "B. such", "C. such a", "D. too"],
+
+          answer: 2,
+
+          explanation:
+            "Student là danh từ số ít đếm được → such a responsible student that.",
+        },
+
+        {
+          part: 1,
+
+          q: "11. The community received ______ much support that the campaign became a huge success.",
+
+          options: ["A. such", "B. so", "C. such a", "D. very"],
+
+          answer: 1,
+
+          explanation: "Với much: so much + uncountable noun + that.",
+        },
+
+        {
+          part: 1,
+
+          q: "12. They are ______ dedicated volunteers that they often spend their weekends helping others.",
+
+          options: ["A. so", "B. such", "C. such a", "D. too"],
+
+          answer: 1,
+
+          explanation:
+            "Volunteers là danh từ số nhiều → such + adjective + plural noun + that.",
+        },
+
+        {
+          part: 1,
+
+          q: "13. The documentary was ______ informative that I learned a lot about climate change.",
+
+          options: ["A. such", "B. so", "C. such an", "D. too"],
+
+          answer: 1,
+
+          explanation: "Informative là tính từ → so informative that.",
+        },
+
+        {
+          part: 1,
+
+          q: "14. It was ______ unforgettable experience that she decided to volunteer again.",
+
+          options: ["A. so", "B. such", "C. such an", "D. too"],
+
+          answer: 2,
+
+          explanation:
+            "Experience là danh từ số ít đếm được và unforgettable bắt đầu bằng âm nguyên âm → such an unforgettable experience.",
+        },
+
+        {
+          part: 1,
+
+          q: "15. The company produced ______ large amount of waste that the government imposed a fine.",
+
+          options: ["A. so", "B. such", "C. such a", "D. too"],
+
+          answer: 2,
+
+          explanation:
+            "Amount là danh từ số ít đếm được → such a large amount of waste that.",
+        },
+
+        /* =========================
+   PART 2
+========================= */
+
+        {
+          part: 2,
+
+          q: "16. ______ completing the project, the students presented their ideas to the class.",
+
+          options: ["A. Because", "B. Although", "C. After", "D. Despite"],
+
+          answer: 2,
+
+          explanation:
+            "After + V-ing dùng để chỉ hành động xảy ra trước một hành động khác.",
+        },
+
+        {
+          part: 2,
+
+          q: "17. We decided to postpone the event ______ the weather forecast was unfavorable.",
+
+          options: ["A. after", "B. because", "C. despite", "D. although"],
+
+          answer: 1,
+
+          explanation:
+            "Because + mệnh đề (S + V) → because the weather forecast was unfavorable.",
+        },
+
+        {
+          part: 2,
+
+          q: "18. ______ she had finished her assignment, she went out with her friends.",
+
+          options: ["A. After", "B. Because of", "C. Despite", "D. Although"],
+
+          answer: 0,
+
+          explanation:
+            "After + S + had + V3/ed → After she had finished her assignment.",
+        },
+
+        {
+          part: 2,
+
+          q: "19. The school launched a recycling campaign ______ students wanted to reduce plastic waste.",
+
+          options: ["A. after", "B. because", "C. despite", "D. although"],
+
+          answer: 1,
+
+          explanation:
+            "Because dùng để chỉ nguyên nhân và theo sau là một mệnh đề.",
+        },
+
+        {
+          part: 2,
+
+          q: "20. ______ attending the workshop, I became more aware of environmental issues.",
+
+          options: ["A. Because", "B. Although", "C. After", "D. Despite"],
+
+          answer: 2,
+
+          explanation: "After + V-ing → After attending the workshop.",
+        },
+
+        {
+          part: 2,
+
+          q: "21. The project was successful ______ everyone worked together effectively.",
+
+          options: ["A. although", "B. after", "C. because", "D. despite"],
+
+          answer: 2,
+
+          explanation:
+            "Because + mệnh đề → because everyone worked together effectively.",
+        },
+
+        {
+          part: 2,
+
+          q: "22. ______ receiving the scholarship, she decided to study abroad.",
+
+          options: ["A. Because", "B. After", "C. Although", "D. Despite"],
+
+          answer: 1,
+
+          explanation: "After + V-ing → After receiving the scholarship.",
+        },
+
+        {
+          part: 2,
+
+          q: "23. We stayed indoors ______ there was a severe thunderstorm.",
+
+          options: ["A. after", "B. although", "C. because", "D. despite"],
+
+          answer: 2,
+
+          explanation:
+            "Because + mệnh đề chỉ nguyên nhân → because there was a severe thunderstorm.",
+        },
+
+        /* =========================
+   PART 3
+========================= */
+
+        {
+          part: 3,
+
+          q: "24. ______ the heavy traffic, we arrived at the meeting on time.",
+
+          options: ["A. Although", "B. Because", "C. Despite", "D. After"],
+
+          answer: 2,
+
+          explanation: "Despite + noun phrase → despite the heavy traffic.",
+        },
+
+        {
+          part: 3,
+
+          q: "25. ______ she was exhausted, she continued working on the presentation.",
+
+          options: ["A. Despite", "B. Although", "C. Because of", "D. After"],
+
+          answer: 1,
+
+          explanation:
+            "Although + mệnh đề (S + V) → Although she was exhausted.",
+        },
+
+        {
+          part: 3,
+
+          q: "26. ______ having limited resources, the organization managed to support hundreds of families.",
+
+          options: ["A. Although", "B. Despite", "C. Because", "D. After"],
+
+          answer: 1,
+
+          explanation: "Despite + V-ing → Despite having limited resources.",
+        },
+
+        {
+          part: 3,
+
+          q: "27. ______ the project was expensive, the local government decided to fund it.",
+
+          options: ["A. Despite", "B. Although", "C. Because of", "D. After"],
+
+          answer: 1,
+
+          explanation:
+            "Although + mệnh đề → Although the project was expensive.",
+        },
+
+        {
+          part: 3,
+
+          q: "28. ______ his lack of experience, he successfully completed the challenging task.",
+
+          options: ["A. Although", "B. Because", "C. Despite", "D. After"],
+
+          answer: 2,
+
+          explanation:
+            "Despite + noun phrase → despite his lack of experience.",
+        },
+
+        {
+          part: 3,
+
+          q: "29. ______ the fact that the journey was tiring, everyone enjoyed the experience.",
+
+          options: ["A. Despite", "B. Although", "C. Because", "D. After"],
+
+          answer: 0,
+
+          explanation: "Cấu trúc: Despite the fact that + mệnh đề.",
+        },
+
+        {
+          part: 3,
+
+          q: "30. ______ it was raining heavily, the volunteers continued distributing food.",
+
+          options: ["A. Despite", "B. Although", "C. Because of", "D. After"],
+
+          answer: 1,
+
+          explanation: "Although + S + V → Although it was raining heavily.",
+        },
+
+        {
+          part: 3,
+
+          q: "31. ______ the difficulties they encountered, they refused to give up.",
+
+          options: ["A. Although", "B. Because", "C. Despite", "D. After"],
+
+          answer: 2,
+
+          explanation: "Despite + noun phrase → despite the difficulties.",
+        },
+
+        /* =========================
+   PART 5
+========================= */
+
+        {
+          part: 5,
+
+          q: "41. The organization received ______ financial support that it was able to expand its community programs.",
+
+          options: ["A. such a", "B. so", "C. such", "D. too"],
+
+          answer: 2,
+
+          explanation:
+            "Support là danh từ không đếm được → such + adjective + uncountable noun + that.",
+        },
+
+        {
+          part: 5,
+
+          q: "42. ______ the increasing amount of plastic waste, many people have started using reusable products.",
+
+          options: ["A. Although", "B. Because", "C. Despite", "D. After"],
+
+          answer: 2,
+
+          explanation:
+            "Despite + noun phrase → despite the increasing amount of plastic waste.",
+        },
+
+        {
+          part: 5,
+
+          q: "43. The campaign aims to ______ awareness of the importance of protecting natural resources.",
+
+          options: ["A. make", "B. raise", "C. do", "D. take"],
+
+          answer: 1,
+
+          explanation: "Collocation: raise awareness = nâng cao nhận thức.",
+        },
+
+        {
+          part: 5,
+
+          q: "44. ______ reducing unnecessary expenses, the company managed to invest more money in employee training.",
+
+          options: ["A. Although", "B. After", "C. Despite", "D. Because"],
+
+          answer: 3,
+
+          explanation:
+            "Because + V-ing không phù hợp trong cấu trúc chuẩn này; tuy nhiên câu này cần 'Because of' nếu theo sau là V-ing. Với các đáp án đã cho, đề đang thiếu 'Because of'.",
+        },
+
+        {
+          part: 5,
+
+          q: "45. The problem was ______ complicated that the experts needed several weeks to come up with an effective solution.",
+
+          options: ["A. such", "B. such a", "C. so", "D. too"],
+
+          answer: 2,
+
+          explanation: "Complicated là tính từ → so + adjective + that.",
+        },
+      ];
+
+      /* =====================================================
+   OPEN QUESTIONS – PART 4
+===================================================== */
+
+      const openQuestions = [
+        {
+          number: 32,
+
+          question: "The book was very interesting. I couldn't put it down.",
+
+          answer: "The book was so interesting that I couldn't put it down.",
+
+          explanation: "So + adjective + that → so interesting that.",
+        },
+
+        {
+          number: 33,
+
+          question: "It was a very difficult exam. Many students failed it.",
+
+          answer: "It was such a difficult exam that many students failed it.",
+
+          explanation:
+            "Such + a/an + adjective + singular countable noun + that.",
+        },
+
+        {
+          number: 34,
+
+          question: "The weather was terrible, but we continued our journey.",
+
+          answer:
+            "Although the weather was terrible, we continued our journey.",
+
+          explanation: "Although + S + V để diễn tả sự tương phản.",
+        },
+
+        {
+          number: 35,
+
+          question: "She was tired, but she continued working on the project.",
+
+          answer: "Despite being tired, she continued working on the project.",
+
+          explanation: "Despite + V-ing → Despite being tired.",
+        },
+
+        {
+          number: 36,
+
+          question: "He didn't attend the meeting because he was ill.",
+
+          answer: "Because of his illness, he didn't attend the meeting.",
+
+          explanation: "Because of + noun phrase → Because of his illness.",
+        },
+
+        {
+          number: 37,
+
+          question: "The city has many vehicles, so the air quality is poor.",
+
+          answer:
+            "There are so many vehicles in the city that the air quality is poor.",
+
+          explanation: "So + many + plural noun + that.",
+        },
+
+        {
+          number: 38,
+
+          question:
+            "The campaign was very successful. Thousands of people participated in it.",
+
+          answer:
+            "It was such a successful campaign that thousands of people participated in it.",
+
+          explanation:
+            "Such + a/an + adjective + singular countable noun + that.",
+        },
+
+        {
+          number: 39,
+
+          question: "We finished the workshop, and then we went home.",
+
+          answer: "After we finished the workshop, we went home.",
+
+          explanation:
+            "After + S + V để diễn tả hành động xảy ra sau một hành động khác.",
+        },
+
+        {
+          number: 40,
+
+          question:
+            "Although the task was challenging, the students completed it successfully.",
+
+          answer:
+            "Despite the challenging task, the students completed it successfully.",
+
+          explanation:
+            "Despite + noun phrase. 'The task was challenging' được chuyển thành 'the challenging task'.",
+        },
+      ];
+
+      /* =====================================================
+   VARIABLES
+===================================================== */
+
+      let score = 0;
+
+      let answered = 0;
+
+      /* =====================================================
+   CONTAINERS
+===================================================== */
+
+      const containers = {
+        1: document.getElementById("part1"),
+
+        2: document.getElementById("part2"),
+
+        3: document.getElementById("part3"),
+
+        5: document.getElementById("part5"),
+      };
+
+      /* =====================================================
+   RENDER MULTIPLE CHOICE
+===================================================== */
+
+      questions.forEach((item, index) => {
+        const questionBox = document.createElement("div");
+
+        questionBox.className = "question";
+
+        questionBox.innerHTML = `
+
+      <div class="question-text">
+
+        ${item.q}
+
+      </div>
+
+
+      <div class="options">
+
+        ${item.options
+          .map(
+            (option, optionIndex) => `
+
+              <button
+
+                class="option"
+
+                data-question="${index}"
+
+                data-option="${optionIndex}">
+
+                ${option}
+
+              </button>
+
+          `,
+          )
+          .join("")}
+
+      </div>
+
+
+      <div
+
+        class="feedback"
+
+        id="feedback-${index}">
+
+      </div>
+
+    `;
+
+        containers[item.part].appendChild(questionBox);
+      });
+
+      /* =====================================================
+   RENDER OPEN QUESTIONS
+===================================================== */
+
+      const openContainer = document.getElementById("part4");
+
+      openQuestions.forEach((item) => {
+        const box = document.createElement("div");
+
+        box.className = "open-question";
+
+        box.innerHTML = `
+
+      <div class="question-text">
+
+        ${item.number}.
+        ${item.question}
+
+      </div>
+
+
+      <button class="answer-btn">
+
+        👁️ Show Answer
+
+      </button>
+
+
+      <div class="model-answer">
+
+        <strong>
+          Đáp án mẫu:
+        </strong>
+
+        <br>
+
+        ${item.answer}
+
+
+        <br><br>
+
+
+        <strong>
+          💡 Explanation:
+        </strong>
+
+        <br>
+
+        ${item.explanation}
+
+      </div>
+
+    `;
+
+        openContainer.appendChild(box);
+      });
+
+      /* =====================================================
+   ANSWER HANDLER
+===================================================== */
+
+      document.querySelectorAll(".option").forEach((button) => {
+        button.addEventListener("click", function () {
+          const questionIndex = Number(this.dataset.question);
+
+          const selectedOption = Number(this.dataset.option);
+
+          const question = questions[questionIndex];
+
+          const allOptions = document.querySelectorAll(
+            `.option[data-question="${questionIndex}"]`,
+          );
+
+          const feedback = document.getElementById(`feedback-${questionIndex}`);
+
+          /* Prevent double answer */
+
+          if (allOptions[0].disabled) {
+            return;
+          }
+
+          /* Disable buttons */
+
+          allOptions.forEach((btn) => {
+            btn.disabled = true;
+          });
+
+          /* Highlight correct */
+
+          allOptions[question.answer].classList.add("correct");
+
+          /* =========================
+             CORRECT
+          ========================= */
+
+          if (selectedOption === question.answer) {
+            score++;
+
+            this.classList.add("correct");
+
+            feedback.className = "feedback show correct-feedback";
+
+            feedback.innerHTML = `
+
+              <strong>
+                ✅ Correct!
+              </strong>
+
+              ${question.explanation}
+
+            `;
+          } else {
+
+          /* =========================
+             WRONG
+          ========================= */
+            this.classList.add("wrong");
+
+            feedback.className = "feedback show wrong-feedback";
+
+            feedback.innerHTML = `
+
+              <strong>
+                ❌ Incorrect!
+              </strong>
+
+
+              <b>
+                Đáp án đúng:
+              </b>
+
+              ${question.options[question.answer]}
+
+
+              <br><br>
+
+
+              ${question.explanation}
+
+            `;
+          }
+
+          /* Update */
+
+          answered++;
+
+          updateProgress();
+        });
+      });
+
+      /* =====================================================
+   SHOW / HIDE OPEN ANSWERS
+===================================================== */
+
+      document.querySelectorAll(".answer-btn").forEach((button) => {
+        button.addEventListener("click", function () {
+          const answerBox = this.nextElementSibling;
+
+          answerBox.classList.toggle("show");
+
+          if (answerBox.classList.contains("show")) {
+            this.textContent = "🙈 Hide Answer";
+          } else {
+            this.textContent = "👁️ Show Answer";
+          }
+        });
+      });
+
+      /* =====================================================
+   UPDATE PROGRESS
+===================================================== */
+
+      function updateProgress() {
+        const total = questions.length;
+
+        document.getElementById("score").textContent = score;
+
+        document.getElementById("progressText").textContent =
+          `${answered} / ${total}`;
+
+        const percentage = (answered / total) * 100;
+
+        document.getElementById("progressBar").style.width = `${percentage}%`;
+
+        /* Quiz complete */
+
+        if (answered === total) {
+          const finalResult = document.getElementById("finalResult");
+
+          const finalScore = document.getElementById("finalScore");
+
+          const percent = Math.round((score / total) * 100);
+
+          finalResult.style.display = "block";
+
+          finalScore.textContent = `Bạn đạt ${score}/${total} câu đúng (${percent}%).`;
+
+          finalResult.scrollIntoView({
+            behavior: "smooth",
+          });
+        }
+      }
+
+      /* =====================================================
+   RESET QUIZ
+===================================================== */
+
+      document
+        .getElementById("resetBtn")
+        .addEventListener("click", function () {
+          score = 0;
+
+          answered = 0;
+
+          /* Reset options */
+
+          document.querySelectorAll(".option").forEach((button) => {
+            button.disabled = false;
+
+            button.classList.remove("correct", "wrong");
+          });
+
+          /* Reset feedback */
+
+          document.querySelectorAll(".feedback").forEach((feedback) => {
+            feedback.className = "feedback";
+
+            feedback.innerHTML = "";
+          });
+
+          /* Reset score */
+
+          document.getElementById("score").textContent = "0";
+
+          /* Reset progress */
+
+          document.getElementById("progressText").textContent =
+            `0 / ${questions.length}`;
+
+          document.getElementById("progressBar").style.width = "0%";
+
+          /* Hide final */
+
+          document.getElementById("finalResult").style.display = "none";
+
+          /* Reset open answers */
+
+          document.querySelectorAll(".model-answer").forEach((answer) => {
+            answer.classList.remove("show");
+          });
+
+          document.querySelectorAll(".answer-btn").forEach((button) => {
+            button.textContent = "👁️ Show Answer";
+          });
+
+          /* Scroll top */
+
+          window.scrollTo({
+            top: 0,
+
+            behavior: "smooth",
+          });
+        });
+    </script>
+  
+<script src="/study-tracker.js"></script>
+
+</body>
+</html>
+```

@@ -1,0 +1,1259 @@
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Idioms Bank - English Idioms</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: linear-gradient(135deg, #eef2ff, #f8fafc);
+        color: #1e293b;
+        min-height: 100vh;
+        padding: 40px 20px;
+      }
+
+      .container {
+        max-width: 1100px;
+        margin: auto;
+      }
+
+      /* HEADER */
+
+      .header {
+        text-align: center;
+        margin-bottom: 35px;
+      }
+
+      .header h1 {
+        font-size: 42px;
+        color: #4338ca;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        color: #64748b;
+        font-size: 17px;
+      }
+
+      /* SEARCH */
+
+      .search-box {
+        margin-bottom: 30px;
+      }
+
+      .search-box input {
+        width: 100%;
+        padding: 17px 20px;
+        border: 2px solid #e2e8f0;
+        border-radius: 14px;
+        font-size: 16px;
+        outline: none;
+        background: white;
+        transition: 0.3s;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      .search-box input:focus {
+        border-color: #6366f1;
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
+      }
+
+      /* IDIOMS LIST */
+
+      .idioms-list {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      .idiom-card {
+        background: white;
+        border-radius: 18px;
+        padding: 24px;
+        display: grid;
+        grid-template-columns: 330px 1fr;
+        gap: 25px;
+        box-shadow: 0 8px 25px rgba(15, 23, 42, 0.07);
+        border: 1px solid #e2e8f0;
+        transition: all 0.3s ease;
+      }
+
+      .idiom-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 15px 35px rgba(79, 70, 229, 0.12);
+        border-color: #c7d2fe;
+      }
+
+      /* LEFT */
+
+      .idiom-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-right: 1px solid #e2e8f0;
+        padding-right: 20px;
+      }
+
+      .idiom-number {
+        font-size: 13px;
+        color: #94a3b8;
+        margin-bottom: 5px;
+        font-weight: 600;
+      }
+
+      .idiom {
+        font-size: 22px;
+        font-weight: 700;
+        color: #4338ca;
+        margin-bottom: 10px;
+        line-height: 1.4;
+      }
+
+      .meaning {
+        color: #475569;
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 1.5;
+      }
+
+      /* RIGHT */
+
+      .example-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .example-label {
+        font-size: 12px;
+        color: #6366f1;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 7px;
+      }
+
+      .example {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #334155;
+        margin-bottom: 8px;
+      }
+
+      .translation {
+        font-size: 15px;
+        color: #64748b;
+        font-style: italic;
+        margin-bottom: 15px;
+        line-height: 1.5;
+      }
+
+      /* SPEAK BUTTON */
+
+      .speak-btn {
+        width: fit-content;
+        border: none;
+        background: #eef2ff;
+        color: #4f46e5;
+        padding: 8px 14px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        transition: 0.2s;
+      }
+
+      .speak-btn:hover {
+        background: #4f46e5;
+        color: white;
+      }
+
+      /* NO RESULT */
+
+      .no-result {
+        display: none;
+        text-align: center;
+        padding: 40px;
+        background: white;
+        border-radius: 15px;
+        color: #64748b;
+      }
+
+      /* FOOTER */
+
+      .footer {
+        text-align: center;
+        margin-top: 35px;
+        color: #94a3b8;
+        font-size: 14px;
+      }
+
+      /* MOBILE */
+
+      @media (max-width: 750px) {
+        body {
+          padding: 25px 12px;
+        }
+
+        .header h1 {
+          font-size: 30px;
+        }
+
+        .header p {
+          font-size: 15px;
+        }
+
+        .idiom-card {
+          grid-template-columns: 1fr;
+          gap: 18px;
+        }
+
+        .idiom-section {
+          border-right: none;
+          border-bottom: 1px solid #e2e8f0;
+          padding-right: 0;
+          padding-bottom: 18px;
+        }
+
+        .idiom {
+          font-size: 20px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- HEADER -->
+
+      <div class="header">
+        <h1>💬 Idioms Bank</h1>
+
+        <p>Common English Idioms • Meanings & Examples</p>
+      </div>
+
+      <!-- SEARCH -->
+
+      <div class="search-box">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="🔍 Search an idiom..."
+        />
+      </div>
+
+      <!-- IDIOMS -->
+
+      <div class="idioms-list" id="idiomsList">
+        <!-- 01 -->
+
+        <div class="idiom-card" data-word="be a tower of strength">
+          <div class="idiom-section">
+            <div class="idiom-number">01</div>
+
+            <div class="idiom">be a tower of strength</div>
+
+            <div class="meaning">
+              là người mạnh mẽ, luôn hỗ trợ và giúp đỡ người khác trong lúc khó
+              khăn
+            </div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              My mother has always been a tower of strength during difficult
+              times.
+            </div>
+
+            <div class="translation">
+              Mẹ tôi luôn là chỗ dựa vững chắc trong những lúc khó khăn.
+            </div>
+
+            <button class="speak-btn" onclick="speak('be a tower of strength')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 02 -->
+
+        <div class="idiom-card" data-word="be all ears">
+          <div class="idiom-section">
+            <div class="idiom-number">02</div>
+
+            <div class="idiom">be all ears</div>
+
+            <div class="meaning">chăm chú lắng nghe; rất muốn nghe</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">Tell me what happened. I'm all ears.</div>
+
+            <div class="translation">
+              Hãy kể cho tôi chuyện gì đã xảy ra. Tôi đang rất muốn nghe đây.
+            </div>
+
+            <button class="speak-btn" onclick="speak('be all ears')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 03 -->
+
+        <div class="idiom-card" data-word="be at loggerheads">
+          <div class="idiom-section">
+            <div class="idiom-number">03</div>
+
+            <div class="idiom">be at loggerheads</div>
+
+            <div class="meaning">
+              bất đồng gay gắt; tranh cãi hoặc mâu thuẫn với nhau
+            </div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The two politicians have been at loggerheads for years.
+            </div>
+
+            <div class="translation">
+              Hai chính trị gia đã mâu thuẫn gay gắt với nhau trong nhiều năm.
+            </div>
+
+            <button class="speak-btn" onclick="speak('be at loggerheads')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 04 -->
+
+        <div class="idiom-card" data-word="be at one's wits' end">
+          <div class="idiom-section">
+            <div class="idiom-number">04</div>
+
+            <div class="idiom">be at one's wits' end</div>
+
+            <div class="meaning">
+              vô cùng tuyệt vọng hoặc không biết phải làm gì tiếp theo
+            </div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              I'm at my wits' end trying to solve this problem.
+            </div>
+
+            <div class="translation">
+              Tôi vô cùng bế tắc khi cố gắng giải quyết vấn đề này.
+            </div>
+
+            <button class="speak-btn" onclick="speak('be at one’s wits’ end')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 05 -->
+
+        <div class="idiom-card" data-word="be barking up the wrong tree">
+          <div class="idiom-section">
+            <div class="idiom-number">05</div>
+
+            <div class="idiom">be barking up the wrong tree</div>
+
+            <div class="meaning">
+              hiểu sai vấn đề; đi sai hướng hoặc nghi ngờ nhầm người
+            </div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              If you think I broke the computer, you're barking up the wrong
+              tree.
+            </div>
+
+            <div class="translation">
+              Nếu bạn nghĩ tôi làm hỏng máy tính thì bạn đã nghi ngờ nhầm người
+              rồi.
+            </div>
+
+            <button
+              class="speak-btn"
+              onclick="speak('be barking up the wrong tree')"
+            >
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 06 -->
+
+        <div
+          class="idiom-card"
+          data-word="be between the devil and the deep blue sea"
+        >
+          <div class="idiom-section">
+            <div class="idiom-number">06</div>
+
+            <div class="idiom">be between the devil and the deep blue sea</div>
+
+            <div class="meaning">
+              rơi vào tình thế tiến thoái lưỡng nan; lựa chọn nào cũng khó khăn
+            </div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              I'm between the devil and the deep blue sea because both choices
+              have serious consequences.
+            </div>
+
+            <div class="translation">
+              Tôi đang ở trong tình thế tiến thoái lưỡng nan vì cả hai lựa chọn
+              đều có hậu quả nghiêm trọng.
+            </div>
+
+            <button
+              class="speak-btn"
+              onclick="speak('be between the devil and the deep blue sea')"
+            >
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 07 -->
+
+        <div class="idiom-card" data-word="dead meat">
+          <div class="idiom-section">
+            <div class="idiom-number">07</div>
+
+            <div class="idiom">be dead meat</div>
+
+            <div class="meaning">
+              gặp rắc rối nghiêm trọng; chắc chắn sẽ gặp hậu quả xấu
+            </div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              If my parents find out what I did, I'm dead meat.
+            </div>
+
+            <div class="translation">
+              Nếu bố mẹ tôi phát hiện ra tôi đã làm gì, tôi sẽ gặp rắc rối lớn.
+            </div>
+
+            <button class="speak-btn" onclick="speak('dead meat')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 08 -->
+
+        <div class="idiom-card" data-word="be dying for">
+          <div class="idiom-section">
+            <div class="idiom-number">08</div>
+
+            <div class="idiom">be dying for</div>
+
+            <div class="meaning">
+              rất thèm; rất khao khát hoặc mong muốn điều gì
+            </div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">I'm dying for a cup of coffee.</div>
+
+            <div class="translation">Tôi rất thèm một cốc cà phê.</div>
+
+            <button class="speak-btn" onclick="speak('be dying for')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 09 -->
+
+        <div class="idiom-card" data-word="be green with envy">
+          <div class="idiom-section">
+            <div class="idiom-number">09</div>
+
+            <div class="idiom">be green with envy</div>
+
+            <div class="meaning">vô cùng ghen tị hoặc đố kỵ</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              She was green with envy when she saw her friend's new car.
+            </div>
+
+            <div class="translation">
+              Cô ấy vô cùng ghen tị khi nhìn thấy chiếc xe mới của bạn mình.
+            </div>
+
+            <button class="speak-btn" onclick="speak('be green with envy')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 10 -->
+
+        <div class="idiom-card" data-word="be in full swing">
+          <div class="idiom-section">
+            <div class="idiom-number">10</div>
+
+            <div class="idiom">be in full swing</div>
+
+            <div class="meaning">đang diễn ra sôi nổi, ở mức cao nhất</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">The festival is now in full swing.</div>
+
+            <div class="translation">
+              Lễ hội hiện đang diễn ra vô cùng sôi nổi.
+            </div>
+
+            <button class="speak-btn" onclick="speak('be in full swing')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 11 -->
+
+        <div class="idiom-card" data-word="be in line for">
+          <div class="idiom-section">
+            <div class="idiom-number">11</div>
+
+            <div class="idiom">be in line for</div>
+
+            <div class="meaning">
+              có khả năng được nhận hoặc đạt được điều gì
+            </div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">She is in line for a promotion.</div>
+
+            <div class="translation">Cô ấy có khả năng được thăng chức.</div>
+
+            <button class="speak-btn" onclick="speak('be in line for')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 12 -->
+
+        <div class="idiom-card" data-word="be in one's good books">
+          <div class="idiom-section">
+            <div class="idiom-number">12</div>
+
+            <div class="idiom">be in one's good books</div>
+
+            <div class="meaning">
+              được ai đó yêu quý, có thiện cảm hoặc đánh giá tốt
+            </div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              You'll be in the teacher's good books if you submit your work
+              early.
+            </div>
+
+            <div class="translation">
+              Bạn sẽ được giáo viên đánh giá tốt nếu nộp bài sớm.
+            </div>
+
+            <button class="speak-btn" onclick="speak('be in one’s good books')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 13 -->
+
+        <div class="idiom-card" data-word="in on the cards">
+          <div class="idiom-section">
+            <div class="idiom-number">13</div>
+
+            <div class="idiom">be in/on the cards</div>
+
+            <div class="meaning">
+              có khả năng xảy ra hoặc sẽ xảy ra trong tương lai
+            </div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              A promotion could be in the cards for her this year.
+            </div>
+
+            <div class="translation">
+              Cô ấy có thể sẽ được thăng chức trong năm nay.
+            </div>
+
+            <button class="speak-btn" onclick="speak('be in the cards')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 14 -->
+
+        <div class="idiom-card" data-word="be in two minds">
+          <div class="idiom-section">
+            <div class="idiom-number">14</div>
+
+            <div class="idiom">be in two minds</div>
+
+            <div class="meaning">
+              phân vân, không thể quyết định giữa hai lựa chọn
+            </div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              I'm in two minds about whether to study abroad.
+            </div>
+
+            <div class="translation">
+              Tôi đang phân vân không biết có nên đi du học hay không.
+            </div>
+
+            <button class="speak-btn" onclick="speak('be in two minds')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 15 -->
+
+        <div class="idiom-card" data-word="be in the dark about">
+          <div class="idiom-section">
+            <div class="idiom-number">15</div>
+
+            <div class="idiom">be in the dark about</div>
+
+            <div class="meaning">
+              không biết hoặc không được thông báo về điều gì
+            </div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              We were completely in the dark about the changes.
+            </div>
+
+            <div class="translation">
+              Chúng tôi hoàn toàn không biết gì về những thay đổi đó.
+            </div>
+
+            <button class="speak-btn" onclick="speak('be in the dark about')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 16 -->
+
+        <div class="idiom-card" data-word="be in the know">
+          <div class="idiom-section">
+            <div class="idiom-number">16</div>
+
+            <div class="idiom">be in the know</div>
+
+            <div class="meaning">
+              biết thông tin bí mật hoặc thông tin mới nhất
+            </div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Ask Anna if you want to be in the know about the latest school
+              news.
+            </div>
+
+            <div class="translation">
+              Hãy hỏi Anna nếu bạn muốn biết những tin tức mới nhất của trường.
+            </div>
+
+            <button class="speak-btn" onclick="speak('be in the know')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 17 -->
+
+        <div class="idiom-card" data-word="be in the same boat">
+          <div class="idiom-section">
+            <div class="idiom-number">17</div>
+
+            <div class="idiom">be in the same boat</div>
+
+            <div class="meaning">
+              ở trong cùng một hoàn cảnh hoặc cùng gặp một vấn đề
+            </div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              We're all in the same boat, so let's help each other.
+            </div>
+
+            <div class="translation">
+              Tất cả chúng ta đều đang ở cùng một hoàn cảnh, vì vậy hãy giúp đỡ
+              lẫn nhau.
+            </div>
+
+            <button class="speak-btn" onclick="speak('be in the same boat')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 18 -->
+
+        <div class="idiom-card" data-word="get into hot water">
+          <div class="idiom-section">
+            <div class="idiom-number">18</div>
+
+            <div class="idiom">get into hot water</div>
+
+            <div class="meaning">
+              gặp rắc rối hoặc gặp phải tình huống khó khăn
+            </div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              He got into hot water after missing an important deadline.
+            </div>
+
+            <div class="translation">
+              Anh ấy gặp rắc rối sau khi bỏ lỡ một thời hạn quan trọng.
+            </div>
+
+            <button class="speak-btn" onclick="speak('get into hot water')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 19 -->
+
+        <div class="idiom-card" data-word="be like chalk and cheese">
+          <div class="idiom-section">
+            <div class="idiom-number">19</div>
+
+            <div class="idiom">be like chalk and cheese</div>
+
+            <div class="meaning">
+              hoàn toàn khác nhau về tính cách hoặc đặc điểm
+            </div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              The two sisters are like chalk and cheese.
+            </div>
+
+            <div class="translation">Hai chị em hoàn toàn khác nhau.</div>
+
+            <button
+              class="speak-btn"
+              onclick="speak('be like chalk and cheese')"
+            >
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 20 -->
+
+        <div class="idiom-card" data-word="be long in the tooth">
+          <div class="idiom-section">
+            <div class="idiom-number">20</div>
+
+            <div class="idiom">be long in the tooth</div>
+
+            <div class="meaning">khá lớn tuổi; đã già hoặc không còn trẻ</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              He's getting a little long in the tooth to start a completely new
+              career.
+            </div>
+
+            <div class="translation">
+              Anh ấy đã hơi lớn tuổi để bắt đầu một sự nghiệp hoàn toàn mới.
+            </div>
+
+            <button class="speak-btn" onclick="speak('be long in the tooth')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 21 -->
+
+        <div class="idiom-card" data-word="no laughing matter">
+          <div class="idiom-section">
+            <div class="idiom-number">21</div>
+
+            <div class="idiom">no laughing matter</div>
+
+            <div class="meaning">
+              chuyện nghiêm trọng, không phải chuyện để đùa
+            </div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">Climate change is no laughing matter.</div>
+
+            <div class="translation">
+              Biến đổi khí hậu là một vấn đề nghiêm trọng, không phải chuyện để
+              đùa.
+            </div>
+
+            <button class="speak-btn" onclick="speak('no laughing matter')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 22 -->
+
+        <div class="idiom-card" data-word="be nuts about">
+          <div class="idiom-section">
+            <div class="idiom-number">22</div>
+
+            <div class="idiom">be nuts about</div>
+
+            <div class="meaning">cực kỳ yêu thích hoặc say mê điều gì</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">My sister is nuts about Korean music.</div>
+
+            <div class="translation">
+              Em gái tôi cực kỳ yêu thích nhạc Hàn Quốc.
+            </div>
+
+            <button class="speak-btn" onclick="speak('be nuts about')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 23 -->
+
+        <div class="idiom-card" data-word="be off one's head">
+          <div class="idiom-section">
+            <div class="idiom-number">23</div>
+
+            <div class="idiom">be off one's head</div>
+
+            <div class="meaning">
+              điên rồ; hành động hoặc suy nghĩ không bình thường
+            </div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              You must be off your head to spend that much money on one shirt!
+            </div>
+
+            <div class="translation">
+              Bạn chắc điên rồi mới bỏ nhiều tiền như vậy cho một chiếc áo!
+            </div>
+
+            <button class="speak-btn" onclick="speak('be off one’s head')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 24 -->
+
+        <div class="idiom-card" data-word="be on a roll">
+          <div class="idiom-section">
+            <div class="idiom-number">24</div>
+
+            <div class="idiom">be on a roll</div>
+
+            <div class="meaning">đang gặp may; liên tục thành công</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Our team is on a roll and has won five games in a row.
+            </div>
+
+            <div class="translation">
+              Đội của chúng tôi đang liên tục gặp may và đã thắng năm trận liên
+              tiếp.
+            </div>
+
+            <button class="speak-btn" onclick="speak('be on a roll')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 25 -->
+
+        <div class="idiom-card" data-word="be walking on air">
+          <div class="idiom-section">
+            <div class="idiom-number">25</div>
+
+            <div class="idiom">be walking on air</div>
+
+            <div class="meaning">cực kỳ hạnh phúc, vui sướng</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              She has been walking on air since she got the scholarship.
+            </div>
+
+            <div class="translation">
+              Cô ấy vô cùng hạnh phúc kể từ khi nhận được học bổng.
+            </div>
+
+            <button class="speak-btn" onclick="speak('be walking on air')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 26 -->
+
+        <div class="idiom-card" data-word="be over the moon">
+          <div class="idiom-section">
+            <div class="idiom-number">26</div>
+
+            <div class="idiom">be over the moon</div>
+
+            <div class="meaning">cực kỳ vui sướng, hạnh phúc</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              My parents were over the moon when I passed the exam.
+            </div>
+
+            <div class="translation">
+              Bố mẹ tôi vô cùng vui mừng khi tôi vượt qua kỳ thi.
+            </div>
+
+            <button class="speak-btn" onclick="speak('be over the moon')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 27 -->
+
+        <div class="idiom-card" data-word="be on the breadline">
+          <div class="idiom-section">
+            <div class="idiom-number">27</div>
+
+            <div class="idiom">be on the breadline</div>
+
+            <div class="meaning">
+              sống trong cảnh nghèo khó; thiếu thốn tiền bạc
+            </div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Many families are on the breadline because of the economic crisis.
+            </div>
+
+            <div class="translation">
+              Nhiều gia đình đang sống trong cảnh nghèo khó vì khủng hoảng kinh
+              tế.
+            </div>
+
+            <button class="speak-btn" onclick="speak('be on the breadline')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 28 -->
+
+        <div class="idiom-card" data-word="be on the right track">
+          <div class="idiom-section">
+            <div class="idiom-number">28</div>
+
+            <div class="idiom">be on the right track</div>
+
+            <div class="meaning">đang đi đúng hướng; đang làm đúng cách</div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              You're on the right track, but you need to check your
+              calculations.
+            </div>
+
+            <div class="translation">
+              Bạn đang đi đúng hướng, nhưng cần kiểm tra lại phép tính.
+            </div>
+
+            <button class="speak-btn" onclick="speak('be on the right track')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 29 -->
+
+        <div class="idiom-card" data-word="on the same wavelength">
+          <div class="idiom-section">
+            <div class="idiom-number">29</div>
+
+            <div class="idiom">be on the same wavelength</div>
+
+            <div class="meaning">
+              hiểu nhau; có cùng suy nghĩ hoặc quan điểm
+            </div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              We work well together because we're on the same wavelength.
+            </div>
+
+            <div class="translation">
+              Chúng tôi làm việc tốt với nhau vì có cùng cách suy nghĩ.
+            </div>
+
+            <button
+              class="speak-btn"
+              onclick="speak('be on the same wavelength')"
+            >
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 30 -->
+
+        <div class="idiom-card" data-word="on the tip of one's tongue">
+          <div class="idiom-section">
+            <div class="idiom-number">30</div>
+
+            <div class="idiom">be on the tip of one's tongue</div>
+
+            <div class="meaning">
+              gần như nhớ ra hoặc nói ra được nhưng tạm thời không thể nhớ chính
+              xác
+            </div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              Her name is on the tip of my tongue, but I can't remember it.
+            </div>
+
+            <div class="translation">
+              Tên của cô ấy ở ngay đầu lưỡi tôi, nhưng tôi không thể nhớ ra.
+            </div>
+
+            <button
+              class="speak-btn"
+              onclick="speak('on the tip of one’s tongue')"
+            >
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+
+        <!-- 31 -->
+
+        <div class="idiom-card" data-word="on one's best behavior">
+          <div class="idiom-section">
+            <div class="idiom-number">31</div>
+
+            <div class="idiom">be on one's best behavior</div>
+
+            <div class="meaning">
+              cư xử tốt nhất có thể; giữ thái độ lịch sự và đúng mực
+            </div>
+          </div>
+
+          <div class="example-section">
+            <div class="example-label">Example</div>
+
+            <div class="example">
+              You need to be on your best behavior when meeting your new
+              teacher.
+            </div>
+
+            <div class="translation">
+              Bạn cần cư xử thật tốt khi gặp giáo viên mới.
+            </div>
+
+            <button class="speak-btn" onclick="speak('on one’s best behavior')">
+              🔊 Listen
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- NO RESULT -->
+
+      <div class="no-result" id="noResult">😕 No idiom found.</div>
+
+      <!-- FOOTER -->
+
+      <div class="footer">Idioms Bank • English Learning</div>
+    </div>
+
+    <script>
+      /* =========================
+       SEARCH FUNCTION
+    ========================= */
+
+      const searchInput = document.getElementById("searchInput");
+
+      const cards = document.querySelectorAll(".idiom-card");
+
+      const noResult = document.getElementById("noResult");
+
+      searchInput.addEventListener("input", function () {
+        const keyword = this.value.toLowerCase().trim();
+
+        let visibleCount = 0;
+
+        cards.forEach((card) => {
+          const word = card.dataset.word.toLowerCase();
+
+          const content = card.innerText.toLowerCase();
+
+          if (word.includes(keyword) || content.includes(keyword)) {
+            card.style.display = "grid";
+
+            visibleCount++;
+          } else {
+            card.style.display = "none";
+          }
+        });
+
+        if (visibleCount === 0) {
+          noResult.style.display = "block";
+        } else {
+          noResult.style.display = "none";
+        }
+      });
+
+      /* =========================
+       TEXT TO SPEECH
+    ========================= */
+
+      function speak(text) {
+        if (!("speechSynthesis" in window)) {
+          alert("Your browser does not support text-to-speech.");
+
+          return;
+        }
+
+        window.speechSynthesis.cancel();
+
+        const utterance = new SpeechSynthesisUtterance(text);
+
+        utterance.lang = "en-US";
+
+        utterance.rate = 0.85;
+
+        utterance.pitch = 1;
+
+        window.speechSynthesis.speak(utterance);
+      }
+    </script>
+  </body>
+</html>
+```

@@ -1,0 +1,1356 @@
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Idioms Multiple-Choice Test — 42 Questions</title>
+
+    <style>
+      /* =========================
+   GLOBAL
+========================= */
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: #eef8fc;
+        color: #243746;
+        min-height: 100vh;
+        padding: 30px 15px;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: auto;
+      }
+
+      /* =========================
+   HEADER
+========================= */
+
+      .header {
+        background: linear-gradient(135deg, #087ea4, #12a8c7);
+
+        color: white;
+
+        padding: 40px 25px;
+
+        border-radius: 28px;
+
+        text-align: center;
+
+        margin-bottom: 25px;
+
+        box-shadow: 0 12px 30px rgba(0, 126, 164, 0.25);
+
+        position: relative;
+
+        overflow: hidden;
+      }
+
+      .header::after {
+        content: "";
+
+        position: absolute;
+
+        width: 180px;
+        height: 180px;
+
+        background: rgba(255, 255, 255, 0.12);
+
+        border-radius: 50%;
+
+        right: -70px;
+        top: -80px;
+      }
+
+      .header h1 {
+        font-size: 30px;
+
+        margin-bottom: 10px;
+
+        position: relative;
+
+        z-index: 2;
+      }
+
+      .header p {
+        font-size: 16px;
+
+        opacity: 0.95;
+
+        position: relative;
+
+        z-index: 2;
+      }
+
+      /* =========================
+   PROGRESS
+========================= */
+
+      .progress-box {
+        background: white;
+
+        padding: 18px 22px;
+
+        border-radius: 20px;
+
+        margin-bottom: 25px;
+
+        box-shadow: 0 5px 20px rgba(0, 100, 130, 0.1);
+
+        position: sticky;
+
+        top: 10px;
+
+        z-index: 10;
+      }
+
+      .progress-info {
+        display: flex;
+
+        justify-content: space-between;
+
+        margin-bottom: 10px;
+
+        font-weight: bold;
+
+        color: #087ea4;
+      }
+
+      .progress-bar {
+        width: 100%;
+
+        height: 12px;
+
+        background: #e6f2f6;
+
+        border-radius: 20px;
+
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        width: 0%;
+
+        height: 100%;
+
+        background: linear-gradient(90deg, #087ea4, #e53935);
+
+        transition: width 0.3s ease;
+      }
+
+      /* =========================
+   QUESTION CARD
+========================= */
+
+      .question-card {
+        background: white;
+
+        border-radius: 22px;
+
+        padding: 28px;
+
+        margin-bottom: 22px;
+
+        box-shadow: 0 7px 25px rgba(0, 100, 130, 0.08);
+
+        border: 2px solid transparent;
+
+        transition: 0.25s;
+      }
+
+      .question-card:hover {
+        border-color: #9ed7e5;
+      }
+
+      .question-number {
+        display: inline-block;
+
+        background: #e3f5fa;
+
+        color: #087ea4;
+
+        padding: 6px 13px;
+
+        border-radius: 20px;
+
+        font-weight: bold;
+
+        font-size: 14px;
+
+        margin-bottom: 14px;
+      }
+
+      .question {
+        font-size: 18px;
+
+        line-height: 1.65;
+
+        font-weight: 600;
+
+        margin-bottom: 20px;
+      }
+
+      /* =========================
+   OPTIONS
+========================= */
+
+      .options {
+        display: grid;
+
+        gap: 12px;
+      }
+
+      .option {
+        width: 100%;
+
+        text-align: left;
+
+        padding: 15px 18px;
+
+        background: #fafdfe;
+
+        border: 2px solid #d9edf2;
+
+        border-radius: 14px;
+
+        cursor: pointer;
+
+        font-size: 16px;
+
+        color: #304b5b;
+
+        transition: all 0.2s ease;
+      }
+
+      .option:hover:not(:disabled) {
+        background: #eef9fc;
+
+        border-color: #159abd;
+
+        transform: translateY(-2px);
+      }
+
+      .option:disabled {
+        cursor: default;
+      }
+
+      /* =========================
+   CORRECT ANSWER
+========================= */
+
+      .option.correct {
+        background: #e8f8f0;
+
+        border-color: #28a66a;
+
+        color: #197044;
+
+        font-weight: bold;
+      }
+
+      /* =========================
+   WRONG ANSWER
+========================= */
+
+      .option.wrong {
+        background: #fff0f0;
+
+        border-color: #e05252;
+
+        color: #b52f2f;
+
+        font-weight: bold;
+      }
+
+      /* =========================
+   FEEDBACK
+========================= */
+
+      .feedback {
+        display: none;
+
+        margin-top: 20px;
+
+        padding: 18px;
+
+        border-radius: 15px;
+
+        line-height: 1.7;
+      }
+
+      .feedback.correct-feedback {
+        display: block;
+
+        background: #edf9f3;
+
+        border-left: 5px solid #28a66a;
+
+        color: #21653f;
+      }
+
+      .feedback.wrong-feedback {
+        display: block;
+
+        background: #fff1f1;
+
+        border-left: 5px solid #e05252;
+
+        color: #963333;
+      }
+
+      .feedback-title {
+        font-size: 17px;
+
+        font-weight: bold;
+
+        margin-bottom: 7px;
+      }
+
+      .explanation {
+        margin-top: 9px;
+      }
+
+      /* =========================
+   RESULT
+========================= */
+
+      .result {
+        display: none;
+
+        background: linear-gradient(135deg, #087ea4, #e53935);
+
+        color: white;
+
+        padding: 40px;
+
+        border-radius: 28px;
+
+        text-align: center;
+
+        margin-top: 35px;
+
+        box-shadow: 0 12px 35px rgba(0, 100, 130, 0.25);
+      }
+
+      .result h2 {
+        font-size: 30px;
+
+        margin-bottom: 12px;
+      }
+
+      .score {
+        font-size: 52px;
+
+        font-weight: bold;
+
+        margin: 15px 0;
+      }
+
+      .result p {
+        font-size: 18px;
+
+        margin-bottom: 20px;
+      }
+
+      .restart-btn {
+        border: none;
+
+        background: white;
+
+        color: #087ea4;
+
+        padding: 14px 30px;
+
+        border-radius: 13px;
+
+        font-size: 16px;
+
+        font-weight: bold;
+
+        cursor: pointer;
+
+        transition: 0.2s;
+      }
+
+      .restart-btn:hover {
+        background: #f1fbfd;
+
+        transform: translateY(-2px);
+      }
+
+      /* =========================
+   MOBILE
+========================= */
+
+      @media (max-width: 600px) {
+        body {
+          padding: 15px 10px;
+        }
+
+        .header {
+          padding: 28px 15px;
+        }
+
+        .header h1 {
+          font-size: 24px;
+        }
+
+        .question-card {
+          padding: 20px;
+        }
+
+        .question {
+          font-size: 16px;
+        }
+
+        .option {
+          font-size: 15px;
+
+          padding: 13px 14px;
+        }
+
+        .score {
+          font-size: 42px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- =========================
+     HEADER
+========================= -->
+
+      <div class="header">
+        <h1>📝 Idioms Multiple-Choice Test</h1>
+
+        <p>42 Questions • B2–C1 Level • Choose the best answer</p>
+      </div>
+
+      <!-- =========================
+     PROGRESS
+========================= -->
+
+      <div class="progress-box">
+        <div class="progress-info">
+          <span> 📊 Your Progress </span>
+
+          <span id="progressText"> 0 / 42 answered </span>
+        </div>
+
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+
+      <!-- =========================
+     QUIZ
+========================= -->
+
+      <div id="quiz"></div>
+
+      <!-- =========================
+     RESULT
+========================= -->
+
+      <div class="result" id="result">
+        <h2>🎉 Test Completed!</h2>
+
+        <div class="score" id="finalScore">0 / 42</div>
+
+        <p id="resultMessage"></p>
+
+        <button class="restart-btn" onclick="restartQuiz()">
+          🔄 Try Again
+        </button>
+      </div>
+    </div>
+
+    <script>
+      /* =========================
+   QUESTIONS
+========================= */
+
+      const questions = [
+        {
+          q: "The comedian's performance was hilarious. He really managed to __________.",
+          options: [
+            "bury the hatchet",
+            "bring the house down",
+            "call the shots",
+            "face the music",
+          ],
+          answer: 1,
+          explanation:
+            "<b>bring the house down</b> = khiến khán giả cười hoặc vỗ tay nhiệt liệt; tạo ra một màn trình diễn cực kỳ thành công.",
+        },
+
+        {
+          q: "After years of arguing, the two brothers finally decided to __________ and move on.",
+          options: [
+            "bury the hatchet",
+            "bury their heads in the sand",
+            "draw a blank",
+            "fall short of",
+          ],
+          answer: 0,
+          explanation:
+            "<b>bury the hatchet</b> = chấm dứt tranh cãi và làm hòa với nhau.",
+        },
+
+        {
+          q: "Instead of dealing with the financial crisis, the government seems to be __________.",
+          options: [
+            "calling it a day",
+            "burying its head in the sand",
+            "cleaning up its act",
+            "coming clean",
+          ],
+          answer: 1,
+          explanation:
+            "<b>bury one's head in the sand</b> = cố tình phớt lờ hoặc không muốn đối mặt với một vấn đề rõ ràng.",
+        },
+
+        {
+          q: "__________, the new system has made our work much more efficient.",
+          options: [
+            "By the skin of our teeth",
+            "By and large",
+            "By leaps and bounds",
+            "By the way",
+          ],
+          answer: 1,
+          explanation: "<b>by and large</b> = nhìn chung, nói chung.",
+        },
+
+        {
+          q: "We only caught the last train __________. If we'd arrived one minute later, we'd have been stranded.",
+          options: [
+            "by and large",
+            "by the skin of our teeth",
+            "by leaps and bounds",
+            "by and by",
+          ],
+          answer: 1,
+          explanation:
+            "<b>by the skin of one's teeth</b> = vừa kịp, chỉ vừa đủ thoát khỏi một tình huống nguy hiểm hoặc khó khăn.",
+        },
+
+        {
+          q: "The company's profits have increased __________ since it launched the new product.",
+          options: [
+            "by the skin of its teeth",
+            "by leaps and bounds",
+            "by and large",
+            "by the book",
+          ],
+          answer: 1,
+          explanation:
+            "<b>by leaps and bounds</b> = tăng hoặc phát triển rất nhanh và mạnh.",
+        },
+
+        {
+          q: "We've been working for ten hours. Let's __________ and continue tomorrow.",
+          options: [
+            "call the shots",
+            "call it a day",
+            "come clean",
+            "clear the decks",
+          ],
+          answer: 1,
+          explanation:
+            "<b>call it a day</b> = dừng công việc hiện tại vì đã đến lúc nghỉ.",
+        },
+
+        {
+          q: "As CEO, she has the authority to __________ and make all the major decisions.",
+          options: [
+            "catch sight of",
+            "call the shots",
+            "carry the can",
+            "draw a blank",
+          ],
+          answer: 1,
+          explanation:
+            "<b>call the shots</b> = có quyền quyết định và kiểm soát một tình huống.",
+        },
+
+        {
+          q: "I suddenly __________ a strange figure standing outside the window.",
+          options: [
+            "caught sight of",
+            "came to mind",
+            "called it a day",
+            "fell short of",
+          ],
+          answer: 0,
+          explanation:
+            "<b>catch sight of</b> = bất chợt nhìn thấy hoặc thoáng thấy ai/cái gì.",
+        },
+
+        {
+          q: "I had to __________ last night because my assignment was due this morning.",
+          options: [
+            "eat like a horse",
+            "burn the midnight oil",
+            "clean up my act",
+            "bury my head in the sand",
+          ],
+          answer: 1,
+          explanation:
+            "<b>burn the midnight oil</b> = thức khuya để học hoặc làm việc.",
+        },
+
+        {
+          q: "The manager made the mistake, but his assistant had to __________ and accept the blame.",
+          options: [
+            "carry the can",
+            "call the shots",
+            "come out of his shell",
+            "catch sight of it",
+          ],
+          answer: 0,
+          explanation:
+            "<b>carry the can</b> = phải chịu trách nhiệm hoặc nhận lỗi thay cho người khác.",
+        },
+
+        {
+          q: "The teacher caught the students __________ when they were secretly using their phones during the exam.",
+          options: [
+            "on the hop",
+            "red-handed",
+            "by leaps and bounds",
+            "off the hook",
+          ],
+          answer: 0,
+          explanation:
+            "<b>catch someone on the hop</b> = bắt ai đó trong tình huống bất ngờ, khi họ chưa kịp chuẩn bị.",
+        },
+
+        {
+          q: "The police caught the thief __________ while he was trying to break into the house.",
+          options: [
+            "on the hop",
+            "red-handed",
+            "by the skin of his teeth",
+            "in the act",
+          ],
+          answer: 1,
+          explanation:
+            "<b>catch someone red-handed</b> = bắt quả tang ai đó đang thực hiện hành vi sai trái.",
+        },
+
+        {
+          q: "The company needs to __________ if it wants to regain the trust of its customers.",
+          options: [
+            "clean up its act",
+            "call it a day",
+            "draw a blank",
+            "bury the hatchet",
+          ],
+          answer: 0,
+          explanation:
+            "<b>clean up one's act</b> = thay đổi hành vi xấu và bắt đầu cư xử hoặc làm việc đúng đắn hơn.",
+        },
+
+        {
+          q: "Before we start the meeting, let's __________ and make sure everyone has the documents they need.",
+          options: [
+            "clear the decks",
+            "fall to pieces",
+            "carry the can",
+            "go blank",
+          ],
+          answer: 0,
+          explanation:
+            "<b>clear the decks</b> = chuẩn bị sẵn sàng và loại bỏ những trở ngại trước khi bắt đầu một việc.",
+        },
+
+        {
+          q: "The politician finally decided to __________ and admit that he had lied about his qualifications.",
+          options: [
+            "come clean",
+            "come in handy",
+            "come to mind",
+            "call the shots",
+          ],
+          answer: 0,
+          explanation:
+            "<b>come clean</b> = thú nhận sự thật hoặc thừa nhận điều mình đã làm sai.",
+        },
+
+        {
+          q: "This small flashlight will __________ if we lose electricity tonight.",
+          options: [
+            "come to light",
+            "come in handy",
+            "come out of our shell",
+            "come to a standstill",
+          ],
+          answer: 1,
+          explanation:
+            "<b>come in handy</b> = trở nên hữu ích trong một tình huống cụ thể.",
+        },
+
+        {
+          q: "At first, Sarah was very shy, but she gradually __________ and started talking to everyone.",
+          options: [
+            "came out of her shell",
+            "came clean",
+            "fell short of",
+            "carried the can",
+          ],
+          answer: 0,
+          explanation:
+            "<b>come out of one's shell</b> = trở nên cởi mở, tự tin và hòa đồng hơn.",
+        },
+
+        {
+          q: "The entire transport system __________ after the computer network crashed.",
+          options: [
+            "came to mind",
+            "came to a standstill",
+            "came to light",
+            "came out of its shell",
+          ],
+          answer: 1,
+          explanation:
+            "<b>come to a standstill</b> = hoàn toàn dừng lại, không còn hoạt động.",
+        },
+
+        {
+          q: "New evidence __________ during the investigation, revealing that the company had been hiding important information.",
+          options: [
+            "came in handy",
+            "came to light",
+            "came to mind",
+            "came clean",
+          ],
+          answer: 1,
+          explanation:
+            "<b>come to light</b> = được phát hiện hoặc được biết đến sau khi trước đó chưa được biết.",
+        },
+
+        {
+          q: "The investigation helped __________ several serious problems within the organization.",
+          options: [
+            "bring something to light",
+            "call something a day",
+            "draw something blank",
+            "carry something on",
+          ],
+          answer: 0,
+          explanation:
+            "<b>bring something to light</b> = làm cho một sự thật hoặc vấn đề được phát hiện, biết đến.",
+        },
+
+        {
+          q: "You need to __________. You're not always right, and you should listen to other people's opinions.",
+          options: [
+            "get down off your high horse",
+            "come out of your shell",
+            "bury your head in the sand",
+            "call the shots",
+          ],
+          answer: 0,
+          explanation:
+            "<b>get down off your high horse</b> = ngừng tỏ ra kiêu ngạo hoặc cho rằng mình tốt hơn người khác.",
+        },
+
+        {
+          q: "When I think of summer, the smell of fresh flowers immediately __________.",
+          options: [
+            "comes to mind",
+            "comes to a standstill",
+            "comes clean",
+            "comes out of its shell",
+          ],
+          answer: 0,
+          explanation:
+            "<b>come to mind</b> = xuất hiện trong suy nghĩ hoặc được nhớ đến.",
+        },
+
+        {
+          q: "That luxury car must have __________. I could never afford one.",
+          options: [
+            "cost an arm and a leg",
+            "brought the house down",
+            "fallen short",
+            "done the trick",
+          ],
+          answer: 0,
+          explanation: "<b>cost an arm and a leg</b> = cực kỳ đắt tiền.",
+        },
+
+        {
+          q: "The repairs are going to __________, so we may need to find a cheaper solution.",
+          options: [
+            "cost the earth",
+            "catch us on the hop",
+            "draw a blank",
+            "fall between two stools",
+          ],
+          answer: 0,
+          explanation:
+            "<b>cost the earth</b> = tốn rất nhiều tiền, cực kỳ đắt.",
+        },
+
+        {
+          q: "I'm not sure I'll pass the exam, but I'm __________ that everything will work out.",
+          options: [
+            "crying over spilt milk",
+            "crossing my fingers",
+            "calling it a day",
+            "carrying the can",
+          ],
+          answer: 1,
+          explanation:
+            "<b>cross one's fingers</b> = hy vọng điều gì đó sẽ xảy ra theo hướng tốt đẹp.",
+        },
+
+        {
+          q: "There's no point __________. You can't change what happened yesterday.",
+          options: [
+            "facing the music",
+            "crying over spilt milk",
+            "burning the midnight oil",
+            "drawing a blank",
+          ],
+          answer: 1,
+          explanation:
+            "<b>cry over spilt milk</b> = buồn hoặc phàn nàn về một chuyện đã xảy ra và không thể thay đổi.",
+        },
+
+        {
+          q: "The politician completely __________ after the newspaper published evidence against him.",
+          options: [
+            "changed his tune",
+            "called it a day",
+            "ate like a bird",
+            "came to mind",
+          ],
+          answer: 0,
+          explanation:
+            "<b>change one's tune</b> = thay đổi quan điểm hoặc thái độ, thường là sau khi hoàn cảnh thay đổi.",
+        },
+
+        {
+          q: "Driving at such a high speed on icy roads is practically __________.",
+          options: [
+            "doing the trick",
+            "dicing with death",
+            "cleaning up your act",
+            "calling the shots",
+          ],
+          answer: 1,
+          explanation:
+            "<b>be dicing with death</b> = đang liều mạng hoặc đặt bản thân vào nguy hiểm cực lớn.",
+        },
+
+        {
+          q: "The restaurant is __________ tonight because of the city's food festival.",
+          options: [
+            "doing a roaring trade",
+            "falling short",
+            "going blank",
+            "coming to a standstill",
+          ],
+          answer: 0,
+          explanation:
+            "<b>do a roaring trade</b> = kinh doanh cực kỳ phát đạt hoặc có rất nhiều khách hàng.",
+        },
+
+        {
+          q: "I couldn't fix the printer myself, but restarting it __________.",
+          options: [
+            "did the trick",
+            "drew a blank",
+            "fell foul of",
+            "brought the house down",
+          ],
+          answer: 0,
+          explanation:
+            "<b>do the trick</b> = có hiệu quả và giải quyết được vấn đề.",
+        },
+
+        {
+          q: "You shouldn't invest all your money in one company. Remember, __________.",
+          options: [
+            "every cloud has a silver lining",
+            "don't put all your eggs in one basket",
+            "easier said than done",
+            "face the music",
+          ],
+          answer: 1,
+          explanation:
+            "<b>don't put all your eggs in one basket</b> = không nên đặt tất cả hy vọng hoặc nguồn lực vào một lựa chọn duy nhất.",
+        },
+
+        {
+          q: "The old man's clothes were __________, but he was still very kind and generous.",
+          options: [
+            "down at heel",
+            "by leaps and bounds",
+            "on the hop",
+            "in the cards",
+          ],
+          answer: 0,
+          explanation:
+            "<b>down at heel</b> = ăn mặc cũ kỹ, tồi tàn hoặc có vẻ nghèo khó.",
+        },
+
+        {
+          q: "I tried to remember his name, but I __________.",
+          options: ["went blank", "drew a blank", "fell short", "came clean"],
+          answer: 1,
+          explanation:
+            "<b>draw a blank</b> = cố gắng nhớ hoặc tìm kiếm thông tin nhưng không thể tìm ra.",
+        },
+
+        {
+          q: "When the interviewer suddenly asked me a question about advanced economics, I completely __________.",
+          options: [
+            "went blank",
+            "drew a blank",
+            "fell to pieces",
+            "came to mind",
+          ],
+          answer: 0,
+          explanation:
+            "<b>go blank</b> = đột nhiên không thể nghĩ hoặc nhớ được điều gì, thường do căng thẳng.",
+        },
+
+        {
+          q: "The constant pressure at work is beginning to __________.",
+          options: [
+            "drive me to the edge",
+            "bring the house down",
+            "do a roaring trade",
+            "call it a day",
+          ],
+          answer: 0,
+          explanation:
+            "<b>drive someone to the edge</b> = khiến ai đó gần như không thể chịu đựng thêm vì quá căng thẳng hoặc áp lực.",
+        },
+
+        {
+          q: "The customer was an experienced negotiator and managed to __________ with the seller.",
+          options: [
+            "strike a hard bargain",
+            "draw a blank",
+            "clean up his act",
+            "fall on deaf ears",
+          ],
+          answer: 0,
+          explanation:
+            "<b>strike a hard bargain</b> = thương lượng rất cứng rắn để đạt được điều kiện tốt.",
+        },
+
+        {
+          q: "I haven't heard from Anna for months. I'll __________ and see how she's doing.",
+          options: [
+            "drop her a line",
+            "call the shots",
+            "face the music",
+            "bury the hatchet",
+          ],
+          answer: 0,
+          explanation:
+            "<b>drop someone a line</b> = gửi cho ai đó một tin nhắn hoặc viết thư ngắn để hỏi thăm.",
+        },
+
+        {
+          q: "I know you want to change your lifestyle, but actually doing it is __________.",
+          options: [
+            "easier said than done",
+            "a roaring trade",
+            "a blank",
+            "a hard bargain",
+          ],
+          answer: 0,
+          explanation:
+            "<b>easier said than done</b> = nói thì dễ hơn làm; việc thực hiện khó hơn nhiều so với việc nói.",
+        },
+
+        {
+          q: "My brother is incredibly hungry. He can __________ and still ask for dessert.",
+          options: [
+            "eat like a bird",
+            "eat like a horse",
+            "fall short",
+            "go blank",
+          ],
+          answer: 1,
+          explanation: "<b>eat like a horse</b> = ăn rất nhiều, ăn khỏe.",
+        },
+
+        {
+          q: "We didn't win the competition, but we learned a lot from the experience. After all, __________.",
+          options: [
+            "every cloud has a silver lining",
+            "don't put all your eggs in one basket",
+            "face the music",
+            "cry over spilt milk",
+          ],
+          answer: 0,
+          explanation:
+            "<b>every cloud has a silver lining</b> = trong mọi tình huống khó khăn vẫn có thể có một điều tốt đẹp hoặc bài học tích cực.",
+        },
+
+        {
+          q: "After breaking the rules, the student had to __________ and accept the consequences.",
+          options: [
+            "fall into place",
+            "face the music",
+            "come in handy",
+            "bring something to light",
+          ],
+          answer: 1,
+          explanation:
+            "<b>face the music</b> = đối mặt với hậu quả của hành động hoặc quyết định của mình.",
+        },
+      ];
+
+      /* =========================
+   VARIABLES
+========================= */
+
+      let answered = 0;
+
+      let score = 0;
+
+      let userAnswers = [];
+
+      const quiz = document.getElementById("quiz");
+
+      const progressText = document.getElementById("progressText");
+
+      const progressFill = document.getElementById("progressFill");
+
+      const result = document.getElementById("result");
+
+      const finalScore = document.getElementById("finalScore");
+
+      const resultMessage = document.getElementById("resultMessage");
+
+      /* =========================
+   LOAD QUIZ
+========================= */
+
+      function loadQuiz() {
+        quiz.innerHTML = "";
+
+        questions.forEach((item, index) => {
+          const card = document.createElement("div");
+
+          card.className = "question-card";
+
+          card.innerHTML = `
+
+                <div class="question-number">
+
+                    Question ${index + 1}
+
+                </div>
+
+
+                <div class="question">
+
+                    ${item.q}
+
+                </div>
+
+
+                <div class="options">
+
+                    ${item.options
+                      .map(
+                        (option, optionIndex) => `
+
+                            <button
+
+                                class="option"
+
+                                onclick="checkAnswer(
+
+                                    ${index},
+
+                                    ${optionIndex},
+
+                                    this
+
+                                )"
+
+                            >
+
+                                <b>
+
+                                    ${String.fromCharCode(65 + optionIndex)}.
+
+                                </b>
+
+                                ${option}
+
+                            </button>
+
+                        `,
+                      )
+                      .join("")}
+
+                </div>
+
+
+                <div
+
+                    class="feedback"
+
+                    id="feedback-${index}"
+
+                >
+
+                </div>
+
+            `;
+
+          quiz.appendChild(card);
+        });
+      }
+
+      /* =========================
+   CHECK ANSWER
+========================= */
+
+      function checkAnswer(questionIndex, selectedIndex, clickedButton) {
+        if (userAnswers[questionIndex] !== undefined) {
+          return;
+        }
+
+        userAnswers[questionIndex] = selectedIndex;
+
+        answered++;
+
+        const question = questions[questionIndex];
+
+        const buttons = clickedButton.parentElement.querySelectorAll(".option");
+
+        const feedback = document.getElementById(`feedback-${questionIndex}`);
+
+        buttons.forEach((button) => {
+          button.disabled = true;
+        });
+
+        /* =====================
+       CORRECT
+    ===================== */
+
+        if (selectedIndex === question.answer) {
+          score++;
+
+          clickedButton.classList.add("correct");
+
+          feedback.className = "feedback correct-feedback";
+
+          feedback.innerHTML = `
+
+            <div class="feedback-title">
+
+                ✅ Correct!
+
+            </div>
+
+
+            <div>
+
+                Đáp án của bạn:
+
+                <b>
+
+                    ${String.fromCharCode(65 + question.answer)}.
+
+                    ${question.options[question.answer]}
+
+                </b>
+
+            </div>
+
+
+            <div class="explanation">
+
+                💡
+
+                <b>
+                    Giải thích:
+                </b>
+
+                ${question.explanation}
+
+            </div>
+
+        `;
+        } else {
+
+        /* =====================
+       WRONG
+    ===================== */
+          clickedButton.classList.add("wrong");
+
+          buttons[question.answer].classList.add("correct");
+
+          feedback.className = "feedback wrong-feedback";
+
+          feedback.innerHTML = `
+
+            <div class="feedback-title">
+
+                ❌ Incorrect!
+
+            </div>
+
+
+            <div>
+
+                Bạn chọn:
+
+                <b>
+
+                    ${String.fromCharCode(65 + selectedIndex)}.
+
+                    ${question.options[selectedIndex]}
+
+                </b>
+
+            </div>
+
+
+            <div>
+
+                Đáp án đúng:
+
+                <b>
+
+                    ${String.fromCharCode(65 + question.answer)}.
+
+                    ${question.options[question.answer]}
+
+                </b>
+
+            </div>
+
+
+            <div class="explanation">
+
+                💡
+
+                <b>
+                    Giải thích:
+                </b>
+
+                ${question.explanation}
+
+            </div>
+
+        `;
+        }
+
+        updateProgress();
+
+        if (answered === questions.length) {
+          showResult();
+        }
+      }
+
+      /* =========================
+   UPDATE PROGRESS
+========================= */
+
+      function updateProgress() {
+        progressText.textContent = `${answered} / ${questions.length} answered`;
+
+        const percentage = (answered / questions.length) * 100;
+
+        progressFill.style.width = percentage + "%";
+      }
+
+      /* =========================
+   SHOW RESULT
+========================= */
+
+      function showResult() {
+        result.style.display = "block";
+
+        finalScore.textContent = `${score} / ${questions.length}`;
+
+        const percentage = (score / questions.length) * 100;
+
+        if (percentage >= 90) {
+          resultMessage.textContent =
+            "🏆 Outstanding! Bạn đã nắm vững các idioms B2–C1 cực kỳ tốt!";
+        } else if (percentage >= 75) {
+          resultMessage.textContent =
+            "🌟 Excellent! Khả năng hiểu idioms của bạn rất tốt!";
+        } else if (percentage >= 60) {
+          resultMessage.textContent =
+            "👍 Good job! Bạn đã hiểu khá nhiều idioms. Hãy ôn lại những câu sai nhé!";
+        } else {
+          resultMessage.textContent =
+            "📚 Keep practicing! Hãy ôn lại các idioms và thử lại bài test nhé!";
+        }
+
+        setTimeout(
+          () => {
+            result.scrollIntoView({
+              behavior: "smooth",
+
+              block: "center",
+            });
+          },
+
+          300,
+        );
+      }
+
+      /* =========================
+   RESTART QUIZ
+========================= */
+
+      function restartQuiz() {
+        answered = 0;
+
+        score = 0;
+
+        userAnswers = [];
+
+        result.style.display = "none";
+
+        progressText.textContent = "0 / 42 answered";
+
+        progressFill.style.width = "0%";
+
+        loadQuiz();
+
+        window.scrollTo({
+          top: 0,
+
+          behavior: "smooth",
+        });
+      }
+
+      /* =========================
+   START
+========================= */
+
+      loadQuiz();
+    </script>
+  </body>
+</html>
+```

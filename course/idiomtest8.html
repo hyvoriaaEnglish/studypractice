@@ -1,0 +1,1335 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Idioms Multiple-Choice Test</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #fff5f5;
+        color: #4a2525;
+        line-height: 1.6;
+        padding: 30px 15px;
+      }
+
+      .container {
+        max-width: 950px;
+        margin: 0 auto;
+        background: #ffffff;
+        padding: 35px;
+        border-radius: 24px;
+        box-shadow: 0 10px 35px rgba(180, 70, 70, 0.12);
+      }
+
+      /* HEADER */
+      .header {
+        text-align: center;
+        background: linear-gradient(135deg, #f8b4b4, #fbd6d6);
+        padding: 35px 20px;
+        border-radius: 20px;
+        margin-bottom: 35px;
+        border: 2px solid #f3a5a5;
+      }
+
+      .header h1 {
+        color: #9f3030;
+        font-size: 30px;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        color: #6f3b3b;
+        font-size: 16px;
+      }
+
+      .instruction {
+        margin-top: 15px;
+        display: inline-block;
+        background: #fffafa;
+        color: #a52e2e;
+        padding: 8px 18px;
+        border-radius: 30px;
+        font-weight: bold;
+        font-size: 14px;
+      }
+
+      /* QUESTION */
+      .question {
+        background: #fffafa;
+        border: 1px solid #f2caca;
+        border-left: 5px solid #d95c5c;
+        padding: 22px;
+        border-radius: 15px;
+        margin-bottom: 22px;
+        transition: 0.25s ease;
+      }
+
+      .question:hover {
+        box-shadow: 0 5px 18px rgba(190, 70, 70, 0.08);
+      }
+
+      .question-text {
+        font-size: 17px;
+        font-weight: bold;
+        color: #632525;
+        margin-bottom: 15px;
+      }
+
+      .question-number {
+        color: #c54242;
+        font-weight: bold;
+      }
+
+      /* ANSWERS */
+      .options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .option {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 11px 15px;
+        background: #ffffff;
+        border: 1px solid #efcaca;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .option:hover {
+        background: #fff0f0;
+        border-color: #dc7777;
+        transform: translateX(3px);
+      }
+
+      .option input {
+        accent-color: #c94b4b;
+        width: 17px;
+        height: 17px;
+        cursor: pointer;
+      }
+
+      .option label {
+        cursor: pointer;
+        flex: 1;
+        color: #593434;
+      }
+
+      /* RESULT */
+      #result {
+        display: none;
+        margin-top: 30px;
+        padding: 25px;
+        text-align: center;
+        border-radius: 18px;
+        background: #fff0f0;
+        border: 2px solid #efa8a8;
+      }
+
+      #result h2 {
+        color: #a83232;
+        margin-bottom: 10px;
+      }
+
+      #score {
+        font-size: 28px;
+        font-weight: bold;
+        color: #c13e3e;
+        margin: 10px 0;
+      }
+
+      #message {
+        font-size: 16px;
+        color: #713737;
+      }
+
+      /* BUTTONS */
+      .button-container {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 30px;
+        flex-wrap: wrap;
+      }
+
+      button {
+        border: none;
+        padding: 13px 28px;
+        border-radius: 30px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.25s ease;
+      }
+
+      .submit-btn {
+        background: #c94b4b;
+        color: white;
+        box-shadow: 0 5px 15px rgba(201, 75, 75, 0.25);
+      }
+
+      .submit-btn:hover {
+        background: #ad3838;
+        transform: translateY(-2px);
+      }
+
+      .reset-btn {
+        background: #f7cccc;
+        color: #8e3030;
+      }
+
+      .reset-btn:hover {
+        background: #efb5b5;
+        transform: translateY(-2px);
+      }
+
+      /* ANSWER FEEDBACK */
+      .correct {
+        background: #e7f7e7 !important;
+        border-color: #76c576 !important;
+      }
+
+      .wrong {
+        background: #ffe5e5 !important;
+        border-color: #e47777 !important;
+      }
+
+      .correct-answer {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #288028;
+        font-weight: bold;
+      }
+
+      .wrong-answer {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #bd3333;
+        font-weight: bold;
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 600px) {
+        body {
+          padding: 15px 10px;
+        }
+
+        .container {
+          padding: 18px;
+          border-radius: 18px;
+        }
+
+        .header h1 {
+          font-size: 23px;
+        }
+
+        .question {
+          padding: 17px;
+        }
+
+        .question-text {
+          font-size: 15px;
+        }
+
+        .option {
+          font-size: 14px;
+        }
+
+        button {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- HEADER -->
+      <div class="header">
+        <h1>📝 Idioms Multiple-Choice Test</h1>
+        <p>30 Questions • B2–C1 Level</p>
+        <div class="instruction">Choose the best answer (A, B, C, or D).</div>
+      </div>
+
+      <form id="quizForm">
+        <!-- QUESTION 1 -->
+        <div class="question" data-answer="B">
+          <div class="question-text">
+            <span class="question-number">1.</span>
+            I wasn't supposed to tell anyone about the surprise party, but I
+            accidentally __________.
+          </div>
+
+          <div class="options">
+            <label class="option">
+              <input type="radio" name="q1" value="A" />
+              A. let sleeping dogs lie
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q1" value="B" />
+              B. let the cat out of the bag
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q1" value="C" />
+              C. let off steam
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q1" value="D" />
+              D. lent an ear to
+            </label>
+          </div>
+        </div>
+
+        <!-- QUESTION 2 -->
+        <div class="question" data-answer="A">
+          <div class="question-text">
+            <span class="question-number">2.</span>
+            My sister is going through a difficult time, so I always try to
+            __________ when she needs to talk.
+          </div>
+
+          <div class="options">
+            <label class="option">
+              <input type="radio" name="q2" value="A" />
+              A. lend an ear to her
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q2" value="B" />
+              B. make a mountain out of a molehill
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q2" value="C" />
+              C. make waves
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q2" value="D" />
+              D. pull a face
+            </label>
+          </div>
+        </div>
+
+        <!-- QUESTION 3 -->
+        <div class="question" data-answer="B">
+          <div class="question-text">
+            <span class="question-number">3.</span>
+            As a new student in a foreign country, I felt __________ and didn't
+            know how to behave.
+          </div>
+
+          <div class="options">
+            <label class="option">
+              <input type="radio" name="q3" value="A" />
+              A. like a red rag to a bull
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q3" value="B" />
+              B. like a fish out of water
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q3" value="C" />
+              C. off the beaten track
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q3" value="D" />
+              D. on the spot
+            </label>
+          </div>
+        </div>
+
+        <!-- QUESTION 4 -->
+        <div class="question" data-answer="B">
+          <div class="question-text">
+            <span class="question-number">4.</span>
+            Mentioning his ex-wife is __________, so you'd better avoid the
+            subject.
+          </div>
+
+          <div class="options">
+            <label class="option">
+              <input type="radio" name="q4" value="A" />
+              A. like a fish out of water
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q4" value="B" />
+              B. like a red rag to a bull
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q4" value="C" />
+              C. like a mountain out of a molehill
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q4" value="D" />
+              D. like a broken record
+            </label>
+          </div>
+        </div>
+
+        <!-- QUESTION 5 -->
+        <div class="question" data-answer="B">
+          <div class="question-text">
+            <span class="question-number">5.</span>
+            After a stressful day at work, I went for a long run to __________.
+          </div>
+
+          <div class="options">
+            <label class="option">
+              <input type="radio" name="q5" value="A" />
+              A. let sleeping dogs lie
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q5" value="B" />
+              B. let off steam
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q5" value="C" />
+              C. make headway
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q5" value="D" />
+              D. make ends meet
+            </label>
+          </div>
+        </div>
+
+        <!-- QUESTION 6 -->
+        <div class="question" data-answer="B">
+          <div class="question-text">
+            <span class="question-number">6.</span>
+            We know our neighbor is angry with us, but it's probably better to
+            __________ and not ask him about it.
+          </div>
+
+          <div class="options">
+            <label class="option">
+              <input type="radio" name="q6" value="A" />
+              A. make waves
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q6" value="B" />
+              B. let sleeping dogs lie
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q6" value="C" />
+              C. make a name for ourselves
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q6" value="D" />
+              D. pull a face
+            </label>
+          </div>
+        </div>
+
+        <!-- QUESTION 7 -->
+        <div class="question" data-answer="B">
+          <div class="question-text">
+            <span class="question-number">7.</span>
+            The young actress quickly __________ for herself after starring in
+            several successful films.
+          </div>
+
+          <div class="options">
+            <label class="option">
+              <input type="radio" name="q7" value="A" />
+              A. made a mountain
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q7" value="B" />
+              B. made a name
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q7" value="C" />
+              C. made ends meet
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q7" value="D" />
+              D. made headway
+            </label>
+          </div>
+        </div>
+
+        <!-- QUESTION 8 -->
+        <div class="question" data-answer="B">
+          <div class="question-text">
+            <span class="question-number">8.</span>
+            You're __________. It's just a small mistake, so there's no need to
+            panic.
+          </div>
+
+          <div class="options">
+            <label class="option">
+              <input type="radio" name="q8" value="A" />
+              A. making a name for yourself
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q8" value="B" />
+              B. making a mountain out of a molehill
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q8" value="C" />
+              C. making headway
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q8" value="D" />
+              D. making waves
+            </label>
+          </div>
+        </div>
+
+        <!-- QUESTION 9 -->
+        <div class="question" data-answer="A">
+          <div class="question-text">
+            <span class="question-number">9.</span>
+            Despite working two jobs, it's difficult for him to __________.
+          </div>
+
+          <div class="options">
+            <label class="option">
+              <input type="radio" name="q9" value="A" />
+              A. make ends meet
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q9" value="B" />
+              B. make a mountain
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q9" value="C" />
+              C. make waves
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q9" value="D" />
+              D. make headway
+            </label>
+          </div>
+        </div>
+
+        <!-- QUESTION 10 -->
+        <div class="question" data-answer="B">
+          <div class="question-text">
+            <span class="question-number">10.</span>
+            After months of negotiations, the two sides are finally __________
+            in reaching an agreement.
+          </div>
+
+          <div class="options">
+            <label class="option">
+              <input type="radio" name="q10" value="A" />
+              A. making no bones
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q10" value="B" />
+              B. making headway
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q10" value="C" />
+              C. making a name
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q10" value="D" />
+              D. making ends meet
+            </label>
+          </div>
+        </div>
+
+        <!-- QUESTION 11 -->
+        <div class="question" data-answer="B">
+          <div class="question-text">
+            <span class="question-number">11.</span>
+            The new manager is __________ of the company's outdated policies and
+            has introduced several major changes.
+          </div>
+
+          <div class="options">
+            <label class="option">
+              <input type="radio" name="q11" value="A" />
+              A. making heavy weather
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q11" value="B" />
+              B. making waves
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q11" value="C" />
+              C. making no bones
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q11" value="D" />
+              D. making ends meet
+            </label>
+          </div>
+        </div>
+
+        <!-- QUESTION 12 -->
+        <div class="question" data-answer="A">
+          <div class="question-text">
+            <span class="question-number">12.</span>
+            The exam was quite difficult, but she didn't __________ of it and
+            completed it confidently.
+          </div>
+
+          <div class="options">
+            <label class="option">
+              <input type="radio" name="q12" value="A" />
+              A. make heavy weather
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q12" value="B" />
+              B. make a name
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q12" value="C" />
+              C. make ends meet
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q12" value="D" />
+              D. make waves
+            </label>
+          </div>
+        </div>
+
+        <!-- QUESTION 13 -->
+        <div class="question" data-answer="A">
+          <div class="question-text">
+            <span class="question-number">13.</span>
+            He __________ about his dislike of the new policy and openly
+            criticized it during the meeting.
+          </div>
+
+          <div class="options">
+            <label class="option">
+              <input type="radio" name="q13" value="A" />
+              A. made no bones
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q13" value="B" />
+              B. made headway
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q13" value="C" />
+              C. made a mountain
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q13" value="D" />
+              D. made the most
+            </label>
+          </div>
+        </div>
+
+        <!-- QUESTION 14 -->
+        <div class="question" data-answer="B">
+          <div class="question-text">
+            <span class="question-number">14.</span>
+            We only have two days in Paris, so let's __________ of our time
+            there.
+          </div>
+
+          <div class="options">
+            <label class="option">
+              <input type="radio" name="q14" value="A" />
+              A. make waves
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q14" value="B" />
+              B. make the most
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q14" value="C" />
+              C. make no bones
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q14" value="D" />
+              D. make heavy weather
+            </label>
+          </div>
+        </div>
+
+        <!-- QUESTION 15 -->
+        <div class="question" data-answer="B">
+          <div class="question-text">
+            <span class="question-number">15.</span>
+            The new policy is likely to __________ in the education system and
+            cause significant changes.
+          </div>
+
+          <div class="options">
+            <label class="option">
+              <input type="radio" name="q15" value="A" />
+              A. pull a face
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q15" value="B" />
+              B. make waves
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q15" value="C" />
+              C. make ends meet
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q15" value="D" />
+              D. make a name
+            </label>
+          </div>
+        </div>
+
+        <!-- QUESTION 16 -->
+        <div class="question" data-answer="A">
+          <div class="question-text">
+            <span class="question-number">16.</span>
+            When I told him he had to work on Saturday, he __________ and
+            clearly showed that he wasn't happy.
+          </div>
+
+          <div class="options">
+            <label class="option">
+              <input type="radio" name="q16" value="A" />
+              A. pulled a face
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q16" value="B" />
+              B. made headway
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q16" value="C" />
+              C. made no bones
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q16" value="D" />
+              D. lent an ear
+            </label>
+          </div>
+        </div>
+
+        <!-- QUESTION 17 -->
+        <div class="question" data-answer="B">
+          <div class="question-text">
+            <span class="question-number">17.</span>
+            The company hasn't __________ to help the local community. They
+            haven't even donated a single dollar.
+          </div>
+
+          <div class="options">
+            <label class="option">
+              <input type="radio" name="q17" value="A" />
+              A. raised a finger
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q17" value="B" />
+              B. lifted a finger
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q17" value="C" />
+              C. made waves
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q17" value="D" />
+              D. made ends meet
+            </label>
+          </div>
+        </div>
+
+        <!-- QUESTION 18 -->
+        <div class="question" data-answer="A">
+          <div class="question-text">
+            <span class="question-number">18.</span>
+            She remained completely calm during the emergency and didn't
+            __________.
+          </div>
+
+          <div class="options">
+            <label class="option">
+              <input type="radio" name="q18" value="A" />
+              A. turn a hair
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q18" value="B" />
+              B. make a mountain
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q18" value="C" />
+              C. pull a face
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q18" value="D" />
+              D. make heavy weather
+            </label>
+          </div>
+        </div>
+
+        <!-- QUESTION 19 -->
+        <div class="question" data-answer="B">
+          <div class="question-text">
+            <span class="question-number">19.</span>
+            The hikers deliberately chose a route __________ to avoid the
+            crowds.
+          </div>
+
+          <div class="options">
+            <label class="option">
+              <input type="radio" name="q19" value="A" />
+              A. on the spot
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q19" value="B" />
+              B. off the beaten track
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q19" value="C" />
+              C. like a red rag to a bull
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q19" value="D" />
+              D. on the edge
+            </label>
+          </div>
+        </div>
+
+        <!-- QUESTION 20 -->
+        <div class="question" data-answer="B">
+          <div class="question-text">
+            <span class="question-number">20.</span>
+            The police caught the suspect __________ and arrested him
+            immediately.
+          </div>
+
+          <div class="options">
+            <label class="option">
+              <input type="radio" name="q20" value="A" />
+              A. off the beaten track
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q20" value="B" />
+              B. on the spot
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q20" value="C" />
+              C. in the grapevine
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q20" value="D" />
+              D. at large
+            </label>
+          </div>
+        </div>
+
+        <!-- QUESTION 21 -->
+        <div class="question" data-answer="B">
+          <div class="question-text">
+            <span class="question-number">21.</span>
+            I heard through the grapevine that the company is going to close its
+            local office.
+            <br /><br />
+            What does <b>"heard through the grapevine"</b> mean?
+          </div>
+
+          <div class="options">
+            <label class="option">
+              <input type="radio" name="q21" value="A" />
+              A. Heard the news from an official announcement
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q21" value="B" />
+              B. Heard the news through informal sources
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q21" value="C" />
+              C. Discovered the news by accident at work
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q21" value="D" />
+              D. Found the information in a newspaper
+            </label>
+          </div>
+        </div>
+
+        <!-- QUESTION 22 -->
+        <div class="question" data-answer="A">
+          <div class="question-text">
+            <span class="question-number">22.</span>
+            My younger brother is very shy and rarely talks to strangers. He
+            feels __________ at large social events.
+          </div>
+
+          <div class="options">
+            <label class="option">
+              <input type="radio" name="q22" value="A" />
+              A. like a fish out of water
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q22" value="B" />
+              B. like a red rag to a bull
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q22" value="C" />
+              C. on the spot
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q22" value="D" />
+              D. off the beaten track
+            </label>
+          </div>
+        </div>
+
+        <!-- QUESTION 23 -->
+        <div class="question" data-answer="A">
+          <div class="question-text">
+            <span class="question-number">23.</span>
+            The teacher asked me to explain my answer immediately, putting me
+            __________.
+          </div>
+
+          <div class="options">
+            <label class="option">
+              <input type="radio" name="q23" value="A" />
+              A. on the spot
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q23" value="B" />
+              B. off the beaten track
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q23" value="C" />
+              C. in the water
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q23" value="D" />
+              D. on the grapevine
+            </label>
+          </div>
+        </div>
+
+        <!-- QUESTION 24 -->
+        <div class="question" data-answer="B">
+          <div class="question-text">
+            <span class="question-number">24.</span>
+            The company is struggling financially, but the new strategy should
+            help it __________ over the next few months.
+          </div>
+
+          <div class="options">
+            <label class="option">
+              <input type="radio" name="q24" value="A" />
+              A. make a mountain
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q24" value="B" />
+              B. make headway
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q24" value="C" />
+              C. pull a face
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q24" value="D" />
+              D. make waves
+            </label>
+          </div>
+        </div>
+
+        <!-- QUESTION 25 -->
+        <div class="question" data-answer="B">
+          <div class="question-text">
+            <span class="question-number">25.</span>
+            My parents are working hard just to __________ and pay all their
+            monthly bills.
+          </div>
+
+          <div class="options">
+            <label class="option">
+              <input type="radio" name="q25" value="A" />
+              A. make a name
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q25" value="B" />
+              B. make ends meet
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q25" value="C" />
+              C. make heavy weather
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q25" value="D" />
+              D. make waves
+            </label>
+          </div>
+        </div>
+
+        <!-- QUESTION 26 -->
+        <div class="question" data-answer="A">
+          <div class="question-text">
+            <span class="question-number">26.</span>
+            The politician __________ about his plans to increase taxes, making
+            his position perfectly clear.
+          </div>
+
+          <div class="options">
+            <label class="option">
+              <input type="radio" name="q26" value="A" />
+              A. made no bones
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q26" value="B" />
+              B. made heavy weather
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q26" value="C" />
+              C. made a mountain
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q26" value="D" />
+              D. made the most
+            </label>
+          </div>
+        </div>
+
+        <!-- QUESTION 27 -->
+        <div class="question" data-answer="B">
+          <div class="question-text">
+            <span class="question-number">27.</span>
+            Don't __________. The problem is much smaller than you think.
+          </div>
+
+          <div class="options">
+            <label class="option">
+              <input type="radio" name="q27" value="A" />
+              A. make ends meet
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q27" value="B" />
+              B. make a mountain out of a molehill
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q27" value="C" />
+              C. make waves
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q27" value="D" />
+              D. make headway
+            </label>
+          </div>
+        </div>
+
+        <!-- QUESTION 28 -->
+        <div class="question" data-answer="A">
+          <div class="question-text">
+            <span class="question-number">28.</span>
+            The new CEO wants to __________ by challenging traditional practices
+            and introducing innovative ideas.
+          </div>
+
+          <div class="options">
+            <label class="option">
+              <input type="radio" name="q28" value="A" />
+              A. make waves
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q28" value="B" />
+              B. make ends meet
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q28" value="C" />
+              C. make no bones
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q28" value="D" />
+              D. let sleeping dogs lie
+            </label>
+          </div>
+        </div>
+
+        <!-- QUESTION 29 -->
+        <div class="question" data-answer="B">
+          <div class="question-text">
+            <span class="question-number">29.</span>
+            After hearing the bad news, Sarah wanted to talk to someone, so her
+            best friend __________.
+          </div>
+
+          <div class="options">
+            <label class="option">
+              <input type="radio" name="q29" value="A" />
+              A. made a mountain out of a molehill
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q29" value="B" />
+              B. lent an ear to her
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q29" value="C" />
+              C. pulled a face
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q29" value="D" />
+              D. let sleeping dogs lie
+            </label>
+          </div>
+        </div>
+
+        <!-- QUESTION 30 -->
+        <div class="question" data-answer="C">
+          <div class="question-text">
+            <span class="question-number">30.</span>
+            We've been arguing about this issue for hours, but we're not getting
+            anywhere. Let's stop and __________.
+          </div>
+
+          <div class="options">
+            <label class="option">
+              <input type="radio" name="q30" value="A" />
+              A. make the most of it
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q30" value="B" />
+              B. let off steam
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q30" value="C" />
+              C. call it a day
+            </label>
+
+            <label class="option">
+              <input type="radio" name="q30" value="D" />
+              D. make a name for ourselves
+            </label>
+          </div>
+        </div>
+
+        <div class="button-container">
+          <button type="button" class="submit-btn" onclick="checkAnswers()">
+            ✅ Submit Test
+          </button>
+
+          <button type="button" class="reset-btn" onclick="resetQuiz()">
+            🔄 Try Again
+          </button>
+        </div>
+      </form>
+
+      <!-- RESULT -->
+      <div id="result">
+        <h2>🎉 Your Result</h2>
+        <div id="score"></div>
+        <p id="message"></p>
+      </div>
+    </div>
+
+    <script>
+      const answers = {
+        1: "B",
+        2: "A",
+        3: "B",
+        4: "B",
+        5: "B",
+        6: "B",
+        7: "B",
+        8: "B",
+        9: "A",
+        10: "B",
+        11: "B",
+        12: "A",
+        13: "A",
+        14: "B",
+        15: "B",
+        16: "A",
+        17: "B",
+        18: "A",
+        19: "B",
+        20: "B",
+        21: "B",
+        22: "A",
+        23: "A",
+        24: "B",
+        25: "B",
+        26: "A",
+        27: "B",
+        28: "A",
+        29: "B",
+        30: "C",
+      };
+
+      function checkAnswers() {
+        let score = 0;
+        let answered = 0;
+
+        const questions = document.querySelectorAll(".question");
+
+        questions.forEach((question, index) => {
+          const questionNumber = index + 1;
+          const correctAnswer = answers[questionNumber];
+
+          const selected = question.querySelector(
+            `input[name="q${questionNumber}"]:checked`,
+          );
+
+          const options = question.querySelectorAll(".option");
+
+          options.forEach((option) => {
+            option.classList.remove("correct", "wrong");
+
+            const input = option.querySelector("input");
+
+            if (input.value === correctAnswer) {
+              option.classList.add("correct");
+            }
+          });
+
+          if (selected) {
+            answered++;
+
+            if (selected.value === correctAnswer) {
+              score++;
+            } else {
+              const selectedOption = selected.closest(".option");
+              selectedOption.classList.add("wrong");
+            }
+          }
+        });
+
+        const percentage = Math.round((score / 30) * 100);
+
+        document.getElementById("result").style.display = "block";
+
+        document.getElementById("score").innerHTML =
+          `${score} / 30 — ${percentage}%`;
+
+        let message = "";
+
+        if (score === 30) {
+          message = "🏆 Perfect! You have an excellent command of idioms!";
+        } else if (score >= 26) {
+          message = "🌟 Excellent! Your idiom knowledge is very strong!";
+        } else if (score >= 22) {
+          message = "👏 Great job! You have a good understanding of idioms.";
+        } else if (score >= 18) {
+          message = "💪 Good effort! Keep reviewing the idioms you missed.";
+        } else {
+          message = "📚 Keep practicing! Review the idioms and try again.";
+        }
+
+        if (answered < 30) {
+          message += `<br><br>⚠️ You answered ${answered}/30 questions.`;
+        }
+
+        document.getElementById("message").innerHTML = message;
+
+        document.getElementById("result").scrollIntoView({
+          behavior: "smooth",
+        });
+      }
+
+      function resetQuiz() {
+        document.getElementById("quizForm").reset();
+
+        document.querySelectorAll(".option").forEach((option) => {
+          option.classList.remove("correct", "wrong");
+        });
+
+        document.getElementById("result").style.display = "none";
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1346 @@
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Idioms Multiple-Choice Test — 48 Questions</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: #f8f5ff;
+        color: #3f3152;
+        min-height: 100vh;
+        padding: 30px 15px;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: auto;
+      }
+
+      /* =========================
+   HEADER
+========================= */
+
+      .header {
+        background: linear-gradient(135deg, #c9b6e4, #e8d9f8);
+
+        padding: 38px 25px;
+        border-radius: 28px;
+        text-align: center;
+        margin-bottom: 25px;
+
+        box-shadow: 0 12px 35px rgba(120, 80, 160, 0.18);
+      }
+
+      .header h1 {
+        font-size: 31px;
+        color: #59377c;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        font-size: 16px;
+        color: #70548d;
+      }
+
+      /* =========================
+   PROGRESS
+========================= */
+
+      .progress-box {
+        background: white;
+        padding: 18px 22px;
+        border-radius: 20px;
+        margin-bottom: 25px;
+
+        box-shadow: 0 5px 20px rgba(120, 80, 160, 0.1);
+
+        position: sticky;
+        top: 10px;
+        z-index: 10;
+      }
+
+      .progress-info {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+
+        font-weight: bold;
+        color: #76539a;
+      }
+
+      .progress-bar {
+        width: 100%;
+        height: 12px;
+        background: #eee5f8;
+        border-radius: 20px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        width: 0%;
+        height: 100%;
+
+        background: linear-gradient(90deg, #9d7bc1, #c7a9e5);
+
+        transition: width 0.3s ease;
+      }
+
+      /* =========================
+   QUESTION CARD
+========================= */
+
+      .question-card {
+        background: white;
+        border-radius: 22px;
+        padding: 28px;
+        margin-bottom: 22px;
+
+        box-shadow: 0 7px 25px rgba(120, 80, 160, 0.08);
+
+        border: 2px solid transparent;
+
+        transition: 0.3s;
+      }
+
+      .question-card:hover {
+        border-color: #cbb3e4;
+      }
+
+      .question-number {
+        display: inline-block;
+
+        background: #eee4f8;
+        color: #76539a;
+
+        padding: 6px 13px;
+        border-radius: 20px;
+
+        font-weight: bold;
+        font-size: 14px;
+
+        margin-bottom: 14px;
+      }
+
+      .question {
+        font-size: 18px;
+        line-height: 1.6;
+
+        font-weight: 600;
+
+        margin-bottom: 20px;
+      }
+
+      /* =========================
+   OPTIONS
+========================= */
+
+      .options {
+        display: grid;
+        gap: 12px;
+      }
+
+      .option {
+        width: 100%;
+        text-align: left;
+
+        padding: 15px 18px;
+
+        background: #fcfaff;
+
+        border: 2px solid #e5d8f0;
+
+        border-radius: 14px;
+
+        cursor: pointer;
+
+        font-size: 16px;
+
+        color: #4f3b61;
+
+        transition: all 0.2s ease;
+      }
+
+      .option:hover:not(:disabled) {
+        background: #f5edfc;
+
+        border-color: #b99bd7;
+
+        transform: translateY(-2px);
+      }
+
+      .option:disabled {
+        cursor: default;
+      }
+
+      /* CORRECT */
+
+      .option.correct {
+        background: #eaf8ed;
+
+        border-color: #62ae73;
+
+        color: #286c38;
+
+        font-weight: bold;
+      }
+
+      /* WRONG */
+
+      .option.wrong {
+        background: #fff0f2;
+
+        border-color: #df7777;
+
+        color: #a83232;
+
+        font-weight: bold;
+      }
+
+      /* =========================
+   FEEDBACK
+========================= */
+
+      .feedback {
+        display: none;
+
+        margin-top: 20px;
+
+        padding: 18px;
+
+        border-radius: 15px;
+
+        line-height: 1.7;
+      }
+
+      .feedback.correct-feedback {
+        display: block;
+
+        background: #edf9ef;
+
+        border-left: 5px solid #62ae73;
+
+        color: #286b35;
+      }
+
+      .feedback.wrong-feedback {
+        display: block;
+
+        background: #fff1f2;
+
+        border-left: 5px solid #df7777;
+
+        color: #8d3030;
+      }
+
+      .feedback-title {
+        font-size: 17px;
+
+        font-weight: bold;
+
+        margin-bottom: 7px;
+      }
+
+      .explanation {
+        margin-top: 8px;
+      }
+
+      /* =========================
+   RESULT
+========================= */
+
+      .result {
+        display: none;
+
+        background: linear-gradient(135deg, #c9b6e4, #e8d9f8);
+
+        color: #59377c;
+
+        padding: 38px;
+
+        border-radius: 28px;
+
+        text-align: center;
+
+        margin-top: 35px;
+
+        box-shadow: 0 12px 35px rgba(120, 80, 160, 0.22);
+      }
+
+      .result h2 {
+        font-size: 30px;
+        margin-bottom: 12px;
+      }
+
+      .score {
+        font-size: 52px;
+
+        font-weight: bold;
+
+        margin: 15px 0;
+      }
+
+      .result p {
+        font-size: 18px;
+
+        margin-bottom: 20px;
+      }
+
+      .restart-btn {
+        border: none;
+
+        background: white;
+
+        color: #76539a;
+
+        padding: 14px 30px;
+
+        border-radius: 13px;
+
+        font-size: 16px;
+
+        font-weight: bold;
+
+        cursor: pointer;
+
+        transition: 0.2s;
+      }
+
+      .restart-btn:hover {
+        background: #f6effc;
+
+        transform: translateY(-2px);
+      }
+
+      /* =========================
+   MOBILE
+========================= */
+
+      @media (max-width: 600px) {
+        body {
+          padding: 15px 10px;
+        }
+
+        .header {
+          padding: 27px 15px;
+        }
+
+        .header h1 {
+          font-size: 25px;
+        }
+
+        .question-card {
+          padding: 20px;
+        }
+
+        .question {
+          font-size: 16px;
+        }
+
+        .option {
+          font-size: 15px;
+          padding: 13px 14px;
+        }
+
+        .score {
+          font-size: 42px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- HEADER -->
+
+      <div class="header">
+        <h1>📝 Idioms Multiple-Choice Test</h1>
+
+        <p>48 Questions • B2–C1 Level • Choose the best answer</p>
+      </div>
+
+      <!-- PROGRESS -->
+
+      <div class="progress-box">
+        <div class="progress-info">
+          <span> 📊 Your Progress </span>
+
+          <span id="progressText"> 0 / 48 answered </span>
+        </div>
+
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+
+      <!-- QUIZ -->
+
+      <div id="quiz"></div>
+
+      <!-- RESULT -->
+
+      <div class="result" id="result">
+        <h2>🎉 Test Completed!</h2>
+
+        <div class="score" id="finalScore">0 / 48</div>
+
+        <p id="resultMessage"></p>
+
+        <button class="restart-btn" onclick="restartQuiz()">
+          🔄 Try Again
+        </button>
+      </div>
+    </div>
+
+    <script>
+      /* =========================
+   QUESTIONS
+========================= */
+
+      const questions = [
+        {
+          q: "If you keep ignoring the safety regulations, you're going to __________.",
+          options: [
+            "be on a roll",
+            "get into hot water",
+            "bear fruit",
+            "break the ice",
+          ],
+          answer: 1,
+          explanation:
+            "<b>get into hot water</b> = gặp rắc rối hoặc rơi vào tình huống khó khăn.",
+        },
+
+        {
+          q: "My brother is extremely outgoing, while I'm quiet and reserved. We're __________.",
+          options: [
+            "on the same wavelength",
+            "like chalk and cheese",
+            "wrapped up in each other",
+            "on the right track",
+          ],
+          answer: 1,
+          explanation:
+            "<b>like chalk and cheese</b> = hoàn toàn khác nhau hoặc trái ngược nhau.",
+        },
+
+        {
+          q: "My grandfather is getting __________, but he still goes swimming every morning.",
+          options: [
+            "out of action",
+            "long in the tooth",
+            "over the moon",
+            "on a roll",
+          ],
+          answer: 1,
+          explanation: "<b>long in the tooth</b> = khá lớn tuổi hoặc đã già.",
+        },
+
+        {
+          q: "The accident was extremely serious. This is __________, so we need to act immediately.",
+          options: [
+            "plain sailing",
+            "no laughing matter",
+            "the luck of the draw",
+            "a break in the ice",
+          ],
+          answer: 1,
+          explanation:
+            "<b>no laughing matter</b> = một vấn đề nghiêm trọng, không phải chuyện để đùa.",
+        },
+
+        {
+          q: "My younger sister is absolutely __________ K-pop. She listens to it all day.",
+          options: [
+            "nuts about",
+            "up in arms about",
+            "out of order",
+            "on one's guard",
+          ],
+          answer: 0,
+          explanation:
+            "<b>nuts about</b> = cực kỳ yêu thích hoặc say mê điều gì đó.",
+        },
+
+        {
+          q: "After drinking too much at the party, he was completely __________ and started behaving strangely.",
+          options: [
+            "on the right track",
+            "off his head",
+            "on a roll",
+            "out of action",
+          ],
+          answer: 1,
+          explanation:
+            "<b>off one's head</b> = hành động hoặc cư xử một cách điên rồ, mất kiểm soát; đôi khi cũng dùng khi ai đó say hoặc chịu ảnh hưởng của chất kích thích.",
+        },
+
+        {
+          q: "Our team has won five matches in a row. We're really __________!",
+          options: [
+            "skating on thin ice",
+            "on a roll",
+            "out of order",
+            "over the moon",
+          ],
+          answer: 1,
+          explanation:
+            "<b>on a roll</b> = đang liên tục thành công hoặc gặp may.",
+        },
+
+        {
+          q: "After receiving the scholarship, Emma was __________.",
+          options: [
+            "walking on air",
+            "on the breadline",
+            "out of action",
+            "snowed under",
+          ],
+          answer: 0,
+          explanation:
+            "<b>walking on air</b> = cảm thấy vô cùng hạnh phúc, phấn khởi.",
+        },
+
+        {
+          q: "When I found out that I had been accepted into my dream university, I was __________.",
+          options: [
+            "on my guard",
+            "over the moon",
+            "off my head",
+            "out of order",
+          ],
+          answer: 1,
+          explanation: "<b>over the moon</b> = cực kỳ hạnh phúc, vui sướng.",
+        },
+
+        {
+          q: "After losing his job and spending all his savings, he found himself __________.",
+          options: [
+            "on the right track",
+            "on the breadline",
+            "on a roll",
+            "in the balance",
+          ],
+          answer: 1,
+          explanation:
+            "<b>on the breadline</b> = trong tình trạng rất nghèo hoặc gần như không có đủ tiền để sống.",
+        },
+
+        {
+          q: "You've made some mistakes, but I think you're __________ now.",
+          options: [
+            "on the right track",
+            "on thin ice",
+            "out of action",
+            "over the moon",
+          ],
+          answer: 0,
+          explanation:
+            "<b>on the right track</b> = đang đi đúng hướng hoặc đang làm điều đúng đắn.",
+        },
+
+        {
+          q: "My best friend and I understand each other perfectly. We're always __________.",
+          options: [
+            "on the same wavelength",
+            "on the breadline",
+            "out of order",
+            "behind the scenes",
+          ],
+          answer: 0,
+          explanation:
+            "<b>on the same wavelength</b> = hiểu nhau và có cách suy nghĩ hoặc quan điểm tương đồng.",
+        },
+
+        {
+          q: "I can't remember her name, but it's __________.",
+          options: [
+            "out of action",
+            "on the tip of my tongue",
+            "beyond the pale",
+            "in the balance",
+          ],
+          answer: 1,
+          explanation:
+            "<b>on the tip of my tongue</b> = gần như nhớ ra được một từ hoặc tên nhưng chưa thể nói ra ngay.",
+        },
+
+        {
+          q: "The children were told to be __________ when their grandparents came to visit.",
+          options: [
+            "on their best behavior",
+            "on a roll",
+            "out of order",
+            "up in arms",
+          ],
+          answer: 0,
+          explanation:
+            "<b>on one's best behavior</b> = cư xử thật ngoan, lịch sự và đúng mực.",
+        },
+
+        {
+          q: "You should always be __________ when walking alone in an unfamiliar area at night.",
+          options: [
+            "on a roll",
+            "on your guard",
+            "over the moon",
+            "right up your street",
+          ],
+          answer: 1,
+          explanation:
+            "<b>on your guard</b> = cảnh giác và sẵn sàng đối phó với nguy hiểm hoặc vấn đề.",
+        },
+
+        {
+          q: "The star player is __________ because of a serious knee injury.",
+          options: [
+            "out of action",
+            "on the same wavelength",
+            "on the right track",
+            "walking on air",
+          ],
+          answer: 0,
+          explanation:
+            "<b>out of action</b> = không thể hoạt động hoặc tham gia vì bị hỏng, bị thương hoặc gặp vấn đề.",
+        },
+
+        {
+          q: "The photocopier is __________ again, so we can't print the documents.",
+          options: [
+            "out of this world",
+            "out of order",
+            "on a roll",
+            "on the tip of our tongues",
+          ],
+          answer: 1,
+          explanation: "<b>out of order</b> = bị hỏng hoặc không hoạt động.",
+        },
+
+        {
+          q: "The food at that restaurant was __________. I've never tasted anything so delicious.",
+          options: [
+            "beyond the pale",
+            "out of this world",
+            "on the breadline",
+            "plain sailing",
+          ],
+          answer: 1,
+          explanation:
+            "<b>out of this world</b> = tuyệt vời, cực kỳ ngon hoặc ấn tượng.",
+        },
+
+        {
+          q: "The first few weeks of the project were difficult, but now everything is __________.",
+          options: [
+            "plain sailing",
+            "skating on thin ice",
+            "up in arms",
+            "out of action",
+          ],
+          answer: 0,
+          explanation:
+            "<b>plain sailing</b> = mọi việc diễn ra dễ dàng và không gặp nhiều khó khăn.",
+        },
+
+        {
+          q: "The goalkeeper is extremely __________ and reacts almost instantly to shots.",
+          options: [
+            "quick on the draw",
+            "wrapped up in",
+            "on the breadline",
+            "over the moon",
+          ],
+          answer: 0,
+          explanation:
+            "<b>quick on the draw</b> = phản ứng hoặc hành động cực kỳ nhanh.",
+        },
+
+        {
+          q: "Designing websites is __________. I love creative technology and coding.",
+          options: [
+            "right up my street",
+            "beyond the pale",
+            "on thin ice",
+            "out of order",
+          ],
+          answer: 0,
+          explanation:
+            "<b>right up my street</b> = rất phù hợp với sở thích hoặc khả năng của mình.",
+        },
+
+        {
+          q: "You're __________ if you continue criticizing your boss in public. You could lose your job.",
+          options: [
+            "walking on air",
+            "skating on thin ice",
+            "on a roll",
+            "plain sailing",
+          ],
+          answer: 1,
+          explanation:
+            "<b>skating on thin ice</b> = đang ở trong một tình huống nguy hiểm hoặc có nguy cơ gặp rắc rối.",
+        },
+
+        {
+          q: "I'm completely __________ work this week. I have three deadlines and two presentations.",
+          options: [
+            "wrapped up in",
+            "snowed under with",
+            "out of action",
+            "on my guard",
+          ],
+          answer: 1,
+          explanation:
+            "<b>be snowed under with</b> = có quá nhiều việc phải làm và cảm thấy bị quá tải.",
+        },
+
+        {
+          q: "She's so __________ her new project that she barely has time to talk to anyone.",
+          options: [
+            "wrapped up in",
+            "up in arms",
+            "on the tip of her tongue",
+            "beyond her wildest dreams",
+          ],
+          answer: 0,
+          explanation:
+            "<b>wrapped up in</b> = quá tập trung hoặc mải mê với một việc gì đó.",
+        },
+
+        {
+          q: "The plan didn't work. __________, we can still try another approach.",
+          options: [
+            "Break a leg",
+            "Be that as it may",
+            "Bite the bullet",
+            "Break the bank",
+          ],
+          answer: 1,
+          explanation:
+            "<b>be that as it may</b> = dù điều đó có đúng là như vậy đi nữa; dùng để thừa nhận một điểm nhưng sau đó đưa ra ý kiến khác.",
+        },
+
+        {
+          q: "Whether you win the prize depends partly on __________.",
+          options: [
+            "the luck of the draw",
+            "the right track",
+            "the same wavelength",
+            "the balance of the draw",
+          ],
+          answer: 0,
+          explanation:
+            "<b>the luck of the draw</b> = kết quả phụ thuộc một phần vào may rủi hoặc sự ngẫu nhiên.",
+        },
+
+        {
+          q: "Parents are __________ the government's decision to close several local schools.",
+          options: [
+            "on a roll",
+            "up in arms about",
+            "out of action",
+            "wrapped up in",
+          ],
+          answer: 1,
+          explanation:
+            "<b>up in arms about</b> = cực kỳ tức giận hoặc phản đối mạnh mẽ về một vấn đề.",
+        },
+
+        {
+          q: "The date of the meeting is still __________ because the manager hasn't confirmed it.",
+          options: [
+            "over the moon",
+            "up in the air",
+            "on the right track",
+            "out of this world",
+          ],
+          answer: 1,
+          explanation:
+            "<b>up in the air</b> = chưa được quyết định hoặc vẫn còn chưa chắc chắn.",
+        },
+
+        {
+          q: "The future of the company __________ after the CEO suddenly resigned.",
+          options: [
+            "hangs in the balance",
+            "breaks the ice",
+            "bears fruit",
+            "bites the dust",
+          ],
+          answer: 0,
+          explanation:
+            "<b>hang in the balance</b> = ở trong tình trạng không chắc chắn và có thể đi theo nhiều hướng khác nhau.",
+        },
+
+        {
+          q: "It's important to __________ work and personal life.",
+          options: [
+            "bite the bullet between",
+            "strike a balance between",
+            "break the ice between",
+            "bear fruit between",
+          ],
+          answer: 1,
+          explanation:
+            "<b>strike a balance between</b> = tạo ra sự cân bằng giữa hai điều.",
+        },
+
+        {
+          q: "The two elderly sisters are so close that they practically __________.",
+          options: [
+            "live in each other's pockets",
+            "walk on air",
+            "bite the dust",
+            "blow hot and cold",
+          ],
+          answer: 0,
+          explanation:
+            "<b>live in each other's pockets</b> = cực kỳ thân thiết và dành hầu hết thời gian ở bên nhau.",
+        },
+
+        {
+          q: "After years of research, the scientists' efforts finally began to __________.",
+          options: [
+            "break the bank",
+            "bear fruit",
+            "bite the bullet",
+            "break the ice",
+          ],
+          answer: 1,
+          explanation:
+            "<b>bear fruit</b> = bắt đầu tạo ra kết quả tốt sau một thời gian nỗ lực.",
+        },
+
+        {
+          q: "Please __________ that the deadline cannot be extended.",
+          options: [
+            "bear in mind",
+            "bear fruit",
+            "break the ice",
+            "bite the dust",
+          ],
+          answer: 0,
+          explanation:
+            "<b>bear in mind</b> = ghi nhớ hoặc luôn nhớ đến một điều khi suy nghĩ hoặc đưa ra quyết định.",
+        },
+
+        {
+          q: "The negotiations were conducted __________, while the public only saw the final agreement.",
+          options: [
+            "on the same wavelength",
+            "behind the scenes",
+            "on the tip of the tongue",
+            "out of action",
+          ],
+          answer: 1,
+          explanation:
+            "<b>behind the scenes</b> = diễn ra một cách bí mật hoặc không được công chúng nhìn thấy.",
+        },
+
+        {
+          q: "His behavior at the formal ceremony was completely __________. He insulted several guests.",
+          options: [
+            "beyond the pale",
+            "right up his street",
+            "plain sailing",
+            "on a roll",
+          ],
+          answer: 0,
+          explanation:
+            "<b>beyond the pale</b> = hoàn toàn không thể chấp nhận được về mặt hành vi hoặc đạo đức.",
+        },
+
+        {
+          q: "Winning an Olympic gold medal was __________ for the young athlete.",
+          options: [
+            "beyond his wildest dreams",
+            "on his best behavior",
+            "out of order",
+            "in the balance",
+          ],
+          answer: 0,
+          explanation:
+            "<b>beyond one's wildest dreams</b> = tốt đẹp hoặc thành công hơn rất nhiều so với những gì có thể tưởng tượng.",
+        },
+
+        {
+          q: "I agreed to organize the entire event by myself, but now I've realized that I've __________.",
+          options: [
+            "bitten the bullet",
+            "bitten off more than I can chew",
+            "broken the ice",
+            "blown my own trumpet",
+          ],
+          answer: 1,
+          explanation:
+            "<b>bitten off more than I can chew</b> = nhận làm một việc quá khó hoặc quá nhiều so với khả năng của mình.",
+        },
+
+        {
+          q: "I didn't want to tell my parents about my mistake, but eventually I had to __________ and admit the truth.",
+          options: [
+            "bite the bullet",
+            "bite the dust",
+            "break the bank",
+            "bear fruit",
+          ],
+          answer: 0,
+          explanation:
+            "<b>bite the bullet</b> = can đảm đối mặt và chấp nhận một tình huống khó khăn hoặc không dễ chịu.",
+        },
+
+        {
+          q: "After years of competing against larger companies, the small business finally __________.",
+          options: [
+            "broke the ice",
+            "bit the dust",
+            "bore fruit",
+            "struck a balance",
+          ],
+          answer: 1,
+          explanation: "<b>bite the dust</b> = thất bại hoặc bị đánh bại.",
+        },
+
+        {
+          q: "The weather forecast says it will be sunny, but the next day it predicts heavy rain. The forecast seems to __________.",
+          options: [
+            "blow its own trumpet",
+            "blow hot and cold",
+            "bite the bullet",
+            "break the bank",
+          ],
+          answer: 1,
+          explanation:
+            "<b>blow hot and cold</b> = liên tục thay đổi thái độ, ý kiến hoặc cảm xúc, lúc thì tích cực lúc thì tiêu cực.",
+        },
+
+        {
+          q: "I don't like people who constantly __________. They should let their achievements speak for themselves.",
+          options: [
+            "break the ice",
+            "blow their own trumpet",
+            "bite the dust",
+            "bear fruit",
+          ],
+          answer: 1,
+          explanation:
+            "<b>blow one's own trumpet</b> = tự khoe khoang hoặc nói quá nhiều về thành tích của bản thân.",
+        },
+
+        {
+          q: '"Good luck in your performance tonight!" "Thanks! __________!"',
+          options: [
+            "Break the ice!",
+            "Break a leg!",
+            "Bite the bullet!",
+            "Break the bank!",
+          ],
+          answer: 1,
+          explanation:
+            "<b>Break a leg!</b> = lời chúc may mắn, đặc biệt thường dùng trước một buổi biểu diễn.",
+        },
+
+        {
+          q: "I told a funny story at the beginning of the meeting to __________ and make everyone feel more relaxed.",
+          options: [
+            "break the ice",
+            "bite the dust",
+            "bear fruit",
+            "blow hot and cold",
+          ],
+          answer: 0,
+          explanation:
+            "<b>break the ice</b> = phá tan sự ngượng ngùng hoặc căng thẳng ban đầu để mọi người cảm thấy thoải mái hơn.",
+        },
+
+        {
+          q: "We want to renovate the entire house, but we don't want to __________.",
+          options: [
+            "break the ice",
+            "break the bank",
+            "bite the bullet",
+            "bear fruit",
+          ],
+          answer: 1,
+          explanation:
+            "<b>break the bank</b> = tốn quá nhiều tiền hoặc làm tiêu tốn một khoản tiền rất lớn.",
+        },
+
+        {
+          q: "The new marketing campaign hasn't produced immediate results, but we hope it will eventually __________.",
+          options: [
+            "bear fruit",
+            "bite the dust",
+            "break the ice",
+            "be out of order",
+          ],
+          answer: 0,
+          explanation:
+            "<b>bear fruit</b> = cuối cùng mang lại kết quả tốt hoặc thành công.",
+        },
+
+        {
+          q: "The project was difficult at first, but after we found the right strategy, it became __________.",
+          options: [
+            "skating on thin ice",
+            "plain sailing",
+            "up in arms",
+            "out of action",
+          ],
+          answer: 1,
+          explanation:
+            "<b>plain sailing</b> = mọi việc trở nên dễ dàng và diễn ra thuận lợi.",
+        },
+
+        {
+          q: "After the company announced massive job cuts, the workers were __________ and organized several protests.",
+          options: [
+            "walking on air",
+            "up in arms",
+            "on the same wavelength",
+            "on a roll",
+          ],
+          answer: 1,
+          explanation:
+            "<b>up in arms</b> = cực kỳ tức giận và phản đối mạnh mẽ.",
+        },
+
+        {
+          q: "The two candidates kept changing their opinions about the issue. They seemed to __________.",
+          options: [
+            "blow hot and cold",
+            "break the bank",
+            "bite the bullet",
+            "be on the right track",
+          ],
+          answer: 0,
+          explanation:
+            "<b>blow hot and cold</b> = liên tục thay đổi ý kiến hoặc thái độ, lúc đồng ý lúc phản đối.",
+        },
+      ];
+
+      /* =========================
+   VARIABLES
+========================= */
+
+      let answered = 0;
+      let score = 0;
+      let userAnswers = [];
+
+      const quiz = document.getElementById("quiz");
+
+      const progressText = document.getElementById("progressText");
+
+      const progressFill = document.getElementById("progressFill");
+
+      const result = document.getElementById("result");
+
+      const finalScore = document.getElementById("finalScore");
+
+      const resultMessage = document.getElementById("resultMessage");
+
+      /* =========================
+   LOAD QUIZ
+========================= */
+
+      function loadQuiz() {
+        quiz.innerHTML = "";
+
+        questions.forEach((item, index) => {
+          const card = document.createElement("div");
+
+          card.className = "question-card";
+
+          card.innerHTML = `
+
+                <div class="question-number">
+
+                    Question ${index + 1}
+
+                </div>
+
+                <div class="question">
+
+                    ${item.q}
+
+                </div>
+
+                <div class="options">
+
+                    ${item.options
+                      .map(
+                        (option, optionIndex) => `
+
+                            <button
+
+                                class="option"
+
+                                onclick="checkAnswer(
+
+                                    ${index},
+
+                                    ${optionIndex},
+
+                                    this
+
+                                )"
+
+                            >
+
+                                <b>
+
+                                    ${String.fromCharCode(65 + optionIndex)}.
+
+                                </b>
+
+                                ${option}
+
+                            </button>
+
+                        `,
+                      )
+                      .join("")}
+
+                </div>
+
+                <div
+
+                    class="feedback"
+
+                    id="feedback-${index}"
+
+                >
+
+                </div>
+
+            `;
+
+          quiz.appendChild(card);
+        });
+      }
+
+      /* =========================
+   CHECK ANSWER
+========================= */
+
+      function checkAnswer(questionIndex, selectedIndex, clickedButton) {
+        if (userAnswers[questionIndex] !== undefined) {
+          return;
+        }
+
+        userAnswers[questionIndex] = selectedIndex;
+
+        answered++;
+
+        const question = questions[questionIndex];
+
+        const buttons = clickedButton.parentElement.querySelectorAll(".option");
+
+        const feedback = document.getElementById(`feedback-${questionIndex}`);
+
+        buttons.forEach((button) => {
+          button.disabled = true;
+        });
+
+        /* CORRECT */
+
+        if (selectedIndex === question.answer) {
+          score++;
+
+          clickedButton.classList.add("correct");
+
+          feedback.className = "feedback correct-feedback";
+
+          feedback.innerHTML = `
+
+            <div class="feedback-title">
+
+                ✅ Correct!
+
+            </div>
+
+            <div>
+
+                Đáp án của bạn:
+
+                <b>
+
+                    ${String.fromCharCode(65 + question.answer)}.
+
+                    ${question.options[question.answer]}
+
+                </b>
+
+            </div>
+
+            <div class="explanation">
+
+                💡
+
+                <b>Giải thích:</b>
+
+                ${question.explanation}
+
+            </div>
+
+        `;
+        } else {
+
+        /* WRONG */
+          clickedButton.classList.add("wrong");
+
+          buttons[question.answer].classList.add("correct");
+
+          feedback.className = "feedback wrong-feedback";
+
+          feedback.innerHTML = `
+
+            <div class="feedback-title">
+
+                ❌ Incorrect!
+
+            </div>
+
+            <div>
+
+                Bạn chọn:
+
+                <b>
+
+                    ${String.fromCharCode(65 + selectedIndex)}.
+
+                    ${question.options[selectedIndex]}
+
+                </b>
+
+            </div>
+
+            <div>
+
+                Đáp án đúng:
+
+                <b>
+
+                    ${String.fromCharCode(65 + question.answer)}.
+
+                    ${question.options[question.answer]}
+
+                </b>
+
+            </div>
+
+            <div class="explanation">
+
+                💡
+
+                <b>Giải thích:</b>
+
+                ${question.explanation}
+
+            </div>
+
+        `;
+        }
+
+        updateProgress();
+
+        if (answered === questions.length) {
+          showResult();
+        }
+      }
+
+      /* =========================
+   PROGRESS
+========================= */
+
+      function updateProgress() {
+        progressText.textContent = `${answered} / ${questions.length} answered`;
+
+        const percentage = (answered / questions.length) * 100;
+
+        progressFill.style.width = percentage + "%";
+      }
+
+      /* =========================
+   RESULT
+========================= */
+
+      function showResult() {
+        result.style.display = "block";
+
+        finalScore.textContent = `${score} / ${questions.length}`;
+
+        const percentage = (score / questions.length) * 100;
+
+        if (percentage >= 90) {
+          resultMessage.textContent =
+            "🏆 Outstanding! Bạn sử dụng idioms cực kỳ tốt!";
+        } else if (percentage >= 75) {
+          resultMessage.textContent =
+            "🌟 Excellent! Bạn đã nắm rất tốt các idioms B2–C1.";
+        } else if (percentage >= 60) {
+          resultMessage.textContent =
+            "👍 Good job! Hãy ôn lại những idioms bạn đã nhầm.";
+        } else {
+          resultMessage.textContent =
+            "📚 Keep practicing! Hãy học lại idioms và thử lại nhé.";
+        }
+
+        setTimeout(
+          () => {
+            result.scrollIntoView({
+              behavior: "smooth",
+
+              block: "center",
+            });
+          },
+
+          300,
+        );
+      }
+
+      /* =========================
+   RESTART
+========================= */
+
+      function restartQuiz() {
+        answered = 0;
+
+        score = 0;
+
+        userAnswers = [];
+
+        result.style.display = "none";
+
+        progressText.textContent = "0 / 48 answered";
+
+        progressFill.style.width = "0%";
+
+        loadQuiz();
+
+        window.scrollTo({
+          top: 0,
+
+          behavior: "smooth",
+        });
+      }
+
+      /* =========================
+   START
+========================= */
+
+      loadQuiz();
+    </script>
+  </body>
+</html>
+```

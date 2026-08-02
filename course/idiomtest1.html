@@ -1,0 +1,971 @@
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Idioms Multiple-Choice Test — 32 Questions</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: #eef8f0;
+        color: #183b25;
+        min-height: 100vh;
+        padding: 30px 15px;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: auto;
+      }
+
+      /* HEADER */
+      .header {
+        background: linear-gradient(135deg, #2e7d32, #66bb6a);
+        padding: 35px 25px;
+        border-radius: 25px;
+        text-align: center;
+        margin-bottom: 25px;
+        box-shadow: 0 10px 30px rgba(46, 125, 50, 0.2);
+      }
+
+      .header h1 {
+        font-size: 31px;
+        color: white;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        font-size: 16px;
+        color: #eaf7eb;
+      }
+
+      /* PROGRESS */
+      .progress-box {
+        background: white;
+        padding: 18px 22px;
+        border-radius: 18px;
+        margin-bottom: 25px;
+        box-shadow: 0 5px 20px rgba(46, 125, 50, 0.1);
+        position: sticky;
+        top: 10px;
+        z-index: 10;
+      }
+
+      .progress-info {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        font-weight: bold;
+        color: #2e7d32;
+      }
+
+      .progress-bar {
+        width: 100%;
+        height: 12px;
+        background: #dcefe0;
+        border-radius: 20px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        width: 0%;
+        height: 100%;
+        background: linear-gradient(90deg, #2e7d32, #66bb6a);
+        transition: width 0.3s ease;
+      }
+
+      /* QUESTION CARD */
+      .question-card {
+        background: white;
+        border-radius: 22px;
+        padding: 28px;
+        margin-bottom: 22px;
+        box-shadow: 0 7px 25px rgba(46, 125, 50, 0.09);
+        border: 2px solid transparent;
+        transition: 0.3s;
+      }
+
+      .question-card:hover {
+        border-color: #81c784;
+      }
+
+      .question-number {
+        display: inline-block;
+        background: #e3f3e5;
+        color: #2e7d32;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-weight: bold;
+        font-size: 14px;
+        margin-bottom: 14px;
+      }
+
+      .question {
+        font-size: 18px;
+        line-height: 1.6;
+        font-weight: 600;
+        margin-bottom: 20px;
+      }
+
+      /* ANSWERS */
+      .options {
+        display: grid;
+        gap: 12px;
+      }
+
+      .option {
+        width: 100%;
+        text-align: left;
+        padding: 15px 18px;
+        background: #f8fcf8;
+        border: 2px solid #c8e2cc;
+        border-radius: 14px;
+        cursor: pointer;
+        font-size: 16px;
+        color: #234d2d;
+        transition: all 0.2s ease;
+      }
+
+      .option:hover:not(:disabled) {
+        background: #e8f5e9;
+        border-color: #4caf50;
+        transform: translateY(-2px);
+      }
+
+      .option:disabled {
+        cursor: default;
+      }
+
+      /* ĐÁP ÁN ĐÚNG */
+      .option.correct {
+        background: #e7f7e9;
+        border-color: #2e7d32;
+        color: #1b5e20;
+        font-weight: bold;
+      }
+
+      /* ĐÁP ÁN SAI */
+      .option.wrong {
+        background: #fff0f0;
+        border-color: #e53935;
+        color: #a82020;
+        font-weight: bold;
+      }
+
+      /* FEEDBACK */
+      .feedback {
+        display: none;
+        margin-top: 20px;
+        padding: 18px;
+        border-radius: 15px;
+        line-height: 1.7;
+      }
+
+      .feedback.correct-feedback {
+        display: block;
+        background: #edf8ee;
+        border-left: 5px solid #43a047;
+        color: #28642b;
+      }
+
+      .feedback.wrong-feedback {
+        display: block;
+        background: #fff1f1;
+        border-left: 5px solid #e53935;
+        color: #8d2020;
+      }
+
+      .feedback-title {
+        font-size: 17px;
+        font-weight: bold;
+        margin-bottom: 7px;
+      }
+
+      .explanation {
+        margin-top: 8px;
+      }
+
+      /* FINAL RESULT */
+      .result {
+        display: none;
+        background: linear-gradient(135deg, #2e7d32, #66bb6a);
+        color: white;
+        padding: 35px;
+        border-radius: 25px;
+        text-align: center;
+        margin-top: 35px;
+        box-shadow: 0 10px 30px rgba(46, 125, 50, 0.25);
+      }
+
+      .result h2 {
+        font-size: 30px;
+        margin-bottom: 12px;
+      }
+
+      .score {
+        font-size: 48px;
+        font-weight: bold;
+        margin: 15px 0;
+      }
+
+      .result p {
+        font-size: 18px;
+        margin-bottom: 20px;
+      }
+
+      .restart-btn {
+        border: none;
+        background: white;
+        color: #2e7d32;
+        padding: 14px 28px;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+
+      .restart-btn:hover {
+        background: #e8f5e9;
+        transform: translateY(-2px);
+      }
+
+      /* MOBILE */
+      @media (max-width: 600px) {
+        body {
+          padding: 15px 10px;
+        }
+
+        .header {
+          padding: 25px 15px;
+        }
+
+        .header h1 {
+          font-size: 25px;
+        }
+
+        .question-card {
+          padding: 20px;
+        }
+
+        .question {
+          font-size: 16px;
+        }
+
+        .option {
+          font-size: 15px;
+          padding: 13px 14px;
+        }
+
+        .score {
+          font-size: 40px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- HEADER -->
+      <div class="header">
+        <h1>📝 Idioms Multiple-Choice Test</h1>
+        <p>32 Questions • Choose the best answer • Learn from your mistakes</p>
+      </div>
+
+      <!-- PROGRESS -->
+      <div class="progress-box">
+        <div class="progress-info">
+          <span>📊 Your Progress</span>
+          <span id="progressText">0 / 32 answered</span>
+        </div>
+
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+
+      <!-- QUIZ -->
+      <div id="quiz"></div>
+
+      <!-- RESULT -->
+      <div class="result" id="result">
+        <h2>🎉 Test Completed!</h2>
+
+        <div class="score" id="finalScore">0 / 32</div>
+
+        <p id="resultMessage"></p>
+
+        <button class="restart-btn" onclick="restartQuiz()">
+          🔄 Try Again
+        </button>
+      </div>
+    </div>
+
+    <script>
+      const questions = [
+        {
+          q: "Despite the criticism from his colleagues, Jack remained __________ and continued working calmly.",
+          options: [
+            "down in the dumps",
+            "as cool as a cucumber",
+            "in a rut",
+            "a hot potato",
+          ],
+          answer: 1,
+          explanation:
+            "<b>as cool as a cucumber</b> = cực kỳ bình tĩnh, không bị ảnh hưởng bởi áp lực hoặc khó khăn.",
+        },
+
+        {
+          q: "The village is __________, so there isn't even a supermarket nearby.",
+          options: [
+            "in the middle of nowhere",
+            "a mine of information",
+            "a level playing field",
+            "a drop in the ocean",
+          ],
+          answer: 0,
+          explanation:
+            "<b>in the middle of nowhere</b> = ở một nơi rất hẻo lánh, xa xôi, không có nhiều tiện nghi.",
+        },
+
+        {
+          q: "She is so calm under pressure. Nothing seems to bother her; she is __________.",
+          options: [
+            "as light as a feather",
+            "as cold as a cucumber",
+            "down in the dumps",
+            "a dark horse",
+          ],
+          answer: 1,
+          explanation:
+            "<b>as cold as a cucumber</b> = rất bình tĩnh, đặc biệt là trong những tình huống căng thẳng.",
+        },
+
+        {
+          q: "The criticism just rolled off him __________. He didn't seem upset at all.",
+          options: [
+            "like blood out of a stone",
+            "like water off a duck's back",
+            "like a flash in the pan",
+            "like a bolt from the blue",
+          ],
+          answer: 1,
+          explanation:
+            "<b>like water off a duck's back</b> = lời chỉ trích không ảnh hưởng đến ai; nghe rồi bỏ ngoài tai.",
+        },
+
+        {
+          q: "Getting him to admit that he was wrong is like trying to get __________.",
+          options: [
+            "blood out of a stone",
+            "water out of a duck",
+            "a bird from a hand",
+            "information from a mine",
+          ],
+          answer: 0,
+          explanation:
+            "<b>get blood out of a stone</b> = cố làm một việc gần như không thể, đặc biệt là cố lấy thông tin hoặc tiền từ một người không chịu cho.",
+        },
+
+        {
+          q: "I've been working in the same job for ten years, and I feel completely __________.",
+          options: [
+            "in the middle of nowhere",
+            "stuck in a rut",
+            "down in the dumps",
+            "on a level playing field",
+          ],
+          answer: 1,
+          explanation:
+            "<b>stuck in a rut</b> = mắc kẹt trong một lối sống hoặc công việc nhàm chán, không có sự thay đổi hay tiến bộ.",
+        },
+
+        {
+          q: "I didn't hear the news from social media. I heard it __________.",
+          options: [
+            "from a dark horse",
+            "from a little bird",
+            "straight from the horse's mouth",
+            "from a bird in the bush",
+          ],
+          answer: 1,
+          explanation:
+            "<b>a little bird told me</b> = một nguồn tin bí mật hoặc không muốn tiết lộ danh tính đã nói cho tôi biết.",
+        },
+
+        {
+          q: "The company director confirmed the rumors himself. We heard the information __________.",
+          options: [
+            "straight from the horse's mouth",
+            "like water off a duck's back",
+            "from a needle in a haystack",
+            "from a flash in the pan",
+          ],
+          answer: 0,
+          explanation:
+            "<b>straight from the horse's mouth</b> = nghe thông tin trực tiếp từ chính người có liên quan hoặc nguồn đáng tin cậy nhất.",
+        },
+
+        {
+          q: "You should accept the job offer you already have instead of waiting for something better. Remember, __________.",
+          options: [
+            "a leopard can't change its spots",
+            "a bird in the hand is worth two in the bush",
+            "a drop in the ocean",
+            "a blessing in disguise",
+          ],
+          answer: 1,
+          explanation:
+            "<b>a bird in the hand is worth two in the bush</b> = cái chắc chắn có trong tay đáng giá hơn thứ có thể có nhưng chưa chắc chắn.",
+        },
+
+        {
+          q: "Losing my job seemed terrible at first, but it helped me discover a career I really love. It was __________.",
+          options: [
+            "a raw deal",
+            "a hot potato",
+            "a blessing in disguise",
+            "a slap in the face",
+          ],
+          answer: 2,
+          explanation:
+            "<b>a blessing in disguise</b> = một điều tưởng như xấu nhưng cuối cùng lại mang đến kết quả tốt.",
+        },
+
+        {
+          q: "The sudden announcement that the company was closing came __________.",
+          options: [
+            "as a dark horse",
+            "as a bolt from the blue",
+            "as a matter of opinion",
+            "as a drop in the ocean",
+          ],
+          answer: 1,
+          explanation:
+            "<b>a bolt from the blue</b> = một điều bất ngờ xảy ra hoàn toàn không được dự đoán trước.",
+        },
+
+        {
+          q: "The argument over who should pay for the repairs has become a major __________ between the two families.",
+          options: [
+            "bone of contention",
+            "mine of information",
+            "flash in the pan",
+            "shoulder to cry on",
+          ],
+          answer: 0,
+          explanation:
+            "<b>a bone of contention</b> = một vấn đề gây tranh cãi hoặc bất đồng giữa các bên.",
+        },
+
+        {
+          q: "The election result was surprising because nobody expected the relatively unknown candidate to win. He was __________.",
+          options: [
+            "a hot potato",
+            "a dark horse",
+            "a raw deal",
+            "a stumbling block",
+          ],
+          answer: 1,
+          explanation:
+            "<b>a dark horse</b> = một người ít được biết đến nhưng bất ngờ đạt thành công hoặc chiến thắng.",
+        },
+
+        {
+          q: "The amount of money we raised is only __________ compared with what is actually needed.",
+          options: [
+            "a needle in a haystack",
+            "a drop in the ocean",
+            "a bird in the hand",
+            "a bolt from the blue",
+          ],
+          answer: 1,
+          explanation:
+            "<b>a drop in the ocean</b> = một lượng rất nhỏ so với tổng số cần thiết.",
+        },
+
+        {
+          q: "This new smartphone is __________ the old model. It has much better features and performance.",
+          options: [
+            "a far cry from",
+            "a flash in the pan",
+            "a close shave",
+            "a level playing field",
+          ],
+          answer: 0,
+          explanation:
+            "<b>a far cry from</b> = rất khác xa so với một thứ khác.",
+        },
+
+        {
+          q: "She accepted the news with __________ because she knew she would never see her friends again.",
+          options: [
+            "a heavy heart",
+            "a light feather",
+            "a cold cucumber",
+            "a raw deal",
+          ],
+          answer: 0,
+          explanation:
+            "<b>a heavy heart</b> = với tâm trạng buồn bã, nặng nề hoặc đau lòng.",
+        },
+
+        {
+          q: "The issue of immigration has become a political __________ that many politicians avoid discussing.",
+          options: [
+            "mine of information",
+            "hot potato",
+            "dark horse",
+            "drop in the ocean",
+          ],
+          answer: 1,
+          explanation:
+            "<b>a hot potato</b> = một vấn đề nhạy cảm hoặc gây tranh cãi mà mọi người thường muốn tránh đề cập.",
+        },
+
+        {
+          q: "His sudden success was just __________. He hasn't achieved anything significant since then.",
+          options: [
+            "a flash in the pan",
+            "a blessing in disguise",
+            "a close call",
+            "a raw deal",
+          ],
+          answer: 0,
+          explanation:
+            "<b>a flash in the pan</b> = một thành công nhất thời, chỉ xảy ra một lần và không kéo dài.",
+        },
+
+        {
+          q: "You can try to change his behavior, but remember that __________.",
+          options: [
+            "a bird in the hand is worth two in the bush",
+            "a leopard can't change its spots",
+            "a drop in the ocean",
+            "a little bird told me",
+          ],
+          answer: 1,
+          explanation:
+            "<b>a leopard can't change its spots</b> = bản chất hoặc tính cách của một người rất khó thay đổi.",
+        },
+
+        {
+          q: "Whether this painting is beautiful or ugly is really __________.",
+          options: [
+            "a matter of opinion",
+            "a bone of contention",
+            "a raw deal",
+            "a stumbling block",
+          ],
+          answer: 0,
+          explanation:
+            "<b>a matter of opinion</b> = vấn đề phụ thuộc vào quan điểm hoặc ý kiến cá nhân.",
+        },
+
+        {
+          q: "I have __________, so I often forget people's names even if I met them recently.",
+          options: [
+            "a mine of information",
+            "a memory like a sieve",
+            "a shoulder to cry on",
+            "a heavy heart",
+          ],
+          answer: 1,
+          explanation:
+            "<b>a memory like a sieve</b> = trí nhớ rất kém, dễ quên mọi thứ.",
+        },
+
+        {
+          q: "My history teacher is __________. She knows something about almost every period in history.",
+          options: [
+            "a mine of information",
+            "a dark horse",
+            "a hot potato",
+            "a raw deal",
+          ],
+          answer: 0,
+          explanation:
+            "<b>a mine of information</b> = một người có rất nhiều kiến thức và thông tin về một chủ đề.",
+        },
+
+        {
+          q: "Finding a specific book in this enormous library is like looking for __________.",
+          options: [
+            "a drop in the ocean",
+            "a needle in a haystack",
+            "a bird in the hand",
+            "a bolt from the blue",
+          ],
+          answer: 1,
+          explanation:
+            "<b>a needle in a haystack</b> = một việc cực kỳ khó vì phải tìm một thứ rất nhỏ hoặc khó nhận ra giữa rất nhiều thứ khác.",
+        },
+
+        {
+          q: "We were given __________ when the company refused to pay us for the extra hours we worked.",
+          options: [
+            "a blessing in disguise",
+            "a raw deal",
+            "a close shave",
+            "a level playing field",
+          ],
+          answer: 1,
+          explanation:
+            "<b>a raw deal</b> = bị đối xử không công bằng hoặc nhận một thỏa thuận bất lợi.",
+        },
+
+        {
+          q: "Whenever I'm feeling upset, Sarah is always there for me. She's a great __________.",
+          options: [
+            "shoulder to cry on",
+            "bone of contention",
+            "mine of information",
+            "dark horse",
+          ],
+          answer: 0,
+          explanation:
+            "<b>a shoulder to cry on</b> = một người luôn sẵn sàng lắng nghe và an ủi khi mình buồn.",
+        },
+
+        {
+          q: "Being rejected from my dream university felt like __________, especially after I had worked so hard.",
+          options: [
+            "a drop in the ocean",
+            "a slap in the face",
+            "a blessing in disguise",
+            "a flash in the pan",
+          ],
+          answer: 1,
+          explanation:
+            "<b>a slap in the face</b> = một cú sốc hoặc sự thất vọng rất lớn, đặc biệt sau khi đã nỗ lực rất nhiều.",
+        },
+
+        {
+          q: "The lack of funding has become a major __________ to the development of the project.",
+          options: [
+            "stumbling block",
+            "shoulder to cry on",
+            "little bird",
+            "heavy heart",
+          ],
+          answer: 0,
+          explanation:
+            "<b>a stumbling block</b> = một trở ngại hoặc vấn đề khiến việc đạt được mục tiêu trở nên khó khăn.",
+        },
+
+        {
+          q: "We almost missed the flight because of the traffic, but fortunately we made it. It was __________.",
+          options: [
+            "a matter of opinion",
+            "a close call",
+            "a dark horse",
+            "a hot potato",
+          ],
+          answer: 1,
+          explanation:
+            "<b>a close call</b> = một tình huống suýt nữa dẫn đến kết quả xấu nhưng cuối cùng đã tránh được.",
+        },
+
+        {
+          q: "The exam was extremely difficult, but I managed to pass by one mark. It was __________.",
+          options: [
+            "a close shave",
+            "a far cry",
+            "a flash in the pan",
+            "a raw deal",
+          ],
+          answer: 0,
+          explanation:
+            "<b>a close shave</b> = một tình huống nguy hiểm hoặc khó khăn mà mình chỉ vừa đủ thoát khỏi.",
+        },
+
+        {
+          q: "The new rules are designed to ensure that everyone has an equal chance to succeed. They aim to create __________.",
+          options: [
+            "a level playing field",
+            "a bone of contention",
+            "a drop in the ocean",
+            "a memory like a sieve",
+          ],
+          answer: 0,
+          explanation:
+            "<b>a level playing field</b> = một môi trường công bằng, trong đó mọi người có cơ hội ngang nhau.",
+        },
+
+        {
+          q: '"How did you know that I was planning to quit my job?"<br>"Well, __________."',
+          options: [
+            "a bird in the hand is worth two in the bush",
+            "a little bird told me",
+            "straight from the horse's mouth",
+            "like water off a duck's back",
+          ],
+          answer: 1,
+          explanation:
+            "<b>a little bird told me</b> = một người nào đó đã bí mật tiết lộ thông tin cho tôi, nhưng tôi không muốn nói người đó là ai.",
+        },
+
+        {
+          q: "After losing the competition, Emma was __________ and didn't want to talk to anyone.",
+          options: [
+            "as cold as a cucumber",
+            "down in the dumps",
+            "as light as a feather",
+            "a mine of information",
+          ],
+          answer: 1,
+          explanation:
+            "<b>down in the dumps</b> = rất buồn, chán nản hoặc thất vọng.",
+        },
+      ];
+
+      let answered = 0;
+      let score = 0;
+      let userAnswers = [];
+
+      const quiz = document.getElementById("quiz");
+      const progressText = document.getElementById("progressText");
+      const progressFill = document.getElementById("progressFill");
+      const result = document.getElementById("result");
+      const finalScore = document.getElementById("finalScore");
+      const resultMessage = document.getElementById("resultMessage");
+
+      /* LOAD QUIZ */
+
+      function loadQuiz() {
+        quiz.innerHTML = "";
+
+        questions.forEach((item, index) => {
+          const card = document.createElement("div");
+
+          card.className = "question-card";
+
+          card.innerHTML = `
+
+      <div class="question-number">
+        Question ${index + 1}
+      </div>
+
+      <div class="question">
+        ${item.q}
+      </div>
+
+      <div class="options">
+
+        ${item.options
+          .map(
+            (option, optionIndex) => `
+
+          <button
+            class="option"
+            onclick="checkAnswer(${index}, ${optionIndex}, this)"
+          >
+
+            <b>${String.fromCharCode(65 + optionIndex)}.</b>
+            ${option}
+
+          </button>
+
+        `,
+          )
+          .join("")}
+
+      </div>
+
+      <div
+        class="feedback"
+        id="feedback-${index}"
+      ></div>
+
+    `;
+
+          quiz.appendChild(card);
+        });
+      }
+
+      /* CHECK ANSWER */
+
+      function checkAnswer(questionIndex, selectedIndex, clickedButton) {
+        /* Không cho chọn lại */
+
+        if (userAnswers[questionIndex] !== undefined) {
+          return;
+        }
+
+        userAnswers[questionIndex] = selectedIndex;
+
+        answered++;
+
+        const question = questions[questionIndex];
+
+        const buttons = clickedButton.parentElement.querySelectorAll(".option");
+
+        const feedback = document.getElementById(`feedback-${questionIndex}`);
+
+        /* Disable tất cả đáp án */
+
+        buttons.forEach((button) => {
+          button.disabled = true;
+        });
+
+        /* ĐÁP ÁN ĐÚNG */
+
+        if (selectedIndex === question.answer) {
+          score++;
+
+          clickedButton.classList.add("correct");
+
+          feedback.className = "feedback correct-feedback";
+
+          feedback.innerHTML = `
+
+      <div class="feedback-title">
+        ✅ Correct!
+      </div>
+
+      <div>
+        Bạn đã chọn đúng:
+        <b>
+          ${String.fromCharCode(65 + question.answer)}.
+          ${question.options[question.answer]}
+        </b>
+      </div>
+
+      <div class="explanation">
+
+        💡 <b>Giải thích:</b>
+        ${question.explanation}
+
+      </div>
+
+    `;
+        } else {
+          /* ĐÁP ÁN SAI */
+          clickedButton.classList.add("wrong");
+
+          buttons[question.answer].classList.add("correct");
+
+          feedback.className = "feedback wrong-feedback";
+
+          feedback.innerHTML = `
+
+      <div class="feedback-title">
+        ❌ Incorrect!
+      </div>
+
+      <div>
+        Bạn chọn:
+        <b>
+          ${String.fromCharCode(65 + selectedIndex)}.
+          ${question.options[selectedIndex]}
+        </b>
+      </div>
+
+      <div>
+        Đáp án đúng:
+        <b>
+          ${String.fromCharCode(65 + question.answer)}.
+          ${question.options[question.answer]}
+        </b>
+      </div>
+
+      <div class="explanation">
+
+        💡 <b>Giải thích:</b>
+        ${question.explanation}
+
+      </div>
+
+    `;
+        }
+
+        updateProgress();
+
+        /* Hoàn thành bài */
+
+        if (answered === questions.length) {
+          showResult();
+        }
+      }
+
+      /* UPDATE PROGRESS */
+
+      function updateProgress() {
+        progressText.textContent = `${answered} / ${questions.length} answered`;
+
+        const percentage = (answered / questions.length) * 100;
+
+        progressFill.style.width = percentage + "%";
+      }
+
+      /* SHOW FINAL RESULT */
+
+      function showResult() {
+        result.style.display = "block";
+
+        finalScore.textContent = `${score} / ${questions.length}`;
+
+        const percentage = (score / questions.length) * 100;
+
+        if (percentage >= 90) {
+          resultMessage.textContent =
+            "🏆 Excellent! Bạn nắm idioms cực kỳ tốt!";
+        } else if (percentage >= 75) {
+          resultMessage.textContent =
+            "🌟 Great job! Bạn đã hiểu phần lớn các idioms.";
+        } else if (percentage >= 60) {
+          resultMessage.textContent =
+            "👍 Good effort! Hãy ôn lại những idioms bạn đã sai.";
+        } else {
+          resultMessage.textContent =
+            "📚 Keep practicing! Hãy học lại idioms và thử lại nhé.";
+        }
+
+        setTimeout(() => {
+          result.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+          });
+        }, 300);
+      }
+
+      /* RESTART QUIZ */
+
+      function restartQuiz() {
+        answered = 0;
+
+        score = 0;
+
+        userAnswers = [];
+
+        result.style.display = "none";
+
+        progressText.textContent = "0 / 32 answered";
+
+        progressFill.style.width = "0%";
+
+        loadQuiz();
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+
+      /* START */
+
+      loadQuiz();
+    </script>
+  </body>
+</html>
+```

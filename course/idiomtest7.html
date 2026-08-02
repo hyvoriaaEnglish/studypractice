@@ -1,0 +1,1125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Idioms Multiple-Choice Test</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: linear-gradient(135deg, #fff7e6, #ffe0b2);
+        color: #4a2c14;
+        min-height: 100vh;
+        padding: 30px 15px;
+      }
+
+      .container {
+        max-width: 950px;
+        margin: auto;
+      }
+
+      /* HEADER */
+      .header {
+        background: linear-gradient(135deg, #ff9800, #ffc107);
+        color: white;
+        border-radius: 25px;
+        padding: 35px 25px;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(255, 152, 0, 0.25);
+        margin-bottom: 25px;
+      }
+
+      .header h1 {
+        font-size: 32px;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        font-size: 16px;
+        opacity: 0.95;
+      }
+
+      /* SCORE */
+      .score-box {
+        background: #fffdf8;
+        border-radius: 20px;
+        padding: 20px;
+        margin-bottom: 25px;
+        box-shadow: 0 5px 20px rgba(130, 80, 20, 0.12);
+        position: sticky;
+        top: 10px;
+        z-index: 10;
+      }
+
+      .score-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+        font-weight: bold;
+      }
+
+      .score {
+        color: #e65100;
+        font-size: 20px;
+      }
+
+      .progress-text {
+        color: #8d6e63;
+      }
+
+      .progress-bar {
+        width: 100%;
+        height: 10px;
+        background: #ffe0b2;
+        border-radius: 20px;
+        overflow: hidden;
+      }
+
+      .progress {
+        width: 0%;
+        height: 100%;
+        background: linear-gradient(90deg, #ff9800, #ffc107);
+        transition: width 0.4s ease;
+      }
+
+      /* QUESTION */
+      .question-card {
+        background: #fffdf8;
+        border-radius: 22px;
+        padding: 28px;
+        margin-bottom: 22px;
+        box-shadow: 0 6px 25px rgba(120, 70, 20, 0.1);
+        border-left: 6px solid #ff9800;
+      }
+
+      .question-number {
+        display: inline-block;
+        background: #fff3cd;
+        color: #e65100;
+        font-weight: bold;
+        padding: 6px 12px;
+        border-radius: 20px;
+        margin-bottom: 15px;
+        font-size: 14px;
+      }
+
+      .question {
+        font-size: 18px;
+        line-height: 1.7;
+        font-weight: 600;
+        margin-bottom: 20px;
+      }
+
+      /* OPTIONS */
+      .options {
+        display: grid;
+        gap: 12px;
+      }
+
+      .option {
+        border: 2px solid #ffe0b2;
+        background: #fffaf0;
+        padding: 14px 16px;
+        border-radius: 14px;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        font-size: 16px;
+        color: #5d4037;
+      }
+
+      .option:hover {
+        border-color: #ff9800;
+        background: #fff3cd;
+        transform: translateX(4px);
+      }
+
+      .option.disabled {
+        cursor: default;
+      }
+
+      .option.correct {
+        background: #e8f5e9;
+        border-color: #43a047;
+        color: #2e7d32;
+        font-weight: bold;
+      }
+
+      .option.wrong {
+        background: #ffebee;
+        border-color: #e53935;
+        color: #c62828;
+        font-weight: bold;
+      }
+
+      /* FEEDBACK */
+      .feedback {
+        display: none;
+        margin-top: 18px;
+        padding: 18px;
+        border-radius: 15px;
+        line-height: 1.7;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .feedback.correct-feedback {
+        display: block;
+        background: #e8f5e9;
+        border-left: 5px solid #43a047;
+        color: #2e7d32;
+      }
+
+      .feedback.wrong-feedback {
+        display: block;
+        background: #ffebee;
+        border-left: 5px solid #e53935;
+        color: #b71c1c;
+      }
+
+      .feedback strong {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      /* RESULT */
+      .result {
+        display: none;
+        background: linear-gradient(135deg, #ff9800, #ffc107);
+        color: white;
+        padding: 35px;
+        border-radius: 25px;
+        text-align: center;
+        margin-top: 30px;
+        box-shadow: 0 10px 30px rgba(255, 152, 0, 0.3);
+      }
+
+      .result h2 {
+        font-size: 30px;
+        margin-bottom: 15px;
+      }
+
+      .result-score {
+        font-size: 45px;
+        font-weight: bold;
+        margin: 10px 0;
+      }
+
+      .result-message {
+        font-size: 18px;
+        margin-bottom: 20px;
+      }
+
+      .restart-btn {
+        border: none;
+        background: white;
+        color: #e65100;
+        padding: 13px 25px;
+        border-radius: 30px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.25s;
+      }
+
+      .restart-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-5px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 600px) {
+        body {
+          padding: 15px 10px;
+        }
+
+        .header h1 {
+          font-size: 25px;
+        }
+
+        .question-card {
+          padding: 20px;
+        }
+
+        .question {
+          font-size: 16px;
+        }
+
+        .score-info {
+          font-size: 14px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>📝 Idioms Multiple-Choice Test</h1>
+        <p>46 Questions • B2–C1 Level</p>
+        <p>Choose the best answer and learn from your mistakes!</p>
+      </div>
+
+      <div class="score-box">
+        <div class="score-info">
+          <div class="score">Score: <span id="score">0</span> / 46</div>
+
+          <div class="progress-text">
+            Answered: <span id="answered">0</span> / 46
+          </div>
+        </div>
+
+        <div class="progress-bar">
+          <div class="progress" id="progress"></div>
+        </div>
+      </div>
+
+      <div id="quiz"></div>
+
+      <div class="result" id="result">
+        <h2>🎉 Test Completed!</h2>
+
+        <div class="result-score"><span id="finalScore">0</span> / 46</div>
+
+        <div class="result-message" id="resultMessage"></div>
+
+        <button class="restart-btn" onclick="restartQuiz()">
+          🔄 Try Again
+        </button>
+      </div>
+    </div>
+
+    <script>
+      const questions = [
+        {
+          question:
+            "The baby was exhausted after playing all afternoon and __________ as soon as her mother put her in bed.",
+          options: [
+            "A. hit the books",
+            "B. went out like a light",
+            "C. hit the roof",
+            "D. went up in smoke",
+          ],
+          answer: "B",
+          explanation:
+            "<b>go out like a light</b> = ngủ rất nhanh, ngủ ngay lập tức.",
+        },
+
+        {
+          question:
+            "The rescue team __________ to find the missing climber, searching the mountains for days.",
+          options: [
+            "A. went to great lengths",
+            "B. jumped the gun",
+            "C. kept a low profile",
+            "D. hit the hay",
+          ],
+          answer: "A",
+          explanation:
+            "<b>go to great lengths</b> = làm mọi cách, cố gắng rất nhiều để đạt được điều gì.",
+        },
+
+        {
+          question:
+            "His sudden promotion __________. He became arrogant and started treating his colleagues badly.",
+          options: [
+            "A. gave him a cold shoulder",
+            "B. went to his head",
+            "C. hit the nail on the head",
+            "D. left him high and dry",
+          ],
+          answer: "B",
+          explanation:
+            "<b>go to one's head</b> = khiến ai đó trở nên kiêu ngạo hoặc quá tự mãn vì thành công.",
+        },
+
+        {
+          question:
+            "Our plans to travel abroad __________ when we couldn't get the necessary visas.",
+          options: [
+            "A. went out like a light",
+            "B. went up in smoke",
+            "C. hit the jackpot",
+            "D. went to great lengths",
+          ],
+          answer: "B",
+          explanation:
+            "<b>go up in smoke</b> = thất bại hoàn toàn hoặc tan thành mây khói.",
+        },
+
+        {
+          question:
+            "She was rude to me yesterday, so I decided to __________ by ignoring her today.",
+          options: [
+            "A. give her free rein",
+            "B. give her a taste of her own medicine",
+            "C. give her the green light",
+            "D. give her the cold shoulder",
+          ],
+          answer: "B",
+          explanation:
+            "<b>give someone a taste of their own medicine</b> = đối xử với ai đó giống như cách họ đã đối xử với mình.",
+        },
+
+        {
+          question:
+            "The manager decided to __________ and let the designers develop the project however they wanted.",
+          options: [
+            "A. give the team free rein",
+            "B. give the team a cold shoulder",
+            "C. give the team a taste of their own medicine",
+            "D. give the team a row",
+          ],
+          answer: "A",
+          explanation:
+            "<b>give someone free rein</b> = cho phép ai đó hoàn toàn tự do hành động hoặc quyết định.",
+        },
+
+        {
+          question:
+            "I've tried talking to him several times, but he just __________ and refuses to speak to me.",
+          options: [
+            "A. gives me the go-ahead",
+            "B. gives me the cold shoulder",
+            "C. gives me free rein",
+            "D. gives me a soft spot",
+          ],
+          answer: "B",
+          explanation:
+            "<b>give someone the cold shoulder</b> = lạnh nhạt, phớt lờ hoặc cố tình không nói chuyện với ai.",
+        },
+
+        {
+          question:
+            "The government finally __________ to begin construction on the new airport.",
+          options: [
+            "A. gave the green light",
+            "B. gave the cold shoulder",
+            "C. gave the go-between",
+            "D. gave the jackpot",
+          ],
+          answer: "A",
+          explanation:
+            "<b>give the green light</b> = chính thức cho phép hoặc phê duyệt một kế hoạch.",
+        },
+
+        {
+          question:
+            "The future of the company is __________ after its main investor suddenly withdrew.",
+          options: [
+            "A. at one's fingertips",
+            "B. hanging by a thread",
+            "C. in the offing",
+            "D. in vain",
+          ],
+          answer: "B",
+          explanation:
+            "<b>hang by a thread</b> = ở trong tình trạng rất nguy hiểm hoặc không chắc chắn.",
+        },
+
+        {
+          question:
+            "With all the information available online, knowledge is practically __________.",
+          options: [
+            "A. hanging by a thread",
+            "B. at your fingertips",
+            "C. in a flat spin",
+            "D. through the grapevine",
+          ],
+          answer: "B",
+          explanation:
+            "<b>at your fingertips</b> = có thể dễ dàng tiếp cận hoặc có ngay trong tầm tay.",
+        },
+
+        {
+          question:
+            "My father has __________ about people using mobile phones at the dinner table. He complains about it constantly.",
+          options: [
+            "A. a bee in his bonnet",
+            "B. a card up his sleeve",
+            "C. a sweet tooth",
+            "D. an axe to grind",
+          ],
+          answer: "A",
+          explanation:
+            "<b>have a bee in one's bonnet about something</b> = luôn bị ám ảnh hoặc bận tâm về một vấn đề nào đó.",
+        },
+
+        {
+          question:
+            "Don't worry about the negotiation. I have __________ that might surprise them.",
+          options: [
+            "A. a soft spot",
+            "B. a card up my sleeve",
+            "C. egg on my face",
+            "D. a bee in my bonnet",
+          ],
+          answer: "B",
+          explanation:
+            "<b>have a card up one's sleeve</b> = có một kế hoạch hoặc lợi thế bí mật để sử dụng khi cần.",
+        },
+
+        {
+          question: "I have __________, so I can never resist chocolate cake.",
+          options: [
+            "A. a soft spot",
+            "B. a sweet tooth",
+            "C. an axe to grind",
+            "D. a bee in my bonnet",
+          ],
+          answer: "B",
+          explanation: "<b>have a sweet tooth</b> = rất thích đồ ngọt.",
+        },
+
+        {
+          question:
+            "My grandmother has always had __________ for stray animals and often takes them home.",
+          options: [
+            "A. a soft spot",
+            "B. a card up her sleeve",
+            "C. a sweet tooth",
+            "D. egg on her face",
+          ],
+          answer: "A",
+          explanation:
+            "<b>have a soft spot for someone/something</b> = có tình cảm đặc biệt hoặc dễ mềm lòng với ai/cái gì.",
+        },
+
+        {
+          question:
+            "The journalist clearly __________ against the company, so her article wasn't very objective.",
+          options: [
+            "A. has a sweet tooth",
+            "B. has an axe to grind",
+            "C. has egg on her face",
+            "D. has a soft spot",
+          ],
+          answer: "B",
+          explanation:
+            "<b>have an axe to grind</b> = có động cơ cá nhân hoặc bất mãn khiến mình không khách quan.",
+        },
+
+        {
+          question:
+            "The politician had __________ after his prediction turned out to be completely wrong.",
+          options: [
+            "A. a card up his sleeve",
+            "B. egg on his face",
+            "C. a bee in his bonnet",
+            "D. a sweet tooth",
+          ],
+          answer: "B",
+          explanation:
+            "<b>have egg on one's face</b> = rơi vào tình huống xấu hổ vì mình đã sai hoặc bị chứng minh là sai.",
+        },
+
+        {
+          question:
+            "The two neighbors had __________ over the boundary between their properties.",
+          options: [
+            "A. a quarrel",
+            "B. a jackpot",
+            "C. a green light",
+            "D. a straight face",
+          ],
+          answer: "A",
+          explanation: "<b>a quarrel</b> = một cuộc cãi vã hoặc tranh cãi.",
+        },
+
+        {
+          question:
+            "When I saw the damage they'd done to my new car, I __________.",
+          options: [
+            "A. hit the hay",
+            "B. saw red",
+            "C. hit the nail on the head",
+            "D. kept a low profile",
+          ],
+          answer: "B",
+          explanation: "<b>see red</b> = cực kỳ tức giận.",
+        },
+
+        {
+          question:
+            "They've only known each other for two weeks, but they're already __________.",
+          options: [
+            "A. hot under the collar",
+            "B. head over heels in love",
+            "C. in a flat spin",
+            "D. at one's fingertips",
+          ],
+          answer: "B",
+          explanation: "<b>head over heels in love</b> = yêu ai đó say đắm.",
+        },
+
+        {
+          question: "There are small cafés __________ throughout the old town.",
+          options: [
+            "A. here and there",
+            "B. in the offing",
+            "C. through the grapevine",
+            "D. in vain",
+          ],
+          answer: "A",
+          explanation:
+            "<b>here and there</b> = ở chỗ này chỗ kia, rải rác ở nhiều nơi.",
+        },
+
+        {
+          question:
+            "I heard __________ that the company is planning to lay off several employees.",
+          options: [
+            "A. in the wake",
+            "B. through the grapevine",
+            "C. at one's fingertips",
+            "D. in the blink of an eye",
+          ],
+          answer: "B",
+          explanation:
+            "<b>through the grapevine</b> = nghe tin qua lời truyền miệng hoặc nguồn không chính thức.",
+        },
+
+        {
+          question:
+            "I have an important exam tomorrow, so I need to __________ tonight.",
+          options: [
+            "A. hit the road",
+            "B. hit the books",
+            "C. hit the hay",
+            "D. hit the roof",
+          ],
+          answer: "B",
+          explanation: "<b>hit the books</b> = bắt đầu học tập chăm chỉ.",
+        },
+
+        {
+          question:
+            "She's exhausted because she's been __________ for months, working during the day and studying at night.",
+          options: [
+            "A. hitting the jackpot",
+            "B. burning the candle at both ends",
+            "C. keeping a low profile",
+            "D. killing two birds with one stone",
+          ],
+          answer: "B",
+          explanation:
+            "<b>burn the candle at both ends</b> = làm việc quá sức, thường xuyên thức khuya và thiếu nghỉ ngơi.",
+        },
+
+        {
+          question:
+            "He bought a lottery ticket and unexpectedly __________, winning millions of dollars.",
+          options: [
+            "A. hit the jackpot",
+            "B. hit the books",
+            "C. hit the roof",
+            "D. hit the road",
+          ],
+          answer: "A",
+          explanation:
+            "<b>hit the jackpot</b> = gặp may lớn hoặc đạt được thành công lớn, đặc biệt là thắng một khoản tiền lớn.",
+        },
+
+        {
+          question:
+            "I'm exhausted. I think I'm going to __________ early tonight.",
+          options: [
+            "A. hit the nail on the head",
+            "B. hit the hay",
+            "C. hit the road",
+            "D. hit the jackpot",
+          ],
+          answer: "B",
+          explanation: "<b>hit the hay</b> = đi ngủ.",
+        },
+
+        {
+          question:
+            "You __________ when you said that the company's biggest problem was poor communication.",
+          options: [
+            "A. hit the roof",
+            "B. hit the nail on the head",
+            "C. hit the road",
+            "D. hit the books",
+          ],
+          answer: "B",
+          explanation:
+            "<b>hit the nail on the head</b> = nói chính xác điều cốt lõi hoặc xác định chính xác vấn đề.",
+        },
+
+        {
+          question:
+            "It's getting late, so we'd better __________ if we want to arrive before dark.",
+          options: [
+            "A. hit the road",
+            "B. hit the hay",
+            "C. hit the jackpot",
+            "D. hit the books",
+          ],
+          answer: "A",
+          explanation: "<b>hit the road</b> = bắt đầu lên đường hoặc rời đi.",
+        },
+
+        {
+          question:
+            "My dad __________ when he discovered that I had damaged his car.",
+          options: [
+            "A. hit the nail on the head",
+            "B. hit the roof",
+            "C. hit the jackpot",
+            "D. hit the hay",
+          ],
+          answer: "B",
+          explanation: "<b>hit the roof</b> = cực kỳ tức giận.",
+        },
+
+        {
+          question:
+            "The customer was extremely angry and __________ after discovering that the store had lost his order.",
+          options: [
+            "A. head over heels in love",
+            "B. hot under the collar",
+            "C. in the offing",
+            "D. at his fingertips",
+          ],
+          answer: "B",
+          explanation:
+            "<b>hot under the collar</b> = rất tức giận hoặc bực mình.",
+        },
+
+        {
+          question:
+            "After receiving three unexpected bills in one week, she was __________ and didn't know what to do.",
+          options: [
+            "A. in a flat spin",
+            "B. in the blink of an eye",
+            "C. in the offing",
+            "D. here and there",
+          ],
+          answer: "A",
+          explanation:
+            "<b>in a flat spin</b> = cực kỳ hoang mang, bối rối hoặc không biết phải làm gì.",
+        },
+
+        {
+          question:
+            "The thief disappeared __________ before the police could catch him.",
+          options: [
+            "A. in the wake of",
+            "B. in the blink of an eye",
+            "C. in vain",
+            "D. through the grapevine",
+          ],
+          answer: "B",
+          explanation:
+            "<b>in the blink of an eye</b> = trong chớp mắt, xảy ra cực kỳ nhanh.",
+        },
+
+        {
+          question:
+            "There are some major changes __________, so employees should prepare themselves.",
+          options: [
+            "A. in vain",
+            "B. in the offing",
+            "C. at one's fingertips",
+            "D. here and there",
+          ],
+          answer: "B",
+          explanation:
+            "<b>in the offing</b> = sắp xảy ra hoặc có khả năng xảy ra trong tương lai gần.",
+        },
+
+        {
+          question:
+            "The firefighters continued working __________ the intense heat and dangerous conditions.",
+          options: [
+            "A. in the face of",
+            "B. in the wake of",
+            "C. in vain",
+            "D. in the offing",
+          ],
+          answer: "A",
+          explanation:
+            "<b>in the face of</b> = đối mặt với, bất chấp một khó khăn hoặc nguy hiểm.",
+        },
+
+        {
+          question:
+            "The new safety regulations were introduced __________ several serious accidents.",
+          options: [
+            "A. in the wake of",
+            "B. in the face of",
+            "C. in the blink of an eye",
+            "D. in a flat spin",
+          ],
+          answer: "A",
+          explanation:
+            "<b>in the wake of</b> = sau một sự kiện nào đó, thường là một sự kiện tiêu cực.",
+        },
+
+        {
+          question:
+            "We tried __________ to persuade him to change his mind, but he refused.",
+          options: [
+            "A. in the offing",
+            "B. in vain",
+            "C. in the wake",
+            "D. in the teeth",
+          ],
+          answer: "B",
+          explanation:
+            "<b>in vain</b> = vô ích, không đạt được kết quả mong muốn.",
+        },
+
+        {
+          question:
+            "This old photograph might __________ and help me remember where we met.",
+          options: [
+            "A. jump the gun",
+            "B. jog my memory",
+            "C. hit the jackpot",
+            "D. keep a straight face",
+          ],
+          answer: "B",
+          explanation:
+            "<b>jog one's memory</b> = gợi lại hoặc giúp ai đó nhớ ra điều gì.",
+        },
+
+        {
+          question:
+            "Don't __________ and announce the results before the official announcement.",
+          options: [
+            "A. grin and bear it",
+            "B. jump the gun",
+            "C. hit the road",
+            "D. keep a low profile",
+          ],
+          answer: "B",
+          explanation:
+            "<b>jump the gun</b> = hành động quá sớm, làm điều gì trước thời điểm thích hợp.",
+        },
+
+        {
+          question:
+            "The job is extremely stressful, but I'll just have to __________ until I can find something better.",
+          options: [
+            "A. grin and bear it",
+            "B. hit the roof",
+            "C. let the cat out of the bag",
+            "D. see red",
+          ],
+          answer: "A",
+          explanation:
+            "<b>grin and bear it</b> = cố chịu đựng một tình huống khó khăn dù không thích.",
+        },
+
+        {
+          question:
+            "The celebrity is trying to __________ after the scandal and avoid media attention.",
+          options: [
+            "A. keep a low profile",
+            "B. hit the jackpot",
+            "C. burn the candle at both ends",
+            "D. jump the gun",
+          ],
+          answer: "A",
+          explanation:
+            "<b>keep a low profile</b> = tránh gây chú ý, sống hoặc hoạt động kín đáo.",
+        },
+
+        {
+          question:
+            "Although their marriage was unhappy, they tried to __________ for the sake of their children.",
+          options: [
+            "A. keep up appearances",
+            "B. keep a straight face",
+            "C. keep a low profile",
+            "D. keep the cat in the bag",
+          ],
+          answer: "A",
+          explanation:
+            "<b>keep up appearances</b> = cố duy trì vẻ ngoài hoặc hình ảnh tốt đẹp dù thực tế bên trong khác.",
+        },
+
+        {
+          question:
+            "The situation was so funny that I could hardly __________ during the serious meeting.",
+          options: [
+            "A. keep a straight face",
+            "B. keep up appearances",
+            "C. keep a low profile",
+            "D. hit the books",
+          ],
+          answer: "A",
+          explanation:
+            "<b>keep a straight face</b> = giữ vẻ mặt nghiêm túc, không bật cười.",
+        },
+
+        {
+          question:
+            "By cycling to work, I can exercise and save money at the same time. It's a great way to __________.",
+          options: [
+            "A. burn the candle at both ends",
+            "B. kill two birds with one stone",
+            "C. hit the jackpot",
+            "D. give someone the cold shoulder",
+          ],
+          answer: "B",
+          explanation:
+            "<b>kill two birds with one stone</b> = đạt được hai mục tiêu chỉ bằng một hành động.",
+        },
+
+        {
+          question:
+            "She knows the company's financial system __________ and can answer almost any question about it.",
+          options: [
+            "A. in the offing",
+            "B. inside out",
+            "C. through the grapevine",
+            "D. in vain",
+          ],
+          answer: "B",
+          explanation:
+            "<b>know something inside out</b> = biết hoặc hiểu một điều gì đó cực kỳ rõ.",
+        },
+
+        {
+          question:
+            "The company promised to help us, but when we needed support, they __________.",
+          options: [
+            "A. left us high and dry",
+            "B. gave us free rein",
+            "C. hit the nail on the head",
+            "D. kept us in the know",
+          ],
+          answer: "A",
+          explanation:
+            "<b>leave someone high and dry</b> = bỏ mặc ai đó trong lúc họ đang cần sự giúp đỡ.",
+        },
+
+        {
+          question:
+            "I wasn't supposed to tell anyone about the surprise party, but Sarah accidentally __________.",
+          options: [
+            "A. kept a low profile",
+            "B. let the cat out of the bag",
+            "C. hit the jackpot",
+            "D. jumped the gun",
+          ],
+          answer: "B",
+          explanation:
+            "<b>let the cat out of the bag</b> = vô tình tiết lộ một bí mật.",
+        },
+
+        {
+          question:
+            "The new law was introduced __________ growing public concern about online safety.",
+          options: [
+            "A. in vain",
+            "B. in the wake of",
+            "C. in the blink of an eye",
+            "D. here and there",
+          ],
+          answer: "B",
+          explanation:
+            "<b>in the wake of</b> = sau hoặc do một sự kiện/tình huống nào đó xảy ra.",
+        },
+      ];
+
+      let score = 0;
+      let answered = 0;
+
+      const quiz = document.getElementById("quiz");
+      const scoreElement = document.getElementById("score");
+      const answeredElement = document.getElementById("answered");
+      const progressElement = document.getElementById("progress");
+      const resultElement = document.getElementById("result");
+      const finalScoreElement = document.getElementById("finalScore");
+      const resultMessageElement = document.getElementById("resultMessage");
+
+      function loadQuiz() {
+        quiz.innerHTML = "";
+
+        questions.forEach((q, index) => {
+          const card = document.createElement("div");
+
+          card.className = "question-card";
+
+          card.innerHTML = `
+            <div class="question-number">
+                Question ${index + 1}
+            </div>
+
+            <div class="question">
+                ${q.question}
+            </div>
+
+            <div class="options">
+
+                ${q.options
+                  .map((option) => {
+                    const letter = option.charAt(0);
+
+                    return `
+                        <div 
+                            class="option"
+                            onclick="selectAnswer(this, '${letter}', ${index})"
+                        >
+                            ${option}
+                        </div>
+                    `;
+                  })
+                  .join("")}
+
+            </div>
+
+            <div class="feedback" id="feedback-${index}">
+            </div>
+        `;
+
+          quiz.appendChild(card);
+        });
+      }
+
+      function selectAnswer(element, selected, index) {
+        const card = element.closest(".question-card");
+
+        const options = card.querySelectorAll(".option");
+
+        const feedback = document.getElementById(`feedback-${index}`);
+
+        // Prevent multiple answers
+        if (card.dataset.answered === "true") {
+          return;
+        }
+
+        card.dataset.answered = "true";
+
+        answered++;
+
+        // Disable all options
+        options.forEach((option) => {
+          option.classList.add("disabled");
+        });
+
+        // Find correct answer
+        const correctAnswer = questions[index].answer;
+
+        // Highlight correct answer
+        options.forEach((option) => {
+          if (option.textContent.trim().startsWith(correctAnswer + ".")) {
+            option.classList.add("correct");
+          }
+        });
+
+        if (selected === correctAnswer) {
+          score++;
+
+          element.classList.add("correct");
+
+          feedback.className = "feedback correct-feedback";
+
+          feedback.innerHTML = `
+            <strong>✅ Chính xác!</strong>
+            ${questions[index].explanation}
+        `;
+        } else {
+          element.classList.add("wrong");
+
+          feedback.className = "feedback wrong-feedback";
+
+          feedback.innerHTML = `
+            <strong>❌ Chưa chính xác!</strong>
+            Đáp án đúng là <b>${correctAnswer}</b>.<br>
+            ${questions[index].explanation}
+        `;
+        }
+
+        updateScore();
+      }
+
+      function updateScore() {
+        scoreElement.textContent = score;
+
+        answeredElement.textContent = answered;
+
+        const percentage = (answered / questions.length) * 100;
+
+        progressElement.style.width = percentage + "%";
+
+        if (answered === questions.length) {
+          setTimeout(() => {
+            showResult();
+          }, 700);
+        }
+      }
+
+      function showResult() {
+        resultElement.style.display = "block";
+
+        finalScoreElement.textContent = score;
+
+        const percentage = (score / questions.length) * 100;
+
+        let message = "";
+
+        if (percentage >= 90) {
+          message = "🏆 Outstanding! Your idiom knowledge is excellent!";
+        } else if (percentage >= 75) {
+          message = "🌟 Great job! You have a strong understanding of idioms.";
+        } else if (percentage >= 60) {
+          message = "👏 Good effort! Keep reviewing the idioms you got wrong.";
+        } else {
+          message =
+            "💪 Keep practicing! Review the explanations and try again.";
+        }
+
+        resultMessageElement.textContent = message;
+
+        resultElement.scrollIntoView({
+          behavior: "smooth",
+        });
+      }
+
+      function restartQuiz() {
+        score = 0;
+
+        answered = 0;
+
+        scoreElement.textContent = "0";
+
+        answeredElement.textContent = "0";
+
+        progressElement.style.width = "0%";
+
+        resultElement.style.display = "none";
+
+        loadQuiz();
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+
+      loadQuiz();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1199 @@
+<!doctype html>
+
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+
+    ```
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Khóa học Idiom | Hyvoria English</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* =========================
+     RESET
+  ========================= */
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* =========================
+     BODY
+  ========================= */
+
+      body {
+        font-family: "Be Vietnam Pro", sans-serif;
+
+        color: #3d4868;
+
+        min-height: 100vh;
+
+        background:
+          radial-gradient(
+            circle at 10% 10%,
+            rgba(255, 190, 220, 0.35),
+            transparent 30%
+          ),
+          radial-gradient(
+            circle at 90% 20%,
+            rgba(170, 215, 255, 0.35),
+            transparent 30%
+          ),
+          linear-gradient(135deg, #fff7fb, #f4f9ff);
+      }
+
+      /* =========================
+     HEADER
+  ========================= */
+
+      header {
+        width: 100%;
+
+        padding: 18px 7%;
+
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        position: sticky;
+
+        top: 0;
+
+        z-index: 100;
+
+        background: rgba(255, 255, 255, 0.78);
+
+        backdrop-filter: blur(15px);
+
+        -webkit-backdrop-filter: blur(15px);
+
+        border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+      }
+
+      /* =========================
+     LOGO
+  ========================= */
+
+      .logo {
+        display: flex;
+
+        align-items: center;
+
+        gap: 12px;
+
+        text-decoration: none;
+
+        color: #3d4868;
+      }
+
+      .logo-icon {
+        width: 45px;
+
+        height: 45px;
+
+        border-radius: 15px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        font-size: 22px;
+
+        background: linear-gradient(135deg, #ffb7d8, #a9d9ff);
+
+        box-shadow: 0 8px 25px rgba(150, 180, 230, 0.2);
+      }
+
+      .logo-text {
+        font-size: 20px;
+
+        font-weight: 800;
+      }
+
+      /* =========================
+     BACK BUTTON
+  ========================= */
+
+      .back-btn {
+        text-decoration: none;
+
+        color: #65718e;
+
+        background: white;
+
+        padding: 10px 18px;
+
+        border-radius: 14px;
+
+        font-size: 13px;
+
+        font-weight: 600;
+
+        box-shadow: 0 6px 20px rgba(100, 130, 180, 0.1);
+
+        transition: 0.3s;
+      }
+
+      .back-btn:hover {
+        transform: translateY(-2px);
+
+        color: #df78aa;
+
+        background: #fff0f7;
+      }
+
+      /* =========================
+     MAIN
+  ========================= */
+
+      main {
+        max-width: 1150px;
+
+        margin: auto;
+
+        padding: 60px 25px 90px;
+      }
+
+      /* =========================
+     HERO COURSE
+  ========================= */
+
+      .course-hero {
+        display: grid;
+
+        grid-template-columns:
+          1.2fr
+          0.8fr;
+
+        gap: 45px;
+
+        align-items: center;
+
+        margin-bottom: 65px;
+      }
+
+      /* =========================
+     HERO CONTENT
+  ========================= */
+
+      .badge {
+        display: inline-block;
+
+        padding: 8px 16px;
+
+        border-radius: 50px;
+
+        background: rgba(255, 255, 255, 0.85);
+
+        color: #dc78a8;
+
+        font-size: 12px;
+
+        font-weight: 700;
+
+        margin-bottom: 18px;
+
+        box-shadow: 0 5px 20px rgba(100, 130, 180, 0.08);
+      }
+
+      .hero-content h1 {
+        font-size: clamp(34px, 5vw, 55px);
+
+        line-height: 1.2;
+
+        color: #354269;
+
+        margin-bottom: 20px;
+
+        font-weight: 800;
+      }
+
+      .hero-content h1 span {
+        background: linear-gradient(90deg, #e986b5, #7bb9ec);
+
+        background-clip: text;
+
+        -webkit-background-clip: text;
+
+        color: transparent;
+
+        -webkit-text-fill-color: transparent;
+      }
+
+      .hero-content > p {
+        color: #78849e;
+
+        font-size: 15px;
+
+        line-height: 1.8;
+
+        max-width: 650px;
+
+        margin-bottom: 25px;
+      }
+
+      /* =========================
+     QUICK INFO
+  ========================= */
+
+      .quick-info {
+        display: flex;
+
+        flex-wrap: wrap;
+
+        gap: 12px;
+
+        margin-bottom: 30px;
+      }
+
+      .quick-item {
+        display: flex;
+
+        align-items: center;
+
+        gap: 8px;
+
+        padding: 10px 14px;
+
+        background: rgba(255, 255, 255, 0.75);
+
+        border-radius: 12px;
+
+        color: #65718e;
+
+        font-size: 13px;
+
+        font-weight: 600;
+
+        box-shadow: 0 5px 18px rgba(100, 130, 180, 0.06);
+      }
+
+      /* =========================
+     HERO CARD
+  ========================= */
+
+      .hero-card {
+        position: relative;
+
+        min-height: 420px;
+
+        border-radius: 35px;
+
+        overflow: hidden;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        background: linear-gradient(135deg, #ffd4e7, #c9e9ff);
+
+        box-shadow: 0 20px 60px rgba(100, 140, 200, 0.15);
+      }
+
+      .hero-card::before {
+        content: "";
+
+        position: absolute;
+
+        width: 250px;
+
+        height: 250px;
+
+        border-radius: 50%;
+
+        background: rgba(255, 255, 255, 0.35);
+
+        top: -80px;
+
+        right: -70px;
+      }
+
+      .hero-card::after {
+        content: "";
+
+        position: absolute;
+
+        width: 180px;
+
+        height: 180px;
+
+        border-radius: 50%;
+
+        background: rgba(255, 255, 255, 0.3);
+
+        bottom: -60px;
+
+        left: -50px;
+      }
+
+      .hero-card-content {
+        position: relative;
+
+        z-index: 2;
+
+        text-align: center;
+      }
+
+      .big-icon {
+        font-size: 85px;
+
+        margin-bottom: 20px;
+
+        filter: drop-shadow(0 10px 15px rgba(100, 130, 180, 0.15));
+      }
+
+      .hero-card h2 {
+        color: #3d496d;
+
+        font-size: 24px;
+
+        margin-bottom: 10px;
+      }
+
+      .hero-card p {
+        color: #687590;
+
+        font-size: 13px;
+      }
+
+      /* =========================
+     PRICE BOX
+  ========================= */
+
+      .price-card {
+        margin-top: 25px;
+
+        padding: 20px;
+
+        border-radius: 20px;
+
+        background: rgba(255, 255, 255, 0.8);
+
+        box-shadow: 0 10px 30px rgba(100, 130, 180, 0.08);
+      }
+
+      .price-label {
+        color: #8994aa;
+
+        font-size: 12px;
+
+        margin-bottom: 5px;
+      }
+
+      .price {
+        color: #df76aa;
+
+        font-size: 32px;
+
+        font-weight: 800;
+
+        margin-bottom: 15px;
+      }
+
+      .buy-btn {
+        width: 100%;
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+
+        gap: 8px;
+
+        padding: 15px;
+
+        border-radius: 15px;
+
+        background: linear-gradient(90deg, #e986b5, #7bb9ec);
+
+        color: white;
+
+        text-decoration: none;
+
+        font-size: 14px;
+
+        font-weight: 700;
+
+        box-shadow: 0 10px 25px rgba(120, 160, 220, 0.22);
+
+        transition: 0.3s;
+      }
+
+      .buy-btn:hover {
+        transform: translateY(-3px);
+
+        box-shadow: 0 15px 35px rgba(120, 160, 220, 0.3);
+      }
+
+      /* =========================
+     SECTION
+  ========================= */
+
+      .section {
+        margin-top: 65px;
+      }
+
+      .section-heading {
+        text-align: center;
+
+        margin-bottom: 35px;
+      }
+
+      .section-heading h2 {
+        color: #3d496d;
+
+        font-size: 28px;
+
+        margin-bottom: 10px;
+      }
+
+      .section-heading p {
+        color: #8994aa;
+
+        font-size: 13px;
+      }
+
+      /* =========================
+     LESSON GRID
+  ========================= */
+
+      .lesson-grid {
+        display: grid;
+
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 18px;
+      }
+
+      .lesson-card {
+        display: flex;
+
+        align-items: center;
+
+        gap: 18px;
+
+        padding: 20px;
+
+        background: rgba(255, 255, 255, 0.8);
+
+        border-radius: 20px;
+
+        border: 1px solid rgba(255, 255, 255, 0.9);
+
+        box-shadow: 0 8px 25px rgba(90, 120, 170, 0.06);
+
+        transition: 0.3s;
+      }
+
+      .lesson-card:hover {
+        transform: translateY(-4px);
+
+        box-shadow: 0 15px 35px rgba(90, 120, 170, 0.1);
+      }
+
+      .lesson-number {
+        flex-shrink: 0;
+
+        width: 48px;
+
+        height: 48px;
+
+        border-radius: 15px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        background: linear-gradient(135deg, #ffc1dc, #a9dbff);
+
+        color: white;
+
+        font-size: 14px;
+
+        font-weight: 800;
+      }
+
+      .lesson-text h3 {
+        color: #46516f;
+
+        font-size: 15px;
+
+        margin-bottom: 5px;
+      }
+
+      .lesson-text p {
+        color: #8a95aa;
+
+        font-size: 12px;
+
+        line-height: 1.5;
+      }
+
+      /* =========================
+     TEST GRID
+  ========================= */
+
+      .test-grid {
+        display: grid;
+
+        grid-template-columns: repeat(3, 1fr);
+
+        gap: 20px;
+      }
+
+      .test-card {
+        padding: 28px;
+
+        text-align: center;
+
+        border-radius: 25px;
+
+        background: linear-gradient(
+          135deg,
+          rgba(255, 224, 238, 0.8),
+          rgba(219, 240, 255, 0.8)
+        );
+
+        border: 1px solid rgba(255, 255, 255, 0.9);
+
+        box-shadow: 0 10px 35px rgba(90, 120, 170, 0.07);
+
+        transition: 0.3s;
+      }
+
+      .test-card:hover {
+        transform: translateY(-4px);
+      }
+
+      .test-icon {
+        font-size: 35px;
+
+        margin-bottom: 15px;
+      }
+
+      .test-card h3 {
+        color: #405071;
+
+        font-size: 17px;
+
+        margin-bottom: 8px;
+      }
+
+      .test-card p {
+        color: #78859e;
+
+        font-size: 12px;
+
+        line-height: 1.6;
+      }
+
+      /* =========================
+     BENEFITS
+  ========================= */
+
+      .benefit-grid {
+        display: grid;
+
+        grid-template-columns: repeat(4, 1fr);
+
+        gap: 18px;
+      }
+
+      .benefit-card {
+        text-align: center;
+
+        padding: 25px 18px;
+
+        background: rgba(255, 255, 255, 0.75);
+
+        border-radius: 20px;
+
+        box-shadow: 0 8px 25px rgba(90, 120, 170, 0.06);
+      }
+
+      .benefit-icon {
+        font-size: 30px;
+
+        margin-bottom: 12px;
+      }
+
+      .benefit-card h3 {
+        font-size: 14px;
+
+        color: #485572;
+
+        margin-bottom: 7px;
+      }
+
+      .benefit-card p {
+        font-size: 11px;
+
+        color: #8994aa;
+
+        line-height: 1.5;
+      }
+
+      /* =========================
+     FINAL CTA
+  ========================= */
+
+      .final-cta {
+        margin-top: 70px;
+
+        padding: 45px 30px;
+
+        text-align: center;
+
+        border-radius: 30px;
+
+        background: linear-gradient(135deg, #ffd9e9, #d5edff);
+
+        box-shadow: 0 15px 45px rgba(90, 130, 180, 0.1);
+      }
+
+      .final-cta h2 {
+        color: #3d496d;
+
+        font-size: 27px;
+
+        margin-bottom: 12px;
+      }
+
+      .final-cta p {
+        color: #71809a;
+
+        font-size: 14px;
+
+        margin-bottom: 25px;
+      }
+
+      .final-buy-btn {
+        display: inline-flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: 8px;
+
+        padding: 14px 30px;
+
+        border-radius: 15px;
+
+        background: white;
+
+        color: #df76aa;
+
+        text-decoration: none;
+
+        font-size: 14px;
+
+        font-weight: 700;
+
+        box-shadow: 0 8px 25px rgba(90, 120, 170, 0.1);
+
+        transition: 0.3s;
+      }
+
+      .final-buy-btn:hover {
+        transform: translateY(-3px);
+
+        box-shadow: 0 12px 30px rgba(90, 120, 170, 0.15);
+      }
+
+      /* =========================
+     FOOTER
+  ========================= */
+
+      footer {
+        text-align: center;
+
+        padding: 30px 20px;
+
+        background: rgba(255, 255, 255, 0.55);
+
+        color: #8b96aa;
+
+        font-size: 13px;
+      }
+
+      footer strong {
+        color: #df7eac;
+      }
+
+      /* =========================
+     PAYMENT SUPPORT
+  ========================= */
+
+      .payment-support {
+        position: fixed;
+
+        right: 20px;
+
+        bottom: 20px;
+
+        max-width: 300px;
+
+        padding: 14px 18px;
+
+        background: white;
+
+        color: #65718e;
+
+        font-size: 12px;
+
+        line-height: 1.6;
+
+        border-radius: 15px;
+
+        box-shadow: 0 8px 30px rgba(90, 120, 170, 0.15);
+
+        border: 1px solid rgba(255, 255, 255, 0.9);
+
+        z-index: 9999;
+      }
+
+      .payment-support strong {
+        color: #df76aa;
+
+        font-size: 13px;
+      }
+
+      /* =========================
+     RESPONSIVE
+  ========================= */
+
+      @media (max-width: 900px) {
+        .course-hero {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-card {
+          min-height: 350px;
+        }
+
+        .benefit-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 650px) {
+        header {
+          padding: 15px 5%;
+        }
+
+        .logo-text {
+          font-size: 17px;
+        }
+
+        .back-btn {
+          padding: 9px 13px;
+
+          font-size: 12px;
+        }
+
+        main {
+          padding: 45px 20px 65px;
+        }
+
+        .hero-content h1 {
+          font-size: 36px;
+        }
+
+        .lesson-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .test-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .benefit-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .payment-support {
+          right: 12px;
+
+          bottom: 12px;
+
+          max-width: 250px;
+
+          font-size: 11px;
+        }
+      }
+    </style>
+    ```
+  </head>
+
+  <body>
+    ```
+    <!-- =========================
+     HEADER
+========================= -->
+
+    <header>
+      <a href="trangchu.html" class="logo">
+        <div class="logo-icon">🌸</div>
+
+        <div class="logo-text">Hyvoria English</div>
+      </a>
+
+      <a href="courses.html" class="back-btn"> ← Các khóa học </a>
+    </header>
+
+    <!-- =========================
+     MAIN
+========================= -->
+
+    <main>
+      <!-- =========================
+       HERO
+  ========================= -->
+
+      <section class="course-hero">
+        <div class="hero-content">
+          <span class="badge"> ✨ HYVORIA ENGLISH — IDIOM COURSE </span>
+
+          <h1>
+            Khóa học
+            <span> Idiom </span>
+          </h1>
+
+          <p>
+            Một chương trình học mới đang được Hyvoria English phát triển, giúp
+            bạn học và ghi nhớ các cụm Idiom thông dụng thông qua bài học theo
+            chủ đề và hệ thống bài tập trắc nghiệm.
+          </p>
+
+          <div class="quick-info">
+            <div class="quick-item">
+              📚
+
+              <span> 7 Lessons </span>
+            </div>
+
+            <div class="quick-item">
+              📝
+
+              <span> 9 Tests </span>
+            </div>
+
+            <div class="quick-item">
+              ✨
+
+              <span> 262 Idioms </span>
+            </div>
+
+            <div class="quick-item">
+              🔓
+
+              <span> Truy cập trọn đời </span>
+            </div>
+          </div>
+
+          <!-- PRICE -->
+
+          <div class="price-card">
+            <div class="price-label">Trọn bộ khóa học</div>
+
+            <div class="price">68.000 VND</div>
+
+            <a href="payment.html" class="buy-btn">
+              💳 Mua khóa học
+
+              <span> → </span>
+            </a>
+          </div>
+        </div>
+
+        <!-- =====================
+         HERO CARD
+    ====================== -->
+
+        <div class="hero-card">
+          <div class="hero-card-content">
+            <div class="big-icon">🌷</div>
+
+            <h2>Idiom Mastery</h2>
+
+            <p>7 Lessons + 9 Tests</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================
+       LESSONS
+  ========================= -->
+
+      <section class="section">
+        <div class="section-heading">
+          <h2>📚 Nội dung khóa học</h2>
+
+          <p>Khóa học bao gồm 7 bài học Idiom và 9 bài tập luyện tập.</p>
+        </div>
+
+        <div class="lesson-grid">
+          <div class="lesson-card">
+            <div class="lesson-number">01</div>
+
+            <div class="lesson-text">
+              <h3>Idioms Lesson 01</h3>
+
+              <p>Bài học Idiom đầu tiên trong chương trình.</p>
+            </div>
+          </div>
+
+          <div class="lesson-card">
+            <div class="lesson-number">02</div>
+
+            <div class="lesson-text">
+              <h3>Idioms Lesson 02</h3>
+
+              <p>Mở rộng vốn từ và làm quen với các cụm Idiom mới.</p>
+            </div>
+          </div>
+
+          <div class="lesson-card">
+            <div class="lesson-number">03</div>
+
+            <div class="lesson-text">
+              <h3>Idioms Lesson 03</h3>
+
+              <p>Học cách hiểu và sử dụng Idiom trong ngữ cảnh.</p>
+            </div>
+          </div>
+
+          <div class="lesson-card">
+            <div class="lesson-number">04</div>
+
+            <div class="lesson-text">
+              <h3>Idioms Lesson 04</h3>
+
+              <p>Tiếp tục khám phá các thành ngữ tiếng Anh phổ biến.</p>
+            </div>
+          </div>
+
+          <div class="lesson-card">
+            <div class="lesson-number">05</div>
+
+            <div class="lesson-text">
+              <h3>Idioms Lesson 05</h3>
+
+              <p>Củng cố và mở rộng khả năng sử dụng Idiom.</p>
+            </div>
+          </div>
+
+          <div class="lesson-card">
+            <div class="lesson-number">06</div>
+
+            <div class="lesson-text">
+              <h3>Idioms Lesson 06</h3>
+
+              <p>Luyện tập và nâng cao vốn Idiom nâng cao.</p>
+            </div>
+          </div>
+
+          <div class="lesson-card">
+            <div class="lesson-number">07</div>
+
+            <div class="lesson-text">
+              <h3>Idioms Lesson 07</h3>
+
+              <p>Hoàn thành chương trình học Idiom.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================
+       TESTS
+  ========================= -->
+
+      <section class="section">
+        <div class="section-heading">
+          <h2>📝 Idiom Practice Zone</h2>
+
+          <p>
+            9 bài kiểm tra giúp bạn luyện tập và kiểm tra khả năng ghi nhớ
+            Idiom.
+          </p>
+        </div>
+
+        <div class="test-grid">
+          <div class="test-card">
+            <div class="test-icon">📝</div>
+
+            <h3>Idiom Test 01</h3>
+
+            <p>Kiểm tra kiến thức Idiom sau những bài học đầu tiên.</p>
+          </div>
+
+          <div class="test-card">
+            <div class="test-icon">🎯</div>
+
+            <h3>Idiom Test 02</h3>
+
+            <p>Luyện tập cách sử dụng Idiom trong ngữ cảnh.</p>
+          </div>
+
+          <div class="test-card">
+            <div class="test-icon">✨</div>
+
+            <h3>Idiom Test 03</h3>
+
+            <p>Củng cố vốn Idiom thông qua câu hỏi trắc nghiệm.</p>
+          </div>
+
+          <div class="test-card">
+            <div class="test-icon">📖</div>
+
+            <h3>Idiom Test 04</h3>
+
+            <p>Tiếp tục luyện tập và nâng cao khả năng ghi nhớ.</p>
+          </div>
+
+          <div class="test-card">
+            <div class="test-icon">💡</div>
+
+            <h3>Idiom Test 05</h3>
+
+            <p>Áp dụng những kiến thức đã học vào bài tập.</p>
+          </div>
+
+          <div class="test-card">
+            <div class="test-icon">🚀</div>
+
+            <h3>Idiom Test 06</h3>
+
+            <p>Thử thách khả năng nhận diện và hiểu Idiom.</p>
+          </div>
+
+          <div class="test-card">
+            <div class="test-icon">🏆</div>
+
+            <h3>Idiom Test 07</h3>
+
+            <p>Nâng cao khả năng vận dụng Idiom trong tiếng Anh.</p>
+          </div>
+
+          <div class="test-card">
+            <div class="test-icon">🌟</div>
+
+            <h3>Idiom Test 08</h3>
+
+            <p>Luyện tập chuyên sâu với các cụm Idiom nâng cao.</p>
+          </div>
+
+          <div class="test-card">
+            <div class="test-icon">👑</div>
+
+            <h3>Idiom Test 09</h3>
+
+            <p>Bài kiểm tra cuối cùng để hoàn thành khóa học.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================
+       BENEFITS
+  ========================= -->
+
+      <section class="section">
+        <div class="section-heading">
+          <h2>✨ Bạn sẽ nhận được gì?</h2>
+
+          <p>Học Idiom hiệu quả hơn cùng Hyvoria English.</p>
+        </div>
+
+        <div class="benefit-grid">
+          <div class="benefit-card">
+            <div class="benefit-icon">📚</div>
+
+            <h3>262 cụm Idiom</h3>
+
+            <p>Mở rộng vốn thành ngữ và cụm từ tiếng Anh.</p>
+          </div>
+
+          <div class="benefit-card">
+            <div class="benefit-icon">📝</div>
+
+            <h3>340+ câu trắc nghiệm</h3>
+
+            <p>Luyện tập và kiểm tra kiến thức sau mỗi bài học.</p>
+          </div>
+
+          <div class="benefit-card">
+            <div class="benefit-icon">🔓</div>
+
+            <h3>Truy cập trọn đời</h3>
+
+            <p>Học lại nội dung khóa học bất cứ lúc nào.</p>
+          </div>
+
+          <div class="benefit-card">
+            <div class="benefit-icon">💻</div>
+
+            <h3>Học online</h3>
+
+            <p>Học mọi lúc trên máy tính, máy tính bảng hoặc điện thoại.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================
+       FINAL CTA
+  ========================= -->
+
+      <section class="final-cta">
+        <h2>Sẵn sàng chinh phục Idiom?</h2>
+
+        <p>Sở hữu trọn bộ 7 Lessons và 9 Tests chỉ với 68.000 VND.</p>
+
+        <a href="payment2.html" class="final-buy-btn"> 💳 Mua khóa học → </a>
+      </section>
+    </main>
+
+    <!-- =========================
+     FOOTER
+========================= -->
+
+    <footer>
+      <p>
+        Made with 💗 for
+
+        <strong> Hyvoria English </strong>
+      </p>
+
+      <p style="margin-top: 8px">Keep learning. Keep growing. ✨</p>
+    </footer>
+
+    <!-- =========================
+     PAYMENT SUPPORT
+========================= -->
+
+    <div class="payment-support">
+      ⚠️ Nếu thanh toán gặp lỗi, vui lòng gửi tin nhắn hỗ trợ qua SĐT:
+
+      <strong> 0384691136 </strong>
+    </div>
+    ```
+  </body>
+</html>

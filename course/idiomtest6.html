@@ -1,0 +1,933 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Idioms Multiple-Choice Test</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: #f4eee5;
+        color: #4b3621;
+        line-height: 1.6;
+        padding: 30px 15px;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: auto;
+      }
+
+      /* HEADER */
+      .header {
+        background: linear-gradient(135deg, #8b6f47, #b79b76);
+        color: white;
+        padding: 35px 25px;
+        border-radius: 22px;
+        text-align: center;
+        margin-bottom: 25px;
+        box-shadow: 0 8px 25px rgba(90, 65, 40, 0.15);
+      }
+
+      .header h1 {
+        font-size: 30px;
+        margin-bottom: 8px;
+      }
+
+      .header p {
+        font-size: 16px;
+        opacity: 0.95;
+      }
+
+      /* SCORE */
+      .score-box {
+        background: #fffaf3;
+        border: 1px solid #dfcfba;
+        border-radius: 18px;
+        padding: 18px 22px;
+        margin-bottom: 25px;
+        box-shadow: 0 5px 15px rgba(90, 65, 40, 0.08);
+      }
+
+      .score-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+
+      .progress-container {
+        width: 100%;
+        height: 12px;
+        background: #e8dccb;
+        border-radius: 20px;
+        overflow: hidden;
+      }
+
+      .progress-bar {
+        height: 100%;
+        width: 0%;
+        background: #8b6f47;
+        border-radius: 20px;
+        transition: 0.3s;
+      }
+
+      /* QUESTION CARD */
+      .question-card {
+        background: #fffaf3;
+        border-radius: 20px;
+        padding: 25px;
+        margin-bottom: 22px;
+        border: 1px solid #e2d3c0;
+        box-shadow: 0 5px 18px rgba(90, 65, 40, 0.07);
+        transition: 0.3s;
+      }
+
+      .question-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 22px rgba(90, 65, 40, 0.12);
+      }
+
+      .question-number {
+        display: inline-block;
+        background: #8b6f47;
+        color: white;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: bold;
+        margin-bottom: 12px;
+      }
+
+      .question {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 18px;
+      }
+
+      /* ANSWERS */
+      .options {
+        display: grid;
+        gap: 10px;
+      }
+
+      .option {
+        width: 100%;
+        padding: 13px 16px;
+        border: 2px solid #dfcfba;
+        background: #faf5ed;
+        border-radius: 12px;
+        text-align: left;
+        font-size: 15px;
+        color: #4b3621;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+
+      .option:hover:not(:disabled) {
+        background: #eee1cf;
+        border-color: #a78963;
+        transform: translateX(3px);
+      }
+
+      .option:disabled {
+        cursor: default;
+      }
+
+      .option.correct {
+        background: #dcebdc;
+        border-color: #6d956d;
+        color: #315c31;
+        font-weight: bold;
+      }
+
+      .option.wrong {
+        background: #f1dcdc;
+        border-color: #b56b6b;
+        color: #7a3030;
+        font-weight: bold;
+      }
+
+      /* EXPLANATION */
+      .explanation {
+        display: none;
+        margin-top: 18px;
+        padding: 16px;
+        border-radius: 12px;
+        background: #f1e7d8;
+        border-left: 5px solid #8b6f47;
+        font-size: 14px;
+      }
+
+      .explanation.show {
+        display: block;
+      }
+
+      .result-icon {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      /* FINAL RESULT */
+      .final-result {
+        display: none;
+        background: #fffaf3;
+        border: 2px solid #b79b76;
+        border-radius: 22px;
+        padding: 30px;
+        text-align: center;
+        margin-top: 30px;
+        box-shadow: 0 8px 25px rgba(90, 65, 40, 0.12);
+      }
+
+      .final-result.show {
+        display: block;
+      }
+
+      .final-result h2 {
+        color: #6f5435;
+        margin-bottom: 10px;
+      }
+
+      .final-score {
+        font-size: 38px;
+        font-weight: bold;
+        color: #8b6f47;
+        margin: 10px 0;
+      }
+
+      .message {
+        font-size: 17px;
+        margin-bottom: 20px;
+      }
+
+      .restart-btn {
+        border: none;
+        background: #8b6f47;
+        color: white;
+        padding: 13px 28px;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+
+      .restart-btn:hover {
+        background: #6f5435;
+        transform: translateY(-2px);
+      }
+
+      /* MOBILE */
+      @media (max-width: 600px) {
+        body {
+          padding: 15px 10px;
+        }
+
+        .header {
+          padding: 25px 15px;
+        }
+
+        .header h1 {
+          font-size: 24px;
+        }
+
+        .question-card {
+          padding: 18px;
+        }
+
+        .question {
+          font-size: 16px;
+        }
+
+        .option {
+          font-size: 14px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>📝 Idioms Multiple-Choice Test</h1>
+        <p>38 Questions • B2–C1 Level</p>
+        <p>Choose the best answer based on the context.</p>
+      </div>
+
+      <div class="score-box">
+        <div class="score-top">
+          <span>📊 Your Progress</span>
+          <span id="progressText">0 / 38</span>
+        </div>
+
+        <div class="progress-container">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+      </div>
+
+      <div id="quiz"></div>
+
+      <div class="final-result" id="finalResult">
+        <h2>🎉 Test Completed!</h2>
+
+        <div class="final-score" id="finalScore">0 / 38</div>
+
+        <div class="message" id="finalMessage"></div>
+
+        <button class="restart-btn" onclick="restartQuiz()">
+          🔄 Try Again
+        </button>
+      </div>
+    </div>
+
+    <script>
+      const questions = [
+        {
+          q: "The project __________ our expectations because we didn't have enough time to complete all the tasks.",
+          options: [
+            "landed on our feet",
+            "fell to pieces",
+            "fell short of",
+            "fit like a glove",
+          ],
+          answer: 2,
+          explanation:
+            "<b>fall short of</b> = không đạt được, không đáp ứng được điều gì. → Dự án không đạt được kỳ vọng.",
+        },
+
+        {
+          q: "After losing his job and his home, his life seemed to __________.",
+          options: [
+            "go through the motions",
+            "fall to pieces",
+            "land on his feet",
+            "get the hang of it",
+          ],
+          answer: 1,
+          explanation:
+            "<b>fall to pieces</b> = tan vỡ, sụp đổ, trở nên hỗn loạn. → Cuộc sống của anh ấy dường như sụp đổ.",
+        },
+
+        {
+          q: "Despite losing his job, Jack managed to __________ and find a better position within a month.",
+          options: [
+            "land on his feet",
+            "get the sack",
+            "flog a dead horse",
+            "go up in smoke",
+          ],
+          answer: 0,
+          explanation:
+            "<b>land on one's feet</b> = xoay xở tốt và vượt qua khó khăn. → Jack nhanh chóng tìm được công việc tốt hơn.",
+        },
+
+        {
+          q: "Do you think he'll agree to lend us his car? __________. He never lends anything to anyone.",
+          options: [
+            "Fit like a glove",
+            "Fat chance",
+            "From scratch",
+            "From the word go",
+          ],
+          answer: 1,
+          explanation:
+            "<b>Fat chance</b> = gần như không có cơ hội, không đời nào. → Anh ấy chẳng bao giờ cho ai mượn đồ.",
+        },
+
+        {
+          q: "The lawyers fought __________ to protect their client's reputation.",
+          options: [
+            "from square one",
+            "tooth and nail",
+            "from scratch",
+            "by the word go",
+          ],
+          answer: 1,
+          explanation:
+            "<b>fight tooth and nail</b> = đấu tranh hết sức, chiến đấu quyết liệt.",
+        },
+
+        {
+          q: "This jacket fits me perfectly. It __________.",
+          options: [
+            "fits like a glove",
+            "gets on my nerves",
+            "goes to my head",
+            "falls to pieces",
+          ],
+          answer: 0,
+          explanation: "<b>fit like a glove</b> = vừa vặn hoàn hảo.",
+        },
+
+        {
+          q: "There's no point trying to convince him anymore. You're just __________.",
+          options: [
+            "following in his footsteps",
+            "flogging a dead horse",
+            "getting cold feet",
+            "jumping on the bandwagon",
+          ],
+          answer: 1,
+          explanation:
+            "<b>flog a dead horse</b> = cố làm điều gì vô ích, cố gắng thay đổi điều không thể thay đổi.",
+        },
+
+        {
+          q: "The broken printer is a real __________ in our otherwise efficient office.",
+          options: [
+            "fly in the ointment",
+            "taste of medicine",
+            "foot in the bill",
+            "bandwagon",
+          ],
+          answer: 0,
+          explanation:
+            "<b>a fly in the ointment</b> = một vấn đề nhỏ làm hỏng một tình huống vốn đang tốt đẹp.",
+        },
+
+        {
+          q: "She decided to __________ and become a doctor, just like her mother.",
+          options: [
+            "follow in her mother's footsteps",
+            "get hold of the wrong end of the stick",
+            "put on an act",
+            "give her mother free rein",
+          ],
+          answer: 0,
+          explanation:
+            "<b>follow in someone's footsteps</b> = noi theo con đường, nghề nghiệp hoặc hành động của ai đó.",
+        },
+
+        {
+          q: "The company agreed to __________ for the entire business dinner.",
+          options: [
+            "foot the bill",
+            "get the sack",
+            "go from scratch",
+            "land on its feet",
+          ],
+          answer: 0,
+          explanation:
+            "<b>foot the bill</b> = trả hóa đơn, chi trả toàn bộ chi phí.",
+        },
+
+        {
+          q: "I knew from __________ that something was wrong with the new employee.",
+          options: [
+            "square one",
+            "the word go",
+            "time immemorial",
+            "the bandwagon",
+          ],
+          answer: 1,
+          explanation: "<b>from the word go</b> = ngay từ đầu.",
+        },
+
+        {
+          q: "We had to build the entire website __________ because the original files were lost.",
+          options: [
+            "from the word go",
+            "from scratch",
+            "from time immemorial",
+            "from the bandwagon",
+          ],
+          answer: 1,
+          explanation:
+            "<b>from scratch</b> = làm từ đầu, không dựa trên cái có sẵn.",
+        },
+
+        {
+          q: "The negotiations failed, so now we're back to __________.",
+          options: [
+            "the word go",
+            "square one",
+            "great lengths",
+            "the ointment",
+          ],
+          answer: 1,
+          explanation:
+            "<b>back to square one</b> = quay lại điểm xuất phát, phải bắt đầu lại từ đầu.",
+        },
+
+        {
+          q: "People have celebrated this festival __________.",
+          options: [
+            "from scratch",
+            "since time immemorial",
+            "from the word go",
+            "from square one",
+          ],
+          answer: 1,
+          explanation:
+            "<b>since time immemorial</b> = từ thời xa xưa, từ lâu đời.",
+        },
+
+        {
+          q: "I think you've __________. I never said I hated your idea; I just suggested changing it.",
+          options: [
+            "got cold feet",
+            "got hold of the wrong end of the stick",
+            "got the hang of it",
+            "got your act together",
+          ],
+          answer: 1,
+          explanation:
+            "<b>get hold of the wrong end of the stick</b> = hiểu sai ý hoặc hiểu nhầm tình huống.",
+        },
+
+        {
+          q: "She was excited about performing on stage, but she __________ at the last minute.",
+          options: [
+            "got cold feet",
+            "got green fingers",
+            "got the sack",
+            "got wind of it",
+          ],
+          answer: 0,
+          explanation:
+            "<b>get cold feet</b> = trở nên lo sợ hoặc mất can đảm vào phút cuối.",
+        },
+
+        {
+          q: "My grandmother has __________. Everything she plants seems to grow beautifully.",
+          options: [
+            "butterflies in her stomach",
+            "green fingers",
+            "cold feet",
+            "free rein",
+          ],
+          answer: 1,
+          explanation:
+            "<b>green fingers</b> = có khiếu làm vườn, trồng cây rất giỏi.",
+        },
+
+        {
+          q: "Don't believe Tom's tears. He's just __________ to make you feel sorry for him.",
+          options: [
+            "going through the motions",
+            "putting on an act",
+            "getting the hang of it",
+            "getting his wires crossed",
+          ],
+          answer: 1,
+          explanation:
+            "<b>put on an act</b> = giả vờ, diễn kịch để tạo ấn tượng hoặc khiến người khác tin.",
+        },
+
+        {
+          q: "He doesn't really care about the project anymore. He's just __________ until he can leave the company.",
+          options: [
+            "going through the motions",
+            "getting his teeth into it",
+            "fighting tooth and nail",
+            "landing on his feet",
+          ],
+          answer: 0,
+          explanation:
+            "<b>go through the motions</b> = làm một việc một cách máy móc, không thực sự nhiệt tình hay quan tâm.",
+        },
+
+        {
+          q: "That constant tapping sound is really __________. I can't concentrate!",
+          options: [
+            "getting on my nerves",
+            "getting the sack",
+            "going up in my head",
+            "putting on an act",
+          ],
+          answer: 0,
+          explanation:
+            "<b>get on someone's nerves</b> = làm ai đó khó chịu, bực mình.",
+        },
+
+        {
+          q: "It took me a few days to __________ using the new software.",
+          options: [
+            "get the hang of",
+            "get wind of",
+            "get the sack",
+            "get cold feet",
+          ],
+          answer: 0,
+          explanation:
+            "<b>get the hang of something</b> = học cách làm hoặc hiểu cách sử dụng một thứ gì đó.",
+        },
+
+        {
+          q: "He was caught stealing from the company and immediately __________.",
+          options: [
+            "got the hang of it",
+            "got the sack",
+            "got green fingers",
+            "got his wires crossed",
+          ],
+          answer: 1,
+          explanation: "<b>get the sack</b> = bị sa thải.",
+        },
+
+        {
+          q: "The journalists __________ the government's secret plan before it was officially announced.",
+          options: [
+            "got their act together",
+            "got wind of",
+            "got cold feet",
+            "got their teeth into",
+          ],
+          answer: 1,
+          explanation:
+            "<b>get wind of something</b> = nghe được tin tức về điều gì, biết được thông tin bí mật.",
+        },
+
+        {
+          q: "We didn't have a meeting yesterday. I think we must have __________ about the date.",
+          options: [
+            "got our wires crossed",
+            "got green fingers",
+            "got the sack",
+            "put on an act",
+          ],
+          answer: 0,
+          explanation:
+            "<b>get one's wires crossed</b> = hiểu nhầm hoặc thông tin sai lệch giữa hai người.",
+        },
+
+        {
+          q: "If we want to finish this project on time, we need to __________.",
+          options: [
+            "flog a dead horse",
+            "get our act together",
+            "go up in smoke",
+            "get cold feet",
+          ],
+          answer: 1,
+          explanation:
+            "<b>get one's act together</b> = tổ chức mọi thứ tốt hơn, trở nên có trách nhiệm và hiệu quả hơn.",
+        },
+
+        {
+          q: "The detective finally had an interesting mystery to __________.",
+          options: [
+            "get his teeth into",
+            "get his wires crossed",
+            "get the sack",
+            "put on an act",
+          ],
+          answer: 0,
+          explanation:
+            "<b>get one's teeth into something</b> = bắt tay vào một việc thú vị hoặc thử thách.",
+        },
+
+        {
+          q: "I always __________ before giving a presentation in front of a large audience.",
+          options: [
+            "get green fingers",
+            "have butterflies in my stomach",
+            "land on my feet",
+            "fit like a glove",
+          ],
+          answer: 1,
+          explanation:
+            "<b>have butterflies in one's stomach</b> = cảm thấy hồi hộp, lo lắng.",
+        },
+
+        {
+          q: "Everyone is investing in cryptocurrency, so many people are __________ without really understanding how it works.",
+          options: [
+            "jumping on the bandwagon",
+            "flogging a dead horse",
+            "fighting tooth and nail",
+            "following in someone's footsteps",
+          ],
+          answer: 0,
+          explanation:
+            "<b>jump on the bandwagon</b> = chạy theo một xu hướng phổ biến vì nhiều người khác cũng đang làm.",
+        },
+
+        {
+          q: "The baby was exhausted and __________ as soon as we put her in bed.",
+          options: [
+            "went up in smoke",
+            "went out like a light",
+            "got cold feet",
+            "fell to pieces",
+          ],
+          answer: 1,
+          explanation: "<b>go out like a light</b> = ngủ thiếp đi rất nhanh.",
+        },
+
+        {
+          q: "The rescue team __________ to find the missing child.",
+          options: [
+            "went to great lengths",
+            "went through the motions",
+            "went up in smoke",
+            "went from scratch",
+          ],
+          answer: 0,
+          explanation:
+            "<b>go to great lengths</b> = làm mọi cách, nỗ lực rất nhiều để đạt được điều gì.",
+        },
+
+        {
+          q: "His sudden promotion really __________. He started treating everyone as if they were beneath him.",
+          options: [
+            "got on his nerves",
+            "went to his head",
+            "gave him butterflies",
+            "put on an act",
+          ],
+          answer: 1,
+          explanation:
+            "<b>go to one's head</b> = khiến ai đó trở nên kiêu ngạo hoặc quá tự tin.",
+        },
+
+        {
+          q: "Our plans to travel abroad __________ when we couldn't get the necessary visas.",
+          options: [
+            "went out like a light",
+            "went up in smoke",
+            "got the hang of it",
+            "landed on our feet",
+          ],
+          answer: 1,
+          explanation:
+            "<b>go up in smoke</b> = thất bại hoàn toàn, tan thành mây khói.",
+        },
+
+        {
+          q: "He was rude to me yesterday, so today I decided to __________ by ignoring him completely.",
+          options: [
+            "give him free rein",
+            "give him a taste of his own medicine",
+            "give him the sack",
+            "give him butterflies",
+          ],
+          answer: 1,
+          explanation:
+            "<b>give someone a taste of their own medicine</b> = đối xử với ai đó theo đúng cách họ đã đối xử với mình.",
+        },
+
+        {
+          q: "The manager decided to __________ and let the creative team develop the campaign however they wanted.",
+          options: [
+            "give them free rein",
+            "give them the sack",
+            "give them cold feet",
+            "give them a taste of their own medicine",
+          ],
+          answer: 0,
+          explanation:
+            "<b>give someone free rein</b> = cho ai đó toàn quyền tự do quyết định hoặc hành động.",
+        },
+
+        {
+          q: "The charity campaign __________ its target because fewer people donated than expected.",
+          options: [
+            "fell short of",
+            "fell to pieces",
+            "went up in smoke",
+            "got the hang of",
+          ],
+          answer: 0,
+          explanation:
+            "<b>fall short of</b> = không đạt được mục tiêu hoặc kỳ vọng.",
+        },
+
+        {
+          q: "After months of preparation, the whole event __________ when the main speaker suddenly cancelled.",
+          options: [
+            "landed on its feet",
+            "fell to pieces",
+            "fit like a glove",
+            "got wind of it",
+          ],
+          answer: 1,
+          explanation: "<b>fall to pieces</b> = sụp đổ hoặc trở nên hỗn loạn.",
+        },
+
+        {
+          q: "The new employee was nervous at first, but she quickly __________ and became very productive.",
+          options: [
+            "got the hang of the job",
+            "got the sack",
+            "got cold feet",
+            "put on an act",
+          ],
+          answer: 0,
+          explanation:
+            "<b>get the hang of something</b> = dần hiểu và thành thạo cách làm một việc.",
+        },
+
+        {
+          q: "The company's plan to expand overseas __________ after investors withdrew their funding.",
+          options: [
+            "went out like a light",
+            "went up in smoke",
+            "got on everyone's nerves",
+            "landed on its feet",
+          ],
+          answer: 1,
+          explanation:
+            "<b>go up in smoke</b> = kế hoạch thất bại hoặc bị phá hỏng hoàn toàn.",
+        },
+      ];
+
+      let score = 0;
+      let answered = 0;
+
+      const quiz = document.getElementById("quiz");
+      const progressBar = document.getElementById("progressBar");
+      const progressText = document.getElementById("progressText");
+      const finalResult = document.getElementById("finalResult");
+      const finalScore = document.getElementById("finalScore");
+      const finalMessage = document.getElementById("finalMessage");
+
+      function loadQuiz() {
+        quiz.innerHTML = "";
+
+        questions.forEach((item, index) => {
+          const card = document.createElement("div");
+          card.className = "question-card";
+
+          const number = document.createElement("div");
+          number.className = "question-number";
+          number.textContent = `Question ${index + 1}`;
+
+          const question = document.createElement("div");
+          question.className = "question";
+          question.innerHTML = item.q;
+
+          const options = document.createElement("div");
+          options.className = "options";
+
+          item.options.forEach((option, optionIndex) => {
+            const button = document.createElement("button");
+
+            button.className = "option";
+
+            button.innerHTML = `<strong>${String.fromCharCode(65 + optionIndex)}.</strong> ${option}`;
+
+            button.onclick = () => {
+              if (button.disabled) return;
+
+              answered++;
+
+              const allButtons = options.querySelectorAll(".option");
+
+              allButtons.forEach((btn) => {
+                btn.disabled = true;
+              });
+
+              if (optionIndex === item.answer) {
+                button.classList.add("correct");
+
+                score++;
+
+                explanation.innerHTML = `<div class="result-icon">✅ Correct!</div>
+             ${item.explanation}`;
+              } else {
+                button.classList.add("wrong");
+
+                allButtons[item.answer].classList.add("correct");
+
+                explanation.innerHTML = `<div class="result-icon">❌ Incorrect!</div>
+             <b>Đáp án đúng:</b>
+             ${String.fromCharCode(65 + item.answer)}.
+             ${item.options[item.answer]}
+             <br><br>
+             ${item.explanation}`;
+              }
+
+              explanation.classList.add("show");
+
+              updateProgress();
+
+              if (answered === questions.length) {
+                showFinalResult();
+              }
+            };
+
+            options.appendChild(button);
+          });
+
+          const explanation = document.createElement("div");
+
+          explanation.className = "explanation";
+
+          card.appendChild(number);
+          card.appendChild(question);
+          card.appendChild(options);
+          card.appendChild(explanation);
+
+          quiz.appendChild(card);
+        });
+      }
+
+      function updateProgress() {
+        const percentage = (answered / questions.length) * 100;
+
+        progressBar.style.width = percentage + "%";
+
+        progressText.textContent = `${answered} / ${questions.length}`;
+      }
+
+      function showFinalResult() {
+        finalResult.classList.add("show");
+
+        finalScore.textContent = `${score} / ${questions.length}`;
+
+        const percentage = (score / questions.length) * 100;
+
+        if (percentage >= 90) {
+          finalMessage.textContent = "🏆 Excellent! Bạn nắm idioms cực kỳ tốt!";
+        } else if (percentage >= 75) {
+          finalMessage.textContent =
+            "🌟 Great job! Bạn có nền tảng idioms rất tốt!";
+        } else if (percentage >= 60) {
+          finalMessage.textContent =
+            "👍 Good effort! Hãy ôn lại một số idioms bạn còn nhầm nhé.";
+        } else {
+          finalMessage.textContent =
+            "📚 Keep practicing! Bạn nên ôn lại nghĩa và cách dùng của các idioms.";
+        }
+
+        setTimeout(() => {
+          finalResult.scrollIntoView({
+            behavior: "smooth",
+          });
+        }, 300);
+      }
+
+      function restartQuiz() {
+        score = 0;
+        answered = 0;
+
+        finalResult.classList.remove("show");
+
+        progressBar.style.width = "0%";
+
+        progressText.textContent = `0 / ${questions.length}`;
+
+        loadQuiz();
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+
+      loadQuiz();
+    </script>
+  </body>
+</html>
