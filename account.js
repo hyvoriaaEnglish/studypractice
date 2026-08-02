@@ -345,7 +345,7 @@ async function loadMyCourses() {
         </div>
 
         <a
-  href="trangchu2.html"
+  href="course/trangchu2.html"
   class="home-btn"
 >
   Start Learning →
@@ -364,7 +364,7 @@ async function loadMyCourses() {
         </div>
 
         <a
-          href="trangchu3.html"
+          href="course/trangchu3.html"
           class="home-btn"
         >
           Start Learning →
