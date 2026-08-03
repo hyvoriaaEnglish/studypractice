@@ -1,0 +1,1047 @@
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Part 3 - Reading</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: linear-gradient(135deg, #f5f3ff, #eef2ff, #fdf2f8);
+        color: #1f2937;
+        min-height: 100vh;
+        padding: 30px 15px;
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: auto;
+      }
+
+      /* =========================
+   HEADER
+========================= */
+
+      .header {
+        background: linear-gradient(135deg, #6d5dfc, #8b5cf6);
+        color: white;
+        border-radius: 25px;
+        padding: 35px;
+        margin-bottom: 25px;
+        box-shadow: 0 15px 35px rgba(109, 93, 252, 0.25);
+      }
+
+      .header h1 {
+        font-size: 30px;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        opacity: 0.92;
+        font-size: 16px;
+        line-height: 1.6;
+      }
+
+      /* =========================
+   INSTRUCTION
+========================= */
+
+      .instruction {
+        background: white;
+        border-radius: 18px;
+        padding: 22px;
+        margin-bottom: 25px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+        line-height: 1.7;
+      }
+
+      .instruction strong {
+        color: #6d28d9;
+      }
+
+      /* =========================
+   PROGRESS
+========================= */
+
+      .progress-box {
+        background: white;
+        padding: 20px;
+        border-radius: 18px;
+        margin-bottom: 25px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+      }
+
+      .progress-info {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        font-weight: 600;
+        color: #4f46e5;
+      }
+
+      .progress-bar {
+        height: 10px;
+        background: #e5e7eb;
+        border-radius: 20px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #6d5dfc, #a855f7);
+        transition: 0.4s;
+      }
+
+      /* =========================
+   PASSAGE
+========================= */
+
+      .passage-card {
+        background: white;
+        border-radius: 22px;
+        padding: 30px;
+        margin-bottom: 25px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+        line-height: 1.9;
+        font-size: 16px;
+      }
+
+      .passage-card h2 {
+        color: #4f46e5;
+        margin-bottom: 20px;
+      }
+
+      .passage-card p {
+        text-align: justify;
+      }
+
+      /* =========================
+   QUESTION
+========================= */
+
+      .question-card {
+        background: white;
+        border-radius: 20px;
+        padding: 25px;
+        margin-bottom: 20px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+        border: 2px solid transparent;
+        transition: 0.3s;
+      }
+
+      .question-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+      }
+
+      .question-number {
+        display: inline-block;
+        background: #ede9fe;
+        color: #6d28d9;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: bold;
+        margin-bottom: 12px;
+      }
+
+      .question {
+        font-size: 17px;
+        line-height: 1.7;
+        margin-bottom: 18px;
+        font-weight: 500;
+      }
+
+      /* =========================
+   OPTIONS
+========================= */
+
+      .options {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .option {
+        border: 2px solid #e5e7eb;
+        padding: 14px 16px;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: 0.25s;
+        background: #fafafa;
+      }
+
+      .option:hover {
+        border-color: #8b5cf6;
+        background: #f5f3ff;
+      }
+
+      .option.selected {
+        border-color: #6d5dfc;
+        background: #ede9fe;
+      }
+
+      /* CORRECT */
+
+      .option.correct {
+        border-color: #16a34a;
+        background: #dcfce7;
+        color: #166534;
+      }
+
+      /* WRONG */
+
+      .option.wrong {
+        border-color: #dc2626;
+        background: #fee2e2;
+        color: #991b1b;
+      }
+
+      /* =========================
+   FEEDBACK
+========================= */
+
+      .feedback {
+        display: none;
+        margin-top: 18px;
+        padding: 18px;
+        border-radius: 12px;
+        line-height: 1.7;
+      }
+
+      .feedback.show {
+        display: block;
+        animation: fadeIn 0.4s ease;
+      }
+
+      .feedback.correct-feedback {
+        background: #f0fdf4;
+        border-left: 5px solid #16a34a;
+        color: #166534;
+      }
+
+      .feedback.wrong-feedback {
+        background: #fef2f2;
+        border-left: 5px solid #dc2626;
+        color: #991b1b;
+      }
+
+      .feedback-title {
+        font-size: 17px;
+        font-weight: bold;
+        margin-bottom: 6px;
+      }
+
+      /* =========================
+   BUTTON
+========================= */
+
+      .button-area {
+        text-align: center;
+        margin: 35px 0;
+      }
+
+      button {
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        padding: 15px 30px;
+        border-radius: 14px;
+        transition: 0.25s;
+      }
+
+      .reset-btn {
+        background: linear-gradient(135deg, #6d5dfc, #8b5cf6);
+        color: white;
+        box-shadow: 0 8px 20px rgba(109, 93, 252, 0.3);
+      }
+
+      .reset-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 25px rgba(109, 93, 252, 0.4);
+      }
+
+      /* =========================
+   SCORE
+========================= */
+
+      .score-box {
+        display: none;
+        background: linear-gradient(135deg, #4f46e5, #9333ea);
+        color: white;
+        padding: 30px;
+        border-radius: 22px;
+        text-align: center;
+        margin-top: 25px;
+        box-shadow: 0 15px 35px rgba(79, 70, 229, 0.25);
+      }
+
+      .score-box.show {
+        display: block;
+        animation: fadeIn 0.5s ease;
+      }
+
+      .score-box h2 {
+        font-size: 30px;
+        margin-bottom: 10px;
+      }
+
+      .score-box p {
+        font-size: 18px;
+      }
+
+      /* =========================
+   ANIMATION
+========================= */
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(15px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* =========================
+   MOBILE
+========================= */
+
+      @media (max-width: 650px) {
+        body {
+          padding: 15px 10px;
+        }
+
+        .header {
+          padding: 25px 20px;
+        }
+
+        .header h1 {
+          font-size: 24px;
+        }
+
+        .passage-card {
+          padding: 20px;
+        }
+
+        .options {
+          grid-template-columns: 1fr;
+        }
+
+        .question-card {
+          padding: 20px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- =========================
+     HEADER
+========================= -->
+
+      <div class="header">
+        <h1>📖 PART 3: READING</h1>
+
+        <p>
+          Read the passage carefully and choose the best answer to complete each
+          blank.
+        </p>
+      </div>
+
+      <!-- =========================
+     INSTRUCTION
+========================= -->
+
+      <div class="instruction">
+        <strong>Instructions:</strong>
+
+        Read the following passage and decide which answer best fits each blank.
+        Choose <strong>A, B, C, or D</strong>. Click an answer to immediately
+        see whether your choice is correct and read the explanation.
+      </div>
+
+      <!-- =========================
+     PROGRESS
+========================= -->
+
+      <div class="progress-box">
+        <div class="progress-info">
+          <span>Your Progress</span>
+
+          <span id="progressText"> 0 / 10 </span>
+        </div>
+
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+
+      <!-- =========================
+     PASSAGE
+========================= -->
+
+      <div class="passage-card">
+        <h2>📚 Reading Passage</h2>
+
+        <p>
+          A recent survey of a language learning magazine has consulted a number
+          of experts in the (1) ______ of a second language acquisition. Their
+          advice may prove (2) ______ for those considering a language course.
+          One suggestion is that you (3) ______ whether you are likely to be
+          successful at learning a language or whether you enjoy studying
+          languages at school, for example. The major (4) ______ will be your
+          own time and effort. Therefore, you must be sure that the course on
+          offer leads to (5) ______ qualifications. Also, be realistic in your
+          (6) ______. If you don’t set achievable aims, you are more likely to
+          give up. Do not be deceived (7) ______ thinking that the most
+          expensive courses are the best. (8) ______ around to get the best
+          possible value for money. You should also bear in mind that the faster
+          you learn a language, the more quickly you forget it. Sandra Miller, a
+          French teacher, tried to teach herself German by enrolling on a (9)
+          ______ course. Already fluent in four languages and with a sound
+          knowledge of teaching methodology, her chances of making progress were
+          high. Three years on she remembers very little (10) ______ nothing.
+          She feels her biggest mistake was not to follow up her first
+          experience. “I should have consolidated what I’d learnt by continuing
+          to study, even if it were by myself.”
+        </p>
+      </div>
+
+      <!-- =========================
+     QUESTIONS
+========================= -->
+
+      <!-- QUESTION 1 -->
+
+      <div class="question-card" data-question="1">
+        <span class="question-number"> Question 1 </span>
+
+        <div class="question">
+          A recent survey of a language learning magazine has consulted a number
+          of experts in the ______ of a second language acquisition.
+        </div>
+
+        <div class="options">
+          <div class="option" data-answer="A">A. branch</div>
+
+          <div class="option" data-answer="B">B. field</div>
+
+          <div class="option" data-answer="C">C. section</div>
+
+          <div class="option" data-answer="D">D. part</div>
+        </div>
+
+        <div class="feedback">
+          <div class="feedback-title"></div>
+
+          <strong>Correct answer: B. field</strong>
+
+          <br /><br />
+
+          <strong>Explanation:</strong>
+
+          "The field of..." is a common collocation meaning a particular area or
+          subject of study or research. Here, "the field of second language
+          acquisition" refers to the academic area concerned with how people
+          learn a second language.
+        </div>
+      </div>
+
+      <!-- QUESTION 2 -->
+
+      <div class="question-card" data-question="2">
+        <span class="question-number"> Question 2 </span>
+
+        <div class="question">
+          Their advice may prove ______ for those considering a language course.
+        </div>
+
+        <div class="options">
+          <div class="option" data-answer="A">A. invaluable</div>
+
+          <div class="option" data-answer="B">B. valueless</div>
+
+          <div class="option" data-answer="C">C. worthless</div>
+
+          <div class="option" data-answer="D">D. invalidate</div>
+        </div>
+
+        <div class="feedback">
+          <div class="feedback-title"></div>
+
+          <strong>Correct answer: A. invaluable</strong>
+
+          <br /><br />
+
+          <strong>Explanation:</strong>
+
+          "Invaluable" means extremely useful or valuable. The experts' advice
+          is very useful for people considering taking a language course.
+
+          <br /><br />
+
+          Note that "invaluable" does NOT mean "without value". It means
+          "extremely valuable".
+        </div>
+      </div>
+
+      <!-- QUESTION 3 -->
+
+      <div class="question-card" data-question="3">
+        <span class="question-number"> Question 3 </span>
+
+        <div class="question">
+          One suggestion is that you ______ whether you are likely to be
+          successful at learning a language.
+        </div>
+
+        <div class="options">
+          <div class="option" data-answer="A">A. survey</div>
+
+          <div class="option" data-answer="B">B. review</div>
+
+          <div class="option" data-answer="C">C. balance</div>
+
+          <div class="option" data-answer="D">D. assess</div>
+        </div>
+
+        <div class="feedback">
+          <div class="feedback-title"></div>
+
+          <strong>Correct answer: D. assess</strong>
+
+          <br /><br />
+
+          <strong>Explanation:</strong>
+
+          "Assess" means to evaluate or judge something carefully. The sentence
+          advises learners to evaluate whether they are likely to succeed at
+          learning a language.
+        </div>
+      </div>
+
+      <!-- QUESTION 4 -->
+
+      <div class="question-card" data-question="4">
+        <span class="question-number"> Question 4 </span>
+
+        <div class="question">
+          The major ______ will be your own time and effort.
+        </div>
+
+        <div class="options">
+          <div class="option" data-answer="A">A. price</div>
+
+          <div class="option" data-answer="B">B. charge</div>
+
+          <div class="option" data-answer="C">C. cost</div>
+
+          <div class="option" data-answer="D">D. valuation</div>
+        </div>
+
+        <div class="feedback">
+          <div class="feedback-title"></div>
+
+          <strong>Correct answer: C. cost</strong>
+
+          <br /><br />
+
+          <strong>Explanation:</strong>
+
+          "Cost" refers to what is required or sacrificed in order to achieve
+          something. In this context, the major cost of learning a language is
+          your own time and effort.
+        </div>
+      </div>
+
+      <!-- QUESTION 5 -->
+
+      <div class="question-card" data-question="5">
+        <span class="question-number"> Question 5 </span>
+
+        <div class="question">
+          Therefore, you must be sure that the course on offer leads to ______
+          qualifications.
+        </div>
+
+        <div class="options">
+          <div class="option" data-answer="A">A. valued</div>
+
+          <div class="option" data-answer="B">B. regarded</div>
+
+          <div class="option" data-answer="C">C. understood</div>
+
+          <div class="option" data-answer="D">D. recognized</div>
+        </div>
+
+        <div class="feedback">
+          <div class="feedback-title"></div>
+
+          <strong>Correct answer: D. recognized</strong>
+
+          <br /><br />
+
+          <strong>Explanation:</strong>
+
+          "Recognized qualifications" are qualifications that are officially
+          accepted or approved by institutions or employers. The natural
+          collocation is:
+          <strong>recognized qualifications</strong>.
+        </div>
+      </div>
+
+      <!-- QUESTION 6 -->
+
+      <div class="question-card" data-question="6">
+        <span class="question-number"> Question 6 </span>
+
+        <div class="question">
+          Also, be realistic in your ______. If you don’t set achievable aims,
+          you are more likely to give up.
+        </div>
+
+        <div class="options">
+          <div class="option" data-answer="A">A. ends</div>
+
+          <div class="option" data-answer="B">B. sights</div>
+
+          <div class="option" data-answer="C">C. goals</div>
+
+          <div class="option" data-answer="D">D. objects</div>
+        </div>
+
+        <div class="feedback">
+          <div class="feedback-title"></div>
+
+          <strong>Correct answer: C. goals</strong>
+
+          <br /><br />
+
+          <strong>Explanation:</strong>
+
+          "Goals" are targets or objectives that you want to achieve. The
+          following sentence mentions "achievable aims", which has a similar
+          meaning to "goals".
+        </div>
+      </div>
+
+      <!-- QUESTION 7 -->
+
+      <div class="question-card" data-question="7">
+        <span class="question-number"> Question 7 </span>
+
+        <div class="question">
+          Do not be deceived ______ thinking that the most expensive courses are
+          the best.
+        </div>
+
+        <div class="options">
+          <div class="option" data-answer="A">A. into</div>
+
+          <div class="option" data-answer="B">B. about</div>
+
+          <div class="option" data-answer="C">C. by</div>
+
+          <div class="option" data-answer="D">D. in</div>
+        </div>
+
+        <div class="feedback">
+          <div class="feedback-title"></div>
+
+          <strong>Correct answer: A. into</strong>
+
+          <br /><br />
+
+          <strong>Explanation:</strong>
+
+          The expression "be deceived into doing something" means to be tricked
+          or persuaded into believing or doing something. Therefore:
+          <strong>be deceived into thinking</strong>.
+        </div>
+      </div>
+
+      <!-- QUESTION 8 -->
+
+      <div class="question-card" data-question="8">
+        <span class="question-number"> Question 8 </span>
+
+        <div class="question">
+          ______ around to get the best possible value for money.
+        </div>
+
+        <div class="options">
+          <div class="option" data-answer="A">A. Nose</div>
+
+          <div class="option" data-answer="B">B. Shop</div>
+
+          <div class="option" data-answer="C">C. Push</div>
+
+          <div class="option" data-answer="D">D. Run</div>
+        </div>
+
+        <div class="feedback">
+          <div class="feedback-title"></div>
+
+          <strong>Correct answer: B. Shop</strong>
+
+          <br /><br />
+
+          <strong>Explanation:</strong>
+
+          "Shop around" means to compare different products, services, or prices
+          before deciding what to buy. Here, learners should compare language
+          courses to get the best value for money.
+        </div>
+      </div>
+
+      <!-- QUESTION 9 -->
+
+      <div class="question-card" data-question="9">
+        <span class="question-number"> Question 9 </span>
+
+        <div class="question">
+          Sandra Miller tried to teach herself German by enrolling on a ______
+          course.
+        </div>
+
+        <div class="options">
+          <div class="option" data-answer="A">A. rapid</div>
+
+          <div class="option" data-answer="B">B. quick</div>
+
+          <div class="option" data-answer="C">C. fast</div>
+
+          <div class="option" data-answer="D">D. crash</div>
+        </div>
+
+        <div class="feedback">
+          <div class="feedback-title"></div>
+
+          <strong>Correct answer: D. crash</strong>
+
+          <br /><br />
+
+          <strong>Explanation:</strong>
+
+          A "crash course" is an intensive course that teaches a subject in a
+          very short period of time. The passage previously says: "the faster
+          you learn a language, the more quickly you forget it", which supports
+          the idea of a
+          <strong>crash course</strong>.
+        </div>
+      </div>
+
+      <!-- QUESTION 10 -->
+
+      <div class="question-card" data-question="10">
+        <span class="question-number"> Question 10 </span>
+
+        <div class="question">
+          Three years on she remembers very little ______ nothing.
+        </div>
+
+        <div class="options">
+          <div class="option" data-answer="A">A. and</div>
+
+          <div class="option" data-answer="B">B. or</div>
+
+          <div class="option" data-answer="C">C. nor</div>
+
+          <div class="option" data-answer="D">D. for</div>
+        </div>
+
+        <div class="feedback">
+          <div class="feedback-title"></div>
+
+          <strong>Correct answer: B. or</strong>
+
+          <br /><br />
+
+          <strong>Explanation:</strong>
+
+          The expression "little or nothing" means almost nothing. Therefore:
+          <strong>she remembers very little or nothing.</strong>
+        </div>
+      </div>
+
+      <!-- =========================
+     BUTTON
+========================= -->
+
+      <div class="button-area">
+        <button class="reset-btn" onclick="resetTest()">🔄 Reset Test</button>
+      </div>
+
+      <!-- =========================
+     SCORE
+========================= -->
+
+      <div class="score-box" id="scoreBox">
+        <h2 id="scoreTitle">🎉 Test Complete!</h2>
+
+        <p id="scoreText"></p>
+      </div>
+    </div>
+
+    <script>
+      /* =====================================
+   CORRECT ANSWERS
+===================================== */
+
+      const correctAnswers = {
+        1: "B",
+
+        2: "A",
+
+        3: "D",
+
+        4: "C",
+
+        5: "D",
+
+        6: "C",
+
+        7: "A",
+
+        8: "B",
+
+        9: "D",
+
+        10: "B",
+      };
+
+      /* =====================================
+   TRACK ANSWERS
+===================================== */
+
+      let answeredQuestions = new Set();
+
+      /* =====================================
+   ADD CLICK EVENT
+===================================== */
+
+      document.querySelectorAll(".question-card").forEach((card) => {
+        const questionNumber = card.dataset.question;
+
+        const options = card.querySelectorAll(".option");
+
+        const feedback = card.querySelector(".feedback");
+
+        const feedbackTitle = card.querySelector(".feedback-title");
+
+        options.forEach((option) => {
+          option.addEventListener("click", function () {
+            /* Prevent changing answer */
+
+            if (answeredQuestions.has(questionNumber)) {
+              return;
+            }
+
+            const selectedAnswer = this.dataset.answer;
+
+            const correctAnswer = correctAnswers[questionNumber];
+
+            /* Mark question answered */
+
+            answeredQuestions.add(questionNumber);
+
+            /* Show correct answer */
+
+            options.forEach((opt) => {
+              if (opt.dataset.answer === correctAnswer) {
+                opt.classList.add("correct");
+              }
+            });
+
+            /* Correct */
+
+            if (selectedAnswer === correctAnswer) {
+              this.classList.add("correct");
+
+              feedbackTitle.textContent = "✅ Correct!";
+
+              feedback.classList.add("show", "correct-feedback");
+            } else {
+
+            /* Wrong */
+              this.classList.add("wrong");
+
+              feedbackTitle.textContent = "❌ Incorrect!";
+
+              feedback.classList.add("show", "wrong-feedback");
+            }
+
+            /* Update progress */
+
+            updateProgress();
+
+            /* Check if completed */
+
+            if (answeredQuestions.size === 10) {
+              showFinalScore();
+            }
+          });
+        });
+      });
+
+      /* =====================================
+   UPDATE PROGRESS
+===================================== */
+
+      function updateProgress() {
+        const answered = answeredQuestions.size;
+
+        const total = 10;
+
+        const percentage = (answered / total) * 100;
+
+        document.getElementById("progressText").textContent =
+          `${answered} / ${total}`;
+
+        document.getElementById("progressFill").style.width = percentage + "%";
+      }
+
+      /* =====================================
+   CALCULATE SCORE
+===================================== */
+
+      function calculateScore() {
+        let score = 0;
+
+        document.querySelectorAll(".question-card").forEach((card) => {
+          const questionNumber = card.dataset.question;
+
+          const selected = card.querySelector(".option.selected");
+
+          /*
+
+        Because the selected option
+        is not automatically given
+        the selected class in the
+        main logic, find the option
+        that has correct/wrong class.
+
+        */
+
+          const chosen = card.querySelector(
+            ".option.correct:not(.wrong), .option.wrong",
+          );
+
+          if (
+            chosen &&
+            chosen.dataset.answer === correctAnswers[questionNumber]
+          ) {
+            score++;
+          }
+        });
+
+        return score;
+      }
+
+      /* =====================================
+   SHOW FINAL SCORE
+===================================== */
+
+      function showFinalScore() {
+        let score = 0;
+
+        document.querySelectorAll(".question-card").forEach((card) => {
+          const questionNumber = card.dataset.question;
+
+          const wrong = card.querySelector(".option.wrong");
+
+          if (!wrong) {
+            score++;
+          }
+        });
+
+        const scoreBox = document.getElementById("scoreBox");
+
+        const scoreTitle = document.getElementById("scoreTitle");
+
+        const scoreText = document.getElementById("scoreText");
+
+        scoreBox.classList.add("show");
+
+        scoreText.textContent = `You got ${score} / 10 correct.`;
+
+        if (score === 10) {
+          scoreTitle.textContent = "🏆 Perfect Score!";
+        } else if (score >= 8) {
+          scoreTitle.textContent = "🌟 Excellent Work!";
+        } else if (score >= 6) {
+          scoreTitle.textContent = "👏 Good Job!";
+        } else {
+          scoreTitle.textContent = "💪 Keep Practicing!";
+        }
+      }
+
+      /* =====================================
+   RESET TEST
+===================================== */
+
+      function resetTest() {
+        /* Clear answered questions */
+
+        answeredQuestions.clear();
+
+        /* Remove option styles */
+
+        document.querySelectorAll(".option").forEach((option) => {
+          option.classList.remove("selected", "correct", "wrong");
+        });
+
+        /* Hide feedback */
+
+        document.querySelectorAll(".feedback").forEach((feedback) => {
+          feedback.classList.remove(
+            "show",
+            "correct-feedback",
+            "wrong-feedback",
+          );
+        });
+
+        /* Clear feedback titles */
+
+        document.querySelectorAll(".feedback-title").forEach((title) => {
+          title.textContent = "";
+        });
+
+        /* Hide score */
+
+        document.getElementById("scoreBox").classList.remove("show");
+
+        /* Reset progress */
+
+        document.getElementById("progressText").textContent = "0 / 10";
+
+        document.getElementById("progressFill").style.width = "0%";
+
+        /* Scroll to top */
+
+        window.scrollTo({
+          top: 0,
+
+          behavior: "smooth",
+        });
+      }
+    </script>
+  </body>
+</html>
+```

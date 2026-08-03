@@ -1,0 +1,1008 @@
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Part 2 - Vocabulary Test</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: linear-gradient(135deg, #f5f3ff, #eef2ff, #fdf2f8);
+        color: #1f2937;
+        min-height: 100vh;
+        padding: 30px 15px;
+      }
+
+      .container {
+        max-width: 950px;
+        margin: auto;
+      }
+
+      /* HEADER */
+      .header {
+        background: linear-gradient(135deg, #6d5dfc, #8b5cf6);
+        color: white;
+        border-radius: 25px;
+        padding: 35px;
+        margin-bottom: 25px;
+        box-shadow: 0 15px 35px rgba(109, 93, 252, 0.25);
+      }
+
+      .header h1 {
+        font-size: 30px;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        opacity: 0.9;
+        font-size: 16px;
+      }
+
+      /* PROGRESS */
+      .progress-box {
+        background: white;
+        padding: 20px;
+        border-radius: 18px;
+        margin-bottom: 25px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+      }
+
+      .progress-info {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        font-weight: 600;
+        color: #4f46e5;
+      }
+
+      .progress-bar {
+        height: 10px;
+        background: #e5e7eb;
+        border-radius: 20px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #6d5dfc, #a855f7);
+        transition: 0.4s;
+      }
+
+      /* SECTION */
+      .section-title {
+        margin: 35px 0 18px;
+        font-size: 22px;
+        color: #4f46e5;
+      }
+
+      /* QUESTION CARD */
+      .question-card {
+        background: white;
+        border-radius: 20px;
+        padding: 25px;
+        margin-bottom: 20px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+        border: 2px solid transparent;
+        transition: 0.3s;
+      }
+
+      .question-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+      }
+
+      .question-number {
+        display: inline-block;
+        background: #ede9fe;
+        color: #6d28d9;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: bold;
+        margin-bottom: 12px;
+      }
+
+      .question {
+        font-size: 17px;
+        line-height: 1.7;
+        margin-bottom: 18px;
+        font-weight: 500;
+      }
+
+      .options {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .option {
+        border: 2px solid #e5e7eb;
+        padding: 14px 16px;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: 0.25s;
+        background: #fafafa;
+      }
+
+      .option:hover {
+        border-color: #8b5cf6;
+        background: #f5f3ff;
+      }
+
+      .option.selected {
+        border-color: #6d5dfc;
+        background: #ede9fe;
+      }
+
+      .option.correct {
+        border-color: #16a34a;
+        background: #dcfce7;
+        color: #166534;
+      }
+
+      .option.wrong {
+        border-color: #dc2626;
+        background: #fee2e2;
+        color: #991b1b;
+      }
+
+      .feedback {
+        display: none;
+        margin-top: 18px;
+        padding: 16px;
+        border-radius: 12px;
+        line-height: 1.6;
+      }
+
+      .feedback.show {
+        display: block;
+      }
+
+      .feedback.correct-feedback {
+        background: #f0fdf4;
+        border-left: 5px solid #16a34a;
+        color: #166534;
+      }
+
+      .feedback.wrong-feedback {
+        background: #fef2f2;
+        border-left: 5px solid #dc2626;
+        color: #991b1b;
+      }
+
+      /* WORD FORM */
+      .word-input {
+        width: 100%;
+        padding: 14px;
+        border: 2px solid #e5e7eb;
+        border-radius: 12px;
+        font-size: 16px;
+        outline: none;
+        transition: 0.2s;
+      }
+
+      .word-input:focus {
+        border-color: #6d5dfc;
+        box-shadow: 0 0 0 4px #ede9fe;
+      }
+
+      .word-input.correct-input {
+        border-color: #16a34a;
+        background: #f0fdf4;
+      }
+
+      .word-input.wrong-input {
+        border-color: #dc2626;
+        background: #fef2f2;
+      }
+
+      .word-feedback {
+        display: none;
+        margin-top: 12px;
+        padding: 12px;
+        border-radius: 10px;
+        line-height: 1.5;
+      }
+
+      .word-feedback.show {
+        display: block;
+      }
+
+      /* BUTTON */
+      .button-area {
+        text-align: center;
+        margin: 35px 0;
+      }
+
+      button {
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        padding: 15px 30px;
+        border-radius: 14px;
+        transition: 0.25s;
+      }
+
+      .check-btn {
+        background: linear-gradient(135deg, #6d5dfc, #8b5cf6);
+        color: white;
+        box-shadow: 0 8px 20px rgba(109, 93, 252, 0.3);
+      }
+
+      .check-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 25px rgba(109, 93, 252, 0.4);
+      }
+
+      .reset-btn {
+        background: #f3f4f6;
+        color: #374151;
+        margin-left: 10px;
+      }
+
+      .reset-btn:hover {
+        background: #e5e7eb;
+      }
+
+      /* SCORE */
+      .score-box {
+        display: none;
+        background: linear-gradient(135deg, #4f46e5, #9333ea);
+        color: white;
+        padding: 30px;
+        border-radius: 22px;
+        text-align: center;
+        margin-top: 25px;
+        box-shadow: 0 15px 35px rgba(79, 70, 229, 0.25);
+      }
+
+      .score-box.show {
+        display: block;
+        animation: fadeIn 0.5s ease;
+      }
+
+      .score-box h2 {
+        font-size: 28px;
+        margin-bottom: 10px;
+      }
+
+      .score-box p {
+        font-size: 18px;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(15px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 650px) {
+        body {
+          padding: 15px 10px;
+        }
+
+        .header {
+          padding: 25px 20px;
+        }
+
+        .header h1 {
+          font-size: 24px;
+        }
+
+        .options {
+          grid-template-columns: 1fr;
+        }
+
+        .question-card {
+          padding: 20px;
+        }
+
+        .reset-btn {
+          margin-left: 0;
+          margin-top: 10px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- HEADER -->
+      <div class="header">
+        <h1>📚 PART 2: VOCABULARY</h1>
+        <p>Choose the best answer and complete the word formation exercises.</p>
+      </div>
+
+      <!-- PROGRESS -->
+      <div class="progress-box">
+        <div class="progress-info">
+          <span>Your Progress</span>
+          <span id="progressText">0 / 15</span>
+        </div>
+
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+
+      <!-- PART I -->
+      <h2 class="section-title">I. Choose the best option</h2>
+
+      <!-- Q1 -->
+      <div class="question-card" data-question="1">
+        <span class="question-number">Question 1</span>
+
+        <div class="question">
+          Thanks to her teacher’s encouragement, she has made great ______ in
+          her study.
+        </div>
+
+        <div class="options">
+          <div class="option" data-answer="A">A. impacts</div>
+
+          <div class="option" data-answer="B">B. acquisitions</div>
+
+          <div class="option" data-answer="C">C. contributions</div>
+
+          <div class="option" data-answer="D">D. strides</div>
+        </div>
+
+        <div class="feedback">
+          <strong>Explanation:</strong>
+          "Make great strides" means to make significant progress or
+          improvement. Therefore, the correct answer is
+          <strong>D. strides</strong>.
+        </div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="question-card" data-question="2">
+        <span class="question-number">Question 2</span>
+
+        <div class="question">
+          According to the scheme of the publishing house, the new teenager
+          magazine ______ next week.
+        </div>
+
+        <div class="options">
+          <div class="option" data-answer="A">A. hits the decks</div>
+
+          <div class="option" data-answer="B">B. hits the streets</div>
+
+          <div class="option" data-answer="C">C. hits the spots</div>
+
+          <div class="option" data-answer="D">D. hits the buffers</div>
+        </div>
+
+        <div class="feedback">
+          <strong>Explanation:</strong>
+          "Hit the streets" means to become available for purchase or
+          distribution, especially when talking about a new newspaper, magazine,
+          or product. Therefore, the correct answer is
+          <strong>B. hits the streets</strong>.
+        </div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="question-card" data-question="3">
+        <span class="question-number">Question 3</span>
+
+        <div class="question">
+          After the crash, the truck driver was ______ on a charge of drunken
+          driving.
+        </div>
+
+        <div class="options">
+          <div class="option" data-answer="A">A. brought up</div>
+
+          <div class="option" data-answer="B">B. brought out</div>
+
+          <div class="option" data-answer="C">C. brought about</div>
+
+          <div class="option" data-answer="D">D. brought back</div>
+        </div>
+
+        <div class="feedback">
+          <strong>Explanation:</strong>
+          "Bring somebody up on a charge" means to officially accuse someone of
+          a crime or offense. The intended answer is
+          <strong>A. brought up</strong>.
+        </div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="question-card" data-question="4">
+        <span class="question-number">Question 4</span>
+
+        <div class="question">
+          In a consumer society, it is easier to purchase inexpensive items;
+          nonetheless, buying a cheap thing may be a/an ______ economy.
+        </div>
+
+        <div class="options">
+          <div class="option" data-answer="A">A. false</div>
+
+          <div class="option" data-answer="B">B. artificial</div>
+
+          <div class="option" data-answer="C">C. fake</div>
+
+          <div class="option" data-answer="D">D. unreal</div>
+        </div>
+
+        <div class="feedback">
+          <strong>Explanation:</strong>
+          "False economy" refers to something that seems cheap initially but
+          actually costs more in the long run. Therefore, the correct answer is
+          <strong>A. false</strong>.
+        </div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="question-card" data-question="5">
+        <span class="question-number">Question 5</span>
+
+        <div class="question">
+          The local celebrities joined hands to ______ a fund-raising campaign
+          for charity.
+        </div>
+
+        <div class="options">
+          <div class="option" data-answer="A">A. aim</div>
+
+          <div class="option" data-answer="B">B. call</div>
+
+          <div class="option" data-answer="C">C. pose</div>
+
+          <div class="option" data-answer="D">D. mount</div>
+        </div>
+
+        <div class="feedback">
+          <strong>Explanation:</strong>
+          "Mount a campaign" means to organize and carry out a campaign.
+          Therefore, the correct answer is <strong>D. mount</strong>.
+        </div>
+      </div>
+
+      <!-- Q6 -->
+      <div class="question-card" data-question="6">
+        <span class="question-number">Question 6</span>
+
+        <div class="question">
+          Maria’s natural talent for public speaking allowed her to steal the
+          ______ and win over the audience.
+        </div>
+
+        <div class="options">
+          <div class="option" data-answer="A">A. flashlight</div>
+
+          <div class="option" data-answer="B">B. greenlight</div>
+
+          <div class="option" data-answer="C">C. limelight</div>
+
+          <div class="option" data-answer="D">D. headlight</div>
+        </div>
+
+        <div class="feedback">
+          <strong>Explanation:</strong>
+          "Steal the limelight" means to attract attention and become the center
+          of attention. Therefore, the correct answer is
+          <strong>C. limelight</strong>.
+        </div>
+      </div>
+
+      <!-- Q7 -->
+      <div class="question-card" data-question="7">
+        <span class="question-number">Question 7</span>
+
+        <div class="question">
+          Going on a roller coaster ride for the first ______ made him
+          experience motion ______.
+        </div>
+
+        <div class="options">
+          <div class="option" data-answer="A">A. illness</div>
+
+          <div class="option" data-answer="B">B. weakness</div>
+
+          <div class="option" data-answer="C">C. tiredness</div>
+
+          <div class="option" data-answer="D">D. sickness</div>
+        </div>
+
+        <div class="feedback">
+          <strong>Explanation:</strong>
+          The natural expression is "motion sickness", which is the feeling of
+          nausea caused by movement. The intended answer is
+          <strong>D. sickness</strong>.
+        </div>
+      </div>
+
+      <!-- Q8 -->
+      <div class="question-card" data-question="8">
+        <span class="question-number">Question 8</span>
+
+        <div class="question">
+          After the leader’s suggestions, all members said nothing, and she was
+          the first one to ______ the silence in the discussion.
+        </div>
+
+        <div class="options">
+          <div class="option" data-answer="A">A. stop</div>
+
+          <div class="option" data-answer="B">B. drop</div>
+
+          <div class="option" data-answer="C">C. break</div>
+
+          <div class="option" data-answer="D">D. pause</div>
+        </div>
+
+        <div class="feedback">
+          <strong>Explanation:</strong>
+          "Break the silence" means to speak or make a sound after a period of
+          silence. Therefore, the correct answer is
+          <strong>C. break</strong>.
+        </div>
+      </div>
+
+      <!-- Q9 -->
+      <div class="question-card" data-question="9">
+        <span class="question-number">Question 9</span>
+
+        <div class="question">
+          They had to use candles when the light suddenly ______ during the
+          dinner.
+        </div>
+
+        <div class="options">
+          <div class="option" data-answer="A">A. switched off</div>
+
+          <div class="option" data-answer="B">B. went out</div>
+
+          <div class="option" data-answer="C">C. cut off</div>
+
+          <div class="option" data-answer="D">D. put out</div>
+        </div>
+
+        <div class="feedback">
+          <strong>Explanation:</strong>
+          "The light went out" means the light stopped working or stopped
+          shining. Therefore, the correct answer is
+          <strong>B. went out</strong>.
+        </div>
+      </div>
+
+      <!-- Q10 -->
+      <div class="question-card" data-question="10">
+        <span class="question-number">Question 10</span>
+
+        <div class="question">
+          She couldn’t help but ______ her breath away as she witnessed the
+          spectacular view from the top of Mua Cave.
+        </div>
+
+        <div class="options">
+          <div class="option" data-answer="A">A. bring</div>
+
+          <div class="option" data-answer="B">B. take</div>
+
+          <div class="option" data-answer="C">C. give</div>
+
+          <div class="option" data-answer="D">D. get</div>
+        </div>
+
+        <div class="feedback">
+          <strong>Explanation:</strong>
+          The expression "take one's breath away" means to make someone
+          extremely impressed or amazed. Therefore, the correct answer is
+          <strong>B. take</strong>.
+        </div>
+      </div>
+
+      <!-- PART II -->
+      <h2 class="section-title">II. Word Formation</h2>
+
+      <!-- WORD 1 -->
+      <div class="question-card word-card">
+        <span class="question-number">Question 1</span>
+
+        <div class="question">
+          Until the twentieth century most scientists argued that dream was
+          nothing but a random jumble of completely
+          <strong>(COMPREHEND)</strong> images remaining from the sensory
+          accumulation of our daily lives.
+        </div>
+
+        <input
+          type="text"
+          class="word-input"
+          data-answer="incomprehensible"
+          placeholder="Type your answer here..."
+        />
+
+        <div class="word-feedback">
+          <strong>Answer:</strong> INCOMPREHENSIBLE
+          <br />
+          <strong>Explanation:</strong>
+          The meaning is "impossible to understand", so the negative adjective
+          <strong>incomprehensible</strong> is needed.
+        </div>
+      </div>
+
+      <!-- WORD 2 -->
+      <div class="question-card word-card">
+        <span class="question-number">Question 2</span>
+
+        <div class="question">
+          Since the idea that dreams are meaningful in their own way became
+          popular, psychologists have proposed
+          <strong>(COUNT)</strong> theories to explain the logic of dreams.
+        </div>
+
+        <input
+          type="text"
+          class="word-input"
+          data-answer="countless"
+          placeholder="Type your answer here..."
+        />
+
+        <div class="word-feedback">
+          <strong>Answer:</strong> COUNTLESS
+          <br />
+          <strong>Explanation:</strong>
+          "Countless" means too many to be counted, which fits the context.
+        </div>
+      </div>
+
+      <!-- WORD 3 -->
+      <div class="question-card word-card">
+        <span class="question-number">Question 3</span>
+
+        <div class="question">
+          A dream can be a response to events in the outside world, or it can
+          <strong>(ORIGIN)</strong> within, expressing aspects of the dreamer’s
+          deep-seated feelings.
+        </div>
+
+        <input
+          type="text"
+          class="word-input"
+          data-answer="originate"
+          placeholder="Type your answer here..."
+        />
+
+        <div class="word-feedback">
+          <strong>Answer:</strong> ORIGINATE
+          <br />
+          <strong>Explanation:</strong>
+          After "can", we need the base form of the verb:
+          <strong>originate</strong>.
+        </div>
+      </div>
+
+      <!-- WORD 4 -->
+      <div class="question-card word-card">
+        <span class="question-number">Question 4</span>
+
+        <div class="question">
+          The language of dreams can warp time, bringing together historical and
+          contemporary figures. It can mix the familiar with the
+          <strong>(KNOW)</strong>.
+        </div>
+
+        <input
+          type="text"
+          class="word-input"
+          data-answer="unknown"
+          placeholder="Type your answer here..."
+        />
+
+        <div class="word-feedback">
+          <strong>Answer:</strong> UNKNOWN
+          <br />
+          <strong>Explanation:</strong>
+          The opposite of "familiar" is "unknown", meaning not known or
+          recognized.
+        </div>
+      </div>
+
+      <!-- WORD 5 -->
+      <div class="question-card word-card">
+        <span class="question-number">Question 5</span>
+
+        <div class="question">
+          People or animals may fly or inanimate things may move
+          <strong>(DEPEND)</strong> and talk.
+        </div>
+
+        <input
+          type="text"
+          class="word-input"
+          data-answer="independently"
+          placeholder="Type your answer here..."
+        />
+
+        <div class="word-feedback">
+          <strong>Answer:</strong> INDEPENDENTLY
+          <br />
+          <strong>Explanation:</strong>
+          We need an adverb modifying the verb "move". The correct form is
+          <strong>independently</strong>.
+        </div>
+      </div>
+
+      <!-- BUTTONS -->
+      <div class="button-area">
+        <button class="check-btn" onclick="checkWordFormation()">
+          ✅ Check Word Formation
+        </button>
+
+        <button class="reset-btn" onclick="resetTest()">🔄 Reset Test</button>
+      </div>
+
+      <!-- SCORE -->
+      <div class="score-box" id="scoreBox">
+        <h2 id="scoreTitle">🎉 Great Job!</h2>
+        <p id="scoreText"></p>
+      </div>
+    </div>
+
+    <script>
+      const correctAnswers = {
+        1: "D",
+        2: "B",
+        3: "A",
+        4: "A",
+        5: "D",
+        6: "C",
+        7: "D",
+        8: "C",
+        9: "B",
+        10: "B",
+      };
+
+      let answeredQuestions = new Set();
+      let wordFormationScore = 0;
+
+      /* ==============================
+   MULTIPLE CHOICE
+================================ */
+
+      document
+        .querySelectorAll(".question-card[data-question]")
+        .forEach((card) => {
+          const questionNumber = card.dataset.question;
+          const options = card.querySelectorAll(".option");
+          const feedback = card.querySelector(".feedback");
+
+          options.forEach((option) => {
+            option.addEventListener("click", function () {
+              // Prevent changing answer after selection
+              if (answeredQuestions.has(questionNumber)) {
+                return;
+              }
+
+              const selectedAnswer = this.dataset.answer;
+              const correctAnswer = correctAnswers[questionNumber];
+
+              answeredQuestions.add(questionNumber);
+
+              // Mark selected option
+              this.classList.add("selected");
+
+              // Show correct answer
+              options.forEach((opt) => {
+                if (opt.dataset.answer === correctAnswer) {
+                  opt.classList.add("correct");
+                }
+              });
+
+              // Check answer
+              if (selectedAnswer === correctAnswer) {
+                this.classList.add("correct");
+
+                feedback.classList.add("show", "correct-feedback");
+              } else {
+                this.classList.add("wrong");
+
+                feedback.classList.add("show", "wrong-feedback");
+              }
+
+              updateProgress();
+            });
+          });
+        });
+
+      /* ==============================
+   WORD FORMATION
+================================ */
+
+      function checkWordFormation() {
+        const inputs = document.querySelectorAll(".word-input");
+
+        wordFormationScore = 0;
+
+        inputs.forEach((input) => {
+          const userAnswer = input.value.trim().toLowerCase();
+
+          const correctAnswer = input.dataset.answer.toLowerCase();
+
+          const feedback = input.nextElementSibling;
+
+          input.classList.remove("correct-input", "wrong-input");
+
+          feedback.classList.remove("show");
+
+          if (userAnswer === correctAnswer) {
+            input.classList.add("correct-input");
+
+            wordFormationScore++;
+
+            feedback.style.background = "#f0fdf4";
+            feedback.style.color = "#166534";
+          } else {
+            input.classList.add("wrong-input");
+
+            feedback.style.background = "#fef2f2";
+            feedback.style.color = "#991b1b";
+          }
+
+          feedback.classList.add("show");
+        });
+
+        showScore();
+      }
+
+      /* ==============================
+   PROGRESS
+================================ */
+
+      function updateProgress() {
+        const multipleChoiceAnswered = answeredQuestions.size;
+
+        const wordInputs = document.querySelectorAll(".word-input");
+
+        let wordAnswered = 0;
+
+        wordInputs.forEach((input) => {
+          if (input.value.trim() !== "") {
+            wordAnswered++;
+          }
+        });
+
+        const totalAnswered = multipleChoiceAnswered + wordAnswered;
+
+        const totalQuestions = 15;
+
+        const percentage = (totalAnswered / totalQuestions) * 100;
+
+        document.getElementById("progressText").textContent =
+          `${totalAnswered} / ${totalQuestions}`;
+
+        document.getElementById("progressFill").style.width = percentage + "%";
+      }
+
+      /* ==============================
+   SCORE
+================================ */
+
+      function showScore() {
+        const mcScore = calculateMultipleChoiceScore();
+
+        const totalScore = mcScore + wordFormationScore;
+
+        const scoreBox = document.getElementById("scoreBox");
+
+        const scoreText = document.getElementById("scoreText");
+
+        const scoreTitle = document.getElementById("scoreTitle");
+
+        scoreBox.classList.add("show");
+
+        scoreText.textContent = `You got ${totalScore} / 15 correct. 
+        Multiple Choice: ${mcScore}/10 
+        | Word Formation: ${wordFormationScore}/5`;
+
+        if (totalScore === 15) {
+          scoreTitle.textContent = "🏆 Perfect Score!";
+        } else if (totalScore >= 12) {
+          scoreTitle.textContent = "🌟 Excellent Work!";
+        } else if (totalScore >= 9) {
+          scoreTitle.textContent = "👏 Good Job!";
+        } else {
+          scoreTitle.textContent = "💪 Keep Practicing!";
+        }
+      }
+
+      /* ==============================
+   CALCULATE MC SCORE
+================================ */
+
+      function calculateMultipleChoiceScore() {
+        let score = 0;
+
+        document
+          .querySelectorAll(".question-card[data-question]")
+          .forEach((card) => {
+            const questionNumber = card.dataset.question;
+
+            const selected = card.querySelector(".option.selected");
+
+            if (
+              selected &&
+              selected.dataset.answer === correctAnswers[questionNumber]
+            ) {
+              score++;
+            }
+          });
+
+        return score;
+      }
+
+      /* ==============================
+   RESET
+================================ */
+
+      function resetTest() {
+        answeredQuestions.clear();
+
+        wordFormationScore = 0;
+
+        document.querySelectorAll(".option").forEach((option) => {
+          option.classList.remove("selected", "correct", "wrong");
+        });
+
+        document.querySelectorAll(".feedback").forEach((feedback) => {
+          feedback.classList.remove(
+            "show",
+            "correct-feedback",
+            "wrong-feedback",
+          );
+        });
+
+        document.querySelectorAll(".word-input").forEach((input) => {
+          input.value = "";
+
+          input.classList.remove("correct-input", "wrong-input");
+        });
+
+        document.querySelectorAll(".word-feedback").forEach((feedback) => {
+          feedback.classList.remove("show");
+        });
+
+        document.getElementById("scoreBox").classList.remove("show");
+
+        document.getElementById("progressText").textContent = "0 / 15";
+
+        document.getElementById("progressFill").style.width = "0%";
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+
+      /* Update progress when typing */
+
+      document.querySelectorAll(".word-input").forEach((input) => {
+        input.addEventListener("input", updateProgress);
+      });
+    </script>
+  </body>
+</html>
+```

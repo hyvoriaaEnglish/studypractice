@@ -1,0 +1,1312 @@
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>English Test - Part 1 & Part 2</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: linear-gradient(135deg, #f5f3ff, #eef2ff, #fdf2f8);
+        color: #1f2937;
+        min-height: 100vh;
+        padding: 30px 15px;
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: auto;
+      }
+
+      /* =========================
+   HEADER
+========================= */
+
+      .header {
+        background: linear-gradient(135deg, #6d5dfc, #8b5cf6);
+        color: white;
+        border-radius: 25px;
+        padding: 35px;
+        margin-bottom: 25px;
+        box-shadow: 0 15px 35px rgba(109, 93, 252, 0.25);
+      }
+
+      .header h1 {
+        font-size: 30px;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        opacity: 0.92;
+        font-size: 16px;
+      }
+
+      /* =========================
+   INSTRUCTION
+========================= */
+
+      .instruction {
+        background: white;
+        border-radius: 18px;
+        padding: 22px;
+        margin-bottom: 25px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+        line-height: 1.7;
+      }
+
+      .instruction strong {
+        color: #6d28d9;
+      }
+
+      /* =========================
+   PROGRESS
+========================= */
+
+      .progress-box {
+        background: white;
+        padding: 20px;
+        border-radius: 18px;
+        margin-bottom: 30px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+      }
+
+      .progress-info {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        font-weight: 600;
+        color: #4f46e5;
+      }
+
+      .progress-bar {
+        height: 10px;
+        background: #e5e7eb;
+        border-radius: 20px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #6d5dfc, #a855f7);
+        transition: 0.4s;
+      }
+
+      /* =========================
+   SECTION TITLE
+========================= */
+
+      .section-title {
+        color: #4f46e5;
+        font-size: 23px;
+        margin: 35px 0 20px;
+      }
+
+      /* =========================
+   QUESTION CARD
+========================= */
+
+      .question-card {
+        background: white;
+        border-radius: 20px;
+        padding: 25px;
+        margin-bottom: 20px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+        transition: 0.3s;
+      }
+
+      .question-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+      }
+
+      .question-number {
+        display: inline-block;
+        background: #ede9fe;
+        color: #6d28d9;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: bold;
+        margin-bottom: 12px;
+      }
+
+      .question {
+        font-size: 17px;
+        line-height: 1.7;
+        margin-bottom: 18px;
+        font-weight: 500;
+      }
+
+      /* =========================
+   OPTIONS
+========================= */
+
+      .options {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .option {
+        border: 2px solid #e5e7eb;
+        padding: 14px 16px;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: 0.25s;
+        background: #fafafa;
+      }
+
+      .option:hover {
+        border-color: #8b5cf6;
+        background: #f5f3ff;
+      }
+
+      .option.correct {
+        border-color: #16a34a;
+        background: #dcfce7;
+        color: #166534;
+      }
+
+      .option.wrong {
+        border-color: #dc2626;
+        background: #fee2e2;
+        color: #991b1b;
+      }
+
+      /* =========================
+   FEEDBACK
+========================= */
+
+      .feedback {
+        display: none;
+        margin-top: 18px;
+        padding: 18px;
+        border-radius: 12px;
+        line-height: 1.7;
+      }
+
+      .feedback.show {
+        display: block;
+        animation: fadeIn 0.4s ease;
+      }
+
+      .feedback.correct-feedback {
+        background: #f0fdf4;
+        border-left: 5px solid #16a34a;
+        color: #166534;
+      }
+
+      .feedback.wrong-feedback {
+        background: #fef2f2;
+        border-left: 5px solid #dc2626;
+        color: #991b1b;
+      }
+
+      .feedback-title {
+        font-size: 17px;
+        font-weight: bold;
+        margin-bottom: 8px;
+      }
+
+      /* =========================
+   WORD FORMATION
+========================= */
+
+      .word-input {
+        width: 100%;
+        padding: 14px;
+        border: 2px solid #e5e7eb;
+        border-radius: 12px;
+        font-size: 16px;
+        outline: none;
+        transition: 0.2s;
+      }
+
+      .word-input:focus {
+        border-color: #6d5dfc;
+        box-shadow: 0 0 0 4px #ede9fe;
+      }
+
+      .word-input.correct-input {
+        border-color: #16a34a;
+        background: #f0fdf4;
+      }
+
+      .word-input.wrong-input {
+        border-color: #dc2626;
+        background: #fef2f2;
+      }
+
+      .word-feedback {
+        display: none;
+        margin-top: 12px;
+        padding: 15px;
+        border-radius: 10px;
+        line-height: 1.6;
+      }
+
+      .word-feedback.show {
+        display: block;
+      }
+
+      /* =========================
+   BUTTONS
+========================= */
+
+      .button-area {
+        text-align: center;
+        margin: 35px 0;
+      }
+
+      button {
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        padding: 15px 30px;
+        border-radius: 14px;
+        transition: 0.25s;
+      }
+
+      .check-btn {
+        background: linear-gradient(135deg, #6d5dfc, #8b5cf6);
+        color: white;
+        box-shadow: 0 8px 20px rgba(109, 93, 252, 0.3);
+      }
+
+      .check-btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .reset-btn {
+        background: #f3f4f6;
+        color: #374151;
+        margin-left: 10px;
+      }
+
+      .reset-btn:hover {
+        background: #e5e7eb;
+      }
+
+      /* =========================
+   SCORE
+========================= */
+
+      .score-box {
+        display: none;
+        background: linear-gradient(135deg, #4f46e5, #9333ea);
+        color: white;
+        padding: 30px;
+        border-radius: 22px;
+        text-align: center;
+        margin-top: 25px;
+        box-shadow: 0 15px 35px rgba(79, 70, 229, 0.25);
+      }
+
+      .score-box.show {
+        display: block;
+        animation: fadeIn 0.5s ease;
+      }
+
+      .score-box h2 {
+        font-size: 30px;
+        margin-bottom: 10px;
+      }
+
+      .score-box p {
+        font-size: 18px;
+      }
+
+      /* =========================
+   ANIMATION
+========================= */
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(15px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* =========================
+   MOBILE
+========================= */
+
+      @media (max-width: 650px) {
+        body {
+          padding: 15px 10px;
+        }
+
+        .header {
+          padding: 25px 20px;
+        }
+
+        .header h1 {
+          font-size: 24px;
+        }
+
+        .options {
+          grid-template-columns: 1fr;
+        }
+
+        .question-card {
+          padding: 20px;
+        }
+
+        .reset-btn {
+          margin-left: 0;
+          margin-top: 10px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- =========================
+     HEADER
+========================= -->
+
+      <div class="header">
+        <h1>📝 ENGLISH TEST</h1>
+
+        <p>Part 1: Multiple Choice &nbsp; | &nbsp; Part 2: Word Formation</p>
+      </div>
+
+      <!-- =========================
+     INSTRUCTION
+========================= -->
+
+      <div class="instruction">
+        <strong>Instructions:</strong>
+
+        Choose the best answer for Questions 26–35. Click an option to
+        immediately see whether your answer is correct and read the explanation.
+        For Questions 36–40, type the correct form of the capitalized word and
+        click <strong>Check Answers</strong>.
+      </div>
+
+      <!-- =========================
+     PROGRESS
+========================= -->
+
+      <div class="progress-box">
+        <div class="progress-info">
+          <span>Your Progress</span>
+
+          <span id="progressText"> 0 / 15 </span>
+        </div>
+
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+
+      <!-- =========================
+     PART 1
+========================= -->
+
+      <h2 class="section-title">PART 1 — Multiple Choice</h2>
+
+      <!-- Q26 -->
+
+      <div class="question-card" data-question="26">
+        <span class="question-number"> Question 26 </span>
+
+        <div class="question">
+          We all have to follow the rules - none of us is ______ the law.
+        </div>
+
+        <div class="options">
+          <div class="option" data-answer="A">A. beyond</div>
+
+          <div class="option" data-answer="B">B. over</div>
+
+          <div class="option" data-answer="C">C. above</div>
+
+          <div class="option" data-answer="D">D. onto</div>
+        </div>
+
+        <div class="feedback">
+          <div class="feedback-title"></div>
+
+          <strong>Correct answer: C. above</strong>
+
+          <br /><br />
+
+          <strong>Explanation:</strong>
+
+          The fixed expression <strong>"above the law"</strong>
+          means not subject to the law or not required to obey it. The sentence
+          says that everyone must follow the rules, so nobody is above the law.
+        </div>
+      </div>
+
+      <!-- Q27 -->
+
+      <div class="question-card" data-question="27">
+        <span class="question-number"> Question 27 </span>
+
+        <div class="question">
+          The defendant answered every question from the judge ______ he had no
+          prior knowledge of the incident whatsoever.
+        </div>
+
+        <div class="options">
+          <div class="option" data-answer="A">A. in that</div>
+
+          <div class="option" data-answer="B">B. as if</div>
+
+          <div class="option" data-answer="C">C. as such</div>
+
+          <div class="option" data-answer="D">D. in case</div>
+        </div>
+
+        <div class="feedback">
+          <div class="feedback-title"></div>
+
+          <strong>Correct answer: B. as if</strong>
+
+          <br /><br />
+
+          <strong>Explanation:</strong>
+
+          <strong>"As if"</strong> introduces a clause describing how something
+          appears or seems to be. The defendant answered the questions
+          <strong>as if he had no prior knowledge</strong>
+          of the incident.
+        </div>
+      </div>
+
+      <!-- Q28 -->
+
+      <div class="question-card" data-question="28">
+        <span class="question-number"> Question 28 </span>
+
+        <div class="question">
+          By the time I reached the station, the last train had already
+          departed. I ______ in such a panic after all.
+        </div>
+
+        <div class="options">
+          <div class="option" data-answer="A">A. didn’t need to leave</div>
+
+          <div class="option" data-answer="B">B. mustn’t have left</div>
+
+          <div class="option" data-answer="C">C. couldn’t have left</div>
+
+          <div class="option" data-answer="D">D. needn’t have left</div>
+        </div>
+
+        <div class="feedback">
+          <div class="feedback-title"></div>
+
+          <strong>Correct answer: D. needn’t have left</strong>
+
+          <br /><br />
+
+          <strong>Explanation:</strong>
+
+          <strong>"Needn't have + past participle"</strong>
+          means something was done but it was unnecessary. The speaker left in a
+          panic, but the last train had already departed, so leaving in such a
+          panic was unnecessary.
+        </div>
+      </div>
+
+      <!-- Q29 -->
+
+      <div class="question-card" data-question="29">
+        <span class="question-number"> Question 29 </span>
+
+        <div class="question">
+          Widely regarded as one of the most innovative architects of the
+          twentieth century, ______.
+        </div>
+
+        <div class="options">
+          <div class="option" data-answer="A">
+            A. critics have long admired the buildings of Le Corbusier
+          </div>
+
+          <div class="option" data-answer="B">
+            B. it was Le Corbusier’s buildings that inspired a whole generation
+          </div>
+
+          <div class="option" data-answer="C">
+            C. Le Corbusier’s influence can still be felt in modern urban design
+          </div>
+
+          <div class="option" data-answer="D">
+            D. Le Corbusier left an indelible mark on the history of
+            architecture
+          </div>
+        </div>
+
+        <div class="feedback">
+          <div class="feedback-title"></div>
+
+          <strong
+            >Correct answer: D. Le Corbusier left an indelible mark on the
+            history of architecture</strong
+          >
+
+          <br /><br />
+
+          <strong>Explanation:</strong>
+
+          The introductory participial phrase
+          <strong>"Widely regarded..."</strong>
+          must logically modify the subject immediately following it. Only
+          option D has <strong>Le Corbusier</strong> as the subject, so the
+          sentence is grammatically correct.
+        </div>
+      </div>
+
+      <!-- Q30 -->
+
+      <div class="question-card" data-question="30">
+        <span class="question-number"> Question 30 </span>
+
+        <div class="question">
+          After the scandal broke, the politician’s reputation was so ______
+          damaged that even his closest allies began to distance themselves from
+          him.
+        </div>
+
+        <div class="options">
+          <div class="option" data-answer="A">A. inadvertently</div>
+
+          <div class="option" data-answer="B">B. irreparably</div>
+
+          <div class="option" data-answer="C">C. inherently</div>
+
+          <div class="option" data-answer="D">D. intrusively</div>
+        </div>
+
+        <div class="feedback">
+          <div class="feedback-title"></div>
+
+          <strong>Correct answer: B. irreparably</strong>
+
+          <br /><br />
+
+          <strong>Explanation:</strong>
+
+          <strong>"Irreparably"</strong> means in a way that cannot be repaired,
+          corrected, or restored. "An irreparably damaged reputation" means a
+          reputation that has been damaged beyond repair.
+        </div>
+      </div>
+
+      <!-- Q31 -->
+
+      <div class="question-card" data-question="31">
+        <span class="question-number"> Question 31 </span>
+
+        <div class="question">
+          The ethics committee has demanded that all submitted research data
+          ______ by an independent body before publication.
+        </div>
+
+        <div class="options">
+          <div class="option" data-answer="A">A. has been verified</div>
+
+          <div class="option" data-answer="B">B. is verified</div>
+
+          <div class="option" data-answer="C">C. be verified</div>
+
+          <div class="option" data-answer="D">D. was verified</div>
+        </div>
+
+        <div class="feedback">
+          <div class="feedback-title"></div>
+
+          <strong>Correct answer: C. be verified</strong>
+
+          <br /><br />
+
+          <strong>Explanation:</strong>
+
+          After verbs such as
+          <strong>demand, suggest, insist, recommend</strong>, formal English
+          can use the subjunctive:
+
+          <strong>demand that + subject + base verb</strong>
+
+          Because the sentence is passive:
+          <strong>demand that the data be verified</strong>.
+        </div>
+      </div>
+
+      <!-- Q32 -->
+
+      <div class="question-card" data-question="32">
+        <span class="question-number"> Question 32 </span>
+
+        <div class="question">
+          She always intended to start meditating but never ______ it because of
+          her daily commitments.
+        </div>
+
+        <div class="options">
+          <div class="option" data-answer="A">A. went in for</div>
+
+          <div class="option" data-answer="B">B. got round to</div>
+
+          <div class="option" data-answer="C">C. came down with</div>
+
+          <div class="option" data-answer="D">D. looked out for</div>
+        </div>
+
+        <div class="feedback">
+          <div class="feedback-title"></div>
+
+          <strong>Correct answer: B. got round to</strong>
+
+          <br /><br />
+
+          <strong>Explanation:</strong>
+
+          <strong>"Get round to doing something"</strong>
+          means to finally find time to do something that you have intended to
+          do. She intended to start meditating but never
+          <strong>got round to it</strong> because she was busy.
+        </div>
+      </div>
+
+      <!-- Q33 -->
+
+      <div class="question-card" data-question="33">
+        <span class="question-number"> Question 33 </span>
+
+        <div class="question">
+          The witness’s testimony provided ______ proof of the suspect’s
+          involvement in the international smuggling ring.
+        </div>
+
+        <div class="options">
+          <div class="option" data-answer="A">A. thick</div>
+
+          <div class="option" data-answer="B">B. heavy</div>
+
+          <div class="option" data-answer="C">C. stiff</div>
+
+          <div class="option" data-answer="D">D. concrete</div>
+        </div>
+
+        <div class="feedback">
+          <div class="feedback-title"></div>
+
+          <strong>Correct answer: D. concrete</strong>
+
+          <br /><br />
+
+          <strong>Explanation:</strong>
+
+          <strong>"Concrete proof"</strong> means clear, definite, and
+          convincing evidence that something is true. The witness's testimony
+          provided strong evidence of the suspect's involvement.
+        </div>
+      </div>
+
+      <!-- Q34 -->
+
+      <div class="question-card" data-question="34">
+        <span class="question-number"> Question 34 </span>
+
+        <div class="question">
+          Her speech about the importance of family really ______ with the
+          audience, moving many to tears.
+        </div>
+
+        <div class="options">
+          <div class="option" data-answer="A">A. hit the nail</div>
+
+          <div class="option" data-answer="B">B. struck a chord</div>
+
+          <div class="option" data-answer="C">C. beat the clock</div>
+
+          <div class="option" data-answer="D">D. rang a bell</div>
+        </div>
+
+        <div class="feedback">
+          <div class="feedback-title"></div>
+
+          <strong>Correct answer: B. struck a chord</strong>
+
+          <br /><br />
+
+          <strong>Explanation:</strong>
+
+          <strong>"Strike a chord with someone"</strong> means to create an
+          emotional response or strong feeling in someone. The speech about
+          family deeply affected the audience.
+        </div>
+      </div>
+
+      <!-- Q35 -->
+
+      <div class="question-card" data-question="35">
+        <span class="question-number"> Question 35 </span>
+
+        <div class="question">
+          Anna: “I didn’t expect the exam to be that difficult.”
+
+          <br /><br />
+
+          Ben: “______”
+        </div>
+
+        <div class="options">
+          <div class="option" data-answer="A">
+            A. I couldn’t care less. I tried my best.
+          </div>
+
+          <div class="option" data-answer="B">
+            B. Tell me about it. I barely finished on time.
+          </div>
+
+          <div class="option" data-answer="C">
+            C. Why are you always complaining?
+          </div>
+
+          <div class="option" data-answer="D">
+            D. No problem, I can help you next time.
+          </div>
+        </div>
+
+        <div class="feedback">
+          <div class="feedback-title"></div>
+
+          <strong
+            >Correct answer: B. Tell me about it. I barely finished on
+            time.</strong
+          >
+
+          <br /><br />
+
+          <strong>Explanation:</strong>
+
+          <strong>"Tell me about it!"</strong> is an informal expression used to
+          show that you strongly agree with what someone has just said because
+          you have experienced the same thing. Ben agrees that the exam was
+          difficult because he barely finished it on time.
+        </div>
+      </div>
+
+      <!-- =========================
+     PART 2
+========================= -->
+
+      <h2 class="section-title">PART 2 — Word Formation</h2>
+
+      <!-- Q36 -->
+
+      <div class="question-card word-card">
+        <span class="question-number"> Question 36 </span>
+
+        <div class="question">
+          Celine Dion, the world-renowned Canadian singer, has officially
+          announced her return to the stage for a series of concerts in Paris.
+          This news comes after the star has been
+          <strong>(VOLUNTARY)</strong> ______ absent from the stage since 2022.
+        </div>
+
+        <input
+          type="text"
+          class="word-input"
+          data-answer="involuntarily"
+          placeholder="Type your answer here..."
+        />
+
+        <div class="word-feedback">
+          <strong>Answer: INVOLUNTARILY</strong>
+
+          <br /><br />
+
+          <strong>Explanation:</strong>
+
+          The meaning is that she was absent from the stage
+          <strong>not by her own choice</strong>, because of her medical
+          condition. Therefore, the negative adverb
+          <strong>involuntarily</strong> is required.
+        </div>
+      </div>
+
+      <!-- Q37 -->
+
+      <div class="question-card word-card">
+        <span class="question-number"> Question 37 </span>
+
+        <div class="question">
+          This condition causes muscle spasms and significant
+          <strong>(CONSTRICT)</strong> ______ on her vocal cords, which had
+          previously made singing nearly impossible.
+        </div>
+
+        <input
+          type="text"
+          class="word-input"
+          data-answer="constriction"
+          placeholder="Type your answer here..."
+        />
+
+        <div class="word-feedback">
+          <strong>Answer: CONSTRICTION</strong>
+
+          <br /><br />
+
+          <strong>Explanation:</strong>
+
+          After the adjective
+          <strong>"significant"</strong>, we need a noun.
+
+          <strong>Constriction</strong> means the act or process of becoming
+          narrower or tighter.
+        </div>
+      </div>
+
+      <!-- Q38 -->
+
+      <div class="question-card word-card">
+        <span class="question-number"> Question 38 </span>
+
+        <div class="question">
+          Despite these immense physical challenges, Dion has remained
+          <strong>(RESILIENCE)</strong> ______, expressing her excitement to
+          perform once again.
+        </div>
+
+        <input
+          type="text"
+          class="word-input"
+          data-answer="resilient"
+          placeholder="Type your answer here..."
+        />
+
+        <div class="word-feedback">
+          <strong>Answer: RESILIENT</strong>
+
+          <br /><br />
+
+          <strong>Explanation:</strong>
+
+          After the linking verb
+          <strong>"has remained"</strong>, we need an adjective.
+
+          <strong>Resilient</strong> means able to recover quickly from
+          difficulties or challenges.
+        </div>
+      </div>
+
+      <!-- Q39 -->
+
+      <div class="question-card word-card">
+        <span class="question-number"> Question 39 </span>
+
+        <div class="question">
+          Her recent performance at the Paris Olympics was
+          <strong>(TRIUMPH)</strong> ______, as critics praised the emotional
+          depth of her voice.
+        </div>
+
+        <input
+          type="text"
+          class="word-input"
+          data-answer="triumphant"
+          placeholder="Type your answer here..."
+        />
+
+        <div class="word-feedback">
+          <strong>Answer: TRIUMPHANT</strong>
+
+          <br /><br />
+
+          <strong>Explanation:</strong>
+
+          After the linking verb
+          <strong>"was"</strong>, we need an adjective describing the
+          performance.
+
+          <strong>Triumphant</strong> means very successful or victorious.
+        </div>
+      </div>
+
+      <!-- Q40 -->
+
+      <div class="question-card word-card">
+        <span class="question-number"> Question 40 </span>
+
+        <div class="question">
+          ...proving that she has truly “nailed the landing” of her
+          <strong>(COME)</strong> ______.
+        </div>
+
+        <input
+          type="text"
+          class="word-input"
+          data-answer="comeback"
+          placeholder="Type your answer here..."
+        />
+
+        <div class="word-feedback">
+          <strong>Answer: COMEBACK</strong>
+
+          <br /><br />
+
+          <strong>Explanation:</strong>
+
+          A <strong>comeback</strong> is a return to a successful career or
+          activity after a period of absence. The context refers to Celine Dion
+          returning to performing after being absent from the stage.
+        </div>
+      </div>
+
+      <!-- =========================
+     BUTTONS
+========================= -->
+
+      <div class="button-area">
+        <button class="check-btn" onclick="checkWordFormation()">
+          ✅ Check Word Formation
+        </button>
+
+        <button class="reset-btn" onclick="resetTest()">🔄 Reset Test</button>
+      </div>
+
+      <!-- =========================
+     SCORE
+========================= -->
+
+      <div class="score-box" id="scoreBox">
+        <h2 id="scoreTitle">🎉 Test Complete!</h2>
+
+        <p id="scoreText"></p>
+      </div>
+    </div>
+
+    <script>
+      /* =====================================
+   MULTIPLE CHOICE ANSWERS
+===================================== */
+
+      const correctAnswers = {
+        26: "C",
+        27: "B",
+        28: "D",
+        29: "D",
+        30: "B",
+        31: "C",
+        32: "B",
+        33: "D",
+        34: "B",
+        35: "B",
+      };
+
+      /* =====================================
+   TRACK ANSWERS
+===================================== */
+
+      let answeredQuestions = new Set();
+
+      let wordScore = 0;
+
+      /* =====================================
+   MULTIPLE CHOICE CLICK
+===================================== */
+
+      document
+        .querySelectorAll(".question-card[data-question]")
+        .forEach((card) => {
+          const questionNumber = card.dataset.question;
+
+          const options = card.querySelectorAll(".option");
+
+          const feedback = card.querySelector(".feedback");
+
+          const feedbackTitle = card.querySelector(".feedback-title");
+
+          options.forEach((option) => {
+            option.addEventListener("click", function () {
+              /* Prevent changing answer */
+
+              if (answeredQuestions.has(questionNumber)) {
+                return;
+              }
+
+              const selectedAnswer = this.dataset.answer;
+
+              const correctAnswer = correctAnswers[questionNumber];
+
+              /* Mark as answered */
+
+              answeredQuestions.add(questionNumber);
+
+              /* Show correct answer */
+
+              options.forEach((opt) => {
+                if (opt.dataset.answer === correctAnswer) {
+                  opt.classList.add("correct");
+                }
+              });
+
+              /* Correct answer */
+
+              if (selectedAnswer === correctAnswer) {
+                this.classList.add("correct");
+
+                feedbackTitle.textContent = "✅ Correct!";
+
+                feedback.classList.add("show", "correct-feedback");
+              } else {
+
+              /* Wrong answer */
+                this.classList.add("wrong");
+
+                feedbackTitle.textContent = "❌ Incorrect!";
+
+                feedback.classList.add("show", "wrong-feedback");
+              }
+
+              updateProgress();
+
+              /* Check MC completion */
+
+              if (answeredQuestions.size === 10) {
+                showMCScore();
+              }
+            });
+          });
+        });
+
+      /* =====================================
+   UPDATE PROGRESS
+===================================== */
+
+      function updateProgress() {
+        let wordAnswered = 0;
+
+        document.querySelectorAll(".word-input").forEach((input) => {
+          if (input.value.trim() !== "") {
+            wordAnswered++;
+          }
+        });
+
+        const totalAnswered = answeredQuestions.size + wordAnswered;
+
+        const totalQuestions = 15;
+
+        const percentage = (totalAnswered / totalQuestions) * 100;
+
+        document.getElementById("progressText").textContent =
+          `${totalAnswered} / ${totalQuestions}`;
+
+        document.getElementById("progressFill").style.width = percentage + "%";
+      }
+
+      /* =====================================
+   WORD FORMATION
+===================================== */
+
+      function checkWordFormation() {
+        const inputs = document.querySelectorAll(".word-input");
+
+        wordScore = 0;
+
+        inputs.forEach((input) => {
+          const userAnswer = input.value
+            .trim()
+            .toLowerCase()
+            .replace(/\s+/g, "");
+
+          const correctAnswer = input.dataset.answer
+            .toLowerCase()
+            .replace(/\s+/g, "");
+
+          const feedback = input.nextElementSibling;
+
+          input.classList.remove("correct-input", "wrong-input");
+
+          feedback.classList.remove("show");
+
+          if (userAnswer === correctAnswer) {
+            input.classList.add("correct-input");
+
+            feedback.style.background = "#f0fdf4";
+
+            feedback.style.color = "#166534";
+
+            wordScore++;
+          } else {
+            input.classList.add("wrong-input");
+
+            feedback.style.background = "#fef2f2";
+
+            feedback.style.color = "#991b1b";
+          }
+
+          feedback.classList.add("show");
+        });
+
+        updateProgress();
+
+        showFinalScore();
+      }
+
+      /* =====================================
+   MC SCORE
+===================================== */
+
+      function calculateMCScore() {
+        let score = 0;
+
+        document
+          .querySelectorAll(".question-card[data-question]")
+          .forEach((card) => {
+            const number = card.dataset.question;
+
+            const wrong = card.querySelector(".option.wrong");
+
+            if (answeredQuestions.has(number) && !wrong) {
+              score++;
+            }
+          });
+
+        return score;
+      }
+
+      /* =====================================
+   SHOW MC SCORE
+===================================== */
+
+      function showMCScore() {
+        const mcScore = calculateMCScore();
+
+        const scoreBox = document.getElementById("scoreBox");
+
+        const scoreTitle = document.getElementById("scoreTitle");
+
+        const scoreText = document.getElementById("scoreText");
+
+        scoreBox.classList.add("show");
+
+        scoreTitle.textContent = "📊 Part 1 Completed";
+
+        scoreText.textContent = `Multiple Choice Score: ${mcScore} / 10`;
+      }
+
+      /* =====================================
+   FINAL SCORE
+===================================== */
+
+      function showFinalScore() {
+        const mcScore = calculateMCScore();
+
+        const totalScore = mcScore + wordScore;
+
+        const scoreBox = document.getElementById("scoreBox");
+
+        const scoreTitle = document.getElementById("scoreTitle");
+
+        const scoreText = document.getElementById("scoreText");
+
+        scoreBox.classList.add("show");
+
+        scoreText.textContent = `Your score: ${totalScore} / 15 | 
+        Multiple Choice: ${mcScore}/10 | 
+        Word Formation: ${wordScore}/5`;
+
+        if (totalScore === 15) {
+          scoreTitle.textContent = "🏆 Perfect Score!";
+        } else if (totalScore >= 12) {
+          scoreTitle.textContent = "🌟 Excellent Work!";
+        } else if (totalScore >= 9) {
+          scoreTitle.textContent = "👏 Good Job!";
+        } else {
+          scoreTitle.textContent = "💪 Keep Practicing!";
+        }
+      }
+
+      /* =====================================
+   RESET
+===================================== */
+
+      function resetTest() {
+        answeredQuestions.clear();
+
+        wordScore = 0;
+
+        /* Reset MC */
+
+        document.querySelectorAll(".option").forEach((option) => {
+          option.classList.remove("correct", "wrong");
+        });
+
+        document.querySelectorAll(".feedback").forEach((feedback) => {
+          feedback.classList.remove(
+            "show",
+            "correct-feedback",
+            "wrong-feedback",
+          );
+        });
+
+        document.querySelectorAll(".feedback-title").forEach((title) => {
+          title.textContent = "";
+        });
+
+        /* Reset Word Formation */
+
+        document.querySelectorAll(".word-input").forEach((input) => {
+          input.value = "";
+
+          input.classList.remove("correct-input", "wrong-input");
+        });
+
+        document.querySelectorAll(".word-feedback").forEach((feedback) => {
+          feedback.classList.remove("show");
+        });
+
+        /* Reset score */
+
+        document.getElementById("scoreBox").classList.remove("show");
+
+        /* Reset progress */
+
+        document.getElementById("progressText").textContent = "0 / 15";
+
+        document.getElementById("progressFill").style.width = "0%";
+
+        window.scrollTo({
+          top: 0,
+
+          behavior: "smooth",
+        });
+      }
+
+      /* =====================================
+   UPDATE PROGRESS WHEN TYPING
+===================================== */
+
+      document.querySelectorAll(".word-input").forEach((input) => {
+        input.addEventListener("input", updateProgress);
+      });
+    </script>
+  </body>
+</html>
+```
