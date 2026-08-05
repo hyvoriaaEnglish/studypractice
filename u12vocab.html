@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nature Vocabulary</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family:
+          Segoe UI,
+          sans-serif;
+      }
+
+      body {
+        background: linear-gradient(135deg, #c9f7e5, #d7ecff);
+        padding: 40px;
+      }
+
+      .container {
+        max-width: 1100px;
+        margin: auto;
+      }
+
+      h1 {
+        text-align: center;
+        color: #0b4f6c;
+        margin-bottom: 10px;
+      }
+
+      .subtitle {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #444;
+      }
+
+      .search {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 30px;
+      }
+
+      .search input {
+        width: 400px;
+        max-width: 90%;
+        padding: 14px;
+        border: none;
+        border-radius: 30px;
+        font-size: 17px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        outline: none;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+        gap: 20px;
+      }
+
+      .card {
+        background: white;
+        border-radius: 18px;
+        padding: 20px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        transition: 0.3s;
+      }
+
+      .card:hover {
+        transform: translateY(-6px);
+      }
+
+      .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+
+      .word {
+        font-size: 27px;
+        font-weight: bold;
+        color: #00695c;
+      }
+
+      button {
+        border: none;
+        background: #009688;
+        color: white;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 20px;
+        transition: 0.3s;
+      }
+
+      button:hover {
+        background: #00796b;
+        transform: scale(1.08);
+      }
+
+      .meaning {
+        font-size: 18px;
+        font-weight: bold;
+        color: #1565c0;
+        margin-bottom: 10px;
+      }
+
+      .example {
+        font-style: italic;
+        margin-bottom: 8px;
+        color: #333;
+      }
+
+      .translation {
+        color: #666;
+      }
+
+      .footer {
+        margin-top: 35px;
+        text-align: center;
+        color: #555;
+        font-size: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Vocabulary</h1>
+      <p class="subtitle">Click 🔊 to hear the pronunciation.</p>
+
+      <div class="search">
+        <input id="search" placeholder="Search vocabulary..." />
+      </div>
+
+      <div class="grid" id="grid"></div>
+
+      <div class="footer">Made for English Learning ❤️</div>
+    </div>
+
+    <script>
+      const words = [
+        {
+          word: "agriculture engineering",
+          meaning: "kỹ thuật nông nghiệp",
+          example: "She wants to study agriculture engineering at university.",
+          translation: "Cô ấy muốn học ngành kỹ thuật nông nghiệp ở đại học.",
+        },
+
+        {
+          word: "assembly worker",
+          meaning: "công nhân lắp ráp",
+          example: "Assembly workers build products in factories.",
+          translation: "Công nhân lắp ráp chế tạo sản phẩm trong các nhà máy.",
+        },
+
+        {
+          word: "bartender",
+          meaning: "người pha chế",
+          example: "The bartender served drinks to the customers.",
+          translation: "Người pha chế phục vụ đồ uống cho khách hàng.",
+        },
+
+        {
+          word: "career",
+          meaning: "nghề nghiệp, sự nghiệp",
+          example: "She hopes to have a successful career.",
+          translation: "Cô ấy hy vọng sẽ có một sự nghiệp thành công.",
+        },
+
+        {
+          word: "cashier",
+          meaning: "thu ngân",
+          example: "The cashier helped me pay for my groceries.",
+          translation: "Thu ngân giúp tôi thanh toán hàng hóa.",
+        },
+
+        {
+          word: "decisive",
+          meaning: "quyết đoán",
+          example: "A good leader must be decisive.",
+          translation: "Một nhà lãnh đạo giỏi phải quyết đoán.",
+        },
+
+        {
+          word: "demanding",
+          meaning: "đòi hỏi nhiều, khó",
+          example: "Being a doctor is a demanding job.",
+          translation: "Làm bác sĩ là một công việc đòi hỏi nhiều.",
+        },
+
+        {
+          word: "fabric",
+          meaning: "vải",
+          example: "This dress is made of soft fabric.",
+          translation: "Chiếc váy này được làm từ loại vải mềm.",
+        },
+
+        {
+          word: "garment worker",
+          meaning: "công nhân may mặc",
+          example: "Garment workers produce clothes for export.",
+          translation: "Công nhân may mặc sản xuất quần áo để xuất khẩu.",
+        },
+
+        {
+          word: "hand-eye coordination",
+          meaning: "sự phối hợp tay và mắt",
+          example: "Surgeons need excellent hand-eye coordination.",
+          translation:
+            "Các bác sĩ phẫu thuật cần có sự phối hợp tay và mắt rất tốt.",
+        },
+
+        {
+          word: "hands-on",
+          meaning: "thực hành, trực tiếp",
+          example: "The course provides hands-on experience.",
+          translation: "Khóa học cung cấp nhiều kinh nghiệm thực hành.",
+        },
+
+        {
+          word: "inquiring",
+          meaning: "ham học hỏi, tò mò",
+          example: "An inquiring mind is important for scientists.",
+          translation:
+            "Tinh thần ham học hỏi rất quan trọng đối với các nhà khoa học.",
+        },
+
+        {
+          word: "knowledge",
+          meaning: "kiến thức",
+          example: "Reading books increases your knowledge.",
+          translation: "Đọc sách giúp tăng kiến thức.",
+        },
+
+        {
+          word: "mechanic",
+          meaning: "thợ cơ khí, thợ sửa xe",
+          example: "The mechanic repaired my motorbike.",
+          translation: "Người thợ đã sửa chiếc xe máy của tôi.",
+        },
+
+        {
+          word: "repetitive",
+          meaning: "lặp đi lặp lại",
+          example: "Some factory jobs are repetitive.",
+          translation:
+            "Một số công việc trong nhà máy mang tính lặp đi lặp lại.",
+        },
+
+        {
+          word: "rewarding",
+          meaning: "đáng giá, mang lại nhiều ý nghĩa",
+          example: "Teaching is a rewarding profession.",
+          translation: "Nghề dạy học là một nghề rất ý nghĩa.",
+        },
+
+        {
+          word: "sew",
+          meaning: "may, khâu",
+          example: "My grandmother can sew beautiful clothes.",
+          translation: "Bà tôi có thể may những bộ quần áo đẹp.",
+        },
+
+        {
+          word: "software engineer",
+          meaning: "kỹ sư phần mềm",
+          example: "My brother works as a software engineer.",
+          translation: "Anh trai tôi làm kỹ sư phần mềm.",
+        },
+
+        {
+          word: "surgeon",
+          meaning: "bác sĩ phẫu thuật",
+          example: "The surgeon performed a successful operation.",
+          translation: "Bác sĩ phẫu thuật đã thực hiện một ca mổ thành công.",
+        },
+
+        {
+          word: "vocational",
+          meaning: "thuộc dạy nghề",
+          example: "He attends a vocational school.",
+          translation: "Anh ấy học tại một trường dạy nghề.",
+        },
+
+        {
+          word: "well-paid",
+          meaning: "được trả lương cao",
+          example: "Pilots usually have well-paid jobs.",
+          translation: "Phi công thường có công việc được trả lương cao.",
+        },
+
+        {
+          word: "orientation",
+          meaning: "định hướng",
+          example: "The school organized a career orientation program.",
+          translation: "Trường đã tổ chức chương trình định hướng nghề nghiệp.",
+        },
+      ];
+      const grid = document.getElementById("grid");
+
+      function render(list) {
+        grid.innerHTML = "";
+
+        list.forEach((item) => {
+          grid.innerHTML += `
+
+<div class="card">
+
+<div class="top">
+
+<div class="word">${item.word}</div>
+
+<button onclick="speak('${item.word}')">🔊</button>
+
+</div>
+
+<div class="meaning">${item.meaning}</div>
+
+<div class="example">${item.example}</div>
+
+<div class="translation">${item.translation}</div>
+
+</div>
+
+`;
+        });
+      }
+
+      render(words);
+
+      document.getElementById("search").addEventListener("input", function () {
+        const value = this.value.toLowerCase();
+
+        render(
+          words.filter(
+            (v) =>
+              v.word.toLowerCase().includes(value) ||
+              v.meaning.toLowerCase().includes(value),
+          ),
+        );
+      });
+
+      function speak(text) {
+        speechSynthesis.cancel();
+
+        const utter = new SpeechSynthesisUtterance(text);
+
+        utter.lang = "en-US";
+
+        utter.rate = 0.9;
+
+        speechSynthesis.speak(utter);
+      }
+    </script>
+  </body>
+</html>

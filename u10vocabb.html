@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nature Vocabulary</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family:
+          Segoe UI,
+          sans-serif;
+      }
+
+      body {
+        background: linear-gradient(135deg, #c9f7e5, #d7ecff);
+        padding: 40px;
+      }
+
+      .container {
+        max-width: 1100px;
+        margin: auto;
+      }
+
+      h1 {
+        text-align: center;
+        color: #0b4f6c;
+        margin-bottom: 10px;
+      }
+
+      .subtitle {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #444;
+      }
+
+      .search {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 30px;
+      }
+
+      .search input {
+        width: 400px;
+        max-width: 90%;
+        padding: 14px;
+        border: none;
+        border-radius: 30px;
+        font-size: 17px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        outline: none;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+        gap: 20px;
+      }
+
+      .card {
+        background: white;
+        border-radius: 18px;
+        padding: 20px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        transition: 0.3s;
+      }
+
+      .card:hover {
+        transform: translateY(-6px);
+      }
+
+      .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+
+      .word {
+        font-size: 27px;
+        font-weight: bold;
+        color: #00695c;
+      }
+
+      button {
+        border: none;
+        background: #009688;
+        color: white;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 20px;
+        transition: 0.3s;
+      }
+
+      button:hover {
+        background: #00796b;
+        transform: scale(1.08);
+      }
+
+      .meaning {
+        font-size: 18px;
+        font-weight: bold;
+        color: #1565c0;
+        margin-bottom: 10px;
+      }
+
+      .example {
+        font-style: italic;
+        margin-bottom: 8px;
+        color: #333;
+      }
+
+      .translation {
+        color: #666;
+      }
+
+      .footer {
+        margin-top: 35px;
+        text-align: center;
+        color: #555;
+        font-size: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🌿 Nature Vocabulary</h1>
+      <p class="subtitle">Click 🔊 to hear the pronunciation.</p>
+
+      <div class="search">
+        <input id="search" placeholder="Search vocabulary..." />
+      </div>
+
+      <div class="grid" id="grid"></div>
+
+      <div class="footer">Made for English Learning ❤️</div>
+    </div>
+
+    <script>
+      const words = [
+        {
+          word: "affect",
+          meaning: "ảnh hưởng",
+          example: "Climate change affects many animal species.",
+          translation: "Biến đổi khí hậu ảnh hưởng đến nhiều loài động vật.",
+        },
+
+        {
+          word: "appreciate",
+          meaning: "đánh giá cao, trân trọng",
+          example: "We should appreciate the beauty of nature.",
+          translation: "Chúng ta nên trân trọng vẻ đẹp của thiên nhiên.",
+        },
+
+        {
+          word: "climate change",
+          meaning: "biến đổi khí hậu",
+          example: "Climate change is a global problem.",
+          translation: "Biến đổi khí hậu là một vấn đề toàn cầu.",
+        },
+
+        {
+          word: "droppings",
+          meaning: "phân động vật",
+          example: "Bird droppings can be used as fertilizer.",
+          translation: "Phân chim có thể được dùng làm phân bón.",
+        },
+
+        {
+          word: "essential",
+          meaning: "thiết yếu",
+          example: "Water is essential for all living things.",
+          translation: "Nước là thiết yếu đối với mọi sinh vật.",
+        },
+
+        {
+          word: "ecological balance",
+          meaning: "cân bằng sinh thái",
+          example: "Forests help maintain ecological balance.",
+          translation: "Rừng giúp duy trì cân bằng sinh thái.",
+        },
+
+        {
+          word: "fascinating",
+          meaning: "hấp dẫn",
+          example: "The universe is fascinating to scientists.",
+          translation: "Vũ trụ rất hấp dẫn đối với các nhà khoa học.",
+        },
+
+        {
+          word: "food chain",
+          meaning: "chuỗi thức ăn",
+          example: "Lions are at the top of the food chain.",
+          translation: "Sư tử đứng đầu chuỗi thức ăn.",
+        },
+
+        {
+          word: "fertilizer",
+          meaning: "phân bón",
+          example: "Farmers use fertilizer to grow crops.",
+          translation: "Nông dân dùng phân bón để trồng cây.",
+        },
+
+        {
+          word: "grassland",
+          meaning: "đồng cỏ",
+          example: "Many wild animals live in grasslands.",
+          translation: "Nhiều loài động vật hoang dã sống ở đồng cỏ.",
+        },
+
+        {
+          word: "habitat",
+          meaning: "môi trường sống",
+          example: "Pollution destroys animal habitats.",
+          translation: "Ô nhiễm phá hủy môi trường sống của động vật.",
+        },
+
+        {
+          word: "harm",
+          meaning: "gây hại",
+          example: "Plastic waste harms marine life.",
+          translation: "Rác thải nhựa gây hại cho sinh vật biển.",
+        },
+
+        {
+          word: "landform",
+          meaning: "địa hình",
+          example: "Mountains are important landforms.",
+          translation: "Núi là một dạng địa hình quan trọng.",
+        },
+
+        {
+          word: "nature reserve",
+          meaning: "khu bảo tồn thiên nhiên",
+          example: "The panda lives in a protected nature reserve.",
+          translation: "Gấu trúc sống trong khu bảo tồn thiên nhiên.",
+        },
+
+        {
+          word: "observe",
+          meaning: "quan sát",
+          example: "Scientists observe birds every morning.",
+          translation: "Các nhà khoa học quan sát chim mỗi sáng.",
+        },
+
+        {
+          word: "orbit",
+          meaning: "quỹ đạo",
+          example: "The Earth orbits the Sun.",
+          translation: "Trái Đất quay quanh Mặt Trời.",
+        },
+
+        {
+          word: "outer space",
+          meaning: "không gian vũ trụ",
+          example: "Astronauts travel into outer space.",
+          translation: "Các phi hành gia du hành vào không gian.",
+        },
+
+        {
+          word: "pesticide",
+          meaning: "thuốc trừ sâu",
+          example: "Too much pesticide harms the environment.",
+          translation: "Quá nhiều thuốc trừ sâu gây hại cho môi trường.",
+        },
+
+        {
+          word: "pose",
+          meaning: "đặt ra, gây ra",
+          example: "Plastic waste poses a serious threat.",
+          translation: "Rác thải nhựa gây ra mối đe dọa nghiêm trọng.",
+        },
+
+        {
+          word: "preserve",
+          meaning: "bảo tồn",
+          example: "We must preserve endangered species.",
+          translation: "Chúng ta phải bảo tồn các loài có nguy cơ tuyệt chủng.",
+        },
+
+        {
+          word: "threat",
+          meaning: "mối đe dọa",
+          example: "Deforestation is a threat to wildlife.",
+          translation: "Nạn phá rừng là mối đe dọa đối với động vật hoang dã.",
+        },
+
+        {
+          word: "vital",
+          meaning: "cực kỳ quan trọng",
+          example: "Clean air is vital for human health.",
+          translation:
+            "Không khí sạch vô cùng quan trọng đối với sức khỏe con người.",
+        },
+      ];
+
+      const grid = document.getElementById("grid");
+
+      function render(list) {
+        grid.innerHTML = "";
+
+        list.forEach((item) => {
+          grid.innerHTML += `
+
+<div class="card">
+
+<div class="top">
+
+<div class="word">${item.word}</div>
+
+<button onclick="speak('${item.word}')">🔊</button>
+
+</div>
+
+<div class="meaning">${item.meaning}</div>
+
+<div class="example">${item.example}</div>
+
+<div class="translation">${item.translation}</div>
+
+</div>
+
+`;
+        });
+      }
+
+      render(words);
+
+      document.getElementById("search").addEventListener("input", function () {
+        const value = this.value.toLowerCase();
+
+        render(
+          words.filter(
+            (v) =>
+              v.word.toLowerCase().includes(value) ||
+              v.meaning.toLowerCase().includes(value),
+          ),
+        );
+      });
+
+      function speak(text) {
+        speechSynthesis.cancel();
+
+        const utter = new SpeechSynthesisUtterance(text);
+
+        utter.lang = "en-US";
+
+        utter.rate = 0.9;
+
+        speechSynthesis.speak(utter);
+      }
+    </script>
+  </body>
+</html>
