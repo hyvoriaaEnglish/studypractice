@@ -1,0 +1,755 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Vocabulary Challenge</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: linear-gradient(135deg, #f5f3ff, #eef2ff);
+        color: #2d2a4a;
+        min-height: 100vh;
+      }
+
+      .hero {
+        text-align: center;
+        padding: 50px 20px 35px;
+        background: linear-gradient(135deg, #7c3aed, #4f46e5);
+        color: white;
+        border-radius: 0 0 35px 35px;
+        box-shadow: 0 8px 25px rgba(79, 70, 229, 0.25);
+      }
+
+      .hero h1 {
+        margin: 0;
+        font-size: 2.4rem;
+      }
+
+      .hero p {
+        margin-top: 12px;
+        opacity: 0.9;
+        font-size: 1rem;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 35px auto;
+        padding: 0 20px 50px;
+      }
+
+      .progress-container {
+        background: white;
+        padding: 20px;
+        border-radius: 18px;
+        margin-bottom: 25px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+      }
+
+      .progress-info {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+
+      .progress-bar {
+        width: 100%;
+        height: 10px;
+        background: #e5e7eb;
+        border-radius: 20px;
+        overflow: hidden;
+      }
+
+      .progress {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #7c3aed, #ec4899);
+        transition: 0.4s;
+      }
+
+      .question-card {
+        background: white;
+        padding: 28px;
+        margin-bottom: 22px;
+        border-radius: 20px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+        transition: 0.3s;
+      }
+
+      .question-card:hover {
+        transform: translateY(-2px);
+      }
+
+      .question-number {
+        display: inline-block;
+        background: #ede9fe;
+        color: #6d28d9;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: bold;
+        margin-bottom: 12px;
+      }
+
+      .question {
+        font-size: 1.1rem;
+        line-height: 1.7;
+        margin-bottom: 20px;
+        font-weight: 600;
+      }
+
+      .options {
+        display: grid;
+        gap: 12px;
+      }
+
+      .option {
+        padding: 14px 17px;
+        border: 2px solid #e5e7eb;
+        border-radius: 13px;
+        cursor: pointer;
+        transition: 0.2s;
+        background: #fff;
+      }
+
+      .option:hover {
+        border-color: #8b5cf6;
+        background: #f5f3ff;
+      }
+
+      .option.selected {
+        border-color: #7c3aed;
+        background: #ede9fe;
+      }
+
+      .option.correct {
+        border-color: #22c55e;
+        background: #dcfce7;
+        color: #166534;
+      }
+
+      .option.wrong {
+        border-color: #ef4444;
+        background: #fee2e2;
+        color: #991b1b;
+      }
+
+      .check-btn {
+        margin-top: 20px;
+        padding: 12px 22px;
+        border: none;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #7c3aed, #4f46e5);
+        color: white;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+
+      .check-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(124, 58, 237, 0.3);
+      }
+
+      .feedback {
+        margin-top: 18px;
+        padding: 15px 18px;
+        border-radius: 12px;
+        display: none;
+        line-height: 1.6;
+      }
+
+      .feedback.correct-feedback {
+        background: #dcfce7;
+        color: #166534;
+      }
+
+      .feedback.wrong-feedback {
+        background: #fee2e2;
+        color: #991b1b;
+      }
+
+      .result {
+        background: white;
+        border-radius: 25px;
+        padding: 35px;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        display: none;
+      }
+
+      .result h2 {
+        font-size: 2rem;
+        margin-top: 0;
+      }
+
+      .score {
+        font-size: 3rem;
+        font-weight: bold;
+        color: #7c3aed;
+        margin: 15px 0;
+      }
+
+      .restart-btn {
+        padding: 14px 28px;
+        border: none;
+        border-radius: 14px;
+        background: #7c3aed;
+        color: white;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 15px;
+      }
+
+      @media (max-width: 600px) {
+        .hero h1 {
+          font-size: 1.8rem;
+        }
+
+        .question-card {
+          padding: 20px;
+        }
+
+        .question {
+          font-size: 1rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="hero">
+      <h1>🧠 Vocabulary Challenge</h1>
+      <p>Multiple-choice & Contextual Vocabulary Practice</p>
+    </div>
+
+    <div class="container">
+      <div class="progress-container">
+        <div class="progress-info">
+          <span>Progress</span>
+          <span id="progressText">0 / 28 answered</span>
+        </div>
+
+        <div class="progress-bar">
+          <div class="progress" id="progressBar"></div>
+        </div>
+      </div>
+
+      <div id="quiz"></div>
+
+      <div class="result" id="result">
+        <h2>🎉 Quiz Completed!</h2>
+        <p>Your score:</p>
+
+        <div class="score" id="finalScore"></div>
+
+        <p id="resultMessage"></p>
+
+        <button class="restart-btn" onclick="restartQuiz()">
+          🔄 Try Again
+        </button>
+      </div>
+    </div>
+
+    <script>
+      const questions = [
+        {
+          question:
+            "The politician was accused of ________ a story about his childhood in order to gain public sympathy.",
+          options: [
+            "regenerating",
+            "confabulating",
+            "emancipating",
+            "instilling",
+          ],
+          answer: 1,
+          explanation:
+            "<b>Confabulate</b> means to invent or fabricate a story, often without intending to deceive.",
+        },
+
+        {
+          question:
+            "His explanation sounded completely ________; the facts simply did not connect logically.",
+          options: ["facile", "native", "illogical", "mainstream"],
+          answer: 2,
+          explanation:
+            "<b>Illogical</b> means not based on clear or reasonable logic.",
+        },
+
+        {
+          question:
+            "The article made several ________ claims that sounded convincing but were not supported by evidence.",
+          options: ["pseudological", "regenerative", "cultural", "visionary"],
+          answer: 0,
+          explanation:
+            "<b>Pseudological</b> refers to something involving false or fabricated reasoning or statements.",
+        },
+
+        {
+          question:
+            "The abolition of slavery was a major step toward the ________ of millions of people.",
+          options: ["genesis", "pretension", "emancipation", "conurbation"],
+          answer: 2,
+          explanation:
+            "<b>Emancipation</b> means the process of being freed from legal, political, or social restrictions.",
+        },
+
+        {
+          question:
+            "Success is often ________ hard work, patience, and a certain amount of luck.",
+          options: [
+            "accompanied by",
+            "native to",
+            "cooped up with",
+            "grounded in",
+          ],
+          answer: 0,
+          explanation:
+            "<b>Be accompanied by</b> means to happen or exist together with something.",
+        },
+
+        {
+          question:
+            "London and its surrounding urban areas have gradually developed into a vast ________.",
+          options: ["fable", "conurbation", "mainstream", "genesis"],
+          answer: 1,
+          explanation:
+            "<b>Conurbation</b> is a large urban area formed when several towns or cities grow and merge together.",
+        },
+
+        {
+          question:
+            "Many technological ________ were initially dismissed as dreamers because their ideas seemed impossible.",
+          options: ["fellow citizens", "visionaries", "pretensions", "natives"],
+          answer: 1,
+          explanation:
+            "<b>Visionaries</b> are people who have original and imaginative ideas about the future.",
+        },
+
+        {
+          question:
+            "Good teachers try to ________ curiosity and independent thinking in their students.",
+          options: ["instil", "fabricate", "cramp", "thrash"],
+          answer: 0,
+          explanation:
+            "<b>Instil</b> means to gradually introduce an idea, feeling, or attitude into someone's mind.",
+        },
+
+        {
+          question:
+            "The president addressed his ________ and urged them to remain united during the crisis.",
+          options: [
+            "fellow citizens",
+            "cultural obsessions",
+            "visionaries",
+            "pretensions",
+          ],
+          answer: 0,
+          explanation:
+            "<b>Fellow citizens</b> means other people who are citizens of the same country.",
+        },
+
+        {
+          question:
+            "What was once considered an alternative lifestyle has now entered the ________.",
+          options: ["genesis", "mainstream", "fable", "conurbation"],
+          answer: 1,
+          explanation:
+            "<b>Mainstream</b> refers to ideas, activities, or attitudes that are accepted by most people.",
+        },
+
+        {
+          question:
+            "In some societies, physical appearance has become a ________, with enormous amounts of money spent on beauty products and procedures.",
+          options: [
+            "cultural obsession",
+            "facile argument",
+            "fellow citizen",
+            "path of least resistance",
+          ],
+          answer: 0,
+          explanation:
+            "<b>Cultural obsession</b> describes something that a society becomes extremely interested in or preoccupied with.",
+        },
+
+        {
+          question:
+            "Instead of carefully planning the trip, they decided to ________ and book their flights at the last minute.",
+          options: [
+            "get to the bottom of it",
+            "throw caution to the wind",
+            "make the cut",
+            "hold their own",
+          ],
+          answer: 1,
+          explanation:
+            "<b>Throw caution to the wind</b> means to take risks without worrying about possible danger or consequences.",
+        },
+
+        {
+          question:
+            "Choosing the ________ may be easier in the short term, but it does not always lead to the best outcome.",
+          options: [
+            "cultural obsession",
+            "path of least resistance",
+            "old axe to grind",
+            "seat of one's pants",
+          ],
+          answer: 1,
+          explanation:
+            "<b>Take the path of least resistance</b> means to choose the easiest option instead of making more effort.",
+        },
+
+        {
+          question:
+            "The police are determined to ________ what really happened on the night of the accident.",
+          options: [
+            "get to the bottom of",
+            "make do with",
+            "hold their own",
+            "throw caution to the wind",
+          ],
+          answer: 0,
+          explanation:
+            "<b>Get to the bottom of something</b> means to discover the real cause or truth about something.",
+        },
+
+        {
+          question:
+            "The story of the tortoise and the hare is a well-known ________ that teaches the value of persistence.",
+          options: ["pretension", "genesis", "fable", "conurbation"],
+          answer: 2,
+          explanation:
+            "<b>Fable</b> is a short story, often involving animals, that teaches a moral lesson.",
+        },
+
+        {
+          question:
+            "We had no detailed plan for the presentation, so we basically had to ________.",
+          options: [
+            "fly by the seat of our pants",
+            "take the path of least resistance",
+            "make the cut",
+            "coop ourselves up",
+          ],
+          answer: 0,
+          explanation:
+            "<b>Fly by the seat of one's pants</b> means to do something without planning and rely on your own ability.",
+        },
+
+        {
+          question:
+            "Her claim that she was an expert in the field turned out to be nothing more than ________.",
+          options: ["emancipation", "pretension", "regeneration", "genesis"],
+          answer: 1,
+          explanation:
+            "<b>Pretension</b> is a claim to importance, knowledge, or ability that may not be genuine.",
+        },
+
+        {
+          question:
+            "This species of orchid is ________ the tropical rainforests of Southeast Asia.",
+          options: [
+            "accompanied by",
+            "native to",
+            "grounded in",
+            "made do with",
+          ],
+          answer: 1,
+          explanation:
+            "<b>Native to</b> means naturally existing or originally coming from a particular place.",
+        },
+
+        {
+          question:
+            "Since the electricity went out, we had to ________ candles and flashlights.",
+          options: [
+            "make do with",
+            "get to the bottom of",
+            "hold our own against",
+            "throw caution to the wind with",
+          ],
+          answer: 0,
+          explanation:
+            "<b>Make do with</b> means to manage with something that is not ideal because there is no better option.",
+        },
+
+        {
+          question:
+            "The city is trying to ________ its old industrial areas and turn them into attractive public spaces.",
+          options: ["regenerate", "fabricate", "confabulate", "instil"],
+          answer: 0,
+          explanation:
+            "<b>Regenerate</b> means to improve or bring new life to an area, system, or organization.",
+        },
+
+        {
+          question:
+            "Although they were competing against much larger companies, the small business managed to ________.",
+          options: [
+            "make the cut",
+            "hold its own",
+            "get cooped up",
+            "take the path of least resistance",
+          ],
+          answer: 1,
+          explanation:
+            "<b>Hold one's own</b> means to remain successful or competitive despite difficulties.",
+        },
+
+        {
+          question:
+            "Money, ________, cannot guarantee happiness; what matters is how it is used.",
+          options: [
+            "in and of itself",
+            "by the seat of one's pants",
+            "native to",
+            "accompanied by",
+          ],
+          answer: 0,
+          explanation:
+            "<b>In and of itself</b> means considered alone, without considering other factors.",
+        },
+
+        {
+          question:
+            "Be careful when listening to his criticism of the company—he may ________ because they rejected his job application years ago.",
+          options: [
+            "have an old axe to grind",
+            "make the cut",
+            "get to the bottom of it",
+            "hold his own",
+          ],
+          answer: 0,
+          explanation:
+            "<b>Have an axe to grind</b> means to have a personal reason for being angry or criticizing someone.",
+        },
+
+        {
+          question:
+            "The two sides spent several hours trying to ________ the details of the agreement.",
+          options: ["thrash out", "coop up", "regenerate", "confabulate"],
+          answer: 0,
+          explanation:
+            "<b>Thrash out</b> means to discuss something thoroughly until an agreement or solution is reached.",
+        },
+
+        {
+          question:
+            "The cramped office and strict rules really ________; I feel like I have no freedom to be creative.",
+          options: [
+            "make the cut",
+            "cramp my style",
+            "throw caution to the wind",
+            "hold my own",
+          ],
+          answer: 1,
+          explanation:
+            "<b>Cramp someone's style</b> means to limit someone's freedom or prevent them from doing what they want.",
+        },
+
+        {
+          question:
+            "After being ________ indoors for several days because of the storm, the children were desperate to go outside.",
+          options: ["cooped", "regenerated", "emancipated", "instilled"],
+          answer: 0,
+          explanation:
+            "<b>Be cooped up</b> means to be kept in a small or enclosed place for a long time.",
+        },
+
+        {
+          question:
+            "Only the top 10 contestants will ________ and advance to the final round.",
+          options: [
+            "make the cut",
+            "get to the bottom",
+            "hold their own",
+            "take the path",
+          ],
+          answer: 0,
+          explanation:
+            "<b>Make the cut</b> means to reach the required standard and be selected.",
+        },
+
+        {
+          question:
+            "The documentary explores the ________ of the conflict, tracing how a small disagreement eventually developed into a full-scale war.",
+          options: ["genesis", "mainstream", "pretension", "fable"],
+          answer: 0,
+          explanation:
+            "<b>Genesis</b> means the origin or beginning of something.",
+        },
+      ];
+
+      const quiz = document.getElementById("quiz");
+
+      let score = 0;
+      let answered = 0;
+
+      questions.forEach((q, index) => {
+        const card = document.createElement("div");
+        card.className = "question-card";
+
+        card.innerHTML = `
+
+        <div class="question-number">
+            Question ${index + 1}
+        </div>
+
+        <div class="question">
+            ${q.question}
+        </div>
+
+        <div class="options" id="options-${index}">
+            ${q.options
+              .map(
+                (option, i) => `
+                <div class="option" onclick="selectOption(${index}, ${i})">
+                    <b>${String.fromCharCode(65 + i)}.</b> ${option}
+                </div>
+            `,
+              )
+              .join("")}
+        </div>
+
+        <button class="check-btn"
+        onclick="checkAnswer(${index})">
+            Check Answer
+        </button>
+
+        <div class="feedback" id="feedback-${index}">
+        </div>
+
+    `;
+
+        quiz.appendChild(card);
+      });
+
+      function selectOption(questionIndex, optionIndex) {
+        const options = document.querySelectorAll(
+          `#options-${questionIndex} .option`,
+        );
+
+        options.forEach((option) => {
+          option.classList.remove("selected");
+        });
+
+        options[optionIndex].classList.add("selected");
+      }
+
+      function checkAnswer(index) {
+        const options = document.querySelectorAll(`#options-${index} .option`);
+
+        const feedback = document.getElementById(`feedback-${index}`);
+
+        let selected = -1;
+
+        options.forEach((option, i) => {
+          if (option.classList.contains("selected")) {
+            selected = i;
+          }
+        });
+
+        if (selected === -1) {
+          alert("⚠️ Please choose an answer first!");
+          return;
+        }
+
+        if (feedback.style.display === "block") {
+          return;
+        }
+
+        answered++;
+
+        if (selected === questions[index].answer) {
+          score++;
+
+          options[selected].classList.add("correct");
+
+          feedback.className = "feedback correct-feedback";
+
+          feedback.innerHTML = `✅ <b>Correct!</b><br>${questions[index].explanation}`;
+        } else {
+          options[selected].classList.add("wrong");
+
+          options[questions[index].answer].classList.add("correct");
+
+          feedback.className = "feedback wrong-feedback";
+
+          feedback.innerHTML = `❌ <b>Incorrect.</b><br>
+            Correct answer: <b>
+            ${String.fromCharCode(65 + questions[index].answer)}. ${
+              questions[index].options[questions[index].answer]
+            }
+            </b><br><br>
+            ${questions[index].explanation}`;
+        }
+
+        feedback.style.display = "block";
+
+        options.forEach((option) => {
+          option.style.pointerEvents = "none";
+        });
+
+        updateProgress();
+
+        if (answered === questions.length) {
+          setTimeout(showResult, 600);
+        }
+      }
+
+      function updateProgress() {
+        const percentage = (answered / questions.length) * 100;
+
+        document.getElementById("progressBar").style.width = percentage + "%";
+
+        document.getElementById("progressText").innerText =
+          `${answered} / ${questions.length} answered`;
+      }
+
+      function showResult() {
+        const result = document.getElementById("result");
+
+        result.style.display = "block";
+
+        document.getElementById("finalScore").innerText =
+          `${score} / ${questions.length}`;
+
+        let message = "";
+
+        const percentage = (score / questions.length) * 100;
+
+        if (percentage >= 90) {
+          message = "🏆 Excellent! Your vocabulary knowledge is outstanding!";
+        } else if (percentage >= 75) {
+          message =
+            "🌟 Great job! You have a strong understanding of these words.";
+        } else if (percentage >= 50) {
+          message = "💪 Good effort! Review the explanations and try again.";
+        } else {
+          message = "📚 Keep practicing! Vocabulary mastery takes time.";
+        }
+
+        document.getElementById("resultMessage").innerText = message;
+
+        result.scrollIntoView({
+          behavior: "smooth",
+        });
+      }
+
+      function restartQuiz() {
+        location.reload();
+      }
+    </script>
+  </body>
+</html>

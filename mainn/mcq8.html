@@ -1,0 +1,990 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Vocabulary Challenge</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        min-height: 100vh;
+        font-family: Arial, Helvetica, sans-serif;
+        background: linear-gradient(135deg, #f5f3ff, #eef2ff, #fdf2f8);
+        color: #1f2937;
+        padding: 30px 20px;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 850px;
+        margin: auto;
+      }
+
+      /* HEADER */
+
+      .header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .header-icon {
+        width: 70px;
+        height: 70px;
+
+        margin: 0 auto 15px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-size: 32px;
+
+        background: white;
+        border-radius: 22px;
+
+        box-shadow: 0 10px 30px rgba(124, 58, 237, 0.15);
+      }
+
+      h1 {
+        font-size: 38px;
+        color: #312e81;
+        margin-bottom: 8px;
+      }
+
+      .subtitle {
+        color: #6b7280;
+        font-size: 16px;
+      }
+
+      /* SCORE BAR */
+
+      .quiz-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        background: white;
+
+        padding: 16px 20px;
+        border-radius: 18px;
+
+        margin-bottom: 20px;
+
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+      }
+
+      .progress-text {
+        font-weight: bold;
+        color: #4f46e5;
+      }
+
+      .score {
+        font-weight: bold;
+        color: #db2777;
+      }
+
+      .progress-bar {
+        height: 10px;
+
+        background: #e5e7eb;
+
+        border-radius: 20px;
+
+        overflow: hidden;
+
+        margin-bottom: 25px;
+      }
+
+      .progress {
+        height: 100%;
+        width: 4%;
+
+        background: linear-gradient(90deg, #7c3aed, #db2777);
+
+        border-radius: 20px;
+
+        transition: width 0.4s ease;
+      }
+
+      /* QUESTION CARD */
+
+      .quiz-card {
+        background: rgba(255, 255, 255, 0.95);
+
+        border-radius: 25px;
+
+        padding: 35px;
+
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+      }
+
+      .question-number {
+        display: inline-block;
+
+        background: #ede9fe;
+        color: #7c3aed;
+
+        padding: 8px 15px;
+
+        border-radius: 12px;
+
+        font-weight: bold;
+
+        margin-bottom: 20px;
+      }
+
+      .question {
+        font-size: 22px;
+        line-height: 1.6;
+
+        margin-bottom: 30px;
+
+        font-weight: 600;
+      }
+
+      /* ANSWERS */
+
+      .answers {
+        display: grid;
+        gap: 14px;
+      }
+
+      .answer {
+        width: 100%;
+
+        display: flex;
+        align-items: center;
+        gap: 15px;
+
+        padding: 17px 20px;
+
+        border: 2px solid #e5e7eb;
+        border-radius: 15px;
+
+        background: white;
+
+        font-size: 16px;
+        text-align: left;
+
+        cursor: pointer;
+
+        transition: all 0.2s ease;
+      }
+
+      .answer:hover:not(:disabled) {
+        border-color: #8b5cf6;
+        transform: translateX(5px);
+        background: #faf5ff;
+      }
+
+      .answer-letter {
+        width: 34px;
+        height: 34px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        flex-shrink: 0;
+
+        background: #f3f4f6;
+
+        border-radius: 10px;
+
+        font-weight: bold;
+      }
+
+      .answer.correct {
+        background: #ecfdf5;
+        border-color: #22c55e;
+      }
+
+      .answer.correct .answer-letter {
+        background: #22c55e;
+        color: white;
+      }
+
+      .answer.wrong {
+        background: #fef2f2;
+        border-color: #ef4444;
+      }
+
+      .answer.wrong .answer-letter {
+        background: #ef4444;
+        color: white;
+      }
+
+      .answer:disabled {
+        cursor: default;
+      }
+
+      /* EXPLANATION */
+
+      .feedback {
+        display: none;
+
+        margin-top: 25px;
+
+        padding: 20px;
+
+        border-radius: 16px;
+
+        line-height: 1.7;
+      }
+
+      .feedback.correct-feedback {
+        display: block;
+        background: #ecfdf5;
+        border: 1px solid #86efac;
+      }
+
+      .feedback.wrong-feedback {
+        display: block;
+        background: #fef2f2;
+        border: 1px solid #fca5a5;
+      }
+
+      .feedback-title {
+        font-weight: bold;
+        font-size: 18px;
+
+        margin-bottom: 8px;
+      }
+
+      /* NEXT BUTTON */
+
+      .next-btn {
+        display: none;
+
+        margin-top: 25px;
+        margin-left: auto;
+
+        padding: 14px 25px;
+
+        border: none;
+        border-radius: 14px;
+
+        background: linear-gradient(135deg, #7c3aed, #db2777);
+        color: white;
+
+        font-size: 16px;
+        font-weight: bold;
+
+        cursor: pointer;
+
+        transition: 0.2s;
+      }
+
+      .next-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(124, 58, 237, 0.25);
+      }
+
+      /* RESULT */
+
+      .result-card {
+        display: none;
+
+        text-align: center;
+
+        background: white;
+
+        padding: 50px 30px;
+
+        border-radius: 25px;
+
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+      }
+
+      .result-icon {
+        font-size: 65px;
+        margin-bottom: 15px;
+      }
+
+      .result-card h2 {
+        font-size: 32px;
+        color: #312e81;
+
+        margin-bottom: 15px;
+      }
+
+      .final-score {
+        font-size: 22px;
+        margin-bottom: 25px;
+      }
+
+      .restart-btn {
+        padding: 15px 28px;
+
+        border: none;
+        border-radius: 15px;
+
+        background: linear-gradient(135deg, #7c3aed, #db2777);
+
+        color: white;
+
+        font-size: 16px;
+        font-weight: bold;
+
+        cursor: pointer;
+      }
+
+      @media (max-width: 600px) {
+        body {
+          padding: 20px 12px;
+        }
+
+        h1 {
+          font-size: 30px;
+        }
+
+        .quiz-card {
+          padding: 25px 18px;
+        }
+
+        .question {
+          font-size: 19px;
+        }
+
+        .quiz-info {
+          font-size: 14px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="header-icon">🧠</div>
+
+        <h1>Vocabulary Challenge</h1>
+
+        <p class="subtitle">
+          Choose the best answer and test your vocabulary knowledge.
+        </p>
+      </div>
+
+      <div id="quizContainer">
+        <div class="quiz-info">
+          <div class="progress-text" id="questionCounter">Question 1 / 25</div>
+
+          <div class="score" id="score">Score: 0</div>
+        </div>
+
+        <div class="progress-bar">
+          <div class="progress" id="progressBar"></div>
+        </div>
+
+        <div class="quiz-card">
+          <div class="question-number" id="questionNumber">QUESTION 1</div>
+
+          <div class="question" id="question"></div>
+
+          <div class="answers" id="answers"></div>
+
+          <div class="feedback" id="feedback"></div>
+
+          <button class="next-btn" id="nextBtn">Next Question →</button>
+        </div>
+      </div>
+
+      <div class="result-card" id="resultCard">
+        <div class="result-icon">🎉</div>
+
+        <h2>Quiz Complete!</h2>
+
+        <div class="final-score" id="finalScore"></div>
+
+        <p id="resultMessage"></p>
+
+        <br />
+
+        <button class="restart-btn" onclick="restartQuiz()">
+          🔄 Try Again
+        </button>
+      </div>
+    </div>
+
+    <script>
+      const questions = [
+        {
+          question: `Despite being only 25, she is a ______ journalist who has covered several major international conflicts.`,
+
+          options: ["oblivious", "seasoned", "despicable", "slackened"],
+
+          answer: 1,
+
+          explanation: `
+      <b>Seasoned</b> means experienced and skilled because someone has done something for a long time.<br><br>
+      → She is a <b>seasoned journalist</b> despite her young age.
+    `,
+        },
+
+        {
+          question: `Buying a very cheap laptop may seem economical, but if it breaks down quickly, it could turn out to be a ______.`,
+
+          options: [
+            "raw deal",
+            "false economy",
+            "cottage industry",
+            "red herring",
+          ],
+
+          answer: 1,
+
+          explanation: `
+      <b>False economy</b> refers to saving money in the short term but spending more money later.<br><br>
+      → A cheap laptop that quickly breaks may become a <b>false economy</b>.
+    `,
+        },
+
+        {
+          question: `Before mass production became common, furniture-making was largely a ______, with goods produced in small workshops or homes.`,
+
+          options: [
+            "cottage industry",
+            "mainstream industry",
+            "false economy",
+            "home stretch",
+          ],
+
+          answer: 0,
+
+          explanation: `
+      A <b>cottage industry</b> is a small-scale business where products are often made at home or in small workshops.
+    `,
+        },
+
+        {
+          question: `Exploiting vulnerable people for personal profit is absolutely ______.`,
+
+          options: ["seasoned", "extenuating", "despicable", "oblivious"],
+
+          answer: 2,
+
+          explanation: `
+      <b>Despicable</b> means morally very bad and deserving strong dislike or contempt.
+    `,
+        },
+
+        {
+          question: `Several companies are ______ the contract, which is expected to be worth millions of dollars.`,
+
+          options: ["renouncing", "acceding to", "vying for", "knuckling down"],
+
+          answer: 2,
+
+          explanation: `
+      <b>Vie for</b> means to compete with others in order to get or achieve something.<br><br>
+      → Several companies are <b>vying for</b> the contract.
+    `,
+        },
+
+        {
+          question: `After wasting the first few months of the semester, he finally decided to ______ and prepare seriously for the exam.`,
+
+          options: [
+            "slacken off",
+            "knuckle down",
+            "muck up",
+            "get the willies",
+          ],
+
+          answer: 1,
+
+          explanation: `
+      <b>Knuckle down</b> means to start working or studying seriously and with determination.
+    `,
+        },
+
+        {
+          question: `The previous government refused to ______ the demands of the protesters.`,
+
+          options: ["saddle with", "accede to", "vie for", "renounce from"],
+
+          answer: 1,
+
+          explanation: `
+      <b>Accede to</b> means to agree to or accept a request, demand, or proposal.<br><br>
+      ❌ We normally say <b>renounce something</b>, not "renounce from".
+    `,
+        },
+
+        {
+          question: `The new policy may ______ small businesses ______ unnecessary paperwork.`,
+
+          options: [
+            "give / a raw deal",
+            "saddle / with",
+            "afflict / to",
+            "muck / up",
+          ],
+
+          answer: 1,
+
+          explanation: `
+      <b>Saddle somebody with something</b> means to give someone an unwanted responsibility or burden.<br><br>
+      → saddle small businesses <b>with</b> unnecessary paperwork.
+    `,
+        },
+
+        {
+          question: `Millions of people around the world are ______ by poverty and disease.`,
+
+          options: ["afflicted", "acceded", "seasoned", "renounced"],
+
+          answer: 0,
+
+          explanation: `
+      <b>Afflict</b> means to cause suffering or serious problems to someone or something.<br><br>
+      → People are <b>afflicted by</b> poverty and disease.
+    `,
+        },
+
+        {
+          question: `We're finally ______ now—just two more weeks until the final exam is over!`,
+
+          options: [
+            "up the spout",
+            "in the home stretch",
+            "on the ball",
+            "for the high jump",
+          ],
+
+          answer: 1,
+
+          explanation: `
+      <b>In the home stretch</b> means in the final part of a process, especially when you are close to finishing.
+    `,
+        },
+
+        {
+          question: `She tends to ______ whenever someone else receives a promotion instead of her.`,
+
+          options: [
+            "feel hard done by",
+            "get the willies",
+            "slacken off",
+            "be oblivious",
+          ],
+
+          answer: 0,
+
+          explanation: `
+      <b>Feel hard done by</b> means to feel that you have been treated unfairly.
+    `,
+        },
+
+        {
+          question: `Many employees believe they have been ______ after working overtime without receiving additional pay.`,
+
+          options: [
+            "given a raw deal",
+            "saddled with",
+            "up the spout",
+            "in the home stretch",
+          ],
+
+          answer: 0,
+
+          explanation: `
+      <b>Be given a raw deal</b> means to be treated unfairly or badly.
+    `,
+        },
+
+        {
+          question: `The manager made the decision, but it was his assistant who ______ from the angry customers.`,
+
+          options: [
+            "got the flak",
+            "got the willies",
+            "made the cut",
+            "had half a mind",
+          ],
+
+          answer: 0,
+
+          explanation: `
+      <b>Get the flak</b> means to receive strong criticism, often for something that went wrong.
+    `,
+        },
+
+        {
+          question: `Walking through that abandoned house at night really ______.`,
+
+          options: [
+            "gave me the flak",
+            "got me the willies",
+            "made me on the ball",
+            "put me up the spout",
+          ],
+
+          answer: 1,
+
+          explanation: `
+      <b>Get the willies</b> means to feel frightened, uncomfortable, or creeped out.<br><br>
+      → Something <b>gave me the willies</b> is also a common natural expression.
+    `,
+        },
+
+        {
+          question: `Although he broke the rules, there were some ______ that the committee agreed to take into consideration.`,
+
+          options: [
+            "red herrings",
+            "extenuating circumstances",
+            "apples of discord",
+            "false economies",
+          ],
+
+          answer: 1,
+
+          explanation: `
+      <b>Extenuating circumstances</b> are special factors that make someone's mistake or wrongdoing seem less serious.
+    `,
+        },
+
+        {
+          question: `Money became an ______ between the two brothers and eventually destroyed their relationship.`,
+
+          options: [
+            "asset",
+            "apple of discord",
+            "uphill struggle",
+            "cottage industry",
+          ],
+
+          answer: 1,
+
+          explanation: `
+      An <b>apple of discord</b> is something that causes an argument or disagreement between people.
+    `,
+        },
+
+        {
+          question: `I ______ call her and ask what really happened, but I'm not sure if that's a good idea.`,
+
+          options: [
+            "have half a mind to",
+            "am in the home stretch to",
+            "am up the spout to",
+            "am on the ball to",
+          ],
+
+          answer: 0,
+
+          explanation: `
+      <b>Have half a mind to do something</b> means to be considering doing it or to feel tempted to do it.
+    `,
+        },
+
+        {
+          question: `Getting the company back on its feet after the financial crisis was ______.`,
+
+          options: [
+            "an apple of discord",
+            "a false economy",
+            "an uphill struggle",
+            "a red herring",
+          ],
+
+          answer: 2,
+
+          explanation: `
+      <b>An uphill struggle</b> means something that is very difficult and requires a lot of effort.
+    `,
+        },
+
+        {
+          question: `The prince decided to ______ his claim to the throne.`,
+
+          options: ["vie for", "renounce", "accede to", "saddle"],
+
+          answer: 1,
+
+          explanation: `
+      <b>Renounce</b> means to formally give up a right, claim, belief, or position.<br><br>
+      → <b>renounce his claim to the throne</b>.
+    `,
+        },
+
+        {
+          question: `Her ability to speak three languages is a valuable ______ when applying for international jobs.`,
+
+          options: ["perk", "asset", "propensity", "flak"],
+
+          answer: 1,
+
+          explanation: `
+      An <b>asset</b> is a useful or valuable quality that gives someone an advantage.
+    `,
+        },
+
+        {
+          question: `One major ______ of working from home is that you can avoid the daily commute.`,
+
+          options: ["raw deal", "perk", "red herring", "circumstance"],
+
+          answer: 1,
+
+          explanation: `
+      A <b>perk</b> is an additional benefit or advantage that comes with a job or situation.
+    `,
+        },
+
+        {
+          question: `He was completely ______ the fact that everyone in the room was laughing at him.`,
+
+          options: [
+            "seasoned by",
+            "oblivious to",
+            "saddled with",
+            "afflicted by",
+          ],
+
+          answer: 1,
+
+          explanation: `
+      <b>Oblivious to</b> means completely unaware of something.<br><br>
+      → He was oblivious <b>to the fact that...</b>
+    `,
+        },
+
+        {
+          question: `The lawyer introduced several irrelevant arguments that were clearly ______ intended to distract the jury from the main issue.`,
+
+          options: [
+            "assets",
+            "red herrings",
+            "extenuating circumstances",
+            "cottage industries",
+          ],
+
+          answer: 1,
+
+          explanation: `
+      <b>Red herrings</b> are irrelevant pieces of information introduced to distract people from the main issue.
+    `,
+        },
+
+        {
+          question: `If the teacher finds out who damaged the laboratory equipment, the student responsible will ______.`,
+
+          options: [
+            "be in the home stretch",
+            "be for the high jump",
+            "be on the ball",
+            "get a perk",
+          ],
+
+          answer: 1,
+
+          explanation: `
+      <b>Be for the high jump</b> means to be likely to get into serious trouble or be punished.
+    `,
+        },
+
+        {
+          question: `She has a strong ______ taking risks, which sometimes leads her into trouble.`,
+
+          options: [
+            "propensity for",
+            "half a mind to",
+            "raw deal with",
+            "apple of discord",
+          ],
+
+          answer: 0,
+
+          explanation: `
+      <b>Propensity for</b> means a natural tendency or inclination to do something.<br><br>
+      → a propensity <b>for taking risks</b>.
+    `,
+        },
+      ];
+
+      let currentQuestion = 0;
+      let score = 0;
+      let answered = false;
+
+      const questionElement = document.getElementById("question");
+      const answersElement = document.getElementById("answers");
+
+      const feedbackElement = document.getElementById("feedback");
+
+      const nextBtn = document.getElementById("nextBtn");
+
+      const questionCounter = document.getElementById("questionCounter");
+      const questionNumber = document.getElementById("questionNumber");
+
+      const scoreElement = document.getElementById("score");
+
+      const progressBar = document.getElementById("progressBar");
+
+      function loadQuestion() {
+        answered = false;
+
+        const q = questions[currentQuestion];
+
+        questionElement.innerHTML = q.question;
+
+        questionNumber.textContent = `QUESTION ${currentQuestion + 1}`;
+
+        questionCounter.textContent = `Question ${currentQuestion + 1} / ${questions.length}`;
+
+        scoreElement.textContent = `Score: ${score}`;
+
+        progressBar.style.width = `${((currentQuestion + 1) / questions.length) * 100}%`;
+
+        answersElement.innerHTML = "";
+
+        feedbackElement.className = "feedback";
+        feedbackElement.innerHTML = "";
+
+        nextBtn.style.display = "none";
+
+        const letters = ["A", "B", "C", "D"];
+
+        q.options.forEach((option, index) => {
+          const button = document.createElement("button");
+
+          button.className = "answer";
+
+          button.innerHTML = `
+      <span class="answer-letter">
+        ${letters[index]}
+      </span>
+
+      <span>
+        ${option}
+      </span>
+    `;
+
+          button.onclick = () => selectAnswer(index);
+
+          answersElement.appendChild(button);
+        });
+      }
+
+      function selectAnswer(selectedIndex) {
+        if (answered) return;
+
+        answered = true;
+
+        const q = questions[currentQuestion];
+
+        const buttons = document.querySelectorAll(".answer");
+
+        buttons.forEach((button, index) => {
+          button.disabled = true;
+
+          if (index === q.answer) {
+            button.classList.add("correct");
+          }
+
+          if (index === selectedIndex && selectedIndex !== q.answer) {
+            button.classList.add("wrong");
+          }
+        });
+
+        if (selectedIndex === q.answer) {
+          score++;
+
+          feedbackElement.className = "feedback correct-feedback";
+
+          feedbackElement.innerHTML = `
+      <div class="feedback-title">
+        ✅ Correct!
+      </div>
+
+      ${q.explanation}
+    `;
+        } else {
+          feedbackElement.className = "feedback wrong-feedback";
+
+          feedbackElement.innerHTML = `
+      <div class="feedback-title">
+        ❌ Incorrect
+      </div>
+
+      <b>Correct answer:</b>
+      ${String.fromCharCode(65 + q.answer)}.
+      ${q.options[q.answer]}
+
+      <br><br>
+
+      ${q.explanation}
+    `;
+        }
+
+        scoreElement.textContent = `Score: ${score}`;
+
+        nextBtn.style.display = "block";
+      }
+
+      nextBtn.addEventListener("click", () => {
+        currentQuestion++;
+
+        if (currentQuestion < questions.length) {
+          loadQuestion();
+        } else {
+          showResult();
+        }
+      });
+
+      function showResult() {
+        document.getElementById("quizContainer").style.display = "none";
+
+        const resultCard = document.getElementById("resultCard");
+
+        resultCard.style.display = "block";
+
+        document.getElementById("finalScore").innerHTML = `
+      You got <b>${score} / ${questions.length}</b> correct!
+    `;
+
+        const percentage = Math.round((score / questions.length) * 100);
+
+        let message = "";
+
+        if (percentage === 100) {
+          message = "🔥 Perfect score! Your vocabulary knowledge is excellent.";
+        } else if (percentage >= 80) {
+          message =
+            "🌟 Great job! You have a strong understanding of these words.";
+        } else if (percentage >= 60) {
+          message = "💪 Good effort! Review the explanations and try again.";
+        } else {
+          message =
+            "📚 Keep practising! Go back to the Vocabulary Bank and review the words.";
+        }
+
+        document.getElementById("resultMessage").textContent = message;
+      }
+
+      function restartQuiz() {
+        currentQuestion = 0;
+
+        score = 0;
+
+        answered = false;
+
+        document.getElementById("quizContainer").style.display = "block";
+
+        document.getElementById("resultCard").style.display = "none";
+
+        loadQuestion();
+      }
+
+      loadQuestion();
+    </script>
+  </body>
+</html>

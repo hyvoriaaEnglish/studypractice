@@ -1,0 +1,980 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Vocabulary Bank - Culture & Heritage</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: linear-gradient(135deg, #eef2ff, #f8fafc);
+        color: #1e293b;
+        min-height: 100vh;
+        padding: 40px 20px;
+      }
+
+      .container {
+        max-width: 1100px;
+        margin: auto;
+      }
+
+      /* HEADER */
+
+      .header {
+        text-align: center;
+        margin-bottom: 35px;
+      }
+
+      .header h1 {
+        font-size: 42px;
+        color: #4338ca;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        color: #64748b;
+        font-size: 17px;
+      }
+
+      /* SEARCH */
+
+      .search-box {
+        margin-bottom: 30px;
+      }
+
+      .search-box input {
+        width: 100%;
+        padding: 17px 20px;
+        border: 2px solid #e2e8f0;
+        border-radius: 14px;
+        font-size: 16px;
+        outline: none;
+        background: white;
+        transition: 0.3s;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      .search-box input:focus {
+        border-color: #6366f1;
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
+      }
+
+      /* VOCABULARY LIST */
+
+      .vocabulary-list {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      .vocab-card {
+        background: white;
+        border-radius: 18px;
+        padding: 24px;
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        gap: 25px;
+        box-shadow: 0 8px 25px rgba(15, 23, 42, 0.07);
+        border: 1px solid #e2e8f0;
+        transition: all 0.3s ease;
+      }
+
+      .vocab-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 15px 35px rgba(79, 70, 229, 0.12);
+        border-color: #c7d2fe;
+      }
+
+      /* WORD SECTION */
+
+      .word-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-right: 1px solid #e2e8f0;
+        padding-right: 20px;
+      }
+
+      .word-number {
+        font-size: 13px;
+        color: #94a3b8;
+        margin-bottom: 5px;
+        font-weight: 600;
+      }
+
+      .word {
+        font-size: 25px;
+        font-weight: 700;
+        color: #4338ca;
+        margin-bottom: 8px;
+      }
+
+      .meaning {
+        color: #475569;
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 1.5;
+      }
+
+      /* EXAMPLE SECTION */
+
+      .example-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .example-label {
+        font-size: 12px;
+        color: #6366f1;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 7px;
+      }
+
+      .example {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #334155;
+        margin-bottom: 8px;
+      }
+
+      .translation {
+        font-size: 15px;
+        color: #64748b;
+        font-style: italic;
+        margin-bottom: 15px;
+        line-height: 1.5;
+      }
+
+      /* SPEAK BUTTON */
+
+      .speak-btn {
+        width: fit-content;
+        border: none;
+        background: #eef2ff;
+        color: #4f46e5;
+        padding: 8px 14px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        transition: 0.2s;
+      }
+
+      .speak-btn:hover {
+        background: #4f46e5;
+        color: white;
+      }
+
+      /* NO RESULT */
+
+      .no-result {
+        display: none;
+        text-align: center;
+        padding: 40px;
+        background: white;
+        border-radius: 15px;
+        color: #64748b;
+      }
+
+      /* FOOTER */
+
+      .footer {
+        text-align: center;
+        margin-top: 35px;
+        color: #94a3b8;
+        font-size: 14px;
+      }
+
+      /* MOBILE */
+
+      @media (max-width: 700px) {
+        body {
+          padding: 25px 12px;
+        }
+
+        .header h1 {
+          font-size: 30px;
+        }
+
+        .header p {
+          font-size: 15px;
+        }
+
+        .vocab-card {
+          grid-template-columns: 1fr;
+          gap: 18px;
+        }
+
+        .word-section {
+          border-right: none;
+          border-bottom: 1px solid #e2e8f0;
+          padding-right: 0;
+          padding-bottom: 18px;
+        }
+
+        .word {
+          font-size: 23px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- HEADER -->
+
+      <div class="header">
+        <h1>🏛️ Vocabulary Bank</h1>
+
+        <p>Vocabulary</p>
+      </div>
+
+      <!-- SEARCH -->
+
+      <div class="search-box">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="🔍 Search vocabulary..."
+        />
+      </div>
+
+      <!-- VOCABULARY LIST -->
+
+      <div class="vocabulary-list" id="vocabularyList">
+       <div class="vocabulary-list" id="vocabularyList">
+
+  <!-- 1 -->
+  <div class="vocab-card" data-word="seasoned">
+    <div class="word-section">
+      <div class="word-number">01</div>
+      <div class="word">seasoned</div>
+      <div class="meaning">dày dạn kinh nghiệm, từng trải</div>
+    </div>
+
+    <div class="example-section">
+      <div class="example-label">Example</div>
+      <div class="example">
+        She is a seasoned lawyer with more than twenty years of experience.
+      </div>
+      <div class="translation">
+        Cô ấy là một luật sư dày dạn kinh nghiệm với hơn hai mươi năm làm việc.
+      </div>
+      <button class="speak-btn" onclick="speak('seasoned')">🔊 Listen</button>
+    </div>
+  </div>
+
+
+  <!-- 2 -->
+  <div class="vocab-card" data-word="false economy">
+    <div class="word-section">
+      <div class="word-number">02</div>
+      <div class="word">false economy</div>
+      <div class="meaning">tiết kiệm trước mắt nhưng gây tốn kém về sau</div>
+    </div>
+
+    <div class="example-section">
+      <div class="example-label">Example</div>
+      <div class="example">
+        Buying cheap equipment may be a false economy if it breaks down quickly.
+      </div>
+      <div class="translation">
+        Mua thiết bị rẻ có thể là một sự tiết kiệm giả tạo nếu nó nhanh chóng hỏng.
+      </div>
+      <button class="speak-btn" onclick="speak('false economy')">🔊 Listen</button>
+    </div>
+  </div>
+
+
+  <!-- 3 -->
+  <div class="vocab-card" data-word="cottage industry">
+    <div class="word-section">
+      <div class="word-number">03</div>
+      <div class="word">cottage industry</div>
+      <div class="meaning">ngành nghề sản xuất nhỏ, thường làm tại nhà</div>
+    </div>
+
+    <div class="example-section">
+      <div class="example-label">Example</div>
+      <div class="example">
+        Handmade pottery has developed into a successful cottage industry in the village.
+      </div>
+      <div class="translation">
+        Nghề làm đồ gốm thủ công đã phát triển thành một ngành sản xuất nhỏ thành công trong ngôi làng.
+      </div>
+      <button class="speak-btn" onclick="speak('cottage industry')">🔊 Listen</button>
+    </div>
+  </div>
+
+
+  <!-- 4 -->
+  <div class="vocab-card" data-word="despicable">
+    <div class="word-section">
+      <div class="word-number">04</div>
+      <div class="word">despicable</div>
+      <div class="meaning">đê hèn, đáng khinh</div>
+    </div>
+
+    <div class="example-section">
+      <div class="example-label">Example</div>
+      <div class="example">
+        Exploiting vulnerable people for profit is a despicable act.
+      </div>
+      <div class="translation">
+        Lợi dụng những người yếu thế để kiếm lợi là một hành động đáng khinh.
+      </div>
+      <button class="speak-btn" onclick="speak('despicable')">🔊 Listen</button>
+    </div>
+  </div>
+
+
+  <!-- 5 -->
+  <div class="vocab-card" data-word="vie for">
+    <div class="word-section">
+      <div class="word-number">05</div>
+      <div class="word">vie for</div>
+      <div class="meaning">cạnh tranh để giành được</div>
+    </div>
+
+    <div class="example-section">
+      <div class="example-label">Example</div>
+      <div class="example">
+        Several companies are vying for the contract.
+      </div>
+      <div class="translation">
+        Một số công ty đang cạnh tranh để giành được hợp đồng.
+      </div>
+      <button class="speak-btn" onclick="speak('vie for')">🔊 Listen</button>
+    </div>
+  </div>
+
+
+  <!-- 6 -->
+  <div class="vocab-card" data-word="accede to">
+    <div class="word-section">
+      <div class="word-number">06</div>
+      <div class="word">accede to</div>
+      <div class="meaning">đồng ý, chấp thuận một yêu cầu</div>
+    </div>
+
+    <div class="example-section">
+      <div class="example-label">Example</div>
+      <div class="example">
+        The manager finally acceded to the employees' request for more flexible hours.
+      </div>
+      <div class="translation">
+        Cuối cùng người quản lý đã chấp thuận yêu cầu về giờ làm linh hoạt hơn của nhân viên.
+      </div>
+      <button class="speak-btn" onclick="speak('accede to')">🔊 Listen</button>
+    </div>
+  </div>
+
+
+  <!-- 7 -->
+  <div class="vocab-card" data-word="knuckle down">
+    <div class="word-section">
+      <div class="word-number">07</div>
+      <div class="word">knuckle down</div>
+      <div class="meaning">bắt đầu tập trung làm việc/học tập nghiêm túc</div>
+    </div>
+
+    <div class="example-section">
+      <div class="example-label">Example</div>
+      <div class="example">
+        If you want to pass the exam, you need to knuckle down and study.
+      </div>
+      <div class="translation">
+        Nếu muốn vượt qua kỳ thi, bạn cần nghiêm túc tập trung vào việc học.
+      </div>
+      <button class="speak-btn" onclick="speak('knuckle down')">🔊 Listen</button>
+    </div>
+  </div>
+
+
+  <!-- 8 -->
+  <div class="vocab-card" data-word="saddle sb with">
+    <div class="word-section">
+      <div class="word-number">08</div>
+      <div class="word">saddle sb with</div>
+      <div class="meaning">chất/giao cho ai một trách nhiệm hoặc gánh nặng không mong muốn</div>
+    </div>
+
+    <div class="example-section">
+      <div class="example-label">Example</div>
+      <div class="example">
+        They saddled him with responsibility for the entire project.
+      </div>
+      <div class="translation">
+        Họ giao cho anh ấy trách nhiệm gánh vác toàn bộ dự án.
+      </div>
+      <button class="speak-btn" onclick="speak('saddle someone with')">🔊 Listen</button>
+    </div>
+  </div>
+
+
+  <!-- 9 -->
+  <div class="vocab-card" data-word="afflict">
+    <div class="word-section">
+      <div class="word-number">09</div>
+      <div class="word">afflict</div>
+      <div class="meaning">gây đau khổ, ảnh hưởng nghiêm trọng đến</div>
+    </div>
+
+    <div class="example-section">
+      <div class="example-label">Example</div>
+      <div class="example">
+        The region has long been afflicted by poverty and unemployment.
+      </div>
+      <div class="translation">
+        Khu vực này từ lâu đã bị ảnh hưởng nghiêm trọng bởi nghèo đói và thất nghiệp.
+      </div>
+      <button class="speak-btn" onclick="speak('afflict')">🔊 Listen</button>
+    </div>
+  </div>
+
+
+  <!-- 10 -->
+  <div class="vocab-card" data-word="in the home stretch">
+    <div class="word-section">
+      <div class="word-number">10</div>
+      <div class="word">in the home stretch</div>
+      <div class="meaning">ở chặng cuối, gần hoàn thành</div>
+    </div>
+
+    <div class="example-section">
+      <div class="example-label">Example</div>
+      <div class="example">
+        We're in the home stretch now, with only two weeks left before the deadline.
+      </div>
+      <div class="translation">
+        Bây giờ chúng ta đang ở chặng cuối, chỉ còn hai tuần trước hạn chót.
+      </div>
+      <button class="speak-btn" onclick="speak('in the home stretch')">🔊 Listen</button>
+    </div>
+  </div>
+
+
+  <!-- 11 -->
+  <div class="vocab-card" data-word="feel hard done by">
+    <div class="word-section">
+      <div class="word-number">11</div>
+      <div class="word">feel hard done by</div>
+      <div class="meaning">cảm thấy mình bị đối xử bất công</div>
+    </div>
+
+    <div class="example-section">
+      <div class="example-label">Example</div>
+      <div class="example">
+        She felt hard done by when her colleagues received bonuses but she did not.
+      </div>
+      <div class="translation">
+        Cô ấy cảm thấy mình bị đối xử bất công khi đồng nghiệp nhận được tiền thưởng còn cô thì không.
+      </div>
+      <button class="speak-btn" onclick="speak('feel hard done by')">🔊 Listen</button>
+    </div>
+  </div>
+
+
+  <!-- 12 -->
+  <div class="vocab-card" data-word="be given a raw deal">
+    <div class="word-section">
+      <div class="word-number">12</div>
+      <div class="word">be given a raw deal</div>
+      <div class="meaning">bị đối xử rất bất công</div>
+    </div>
+
+    <div class="example-section">
+      <div class="example-label">Example</div>
+      <div class="example">
+        Many workers believe they were given a raw deal by the company.
+      </div>
+      <div class="translation">
+        Nhiều công nhân tin rằng họ đã bị công ty đối xử rất bất công.
+      </div>
+      <button class="speak-btn" onclick="speak('be given a raw deal')">🔊 Listen</button>
+    </div>
+  </div>
+
+
+  <!-- 13 -->
+  <div class="vocab-card" data-word="get the flak">
+    <div class="word-section">
+      <div class="word-number">13</div>
+      <div class="word">get the flak</div>
+      <div class="meaning">chịu nhiều chỉ trích</div>
+    </div>
+
+    <div class="example-section">
+      <div class="example-label">Example</div>
+      <div class="example">
+        The manager got the flak when the project failed.
+      </div>
+      <div class="translation">
+        Người quản lý phải chịu nhiều chỉ trích khi dự án thất bại.
+      </div>
+      <button class="speak-btn" onclick="speak('get the flak')">🔊 Listen</button>
+    </div>
+  </div>
+
+
+  <!-- 14 -->
+  <div class="vocab-card" data-word="get the willies">
+    <div class="word-section">
+      <div class="word-number">14</div>
+      <div class="word">get the willies</div>
+      <div class="meaning">cảm thấy rùng mình, sợ hãi hoặc khó chịu</div>
+    </div>
+
+    <div class="example-section">
+      <div class="example-label">Example</div>
+      <div class="example">
+        That abandoned house gives me the willies.
+      </div>
+      <div class="translation">
+        Ngôi nhà bỏ hoang đó khiến tôi cảm thấy rùng mình.
+      </div>
+      <button class="speak-btn" onclick="speak('get the willies')">🔊 Listen</button>
+    </div>
+  </div>
+
+
+  <!-- 15 -->
+  <div class="vocab-card" data-word="extenuating circumstances">
+    <div class="word-section">
+      <div class="word-number">15</div>
+      <div class="word">extenuating circumstances</div>
+      <div class="meaning">những tình tiết giảm nhẹ</div>
+    </div>
+
+    <div class="example-section">
+      <div class="example-label">Example</div>
+      <div class="example">
+        The judge took the extenuating circumstances into account.
+      </div>
+      <div class="translation">
+        Thẩm phán đã xem xét những tình tiết giảm nhẹ.
+      </div>
+      <button class="speak-btn" onclick="speak('extenuating circumstances')">🔊 Listen</button>
+    </div>
+  </div>
+
+
+  <!-- 16 -->
+  <div class="vocab-card" data-word="apple of discord">
+    <div class="word-section">
+      <div class="word-number">16</div>
+      <div class="word">apple of discord</div>
+      <div class="meaning">nguyên nhân gây tranh cãi hoặc bất hòa</div>
+    </div>
+
+    <div class="example-section">
+      <div class="example-label">Example</div>
+      <div class="example">
+        The proposed budget became an apple of discord between the two departments.
+      </div>
+      <div class="translation">
+        Ngân sách được đề xuất trở thành nguyên nhân gây bất hòa giữa hai phòng ban.
+      </div>
+      <button class="speak-btn" onclick="speak('apple of discord')">🔊 Listen</button>
+    </div>
+  </div>
+
+
+  <!-- 17 -->
+  <div class="vocab-card" data-word="have half a mind to">
+    <div class="word-section">
+      <div class="word-number">17</div>
+      <div class="word">have half a mind to</div>
+      <div class="meaning">đang có ý định, gần như muốn làm gì</div>
+    </div>
+
+    <div class="example-section">
+      <div class="example-label">Example</div>
+      <div class="example">
+        I have half a mind to complain to the manager about the service.
+      </div>
+      <div class="translation">
+        Tôi đang có ý định phàn nàn với quản lý về dịch vụ này.
+      </div>
+      <button class="speak-btn" onclick="speak('have half a mind to')">🔊 Listen</button>
+    </div>
+  </div>
+
+
+  <!-- 18 -->
+  <div class="vocab-card" data-word="an uphill struggle">
+    <div class="word-section">
+      <div class="word-number">18</div>
+      <div class="word">an uphill struggle</div>
+      <div class="meaning">một cuộc đấu tranh/vật lộn đầy khó khăn</div>
+    </div>
+
+    <div class="example-section">
+      <div class="example-label">Example</div>
+      <div class="example">
+        Recovering the company's reputation will be an uphill struggle.
+      </div>
+      <div class="translation">
+        Khôi phục danh tiếng của công ty sẽ là một quá trình vô cùng khó khăn.
+      </div>
+      <button class="speak-btn" onclick="speak('an uphill struggle')">🔊 Listen</button>
+    </div>
+  </div>
+
+
+  <!-- 19 -->
+  <div class="vocab-card" data-word="renounce">
+    <div class="word-section">
+      <div class="word-number">19</div>
+      <div class="word">renounce</div>
+      <div class="meaning">từ bỏ chính thức</div>
+    </div>
+
+    <div class="example-section">
+      <div class="example-label">Example</div>
+      <div class="example">
+        He publicly renounced his involvement in the organisation.
+      </div>
+      <div class="translation">
+        Anh ấy công khai từ bỏ sự liên quan của mình với tổ chức đó.
+      </div>
+      <button class="speak-btn" onclick="speak('renounce')">🔊 Listen</button>
+    </div>
+  </div>
+
+
+  <!-- 20 -->
+  <div class="vocab-card" data-word="asset">
+    <div class="word-section">
+      <div class="word-number">20</div>
+      <div class="word">asset</div>
+      <div class="meaning">tài sản; điểm mạnh/lợi thế có giá trị</div>
+    </div>
+
+    <div class="example-section">
+      <div class="example-label">Example</div>
+      <div class="example">
+        Her ability to speak several languages is a valuable asset to the company.
+      </div>
+      <div class="translation">
+        Khả năng nói nhiều ngôn ngữ của cô ấy là một tài sản quý giá đối với công ty.
+      </div>
+      <button class="speak-btn" onclick="speak('asset')">🔊 Listen</button>
+    </div>
+  </div>
+
+
+  <!-- 21 -->
+  <div class="vocab-card" data-word="perk">
+    <div class="word-section">
+      <div class="word-number">21</div>
+      <div class="word">perk</div>
+      <div class="meaning">đặc quyền, lợi ích thêm</div>
+    </div>
+
+    <div class="example-section">
+      <div class="example-label">Example</div>
+      <div class="example">
+        Free gym membership is one of the perks of working for the company.
+      </div>
+      <div class="translation">
+        Thẻ thành viên phòng gym miễn phí là một trong những quyền lợi thêm khi làm việc cho công ty.
+      </div>
+      <button class="speak-btn" onclick="speak('perk')">🔊 Listen</button>
+    </div>
+  </div>
+
+
+  <!-- 22 -->
+  <div class="vocab-card" data-word="oblivious">
+    <div class="word-section">
+      <div class="word-number">22</div>
+      <div class="word">oblivious</div>
+      <div class="meaning">không nhận thức, không để ý đến</div>
+    </div>
+
+    <div class="example-section">
+      <div class="example-label">Example</div>
+      <div class="example">
+        He was completely oblivious to the fact that everyone was waiting for him.
+      </div>
+      <div class="translation">
+        Anh ấy hoàn toàn không nhận ra rằng mọi người đang chờ mình.
+      </div>
+      <button class="speak-btn" onclick="speak('oblivious')">🔊 Listen</button>
+    </div>
+  </div>
+
+
+  <!-- 23 -->
+  <div class="vocab-card" data-word="red herrings">
+    <div class="word-section">
+      <div class="word-number">23</div>
+      <div class="word">red herrings</div>
+      <div class="meaning">thông tin đánh lạc hướng</div>
+    </div>
+
+    <div class="example-section">
+      <div class="example-label">Example</div>
+      <div class="example">
+        The article contains several red herrings that distract readers from the real issue.
+      </div>
+      <div class="translation">
+        Bài báo chứa một số thông tin đánh lạc hướng người đọc khỏi vấn đề thực sự.
+      </div>
+      <button class="speak-btn" onclick="speak('red herrings')">🔊 Listen</button>
+    </div>
+  </div>
+
+
+  <!-- 24 -->
+  <div class="vocab-card" data-word="oblivious to">
+    <div class="word-section">
+      <div class="word-number">24</div>
+      <div class="word">oblivious to</div>
+      <div class="meaning">không nhận thức hoặc không để ý đến điều gì</div>
+    </div>
+
+    <div class="example-section">
+      <div class="example-label">Example</div>
+      <div class="example">
+        She was oblivious to the danger until someone warned her.
+      </div>
+      <div class="translation">
+        Cô ấy không hề nhận thức được nguy hiểm cho đến khi có người cảnh báo.
+      </div>
+      <button class="speak-btn" onclick="speak('oblivious to')">🔊 Listen</button>
+    </div>
+  </div>
+
+
+  <!-- 25 -->
+  <div class="vocab-card" data-word="be for the high jump">
+    <div class="word-section">
+      <div class="word-number">25</div>
+      <div class="word">be for the high jump</div>
+      <div class="meaning">sắp bị khiển trách hoặc trừng phạt nặng</div>
+    </div>
+
+    <div class="example-section">
+      <div class="example-label">Example</div>
+      <div class="example">
+        If the teacher finds out who broke the window, someone will be for the high jump.
+      </div>
+      <div class="translation">
+        Nếu giáo viên phát hiện ai làm vỡ cửa sổ, ai đó sẽ gặp rắc rối lớn.
+      </div>
+      <button class="speak-btn" onclick="speak('be for the high jump')">🔊 Listen</button>
+    </div>
+  </div>
+
+
+  <!-- 26 -->
+  <div class="vocab-card" data-word="a lady of the first water">
+    <div class="word-section">
+      <div class="word-number">26</div>
+      <div class="word">a lady of the first water</div>
+      <div class="meaning">một người phụ nữ xuất sắc, thuộc hàng đầu</div>
+    </div>
+
+    <div class="example-section">
+      <div class="example-label">Example</div>
+      <div class="example">
+        She is regarded as a lady of the first water in the world of classical music.
+      </div>
+      <div class="translation">
+        Cô ấy được xem là một phụ nữ xuất sắc hàng đầu trong giới âm nhạc cổ điển.
+      </div>
+      <button class="speak-btn" onclick="speak('a lady of the first water')">🔊 Listen</button>
+    </div>
+  </div>
+
+
+  <!-- 27 -->
+  <div class="vocab-card" data-word="propensity for">
+    <div class="word-section">
+      <div class="word-number">27</div>
+      <div class="word">propensity for</div>
+      <div class="meaning">khuynh hướng có xu hướng làm điều gì</div>
+    </div>
+
+    <div class="example-section">
+      <div class="example-label">Example</div>
+      <div class="example">
+        He has a propensity for taking unnecessary risks.
+      </div>
+      <div class="translation">
+        Anh ấy có khuynh hướng chấp nhận những rủi ro không cần thiết.
+      </div>
+      <button class="speak-btn" onclick="speak('propensity for')">🔊 Listen</button>
+    </div>
+  </div>
+
+
+  <!-- 28 -->
+  <div class="vocab-card" data-word="slacken off">
+    <div class="word-section">
+      <div class="word-number">28</div>
+      <div class="word">slacken off</div>
+      <div class="meaning">giảm tốc độ, cường độ hoặc mức độ</div>
+    </div>
+
+    <div class="example-section">
+      <div class="example-label">Example</div>
+      <div class="example">
+        Sales usually slacken off after the holiday season.
+      </div>
+      <div class="translation">
+        Doanh số thường giảm sau mùa lễ hội.
+      </div>
+      <button class="speak-btn" onclick="speak('slacken off')">🔊 Listen</button>
+    </div>
+  </div>
+
+
+  <!-- 29 -->
+  <div class="vocab-card" data-word="muck up">
+    <div class="word-section">
+      <div class="word-number">29</div>
+      <div class="word">muck up</div>
+      <div class="meaning">làm hỏng, làm rối tung</div>
+    </div>
+
+    <div class="example-section">
+      <div class="example-label">Example</div>
+      <div class="example">
+        I completely mucked up the presentation because I was so nervous.
+      </div>
+      <div class="translation">
+        Tôi đã làm hỏng hoàn toàn bài thuyết trình vì quá lo lắng.
+      </div>
+      <button class="speak-btn" onclick="speak('muck up')">🔊 Listen</button>
+    </div>
+  </div>
+
+
+  <!-- 30 -->
+  <div class="vocab-card" data-word="up the spout">
+    <div class="word-section">
+      <div class="word-number">30</div>
+      <div class="word">up the spout</div>
+      <div class="meaning">thất bại, hỏng; lâm vào tình trạng tồi tệ</div>
+    </div>
+
+    <div class="example-section">
+      <div class="example-label">Example</div>
+      <div class="example">
+        All our plans went up the spout when the event was cancelled.
+      </div>
+      <div class="translation">
+        Mọi kế hoạch của chúng tôi đều đổ bể khi sự kiện bị hủy.
+      </div>
+      <button class="speak-btn" onclick="speak('up the spout')">🔊 Listen</button>
+    </div>
+  </div>
+
+
+  <!-- 31 -->
+  <div class="vocab-card" data-word="on the ball">
+    <div class="word-section">
+      <div class="word-number">31</div>
+      <div class="word">on the ball</div>
+      <div class="meaning">nhanh nhẹn, tỉnh táo, nắm bắt tình hình tốt</div>
+    </div>
+
+    <div class="example-section">
+      <div class="example-label">Example</div>
+      <div class="example">
+        You need to be on the ball if you want to succeed in such a competitive environment.
+      </div>
+      <div class="translation">
+        Bạn cần nhanh nhạy và nắm bắt tình hình tốt nếu muốn thành công trong một môi trường cạnh tranh như vậy.
+      </div>
+      <button class="speak-btn" onclick="speak('on the ball')">🔊 Listen</button>
+    </div>
+  </div>
+
+</div>
+      <!-- NO RESULT -->
+
+      <div class="no-result" id="noResult">😕 No vocabulary found.</div>
+
+      <!-- FOOTER -->
+
+      <div class="footer">Vocabulary Bank • Culture, History & Heritage</div>
+    </div>
+
+    <script>
+      /* =========================
+       SEARCH VOCABULARY
+    ========================= */
+
+      const searchInput = document.getElementById("searchInput");
+
+      const cards = document.querySelectorAll(".vocab-card");
+
+      const noResult = document.getElementById("noResult");
+
+      searchInput.addEventListener("input", function () {
+        const keyword = this.value.toLowerCase().trim();
+
+        let visibleCount = 0;
+
+        cards.forEach((card) => {
+          const word = card.dataset.word.toLowerCase();
+
+          const content = card.innerText.toLowerCase();
+
+          if (word.includes(keyword) || content.includes(keyword)) {
+            card.style.display = "grid";
+
+            visibleCount++;
+          } else {
+            card.style.display = "none";
+          }
+        });
+
+        if (visibleCount === 0) {
+          noResult.style.display = "block";
+        } else {
+          noResult.style.display = "none";
+        }
+      });
+
+      /* =========================
+       TEXT TO SPEECH
+    ========================= */
+
+      function speak(text) {
+        if (!("speechSynthesis" in window)) {
+          alert("Your browser does not support text-to-speech.");
+
+          return;
+        }
+
+        window.speechSynthesis.cancel();
+
+        const utterance = new SpeechSynthesisUtterance(text);
+
+        utterance.lang = "en-US";
+
+        utterance.rate = 0.85;
+
+        utterance.pitch = 1;
+
+        window.speechSynthesis.speak(utterance);
+      }
+    </script>
+  </body>
+</html>
