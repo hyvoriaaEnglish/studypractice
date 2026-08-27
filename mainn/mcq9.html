@@ -1,0 +1,844 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vocabulary Quiz — 30 Questions</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: linear-gradient(135deg, #fdf2f8, #f5f3ff, #eff6ff);
+        min-height: 100vh;
+        color: #27272a;
+        padding: 30px 15px 60px;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: auto;
+      }
+
+      /* HEADER */
+      .header {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(12px);
+        border-radius: 24px;
+        padding: 35px 30px;
+        text-align: center;
+        margin-bottom: 25px;
+        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+      }
+
+      .header h1 {
+        font-size: 32px;
+        margin-bottom: 10px;
+        font-weight: 800;
+        background: linear-gradient(90deg, #ec4899, #8b5cf6);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        -webkit-text-fill-color: transparent;
+      }
+      .header p {
+        color: #71717a;
+        font-size: 16px;
+      }
+
+      /* PROGRESS */
+      .progress-container {
+        margin-top: 22px;
+      }
+
+      .progress-info {
+        display: flex;
+        justify-content: space-between;
+        font-size: 14px;
+        color: #71717a;
+        margin-bottom: 8px;
+      }
+
+      .progress-bar {
+        width: 100%;
+        height: 9px;
+        background: #e4e4e7;
+        border-radius: 20px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #ec4899, #8b5cf6);
+        border-radius: 20px;
+        transition: width 0.3s ease;
+      }
+
+      /* QUESTION CARD */
+      .question-card {
+        background: rgba(255, 255, 255, 0.94);
+        border-radius: 22px;
+        padding: 27px;
+        margin-bottom: 20px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+        border: 1px solid #f1f1f1;
+        transition: 0.25s ease;
+      }
+
+      .question-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+      }
+
+      .question-number {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 38px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #fce7f3, #ede9fe);
+        color: #7c3aed;
+        font-weight: 700;
+        margin-bottom: 14px;
+      }
+
+      .question {
+        font-size: 17px;
+        line-height: 1.65;
+        font-weight: 600;
+        margin-bottom: 18px;
+      }
+
+      .blank {
+        color: #db2777;
+        font-weight: 800;
+      }
+
+      /* OPTIONS */
+      .options {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 11px;
+      }
+
+      .option {
+        border: 2px solid #e4e4e7;
+        background: #fff;
+        border-radius: 13px;
+        padding: 13px 15px;
+        cursor: pointer;
+        text-align: left;
+        font-size: 15px;
+        transition: all 0.2s ease;
+      }
+
+      .option:hover:not(.disabled) {
+        border-color: #c084fc;
+        background: #faf5ff;
+        transform: translateY(-1px);
+      }
+
+      .option.correct {
+        background: #ecfdf5;
+        border-color: #22c55e;
+        color: #15803d;
+        font-weight: 700;
+      }
+
+      .option.wrong {
+        background: #fef2f2;
+        border-color: #ef4444;
+        color: #dc2626;
+        font-weight: 700;
+      }
+
+      .option.disabled {
+        cursor: default;
+      }
+
+      .option-letter {
+        display: inline-flex;
+        width: 28px;
+        height: 28px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        background: #f4f4f5;
+        margin-right: 8px;
+        font-weight: 700;
+      }
+
+      .correct .option-letter {
+        background: #bbf7d0;
+        color: #166534;
+      }
+
+      .wrong .option-letter {
+        background: #fecaca;
+        color: #991b1b;
+      }
+
+      /* FEEDBACK */
+      .feedback {
+        display: none;
+        margin-top: 17px;
+        padding: 17px;
+        border-radius: 14px;
+        line-height: 1.6;
+        font-size: 14px;
+      }
+
+      .feedback.correct-feedback {
+        display: block;
+        background: #f0fdf4;
+        border-left: 4px solid #22c55e;
+      }
+
+      .feedback.wrong-feedback {
+        display: block;
+        background: #fff7ed;
+        border-left: 4px solid #f97316;
+      }
+
+      .feedback-title {
+        font-weight: 800;
+        font-size: 15px;
+        margin-bottom: 5px;
+      }
+
+      .feedback.correct-feedback .feedback-title {
+        color: #15803d;
+      }
+
+      .feedback.wrong-feedback .feedback-title {
+        color: #c2410c;
+      }
+
+      .explanation {
+        color: #52525b;
+      }
+
+      /* RESULT */
+      .result {
+        display: none;
+        background: white;
+        border-radius: 24px;
+        padding: 35px 25px;
+        text-align: center;
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
+        margin-top: 30px;
+      }
+
+      .result.show {
+        display: block;
+        animation: fadeUp 0.5s ease;
+      }
+
+      .result-icon {
+        font-size: 55px;
+        margin-bottom: 10px;
+      }
+
+      .result h2 {
+        font-size: 28px;
+        margin-bottom: 12px;
+      }
+
+      .score {
+        font-size: 48px;
+        font-weight: 800;
+        background: linear-gradient(90deg, #ec4899, #8b5cf6);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        margin: 12px 0;
+      }
+
+      .result-message {
+        color: #71717a;
+        margin-bottom: 22px;
+      }
+
+      .restart-btn {
+        border: none;
+        background: linear-gradient(90deg, #ec4899, #8b5cf6);
+        color: white;
+        padding: 13px 28px;
+        border-radius: 12px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+
+      .restart-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 7px 20px rgba(139, 92, 246, 0.3);
+      }
+
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(15px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* MOBILE */
+      @media (max-width: 650px) {
+        body {
+          padding: 15px 10px 40px;
+        }
+
+        .header {
+          padding: 25px 18px;
+        }
+
+        .header h1 {
+          font-size: 25px;
+        }
+
+        .question-card {
+          padding: 20px 16px;
+        }
+
+        .options {
+          grid-template-columns: 1fr;
+        }
+
+        .question {
+          font-size: 16px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>📝 Vocabulary Mastery Quiz</h1>
+        <p>30 questions • Choose the best answer</p>
+
+        <div class="progress-container">
+          <div class="progress-info">
+            <span>Progress</span>
+            <span id="progressText">0 / 30</span>
+          </div>
+
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="quiz"></div>
+
+      <div class="result" id="result">
+        <div class="result-icon" id="resultIcon">🎉</div>
+
+        <h2>Quiz Completed!</h2>
+
+        <div class="score" id="score">0 / 30</div>
+
+        <div class="result-message" id="resultMessage"></div>
+
+        <button class="restart-btn" onclick="restartQuiz()">
+          🔄 Try Again
+        </button>
+      </div>
+    </div>
+
+    <script>
+      const questions = [
+        {
+          question:
+            "The waiter ______ us over to our table with a friendly smile.",
+          options: ["defied", "beckoned", "aggravated", "solidified"],
+          answer: 1,
+          explanation:
+            "<b>Beckon</b> = vẫy gọi, ra hiệu cho ai đó đến gần. → Người phục vụ vẫy gọi chúng tôi đến bàn.",
+        },
+
+        {
+          question:
+            "After exercising for two hours, athletes need to ______ their energy levels.",
+          options: ["replenish", "reform", "conceptualize", "reciprocate"],
+          answer: 0,
+          explanation:
+            "<b>Replenish</b> = bổ sung, làm đầy lại. → Sau khi tập luyện, vận động viên cần bổ sung năng lượng.",
+        },
+
+        {
+          question:
+            "She made an ______ remark without thinking about how it might sound.",
+          options: ["extensive", "universal", "offhand", "starchy"],
+          answer: 2,
+          explanation:
+            "<b>Offhand</b> = nói một cách tùy tiện, không suy nghĩ kỹ hoặc không chuẩn bị trước.",
+        },
+
+        {
+          question:
+            "The singer's ______ voice made the entire performance pleasant to listen to.",
+          options: ["jarring", "arbitrary", "melodic", "involuntary"],
+          answer: 2,
+          explanation:
+            "<b>Melodic</b> = du dương, có giai điệu, êm tai. Trái nghĩa gần với <b>jarring</b>.",
+        },
+
+        {
+          question:
+            "The noise from the construction site was extremely ______.",
+          options: ["melodic", "pragmatic", "jarring", "singular"],
+          answer: 2,
+          explanation:
+            "<b>Jarring</b> = chói tai, khó chịu, không hài hòa. Tiếng ồn công trường thường mang tính jarring.",
+        },
+
+        {
+          question:
+            "The old wooden table was built ______ enough to withstand years of heavy use.",
+          options: ["sturdily", "involuntarily", "universally", "arbitrarily"],
+          answer: 0,
+          explanation:
+            "<b>Sturdily</b> = một cách chắc chắn, vững chãi. → Bàn được xây/làm đủ chắc chắn để sử dụng trong nhiều năm.",
+        },
+
+        {
+          question:
+            "The villagers built a shelter to protect themselves from the storm, providing much-needed ______.",
+          options: ["neutrality", "sheltering", "synchronization", "reform"],
+          answer: 1,
+          explanation:
+            "<b>Sheltering</b> = sự che chở/bảo vệ khỏi thời tiết hoặc nguy hiểm.",
+        },
+
+        {
+          question:
+            "Scientists use computer models to ______ how a disease might spread through a population.",
+          options: ["simulate", "reciprocate", "defy", "replenish"],
+          answer: 0,
+          explanation:
+            "<b>Simulate</b> = mô phỏng, giả lập. → Máy tính mô phỏng cách bệnh có thể lây lan.",
+        },
+
+        {
+          question:
+            "Regular exercise can ______ blood circulation and improve overall health.",
+          options: ["stimulate", "solidify", "conceptualize", "creep"],
+          answer: 0,
+          explanation:
+            "<b>Stimulate</b> = kích thích, thúc đẩy. → Tập thể dục có thể kích thích/thúc đẩy tuần hoàn máu.",
+        },
+
+        {
+          question:
+            "The company tried to ______ the criticism by introducing stricter safety measures.",
+          options: ["hold up", "defy", "aggravate", "reform"],
+          answer: 3,
+          explanation:
+            "<b>Reform</b> = cải cách, cải tổ. → Công ty cố gắng cải tổ bằng cách đưa ra các biện pháp an toàn nghiêm ngặt hơn.",
+        },
+
+        {
+          question:
+            "The police officer had to ______ the traffic while the accident was being cleared.",
+          options: ["hold up", "reciprocate", "simulate", "solidify"],
+          answer: 0,
+          explanation:
+            "<b>Hold up</b> = làm trì hoãn/làm chậm. → Cảnh sát phải làm giao thông bị chậm lại trong khi xử lý tai nạn.",
+        },
+
+        {
+          question:
+            "Switzerland is well known for maintaining its political ______ in international conflicts.",
+          options: ["neutrality", "singularity", "synchronization", "reform"],
+          answer: 0,
+          explanation:
+            "<b>Neutrality</b> = sự trung lập, không đứng về bên nào trong xung đột.",
+        },
+
+        {
+          question: "The new evidence helped ______ the scientist's theory.",
+          options: ["creep into", "solidify", "defy", "stimulate"],
+          answer: 1,
+          explanation:
+            "<b>Solidify</b> = củng cố, làm vững chắc. → Bằng chứng mới củng cố lý thuyết.",
+        },
+
+        {
+          question:
+            "It took years for the idea to develop, but eventually she managed to ______ a clear vision of her future career.",
+          options: ["conceptualize", "replenish", "beckon", "aggravate"],
+          answer: 0,
+          explanation:
+            "<b>Conceptualize</b> = hình dung, hình thành một ý tưởng/khái niệm rõ ràng.",
+        },
+
+        {
+          question:
+            "Fear began to ______ his thoughts after he heard the strange noise downstairs.",
+          options: ["hold up", "creep into", "reciprocate", "reform"],
+          answer: 1,
+          explanation:
+            "<b>Creep into</b> = len lỏi/dần dần xâm nhập vào. → Nỗi sợ dần len lỏi vào suy nghĩ của anh ấy.",
+        },
+
+        {
+          question:
+            "She smiled at him, and he immediately ______ her friendliness.",
+          options: ["defied", "aggravated", "reciprocated", "simulated"],
+          answer: 2,
+          explanation:
+            "<b>Reciprocate</b> = đáp lại một hành động, cảm xúc hoặc thái độ. → Anh ấy đáp lại sự thân thiện của cô ấy.",
+        },
+
+        {
+          question: "Lack of sleep can ______ existing health problems.",
+          options: ["aggravate", "replenish", "solidify", "beckon"],
+          answer: 0,
+          explanation:
+            "<b>Aggravate</b> = làm trầm trọng hơn/làm tình hình trở nên tồi tệ hơn.",
+        },
+
+        {
+          question:
+            "The speaker gave a ______ speech that inspired the audience to take action.",
+          options: ["starchy", "rousing", "arbitrary", "jarring"],
+          answer: 1,
+          explanation:
+            "<b>Rousing</b> = mạnh mẽ, hào hứng, truyền cảm hứng và thúc đẩy người khác hành động.",
+        },
+
+        {
+          question:
+            "The decision to fire the employee seemed completely ______ because no explanation was given.",
+          options: ["universal", "pragmatic", "arbitrary", "melodic"],
+          answer: 2,
+          explanation:
+            "<b>Arbitrary</b> = tùy tiện, độc đoán, không dựa trên lý do hoặc nguyên tắc rõ ràng.",
+        },
+
+        {
+          question: "The dancers moved in perfect ______ with the music.",
+          options: [
+            "neutrality",
+            "synchronization",
+            "sheltering",
+            "singularity",
+          ],
+          answer: 1,
+          explanation:
+            "<b>Synchronization</b> = sự đồng bộ hóa. → Các vũ công chuyển động đồng bộ hoàn hảo với âm nhạc.",
+        },
+
+        {
+          question:
+            "The government needs to ______ the education system to make it more effective.",
+          options: ["reform", "creep into", "defy", "replenish"],
+          answer: 0,
+          explanation:
+            "<b>Reform</b> = cải cách, cải tổ. → Chính phủ cần cải cách hệ thống giáo dục.",
+        },
+
+        {
+          question:
+            "She laughed ______ when someone suddenly frightened her from behind.",
+          options: [
+            "extensively",
+            "involuntarily",
+            "sturdily",
+            "pragmatically",
+          ],
+          answer: 1,
+          explanation:
+            "<b>Involuntarily</b> = một cách vô thức/không chủ ý. → Cô ấy bật cười theo phản xạ.",
+        },
+
+        {
+          question:
+            "The museum has an ______ collection of ancient Egyptian artifacts.",
+          options: ["singular", "extensive", "arbitrary", "offhand"],
+          answer: 1,
+          explanation:
+            "<b>Extensive</b> = rộng lớn, phong phú, trên diện rộng. → Bảo tàng có một bộ sưu tập rất phong phú.",
+        },
+
+        {
+          question:
+            "The desire for freedom is almost ______; people in every society value it in some form.",
+          options: ["universal", "starchy", "jarring", "involuntary"],
+          answer: 0,
+          explanation:
+            "<b>Universal</b> = phổ quát, tồn tại hoặc được công nhận ở mọi nơi/đối với tất cả.",
+        },
+
+        {
+          question:
+            "Instead of complaining about the problem, we need to find a ______ solution.",
+          options: ["melodic", "pragmatic", "arbitrary", "rousing"],
+          answer: 1,
+          explanation:
+            "<b>Pragmatic</b> = thực tế, chú trọng giải pháp có thể áp dụng hiệu quả.",
+        },
+
+        {
+          question:
+            "The small scratch on the surface was only a minor ______ and did not affect the object's function.",
+          options: ["blemish", "reform", "neutrality", "synchronization"],
+          answer: 0,
+          explanation:
+            "<b>Blemish</b> = khuyết điểm, vết tì, vết nhỏ làm mất vẻ hoàn hảo.",
+        },
+
+        {
+          question:
+            "The businessman was known for his ______ manner of speaking and his formal appearance.",
+          options: ["starchy", "melodic", "involuntary", "extensive"],
+          answer: 0,
+          explanation:
+            "<b>Starchy</b> có thể mang nghĩa cứng nhắc, kiểu cách, quá trang trọng trong cách cư xử.",
+        },
+
+        {
+          question:
+            "Despite facing enormous pressure, the scientist continued to ______ conventional scientific thinking.",
+          options: ["replenish", "defy", "shelter", "reciprocate"],
+          answer: 1,
+          explanation:
+            "<b>Defy</b> = thách thức, chống lại hoặc bất chấp. → Nhà khoa học tiếp tục thách thức tư duy khoa học truyền thống.",
+        },
+
+        {
+          question:
+            "Her ability to remain calm in such a difficult situation was truly ______.",
+          options: ["singular", "arbitrary", "jarring", "starchy"],
+          answer: 0,
+          explanation:
+            "<b>Singular</b> = độc nhất, đặc biệt, khác thường. → Khả năng của cô ấy thực sự đặc biệt.",
+        },
+
+        {
+          question:
+            "The two machines must operate in perfect ______ for the system to work correctly.",
+          options: ["neutrality", "synchronization", "blemish", "sheltering"],
+          answer: 1,
+          explanation:
+            "<b>Synchronization</b> = sự đồng bộ. Hai máy phải hoạt động đồng bộ để hệ thống hoạt động chính xác.",
+        },
+      ];
+
+      let score = 0;
+      let answered = 0;
+
+      const quiz = document.getElementById("quiz");
+
+      function renderQuiz() {
+        quiz.innerHTML = "";
+
+        questions.forEach((q, index) => {
+          const card = document.createElement("div");
+          card.className = "question-card";
+          card.id = `question-${index}`;
+
+          const questionHTML = q.question.replace(
+            "______",
+            '<span class="blank">______</span>',
+          );
+
+          card.innerHTML = `
+
+      <div class="question-number">
+        ${index + 1}
+      </div>
+
+      <div class="question">
+        ${questionHTML}
+      </div>
+
+      <div class="options">
+
+        ${q.options
+          .map(
+            (option, optionIndex) => `
+
+          <button
+            class="option"
+            onclick="checkAnswer(${index}, ${optionIndex})"
+          >
+
+            <span class="option-letter">
+              ${String.fromCharCode(65 + optionIndex)}
+            </span>
+
+            ${option}
+
+          </button>
+
+        `,
+          )
+          .join("")}
+
+      </div>
+
+      <div class="feedback" id="feedback-${index}"></div>
+
+    `;
+
+          quiz.appendChild(card);
+        });
+      }
+
+      function checkAnswer(questionIndex, selectedIndex) {
+        const question = questions[questionIndex];
+
+        const card = document.getElementById(`question-${questionIndex}`);
+
+        const options = card.querySelectorAll(".option");
+
+        const feedback = document.getElementById(`feedback-${questionIndex}`);
+
+        // Prevent answering twice
+        if (card.dataset.answered === "true") {
+          return;
+        }
+
+        card.dataset.answered = "true";
+
+        answered++;
+
+        // Disable all options
+        options.forEach((option) => {
+          option.classList.add("disabled");
+        });
+
+        // Correct answer
+        options[question.answer].classList.add("correct");
+
+        if (selectedIndex === question.answer) {
+          score++;
+
+          feedback.className = "feedback correct-feedback";
+
+          feedback.innerHTML = `
+      <div class="feedback-title">
+        ✅ Correct!
+      </div>
+
+      <div class="explanation">
+        ${question.explanation}
+      </div>
+    `;
+        } else {
+          options[selectedIndex].classList.add("wrong");
+
+          feedback.className = "feedback wrong-feedback";
+
+          feedback.innerHTML = `
+      <div class="feedback-title">
+        ❌ Incorrect!
+      </div>
+
+      <div class="explanation">
+        <strong>Correct answer:</strong>
+        ${String.fromCharCode(65 + question.answer)}. 
+        ${question.options[question.answer]}
+        <br><br>
+        ${question.explanation}
+      </div>
+    `;
+        }
+
+        updateProgress();
+
+        // Show result when all questions answered
+        if (answered === questions.length) {
+          setTimeout(() => {
+            showResult();
+          }, 600);
+        }
+      }
+
+      function updateProgress() {
+        const percentage = (answered / questions.length) * 100;
+
+        document.getElementById("progressFill").style.width = `${percentage}%`;
+
+        document.getElementById("progressText").textContent =
+          `${answered} / ${questions.length}`;
+      }
+
+      function showResult() {
+        const result = document.getElementById("result");
+
+        const scoreElement = document.getElementById("score");
+
+        const message = document.getElementById("resultMessage");
+
+        const icon = document.getElementById("resultIcon");
+
+        scoreElement.textContent = `${score} / ${questions.length}`;
+
+        const percentage = Math.round((score / questions.length) * 100);
+
+        if (percentage === 100) {
+          icon.textContent = "🏆";
+
+          message.textContent =
+            "Perfect score! You have mastered these vocabulary words!";
+        } else if (percentage >= 80) {
+          icon.textContent = "🎉";
+
+          message.textContent =
+            "Excellent! Your vocabulary knowledge is very strong.";
+        } else if (percentage >= 60) {
+          icon.textContent = "👏";
+
+          message.textContent =
+            "Good job! Review the incorrect answers and try again.";
+        } else {
+          icon.textContent = "📚";
+
+          message.textContent =
+            "Keep practicing! Review the explanations and try again.";
+        }
+
+        result.classList.add("show");
+
+        result.scrollIntoView({
+          behavior: "smooth",
+        });
+      }
+
+      function restartQuiz() {
+        score = 0;
+        answered = 0;
+
+        document.getElementById("result").classList.remove("show");
+
+        updateProgress();
+
+        renderQuiz();
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+
+      // Start quiz
+      renderQuiz();
+    </script>
+  </body>
+</html>

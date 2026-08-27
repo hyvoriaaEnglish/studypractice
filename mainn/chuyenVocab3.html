@@ -1,0 +1,776 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Vocabulary Bank - Culture & Heritage</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: linear-gradient(135deg, #eef2ff, #f8fafc);
+        color: #1e293b;
+        min-height: 100vh;
+        padding: 40px 20px;
+      }
+
+      .container {
+        max-width: 1100px;
+        margin: auto;
+      }
+
+      /* HEADER */
+
+      .header {
+        text-align: center;
+        margin-bottom: 35px;
+      }
+
+      .header h1 {
+        font-size: 42px;
+        color: #4338ca;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        color: #64748b;
+        font-size: 17px;
+      }
+
+      /* SEARCH */
+
+      .search-box {
+        margin-bottom: 30px;
+      }
+
+      .search-box input {
+        width: 100%;
+        padding: 17px 20px;
+        border: 2px solid #e2e8f0;
+        border-radius: 14px;
+        font-size: 16px;
+        outline: none;
+        background: white;
+        transition: 0.3s;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      .search-box input:focus {
+        border-color: #6366f1;
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
+      }
+
+      /* VOCABULARY LIST */
+
+      .vocabulary-list {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      .vocab-card {
+        background: white;
+        border-radius: 18px;
+        padding: 24px;
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        gap: 25px;
+        box-shadow: 0 8px 25px rgba(15, 23, 42, 0.07);
+        border: 1px solid #e2e8f0;
+        transition: all 0.3s ease;
+      }
+
+      .vocab-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 15px 35px rgba(79, 70, 229, 0.12);
+        border-color: #c7d2fe;
+      }
+
+      /* WORD SECTION */
+
+      .word-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-right: 1px solid #e2e8f0;
+        padding-right: 20px;
+      }
+
+      .word-number {
+        font-size: 13px;
+        color: #94a3b8;
+        margin-bottom: 5px;
+        font-weight: 600;
+      }
+
+      .word {
+        font-size: 25px;
+        font-weight: 700;
+        color: #4338ca;
+        margin-bottom: 8px;
+      }
+
+      .meaning {
+        color: #475569;
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 1.5;
+      }
+
+      /* EXAMPLE SECTION */
+
+      .example-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .example-label {
+        font-size: 12px;
+        color: #6366f1;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 7px;
+      }
+
+      .example {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #334155;
+        margin-bottom: 8px;
+      }
+
+      .translation {
+        font-size: 15px;
+        color: #64748b;
+        font-style: italic;
+        margin-bottom: 15px;
+        line-height: 1.5;
+      }
+
+      /* SPEAK BUTTON */
+
+      .speak-btn {
+        width: fit-content;
+        border: none;
+        background: #eef2ff;
+        color: #4f46e5;
+        padding: 8px 14px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        transition: 0.2s;
+      }
+
+      .speak-btn:hover {
+        background: #4f46e5;
+        color: white;
+      }
+
+      /* NO RESULT */
+
+      .no-result {
+        display: none;
+        text-align: center;
+        padding: 40px;
+        background: white;
+        border-radius: 15px;
+        color: #64748b;
+      }
+
+      /* FOOTER */
+
+      .footer {
+        text-align: center;
+        margin-top: 35px;
+        color: #94a3b8;
+        font-size: 14px;
+      }
+
+      /* MOBILE */
+
+      @media (max-width: 700px) {
+        body {
+          padding: 25px 12px;
+        }
+
+        .header h1 {
+          font-size: 30px;
+        }
+
+        .header p {
+          font-size: 15px;
+        }
+
+        .vocab-card {
+          grid-template-columns: 1fr;
+          gap: 18px;
+        }
+
+        .word-section {
+          border-right: none;
+          border-bottom: 1px solid #e2e8f0;
+          padding-right: 0;
+          padding-bottom: 18px;
+        }
+
+        .word {
+          font-size: 23px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- HEADER -->
+
+      <div class="header">
+        <h1>🏛️ Vocabulary Bank</h1>
+
+        <p>Vocabulary</p>
+      </div>
+
+      <!-- SEARCH -->
+
+      <div class="search-box">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="🔍 Search vocabulary..."
+        />
+      </div>
+
+      <!-- VOCABULARY LIST -->
+
+      <div class="vocabulary-list" id="vocabularyList">
+       <div class="vocabulary-list" id="vocabularyList">
+
+ <!-- 30 -->
+<div class="vocab-card" data-word="beckon">
+  <div class="word-section">
+    <div class="word-number">30</div>
+    <div class="word">beckon</div>
+    <div class="meaning">vẫy gọi, mời gọi</div>
+  </div>
+
+  <div class="example-section">
+    <div class="example-label">Example</div>
+    <div class="example">She beckoned me to come closer.</div>
+    <div class="translation">Cô ấy vẫy gọi tôi lại gần hơn.</div>
+    <button class="speak-btn" onclick="speak('beckon')">🔊 Listen</button>
+  </div>
+</div>
+
+<!-- 31 -->
+<div class="vocab-card" data-word="replenish">
+  <div class="word-section">
+    <div class="word-number">31</div>
+    <div class="word">replenish</div>
+    <div class="meaning">bổ sung, làm đầy lại</div>
+  </div>
+
+  <div class="example-section">
+    <div class="example-label">Example</div>
+    <div class="example">We need to replenish our supplies before the journey.</div>
+    <div class="translation">Chúng ta cần bổ sung vật dụng trước chuyến đi.</div>
+    <button class="speak-btn" onclick="speak('replenish')">🔊 Listen</button>
+  </div>
+</div>
+
+<!-- 32 -->
+<div class="vocab-card" data-word="offhand">
+  <div class="word-section">
+    <div class="word-number">32</div>
+    <div class="word">offhand</div>
+    <div class="meaning">ngay lập tức, không suy nghĩ kỹ; tình cờ</div>
+  </div>
+
+  <div class="example-section">
+    <div class="example-label">Example</div>
+    <div class="example">I can't remember his name offhand.</div>
+    <div class="translation">Tôi không thể nhớ ngay tên của anh ấy.</div>
+    <button class="speak-btn" onclick="speak('offhand')">🔊 Listen</button>
+  </div>
+</div>
+
+<!-- 33 -->
+<div class="vocab-card" data-word="melodic">
+  <div class="word-section">
+    <div class="word-number">33</div>
+    <div class="word">melodic</div>
+    <div class="meaning">du dương, có giai điệu, êm tai</div>
+  </div>
+
+  <div class="example-section">
+    <div class="example-label">Example</div>
+    <div class="example">Her melodic voice made the song unforgettable.</div>
+    <div class="translation">Giọng hát du dương của cô ấy khiến bài hát trở nên khó quên.</div>
+    <button class="speak-btn" onclick="speak('melodic')">🔊 Listen</button>
+  </div>
+</div>
+
+<!-- 34 -->
+<div class="vocab-card" data-word="jarring">
+  <div class="word-section">
+    <div class="word-number">34</div>
+    <div class="word">jarring</div>
+    <div class="meaning">chói tai, khó chịu, gây cảm giác không hài hòa</div>
+  </div>
+
+  <div class="example-section">
+    <div class="example-label">Example</div>
+    <div class="example">The sudden noise was jarring and unpleasant.</div>
+    <div class="translation">Âm thanh đột ngột đó chói tai và khó chịu.</div>
+    <button class="speak-btn" onclick="speak('jarring')">🔊 Listen</button>
+  </div>
+</div>
+
+<!-- 35 -->
+<div class="vocab-card" data-word="sturdily">
+  <div class="word-section">
+    <div class="word-number">35</div>
+    <div class="word">sturdily</div>
+    <div class="meaning">một cách chắc chắn, vững chãi</div>
+  </div>
+
+  <div class="example-section">
+    <div class="example-label">Example</div>
+    <div class="example">The house was sturdily built to withstand strong winds.</div>
+    <div class="translation">Ngôi nhà được xây dựng chắc chắn để chịu được gió mạnh.</div>
+    <button class="speak-btn" onclick="speak('sturdily')">🔊 Listen</button>
+  </div>
+</div>
+
+<!-- 36 -->
+<div class="vocab-card" data-word="sheltering">
+  <div class="word-section">
+    <div class="word-number">36</div>
+    <div class="word">sheltering</div>
+    <div class="meaning">che chở, trú ẩn, bảo vệ khỏi nguy hiểm/thời tiết</div>
+  </div>
+
+  <div class="example-section">
+    <div class="example-label">Example</div>
+    <div class="example">The trees provided a sheltering canopy from the rain.</div>
+    <div class="translation">Những tán cây che chở chúng tôi khỏi cơn mưa.</div>
+    <button class="speak-btn" onclick="speak('sheltering')">🔊 Listen</button>
+  </div>
+</div>
+
+<!-- 37 -->
+<div class="vocab-card" data-word="simulate">
+  <div class="word-section">
+    <div class="word-number">37</div>
+    <div class="word">simulate</div>
+    <div class="meaning">mô phỏng, giả lập, mô phỏng lại</div>
+  </div>
+
+  <div class="example-section">
+    <div class="example-label">Example</div>
+    <div class="example">The software can simulate real-world situations.</div>
+    <div class="translation">Phần mềm có thể mô phỏng các tình huống trong thực tế.</div>
+    <button class="speak-btn" onclick="speak('simulate')">🔊 Listen</button>
+  </div>
+</div>
+
+<!-- 38 -->
+<div class="vocab-card" data-word="stimulate">
+  <div class="word-section">
+    <div class="word-number">38</div>
+    <div class="word">stimulate</div>
+    <div class="meaning">kích thích, thúc đẩy</div>
+  </div>
+
+  <div class="example-section">
+    <div class="example-label">Example</div>
+    <div class="example">The new policy is designed to stimulate economic growth.</div>
+    <div class="translation">Chính sách mới được thiết kế để thúc đẩy tăng trưởng kinh tế.</div>
+    <button class="speak-btn" onclick="speak('stimulate')">🔊 Listen</button>
+  </div>
+</div>
+
+<!-- 39 -->
+<div class="vocab-card" data-word="hold up">
+  <div class="word-section">
+    <div class="word-number">39</div>
+    <div class="word">hold up</div>
+    <div class="meaning">trì hoãn, làm chậm; chống đỡ, chịu đựng</div>
+  </div>
+
+  <div class="example-section">
+    <div class="example-label">Example</div>
+    <div class="example">The traffic held us up for nearly an hour.</div>
+    <div class="translation">Giao thông khiến chúng tôi bị trì hoãn gần một giờ.</div>
+    <button class="speak-btn" onclick="speak('hold up')">🔊 Listen</button>
+  </div>
+</div>
+
+<!-- 40 -->
+<div class="vocab-card" data-word="neutrality">
+  <div class="word-section">
+    <div class="word-number">40</div>
+    <div class="word">neutrality</div>
+    <div class="meaning">sự trung lập, tính không thiên vị</div>
+  </div>
+
+  <div class="example-section">
+    <div class="example-label">Example</div>
+    <div class="example">The country maintained neutrality during the conflict.</div>
+    <div class="translation">Đất nước này duy trì sự trung lập trong cuộc xung đột.</div>
+    <button class="speak-btn" onclick="speak('neutrality')">🔊 Listen</button>
+  </div>
+</div>
+
+<!-- 41 -->
+<div class="vocab-card" data-word="solidify">
+  <div class="word-section">
+    <div class="word-number">41</div>
+    <div class="word">solidify</div>
+    <div class="meaning">củng cố, làm vững chắc</div>
+  </div>
+
+  <div class="example-section">
+    <div class="example-label">Example</div>
+    <div class="example">The victory helped solidify her position as a leader.</div>
+    <div class="translation">Chiến thắng giúp củng cố vị thế lãnh đạo của cô ấy.</div>
+    <button class="speak-btn" onclick="speak('solidify')">🔊 Listen</button>
+  </div>
+</div>
+
+<!-- 42 -->
+<div class="vocab-card" data-word="conceptualize">
+  <div class="word-section">
+    <div class="word-number">42</div>
+    <div class="word">conceptualize</div>
+    <div class="meaning">hình dung, khái niệm hóa, hình thành ý tưởng về một điều gì đó</div>
+  </div>
+
+  <div class="example-section">
+    <div class="example-label">Example</div>
+    <div class="example">It is difficult to conceptualize a world without technology.</div>
+    <div class="translation">Thật khó hình dung một thế giới không có công nghệ.</div>
+    <button class="speak-btn" onclick="speak('conceptualize')">🔊 Listen</button>
+  </div>
+</div>
+
+<!-- 43 -->
+<div class="vocab-card" data-word="creep into">
+  <div class="word-section">
+    <div class="word-number">43</div>
+    <div class="word">creep into</div>
+    <div class="meaning">len lỏi, dần dần xâm nhập vào</div>
+  </div>
+
+  <div class="example-section">
+    <div class="example-label">Example</div>
+    <div class="example">Doubt began to creep into her mind.</div>
+    <div class="translation">Sự nghi ngờ bắt đầu len lỏi vào tâm trí cô ấy.</div>
+    <button class="speak-btn" onclick="speak('creep into')">🔊 Listen</button>
+  </div>
+</div>
+
+<!-- 44 -->
+<div class="vocab-card" data-word="reciprocate">
+  <div class="word-section">
+    <div class="word-number">44</div>
+    <div class="word">reciprocate</div>
+    <div class="meaning">đáp lại, đáp trả, đáp lễ</div>
+  </div>
+
+  <div class="example-section">
+    <div class="example-label">Example</div>
+    <div class="example">She smiled at him, but he didn't reciprocate.</div>
+    <div class="translation">Cô ấy mỉm cười với anh ta, nhưng anh ta không đáp lại.</div>
+    <button class="speak-btn" onclick="speak('reciprocate')">🔊 Listen</button>
+  </div>
+</div>
+
+<!-- 45 -->
+<div class="vocab-card" data-word="aggravate">
+  <div class="word-section">
+    <div class="word-number">45</div>
+    <div class="word">aggravate</div>
+    <div class="meaning">làm trầm trọng hơn, làm trở nên tồi tệ hơn; chọc tức</div>
+  </div>
+
+  <div class="example-section">
+    <div class="example-label">Example</div>
+    <div class="example">The lack of sleep aggravated his stress.</div>
+    <div class="translation">Việc thiếu ngủ làm tình trạng căng thẳng của anh ấy trở nên tồi tệ hơn.</div>
+    <button class="speak-btn" onclick="speak('aggravate')">🔊 Listen</button>
+  </div>
+</div>
+
+<!-- 46 -->
+<div class="vocab-card" data-word="rousing">
+  <div class="word-section">
+    <div class="word-number">46</div>
+    <div class="word">rousing</div>
+    <div class="meaning">kích động, hào hứng, mạnh mẽ, truyền cảm hứng</div>
+  </div>
+
+  <div class="example-section">
+    <div class="example-label">Example</div>
+    <div class="example">The team received a rousing welcome from the crowd.</div>
+    <div class="translation">Đội tuyển nhận được sự chào đón nồng nhiệt từ đám đông.</div>
+    <button class="speak-btn" onclick="speak('rousing')">🔊 Listen</button>
+  </div>
+</div>
+
+<!-- 47 -->
+<div class="vocab-card" data-word="arbitrary">
+  <div class="word-section">
+    <div class="word-number">47</div>
+    <div class="word">arbitrary</div>
+    <div class="meaning">tùy tiện, độc đoán, không dựa trên lý do/nguyên tắc rõ ràng</div>
+  </div>
+
+  <div class="example-section">
+    <div class="example-label">Example</div>
+    <div class="example">The decision seemed completely arbitrary.</div>
+    <div class="translation">Quyết định đó dường như hoàn toàn tùy tiện.</div>
+    <button class="speak-btn" onclick="speak('arbitrary')">🔊 Listen</button>
+  </div>
+</div>
+
+<!-- 48 -->
+<div class="vocab-card" data-word="synchronization">
+  <div class="word-section">
+    <div class="word-number">48</div>
+    <div class="word">synchronization</div>
+    <div class="meaning">sự đồng bộ hóa, sự đồng bộ</div>
+  </div>
+
+  <div class="example-section">
+    <div class="example-label">Example</div>
+    <div class="example">The synchronization of the two systems is essential.</div>
+    <div class="translation">Việc đồng bộ hóa hai hệ thống là rất cần thiết.</div>
+    <button class="speak-btn" onclick="speak('synchronization')">🔊 Listen</button>
+  </div>
+</div>
+
+<!-- 49 -->
+<div class="vocab-card" data-word="reform">
+  <div class="word-section">
+    <div class="word-number">49</div>
+    <div class="word">reform</div>
+    <div class="meaning">cải cách, cải tổ</div>
+  </div>
+
+  <div class="example-section">
+    <div class="example-label">Example</div>
+    <div class="example">The government introduced reforms to improve the education system.</div>
+    <div class="translation">Chính phủ đã đưa ra các cải cách để cải thiện hệ thống giáo dục.</div>
+    <button class="speak-btn" onclick="speak('reform')">🔊 Listen</button>
+  </div>
+</div>
+
+<!-- 50 -->
+<div class="vocab-card" data-word="involuntarily">
+  <div class="word-section">
+    <div class="word-number">50</div>
+    <div class="word">involuntarily</div>
+    <div class="meaning">một cách không tự nguyện, vô thức, không chủ ý</div>
+  </div>
+
+  <div class="example-section">
+    <div class="example-label">Example</div>
+    <div class="example">He involuntarily stepped back when he heard the noise.</div>
+    <div class="translation">Anh ấy vô thức lùi lại khi nghe thấy tiếng động.</div>
+    <button class="speak-btn" onclick="speak('involuntarily')">🔊 Listen</button>
+  </div>
+</div>
+
+<!-- 51 -->
+<div class="vocab-card" data-word="extensive">
+  <div class="word-section">
+    <div class="word-number">51</div>
+    <div class="word">extensive</div>
+    <div class="meaning">rộng lớn, trên diện rộng, toàn diện</div>
+  </div>
+
+  <div class="example-section">
+    <div class="example-label">Example</div>
+    <div class="example">The project required extensive research.</div>
+    <div class="translation">Dự án đòi hỏi nghiên cứu trên diện rộng.</div>
+    <button class="speak-btn" onclick="speak('extensive')">🔊 Listen</button>
+  </div>
+</div>
+
+<!-- 52 -->
+<div class="vocab-card" data-word="universal">
+  <div class="word-section">
+    <div class="word-number">52</div>
+    <div class="word">universal</div>
+    <div class="meaning">phổ quát, toàn cầu, chung cho tất cả</div>
+  </div>
+
+  <div class="example-section">
+    <div class="example-label">Example</div>
+    <div class="example">Music is often considered a universal language.</div>
+    <div class="translation">Âm nhạc thường được coi là một ngôn ngữ phổ quát.</div>
+    <button class="speak-btn" onclick="speak('universal')">🔊 Listen</button>
+  </div>
+</div>
+
+<!-- 53 -->
+<div class="vocab-card" data-word="pragmatic">
+  <div class="word-section">
+    <div class="word-number">53</div>
+    <div class="word">pragmatic</div>
+    <div class="meaning">thực tế, thực dụng</div>
+  </div>
+
+  <div class="example-section">
+    <div class="example-label">Example</div>
+    <div class="example">We need a pragmatic approach to solve this problem.</div>
+    <div class="translation">Chúng ta cần một cách tiếp cận thực tế để giải quyết vấn đề này.</div>
+    <button class="speak-btn" onclick="speak('pragmatic')">🔊 Listen</button>
+  </div>
+</div>
+
+<!-- 54 -->
+<div class="vocab-card" data-word="blemish">
+  <div class="word-section">
+    <div class="word-number">54</div>
+    <div class="word">blemish</div>
+    <div class="meaning">khuyết điểm, vết nhơ, vết tì</div>
+  </div>
+
+  <div class="example-section">
+    <div class="example-label">Example</div>
+    <div class="example">The small scar was the only blemish on her otherwise clear skin.</div>
+    <div class="translation">Vết sẹo nhỏ là khuyết điểm duy nhất trên làn da vốn rất sạch của cô ấy.</div>
+    <button class="speak-btn" onclick="speak('blemish')">🔊 Listen</button>
+  </div>
+</div>
+
+<!-- 55 -->
+<div class="vocab-card" data-word="starchy">
+  <div class="word-section">
+    <div class="word-number">55</div>
+    <div class="word">starchy</div>
+    <div class="meaning">nhiều tinh bột; cứng nhắc, kiểu cách</div>
+  </div>
+
+  <div class="example-section">
+    <div class="example-label">Example</div>
+    <div class="example">Potatoes and rice are both starchy foods.</div>
+    <div class="translation">Khoai tây và gạo đều là những thực phẩm giàu tinh bột.</div>
+    <button class="speak-btn" onclick="speak('starchy')">🔊 Listen</button>
+  </div>
+</div>
+
+<!-- 56 -->
+<div class="vocab-card" data-word="defy">
+  <div class="word-section">
+    <div class="word-number">56</div>
+    <div class="word">defy</div>
+    <div class="meaning">thách thức, chống lại; bất chấp</div>
+  </div>
+
+  <div class="example-section">
+    <div class="example-label">Example</div>
+    <div class="example">The athlete defied expectations and won the competition.</div>
+    <div class="translation">Vận động viên đã bất chấp mọi kỳ vọng và giành chiến thắng trong cuộc thi.</div>
+    <button class="speak-btn" onclick="speak('defy')">🔊 Listen</button>
+  </div>
+</div>
+
+<!-- 57 -->
+<div class="vocab-card" data-word="singular">
+  <div class="word-section">
+    <div class="word-number">57</div>
+    <div class="word">singular</div>
+    <div class="meaning">độc nhất, đặc biệt, khác thường</div>
+  </div>
+
+  <div class="example-section">
+    <div class="example-label">Example</div>
+    <div class="example">She has a singular ability to inspire others.</div>
+    <div class="translation">Cô ấy có một khả năng đặc biệt trong việc truyền cảm hứng cho người khác.</div>
+    <button class="speak-btn" onclick="speak('singular')">🔊 Listen</button>
+  </div>
+</div>
+      <!-- NO RESULT -->
+
+      <div class="no-result" id="noResult">😕 No vocabulary found.</div>
+
+      <!-- FOOTER -->
+
+      <div class="footer">Vocabulary Bank • Culture, History & Heritage</div>
+    </div>
+
+    <script>
+      /* =========================
+       SEARCH VOCABULARY
+    ========================= */
+
+      const searchInput = document.getElementById("searchInput");
+
+      const cards = document.querySelectorAll(".vocab-card");
+
+      const noResult = document.getElementById("noResult");
+
+      searchInput.addEventListener("input", function () {
+        const keyword = this.value.toLowerCase().trim();
+
+        let visibleCount = 0;
+
+        cards.forEach((card) => {
+          const word = card.dataset.word.toLowerCase();
+
+          const content = card.innerText.toLowerCase();
+
+          if (word.includes(keyword) || content.includes(keyword)) {
+            card.style.display = "grid";
+
+            visibleCount++;
+          } else {
+            card.style.display = "none";
+          }
+        });
+
+        if (visibleCount === 0) {
+          noResult.style.display = "block";
+        } else {
+          noResult.style.display = "none";
+        }
+      });
+
+      /* =========================
+       TEXT TO SPEECH
+    ========================= */
+
+      function speak(text) {
+        if (!("speechSynthesis" in window)) {
+          alert("Your browser does not support text-to-speech.");
+
+          return;
+        }
+
+        window.speechSynthesis.cancel();
+
+        const utterance = new SpeechSynthesisUtterance(text);
+
+        utterance.lang = "en-US";
+
+        utterance.rate = 0.85;
+
+        utterance.pitch = 1;
+
+        window.speechSynthesis.speak(utterance);
+      }
+    </script>
+  </body>
+</html>
