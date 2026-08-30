@@ -5,7 +5,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Reading Practice</title>
+    <title>Grammar Practice</title>
 
     <style>
       /* =====================================================
@@ -35,10 +35,10 @@
       }
 
       /* =====================================================
-         TRÁI TIM TRANG TRÍ
+         NGÔI SAO TRANG TRÍ
       ===================================================== */
 
-      .hearts {
+      .stars {
         position: fixed;
 
         width: 100%;
@@ -52,102 +52,98 @@
         z-index: 1;
       }
 
-      .heart {
+      .star {
         position: absolute;
 
-        /* MÀU TÍM PASTEL */
+        color: #f6c453;
 
-        color: #b79ad8;
-
-        opacity: 0.7;
+        opacity: 0.65;
 
         animation: floating 4s ease-in-out infinite;
       }
 
-      /* =====================================================
-         VỊ TRÍ TRÁI TIM
-      ===================================================== */
+      /* Vị trí ngôi sao */
 
-      .heart:nth-child(1) {
-        top: 3%;
+      .star:nth-child(1) {
+        top: -15px;
         left: 7%;
-        font-size: 40px;
+        font-size: 45px;
       }
 
-      .heart:nth-child(2) {
-        top: 10%;
+      .star:nth-child(2) {
+        top: 7%;
         left: 25%;
-        font-size: 25px;
-      }
-
-      .heart:nth-child(3) {
-        top: 4%;
-        left: 47%;
         font-size: 30px;
       }
 
-      .heart:nth-child(4) {
-        top: 8%;
+      .star:nth-child(3) {
+        top: 2%;
+        left: 47%;
+        font-size: 28px;
+      }
+
+      .star:nth-child(4) {
+        top: 7%;
         right: 25%;
-        font-size: 25px;
+        font-size: 30px;
       }
 
-      .heart:nth-child(5) {
+      .star:nth-child(5) {
         top: 15%;
-        right: 7%;
+        right: 6%;
+        font-size: 38px;
+      }
+
+      .star:nth-child(6) {
+        top: 31%;
+        left: 20%;
         font-size: 40px;
       }
 
-      .heart:nth-child(6) {
-        top: 32%;
-        left: 18%;
-        font-size: 35px;
+      .star:nth-child(7) {
+        top: 33%;
+        right: 16%;
+        font-size: 28px;
       }
 
-      .heart:nth-child(7) {
-        top: 35%;
-        right: 15%;
-        font-size: 25px;
-      }
-
-      .heart:nth-child(8) {
+      .star:nth-child(8) {
         top: 58%;
-        left: 3%;
-        font-size: 40px;
+        left: 2%;
+        font-size: 46px;
       }
 
-      .heart:nth-child(9) {
-        top: 65%;
-        right: 10%;
-        font-size: 35px;
+      .star:nth-child(9) {
+        top: 64%;
+        right: 12%;
+        font-size: 43px;
       }
 
-      .heart:nth-child(10) {
-        bottom: 15%;
+      .star:nth-child(10) {
+        bottom: 13%;
         left: 30%;
-        font-size: 25px;
+        font-size: 28px;
       }
 
-      .heart:nth-child(11) {
-        bottom: 5%;
+      .star:nth-child(11) {
+        bottom: 3%;
         left: 48%;
         font-size: 40px;
       }
 
-      .heart:nth-child(12) {
-        bottom: 8%;
+      .star:nth-child(12) {
+        bottom: 7%;
         right: 24%;
         font-size: 25px;
       }
 
-      .heart:nth-child(13) {
-        bottom: 10%;
-        right: 7%;
-        font-size: 30px;
+      .star:nth-child(13) {
+        bottom: 8%;
+        right: 8%;
+        font-size: 25px;
       }
 
       /* =====================================================
-         HIỆU ỨNG TRÁI TIM
+         HIỆU ỨNG NGÔI SAO
       ===================================================== */
 
       @keyframes floating {
@@ -191,35 +187,17 @@
       }
 
       /* =====================================================
-         TIÊU ĐỀ
-      ===================================================== */
-
-      .title {
-        color: #6d527f;
-
-        font-size: 28px;
-
-        font-weight: 500;
-
-        text-align: center;
-
-        margin-bottom: 5px;
-      }
-
-      /* =====================================================
-         CÁC Ô LINK - TÍM PASTEL
+         CÁC Ô LINK
       ===================================================== */
 
       .link-box {
-        width: 320px;
+        width: 300px;
 
         min-height: 100px;
 
         padding: 20px;
 
-        /* MÀU TÍM PASTEL */
-
-        background-color: #d8c4e8;
+        background-color: #f8c8cc;
 
         display: flex;
 
@@ -231,7 +209,7 @@
 
         text-decoration: none;
 
-        color: #543d68;
+        color: #222222;
 
         font-size: 24px;
 
@@ -241,15 +219,15 @@
       }
 
       /* =====================================================
-         HIỆU ỨNG HOVER
+         HIỆU ỨNG KHI DI CHUỘT
       ===================================================== */
 
       .link-box:hover {
         transform: scale(1.05);
 
-        background-color: #cbb1df;
+        background-color: #f5b9c0;
 
-        box-shadow: 0 8px 20px rgba(150, 110, 190, 0.25);
+        box-shadow: 0 8px 20px rgba(240, 150, 165, 0.25);
       }
 
       /* =====================================================
@@ -261,19 +239,15 @@
           gap: 25px;
         }
 
-        .title {
-          font-size: 23px;
-        }
-
         .link-box {
-          width: 240px;
+          width: 230px;
 
-          min-height: 85px;
+          min-height: 80px;
 
           font-size: 20px;
         }
 
-        .heart {
+        .star {
           transform: scale(0.8);
         }
       }
@@ -282,35 +256,35 @@
 
   <body>
     <!-- =====================================================
-         TRÁI TIM TÍM PASTEL TRANG TRÍ
+         NGÔI SAO VÀNG TRANG TRÍ
     ===================================================== -->
 
-    <div class="hearts">
-      <div class="heart">♥</div>
+    <div class="stars">
+      <div class="star">★</div>
 
-      <div class="heart">♥</div>
+      <div class="star">★</div>
 
-      <div class="heart">♥</div>
+      <div class="star">★</div>
 
-      <div class="heart">♥</div>
+      <div class="star">★</div>
 
-      <div class="heart">♥</div>
+      <div class="star">★</div>
 
-      <div class="heart">♥</div>
+      <div class="star">★</div>
 
-      <div class="heart">♥</div>
+      <div class="star">★</div>
 
-      <div class="heart">♥</div>
+      <div class="star">★</div>
 
-      <div class="heart">♥</div>
+      <div class="star">★</div>
 
-      <div class="heart">♥</div>
+      <div class="star">★</div>
 
-      <div class="heart">♥</div>
+      <div class="star">★</div>
 
-      <div class="heart">♥</div>
+      <div class="star">★</div>
 
-      <div class="heart">♥</div>
+      <div class="star">★</div>
     </div>
 
     <!-- =====================================================
@@ -318,34 +292,13 @@
     ===================================================== -->
 
     <main class="container">
-      <!-- TIÊU ĐỀ -->
+      <!-- WORD FORM + GIỚI TỪ + PHRASAL VERB -->
 
-      <h3 class="title">Phần bài đọc 10 câu</h3>
+      <a href="../HCM.html" class="link-box"> Trắc nghiệm từ vựng </a>
 
-      <!-- READING 1 -->
-
-      <a href="../read34.html" class="link-box"> Reading 1 </a>
-
-      <!-- READING 2 -->
-
-      <a href="../read31.html" class="link-box"> Reading 2 </a>
-      <!-- READING 3 and 4 -->
-
-      <a href="../re3536.html" class="link-box"> Reading 3 and Reading 4 </a>
-      <!-- READING 5 and 6 -->
-
-      <a href="../re3738.html" class="link-box"> Reading 5 and Reading 6 </a>
-      <a href="../read39.html" class="link-box"> Reading 7</a>
-      <a href="../read40.html" class="link-box">Reading 8</a>
-      <a href="../read32.html" class="link-box">Reading 9</a>
-      <a href="../read42.html" class="link-box">Reading 10</a>
-      <a href="../read28.html" class="link-box">Reading 11</a>
-      <a href="../read41.html" class="link-box">Reading 12</a>
-      <a href="../Read27.html" class="link-box">Reading 13</a>
-      <a href="../read33.html" class="link-box">Reading 14</a>
-      <a href="../read30.html" class="link-box">Reading 15</a>
-      <a href="../read29.html" class="link-box">Reading 16</a>
-      <a href="../read28.html" class="link-box">Reading 17</a>
+      <a href="../HCM2.html" class="link-box"> Guided Cloze</a>
+      <a href="../HCM3.html" class="link-box"> Bài đọc điền từ</a>
+      <a href="../HCM4.html" class="link-box"> Wordform</a>
     </main>
 
     <script src="/study-tracker.js"></script>
