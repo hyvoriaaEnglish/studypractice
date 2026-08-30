@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luyện Tập Grammar & Vocabulary (40 Câus)</title>
+    <style>
+      :root {
+        --primary-color: #4f46e5;
+        --primary-hover: #4338ca;
+        --bg-color: #f3f4f6;
+        --card-bg: #ffffff;
+        --text-color: #1f2937;
+        --correct-color: #10b981;
+        --correct-bg: #ecfdf5;
+        --wrong-color: #ef4444;
+        --wrong-bg: #fef2f2;
+        --border-color: #e5e7eb;
+      }
+
+      body {
+        font-family:
+          "Segoe UI",
+          -apple-system,
+          BlinkMacSystemFont,
+          Roboto,
+          sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .header {
+        text-align: center;
+        background: var(--card-bg);
+        padding: 24px;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        margin-bottom: 24px;
+      }
+
+      .header h1 {
+        margin: 0 0 10px 0;
+        color: var(--primary-color);
+        font-size: 1.8rem;
+      }
+
+      .question-card {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 20px 24px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        border: 1px solid var(--border-color);
+      }
+
+      .question-title {
+        font-weight: 600;
+        font-size: 1.05rem;
+        margin-bottom: 16px;
+      }
+
+      .options-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      @media (min-width: 600px) {
+        .options-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      .btn-option {
+        background-color: #f9fafb;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 12px 16px;
+        text-align: left;
+        font-size: 0.95rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        color: var(--text-color);
+      }
+
+      .btn-option:hover:not([disabled]) {
+        background-color: #eef2ff;
+        border-color: var(--primary-color);
+      }
+
+      .btn-option[disabled] {
+        cursor: default;
+      }
+
+      .btn-option.correct {
+        background-color: var(--correct-bg) !important;
+        border-color: var(--correct-color) !important;
+        color: #065f46;
+        font-weight: 600;
+      }
+
+      .btn-option.wrong {
+        background-color: var(--wrong-bg) !important;
+        border-color: var(--wrong-color) !important;
+        color: #991b1b;
+      }
+
+      .explanation {
+        display: none;
+        margin-top: 16px;
+        padding: 14px 16px;
+        border-radius: 8px;
+        background-color: #f8fafc;
+        border-left: 4px solid var(--primary-color);
+        font-size: 0.92rem;
+        color: #334155;
+      }
+
+      .explanation strong {
+        color: var(--primary-color);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>GRAMMAR AND VOCABULARY QUIZ</h1>
+        <p>
+          Chọn đáp án thích hợp cho mỗi câu hỏi bên dưới để xem giải thích chi
+          tiết.
+        </p>
+      </div>
+
+      <div id="quiz-container"></div>
+    </div>
+
+    <script>
+      const quizData = [
+        {
+          q: "1. _______ her better judgement, my mother invested all her retirement savings in cryptocurrency.",
+          options: [
+            "A. Against",
+            "B. Notwithstanding",
+            "C. Without",
+            "D. In spite of",
+          ],
+          answer: 0,
+          explain:
+            "<b>Cụm từ cố định:</b> <i>Against one's better judgement</i> nghĩa là 'dù biết là không nên/bất chấp sự đắn đo suy tính của bản thân'.",
+        },
+        {
+          q: "2. Burglars _______ with not only valuables but also sensitive company documents.",
+          options: [
+            "A. made off",
+            "B. cleared out",
+            "C. took off",
+            "D. bowed out",
+          ],
+          answer: 0,
+          explain:
+            "<b>Phrasal verb:</b> <i>Make off with sth</i> có nghĩa là 'tẩu thoát cùng với cái gì (đồ ăn trộm)'.",
+        },
+        {
+          q: "3. Please do not do me any favors. I do not like to be _______ to anyone.",
+          options: [
+            "A. befriended",
+            "B. bewildered",
+            "C. beholden",
+            "D. begrudged",
+          ],
+          answer: 2,
+          explain:
+            "<b>Từ vựng:</b> <i>Be beholden to sb</i> nghĩa là 'chịu ơn/nợ ân tình của ai'.",
+        },
+        {
+          q: "4. Jimmy was sent to prison for 3 years just for possession of _______ drugs.",
+          options: ["A. elicit", "B. explicit", "C. illicit", "D. implicit"],
+          answer: 2,
+          explain:
+            "<b>Từ vựng:</b> <i>Illicit drugs</i> có nghĩa là 'ma túy/chất cấm/bất hợp pháp'.",
+        },
+        {
+          q: "5. With the passing of the Equality Act, the government wants to show its _______ commitment to women’s rights.",
+          options: [
+            "A. unblinking",
+            "B. unwavering",
+            "C. unquestioned",
+            "D. unquestioning",
+          ],
+          answer: 1,
+          explain:
+            "<b>Kết hợp từ (Collocation):</b> <i>Unwavering commitment</i> nghĩa là 'cam kết kiên định/không hề lay chuyển'.",
+        },
+        {
+          q: "6. Her mother has warned her _______ not to respond to messages from strangers online.",
+          options: [
+            "A. most times",
+            "B. many a time",
+            "C. most of the time",
+            "D. a many times",
+          ],
+          answer: 1,
+          explain:
+            "<b>Ngữ pháp:</b> <i>Many a time</i> (hoặc <i>many a time and oft</i>) mang nghĩa là 'rất nhiều lần'.",
+        },
+        {
+          q: "7. Just _______! Life is miserable when you have to watch out for everything and everyone.",
+          options: [
+            "A. throw in the towel",
+            "B. throw yourself a bone",
+            "C. throw a spanner in the works",
+            "D. throw caution to the wind",
+          ],
+          answer: 3,
+          explain:
+            "<b>Thành ngữ:</b> <i>Throw caution to the wind/winds</i> nghĩa là 'liều lĩnh, không lo lắng lo sợ gì nữa'.",
+        },
+        {
+          q: "8. Jimmy received a court order for tax evasion offense, but with his reckless business practice, he _______.",
+          options: [
+            "A. had seen it coming",
+            "B. would get his coming",
+            "C. would not have come",
+            "D. had it coming",
+          ],
+          answer: 3,
+          explain:
+            "<b>Thành ngữ:</b> <i>Have it coming (to one)</i> có nghĩa là 'đáng đời/quả báo do hành vi của mình gây ra'.",
+        },
+        {
+          q: "9. CEOs need to be _______ accountable for enabling the exploitation of the working class.",
+          options: ["A. forced", "B. made", "C. held", "D. turned"],
+          answer: 2,
+          explain:
+            "<b>Cụm từ cố định:</b> <i>Hold sb accountable (for sth)</i> nghĩa là 'quy trách nhiệm cho ai về việc gì'.",
+        },
+        {
+          q: "10. Be careful and _______. You might not be aware of what you are signing up for.",
+          options: [
+            "A. read the runes",
+            "B. read the fine print",
+            "C. read between the lines",
+            "D. read the room",
+          ],
+          answer: 1,
+          explain:
+            "<b>Thành ngữ:</b> <i>Read the fine print</i> nghĩa là 'đọc kỹ các điều khoản nhỏ/chi tiết trước khi ký hợp đồng'.",
+        },
+        {
+          q: "11. While your essay is satisfactory, there are some points that need to be _______ with evidence and reasoning.",
+          options: [
+            "A. worn out",
+            "B. fleshed out",
+            "C. muscled out",
+            "D. ironed out",
+          ],
+          answer: 1,
+          explain:
+            "<b>Phrasal verb:</b> <i>Flesh sth out</i> nghĩa là 'bổ sung chi tiết/làm cho cụ thể đầy đủ hơn'.",
+        },
+        {
+          q: "12. Now is a good time to _______ your French before you transfer to the Paris office at the end of this year.",
+          options: [
+            "A. dust off",
+            "B. scrub off",
+            "C. sweep away",
+            "D. brush up on",
+          ],
+          answer: 3,
+          explain:
+            "<b>Phrasal verb:</b> <i>Brush up on sth</i> nghĩa là 'ôn tập/trau dồi lại kỹ năng/ngôn ngữ đã lâu không dùng'.",
+        },
+        {
+          q: "13. _______ an ancient battlefield, the cave mural was painted using various pigmented minerals.",
+          options: [
+            "A. Exhibiting",
+            "B. Demonstrating",
+            "C. Displaying",
+            "D. Depicting",
+          ],
+          answer: 3,
+          explain:
+            "<b>Từ vựng:</b> <i>Depict</i> nghĩa là 'mô tả/khắc họa (qua tranh vẽ, nghệ thuật)'.",
+        },
+        {
+          q: "14. _______ modelled after the symbol animal of France.",
+          options: [
+            "A. Situated atop the church spire is a brass figure of a rooster",
+            "B. Is atop the church spire situated a brass figure of a rooster",
+            "C. A brass figure of a rooster is situated atop the church spire",
+            "D. Atop the church spire situated is a brass figure of a rooster",
+          ],
+          answer: 0,
+          explain:
+            "<b>Cấu trúc Đảo ngữ vị ngữ (Inversion of Place):</b> <i>[Phân từ / Cụm giới từ chỉ vị trí] + Verb + Noun Subject</i>. Do đó <i>'Situated atop the church spire is a brass figure of a rooster'</i> là cấu trúc chính xác.",
+        },
+        {
+          q: "15. We adopted a _______ to keep our older dog company.",
+          options: [
+            "A. little brown playful poodle puppy",
+            "B. playful little brown poodle puppy",
+            "C. brown little playful poodle puppy",
+            "D. playful little poodle brown puppy",
+          ],
+          answer: 1,
+          explain:
+            "<b>Trật tự tính từ (OSASCOMP):</b> Opinion (playful) -> Size (little) -> Color (brown) -> Origin/Type (poodle) -> Noun (puppy).",
+        },
+        {
+          q: "16. Since our budget is shrinking, we have to _______. Let’s start with the office massage chairs.",
+          options: [
+            "A. cut corners",
+            "B. split hairs",
+            "C. cut ourselves some slack",
+            "D. trim the fat",
+          ],
+          answer: 3,
+          explain:
+            "<b>Thành ngữ:</b> <i>Trim the fat</i> nghĩa là 'cắt giảm chi phí/nhân sự thừa thãi không cần thiết'.",
+        },
+        {
+          q: "17. No sooner _______ John burst into tears.",
+          options: [
+            "A. did he hear the voice of his love when",
+            "B. had he heard the voice of his love when",
+            "C. had he heard the voice of his love than",
+            "D. did he hear the voice of his love than",
+          ],
+          answer: 2,
+          explain:
+            "<b>Cấu trúc Đảo ngữ:</b> <i>No sooner + had + S + V3/ed + THAN + S + V2/ed</i>.",
+        },
+        {
+          q: "18. You are always expected to go the extra _______, but never with any extra pay.",
+          options: ["A. mile", "B. road", "C. length", "D. step"],
+          answer: 0,
+          explain:
+            "<b>Thành ngữ:</b> <i>Go the extra mile</i> có nghĩa là 'nỗ lực làm tốt hơn sự mong đợi/nỗ lực hết sức'.",
+        },
+        {
+          q: "19. You ought to remind your teacher as she _______ about your bonus points.",
+          options: [
+            "A. would not do well to forget",
+            "B. might well have forgotten",
+            "C. as well as forgets",
+            "D. might as well forget",
+          ],
+          answer: 1,
+          explain:
+            "<b>Modal Verb:</b> <i>Might well have + V3/ed</i> dùng để chỉ một suy đoán có khả năng cao đã xảy ra trong quá khứ ('rất có thể cô đã quên mất').",
+        },
+        {
+          q: "20. Some schools are coming under _______ pressure from parents to censor content inappropriate for students.",
+          options: ["A. peaking", "B. boiling", "C. mounting", "D. climbing"],
+          answer: 2,
+          explain:
+            "<b>Kết hợp từ (Collocation):</b> <i>Mounting pressure</i> có nghĩa là 'áp lực gia tăng ngày càng lớn'.",
+        },
+        {
+          q: "21. To combat inflation, the government assembled an economic _______ in order to propose new policies.",
+          options: [
+            "A. think piece",
+            "B. think tank",
+            "C. thought bubble",
+            "D. thought group",
+          ],
+          answer: 1,
+          explain:
+            "<b>Thuật ngữ:</b> <i>Think tank</i> nghĩa là 'nhóm chuyên gia/vện nghiên cứu tư vấn chính sách'.",
+        },
+        {
+          q: "22. Ms. Sally needs someone to _______ at the school assembly tomorrow as she is quite sick.",
+          options: [
+            "A. pull her through",
+            "B. bring her round to",
+            "C. fill her in on",
+            "D. stand in for her",
+          ],
+          answer: 3,
+          explain:
+            "<b>Phrasal verb:</b> <i>Stand in for sb</i> nghĩa là 'thay thế/đại diện làm thay công việc cho ai'.",
+        },
+        {
+          q: "23. Any luggage _______ at the airport will be confiscated and searched by police.",
+          options: [
+            "A. leaving unattended",
+            "B. left unattended",
+            "C. leaving unattending",
+            "D. left unattending",
+          ],
+          answer: 1,
+          explain:
+            "<b>Rút gọn mệnh đề quan hệ (Dạng bị động):</b> <i>Any luggage (which is) left unattended...</i>",
+        },
+        {
+          q: "24. That traitorous snake _______ multiple times for his own benefit.",
+          options: [
+            "A. pulled the plug on people",
+            "B. threw people under the bus",
+            "C. threw people a curveball",
+            "D. pulled the rug out from people’s feet",
+          ],
+          answer: 1,
+          explain:
+            "<b>Thành ngữ:</b> <i>Throw someone under the bus</i> nghĩa là 'đâm sau lưng/đổ lỗi/hi sinh bạn bè vì lợi ích cá nhân'.",
+        },
+        {
+          q: "25. Our government is working with foreign construction companies to _______ the urban infrastructure problem.",
+          options: [
+            "A. disintegrate",
+            "B. elevate",
+            "C. alleviate",
+            "D. propagate",
+          ],
+          answer: 2,
+          explain:
+            "<b>Từ vựng:</b> <i>Alleviate (a problem/pain)</i> nghĩa là 'xoa dịu/làm giảm bớt gánh nặng hay vấn đề'.",
+        },
+        {
+          q: "26. _______ it started to malfunction just after a drop.",
+          options: [
+            "A. Though was the camera expensive",
+            "B. Expensive that the camera was",
+            "C. Expensive as the camera was",
+            "D. Though the camera be expensive",
+          ],
+          answer: 2,
+          explain:
+            "<b>Cấu trúc Nhượng bộ Đảo ngữ:</b> <i>Adj/Adv + AS/THAT + S + V, clause</i> (Mặc dù chiếc máy ảnh rất đắt...).",
+        },
+        {
+          q: "27. You need to realize that we are all on the same _______, and either we all survive or no one does.",
+          options: ["A. page", "B. wavelength", "C. cloth", "D. boat"],
+          answer: 3,
+          explain:
+            "<b>Thành ngữ:</b> <i>In the same boat</i> nghĩa là 'cùng chung hội cùng thuyền / ở chung hoàn cảnh'.",
+        },
+        {
+          q: "28. The _______ majority of students prefer blended learning to strictly online or face to face.",
+          options: ["A. broad", "B. deep", "C. vast", "D. high"],
+          answer: 2,
+          explain:
+            "<b>Kết hợp từ (Collocation):</b> <i>The vast majority</i> nghĩa là 'đại đa số'.",
+        },
+        {
+          q: "29. The student performer’s rapping over the ‘Declaration of Independence’ raised a few _______ in the audience.",
+          options: ["A. hands", "B. fists", "C. eyebrows", "D. necks"],
+          answer: 2,
+          explain:
+            "<b>Thành ngữ:</b> <i>Raise eyebrows</i> nghĩa là 'gây kinh ngạc/bất ngờ hoặc gây tranh cãi'.",
+        },
+        {
+          q: "30. Receiving warning of a(n) _______ storm, our family quickly devised a shelter plan.",
+          options: ["A. dominant", "B. eminent", "C. prominent", "D. imminent"],
+          answer: 3,
+          explain:
+            "<b>Từ vựng:</b> <i>Imminent</i> nghĩa là '(cái gì đó xấu/nguy hiểm) sắp xảy ra đến nơi'.",
+        },
+        {
+          q: "31. We all paused our climb to admire the _______ beauty of the sun rising over the snow-cloaked peaks.",
+          options: [
+            "A. speechless",
+            "B. ineffable",
+            "C. unwritten",
+            "D. breathless",
+          ],
+          answer: 1,
+          explain:
+            "<b>Từ vựng:</b> <i>Ineffable</i> nghĩa là 'không thể diễn tả bằng lời / đẹp đến nghẹn ngào'.",
+        },
+        {
+          q: "32. The host would prefer _______ in formal attire.",
+          options: [
+            "A. for her guests to arrive",
+            "B. it if her guests arrived",
+            "C. her guests arriving",
+            "D. that her guests arrive",
+          ],
+          answer: 1,
+          explain:
+            "<b>Cấu trúc ngữ pháp:</b> <i>Would prefer it if + S + V-past</i> (Thích điều gì xảy ra hơn ở hiện tại/tương lai).",
+        },
+        {
+          q: "33. While doing research for my history assignment, I went _______ reading about medieval conspiracy theories.",
+          options: [
+            "A. on a wild goose chase",
+            "B. down a rabbit hole",
+            "C. under the radar",
+            "D. cold turkey",
+          ],
+          answer: 1,
+          explain:
+            "<b>Thành ngữ:</b> <i>Go down a rabbit hole</i> nghĩa là 'mải mê/chìm đắm tìm hiểu một chủ đề phức tạp, dường như không có hồi kết'.",
+        },
+        {
+          q: "34. After years of thinking about it, Molly decided to _______ and get a tattoo.",
+          options: [
+            "A. eat her heart out",
+            "B. chew the cud",
+            "C. bite the bullet",
+            "D. sink her teeth into it",
+          ],
+          answer: 2,
+          explain:
+            "<b>Thành ngữ:</b> <i>Bite the bullet</i> nghĩa là 'liều/cắn răng quyết định làm điều gì đó khó khăn hay ngần ngại lâu nay'.",
+        },
+        {
+          q: "35. It is crucial that the evidence _______ by any non-authorized persons.",
+          options: [
+            "A. is not touched",
+            "B. not be touched",
+            "C. be not touched",
+            "D. not to be touched",
+          ],
+          answer: 1,
+          explain:
+            "<b>Thức giả định (Subjunctive):</b> <i>It is crucial that + S + (not) + V-bare</i>. Dạng bị động phủ định: <i>not be + V3/ed</i>.",
+        },
+        {
+          q: "36. Independent studies are beginning to _______ doubt on the effectiveness of dietary supplements.",
+          options: ["A. cast", "B. shed", "C. throw", "D. bring"],
+          answer: 0,
+          explain:
+            "<b>Kết hợp từ (Collocation):</b> <i>Cast doubt on sth</i> nghĩa là 'dấy lên sự nghi ngờ về cái gì'.",
+        },
+        {
+          q: "37. While doing research for my history assignment, I went _______ reading about medieval conspiracy theories.",
+          options: [
+            "A. on a wild goose chase",
+            "B. down a rabbit hole",
+            "C. under the radar",
+            "D. cold turkey",
+          ],
+          answer: 1,
+          explain:
+            "<b>Thành ngữ (Trùng câu 33):</b> <i>Go down a rabbit hole</i> nghĩa là 'mải mê tìm hiểu/chìm đắm vào một chủ đề kỳ lạ'.",
+        },
+        {
+          q: "38. After years of thinking about it, Molly decided to _______ and get a tattoo.",
+          options: [
+            "A. eat her heart out",
+            "B. chew the cud",
+            "C. bite the bullet",
+            "D. sink her teeth into it",
+          ],
+          answer: 2,
+          explain:
+            "<b>Thành ngữ (Trùng câu 34):</b> <i>Bite the bullet</i> nghĩa là 'đưa ra quyết định thực hiện điều gì đó sau thời gian ngần ngại'.",
+        },
+        {
+          q: "39. It is crucial that the evidence _______ by any non-authorized persons.",
+          options: [
+            "A. is not touched",
+            "B. not be touched",
+            "C. be not touched",
+            "D. not to be touched",
+          ],
+          answer: 1,
+          explain:
+            "<b>Thức giả định (Trùng câu 35):</b> <i>It is crucial that + S + not be V3/ed</i>.",
+        },
+        {
+          q: "40. Independent studies are beginning to _______ doubt on the effectiveness of dietary supplements.",
+          options: ["A. cast", "B. shed", "C. throw", "D. bring"],
+          answer: 0,
+          explain:
+            "<b>Kết hợp từ (Trùng câu 36):</b> <i>Cast doubt on sth</i>.",
+        },
+      ];
+
+      function renderQuiz() {
+        const container = document.getElementById("quiz-container");
+        quizData.forEach((item, index) => {
+          const card = document.createElement("div");
+          card.className = "question-card";
+
+          const title = document.createElement("div");
+          title.className = "question-title";
+          title.innerHTML = item.q;
+          card.appendChild(title);
+
+          const optionsGrid = document.createElement("div");
+          optionsGrid.className = "options-grid";
+
+          item.options.forEach((opt, optIdx) => {
+            const btn = document.createElement("button");
+            btn.className = "btn-option";
+            btn.innerHTML = opt;
+            btn.onclick = () => selectOption(index, optIdx);
+            optionsGrid.appendChild(btn);
+          });
+
+          card.appendChild(optionsGrid);
+
+          const exp = document.createElement("div");
+          exp.id = `exp-${index}`;
+          exp.className = "explanation";
+          exp.innerHTML = `<strong>Giải thích:</strong> ${item.explain}`;
+          card.appendChild(exp);
+
+          container.appendChild(card);
+        });
+      }
+
+      function selectOption(qIdx, selectedOptIdx) {
+        const card = document.getElementsByClassName("question-card")[qIdx];
+        const buttons = card.getElementsByClassName("btn-option");
+        const correctIdx = quizData[qIdx].answer;
+
+        // Disable all buttons in this question
+        for (let i = 0; i < buttons.length; i++) {
+          buttons[i].disabled = true;
+          if (i === correctIdx) {
+            buttons[i].classList.add("correct");
+          }
+        }
+
+        // If selected wrong
+        if (selectedOptIdx !== correctIdx) {
+          buttons[selectedOptIdx].classList.add("wrong");
+        }
+
+        // Show explanation
+        const exp = document.getElementById(`exp-${qIdx}`);
+        exp.style.display = "block";
+      }
+
+      // Initial render
+      renderQuiz();
+    </script>
+  </body>
+</html>

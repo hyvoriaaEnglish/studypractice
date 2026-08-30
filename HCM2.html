@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guided Cloze Test (Questions 41-60)</title>
+    <style>
+      :root {
+        --primary-color: #0284c7;
+        --primary-hover: #0369a1;
+        --bg-color: #f8fafc;
+        --card-bg: #ffffff;
+        --text-color: #1e293b;
+        --correct-color: #16a34a;
+        --correct-bg: #f0fdf4;
+        --wrong-color: #dc2626;
+        --wrong-bg: #fef2f2;
+        --border-color: #e2e8f0;
+      }
+
+      body {
+        font-family:
+          "Segoe UI",
+          -apple-system,
+          BlinkMacSystemFont,
+          Roboto,
+          sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        line-height: 1.7;
+        margin: 0;
+        padding: 24px 12px;
+      }
+
+      .container {
+        max-width: 860px;
+        margin: 0 auto;
+      }
+
+      .header {
+        text-align: center;
+        background: var(--card-bg);
+        padding: 28px 20px;
+        border-radius: 16px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        margin-bottom: 28px;
+        border: 1px solid var(--border-color);
+      }
+
+      .header h1 {
+        margin: 0 0 10px 0;
+        color: var(--primary-color);
+        font-size: 1.8rem;
+      }
+
+      .passage-card {
+        background: var(--card-bg);
+        border-radius: 16px;
+        padding: 28px;
+        margin-bottom: 32px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        border: 1px solid var(--border-color);
+      }
+
+      .passage-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 16px;
+        padding-bottom: 8px;
+        border-bottom: 2px solid #e0f2fe;
+      }
+
+      .passage-text {
+        font-size: 1.05rem;
+        color: #334155;
+        background-color: #f1f5f9;
+        padding: 20px;
+        border-radius: 12px;
+        margin-bottom: 28px;
+        text-align: justify;
+      }
+
+      .passage-text blank {
+        font-weight: 700;
+        color: var(--primary-color);
+        text-decoration: underline;
+      }
+
+      .question-card {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 20px;
+        border: 1px solid var(--border-color);
+      }
+
+      .question-title {
+        font-weight: 600;
+        font-size: 1.05rem;
+        margin-bottom: 14px;
+      }
+
+      .options-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      @media (min-width: 600px) {
+        .options-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      .btn-option {
+        background-color: #ffffff;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 12px 16px;
+        text-align: left;
+        font-size: 0.95rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        color: var(--text-color);
+      }
+
+      .btn-option:hover:not([disabled]) {
+        background-color: #e0f2fe;
+        border-color: var(--primary-color);
+      }
+
+      .btn-option[disabled] {
+        cursor: default;
+      }
+
+      .btn-option.correct {
+        background-color: var(--correct-bg) !important;
+        border-color: var(--correct-color) !important;
+        color: #14532d;
+        font-weight: 600;
+      }
+
+      .btn-option.wrong {
+        background-color: var(--wrong-bg) !important;
+        border-color: var(--wrong-color) !important;
+        color: #7f1d1d;
+      }
+
+      .explanation {
+        display: none;
+        margin-top: 14px;
+        padding: 14px 16px;
+        border-radius: 8px;
+        background-color: #f8fafc;
+        border-left: 4px solid var(--primary-color);
+        font-size: 0.93rem;
+        color: #334155;
+      }
+
+      .explanation strong {
+        color: var(--primary-color);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>GUIDED CLOZE TEST (Questions 41–60)</h1>
+        <p>
+          Chọn đáp án thích hợp nhất cho mỗi chỗ trống để xem kết quả và giải
+          thích chi tiết.
+        </p>
+      </div>
+
+      <!-- Cloze 1 -->
+      <div class="passage-card">
+        <div class="passage-title">Guided Cloze 1: Black Mirror</div>
+        <div class="passage-text">
+          Black Mirror, created by British writer and satirist Charlie Brooker,
+          is a critically <strong>[41]</strong> anthology series that examines
+          the <strong>[42]</strong> of technology, society, and human
+          psychology. First <strong>[43]</strong> in 2011, the show quickly
+          gained <strong>[44]</strong> for its hauntingly plausible depictions
+          of near-future worlds dominated by technology. Brooker has described
+          the series as inspired by The Twilight Zone, but reframed for a
+          digital age, with each episode serving as a
+          <strong>[45]</strong> exploration of how modern innovations might
+          twist human behavior in unexpected ways.<br /><br />
+          The title Black Mirror refers to the reflective surface of a
+          <strong>[46]</strong> screen — phones, televisions, tablets —
+          symbolizing both a literal object and a metaphor for introspection in
+          the age of technology. <strong>[47]</strong> offering grand dystopias,
+          the series often focuses on intimate stories: a woman resurrecting her
+          partner through AI, or a social credit system that dictates a person’s
+          rights. The tone is contemplative, with a narrative rhythm that
+          <strong>[48]</strong> stillness and reflection over sensationalism.
+          Its cultural significance lies in the way it
+          <strong>[49]</strong> invisible anxieties visible,
+          <strong>[50]</strong> the cost of progress without rejecting the
+          values of technology. Through minimalism and emotional depth, each
+          episode offers viewers a quiet meditation on a possible tomorrow.
+        </div>
+        <div id="quiz-cloze-1"></div>
+      </div>
+
+      <!-- Cloze 2 -->
+      <div class="passage-card">
+        <div class="passage-title">Guided Cloze 2: The Mohana Fishermen</div>
+        <div class="passage-text">
+          The Mohana fishermen of central Pakistan are a living link with some
+          of the earliest moments of human history. <strong>[51]</strong> from
+          change by the inhospitability of their environment, they live a life
+          which has <strong>[52]</strong> altered in five millennia. Some call
+          them Noah’s children.<br /><br />
+          They live in floating villages on the <strong>[53]</strong> of the
+          Indus, in the flood plain of Sind, where for 200 miles the river cuts
+          through what is <strong>[54]</strong> desert wasteland. Few other
+          living creatures survive there, <strong>[55]</strong> the climate is
+          harsh and unpredictable. The river, up to three miles wide at points,
+          is too treacherous for <strong>[56]</strong> the Mohana to
+          navigate.<br /><br />
+          They live as they <strong>[57]</strong>, each person’s role rigidly
+          predetermined. There are three castes, based on the three traditional
+          river trades: fishing, boat building and ferrying. The fishermen, or
+          shikari, are the most unusual. They fish the shallow waters at the
+          edge of the river, where the alluvial currents make it difficult to
+          locate fish.<br /><br />
+          The solution is to use <strong>[58]</strong> herons. Endowed with oils
+          on the surface of their eyes which act as colour filters, these birds
+          can <strong>[59]</strong> the tiniest movements in the murky surface
+          of the water and <strong>[60]</strong> detect the fish below, which
+          they then dive for and catch. For the shikari, these herons mean the
+          difference between life and death.
+        </div>
+        <div id="quiz-cloze-2"></div>
+      </div>
+    </div>
+
+    <script>
+      const quizDataCloze1 = [
+        {
+          q: "41.",
+          options: [
+            "A. acclaimed",
+            "B. credited",
+            "C. applauded",
+            "D. commended",
+          ],
+          answer: 0,
+          explain:
+            "<b>Cụm từ cố định:</b> <i>critically acclaimed</i> có nghĩa là 'được các nhà chuyên môn/giới phê bình đánh giá rất cao'.",
+        },
+        {
+          q: "42.",
+          options: [
+            "A. roundabouts",
+            "B. crossroads",
+            "C. intersections",
+            "D. sidewalks",
+          ],
+          answer: 2,
+          explain:
+            "<b>Từ vựng:</b> <i>intersection</i> (điểm giao nhau/sự giao thoa). 'Examines the intersection of technology, society, and human psychology' = xem xét sự giao thoa giữa công nghệ, xã hội và tâm lý con người.",
+        },
+        {
+          q: "43.",
+          options: [
+            "A. being aired",
+            "B. airing",
+            "C. having aired",
+            "D. having been aired",
+          ],
+          answer: 1,
+          explain:
+            "<b>Rút gọn phân từ:</b> Động từ <i>air</i> (phát sóng) có thể dùng theo dạng nội động từ (intransitive) ở dạng hiện tại phân từ <i>airing</i> mang nghĩa 'lần đầu phát sóng/ra mắt' (First airing in 2011).",
+        },
+        {
+          q: "44.",
+          options: [
+            "A. recognition",
+            "B. awareness",
+            "C. momentum",
+            "D. favor",
+          ],
+          answer: 0,
+          explain:
+            "<b>Kết hợp từ (Collocation):</b> <i>gain recognition for sth</i> nghĩa là 'đạt được sự công nhận/tiếng danh về điều gì'.",
+        },
+        {
+          q: "45.",
+          options: [
+            "A. self-contained",
+            "B. self-serving",
+            "C. self-imposed",
+            "D. self-directed",
+          ],
+          answer: 0,
+          explain:
+            "<b>Từ vựng:</b> <i>self-contained</i> nghĩa là 'độc lập/hoàn chỉnh trong chính nó' (mỗi tập phim là một câu chuyện riêng biệt, trọn vẹn).",
+        },
+        {
+          q: "46.",
+          options: [
+            "A. broken",
+            "B. switched-off",
+            "C. turned-on",
+            "D. glitching",
+          ],
+          answer: 1,
+          explain:
+            "<b>Ngữ cảnh:</b> 'Black Mirror' (Tấm gương đen) là hình ảnh phản chiếu của một màn hình thiết bị khi đã <b>tắt</b> (<i>switched-off screen</i>).",
+        },
+        {
+          q: "47.",
+          options: [
+            "A. Besides",
+            "B. Thanks to",
+            "C. With regards to",
+            "D. Rather than",
+          ],
+          answer: 3,
+          explain:
+            "<b>Cụm từ liên kết:</b> <i>Rather than + V-ing</i> nghĩa là 'Thay vì...'. Vế sau đối lập: 'hơn là vẽ ra những viễn cảnh tận thế hoành tráng, phim tập trung vào các câu chuyện cá nhân'.",
+        },
+        {
+          q: "48.",
+          options: ["A. favors", "B. considers", "C. deepens", "D. invites"],
+          answer: 0,
+          explain:
+            "<b>Từ vựng:</b> <i>favor sth over sth</i> có nghĩa là 'chuộng/ưu ái/thiên về cái gì hơn cái gì'.",
+        },
+        {
+          q: "49.",
+          options: ["A. transforms", "B. renders", "C. imagines", "D. forces"],
+          answer: 1,
+          explain:
+            "<b>Cấu trúc ngữ pháp:</b> <i>render + adj</i> mang nghĩa 'làm cho/khiến cho cái gì trở nên như thế nào' (<i>renders invisible anxieties visible</i> = biến những nỗi lo vô hình thành hữu hình).",
+        },
+        {
+          q: "50.",
+          options: [
+            "A. doubting",
+            "B. suspecting",
+            "C. interrogating",
+            "D. questioning",
+          ],
+          answer: 3,
+          explain:
+            "<b>Từ vựng:</b> <i>questioning (sth)</i> có nghĩa là 'đặt dấu hỏi/hoài nghi/lật lại vấn đề về giá trị/chi phí của sự tiến bộ'.",
+        },
+      ];
+
+      const quizDataCloze2 = [
+        {
+          q: "51.",
+          options: [
+            "A. Separated",
+            "B. Independent",
+            "C. Excluded",
+            "D. Isolated",
+          ],
+          answer: 3,
+          explain:
+            "<b>Từ vựng/Tính từ:</b> <i>Isolated from</i> nghĩa là 'bị cô lập/tách biệt khỏi sự thay đổi do môi trường sống khắc nghiệt'.",
+        },
+        {
+          q: "52.",
+          options: ["A. seemingly", "B. mostly", "C. barely", "D. certainly"],
+          answer: 2,
+          explain:
+            "<b>Trạng từ:</b> <i>barely</i> có nghĩa là 'hầu như không' (cuộc sống hầu như không hề thay đổi suốt 5 thiên niên kỷ).",
+        },
+        {
+          q: "53.",
+          options: ["A. shores", "B. currents", "C. banks", "D. edges"],
+          answer: 2,
+          explain:
+            "<b>Kết hợp từ (Collocation):</b> <i>banks of the river</i> nghĩa là 'bờ sông'.",
+        },
+        {
+          q: "54.",
+          options: ["A. otherwise", "B. thus", "C. unless", "D. however"],
+          answer: 0,
+          explain:
+            "<b>Từ vựng/Cách dùng:</b> <i>otherwise</i> được dùng trước danh từ/tính từ để chỉ 'nếu không nhờ dòng sông thì nơi đây chỉ là...' (what is otherwise desert wasteland).",
+        },
+        {
+          q: "55.",
+          options: ["A. because", "B. so", "C. for", "D. but"],
+          answer: 2,
+          explain:
+            "<b>Liên từ:</b> <i>for</i> đóng vai trò là liên từ đẳng lập giải thích lý do (= because), đứng sau dấu phẩy (..., for the climate is harsh).",
+        },
+        {
+          q: "56.",
+          options: ["A. any but", "B. some of", "C. none but", "D. only"],
+          answer: 0,
+          explain:
+            "<b>Cụm từ cố định:</b> <i>too + adj + for ANY BUT + N</i> nghĩa là 'quá nguy hiểm đối với bất kỳ ai NGOẠI TRỪ tộc người Mohana'.",
+        },
+        {
+          q: "57.",
+          options: [
+            "A. have always been",
+            "B. have always lived",
+            "C. always had",
+            "D. always lived",
+          ],
+          answer: 1,
+          explain:
+            "<b>Thì động từ:</b> <i>They live as they have always lived</i> nghĩa là 'Họ sống như họ đã luôn sống từ trước tới nay' (Thì Hiện tại hoàn thành chỉ thói quen/truyền thống kéo dài từ quá khứ).",
+        },
+        {
+          q: "58.",
+          options: ["A. trainee", "B. training", "C. trained", "D. trainer"],
+          answer: 2,
+          explain:
+            "<b>Tính từ phân từ:</b> <i>trained herons</i> nghĩa là 'những con chim diệc đã được huấn luyện'.",
+        },
+        {
+          q: "59.",
+          options: ["A. dismiss", "B. disclose", "C. discharge", "D. discern"],
+          answer: 3,
+          explain:
+            "<b>Từ vựng:</b> <i>discern</i> nghĩa là 'nhận ra/phát hiện ra (bằng thị giác/giác quan)' đối với những chuyển động vô cùng nhỏ.",
+        },
+        {
+          q: "60.",
+          options: ["A. so", "B. thus", "C. that", "D. such"],
+          answer: 1,
+          explain:
+            "<b>Trạng từ:</b> <i>thus</i> có nghĩa là 'nhờ đó / bằng cách đó'.",
+        },
+      ];
+
+      function renderSection(data, containerId) {
+        const container = document.getElementById(containerId);
+        data.forEach((item, index) => {
+          const card = document.createElement("div");
+          card.className = "question-card";
+
+          const title = document.createElement("div");
+          title.className = "question-title";
+          title.innerHTML = `Question ${item.q}`;
+          card.appendChild(title);
+
+          const optionsGrid = document.createElement("div");
+          optionsGrid.className = "options-grid";
+
+          item.options.forEach((opt, optIdx) => {
+            const btn = document.createElement("button");
+            btn.className = "btn-option";
+            btn.innerHTML = opt;
+            btn.onclick = () => selectOption(containerId, index, optIdx, data);
+            optionsGrid.appendChild(btn);
+          });
+
+          card.appendChild(optionsGrid);
+
+          const exp = document.createElement("div");
+          exp.id = `exp-${containerId}-${index}`;
+          exp.className = "explanation";
+          exp.innerHTML = `<strong>Giải thích:</strong> ${item.explain}`;
+          card.appendChild(exp);
+
+          container.appendChild(card);
+        });
+      }
+
+      function selectOption(containerId, qIdx, selectedOptIdx, data) {
+        const container = document.getElementById(containerId);
+        const card = container.getElementsByClassName("question-card")[qIdx];
+        const buttons = card.getElementsByClassName("btn-option");
+        const correctIdx = data[qIdx].answer;
+
+        for (let i = 0; i < buttons.length; i++) {
+          buttons[i].disabled = true;
+          if (i === correctIdx) {
+            buttons[i].classList.add("correct");
+          }
+        }
+
+        if (selectedOptIdx !== correctIdx) {
+          buttons[selectedOptIdx].classList.add("wrong");
+        }
+
+        const exp = document.getElementById(`exp-${containerId}-${qIdx}`);
+        exp.style.display = "block";
+      }
+
+      // Render both quiz sections
+      renderSection(quizDataCloze1, "quiz-cloze-1");
+      renderSection(quizDataCloze2, "quiz-cloze-2");
+    </script>
+  </body>
+</html>

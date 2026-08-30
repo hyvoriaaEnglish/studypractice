@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Word Formation & Sentence Transformation</title>
+    <style>
+      :root {
+        --primary-color: #6366f1;
+        --primary-hover: #4f46e5;
+        --bg-color: #f8fafc;
+        --card-bg: #ffffff;
+        --text-color: #1e293b;
+        --correct-color: #16a34a;
+        --correct-bg: #dcfce7;
+        --wrong-color: #dc2626;
+        --wrong-bg: #fee2e2;
+        --border-color: #cbd5e1;
+      }
+
+      body {
+        font-family:
+          "Segoe UI",
+          -apple-system,
+          BlinkMacSystemFont,
+          Roboto,
+          sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        line-height: 1.7;
+        margin: 0;
+        padding: 24px 12px;
+      }
+
+      .container {
+        max-width: 860px;
+        margin: 0 auto;
+      }
+
+      .header {
+        text-align: center;
+        background: var(--card-bg);
+        padding: 28px 20px;
+        border-radius: 16px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        margin-bottom: 28px;
+        border: 1px solid var(--border-color);
+      }
+
+      .header h1 {
+        margin: 0 0 10px 0;
+        color: var(--primary-color);
+        font-size: 1.8rem;
+      }
+
+      .section-card {
+        background: var(--card-bg);
+        border-radius: 16px;
+        padding: 28px;
+        margin-bottom: 32px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        border: 1px solid var(--border-color);
+      }
+
+      .section-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 16px;
+        padding-bottom: 8px;
+        border-bottom: 2px solid #e0e7ff;
+      }
+
+      .passage-text {
+        font-size: 1.05rem;
+        color: #334155;
+        background-color: #f1f5f9;
+        padding: 20px;
+        border-radius: 12px;
+        margin-bottom: 28px;
+        text-align: justify;
+      }
+
+      .question-card {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 20px;
+        border: 1px solid var(--border-color);
+      }
+
+      .question-title {
+        font-weight: 600;
+        font-size: 1.02rem;
+        margin-bottom: 14px;
+      }
+
+      .input-group {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+
+      .input-box {
+        flex: 1;
+        padding: 10px 14px;
+        font-size: 1rem;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        outline: none;
+        transition: all 0.2s;
+      }
+
+      .input-box:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+      }
+
+      .btn-check {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 20px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+
+      .btn-check:hover {
+        background-color: var(--primary-hover);
+      }
+
+      .explanation {
+        display: none;
+        margin-top: 14px;
+        padding: 14px 16px;
+        border-radius: 8px;
+        background-color: #f8fafc;
+        border-left: 4px solid var(--primary-color);
+        font-size: 0.93rem;
+        color: #1e293b;
+      }
+
+      .explanation strong {
+        color: var(--primary-color);
+      }
+
+      .status-badge {
+        display: inline-block;
+        font-weight: bold;
+        margin-bottom: 8px;
+      }
+
+      .status-badge.correct {
+        color: var(--correct-color);
+      }
+
+      .status-badge.wrong {
+        color: var(--wrong-color);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>WORD FORMATION & TRANSFORMATION</h1>
+        <p>
+          Nhập đáp án đúng vào ô trống rồi bấm <b>"Kiểm tra"</b> để xem kết quả
+          và giải thích chi tiết.
+        </p>
+      </div>
+
+      <!-- Part 1: Word Formation -->
+      <div class="section-card">
+        <div class="section-title">
+          Part 1: Questions 106–115 (Word Formation)
+        </div>
+        <div class="passage-text">
+          Artificial intelligence is revolutionizing mass surveillance and
+          modern policing. China, for instance, has deployed AI-powered systems
+          with facial recognition to monitor public spaces, using networks of
+          millions of cameras. These tools have significantly improved the
+          efficiency of <strong>106 (HUNT)</strong>, such as when Chinese
+          authorities successfully tracked a fugitive in a crowd of 60,000
+          <strong>107 (CONCERT)</strong> within minutes.<br /><br />
+          On another front, the U.S. National Security Agency (NSA) employs AI
+          to analyze vast amounts of global digital communication, identifying
+          potential threats related to espionage and
+          <strong>108 (TERROR)</strong>. AI systems detect linguistic patterns
+          and unusual metadata in emails or phone calls that human analysts
+          might <strong>109 (LOOK)</strong>, bolstering a nation’s information
+          defense amidst international tensions.<br /><br />
+          AI also supports <strong>110 (COVER)</strong> police operations. Law
+          enforcement in the UK has used AI to assist in fighting 111
+          <strong>(CRIME)</strong>, such as online sexual harassment and
+          grooming. Algorithms are used to monitor and detect alarming patterns
+          on messaging platforms and chatrooms. Sometimes, they even accurately
+          predict potential threats.<br /><br />
+          However, along with this just use, there are a plethora of ethical
+          concerns. In <strong>112 (TOTAL)</strong> regimes, AI may be used to
+          stem dissent, turning even a trusted 113
+          <strong>(CONFIDE)</strong> like close friends and family into
+          <strong>114 (KNOW)</strong> spies for the police. Furthermore, the
+          growing popularity of generative art and deep-fakes assist the
+          <strong>115 (FORGE)</strong> of evidence, which muddles critical
+          judicial decisions. Therefore, as AI grows more powerful, societies
+          must navigate the fine line between security and civil liberty,
+          ensuring that the technology serves justice, not undermines it.
+        </div>
+        <div id="quiz-wf"></div>
+      </div>
+
+      
+
+    <script>
+      const wfData = [
+        {
+          num: 106,
+          prompt: "106 (HUNT)",
+          answers: ["manhunts", "manhunt"],
+          explain:
+            "<b>Danh từ:</b> <i>manhunt</i> (cuộc truy lùng tội phạm). Cụm 'efficiency of manhunts/manhunt'.",
+        },
+        {
+          num: 107,
+          prompt: "107 (CONCERT)",
+          answers: ["concertgoers", "concertgoer"],
+          explain:
+            "<b>Danh từ chỉ người:</b> <i>concertgoer(s)</i> (người đi xem hòa nhạc). Đứng sau chỉ số lượng 60,000 dùng dạng số nhiều <i>concertgoers</i>.",
+        },
+        {
+          num: 108,
+          prompt: "108 (TERROR)",
+          answers: ["terrorism"],
+          explain:
+            "<b>Danh từ chỉ khái niệm:</b> <i>espionage and terrorism</i> (hoạt động gián điệp và chủ nghĩa khủng bố).",
+        },
+        {
+          num: 109,
+          prompt: "109 (LOOK)",
+          answers: ["overlook"],
+          explain:
+            "<b>Động từ ghép:</b> <i>overlook</i> (bỏ sót/bỏ qua). Cấu trúc <i>might + V-bare</i>.",
+        },
+        {
+          num: 110,
+          prompt: "110 (COVER)",
+          answers: ["undercover"],
+          explain:
+            "<b>Tính từ:</b> <i>undercover</i> (ngầm/bí mật). 'Undercover police operations' = các chiến dịch cảnh sát chìm/bí mật.",
+        },
+        {
+          num: 111,
+          prompt: "111 (CRIME)",
+          answers: ["cybercrime", "cybercrimes"],
+          explain:
+            "<b>Danh từ ghép:</b> <i>cybercrime</i> (tội phạm mạng/tội phạm công nghệ cao).",
+        },
+        {
+          num: 112,
+          prompt: "112 (TOTAL)",
+          answers: ["totalitarian"],
+          explain:
+            "<b>Tính từ:</b> <i>totalitarian regimes</i> (các chế độ độc tài/chuyên chế).",
+        },
+        {
+          num: 113,
+          prompt: "113 (CONFIDE)",
+          answers: ["confidant", "confidante", "confidants"],
+          explain:
+            "<b>Danh từ chỉ người:</b> <i>confidant</i> (tri kỷ/người tin cậy để tâm sự).",
+        },
+        {
+          num: 114,
+          prompt: "114 (KNOW)",
+          answers: ["unknowing", "unwitting"],
+          explain:
+            "<b>Tính từ:</b> <i>unknowing spies</i> (những kẻ làm gián điệp một cách không hề hay biết/vô tình).",
+        },
+        {
+          num: 115,
+          prompt: "115 (FORGE)",
+          answers: ["forgery", "forging"],
+          explain:
+            "<b>Danh từ:</b> <i>the forgery of evidence</i> (việc làm giả/ngụy tạo chứng cứ).",
+        },
+      ];
+
+      function renderSection(data, containerId, isWf = true) {
+        const container = document.getElementById(containerId);
+        data.forEach((item) => {
+          const card = document.createElement("div");
+          card.className = "question-card";
+
+          const title = document.createElement("div");
+          title.className = "question-title";
+          title.innerHTML = isWf
+            ? `Question ${item.num}: <b>${item.prompt}</b>`
+            : `Item ${item.num}: ${item.prompt}`;
+          card.appendChild(title);
+
+          const inputGroup = document.createElement("div");
+          inputGroup.className = "input-group";
+
+          const input = document.createElement("input");
+          input.type = "text";
+          input.className = "input-box";
+          input.placeholder = "Nhập câu trả lời của bạn...";
+          input.id = `input-${containerId}-${item.num}`;
+
+          const btn = document.createElement("button");
+          btn.className = "btn-check";
+          btn.innerHTML = "Kiểm tra";
+          btn.onclick = () => checkAnswer(containerId, item.num, data);
+
+          inputGroup.appendChild(input);
+          inputGroup.appendChild(btn);
+          card.appendChild(inputGroup);
+
+          const exp = document.createElement("div");
+          exp.id = `exp-${containerId}-${item.num}`;
+          exp.className = "explanation";
+          card.appendChild(exp);
+
+          container.appendChild(card);
+        });
+      }
+
+      function checkAnswer(containerId, num, data) {
+        const item = data.find((i) => i.num === num);
+        const userInput = document
+          .getElementById(`input-${containerId}-${num}`)
+          .value.trim()
+          .toLowerCase();
+        const expDiv = document.getElementById(`exp-${containerId}-${num}`);
+
+        if (!userInput) {
+          alert("Vui lòng nhập câu trả lời trước khi kiểm tra!");
+          return;
+        }
+
+        // Check if user answer matches any valid pattern
+        const isCorrect = item.answers.some(
+          (ans) =>
+            userInput === ans.toLowerCase() ||
+            userInput.includes(ans.toLowerCase()),
+        );
+        const correctAnswersStr = item.answers.join(" / ");
+
+        let statusHtml = isCorrect
+          ? `<div class="status-badge correct">✓ Chính xác!</div>`
+          : `<div class="status-badge wrong">✗ Chưa chuẩn xác! Đáp án tham khảo: <b>${correctAnswersStr}</b></div>`;
+
+        expDiv.innerHTML = `${statusHtml}<div><strong>Giải thích:</strong> ${item.explain}</div>`;
+        expDiv.style.display = "block";
+      }
+
+      // Render both sections
+      renderSection(wfData, "quiz-wf", true);
+      renderSection(part2Data, "quiz-part2", false);
+    </script>
+  </body>
+</html>
