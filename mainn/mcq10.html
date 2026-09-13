@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bài Tập Trắc Nghiệm Từ Vựng Tiếng Anh</title>
+    <style>
+      :root {
+        --primary-color: #4f46e5;
+        --primary-hover: #4338ca;
+        --bg-color: #f3f4f6;
+        --card-bg: #ffffff;
+        --text-color: #1f2937;
+        --success-color: #10b981;
+        --success-bg: #d1fae5;
+        --error-color: #ef4444;
+        --error-bg: #fee2e2;
+        --border-color: #e5e7eb;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        line-height: 1.6;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 30px;
+        padding: 20px 0;
+      }
+
+      header h1 {
+        color: var(--primary-color);
+        font-size: 2rem;
+        margin-bottom: 8px;
+      }
+
+      header p {
+        color: #6b7280;
+      }
+
+      .question-card {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 24px;
+        margin-bottom: 20px;
+        box-shadow:
+          0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        transition: transform 0.2s ease;
+      }
+
+      .question-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 16px;
+      }
+
+      .question-title .q-num {
+        color: var(--primary-color);
+        margin-right: 6px;
+      }
+
+      .options-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 12px;
+      }
+
+      .option-btn {
+        background: #f9fafb;
+        border: 2px solid var(--border-color);
+        border-radius: 8px;
+        padding: 12px 16px;
+        font-size: 1rem;
+        text-align: left;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        outline: none;
+      }
+
+      .option-btn:hover:not([disabled]) {
+        border-color: var(--primary-color);
+        background: #eef2ff; /* Màu tím rất nhạt, khớp đẹp với var(--primary-color) */
+      }
+
+      .option-btn.correct {
+        background-color: var(--success-bg) !important;
+        border-color: var(--success-color) !important;
+        color: #065f46;
+        font-weight: 600;
+      }
+
+      .option-btn.wrong {
+        background-color: var(--error-bg) !important;
+        border-color: var(--error-color) !important;
+        color: #991b1b;
+      }
+
+      .option-btn[disabled] {
+        cursor: default;
+        opacity: 0.8;
+      }
+
+      .explanation {
+        display: none;
+        margin-top: 16px;
+        padding: 14px 16px;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        animation: fadeIn 0.3s ease-in-out;
+      }
+
+      .explanation.show {
+        display: block;
+      }
+
+      .explanation.correct-exp {
+        background-color: #ecfdf5;
+        border-left: 4px solid var(--success-color);
+        color: #065f46;
+      }
+
+      .explanation.wrong-exp {
+        background-color: #fef2f2;
+        border-left: 4px solid var(--error-color);
+        color: #991b1b;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-5px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Bài Tập Trắc Nghiệm Từ Vựng</h1>
+        <p>
+          Chọn đáp án đúng cho mỗi câu để xem kết quả và giải thích chi tiết.
+        </p>
+      </header>
+
+      <div id="quiz-container"></div>
+    </div>
+
+    <script>
+      const quizData = [
+        {
+          q: "1. The storm raged all night without any ________, causing severe flooding in the coastal town.",
+          options: [
+            "A. let-up",
+            "B. crack-down",
+            "C. go-under",
+            "D. picket line",
+          ],
+          answer: 0,
+          explain:
+            "<b>Let-up:</b> Sự giảm bớt, sự dịu đi (dùng cho thời tiết hoặc áp lực).",
+        },
+        {
+          q: "2. Stop arguing about whether it was 8:59 or 9:00 AM! You are just ________.",
+          options: [
+            "A. letting off steam",
+            "B. splitting hairs",
+            "C. getting at",
+            "D. sticking to your guns",
+          ],
+          answer: 1,
+          explain:
+            "<b>Split hairs:</b> Bới lông tìm vết, xăm xoi chi tiết nhỏ không quan trọng.",
+        },
+        {
+          q: "3. The government decided to ________ on illegal gambling apps across the nation.",
+          options: [
+            "A. palm off",
+            "B. crack down",
+            "C. hold out",
+            "D. thumb through",
+          ],
+          answer: 1,
+          explain:
+            "<b>Crack down (on):</b> Trừng trị thẳng tay, thắt chặt kiểm soát.",
+        },
+        {
+          q: "4. After the company scandal, his reputation as an honest businessman was in ________.",
+          options: ["A. tatters", "B. principle", "C. waves", "D. guns"],
+          answer: 0,
+          explain:
+            "<b>Be in tatters:</b> Bị tàn phá, sụp đổ hoàn toàn (danh tiếng, kế hoạch).",
+        },
+        {
+          q: "5. I never thought a respected journalist would sink to ________ fake news just to get clicks.",
+          options: [
+            "A. publish",
+            "B. publishing",
+            "C. published",
+            "D. be published",
+          ],
+          answer: 1,
+          explain:
+            "<b>Sink to + V-ing:</b> Hạ mình / tha hóa đến mức làm việc gì tồi tệ.",
+        },
+        {
+          q: "6. Striking union members have been standing on ________ outside the factory since dawn.",
+          options: [
+            "A. wild dreams",
+            "B. picket lines",
+            "C. crests of waves",
+            "D. principles",
+          ],
+          answer: 1,
+          explain:
+            "<b>On picket lines:</b> Đang tham gia biểu tình/đình công dây chuyền trước cổng.",
+        },
+        {
+          q: "7. Despite intense pressure from his family to change his career path, Mark decided to stick to his ________.",
+          options: ["A. guns", "B. tatters", "C. steam", "D. waves"],
+          answer: 0,
+          explain:
+            "<b>Stick to one's guns:</b> Giữ vững lập trường, kiên định.",
+        },
+        {
+          q: "8. Following their major victory at the championship, the team is riding a crest of a ________.",
+          options: ["A. wave", "B. dream", "C. line", "D. hair"],
+          answer: 0,
+          explain:
+            "<b>Ride a crest of a wave:</b> Đang trên đỉnh cao thành công / thuận lợi.",
+        },
+        {
+          q: "9. After a stressful week at work, he likes to go to the gym to let off ________.",
+          options: ["A. fire", "B. steam", "C. water", "D. heat"],
+          answer: 1,
+          explain: "<b>Let off steam:</b> Xả hơi, giải tỏa căng thẳng/giận dữ.",
+        },
+        {
+          q: "10. I refuse to accept gifts from lobbyists on ________; it's simply wrong.",
+          options: ["A. tatters", "B. principle", "C. crest", "D. dream"],
+          answer: 1,
+          explain: "<b>On principle:</b> Theo nguyên tắc đạo đức.",
+        },
+        {
+          q: "11. The negotiation stalled because the workers were holding out for a ________ salary increase.",
+          options: ["A. higher", "B. highly", "C. high", "D. height"],
+          answer: 0,
+          explain:
+            "<b>Hold out for:</b> Cố chờ / đòi cho bằng được điều kiện tốt hơn trong đàm phán.",
+        },
+        {
+          q: "12. Winning the international award was success beyond her wildest ________.",
+          options: [
+            "A. thoughts",
+            "B. dreams",
+            "C. imaginations",
+            "D. visions",
+          ],
+          answer: 1,
+          explain:
+            "<b>Beyond one's wildest dreams:</b> Vượt xa ngoài tưởng tượng / ước mơ.",
+        },
+        {
+          q: "13. The sleazy salesman tried to palm a defective car off ________ me.",
+          options: ["A. with", "B. on", "C. at", "D. into"],
+          answer: 1,
+          explain:
+            "<b>Palm sb/sth off on sb:</b> Đẩy trách nhiệm hoặc hàng kém chất lượng cho ai.",
+        },
+        {
+          q: "14. His refusal to cooperate with the police amounts ________ an admission of guilt.",
+          options: ["A. for", "B. to", "C. on", "D. with"],
+          answer: 1,
+          explain: "<b>Amount to:</b> Tương đương với, chẳng khác nào.",
+        },
+        {
+          q: "15. While waiting for her appointment, she thumbed ________ a few magazines in the lobby.",
+          options: ["A. over", "B. through", "C. into", "D. off"],
+          answer: 1,
+          explain:
+            "<b>Thumb through:</b> Đọc lướt, giở nhanh các trang sách/báo.",
+        },
+        {
+          q: "16. If sales don't improve soon, many small local shops will ________ under.",
+          options: ["A. go", "B. fall", "C. sink", "D. let"],
+          answer: 0,
+          explain: "<b>Go under:</b> Phá sản, sụp đổ (dùng cho doanh nghiệp).",
+        },
+        {
+          q: "17. What exactly are you getting ________? Just speak directly!",
+          options: ["A. on", "B. out", "C. at", "D. down"],
+          answer: 2,
+          explain:
+            "<b>Get at:</b> Định nói gì, ám chỉ điều gì (ví dụ: What are you getting at?).",
+        },
+        {
+          q: "18. The entire countryside was ________ by the wildfires last summer.",
+          options: ["A. ravaged", "B. palmed", "C. thumbed", "D. cracked"],
+          answer: 0,
+          explain:
+            "<b>Ravage:</b> Tàn phá nặng nề trên diện rộng (thiên tai, chiến tranh).",
+        },
+        {
+          q: "19. We don't need a full dinner right now, but I can ________ up a quick sandwich for you.",
+          options: ["A. crack", "B. knock", "C. let", "D. hold"],
+          answer: 1,
+          explain: "<b>Knock up (a meal):</b> Nấu nhanh một bữa ăn đơn giản.",
+        },
+        {
+          q: "20. Instead of taking responsibility, the manager tried to ________ the blame off on his junior staff.",
+          options: ["A. palm", "B. sink", "C. split", "D. amount"],
+          answer: 0,
+          explain:
+            "<b>Palm off:</b> Đẩy trách nhiệm / trút lỗi cho người khác.",
+        },
+        {
+          q: "21. The sales figures for this quarter amounted ________ over five million dollars.",
+          options: ["A. for", "B. in", "C. to", "D. at"],
+          answer: 2,
+          explain: "<b>Amount to:</b> Tổng cộng là, đạt tới con số.",
+        },
+        {
+          q: "22. If interest rates keep rising, many small tech startups might ________ under by next year.",
+          options: ["A. let", "B. go", "C. sink", "D. run"],
+          answer: 1,
+          explain: "<b>Go under:</b> Phá sản.",
+        },
+        {
+          q: "23. She sat on the couch quietly ________ through her old high school yearbook.",
+          options: ["A. cracking", "B. thumbing", "C. splitting", "D. riding"],
+          answer: 1,
+          explain: "<b>Thumb through:</b> Lật giở lướt qua.",
+        },
+        {
+          q: "24. He claims he doesn't eat meat on ________ because he believes in animal rights.",
+          options: ["A. principle", "B. tatters", "C. guns", "D. crest"],
+          answer: 0,
+          explain: "<b>On principle:</b> Vì lý do nguyên tắc.",
+        },
+        {
+          q: "25. Don't listen to him! He is just yelling to let off ________ after a bad day.",
+          options: ["A. steam", "B. hair", "C. line", "D. wave"],
+          answer: 0,
+          explain: "<b>Let off steam:</b> Xả giận, xả áp lực.",
+        },
+        {
+          q: "26. The new pop band is currently riding a crest of a ________ after their single went viral globally.",
+          options: ["A. wave", "B. gun", "C. dream", "D. tatter"],
+          answer: 0,
+          explain: "<b>Ride a crest of a wave:</b> Đang rất thành công.",
+        },
+        {
+          q: "27. Even when all his friends advised him to surrender, the commander stuck to his ________.",
+          options: ["A. guns", "B. lines", "C. dreams", "D. steams"],
+          answer: 0,
+          explain: "<b>Stick to one's guns:</b> Giữ nguyên ý kiến.",
+        },
+        {
+          q: "28. Union leaders encouraged every worker to stand on the ________ line until their demands were met.",
+          options: ["A. picket", "B. crack", "C. split", "D. let"],
+          answer: 0,
+          explain: "<b>Picket line:</b> Hàng rào đình công.",
+        },
+        {
+          q: "29. I was disgusted that the politician sunk to ________ personal insults during the debate.",
+          options: ["A. use", "B. using", "C. used", "D. be using"],
+          answer: 1,
+          explain: "<b>Sink to V-ing:</b> Hạ mình làm trò xấu.",
+        },
+        {
+          q: "30. After the scandal broke out, the candidate's campaign was in ________.",
+          options: ["A. ruins", "B. tatters", "C. waves", "D. principles"],
+          answer: 1,
+          explain: "<b>In tatters:</b> Tan thành mây khói, sụp đổ.",
+        },
+        {
+          q: "31. The police announced a strict ________ on drunk drivers during the holiday season.",
+          options: [
+            "A. let-up",
+            "B. crack-down",
+            "C. go-under",
+            "D. picket-line",
+          ],
+          answer: 1,
+          explain: "<b>Crack-down:</b> Sự siết chặt, trừng trị.",
+        },
+        {
+          q: "32. We shouldn't waste time splitting ________ over minor details when the main project is failing.",
+          options: ["A. hairs", "B. dreams", "C. guns", "D. steams"],
+          answer: 0,
+          explain: "<b>Split hairs:</b> Chi li không cần thiết.",
+        },
+        {
+          q: "33. The rain showed no sign of ________ up, so we decided to cancel the outdoor picnic.",
+          options: ["A. letting", "B. cracking", "C. going", "D. sinking"],
+          answer: 0,
+          explain: "<b>Let up:</b> Dịu đi, tạnh (mưa).",
+        },
+        {
+          q: "34. The union decided to hold ________ for a 10% pay rise before signing any agreement.",
+          options: ["A. out", "B. in", "C. on", "D. off"],
+          answer: 0,
+          explain: "<b>Hold out for:</b> Đòi cho bằng được.",
+        },
+        {
+          q: "35. Buying a mansion on the coast was a lifestyle beyond his wildest ________.",
+          options: ["A. dreams", "B. thoughts", "C. goals", "D. hopes"],
+          answer: 0,
+          explain: "<b>Beyond wildest dreams:</b> Vượt ngoài mơ ước.",
+        },
+      ];
+
+      function renderQuiz() {
+        const container = document.getElementById("quiz-container");
+
+        quizData.forEach((item, qIndex) => {
+          const card = document.createElement("div");
+          card.className = "question-card";
+
+          const title = document.createElement("div");
+          title.className = "question-title";
+          title.innerHTML = item.q;
+          card.appendChild(title);
+
+          const optionsGrid = document.createElement("div");
+          optionsGrid.className = "options-grid";
+
+          item.options.forEach((opt, oIndex) => {
+            const btn = document.createElement("button");
+            btn.className = "option-btn";
+            btn.innerText = opt;
+            btn.onclick = () => checkAnswer(qIndex, oIndex);
+            optionsGrid.appendChild(btn);
+          });
+
+          card.appendChild(optionsGrid);
+
+          const exp = document.createElement("div");
+          exp.id = `exp-${qIndex}`;
+          exp.className = "explanation";
+          card.appendChild(exp);
+
+          container.appendChild(card);
+        });
+      }
+
+      function checkAnswer(questionIndex, selectedOption) {
+        const item = quizData[questionIndex];
+        const card = document.querySelectorAll(".question-card")[questionIndex];
+        const buttons = card.querySelectorAll(".option-btn");
+        const expBox = document.getElementById(`exp-${questionIndex}`);
+
+        // Vô hiệu hóa tất cả các nút trong câu hỏi này sau khi chọn
+        buttons.forEach((btn, idx) => {
+          btn.disabled = true;
+          if (idx === item.answer) {
+            btn.classList.add("correct");
+          }
+        });
+
+        if (selectedOption === item.answer) {
+          expBox.className = "explanation show correct-exp";
+          expBox.innerHTML = `<strong> Chính xác!</strong><br>${item.explain}`;
+        } else {
+          buttons[selectedOption].classList.add("wrong");
+          expBox.className = "explanation show wrong-exp";
+          expBox.innerHTML = `<strong> Chưa đúng!</strong> Đáp án chính xác là <strong>${item.options[item.answer]}</strong>.<br>${item.explain}`;
+        }
+      }
+
+      // Chạy khởi tạo bài tập
+      renderQuiz();
+    </script>
+  </body>
+</html>
