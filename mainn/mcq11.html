@@ -1,0 +1,683 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luyện Tập Từ Vựng Tiếng Anh - Pink Theme</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #ff6b8b;
+        --primary-hover: #ff4770;
+        --primary-light: #ffeef2;
+        --bg: #fff5f7;
+        --card-bg: #ffffff;
+        --text-main: #4a3e43;
+        --text-muted: #8c7a82;
+        --correct-bg: #e6f9f0;
+        --correct-border: #2ecc71;
+        --correct-text: #1b7a43;
+        --wrong-bg: #ffebee;
+        --wrong-border: #ff5252;
+        --wrong-text: #c62828;
+        --shadow: 0 8px 24px rgba(255, 107, 139, 0.12);
+        --radius: 16px;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Nunito", sans-serif;
+        background-color: var(--bg);
+        color: var(--text-main);
+        line-height: 1.6;
+        padding: 40px 20px;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      header h1 {
+        color: var(--primary);
+        font-size: 2.2rem;
+        font-weight: 800;
+        margin-bottom: 8px;
+      }
+
+      header p {
+        color: var(--text-muted);
+        font-size: 1.05rem;
+      }
+
+      /* Score Tracker */
+      .score-board {
+        position: sticky;
+        top: 20px;
+        z-index: 100;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 15px 25px;
+        border-radius: 50px;
+        box-shadow: 0 4px 20px rgba(255, 107, 139, 0.2);
+        border: 2px solid var(--primary-light);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        font-weight: 700;
+      }
+
+      .score-board .score {
+        color: var(--primary);
+        font-size: 1.1rem;
+      }
+
+      .progress-bar {
+        flex-grow: 1;
+        height: 10px;
+        background: var(--primary-light);
+        border-radius: 5px;
+        margin: 0 20px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        height: 100%;
+        width: 0%;
+        background: var(--primary);
+        transition: width 0.3s ease;
+        border-radius: 5px;
+      }
+
+      /* Question Cards */
+      .question-card {
+        background: var(--card-bg);
+        border-radius: var(--radius);
+        padding: 25px;
+        margin-bottom: 25px;
+        box-shadow: var(--shadow);
+        border: 1px solid #ffe3e8;
+        transition: transform 0.2s ease;
+      }
+
+      .question-num {
+        display: inline-block;
+        background: var(--primary-light);
+        color: var(--primary);
+        font-weight: 800;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        margin-bottom: 12px;
+      }
+
+      .question-text {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--text-main);
+        margin-bottom: 18px;
+      }
+
+      .options-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      @media (min-width: 600px) {
+        .options-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      .option-btn {
+        background: #fff;
+        border: 2px solid #ffd0da;
+        padding: 12px 18px;
+        border-radius: 12px;
+        text-align: left;
+        font-family: inherit;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text-main);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+      }
+
+      .option-btn:hover:not([disabled]) {
+        border-color: var(--primary);
+        background: var(--primary-light);
+        transform: translateY(-2px);
+      }
+
+      .option-btn [disabled] {
+        cursor: default;
+      }
+
+      /* Answer States */
+      .option-btn.correct {
+        background-color: var(--correct-bg) !important;
+        border-color: var(--correct-border) !important;
+        color: var(--correct-text) !important;
+      }
+
+      .option-btn.wrong {
+        background-color: var(--wrong-bg) !important;
+        border-color: var(--wrong-border) !important;
+        color: var(--wrong-text) !important;
+      }
+
+      /* Explanation Box */
+      .explanation {
+        display: none;
+        margin-top: 15px;
+        padding: 15px;
+        border-radius: 12px;
+        background-color: #fff9fa;
+        border-left: 4px solid var(--primary);
+        font-size: 0.95rem;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .explanation strong {
+        color: var(--primary);
+        display: block;
+        margin-bottom: 4px;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-5px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>🌸 Luyện Tập Từ Vựng 🌸</h1>
+        <p>
+          Chọn đáp án đúng cho 38 câu hỏi bên dưới để kiểm tra ghi nhớ từ vựng
+          nhé!
+        </p>
+      </header>
+
+      <div class="score-board">
+        <span class="score" id="score-text">Đã làm: 0/38</span>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+        <span class="score" id="correct-count">Đúng: 0</span>
+      </div>
+
+      <div id="questions-container"></div>
+    </div>
+
+    <script>
+      const quizData = [
+        {
+          q: "He ______ deleted the main database file while trying to clean up his desktop.",
+          options: [
+            "graciously",
+            "inadvertently",
+            "whimsical",
+            "self-righteous",
+          ],
+          answer: 1,
+          explain:
+            "<b>inadvertently</b>: Vô tình, sơ suất.<br><i>Dịch:</i> Anh ấy đã vô tình xóa tệp dữ liệu chính khi đang cố dọn dẹp màn hình máy tính.",
+        },
+        {
+          q: "The host ______ accepted the apology and invited everyone back inside for dessert.",
+          options: [
+            "inadvertently",
+            "counter-intuitively",
+            "graciously",
+            "unequivocally",
+          ],
+          answer: 2,
+          explain:
+            "<b>graciously</b>: Một cách trang nhã, rộng lượng, lịch sự.<br><i>Dịch:</i> Chủ nhà đã lịch sự/rộng lượng chấp nhận lời xin lỗi và mời mọi người trở lại vào trong ăn món tráng miệng.",
+        },
+        {
+          q: "He left the meeting early ______ he had an urgent doctor's appointment.",
+          options: [
+            "on the pretext that",
+            "in full swing",
+            "to all intents and purposes",
+            "beyond compare",
+          ],
+          answer: 0,
+          explain:
+            "<b>on the pretext that</b>: Lấy cái cớ là.<br><i>Dịch:</i> Anh ấy rời cuộc họp sớm với cái cớ là có hẹn khẩn cấp với bác sĩ.",
+        },
+        {
+          q: "During the summer holidays, ______ flood the historic streets of Old Town.",
+          options: [
+            "lapses of concentration",
+            "pseudonyms",
+            "throngs of tourists",
+            "prerogatives",
+          ],
+          answer: 2,
+          explain:
+            "<b>throngs of tourists</b>: Những đám đông du khách.<br><i>Dịch:</i> Trong kỳ nghỉ hè, những đám đông du khách tràn ngập các con phố cổ kính của Phố Cổ.",
+        },
+        {
+          q: "The author's ______ novel features flying cats, talking teapots, and floating castles.",
+          options: ["self-righteous", "whimsical", "unequivocal", "ill-health"],
+          answer: 1,
+          explain:
+            "<b>whimsical</b>: Kỳ lạ, kỳ ngộ, đầy tưởng tượng bay bổng.<br><i>Dịch:</i> Cuốn tiểu thuyết đầy tưởng tượng bay bổng của tác giả có những con mèo biết bay, ấm trà biết nói và lâu đài lơ lửng.",
+        },
+        {
+          q: "A brief ______ while driving on the highway can lead to a serious accident.",
+          options: [
+            "lapse of concentration",
+            "throng of tourists",
+            "prerequisite",
+            "pseudonym",
+          ],
+          answer: 0,
+          explain:
+            "<b>lapse of concentration</b>: Sự mất tập trung chốc nháy.<br><i>Dịch:</i> Sự mất tập trung chốc nháy khi đang lái xe trên đường cao tốc có thể dẫn đến tai nạn nghiêm trọng.",
+        },
+        {
+          q: "If the two political leaders cannot reach an agreement, a prolonged crisis will ______.",
+          options: ["ensure", "ensure", "ensue", "assimilate"],
+          answer: 2,
+          explain:
+            "<b>ensue</b>: Xảy ra ngay sau đó, là kết quả của.<br><i>Dịch:</i> Nếu hai lãnh đạo chính trị không thể đạt được thỏa thuận, một cuộc khủng hoảng kéo dài sẽ xảy ra ngay sau đó.",
+        },
+        {
+          q: "Please double-check your application form to ______ that all details are accurate.",
+          options: ["ensue", "ensure", "assimilate", "deal blow to"],
+          answer: 1,
+          explain:
+            "<b>ensure</b>: Đảm bảo.<br><i>Dịch:</i> Vui lòng kiểm tra kỹ lại đơn đăng ký của bạn để đảm bảo rằng mọi thông tin chi tiết đều chính xác.",
+        },
+        {
+          q: "It is the management’s ______ to decide whether to approval remote work requests.",
+          options: ["pseudonym", "pretext", "prerogative", "concentration"],
+          answer: 2,
+          explain:
+            "<b>prerogative</b>: Đặc quyền, quyền hạn riêng.<br><i>Dịch:</i> Việc quyết định có chấp thuận các yêu cầu làm việc từ xa hay không là đặc quyền của ban quản lý.",
+        },
+        {
+          q: "The unexpected tariff increase ______ the local manufacturing sector.",
+          options: [
+            "cut its teeth",
+            "dealt a heavy blow to",
+            "was in full swing",
+            "was beyond compare",
+          ],
+          answer: 1,
+          explain:
+            "<b>deal a blow to</b>: Giáng một đòn mạnh vào.<br><i>Dịch:</i> Việc tăng thuế bất ngờ đã giáng một đòn nặng nề vào ngành sản xuất địa phương.",
+        },
+        {
+          q: "Although the contract has not been signed yet, the deal is, ______, complete.",
+          options: [
+            "on the pretext that",
+            "for all intents and purposes",
+            "counter-intuitively",
+            "in full swing",
+          ],
+          answer: 1,
+          explain:
+            "<b>for all intents and purposes</b>: Hầu như, thực chất là, trên thực tế.<br><i>Dịch:</i> Mặc dù hợp đồng chưa được ký kết nhưng trên thực tế thương vụ đã hoàn tất.",
+        },
+        {
+          q: "She first ______ as a junior journalist at a local news station before moving to national TV.",
+          options: ["dealt a blow", "cut her teeth", "assimilated", "ensured"],
+          answer: 1,
+          explain:
+            "<b>cut one's teeth</b>: Bắt đầu học hỏi / lấy kinh nghiệm đầu đời.<br><i>Dịch:</i> Cô ấy lần đầu tích lũy kinh nghiệm với tư cách là một phóng viên trẻ tại một đài truyền hình địa phương trước khi chuyển sang TV quốc gia.",
+        },
+        {
+          q: "By midnight, the music festival was ______ with thousands of people dancing.",
+          options: [
+            "in full swing",
+            "beyond compare",
+            "on the pretext that",
+            "self-righteous",
+          ],
+          answer: 0,
+          explain:
+            "<b>in full swing</b>: Sôi nổi, diễn ra ở mức độ cao nhất.<br><i>Dịch:</i> Đến nửa đêm, lễ hội âm nhạc đã diễn ra vô cùng sôi nổi với hàng ngàn người đang nhảy múa.",
+        },
+        {
+          q: "The natural beauty of the mountain range is ______; no other region comes close.",
+          options: [
+            "whimsical",
+            "unequivocal",
+            "beyond compare",
+            "counter-intuitive",
+          ],
+          answer: 2,
+          explain:
+            "<b>beyond compare</b>: Không gì sánh bằng.<br><i>Dịch:</i> Vẻ đẹp tự nhiên của dãy núi này là không gì sánh bằng; không nơi nào khác có thể so sánh được.",
+        },
+        {
+          q: "The CEO gave an ______ refusal to the buyout offer, stating the firm was not for sale.",
+          options: ["whimsical", "unequivocal", "inadvertently", "ill-health"],
+          answer: 1,
+          explain:
+            "<b>unequivocal</b>: Dứt khoát, rõ ràng, không mập mờ.<br><i>Dịch:</i> CEO đã đưa ra lời từ chối dứt khoát đối với đề nghị mua lại, tuyên bố rằng công ty không phải để bán.",
+        },
+        {
+          q: "Stop lecturing everyone on ethics with that ______ tone; nobody is perfect.",
+          options: ["self-righteous", "whimsical", "gracious", "unequivocal"],
+          answer: 0,
+          explain:
+            "<b>self-righteous</b>: Tự cho mình là đúng đắn/đạo đức.<br><i>Dịch:</i> Đừng dạy đời mọi người về đạo đức bằng giọng điệu tự cho mình là đúng đắn đó nữa; không ai hoàn hảo cả.",
+        },
+        {
+          q: "It takes time for immigrants to fully ______ into a culture with completely different values.",
+          options: ["ensue", "ensure", "assimilate", "deal blow"],
+          answer: 2,
+          explain:
+            "<b>assimilate</b>: Đồng hóa, hòa nhập.<br><i>Dịch:</i> Phải mất thời gian để người nhập cư hòa nhập hoàn toàn vào một văn hóa có các giá trị hoàn toàn khác biệt.",
+        },
+        {
+          q: "The famous painter published his controversial autobiography under a ______. ",
+          options: [
+            "prerogative",
+            "throngs of tourists",
+            "pseudonym",
+            "lapse of concentration",
+          ],
+          answer: 2,
+          explain:
+            "<b>pseudonym</b>: Bút danh, biệt hiệu.<br><i>Dịch:</i> Họa sĩ nổi tiếng đã xuất bản cuốn tự truyện gây tranh cãi của mình dưới một bút danh.",
+        },
+        {
+          q: "He was forced to step down from his executive role due to persistent ______.",
+          options: ["ill-health", "prerogatives", "pseudonyms", "throngs"],
+          answer: 0,
+          explain:
+            "<b>ill-health</b>: Tình trạng sức khỏe kém / ốm đau.<br><i>Dịch:</i> Anh ấy buộc phải rời khỏi vị trí điều hành do tình trạng sức khỏe yếu kéo dài.",
+        },
+        {
+          q: "______, lowering prices actually decreased sales because customers assumed the quality had dropped.",
+          options: [
+            "Inadvertently",
+            "Counter-intuitively",
+            "Graciously",
+            "Unequivocally",
+          ],
+          answer: 1,
+          explain:
+            "<b>counter-intuitively</b>: Trái với lẽ thường / phản trực giác.<br><i>Dịch:</i> Trái với lẽ thường, việc giảm giá thực tế lại làm giảm doanh số vì khách hàng cho rằng chất lượng đã giảm.",
+        },
+        {
+          q: "I ______ dropped my keys down the elevator shaft while checking my phone.",
+          options: [
+            "counter-intuitively",
+            "inadvertently",
+            "self-righteously",
+            "graciously",
+          ],
+          answer: 1,
+          explain:
+            "<b>inadvertently</b>: Vô tình.<br><i>Dịch:</i> Tôi đã vô tình làm rơi chìa khóa xuống khe thang máy khi đang kiểm tra điện thoại.",
+        },
+        {
+          q: "Despite being insulted publicly, she ______ smiled and offered a soft response.",
+          options: [
+            "inadvertently",
+            "graciously",
+            "self-righteously",
+            "counter-intuitively",
+          ],
+          answer: 1,
+          explain:
+            "<b>graciously</b>: Lịch thiệp, tử tốn.<br><i>Dịch:</i> Dù bị xúc phạm công khai, cô ấy vẫn mỉm cười lịch thiệp và đưa ra câu trả lời nhẹ nhàng.",
+        },
+        {
+          q: "She avoided the family dinner ______ she had to finish an urgent project.",
+          options: [
+            "in full swing",
+            "beyond compare",
+            "on the pretext that",
+            "for all intents and purposes",
+          ],
+          answer: 2,
+          explain:
+            "<b>on the pretext that</b>: Với cái cớ là.<br><i>Dịch:</i> Cô ấy tránh bữa tối gia đình với cái cớ là phải hoàn thành một dự án khẩn cấp.",
+        },
+        {
+          q: "Local shopkeepers rely on the vast ______ to keep their businesses running through peak season.",
+          options: [
+            "lapses of concentration",
+            "prerogatives",
+            "throngs of tourists",
+            "pseudonyms",
+          ],
+          answer: 2,
+          explain:
+            "<b>throngs of tourists</b>: Những đám đông du khách.<br><i>Dịch:</i> Các chủ cửa hàng địa phương phụ thuộc vào những đám đông du khách lớn để duy trì kinh doanh trong mùa cao điểm.",
+        },
+        {
+          q: "The child's ______ artwork showed polka-dot trees and purple sky.",
+          options: [
+            "whimsical",
+            "self-righteous",
+            "unequivocal",
+            "counter-intuitive",
+          ],
+          answer: 0,
+          explain:
+            "<b>whimsical</b>: Kỳ lạ, ngộ nghĩnh.<br><i>Dịch:</i> Tác phẩm nghệ thuật đầy kỳ ngộ của đứa trẻ thể hiện những cái cây có chấm bi và bầu trời màu tím.",
+        },
+        {
+          q: "A momentary ______ cost the grandmaster the entire chess tournament.",
+          options: [
+            "throng",
+            "lapse of concentration",
+            "prerogative",
+            "pseudonym",
+          ],
+          answer: 1,
+          explain:
+            "<b>lapse of concentration</b>: Sự mất tập trung chốc nháy.<br><i>Dịch:</i> Sự mất tập trung trong thoáng chốc đã khiến đại kiện tướng trả giá bằng toàn bộ giải cờ vua.",
+        },
+        {
+          q: "Panic is bound to ______ if the emergency sirens sound without prior warning.",
+          options: ["ensure", "ensue", "assimilate", "cut teeth"],
+          answer: 1,
+          explain:
+            "<b>ensue</b>: Xảy ra ngay sau đó.<br><i>Dịch:</i> Sự hỗn loạn chắc chắn sẽ xảy ra ngay sau đó nếu còi báo động khẩn cấp vang lên mà không có cảnh báo trước.",
+        },
+        {
+          q: "The company launched a new quality control system to ______ zero defects.",
+          options: ["ensue", "ensure", "assimilate", "deal a blow"],
+          answer: 1,
+          explain:
+            "<b>ensure</b>: Đảm bảo.<br><i>Dịch:</i> Công ty đã ra mắt một hệ thống kiểm soát chất lượng mới để đảm bảo không có lỗi.",
+        },
+        {
+          q: "Voting on key policy amendments remains the exclusive ______ of board members.",
+          options: ["prerogative", "pseudonym", "pretext", "concentration"],
+          answer: 0,
+          explain:
+            "<b>prerogative</b>: Đặc quyền.<br><i>Dịch:</i> Bỏ phiếu cho các sửa đổi chính sách quan trọng vẫn là đặc quyền riêng của các thành viên hội đồng quản trị.",
+        },
+        {
+          q: "The sudden resignation of the head coach ______ the team's championship hopes.",
+          options: [
+            "cut teeth on",
+            "was in full swing",
+            "dealt a severe blow to",
+            "assimilated",
+          ],
+          answer: 2,
+          explain:
+            "<b>deal a blow to</b>: Giáng một đòn mạnh vào.<br><i>Dịch:</i> Việc huấn luyện viên trưởng đột ngột từ chức đã giáng một đòn nặng nề vào hy vọng vô địch của đội.",
+        },
+        {
+          q: "Without additional funding, the project is ______ dead.",
+          options: [
+            "on the pretext that",
+            "for all intents and purposes",
+            "counter-intuitively",
+            "beyond compare",
+          ],
+          answer: 1,
+          explain:
+            "<b>for all intents and purposes</b>: Xem như, coi như là.<br><i>Dịch:</i> Nếu không có thêm kinh phí, dự án coi như đã chết.",
+        },
+        {
+          q: "Young software engineers often ______ working on open-source projects.",
+          options: ["cut their teeth", "deal a blow", "assimilate", "ensure"],
+          answer: 0,
+          explain:
+            "<b>cut one's teeth</b>: Bắt đầu học hỏi / lấy kinh nghiệm.<br><i>Dịch:</i> Các kỹ sư phần mềm trẻ thường tích lũy kinh nghiệm bằng cách làm việc trên các dự án mã nguồn mở.",
+        },
+        {
+          q: "When we arrived at the venue, the party was already ______ with live music and dancing.",
+          options: [
+            "beyond compare",
+            "in full swing",
+            "counter-intuitive",
+            "on the pretext that",
+          ],
+          answer: 1,
+          explain:
+            "<b>in full swing</b>: Đang diễn ra vô cùng sôi nổi.<br><i>Dịch:</i> Khi chúng tôi đến địa điểm, bữa tiệc đã diễn ra vô cùng sôi nổi với nhạc sống và nhảy múa.",
+        },
+        {
+          q: "Her dedication and willingness to help others are ______ in this organization.",
+          options: [
+            "self-righteous",
+            "whimsical",
+            "beyond compare",
+            "inadvertent",
+          ],
+          answer: 2,
+          explain:
+            "<b>beyond compare</b>: Vô song, không gì sánh bằng.<br><i>Dịch:</i> Cống hiến và sự sẵn lòng giúp đỡ người khác của cô ấy là không gì sánh bằng trong tổ chức này.",
+        },
+        {
+          q: "The study provided ______ evidence that regular exercise improves mental health.",
+          options: [
+            "unequivocal",
+            "whimsical",
+            "counter-intuitive",
+            "ill-health",
+          ],
+          answer: 0,
+          explain:
+            "<b>unequivocal</b>: Rõ ràng, dứt khoát, không thể bàn cãi.<br><i>Dịch:</i> Nghiên cứu đã cung cấp bằng chứng rõ ràng không thể bàn cãi rằng tập thể dục thường xuyên làm cải thiện sức khỏe tâm thần.",
+        },
+        {
+          q: "Nobody likes his ______ attitude whenever someone makes a small mistake.",
+          options: ["self-righteous", "gracious", "whimsical", "unequivocal"],
+          answer: 0,
+          explain:
+            "<b>self-righteous</b>: Tự cho mình là đúng đắn/thánh thiện.<br><i>Dịch:</i> Không ai thích thái độ tự cho mình là đúng đắn của anh ta mỗi khi có ai đó mắc phải lỗi nhỏ.",
+        },
+        {
+          q: "New employees often struggle to ______ all the corporate rules during their first week.",
+          options: ["ensure", "ensue", "assimilate", "deal blow"],
+          answer: 2,
+          explain:
+            "<b>assimilate</b>: Nắm vững, tiếp thu, tiếp nhận.<br><i>Dịch:</i> Nhân viên mới thường gặp khó khăn trong việc tiếp thu hết tất cả các quy định của công ty trong tuần đầu tiên.",
+        },
+        {
+          q: "Samuel Langhorne Clemens wrote his most famous books using the ______ Mark Twain.",
+          options: ["prerogative", "pretext", "pseudonym", "lapse"],
+          answer: 2,
+          explain:
+            "<b>pseudonym</b>: Bút danh.<br><i>Dịch:</i> Samuel Langhorne Clemens đã viết những cuốn sách nổi tiếng nhất của mình dưới bút danh Mark Twain.",
+        },
+      ];
+
+      let answeredCount = 0;
+      let correctCount = 0;
+
+      function renderQuiz() {
+        const container = document.getElementById("questions-container");
+        quizData.forEach((item, index) => {
+          const card = document.createElement("div");
+          card.className = "question-card";
+          card.id = `q-${index}`;
+
+          let optionsHTML = "";
+          item.options.forEach((opt, optIdx) => {
+            optionsHTML += `
+                <button class="option-btn" onclick="checkAnswer(${index}, ${optIdx}, this)">
+                    ${String.fromCharCode(65 + optIdx)}. ${opt}
+                </button>
+            `;
+          });
+
+          card.innerHTML = `
+            <div class="question-num">Câu ${index + 1} / 38</div>
+            <div class="question-text">${item.q}</div>
+            <div class="options-grid">
+                ${optionsHTML}
+            </div>
+            <div class="explanation" id="explain-${index}">
+                <strong>Giải thích chi tiết:</strong>
+                <div>${item.explain}</div>
+            </div>
+        `;
+          container.appendChild(card);
+        });
+      }
+
+      function checkAnswer(qIdx, selectedOptIdx, btn) {
+        const card = document.getElementById(`q-${qIdx}`);
+        const buttons = card.querySelectorAll(".option-btn");
+        const correctOptIdx = quizData[qIdx].answer;
+        const explainBox = document.getElementById(`explain-${qIdx}`);
+
+        // Disable all buttons for this question
+        buttons.forEach((b) => b.setAttribute("disabled", "true"));
+
+        if (selectedOptIdx === correctOptIdx) {
+          btn.classList.add("correct");
+          correctCount++;
+        } else {
+          btn.classList.add("wrong");
+          buttons[correctOptIdx].classList.add("correct");
+        }
+
+        answeredCount++;
+        explainBox.style.display = "block";
+
+        // Update Score Board
+        document.getElementById("score-text").innerText =
+          `Đã làm: ${answeredCount}/38`;
+        document.getElementById("correct-count").innerText =
+          `Đúng: ${correctCount}`;
+        const percentage = (answeredCount / 38) * 100;
+        document.getElementById("progress-fill").style.width = `${percentage}%`;
+      }
+
+      document.addEventListener("DOMContentLoaded", renderQuiz);
+    </script>
+  </body>
+</html>

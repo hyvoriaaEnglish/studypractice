@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luyện Tập Từ Vựng Tiếng Anh - Sage Green Theme</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #588157;
+        --primary-hover: #3a5a40;
+        --primary-light: #e9f5ec;
+        --primary-accent: #a3b18a;
+        --bg: #f4f7f4;
+        --card-bg: #ffffff;
+        --text-main: #2f3e46;
+        --text-muted: #6c757d;
+        --correct-bg: #e8f5e9;
+        --correct-border: #4caf50;
+        --correct-text: #1b5e20;
+        --wrong-bg: #ffebee;
+        --wrong-border: #ef5350;
+        --wrong-text: #c62828;
+        --shadow: 0 10px 30px rgba(88, 129, 87, 0.08);
+        --radius: 18px;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        background-color: var(--bg);
+        color: var(--text-main);
+        line-height: 1.6;
+        padding: 40px 20px;
+      }
+
+      .container {
+        max-width: 820px;
+        margin: 0 auto;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 35px;
+      }
+
+      header h1 {
+        color: var(--primary);
+        font-size: 2.2rem;
+        font-weight: 800;
+        margin-bottom: 8px;
+        letter-spacing: -0.5px;
+      }
+
+      header p {
+        color: var(--text-muted);
+        font-size: 1.05rem;
+      }
+
+      /* Sticky Score Board */
+      .score-board {
+        position: sticky;
+        top: 20px;
+        z-index: 100;
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(12px);
+        padding: 16px 28px;
+        border-radius: 50px;
+        box-shadow: 0 6px 25px rgba(88, 129, 87, 0.15);
+        border: 2px solid var(--primary-light);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 35px;
+        font-weight: 700;
+      }
+
+      .score-board .score {
+        color: var(--primary);
+        font-size: 1.05rem;
+      }
+
+      .progress-bar {
+        flex-grow: 1;
+        height: 12px;
+        background: var(--primary-light);
+        border-radius: 6px;
+        margin: 0 20px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(
+          90deg,
+          var(--primary-accent),
+          var(--primary)
+        );
+        transition: width 0.3s ease;
+        border-radius: 6px;
+      }
+
+      /* Question Cards */
+      .question-card {
+        background: var(--card-bg);
+        border-radius: var(--radius);
+        padding: 28px;
+        margin-bottom: 25px;
+        box-shadow: var(--shadow);
+        border: 1px solid #e1ebe2;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      .question-num {
+        display: inline-block;
+        background: var(--primary-light);
+        color: var(--primary);
+        font-weight: 800;
+        padding: 5px 14px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        margin-bottom: 14px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+      }
+
+      .question-text {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--text-main);
+        margin-bottom: 20px;
+      }
+
+      .options-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      @media (min-width: 600px) {
+        .options-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      .option-btn {
+        background: #fff;
+        border: 2px solid #d3e2d5;
+        padding: 14px 20px;
+        border-radius: 14px;
+        text-align: left;
+        font-family: inherit;
+        font-size: 0.98rem;
+        font-weight: 600;
+        color: var(--text-main);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+      }
+
+      .option-btn:hover:not([disabled]) {
+        border-color: var(--primary);
+        background: var(--primary-light);
+        transform: translateY(-2px);
+      }
+
+      .option-btn[disabled] {
+        cursor: default;
+      }
+
+      /* Answer States */
+      .option-btn.correct {
+        background-color: var(--correct-bg) !important;
+        border-color: var(--correct-border) !important;
+        color: var(--correct-text) !important;
+      }
+
+      .option-btn.wrong {
+        background-color: var(--wrong-bg) !important;
+        border-color: var(--wrong-border) !important;
+        color: var(--wrong-text) !important;
+      }
+
+      /* Explanation Box */
+      .explanation {
+        display: none;
+        margin-top: 18px;
+        padding: 16px 20px;
+        border-radius: 14px;
+        background-color: #f7faf7;
+        border-left: 5px solid var(--primary);
+        font-size: 0.95rem;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .explanation strong {
+        color: var(--primary);
+        display: block;
+        margin-bottom: 6px;
+        font-size: 1rem;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-6px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>🌿 Luyện Tập Từ Vựng Tiếng Anh 🌿</h1>
+        <p>Chọn đáp án đúng cho 32 câu hỏi bên dưới để kiểm tra từ vựng nhé!</p>
+      </header>
+
+      <div class="score-board">
+        <span class="score" id="score-text">Đã làm: 0/32</span>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+        <span class="score" id="correct-count">Đúng: 0</span>
+      </div>
+
+      <div id="questions-container"></div>
+    </div>
+
+    <script>
+      const quizData = [
+        {
+          q: "After months of relaxing and enjoying his vacation, he decided it was finally time to ______ his studies for the upcoming finals.",
+          options: [
+            "slouch around",
+            "buckle down to",
+            "niggle over",
+            "split hairs",
+          ],
+          answer: 1,
+          explain:
+            "<b>buckle down to</b>: Bắt tay vào làm việc nghiêm túc.<br><i>Dịch:</i> Sau nhiều tháng thư giãn và tận hưởng kỳ nghỉ, cuối cùng anh ấy quyết định đã đến lúc bắt tay vào học hành nghiêm túc cho kỳ thi cuối kỳ sắp tới.",
+        },
+        {
+          q: "The desert terrain was so ______ that very few plants or animals could survive without specialized adaptations.",
+          options: ["indefatigable", "incorrigible", "arid", "triumphant"],
+          answer: 2,
+          explain:
+            "<b>arid</b>: Khô hạn, cằn cỗi.<br><i>Dịch:</i> Địa hình hoang mạc quá khô hạn đến mức rất ít động thực vật có thể sống sót nếu không có sự thích nghi đặc biệt.",
+        },
+        {
+          q: "Even after working an eighteen-hour shift, the ______ nurse continued to check on every single patient with a smile.",
+          options: ["arid", "expressionless", "dandy", "indefatigable"],
+          answer: 3,
+          explain:
+            "<b>indefatigable</b>: Không biết mệt mỏi, kiên trì.<br><i>Dịch:</i> Ngay cả sau khi làm ca 18 tiếng, cô y tá không biết mệt mỏi vẫn tiếp tục thăm khám từng bệnh nhân với nụ cười trên môi.",
+        },
+        {
+          q: "Her extreme mood swings sometimes ______ paranoia, making her friends genuinely concerned for her well-being.",
+          options: ["border on", "take over", "go under", "go around"],
+          answer: 0,
+          explain:
+            "<b>border on</b>: Gần như, tiệm cận, suýt soát.<br><i>Dịch:</i> Sự thay đổi tâm trạng thất thường của cô ấy đôi khi gần như hoang tưởng, khiến bạn bè thực sự lo lắng cho sức khỏe của cô.",
+        },
+        {
+          q: "The smaller tech startup was eventually ______ by a multinational corporation seeking to expand its market share.",
+          options: ["taken over", "gone under", "knocked up", "typecast"],
+          answer: 0,
+          explain:
+            "<b>take over</b>: Tiếp quản, mua lại.<br><i>Dịch:</i> Công ty khởi nghiệp công nghệ nhỏ hơn cuối cùng đã bị một tập đoàn đa quốc gia mua lại nhằm mở rộng thị phần.",
+        },
+        {
+          q: "Due to severe financial mismanagement during the pandemic, the local bookstore chain was forced to ______.",
+          options: ["go around", "go under", "pull a face", "slouch around"],
+          answer: 1,
+          explain:
+            "<b>go under</b>: Phá sản, sụp đổ.<br><i>Dịch:</i> Do quản lý tài chính yếu kém nghiêm trọng trong đại dịch, chuỗi nhà sách địa phương buộc phải phá sản.",
+        },
+        {
+          q: "A rumor began to ______ that the CEO was planning to step down before the end of the quarter.",
+          options: ["border on", "typecast", "go around", "buckle down"],
+          answer: 2,
+          explain:
+            "<b>go around</b>: Lan truyền, đồn đại.<br><i>Dịch:</i> Một tin đồn bắt đầu lan truyền rằng CEO đang có kế hoạch từ chức trước khi kết thúc quý.",
+        },
+        {
+          q: "Old currency notes that are heavily worn out are gradually taken out of ______ by the central bank.",
+          options: [
+            "circulation",
+            "salad days",
+            "editorials",
+            "arts and crafts",
+          ],
+          answer: 0,
+          explain:
+            "<b>in circulation</b>: Lưu thông (tiền tệ, thông tin).<br><i>Dịch:</i> Những tờ tiền cũ bị hư hỏng nặng dần dần được ngân hàng trung ương thu hồi khỏi lưu thông.",
+        },
+        {
+          q: "To ______ the upcoming operation, she spent the evening listening to calming classical music.",
+          options: [
+            "split hairs on",
+            "take her mind off",
+            "brush up on",
+            "niggle over",
+          ],
+          answer: 1,
+          explain:
+            "<b>take one's mind off</b>: Mất chú ý / giải tỏa tâm trí khỏi lo âu.<br><i>Dịch:</i> Để giải tỏa tâm trí khỏi cuộc phẫu thuật sắp tới, cô ấy đã dành buổi tối nghe nhạc cổ điển êm dịu.",
+        },
+        {
+          q: "Stop spending hours trying to ______ minor details that won't even affect the overall project budget!",
+          options: ["niggle over", "pioneer", "devise", "take over"],
+          answer: 0,
+          explain:
+            "<b>niggle over</b>: Bắt bẻ, bắt lỗi nhỏ nhặt, tranh cãi chi tiết vụn vặt.<br><i>Dịch:</i> Dừng việc dành hàng giờ để bắt bẻ những chi tiết vụn vặt thậm chí không ảnh hưởng đến tổng ngân sách dự án đi!",
+        },
+        {
+          q: "Arguing over whether to call the shade 'navy' or 'midnight blue' is just ______ when the client asked for dark blue.",
+          options: [
+            "pulling a face",
+            "going under",
+            "splitting hairs",
+            "slouching around",
+          ],
+          answer: 2,
+          explain:
+            "<b>split hairs</b>: Chẻ sợi tóc làm tư, bới lông tìm vết, tranh cãi vụn vặt.<br><i>Dịch:</i> Tranh cãi xem nên gọi tông màu là 'xanh hải quân' hay 'xanh đêm' chỉ là chẻ sợi tóc làm tư khi khách hàng yêu cầu màu xanh đậm.",
+        },
+        {
+          q: "Before travelling to Paris for work, she bought a language book to ______ her conversational French.",
+          options: ["brush up on", "border on", "take over", "go around"],
+          answer: 0,
+          explain:
+            "<b>brush up on</b>: Ôn lại, trau dồi lại kiến thức.<br><i>Dịch:</i> Trước khi đi công tác Paris, cô ấy đã mua một cuốn sách ngôn ngữ để ôn lại tiếng Pháp giao tiếp của mình.",
+        },
+        {
+          q: "Don't worry about dinner; I can easily ______ with whatever ingredients we have left in the fridge.",
+          options: [
+            "knock up a meal",
+            "pull a face",
+            "slouch around",
+            "typecast someone",
+          ],
+          answer: 0,
+          explain:
+            "<b>knock up a meal</b>: Nấu nhanh một bữa ăn.<br><i>Dịch:</i> Đừng lo về bữa tối; tôi có thể dễ dàng nấu nhanh một bữa ăn với bất kỳ nguyên liệu nào còn lại trong tủ lạnh.",
+        },
+        {
+          q: "Despite receiving multiple warnings and disciplinary actions, the student proved to be completely ______.",
+          options: ["triumphant", "incorrigible", "indefatigable", "dandy"],
+          answer: 1,
+          explain:
+            "<b>incorrigible</b>: Không thể sửa đổi, bất trị.<br><i>Dịch:</i> Mặc dù nhận được nhiều lời cảnh báo và hình thức kỷ luật, học sinh này tỏ ra hoàn toàn bất trị.",
+        },
+        {
+          q: "The child would always ______ whenever his mother served broccoli or spinach for dinner.",
+          options: ["split hairs", "pull a face", "border on", "go under"],
+          answer: 1,
+          explain:
+            "<b>pull a face</b>: Nhăn mặt, nhăn nhó biểu thị không thích.<br><i>Dịch:</i> Đứa trẻ luôn nhăn mặt mỗi khi mẹ dọn súp lơ xanh hoặc rau bina cho bữa tối.",
+        },
+        {
+          q: "Adding ______ to the tomato soup right before serving gives it a wonderfully rich and silky texture.",
+          options: [
+            "a dash of cream",
+            "an editorial",
+            "a fugitive",
+            "a cast-iron guarantee",
+          ],
+          answer: 0,
+          explain:
+            "<b>a dash of cream</b>: Một chút kem tươi.<br><i>Dịch:</i> Thêm một chút kem tươi vào súp cà chua ngay trước khi dọn ra sẽ tạo nên độ ngậy và mịn tuyệt vời.",
+        },
+        {
+          q: "He often reminisced about his youthful adventures and careless freedom back in his ______.",
+          options: ["salad days", "arts and crafts", "editorials", "fugitives"],
+          answer: 0,
+          explain:
+            "<b>in one's salad days</b>: Thời tuổi trẻ ngây thơ / bồng bột nhưng đẹp đẽ.<br><i>Dịch:</i> Anh ấy thường hồi tưởng lại những cuộc phiêu lưu thời trẻ và sự tự do vô tư thời còn bồng bột của mình.",
+        },
+        {
+          q: "Dressed in a tailored velvet suit with polished leather boots, he looked like a true 19th-century ______.",
+          options: ["fugitive", "pioneer", "dandy", "editorial"],
+          answer: 2,
+          explain:
+            "<b>dandy</b>: Người đàn ông ăn mặc quá chải chuốt, công tử bột.<br><i>Dịch:</i> Diện bộ vest nhung may đo cùng đôi bốt da bóng lộn, anh ấy trông giống như một công tử chải chuốt thực sự của thế kỷ 19.",
+        },
+        {
+          q: "Ever since he sold his tech company to an international investor, he has been ______.",
+          options: [
+            "rolling in money",
+            "slouching around",
+            "going under",
+            "splitting hairs",
+          ],
+          answer: 0,
+          explain:
+            "<b>rolling in money</b>: Rất giàu có, tiền chất thành núi.<br><i>Dịch:</i> Kể từ khi bán công ty công nghệ cho một nhà đầu tư quốc tế, anh ấy ngập trong tiền.",
+        },
+        {
+          q: "The police set up roadblocks across the state border to apprehend the two dangerous ______.",
+          options: ["dandies", "fugitives", "pioneers", "editorials"],
+          answer: 1,
+          explain:
+            "<b>fugitive</b>: Kẻ đào tẩu, kẻ trốn chạy pháp luật.<br><i>Dịch:</i> Cảnh sát đã lập các trạm kiểm soát dọc biên giới tiểu bang để bắt giữ hai kẻ đào tẩu nguy hiểm.",
+        },
+        {
+          q: "Engineers managed to ______ an innovative system that recycled industrial wastewater safely.",
+          options: ["slouch around", "pull a face", "devise", "typecast"],
+          answer: 2,
+          explain:
+            "<b>devise</b>: Phát minh, nghĩ ra, sáng chế.<br><i>Dịch:</i> Các kỹ sư đã nghĩ ra một hệ thống sáng tạo giúp tái chế nước thải công nghiệp một cách an toàn.",
+        },
+        {
+          q: "Dr. Marie Curie was a ______ in the field of radioactivity whose work paved the way for modern physics.",
+          options: ["fugitive", "pioneer", "dandy", "editorial"],
+          answer: 1,
+          explain:
+            "<b>pioneer</b>: Người tiên phong.<br><i>Dịch:</i> Tiến sĩ Marie Curie là người tiên phong trong lĩnh vực phóng xạ, người mà công trình đã mở đường cho vật lý hiện đại.",
+        },
+        {
+          q: "Because he played a villain so convincingly in his debut film, Hollywood directors tended to ______ him for years.",
+          options: ["typecast", "assimilate", "devise", "ensure"],
+          answer: 0,
+          explain:
+            "<b>typecast</b>: Bị đóng khung vào một loại vai diễn.<br><i>Dịch:</i> Vì đóng vai phản diện quá thuyết phục trong bộ phim đầu tay, các đạo diễn Hollywood có xu hướng đóng khung vai diễn của anh ấy trong nhiều năm.",
+        },
+        {
+          q: "Major newspapers published scathing ______ criticizing the government's new taxation policy.",
+          options: ["salad days", "arts and crafts", "editorials", "fugitives"],
+          answer: 2,
+          explain:
+            "<b>editorial</b>: Bài xã luận của tòa soạn.<br><i>Dịch:</i> Các tờ báo lớn đã đăng những bài xã luận gay gắt chỉ trích chính sách thuế mới của chính phủ.",
+        },
+        {
+          q: "Despite hearing the shocking news of his sudden promotion, his face remained completely ______.",
+          options: [
+            "expressionless",
+            "triumphant",
+            "incorrigible",
+            "whimsical",
+          ],
+          answer: 0,
+          explain:
+            "<b>expressionless</b>: Không cảm xúc, đơ ra.<br><i>Dịch:</i> Dù nghe tin sốc về việc đột ngột được thăng chức, khuôn mặt anh ấy vẫn hoàn toàn không cảm xúc.",
+        },
+        {
+          q: "Holding the championship trophy high above his head, the athlete flashed a ______ smile to the roaring crowd.",
+          options: ["expressionless", "triumphant", "arid", "cast-iron"],
+          answer: 1,
+          explain:
+            "<b>triumphant</b>: Hân hoan thắng lợi, vẻ chiến thắng.<br><i>Dịch:</i> Giơ cao cúp vô địch trên đầu, vận động viên nở nụ cười chiến thắng với đám đông đang reo hò.",
+        },
+        {
+          q: "Instead of doing his weekend chores, the teenager preferred to ______ on the couch all day playing video games.",
+          options: ["buckle down", "slouch around", "brush up", "take over"],
+          answer: 1,
+          explain:
+            "<b>slouch around</b>: Vắt chân lên cổ / ngồi thẫn thờ, lười biếng đi lại quanh nhà.<br><i>Dịch:</i> Thay vì làm việc nhà vào cuối tuần, cậu thiếu niên lại thích nằm ườn trên ghế sofa cả ngày để chơi điện tử.",
+        },
+        {
+          q: "Before eating the crunchy biscuit, the young girl liked to ______ it in hot milk to make it soft.",
+          options: ["dip", "devise", "pioneer", "ensure"],
+          answer: 0,
+          explain:
+            "<b>dip sth in sth</b>: Nhúng thứ gì vào thứ gì.<br><i>Dịch:</i> Trước khi ăn chiếc bánh quy giòn, cô bé thích nhúng nó vào sữa nóng để làm nó mềm ra.",
+        },
+        {
+          q: "The community center hosts weekly classes in ______ where seniors learn pottery, painting, and knitting.",
+          options: ["salad days", "editorials", "arts and crafts"],
+          answer: 2,
+          explain:
+            "<b>arts and crafts</b>: Thủ công mỹ nghệ.<br><i>Dịch:</i> Trung tâm cộng đồng tổ chức các lớp học thủ công mỹ nghệ hàng tuần, nơi người cao tuổi học làm gốm, vẽ tranh và dệt đan.",
+        },
+        {
+          q: "The contract contains a ______ clause that protects the buyer's deposit if the deal falls through.",
+          options: ["cast-iron", "expressionless", "dandy", "whimsical"],
+          answer: 0,
+          explain:
+            "<b>cast-iron</b>: Chắc chắn, không thể chối cãi / đố ai phá vỡ được.<br><i>Dịch:</i> Hợp đồng có một khoản chắc chắn đố ai phá vỡ được giúp bảo vệ tiền đặt cọc của người mua nếu thương vụ thất bại.",
+        },
+        {
+          q: "After being away on a business trip, she couldn't wait to go home and ______ her favorite hobby to unwind.",
+          options: [
+            "take her mind off",
+            "buckle down to",
+            "split hairs",
+            "pull a face",
+          ],
+          answer: 0,
+          explain:
+            "<b>take one's mind off</b>: Giải tỏa tâm trí khỏi căng thẳng.<br><i>Dịch:</i> Sau chuyến công tác xa, cô ấy không thể chờ đợi để về nhà và thực hiện sở thích yêu thích nhằm giải tỏa tâm trí để thư giãn.",
+        },
+        {
+          q: "Reports indicate that counterfeit banknotes are currently ______ in several major cities across the region.",
+          options: [
+            "in full swing",
+            "in circulation",
+            "beyond compare",
+            "under a pseudonym",
+          ],
+          answer: 1,
+          explain:
+            "<b>in circulation</b>: Đang lưu thông.<br><i>Dịch:</i> Các báo cáo cho biết tiền giả hiện đang lưu thông tại một số thành phố lớn trong khu vực.",
+        },
+      ];
+
+      let answeredCount = 0;
+      let correctCount = 0;
+
+      function renderQuiz() {
+        const container = document.getElementById("questions-container");
+        quizData.forEach((item, index) => {
+          const card = document.createElement("div");
+          card.className = "question-card";
+          card.id = `q-${index}`;
+
+          let optionsHTML = "";
+          item.options.forEach((opt, optIdx) => {
+            optionsHTML += `
+                <button class="option-btn" onclick="checkAnswer(${index}, ${optIdx}, this)">
+                    ${String.fromCharCode(65 + optIdx)}. ${opt}
+                </button>
+            `;
+          });
+
+          card.innerHTML = `
+            <div class="question-num">Câu ${index + 1} / 32</div>
+            <div class="question-text">${item.q}</div>
+            <div class="options-grid">
+                ${optionsHTML}
+            </div>
+            <div class="explanation" id="explain-${index}">
+                <strong>Giải thích chi tiết:</strong>
+                <div>${item.explain}</div>
+            </div>
+        `;
+          container.appendChild(card);
+        });
+      }
+
+      function checkAnswer(qIdx, selectedOptIdx, btn) {
+        const card = document.getElementById(`q-${qIdx}`);
+        const buttons = card.querySelectorAll(".option-btn");
+        const correctOptIdx = quizData[qIdx].answer;
+        const explainBox = document.getElementById(`explain-${qIdx}`);
+
+        // Disable all buttons for this question
+        buttons.forEach((b) => b.setAttribute("disabled", "true"));
+
+        if (selectedOptIdx === correctOptIdx) {
+          btn.classList.add("correct");
+          correctCount++;
+        } else {
+          btn.classList.add("wrong");
+          buttons[correctOptIdx].classList.add("correct");
+        }
+
+        answeredCount++;
+        explainBox.style.display = "block";
+
+        // Update Score Board
+        document.getElementById("score-text").innerText =
+          `Đã làm: ${answeredCount}/32`;
+        document.getElementById("correct-count").innerText =
+          `Đúng: ${correctCount}`;
+        const percentage = (answeredCount / 32) * 100;
+        document.getElementById("progress-fill").style.width = `${percentage}%`;
+      }
+
+      document.addEventListener("DOMContentLoaded", renderQuiz);
+    </script>
+  </body>
+</html>
