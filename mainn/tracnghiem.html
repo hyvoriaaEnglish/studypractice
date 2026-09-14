@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Danh Sách Bài Trắc Nghiệm</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #d97706; /* Màu chữ/viền điểm nhấn */
+        --primary-hover: #b45309; /* Màu hover đậm hơn */
+        --bg-gradient: #fefce8; /* Nền vàng pastel dịu */
+        --card-bg: #ffffff; /* Nền thẻ trắng */
+        --text-main: #451a03; /* Màu chữ chính nâu đậm sang trọng */
+        --text-muted: #78350f; /* Màu chữ phụ */
+        --btn-bg: #fef3c7; /* Màu thẻ bài tập vàng nhạt */
+        --btn-border: #fde68a; /* Viền thẻ bài tập */
+        --btn-hover-bg: #fde68a; /* Nền khi hover */
+        --shadow: 0 10px 25px -5px rgba(217, 119, 6, 0.08);
+        --radius: 16px;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        background-color: var(--bg-gradient);
+        color: var(--text-main);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .main-card {
+        background: var(--card-bg);
+        width: 100%;
+        max-width: 680px;
+        padding: 40px 30px;
+        border-radius: 24px;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--btn-border);
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      header h1 {
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: var(--primary);
+        margin-bottom: 8px;
+        letter-spacing: -0.5px;
+      }
+
+      header p {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+      }
+
+      .quiz-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 16px;
+      }
+
+      .quiz-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px 15px;
+        background: var(--btn-bg);
+        border: 2px solid var(--btn-border);
+        border-radius: var(--radius);
+        color: var(--text-main);
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1.05rem;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+      }
+
+      .quiz-card:hover {
+        background: var(--btn-hover-bg);
+        border-color: var(--primary);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 15px rgba(217, 119, 6, 0.15);
+        color: var(--primary-hover);
+      }
+
+      .quiz-card .icon {
+        font-size: 1.5rem;
+        margin-bottom: 8px;
+      }
+
+      @media (max-width: 480px) {
+        .quiz-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .main-card {
+          padding: 30px 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-card">
+      <header>
+        <h1>✨ Phần Trắc Nghiệm ABCD</h1>
+        <p>Chọn bài tập bên dưới để bắt đầu luyện tập</p>
+      </header>
+
+      <div class="quiz-grid">
+        <a href="mcq.html" class="quiz-card">
+          <span class="icon">📝</span>
+          Bài 1
+        </a>
+        <a href="mcq2.html" class="quiz-card">
+          <span class="icon">📝</span>
+          Bài 2
+        </a>
+        <a href="mcq3.html" class="quiz-card">
+          <span class="icon">📝</span>
+          Bài 3
+        </a>
+        <a href="mcq4.html" class="quiz-card">
+          <span class="icon">📝</span>
+          Bài 4
+        </a>
+        <a href="mcq5.html" class="quiz-card">
+          <span class="icon">📝</span>
+          Bài 5
+        </a>
+        <a href="mcq6.html" class="quiz-card">
+          <span class="icon">📝</span>
+          Bài 6
+        </a>
+        <a href="mcq10.html" class="quiz-card">
+          <span class="icon">📝</span>
+          Bài 7
+        </a>
+        <a href="mcq11.html" class="quiz-card">
+          <span class="icon">📝</span>
+          Bài 8
+        </a>
+        <a href="mcq12.html" class="quiz-card">
+          <span class="icon">📝</span>
+          Bài 9
+        </a>
+      </div>
+    </div>
+  </body>
+</html>
