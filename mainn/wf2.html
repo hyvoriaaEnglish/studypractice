@@ -1,124 +1,366 @@
 <!doctype html>
-<html lang="en">
+<html lang="vi">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=, initial-scale=1.0" />
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Word Formation Practice - Modern Red Theme</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #e63946;
+        --primary-hover: #c1121f;
+        --primary-light: #fff0f3;
+        --primary-accent: #ffb3c1;
+        --bg: #fff5f6;
+        --card-bg: #ffffff;
+        --text-main: #590d22;
+        --text-muted: #800f2f;
+        --correct-bg: #e8f5e9;
+        --correct-border: #2e7d32;
+        --correct-text: #1b5e20;
+        --wrong-bg: #ffebee;
+        --wrong-border: #c62828;
+        --wrong-text: #b71c1c;
+        --shadow: 0 10px 25px rgba(230, 57, 70, 0.08);
+        --radius: 18px;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        background-color: var(--bg);
+        color: var(--text-main);
+        line-height: 1.6;
+        padding: 40px 20px;
+      }
+
+      .quiz-container {
+        max-width: 820px;
+        margin: 0 auto;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      header h1 {
+        color: var(--primary);
+        font-size: 2.2rem;
+        font-weight: 800;
+        margin-bottom: 8px;
+        letter-spacing: -0.5px;
+      }
+
+      header p {
+        color: var(--text-muted);
+        font-size: 1.05rem;
+      }
+
+      /* Sticky Control Bar */
+      .control-bar {
+        position: sticky;
+        top: 20px;
+        z-index: 100;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(12px);
+        padding: 16px 28px;
+        border-radius: 50px;
+        box-shadow: 0 8px 25px rgba(230, 57, 70, 0.12);
+        border: 2px solid var(--primary-light);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 35px;
+        gap: 15px;
+      }
+
+      .score-info {
+        font-weight: 700;
+        color: var(--primary);
+        font-size: 1.05rem;
+      }
+
+      .check-all-btn {
+        background: var(--primary);
+        color: #fff;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 30px;
+        font-family: inherit;
+        font-size: 0.95rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 12px rgba(230, 57, 70, 0.25);
+      }
+
+      .check-all-btn:hover {
+        background: var(--primary-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(230, 57, 70, 0.35);
+      }
+
+      /* Question Cards */
+      .question {
+        background: var(--card-bg);
+        border-radius: var(--radius);
+        padding: 28px;
+        margin-bottom: 25px;
+        box-shadow: var(--shadow);
+        border: 1px solid #ffccd5;
+        transition: transform 0.2s ease;
+      }
+
+      .question-num {
+        display: inline-block;
+        background: var(--primary-light);
+        color: var(--primary);
+        font-weight: 800;
+        padding: 5px 14px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        margin-bottom: 14px;
+        text-transform: uppercase;
+      }
+
+      .question p {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text-main);
+        margin-bottom: 20px;
+        line-height: 1.7;
+      }
+
+      .input-group {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      input[type="text"] {
+        flex-grow: 1;
+        min-width: 240px;
+        padding: 14px 20px;
+        border: 2px solid #ffb3c1;
+        border-radius: 12px;
+        font-family: inherit;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text-main);
+        outline: none;
+        transition: all 0.2s ease;
+        background: #fff;
+      }
+
+      input[type="text"]:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 4px rgba(230, 57, 70, 0.15);
+      }
+
+      /* Result styling */
+      .result-box {
+        margin-top: 16px;
+        padding: 12px 18px;
+        border-radius: 12px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        display: none;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .result-box.correct-box {
+        display: block;
+        background-color: var(--correct-bg);
+        color: var(--correct-text);
+        border: 1px solid var(--correct-border);
+      }
+
+      .result-box.wrong-box {
+        display: block;
+        background-color: var(--wrong-bg);
+        color: var(--wrong-text);
+        border: 1px solid var(--wrong-border);
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-6px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
   </head>
   <body>
     <div class="quiz-container">
-      <h3>Word Formation Practice</h3>
+      <header>
+        <h1>❤️ Word Formation Practice ❤️</h1>
+        <p>Nhập đáp án đúng vào ô trống bên dưới để kiểm tra kiến thức nhé!</p>
+      </header>
+
+      <div class="control-bar">
+        <span class="score-info" id="score-display">Tiến độ: 0/12</span>
+        <button class="check-all-btn" onclick="checkAnswers()">
+          Check Answers
+        </button>
+      </div>
 
       <div class="question">
+        <span class="question-num">Câu 1</span>
         <p>
           1. A _____________ (ZOO) can defend himself against a dangerous
           animal, even if the zookeeper's negligence caused the animal's escape.
         </p>
-        <input type="text" id="q1" />
-        <div id="r1"></div>
+        <div class="input-group">
+          <input type="text" id="q1" placeholder="Nhập từ cần chia..." />
+        </div>
+        <div id="r1" class="result-box"></div>
       </div>
 
       <div class="question">
+        <span class="question-num">Câu 2</span>
         <p>
           2. A _____________ (BOOK) is a book that is published annually by a
           school or other organization to give facts about the events and
           achievements of the previous year.
         </p>
-        <input type="text" id="q2" />
-        <div id="r2"></div>
+        <div class="input-group">
+          <input type="text" id="q2" placeholder="Nhập từ cần chia..." />
+        </div>
+        <div id="r2" class="result-box"></div>
       </div>
 
       <div class="question">
+        <span class="question-num">Câu 3</span>
         <p>
           3. It would be unexpected, therefore, to find incisions placed across
           the anticipated site of the sinus node, but this was a feature of some
           autopsies of _____________ (YEAR).
         </p>
-        <input type="text" id="q3" />
-        <div id="r3"></div>
+        <div class="input-group">
+          <input type="text" id="q3" placeholder="Nhập từ cần chia..." />
+        </div>
+        <div id="r3" class="result-box"></div>
       </div>
 
       <div class="question">
+        <span class="question-num">Câu 4</span>
         <p>
           4. He will just agree with her. I don't want you to be just a
           _____________ (MAN) but rather have your own views on things as well.
         </p>
-        <input type="text" id="q4" />
-        <div id="r4"></div>
+        <div class="input-group">
+          <input type="text" id="q4" placeholder="Nhập từ cần chia..." />
+        </div>
+        <div id="r4" class="result-box"></div>
       </div>
 
       <div class="question">
+        <span class="question-num">Câu 5</span>
         <p>5. He is a _____________ (BELLY) traitor.</p>
-        <input type="text" id="q5" />
-        <div id="r5"></div>
+        <div class="input-group">
+          <input type="text" id="q5" placeholder="Nhập từ cần chia..." />
+        </div>
+        <div id="r5" class="result-box"></div>
       </div>
 
       <div class="question">
+        <span class="question-num">Câu 6</span>
         <p>
           6. The only valid _____________ (STICK) for measuring traffic safety
           is deaths per mile driven.
         </p>
-        <input type="text" id="q6" />
-        <div id="r6"></div>
+        <div class="input-group">
+          <input type="text" id="q6" placeholder="Nhập từ cần chia..." />
+        </div>
+        <div id="r6" class="result-box"></div>
       </div>
 
       <div class="question">
+        <span class="question-num">Câu 7</span>
         <p>
           7. Some commentators predict a "_____________ (YOUTH)" in the coming
           elections.
         </p>
-        <input type="text" id="q7" />
-        <div id="r7"></div>
+        <div class="input-group">
+          <input type="text" id="q7" placeholder="Nhập từ cần chia..." />
+        </div>
+        <div id="r7" class="result-box"></div>
       </div>
 
       <div class="question">
+        <span class="question-num">Câu 8</span>
         <p>
           8. The scheme is for _____________ (YOUNG) between the ages of ten and
           16.
         </p>
-        <input type="text" id="q8" />
-        <div id="r8"></div>
+        <div class="input-group">
+          <input type="text" id="q8" placeholder="Nhập từ cần chia..." />
+        </div>
+        <div id="r8" class="result-box"></div>
       </div>
 
       <div class="question">
+        <span class="question-num">Câu 9</span>
         <p>
           9. To perpetuate racism and _____________ (PHOBIA) through our media
           is not only antisocial and grossly irresponsible.
         </p>
-        <input type="text" id="q9" />
-        <div id="r9"></div>
+        <div class="input-group">
+          <input type="text" id="q9" placeholder="Nhập từ cần chia..." />
+        </div>
+        <div id="r9" class="result-box"></div>
       </div>
 
       <div class="question">
+        <span class="question-num">Câu 10</span>
         <p>
           10. He admitted that the party had followed policies now considered
           _____________ (WRONG).
         </p>
-        <input type="text" id="q10" />
-        <div id="r10"></div>
+        <div class="input-group">
+          <input type="text" id="q10" placeholder="Nhập từ cần chia..." />
+        </div>
+        <div id="r10" class="result-box"></div>
       </div>
 
       <div class="question">
+        <span class="question-num">Câu 11</span>
         <p>
           11. Many operating systems include a command to _____________ (WRITE)
           files to make it impossible for a computer user to write information
           onto a computer disk.
         </p>
-        <input type="text" id="q11" />
-        <div id="r11"></div>
+        <div class="input-group">
+          <input type="text" id="q11" placeholder="Nhập từ cần chia..." />
+        </div>
+        <div id="r11" class="result-box"></div>
       </div>
 
       <div class="question">
+        <span class="question-num">Câu 12</span>
         <p>
           12. The latter response is reinforced in us by our obligation to stand
           in solidarity with victims of _____________ (DO) against those who
           have wronged them.
         </p>
-        <input type="text" id="q12" />
-        <div id="r12"></div>
+        <div class="input-group">
+          <input type="text" id="q12" placeholder="Nhập từ cần chia..." />
+        </div>
+        <div id="r12" class="result-box"></div>
       </div>
-
-      <button onclick="checkAnswers()">Check Answers</button>
     </div>
 
     <script>
@@ -146,27 +388,36 @@
       }
 
       function checkAnswers() {
+        let correctTotal = 0;
+
         for (let i = 1; i <= 12; i++) {
-          const input = normalize(document.getElementById("q" + i).value);
+          const inputEl = document.getElementById("q" + i);
+          const input = normalize(inputEl.value);
           const result = document.getElementById("r" + i);
 
           let correct = false;
 
           answers[i].forEach((ans) => {
-            if (input === normalize(ans)) correct = true;
+            if (input && input === normalize(ans)) correct = true;
           });
 
           if (correct) {
-            result.innerHTML =
-              "<span style='color:green;font-weight:bold;'>✔ Correct!</span>";
+            correctTotal++;
+            result.className = "result-box correct-box";
+            result.innerHTML = "✔ <b>Chính xác!</b>";
           } else {
+            result.className = "result-box wrong-box";
             result.innerHTML =
-              "<span style='color:red;font-weight:bold;'>✘ Incorrect.</span> Correct answer: <b>" +
+              "✘ <b>Chưa đúng.</b> Đáp án đúng: <b>" +
               answers[i].join(" / ") +
               "</b>";
           }
         }
+
+        document.getElementById("score-display").innerText =
+          `Kết quả: ${correctTotal}/12 Đúng`;
       }
     </script>
+    <script src="/study-tracker.js"></script>
   </body>
 </html>

@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luyện Tập Word Form - Theme Tím Pastel</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #8b5cf6;
+        --primary-hover: #7c3aed;
+        --primary-light: #f3e8ff;
+        --primary-accent: #c084fc;
+        --bg: #faf5ff;
+        --card-bg: #ffffff;
+        --text-main: #3b0764;
+        --text-muted: #6b21a8;
+        --correct-bg: #f0fdf4;
+        --correct-border: #16a34a;
+        --correct-text: #15803d;
+        --wrong-bg: #fef2f2;
+        --wrong-border: #dc2626;
+        --wrong-text: #b91c1c;
+        --shadow: 0 10px 25px rgba(139, 92, 246, 0.08);
+        --radius: 18px;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        background-color: var(--bg);
+        color: var(--text-main);
+        line-height: 1.6;
+        padding: 40px 20px;
+      }
+
+      .container {
+        max-width: 820px;
+        margin: 0 auto;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      header h1 {
+        color: var(--primary);
+        font-size: 2.2rem;
+        font-weight: 800;
+        margin-bottom: 8px;
+        letter-spacing: -0.5px;
+      }
+
+      header p {
+        color: var(--text-muted);
+        font-size: 1.05rem;
+      }
+
+      .score-board {
+        position: sticky;
+        top: 20px;
+        z-index: 100;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(12px);
+        padding: 16px 28px;
+        border-radius: 50px;
+        box-shadow: 0 8px 25px rgba(139, 92, 246, 0.12);
+        border: 2px solid var(--primary-light);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 35px;
+        font-weight: 700;
+      }
+
+      .score-board .score {
+        color: var(--primary);
+        font-size: 1.05rem;
+      }
+
+      .progress-bar {
+        flex-grow: 1;
+        height: 12px;
+        background: var(--primary-light);
+        border-radius: 6px;
+        margin: 0 20px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(
+          90deg,
+          var(--primary-accent),
+          var(--primary)
+        );
+        transition: width 0.3s ease;
+        border-radius: 6px;
+      }
+
+      .question-card {
+        background: var(--card-bg);
+        border-radius: var(--radius);
+        padding: 28px;
+        margin-bottom: 25px;
+        box-shadow: var(--shadow);
+        border: 1px solid #e9d5ff;
+        transition: transform 0.2s ease;
+      }
+
+      .question-num {
+        display: inline-block;
+        background: var(--primary-light);
+        color: var(--primary);
+        font-weight: 800;
+        padding: 5px 14px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        margin-bottom: 14px;
+        text-transform: uppercase;
+      }
+
+      .question-text {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--text-main);
+        margin-bottom: 20px;
+        line-height: 1.7;
+      }
+
+      .input-group {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .word-input {
+        flex-grow: 1;
+        min-width: 240px;
+        padding: 14px 20px;
+        border: 2px solid #d8b4fe;
+        border-radius: 12px;
+        font-family: inherit;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text-main);
+        outline: none;
+        transition: all 0.2s ease;
+      }
+
+      .word-input:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
+      }
+
+      .word-input:disabled {
+        background-color: #fcfcfc;
+        cursor: not-allowed;
+      }
+
+      .submit-btn {
+        background: var(--primary);
+        color: #fff;
+        border: none;
+        padding: 14px 28px;
+        border-radius: 12px;
+        font-family: inherit;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 12px rgba(139, 92, 246, 0.25);
+      }
+
+      .submit-btn:hover:not([disabled]) {
+        background: var(--primary-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(139, 92, 246, 0.35);
+      }
+
+      .submit-btn[disabled] {
+        opacity: 0.6;
+        cursor: default;
+      }
+
+      .input-group.correct .word-input {
+        background-color: var(--correct-bg) !important;
+        border-color: var(--correct-border) !important;
+        color: var(--correct-text) !important;
+      }
+
+      .input-group.wrong .word-input {
+        background-color: var(--wrong-bg) !important;
+        border-color: var(--wrong-border) !important;
+        color: var(--wrong-text) !important;
+      }
+
+      .explanation {
+        display: none;
+        margin-top: 18px;
+        padding: 16px 20px;
+        border-radius: 14px;
+        background-color: #f3e8ff;
+        border-left: 5px solid var(--primary);
+        font-size: 0.95rem;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .explanation strong {
+        color: var(--primary);
+        display: block;
+        margin-bottom: 6px;
+        font-size: 1rem;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-6px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>💜 Word Formation Practice 💜</h1>
+        <p>
+          Nhập đáp án đúng vào ô trống và ấn "Kiểm tra" hoặc Enter để xem đáp án
+          nhé!
+        </p>
+      </header>
+
+      <div class="score-board">
+        <span class="score" id="score-text">Đã làm: 0/15</span>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+        <span class="score" id="correct-count">Đúng: 0</span>
+      </div>
+
+      <div id="questions-container"></div>
+    </div>
+
+    <script>
+      const quizData = [
+        {
+          q: "The building's name, El Centro, ________ this identity, as do its exuberant shape and bright colors.",
+          root: "SPEAK",
+          answers: ["bespeaks"],
+          explain:
+            "<b>bespeaks</b> (v): Thể hiện, chứng tỏ.<br><i>Giải thích:</i> Chủ ngữ số ít 'The building's name' ở thì hiện tại đơn cần động từ thêm '-s'.",
+        },
+        {
+          q: "All around are ________ mountains which provide the walkers or nature-lovers with magnificent opportunities to savor the Alpine flora.",
+          root: "SNOW",
+          answers: ["snow-capped", "snow-clad"],
+          explain:
+            "<b>snow-capped / snow-clad</b> (adj): Phủ đầy tuyết.<br><i>Giải thích:</i> Cần tính từ ghép để bổ nghĩa cho danh từ 'mountains'.",
+        },
+        {
+          q: "From that moment, it was doomed to become a huge, sprawling, one-story ________, hopelessly dependent on the automobile.",
+          root: "URBAN",
+          answers: ["suburbia", "conurbation"],
+          explain:
+            "<b>suburbia</b> (n) / <b>conurbation</b> (n): Vùng ngoại ô / Khu đô thị mở rộng.<br><i>Giải thích:</i> Đứng sau mạo từ 'a' và chuỗi tính từ bổ nghĩa cần một danh từ.",
+        },
+        {
+          q: "The train has its own telephone exchange and electricity generating car, plus office accommodations and restaurant cars for the royal ________.",
+          root: "TOUR",
+          answers: ["entourage"],
+          explain:
+            "<b>entourage</b> (n): Đoàn tùy tùng.<br><i>Giải thích:</i> Đứng sau tính từ 'royal' cần một danh từ chỉ đoàn người đi cùng hoàng gia.",
+        },
+        {
+          q: "Mind your language, you guys. It is ________ rude.",
+          root: "EXCUSE",
+          answers: ["inexcusably"],
+          explain:
+            "<b>inexcusably</b> (adv): Một cách không thể tha thứ/bào chữa được.<br><i>Giải thích:</i> Đứng trước tính từ 'rude' cần một trạng từ bổ nghĩa.",
+        },
+        {
+          q: "This period of mass unemployment has ________ many families.",
+          root: "POVERTY",
+          answers: ["impoverished"],
+          explain:
+            "<b>impoverished</b> (v_p2): Bị làm cho nghèo khổ.<br><i>Giải thích:</i> Đứng sau trợ động từ 'has' hình thành dạng hoàn thành (has + V_p2).",
+        },
+        {
+          q: "He was a poor old man, down and out, with many wrinkles on his ________ face.",
+          root: "WEATHER",
+          answers: ["weather-beaten"],
+          explain:
+            "<b>weather-beaten</b> (adj): Dãi dầu sương gió, nhăn nheo.<br><i>Giải thích:</i> Cần tính từ ghép đứng trước bổ nghĩa cho danh từ 'face'.",
+        },
+        {
+          q: "His ________ style has resulted in a number of controversial incidents.",
+          root: "FRONT",
+          answers: ["confrontational"],
+          explain:
+            "<b>confrontational</b> (adj): Mang tính đối đầu, gây hấn.<br><i>Giải thích:</i> Đứng trước danh từ 'style' cần một tính từ bổ nghĩa.",
+        },
+        {
+          q: "For consistency, all products were tested and laboratory analysis was completed ________.",
+          root: "TEMPORAL",
+          answers: ["extemporaneously", "contemporaneously"],
+          explain:
+            "<b>extemporaneously / contemporaneously</b> (adv): Ngẫu hứng / Đồng thời.<br><i>Giải thích:</i> Bổ nghĩa cho động từ 'was completed' ở cuối câu cần một trạng từ.",
+        },
+        {
+          q: "Climate systems are although cyclic, they are chaotic and ________.",
+          root: "LINE",
+          answers: ["non-linear", "nonlinear"],
+          explain:
+            "<b>non-linear / nonlinear</b> (adj): Phi tuyến tính.<br><i>Giải thích:</i> Đứng sau tobe 'are' và kết nối với 'chaotic' bằng từ 'and' cần một tính từ.",
+        },
+        {
+          q: "Injuries ________, he won the semi-final match.",
+          root: "WITHSTAND",
+          answers: ["notwithstanding"],
+          explain:
+            "<b>notwithstanding</b> (prep): Bất chấp, mặc dù.<br><i>Giải thích:</i> Cấu trúc đảo danh từ đứng trước 'notwithstanding' mang nghĩa mặc dù bị chấn thương.",
+        },
+        {
+          q: "Demand has been so feverish that the company has a(n) ________ of unfilled orders for commercial satellites.",
+          root: "LOG",
+          answers: ["backlog"],
+          explain:
+            "<b>backlog</b> (n): Lượng công việc/đơn hàng tồn đọng.<br><i>Giải thích:</i> Đứng sau mạo từ 'a(n)' và trước giới từ 'of' cần một danh từ.",
+        },
+        {
+          q: "Arnold died in 1953. His wife, who ________ him by almost half a century passed away on the last day of the millennium.",
+          root: "LIVE",
+          answers: ["outlived"],
+          explain:
+            "<b>outlived</b> (v_past): Sống lâu hơn.<br><i>Giải thích:</i> Động từ chia ở thì quá khứ đơn phù hợp với ngữ cảnh lịch sử.",
+        },
+        {
+          q: "I cannot comment; I have sworn to ________ on the matter.",
+          root: "SECRET",
+          answers: ["secrecy"],
+          explain:
+            "<b>secrecy</b> (n): Sự giữ bí mật.<br><i>Giải thích:</i> Sau động từ 'sworn to' (thề giữ điều gì) cần một danh từ.",
+        },
+        {
+          q: "She’s a self-appointed moral guardian, an old-fashioned ________ who believes that she knows what’s best for everyone.",
+          root: "BOSS",
+          answers: ["busybody"],
+          explain:
+            "<b>busybody</b> (n): Kẻ nhiều chuyện, thích can thiệp chuyện người khác.<br><i>Giải thích:</i> Đứng sau tính từ 'old-fashioned' cần một danh từ chỉ người.",
+        },
+      ];
+
+      let answeredCount = 0;
+      let correctCount = 0;
+
+      function renderQuiz() {
+        const container = document.getElementById("questions-container");
+        quizData.forEach((item, index) => {
+          const card = document.createElement("div");
+          card.className = "question-card";
+          card.id = `q-${index}`;
+
+          const parts = item.q.split("________");
+
+          card.innerHTML = `
+            <div class="question-num">Câu ${index + 1} / 15</div>
+            <div class="question-text">
+                ${parts[0]} <strong>(____)</strong> ${parts[1]} <strong>(${item.root})</strong>
+            </div>
+            <div class="input-group" id="input-group-${index}">
+                <input type="text" class="word-input" id="input-${index}" placeholder="Nhập đáp án..." onkeypress="handleKeyPress(event, ${index})">
+                <button class="submit-btn" onclick="checkAnswer(${index})">Kiểm tra</button>
+            </div>
+            <div class="explanation" id="explain-${index}">
+                <strong>Giải thích chi tiết:</strong>
+                <div>${item.explain}</div>
+            </div>
+        `;
+          container.appendChild(card);
+        });
+      }
+
+      function handleKeyPress(event, index) {
+        if (event.key === "Enter") {
+          checkAnswer(index);
+        }
+      }
+
+      function checkAnswer(index) {
+        const inputEl = document.getElementById(`input-${index}`);
+        const inputGroup = document.getElementById(`input-group-${index}`);
+        const btn = inputGroup.querySelector(".submit-btn");
+        const explainBox = document.getElementById(`explain-${index}`);
+
+        const userAns = inputEl.value.trim().toLowerCase();
+        if (!userAns) return;
+
+        const validAnswers = quizData[index].answers.map((a) =>
+          a.toLowerCase(),
+        );
+        const isCorrect = validAnswers.includes(userAns);
+
+        inputEl.disabled = true;
+        btn.disabled = true;
+
+        if (isCorrect) {
+          inputGroup.classList.add("correct");
+          correctCount++;
+        } else {
+          inputGroup.classList.add("wrong");
+          inputEl.value = `${userAns} ➔ (${quizData[index].answers[0]})`;
+        }
+
+        answeredCount++;
+        explainBox.style.display = "block";
+
+        document.getElementById("score-text").innerText =
+          `Đã làm: ${answeredCount}/15`;
+        document.getElementById("correct-count").innerText =
+          `Đúng: ${correctCount}`;
+        const percentage = (answeredCount / 15) * 100;
+        document.getElementById("progress-fill").style.width = `${percentage}%`;
+      }
+
+      document.addEventListener("DOMContentLoaded", renderQuiz);
+    </script>
+  </body>
+</html>

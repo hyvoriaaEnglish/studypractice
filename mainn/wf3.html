@@ -1,69 +1,233 @@
 <!doctype html>
-<html lang="en">
+<html lang="vi">
   <head>
     <meta charset="UTF-8" />
-    <title>Word Formation Practice</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Word Formation Practice - Ocean Blue Theme</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <style>
+      :root {
+        --primary: #0284c7;
+        --primary-hover: #0369a1;
+        --primary-light: #e0f2fe;
+        --primary-accent: #38bdf8;
+        --bg: #f0f9ff;
+        --card-bg: #ffffff;
+        --text-main: #0c4a6e;
+        --text-muted: #0369a1;
+        --correct-bg: #f0fdf4;
+        --correct-border: #16a34a;
+        --correct-text: #15803d;
+        --wrong-bg: #fef2f2;
+        --wrong-border: #dc2626;
+        --wrong-text: #b91c1c;
+        --shadow: 0 10px 25px rgba(2, 132, 199, 0.08);
+        --radius: 18px;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
       body {
-        font-family: Arial, sans-serif;
-        max-width: 1000px;
-        margin: auto;
-        padding: 30px;
-        background: #f4f6f9;
+        font-family: "Plus Jakarta Sans", sans-serif;
+        background-color: var(--bg);
+        color: var(--text-main);
+        line-height: 1.6;
+        padding: 40px 20px;
       }
-      h1 {
+
+      .quiz-container {
+        max-width: 860px;
+        margin: 0 auto;
+      }
+
+      header {
         text-align: center;
+        margin-bottom: 30px;
       }
-      .question {
-        background: white;
-        padding: 15px;
-        margin: 15px 0;
-        border-radius: 10px;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+      header h1 {
+        color: var(--primary);
+        font-size: 2.2rem;
+        font-weight: 800;
+        margin-bottom: 8px;
+        letter-spacing: -0.5px;
       }
-      input {
-        width: 250px;
-        padding: 8px;
-        font-size: 16px;
+
+      header p {
+        color: var(--text-muted);
+        font-size: 1.05rem;
       }
-      .correct {
-        color: green;
-        font-weight: bold;
+
+      /* Control Bar Cố Định */
+      .control-bar {
+        position: sticky;
+        top: 20px;
+        z-index: 100;
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(12px);
+        padding: 16px 28px;
+        border-radius: 50px;
+        box-shadow: 0 8px 25px rgba(2, 132, 199, 0.12);
+        border: 2px solid var(--primary-light);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 35px;
       }
-      .wrong {
-        color: red;
-        font-weight: bold;
-      }
-      button {
-        padding: 12px 30px;
-        font-size: 18px;
-        cursor: pointer;
+
+      .check-all-btn {
+        background: var(--primary);
+        color: #fff;
         border: none;
-        background: #007bff;
-        color: white;
-        border-radius: 8px;
+        padding: 12px 28px;
+        border-radius: 30px;
+        font-family: inherit;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
       }
-      button:hover {
-        background: #0056b3;
+
+      .check-all-btn:hover {
+        background: var(--primary-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(2, 132, 199, 0.35);
       }
+
       #score {
-        font-size: 24px;
-        text-align: center;
-        margin-top: 30px;
-        font-weight: bold;
+        font-size: 1.1rem;
+        font-weight: 800;
+        color: var(--primary);
+      }
+
+      /* Question Cards */
+      .question {
+        background: var(--card-bg);
+        border-radius: var(--radius);
+        padding: 28px;
+        margin-bottom: 25px;
+        box-shadow: var(--shadow);
+        border: 1px solid #bae6fd;
+        transition: transform 0.2s ease;
+      }
+
+      .question-num {
+        display: inline-block;
+        background: var(--primary-light);
+        color: var(--primary);
+        font-weight: 800;
+        padding: 5px 14px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        margin-bottom: 14px;
+        text-transform: uppercase;
+      }
+
+      .question p {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text-main);
+        margin-bottom: 18px;
+        line-height: 1.7;
+      }
+
+      .input-group {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      input[type="text"] {
+        flex-grow: 1;
+        min-width: 260px;
+        padding: 14px 20px;
+        border: 2px solid #bae6fd;
+        border-radius: 12px;
+        font-family: inherit;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text-main);
+        outline: none;
+        transition: all 0.2s ease;
+        background: #fff;
+      }
+
+      input[type="text"]:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.15);
+      }
+
+      /* Dynamic Result Boxes */
+      .result-box {
+        margin-top: 16px;
+        padding: 12px 18px;
+        border-radius: 12px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        display: none;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .result-box.correct-box {
+        display: block;
+        background-color: var(--correct-bg);
+        color: var(--correct-text);
+        border: 1px solid var(--correct-border);
+      }
+
+      .result-box.wrong-box {
+        display: block;
+        background-color: var(--wrong-bg);
+        color: var(--wrong-text);
+        border: 1px solid var(--wrong-border);
+      }
+
+      .correct {
+        color: var(--correct-text);
+        font-weight: 700;
+      }
+
+      .wrong {
+        color: var(--wrong-text);
+        font-weight: 700;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-6px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
     </style>
   </head>
   <body>
-    <h1>Word Formation Practice</h1>
+    <div class="quiz-container">
+      <header>
+        <h1>🌊 Word Formation Practice 🌊</h1>
+        <p>
+          Nhập đáp án đúng vào ô trống và nhấn "Check Answers" để chấm điểm!
+        </p>
+      </header>
 
-    <div id="quiz"></div>
+      <div class="control-bar">
+        <button class="check-all-btn" onclick="check()">Check Answers</button>
+        <div id="score">Điểm số: 0 / 29</div>
+      </div>
 
-    <div style="text-align: center; margin-top: 30px">
-      <button onclick="check()">Check Answers</button>
+      <div id="quiz"></div>
     </div>
-
-    <div id="score"></div>
 
     <script>
       const questions = [
@@ -71,136 +235,108 @@
           "Liskeard and Callington are basically _______ from here, so it’ll take about the same time to get to either of them. (DISTANT)",
           "equidistant",
         ],
-
         ["The bride was _______ dressed in white. (STYLE)", "stylishly"],
-
         [
           "His methodical _______ was a point of divergence from the Impressionists and he devoted many studies to creating the composition. (PAIN)",
           "painstakingness",
         ],
-
         [
           "It’s _______ when people won’t believe things that are obviously true. (FURY)",
           "infuriating",
         ],
-
         [
           "_______ of East and West Germany began when the Berlin Wall came down. (UNITY)",
           "reunification",
         ],
-
         [
           "In Scotland, there is greater emphasis on _______ by individual schools. (VALUE)",
           "values",
         ],
-
         [
           "Eighty percent of people interviewed _______ declared that the use of endangered wild animals should be prohibited. (VOICE)",
           "voiced",
         ],
-
         [
           "Don’t believe what they said. I think they are _______ witnesses. (TRUST)",
           "untrustworthy",
         ],
-
         [
           "British Prime Minister Margaret Thatcher called the hanging an act of _______. (BARBARIC)",
           "barbarity",
         ],
-
         [
           "Don’t judge the matter by my opponent’s _______ statement. (LATERAL)",
           "unilateral",
         ],
-
         [
           "In my opinion, this book is just _______ rubbish. (INTELLECT)",
           "intellectual",
         ],
-
         [
           "Jim is one of the most _______ members of the committee. (SPEAK)",
           "outspoken",
         ],
-
         ["She found the idea deeply _______. (REPEL)", "repellent"],
-
         [
           "He was discovered to have been _______ company funds. (PROPERTY)",
           "misappropriating",
         ],
-
         [
           "If you can respond calmly and _______ then I think that would be the best way forward. (AGGRESSIVE)",
           "non-aggressively",
         ],
-
         [
           "Most of the errors were corrected at the _______ stage before the copies were finally printed. (READ)",
           "proofreading",
         ],
-
         [
           "The other team completely _______ us and we lost 6-0. (PLAY)",
           "outplayed",
         ],
-
         [
           "Some species feed primarily on fruit and so aid in seed _______. (DISPERSE)",
           "dispersal",
         ],
-
         [
           "Any actor who becomes known for one role is in danger of becoming _______. (TYPE)",
           "typecast",
         ],
-
         [
           "If the cabin _______, oxygen masks will automatically drop down. (PRESS)",
           "depressurizes",
         ],
-
         [
           "The museum’s collection includes _______ dating back to prehistoric times. (FACT)",
           "artefacts|artifacts",
         ],
-
         [
           "You won’t persuade him to change his mind. His decision is _______. (REVOKE)",
           "irrevocable",
         ],
-
         [
           "They were divorced because there was nothing she could do to make her husband change. He was such a _______ flirt.",
           "incorrigible",
         ],
-
         [
           "The slight _______ in his left hand was corrected by surgery. (FORM)",
           "deformity",
         ],
-
         [
           "You and he were so close about the project; it was an _______ obsession of his. (PERVADE)",
           "all-pervading",
         ],
-
         [
           "The candidate made an _______ speech that incensed all those who heard it. (FLAME)",
           "inflammatory",
         ],
-
         [
           "These shoes are very nice, but they are terribly _______. (PRICE)",
           "overpriced",
         ],
-
         [
           "It was _______ of him to leave the children on their own in the pool. (RESPONSE)",
           "irresponsible",
         ],
-
         [
           "He refused to say anything on the grounds that he might _______ himself. (CRIME)",
           "incriminate",
@@ -212,9 +348,12 @@
       questions.forEach((q, i) => {
         quiz.innerHTML += `
 <div class="question">
-<p><b>${i + 1}.</b> ${q[0]}</p>
-<input id="q${i}">
-<div id="r${i}"></div>
+  <span class="question-num">Câu ${i + 1}</span>
+  <p>${q[0]}</p>
+  <div class="input-group">
+    <input id="q${i}" placeholder="Nhập từ cần chia...">
+  </div>
+  <div id="r${i}" class="result-box"></div>
 </div>
 `;
       });
@@ -236,9 +375,10 @@
 
           if (correct) {
             score++;
-
+            result.className = "result-box correct-box";
             result.innerHTML = "<span class='correct'>✔ Correct</span>";
           } else {
+            result.className = "result-box wrong-box";
             result.innerHTML =
               "<span class='wrong'>✘ Wrong</span><br>Correct answer: <b>" +
               acceptable[0] +
@@ -250,5 +390,7 @@
           "Score: <b>" + score + " / " + questions.length + "</b>";
       }
     </script>
+
+    <script src="/study-tracker.js"></script>
   </body>
 </html>

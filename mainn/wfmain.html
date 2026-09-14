@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phần Word Formation</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #8c6d53;
+        --primary-hover: #6f533c;
+        --primary-light: #f5efe6;
+        --bg: #fbf8f3;
+        --card-bg: #ffffff;
+        --text-main: #4a3b32;
+        --text-muted: #7a685a;
+        --shadow: 0 10px 25px rgba(140, 109, 83, 0.08);
+        --radius: 20px;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        background-color: var(--bg);
+        color: var(--text-main);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 520px;
+        background: var(--card-bg);
+        border-radius: var(--radius);
+        padding: 40px 32px;
+        box-shadow: var(--shadow);
+        border: 1px solid #e8dfd8;
+        text-align: center;
+      }
+
+      header {
+        margin-bottom: 32px;
+      }
+
+      header h1 {
+        color: var(--primary);
+        font-size: 2rem;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+        margin-bottom: 8px;
+      }
+
+      header p {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+      }
+
+      .quiz-list {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .quiz-card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 24px;
+        background-color: var(--primary-light);
+        color: var(--text-main);
+        text-decoration: none;
+        font-size: 1.05rem;
+        font-weight: 700;
+        border-radius: 14px;
+        border: 1.5px solid transparent;
+        transition: all 0.25s ease;
+      }
+
+      .quiz-card:hover {
+        background-color: #f0e6da;
+        border-color: var(--primary);
+        color: var(--primary-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(140, 109, 83, 0.12);
+      }
+
+      .quiz-card span {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .arrow-icon {
+        font-size: 1.2rem;
+        color: var(--primary);
+        transition: transform 0.25s ease;
+      }
+
+      .quiz-card:hover .arrow-icon {
+        transform: translateX(4px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>📜 Phần Wordform</h1>
+        <p>Chọn bài tập bên dưới để bắt đầu luyện tập</p>
+      </header>
+
+      <div class="quiz-list">
+        <a href="wf4.html" class="quiz-card">
+          <span>📝 Bài 1</span>
+          <span class="arrow-icon">➔</span>
+        </a>
+        <a href="wf2.html" class="quiz-card">
+          <span>📝 Bài 2</span>
+          <span class="arrow-icon">➔</span>
+        </a>
+        <a href="wf5.html" class="quiz-card">
+          <span>📝 Bài 3</span>
+          <span class="arrow-icon">➔</span>
+        </a>
+        <a href="wf3.html" class="quiz-card">
+          <span>📝 Bài 4</span>
+          <span class="arrow-icon">➔</span>
+        </a>
+        <a href="wf6.html" class="quiz-card">
+          <span>📝 Bài 5</span>
+          <span class="arrow-icon">➔</span>
+        </a>
+      </div>
+    </div>
+
+    <script src="/study-tracker.js"></script>
+  </body>
+</html>

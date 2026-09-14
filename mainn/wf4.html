@@ -1,0 +1,552 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luyện Tập Word Form - Theme Đỏ Trái Tim</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #e63946;
+        --primary-hover: #c1121f;
+        --primary-light: #fff0f3;
+        --primary-accent: #ffb3c1;
+        --bg: #fff5f6;
+        --card-bg: #ffffff;
+        --text-main: #590d22;
+        --text-muted: #800f2f;
+        --correct-bg: #e8f5e9;
+        --correct-border: #2e7d32;
+        --correct-text: #1b5e20;
+        --wrong-bg: #ffebee;
+        --wrong-border: #c62828;
+        --wrong-text: #b71c1c;
+        --shadow: 0 10px 25px rgba(230, 57, 70, 0.08);
+        --radius: 18px;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        background-color: var(--bg);
+        color: var(--text-main);
+        line-height: 1.6;
+        padding: 40px 20px;
+      }
+
+      .container {
+        max-width: 820px;
+        margin: 0 auto;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      header h1 {
+        color: var(--primary);
+        font-size: 2.2rem;
+        font-weight: 800;
+        margin-bottom: 8px;
+        letter-spacing: -0.5px;
+      }
+
+      header p {
+        color: var(--text-muted);
+        font-size: 1.05rem;
+      }
+
+      /* Score Board Sticky Header */
+      .score-board {
+        position: sticky;
+        top: 20px;
+        z-index: 100;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(12px);
+        padding: 16px 28px;
+        border-radius: 50px;
+        box-shadow: 0 8px 25px rgba(230, 57, 70, 0.12);
+        border: 2px solid var(--primary-light);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 35px;
+        font-weight: 700;
+      }
+
+      .score-board .score {
+        color: var(--primary);
+        font-size: 1.05rem;
+      }
+
+      .progress-bar {
+        flex-grow: 1;
+        height: 12px;
+        background: var(--primary-light);
+        border-radius: 6px;
+        margin: 0 20px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(
+          90deg,
+          var(--primary-accent),
+          var(--primary)
+        );
+        transition: width 0.3s ease;
+        border-radius: 6px;
+      }
+
+      /* Question Cards */
+      .question-card {
+        background: var(--card-bg);
+        border-radius: var(--radius);
+        padding: 28px;
+        margin-bottom: 25px;
+        box-shadow: var(--shadow);
+        border: 1px solid #ffccd5;
+        transition: transform 0.2s ease;
+      }
+
+      .question-num {
+        display: inline-block;
+        background: var(--primary-light);
+        color: var(--primary);
+        font-weight: 800;
+        padding: 5px 14px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        margin-bottom: 14px;
+        text-transform: uppercase;
+      }
+
+      .question-text {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--text-main);
+        margin-bottom: 20px;
+        line-height: 1.7;
+      }
+
+      .input-group {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .word-input {
+        flex-grow: 1;
+        min-width: 240px;
+        padding: 14px 20px;
+        border: 2px solid #ffb3c1;
+        border-radius: 12px;
+        font-family: inherit;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text-main);
+        outline: none;
+        transition: all 0.2s ease;
+      }
+
+      .word-input:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 4px rgba(230, 57, 70, 0.15);
+      }
+
+      .word-input:disabled {
+        background-color: #fcfcfc;
+        cursor: not-allowed;
+      }
+
+      .submit-btn {
+        background: var(--primary);
+        color: #fff;
+        border: none;
+        padding: 14px 28px;
+        border-radius: 12px;
+        font-family: inherit;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 12px rgba(230, 57, 70, 0.25);
+      }
+
+      .submit-btn:hover:not([disabled]) {
+        background: var(--primary-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(230, 57, 70, 0.35);
+      }
+
+      .submit-btn[disabled] {
+        opacity: 0.6;
+        cursor: default;
+      }
+
+      /* Feedback States */
+      .input-group.correct .word-input {
+        background-color: var(--correct-bg) !important;
+        border-color: var(--correct-border) !important;
+        color: var(--correct-text) !important;
+      }
+
+      .input-group.wrong .word-input {
+        background-color: var(--wrong-bg) !important;
+        border-color: var(--wrong-border) !important;
+        color: var(--wrong-text) !important;
+      }
+
+      .explanation {
+        display: none;
+        margin-top: 18px;
+        padding: 16px 20px;
+        border-radius: 14px;
+        background-color: #fff0f3;
+        border-left: 5px solid var(--primary);
+        font-size: 0.95rem;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .explanation strong {
+        color: var(--primary);
+        display: block;
+        margin-bottom: 6px;
+        font-size: 1rem;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-6px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>❤️ Luyện Tập Word Formation ❤️</h1>
+        <p>
+          Nhập đáp án đúng vào ô trống và nhấn "Kiểm tra" hoặc Enter để nhận
+          giải thích nhé!
+        </p>
+      </header>
+
+      <div class="score-board">
+        <span class="score" id="score-text">Đã làm: 0/30</span>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+        <span class="score" id="correct-count">Đúng: 0</span>
+      </div>
+
+      <div id="questions-container"></div>
+    </div>
+
+    <script>
+      const quizData = [
+        {
+          q: "No matter how many times the boy was punished, he remained completely ________ and refused to change his behaviour.",
+          root: "CORRECT",
+          answers: ["incorrigible"],
+          explain:
+            "<b>incorrigible</b> (adj): Không thể sửa đổi, bất trị.<br><i>Vị trí:</i> Sau động từ 'remained' và trạng từ 'completely' cần một tính từ mang nghĩa tiêu cực.",
+        },
+        {
+          q: "He tried to sound profound, but most people saw him as a ________ who repeated fashionable theories without understanding them.",
+          root: "INTELLECT",
+          answers: ["pseudo-intellectual", "pseudointellectual"],
+          explain:
+            "<b>pseudo-intellectual</b> (n): Kẻ trí thức dởm/ngụy trí thức.<br><i>Vị trí:</i> Sau mạo từ 'a' cần một danh từ chỉ người.",
+        },
+        {
+          q: "Cutting the training budget may seem economical, but it would be ________ in the long run.",
+          root: "PRODUCE",
+          answers: ["counter-productive", "counterproductive"],
+          explain:
+            "<b>counter-productive</b> (adj): Phản tác dụng.<br><i>Vị trí:</i> Sau động từ liên kết 'would be' cần một tính từ mang nghĩa trái ngược.",
+        },
+        {
+          q: "It took the athletes several days to ________ to the hot and humid conditions.",
+          root: "CLIMATE",
+          answers: ["acclimatize", "acclimate", "acclimatise"],
+          explain:
+            "<b>acclimatize / acclimate</b> (v): Thích nghi với khí hậu/môi trường mới.<br><i>Vị trí:</i> Sau cấu trúc 'to + V_bare'.",
+        },
+        {
+          q: "Marble is simply limestone that has been ________ by heat or pressure.",
+          root: "CRYSTAL",
+          answers: ["crystallized", "crystallised"],
+          explain:
+            "<b>crystallized</b> (v_p2): Kết tinh.<br><i>Vị trí:</i> Cấu trúc bị động thì hiện tại hoàn thành 'has been + V_p2'.",
+        },
+        {
+          q: "If he knows the job is ________, he will do it immediately.",
+          root: "GAIN",
+          answers: ["gainful"],
+          explain:
+            "<b>gainful</b> (adj): Sinh lời, có lợi.<br><i>Vị trí:</i> Bổ nghĩa cho chủ ngữ 'the job' sau tobe 'is'.",
+        },
+        {
+          q: "It was quite obvious that there had been a definite ________ between her and her daughter in-law right from the beginning.",
+          root: "STRANGE",
+          answers: ["estrangement"],
+          explain:
+            "<b>estrangement</b> (n): Sự ghẻ lạnh, xa cách.<br><i>Vị trí:</i> Sau mạo từ 'a' và tính từ 'definite' cần một danh từ.",
+        },
+        {
+          q: "The cricket match was a complete ________ because of the unexpected rain and it has now been postponed.",
+          root: "WASH",
+          answers: ["washout"],
+          explain:
+            "<b>washout</b> (n): Sự thất bại / buổi thi đấu bị hủy vì mưa.<br><i>Vị trí:</i> Sau mạo từ 'a' và tính từ 'complete' cần một danh từ.",
+        },
+        {
+          q: "Like the menopause, the ________ is triggered by hormonal changes in the body.",
+          root: "PAUSE",
+          answers: ["andropause"],
+          explain:
+            "<b>andropause</b> (n): Thời kỳ mãn dục nam.<br><i>Vị trí:</i> Đóng vai trò làm chủ ngữ trong câu đối ứng với 'menopause'.",
+        },
+        {
+          q: "________ arise when concurrent shocks and interconnected risks combine to create a crisis even worse than the sum of its parts.",
+          root: "CRISIS",
+          answers: ["polycrisises", "polycrisis", "polycrises"],
+          explain:
+            "<b>polycrisises / polycrisis / polycrises</b> (n): Đa khủng hoảng.<br><i>Vị trí:</i> Làm chủ ngữ đứng trước động từ số nhiều 'arise'.",
+        },
+        {
+          q: "A sum of powers of indeterminate variables multiplied by coefficients constitutes mathematical impressions called ________.",
+          root: "NAME",
+          answers: ["multinomials", "polynomials"],
+          explain:
+            "<b>multinomials / polynomials</b> (n): Đa thức.<br><i>Vị trí:</i> Danh từ thuật ngữ toán học đứng sau động từ 'called'.",
+        },
+        {
+          q: "The magician claimed that he was using the word 'magical' in its stage-magician sense of ________.",
+          root: "DIGITATE",
+          answers: ["prestidigitation"],
+          explain:
+            "<b>prestidigitation</b> (n): Thuật xảo thuật, trò múa tay ảo thuật.<br><i>Vị trí:</i> Sau giới từ 'of' cần một danh từ.",
+        },
+        {
+          q: "The thought of ________ crossed his mind several times but like a true soldier he continued with the War.",
+          root: "TURGUM",
+          answers: ["tergiversation"],
+          explain:
+            "<b>tergiversation</b> (n): Sự đào ngũ, lật lọng, thay đổi lập trường.<br><i>Vị trí:</i> Sau giới từ 'of' cần một danh từ.",
+        },
+        {
+          q: "________ occurred if parasites were observed on thin smears from rats for which clearance was previously noted.",
+          root: "CRUDE",
+          answers: ["recrudescence"],
+          explain:
+            "<b>recrudescence</b> (n): Sự bùng phát lại, tái phát.<br><i>Vị trí:</i> Đóng vai trò danh từ làm chủ ngữ trong câu.",
+        },
+        {
+          q: "The degree of similarity of the same variables between consecutive time intervals is referred to as ________.",
+          root: "RELATE",
+          answers: ["autocorrelation"],
+          explain:
+            "<b>autocorrelation</b> (n): Tự tương quan.<br><i>Vị trí:</i> Sau cụm giới từ 'referred to as' cần một danh từ thuật ngữ.",
+        },
+        {
+          q: "Sharing our evidence has been ________ beneficial to everyone in the class.",
+          root: "STEM",
+          answers: ["systemically", "systemic-stemmatically"],
+          explain:
+            "<b>systemically</b> (adv): Một cách có hệ thống.<br><i>Vị trí:</i> Bổ nghĩa cho tính từ 'beneficial'.",
+        },
+        {
+          q: "The SAGE Encyclopedia states that ________ is 'the presumption that most people do conform to gender norms'.",
+          root: "NORM",
+          answers: ["cisnormativity"],
+          explain:
+            "<b>cisnormativity</b> (n): Định kiến thuận giới.<br><i>Vị trí:</i> Danh từ thuật ngữ làm chủ ngữ.",
+        },
+        {
+          q: "The locals were wary of the ________ who had just moved to town, suspecting he had ulterior motives.",
+          root: "BAG",
+          answers: ["carpetbagger"],
+          explain:
+            "<b>carpetbagger</b> (n): Kẻ cơ hội đến nơi khác kiếm lợi.<br><i>Vị trí:</i> Sau mạo từ 'the' chỉ người.",
+        },
+        {
+          q: "This enterprise was built of thousands of workers who were ________ fired when they asked for fundamentals.",
+          root: "CEREMONY",
+          answers: ["unceremoniously"],
+          explain:
+            "<b>unceremoniously</b> (adv): Một cách phũ phàng, không chút nghi lễ.<br><i>Vị trí:</i> Đứng trước động từ 'fired' bổ nghĩa cho hành động.",
+        },
+        {
+          q: "People in coastal areas live mainly on the ________, which allows them to earn a great deal of money.",
+          root: "CULTURE",
+          answers: ["aquaculture"],
+          explain:
+            "<b>aquaculture</b> (n): Nghề nuôi trồng thủy sản.<br><i>Vị trí:</i> Sau mạo từ 'the' chỉ ngành nghề.",
+        },
+        {
+          q: "The mayor was determined that he would do everything in his power to ________ the murder case.",
+          root: "MYSTERY",
+          answers: ["demystify"],
+          explain:
+            "<b>demystify</b> (v): Làm sáng tỏ, bớt bí ẩn.<br><i>Vị trí:</i> Sau cấu trúc 'to + V_bare'.",
+        },
+        {
+          q: "The misunderstanding had caused a seven-year ________ between them.",
+          root: "STRANGE",
+          answers: ["estrangement"],
+          explain:
+            "<b>estrangement</b> (n): Sự xa cách, bất hòa.<br><i>Vị trí:</i> Sau tính từ bổ nghĩa 'seven-year'.",
+        },
+        {
+          q: "The candidate made an ________ speech that incensed all those who heard it.",
+          root: "FLAME",
+          answers: ["inflammatory"],
+          explain:
+            "<b>inflammatory</b> (adj): Mang tính kích động, gây phẫn nộ.<br><i>Vị trí:</i> Bổ nghĩa cho danh từ 'speech'.",
+        },
+        {
+          q: "Subtropical landscapes tend to be poor in nitrogen because of high rates of ________.",
+          root: "NITRATE",
+          answers: ["denitrification", "denitration"],
+          explain:
+            "<b>denitrification / denitration</b> (n): Quá trình khử nitrat.<br><i>Vị trí:</i> Sau giới từ 'of' cần một danh từ.",
+        },
+        {
+          q: "The ________ approach to problem-solving fosters innovative solutions.",
+          root: "DISCIPLINE",
+          answers: ["interdisciplinary", "cross-disciplinary"],
+          explain:
+            "<b>interdisciplinary</b> (adj): Liên ngành.<br><i>Vị trí:</i> Bổ nghĩa cho danh từ 'approach'.",
+        },
+        {
+          q: "The ________ rate of company failures is having a disastrous effect on unemployment.",
+          root: "QUICK",
+          answers: ["quickening"],
+          explain:
+            "<b>quickening</b> (adj): Gia tăng nhanh chóng.<br><i>Vị trí:</i> Bổ nghĩa cho danh từ 'rate'.",
+        },
+        {
+          q: "Everyone was taken aback finding out how generous and ________ he could be even when harmed.",
+          root: "ANIMUS",
+          answers: ["magnanimous"],
+          explain:
+            "<b>magnanimous</b> (adj): Vị tha, hào hiệp.<br><i>Vị trí:</i> Song song với tính từ 'generous' sau 'how'.",
+        },
+        {
+          q: "By the time he gets around to writing it, it’s an entirely ________, utterly outdated form.",
+          root: "ANNUAL",
+          answers: ["superannuated"],
+          explain:
+            "<b>superannuated</b> (adj): Lỗi thời, quá tuổi.<br><i>Vị trí:</i> Bổ nghĩa cho danh từ 'form' đằng sau.",
+        },
+        {
+          q: "Darwinism is sort of a ________ which sets up the coming great deception in the past 100 years.",
+          root: "PIN",
+          answers: ["linchpin", "lynchpin"],
+          explain:
+            "<b>linchpin</b> (n): Yếu tố nòng cốt, trụ cột.<br><i>Vị trí:</i> Sau mạo từ 'a' cần một danh từ.",
+        },
+        {
+          q: "The woman's laugh is ________ and not very hearty, and she is the only one who is laughing.",
+          root: "MIRTH",
+          answers: ["mirthless"],
+          explain:
+            "<b>mirthless</b> (adj): Gượng gạo, không chứa niềm vui.<br><i>Vị trí:</i> Tính từ đứng sau tobe 'is'.",
+        },
+      ];
+
+      let answeredCount = 0;
+      let correctCount = 0;
+
+      function renderQuiz() {
+        const container = document.getElementById("questions-container");
+        quizData.forEach((item, index) => {
+          const card = document.createElement("div");
+          card.className = "question-card";
+          card.id = `q-${index}`;
+
+          const parts = item.q.split("________");
+
+          card.innerHTML = `
+            <div class="question-num">Câu ${index + 1} / 30</div>
+            <div class="question-text">
+                ${parts[0]} <strong>(____)</strong> ${parts[1]} <strong>(${item.root})</strong>
+            </div>
+            <div class="input-group" id="input-group-${index}">
+                <input type="text" class="word-input" id="input-${index}" placeholder="Nhập từ cần chia..." onkeypress="handleKeyPress(event, ${index})">
+                <button class="submit-btn" onclick="checkAnswer(${index})">Kiểm tra</button>
+            </div>
+            <div class="explanation" id="explain-${index}">
+                <strong>Giải thích chi tiết:</strong>
+                <div>${item.explain}</div>
+            </div>
+        `;
+          container.appendChild(card);
+        });
+      }
+
+      function handleKeyPress(event, index) {
+        if (event.key === "Enter") {
+          checkAnswer(index);
+        }
+      }
+
+      function checkAnswer(index) {
+        const inputEl = document.getElementById(`input-${index}`);
+        const inputGroup = document.getElementById(`input-group-${index}`);
+        const btn = inputGroup.querySelector(".submit-btn");
+        const explainBox = document.getElementById(`explain-${index}`);
+
+        const userAns = inputEl.value.trim().toLowerCase();
+        if (!userAns) return;
+
+        const validAnswers = quizData[index].answers.map((a) =>
+          a.toLowerCase(),
+        );
+        const isCorrect = validAnswers.includes(userAns);
+
+        inputEl.disabled = true;
+        btn.disabled = true;
+
+        if (isCorrect) {
+          inputGroup.classList.add("correct");
+          correctCount++;
+        } else {
+          inputGroup.classList.add("wrong");
+          inputEl.value = `${userAns} ➔ (${quizData[index].answers[0]})`;
+        }
+
+        answeredCount++;
+        explainBox.style.display = "block";
+
+        // Update Score Board
+        document.getElementById("score-text").innerText =
+          `Đã làm: ${answeredCount}/30`;
+        document.getElementById("correct-count").innerText =
+          `Đúng: ${correctCount}`;
+        const percentage = (answeredCount / 30) * 100;
+        document.getElementById("progress-fill").style.width = `${percentage}%`;
+      }
+
+      document.addEventListener("DOMContentLoaded", renderQuiz);
+    </script>
+  </body>
+</html>
