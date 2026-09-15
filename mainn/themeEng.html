@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Học Tiếng Anh Theo Chuyên Ngành</title>
+    <!-- Import font Google Inter cho giao diện hiện đại -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --primary-color: #e63946; /* Đỏ chủ đạo */
+        --secondary-color: #ff758f; /* Hồng tươi */
+        --accent-pink: #ffccd5; /* Hồng nhạt */
+        --bg-color: #fff0f3; /* Nền hồng pastel siêu dịu */
+        --card-bg: #ffffff; /* Nền thẻ trắng */
+        --text-main: #2b2d42; /* Chữ tối màu */
+        --text-muted: #8d99ae; /* Chữ xám mờ */
+        --coming-soon-bg: #fff5f7; /* Nền thẻ sắp ra mắt */
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family:
+          "Inter",
+          system-ui,
+          -apple-system,
+          sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-main);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 600px;
+        background: var(--card-bg);
+        padding: 40px 30px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(230, 57, 70, 0.08);
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 35px;
+      }
+
+      h1 {
+        font-size: 26px;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 8px;
+        letter-spacing: -0.5px;
+      }
+
+      .subtitle {
+        font-size: 14px;
+        color: var(--text-muted);
+      }
+
+      .section-title {
+        font-size: 14px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--secondary-color);
+        margin-bottom: 15px;
+      }
+
+      .nav-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 35px;
+      }
+
+      .nav-card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 20px;
+        background-color: #ffffff;
+        border: 1.5px solid var(--accent-pink);
+        border-radius: 12px;
+        text-decoration: none;
+        color: var(--text-main);
+        font-weight: 600;
+        font-size: 16px;
+        transition: all 0.25s ease;
+      }
+
+      .nav-card:hover {
+        background-color: var(--primary-color);
+        color: #ffffff;
+        border-color: var(--primary-color);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(230, 57, 70, 0.25);
+      }
+
+      .nav-card .arrow {
+        font-size: 18px;
+        transition: transform 0.25s ease;
+      }
+
+      .nav-card:hover .arrow {
+        transform: translateX(5px);
+      }
+
+      /* Phần Coming Soon */
+      .coming-soon-section {
+        border-top: 1px dashed var(--accent-pink);
+        padding-top: 25px;
+      }
+
+      .coming-soon-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .tag-disabled {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 10px 16px;
+        background-color: var(--coming-soon-bg);
+        border: 1px solid #ffe3e8;
+        border-radius: 20px;
+        color: var(--text-muted);
+        font-size: 14px;
+        font-weight: 500;
+        cursor: not-allowed;
+        user-select: none;
+      }
+
+      .tag-badge {
+        font-size: 10px;
+        background: var(--secondary-color);
+        color: white;
+        padding: 2px 6px;
+        border-radius: 10px;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Học Tiếng Anh Theo Chuyên Ngành</h1>
+        <p class="subtitle">Nâng cao từ vựng & kiến thức chuyên môn mỗi ngày</p>
+      </header>
+
+      <!-- Danh sách bài học khả dụng -->
+      <div class="section-title">Chủ đề khả dụng</div>
+      <div class="nav-list">
+        <a href="../econMain.html" class="nav-card">
+          <span>📊 Kinh tế học (Economics)</span>
+          <span class="arrow">&rarr;</span>
+        </a>
+        <a href="../pcgMain.html" class="nav-card">
+          <span>🧠 Tâm lý học (Psychology)</span>
+          <span class="arrow">&rarr;</span>
+        </a>
+      </div>
+
+      <!-- Phần Coming Soon -->
+      <div class="coming-soon-section">
+        <div class="section-title">Sắp ra mắt (Coming Soon)</div>
+        <div class="coming-soon-grid">
+          <div class="tag-disabled">
+            💻 Công nghệ thông tin
+            <span class="tag-badge">Soon</span>
+          </div>
+          <div class="tag-disabled">
+            🎨 Thiết kế & Nghệ thuật
+            <span class="tag-badge">Soon</span>
+          </div>
+          <div class="tag-disabled">
+            ⚕️ Y khoa & Sức khỏe
+            <span class="tag-badge">Soon</span>
+          </div>
+          <div class="tag-disabled">
+            ⚖️ Luật học
+            <span class="tag-badge">Soon</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
