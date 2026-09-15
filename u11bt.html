@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trắc Nghiệm Từ Vựng Tiếng Anh - Orange Theme</title>
+    <style>
+      :root {
+        --primary: #ea580c;
+        --primary-hover: #c2410c;
+        --bg-gradient: linear-gradient(135deg, #ffedd5 0%, #fed7aa 100%);
+        --card-bg: #ffffff;
+        --text-main: #1c1917;
+        --text-muted: #78716c;
+        --correct-bg: #dcfce7;
+        --correct-border: #22c55e;
+        --correct-text: #15803d;
+        --wrong-bg: #ffe4e6;
+        --wrong-border: #f43f5e;
+        --wrong-text: #be123c;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: var(--bg-gradient);
+        color: var(--text-main);
+        margin: 0;
+        padding: 20px;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 30px;
+        background: var(--card-bg);
+        padding: 25px;
+        border-radius: 16px;
+        box-shadow: 0 10px 25px -5px rgba(234, 88, 12, 0.15);
+      }
+
+      h1 {
+        color: var(--primary);
+        margin: 0 0 10px 0;
+        font-size: 1.8rem;
+      }
+
+      p.subtitle {
+        color: var(--text-muted);
+        margin: 0;
+        font-size: 0.95rem;
+      }
+
+      .quiz-card {
+        background: var(--card-bg);
+        border-radius: 16px;
+        padding: 24px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      .quiz-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(234, 88, 12, 0.12);
+      }
+
+      .question-num {
+        font-weight: 700;
+        color: var(--primary);
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 8px;
+      }
+
+      .question-text {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 16px;
+        line-height: 1.5;
+      }
+
+      .options-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 12px;
+      }
+
+      .btn-option {
+        background: #fff7ed;
+        border: 2px solid #ffedd5;
+        border-radius: 10px;
+        padding: 12px 16px;
+        text-align: left;
+        font-size: 0.95rem;
+        color: var(--text-main);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-weight: 500;
+      }
+
+      .btn-option:hover:not(:disabled) {
+        border-color: var(--primary);
+        background: #ffedd5;
+        color: var(--primary);
+      }
+
+      .btn-option:disabled {
+        cursor: not-allowed;
+      }
+
+      .btn-option.correct {
+        background: var(--correct-bg) !important;
+        border-color: var(--correct-border) !important;
+        color: var(--correct-text) !important;
+        font-weight: 700;
+      }
+
+      .btn-option.wrong {
+        background: var(--wrong-bg) !important;
+        border-color: var(--wrong-border) !important;
+        color: var(--wrong-text) !important;
+      }
+
+      .explanation {
+        margin-top: 16px;
+        padding: 14px;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        line-height: 1.4;
+        display: none;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .explanation.visible {
+        display: block;
+      }
+
+      .explanation.correct-exp {
+        background: #f0fdf4;
+        border-left: 4px solid var(--correct-border);
+        color: var(--correct-text);
+      }
+
+      .explanation.wrong-exp {
+        background: #fff1f2;
+        border-left: 4px solid var(--wrong-border);
+        color: var(--wrong-text);
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-5px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Ôn Tập Từ Vựng Tiếng Anh</h1>
+        <p class="subtitle">
+          30 Câu Trắc Nghiệm - Chọn đáp án để kiểm tra kết quả và xem giải thích
+        </p>
+      </header>
+
+      <div id="quiz-container"></div>
+    </div>
+
+    <script>
+      const quizData = [
+        {
+          q: "A(n) __________ allows you to read digital books with a screen that looks like real paper.",
+          options: ["e-reader", "camcorder", "3D printer", "window shade"],
+          answer: 0,
+          exp: "<b>e-reader</b>: thiết bị đọc sách điện tử.",
+        },
+        {
+          q: "Modern smartwatches often feature a __________ display, allowing users to tap and swipe directly on the screen.",
+          options: ["rubber", "touchscreen", "cardboard", "steel"],
+          answer: 1,
+          exp: "<b>touchscreen</b>: màn hình cảm ứng.",
+        },
+        {
+          q: "A __________ can automatically clean your floors by navigating around obstacles in your room.",
+          options: [
+            "window shade",
+            "robotic vacuum cleaner",
+            "portable music player",
+            "3D printer",
+          ],
+          answer: 1,
+          exp: "<b>robotic vacuum cleaner</b>: máy hút bụi robot.",
+        },
+        {
+          q: "You can adjust the __________ to block out sunlight and keep the bedroom dark.",
+          options: ["leaflet", "window shade", "e-reader", "self-portrait"],
+          answer: 1,
+          exp: "<b>window shade</b>: rèm/màn che cửa sổ.",
+        },
+        {
+          q: "An artist usually creates a __________ when they paint or draw a picture of themselves.",
+          options: ["leaflet", "self-portrait", "virtual", "camcorder"],
+          answer: 1,
+          exp: "<b>self-portrait</b>: bức chân dung tự họa.",
+        },
+        {
+          q: "Light and cheap packaging boxes are usually made of thick __________.",
+          options: ["steel", "copper", "cardboard", "aluminum"],
+          answer: 2,
+          exp: "<b>cardboard</b>: bìa cứng, bìa cactông.",
+        },
+        {
+          q: "Water pipes and electrical wires are frequently made of __________ because it is a great conductor of electricity.",
+          options: ["rubber", "copper", "plastic", "cardboard"],
+          answer: 1,
+          exp: "<b>copper</b>: đồng (kim loại dẫn điện tốt).",
+        },
+        {
+          q: "Heavy structural beams for bridges and skyscrapers are made of strong __________.",
+          options: ["steel", "paper", "rubber", "plastic"],
+          answer: 0,
+          exp: "<b>steel</b>: thép (dùng làm dầm chịu lực).",
+        },
+        {
+          q: "Metal drink cans are lightweight because they are manufactured using __________.",
+          options: ["cardboard", "rubber", "aluminum", "wood"],
+          answer: 2,
+          exp: "<b>aluminum</b>: nhôm (nhẹ, dùng làm vỏ lon).",
+        },
+        {
+          q: "Car tires, boots, and rubber bands are made of flexible __________.",
+          options: ["copper", "rubber", "steel", "glass"],
+          answer: 1,
+          exp: "<b>rubber</b>: cao su (dùng làm lốp xe, dây thun).",
+        },
+        {
+          q: "Many water bottles and disposable containers are made from lightweight __________.",
+          options: ["plastic", "copper", "aluminum", "steel"],
+          answer: 0,
+          exp: "<b>plastic</b>: nhựa, chất dẻo.",
+        },
+        {
+          q: "A __________ device can easily be carried around because of its small size and light weight.",
+          options: ["virtual", "portable", "stylish", "wireless"],
+          answer: 1,
+          exp: "<b>portable</b>: di động, dễ mang theo.",
+        },
+        {
+          q: "Bluetooth headphones are completely __________ because they connect to your phone without any cords.",
+          options: ["wireless", "portable", "virtual", "stylish"],
+          answer: 0,
+          exp: "<b>wireless</b>: không dây.",
+        },
+        {
+          q: "She always wears __________ clothes that look fashionable and modern.",
+          options: ["stylish", "rubber", "cardboard", "virtual"],
+          answer: 0,
+          exp: "<b>stylish</b>: thời trang, hợp mốt.",
+        },
+        {
+          q: "Gamers can put on a headset to enter a __________ reality world.",
+          options: ["portable", "virtual", "wireless", "stylish"],
+          answer: 1,
+          exp: "<b>virtual</b>: ảo (trong cụm <i>virtual reality</i> - thực tế ảo).",
+        },
+        {
+          q: "A vacuum cleaner uses a motor to __________ up dust and dirt from carpets.",
+          options: ["pose", "suck", "orbit", "affect"],
+          answer: 1,
+          exp: "<b>suck</b>: hút (cụm <i>suck up</i> - hút bụi/bẩn).",
+        },
+        {
+          q: "Before smartphones, people used a dedicated __________ to record family home videos.",
+          options: ["camcorder", "e-reader", "window shade", "leaflet"],
+          answer: 0,
+          exp: "<b>camcorder</b>: máy quay phim cầm tay.",
+        },
+        {
+          q: "Volunteers handed out informative __________ to promote environmental awareness.",
+          options: [
+            "leaflets",
+            "window shades",
+            "self-portraits",
+            "3D printers",
+          ],
+          answer: 0,
+          exp: "<b>leaflets</b>: tờ rơi quảng cáo/thông tin.",
+        },
+        {
+          q: "An iPod is a classic example of a digital __________.",
+          options: [
+            "robotic vacuum cleaner",
+            "portable music player",
+            "camcorder",
+            "e-reader",
+          ],
+          answer: 1,
+          exp: "<b>portable music player</b>: máy nghe nhạc di động.",
+        },
+        {
+          q: "A __________ can create physical three-dimensional objects layer by layer from digital files.",
+          options: ["3D printer", "smartwatch", "camcorder", "window shade"],
+          answer: 0,
+          exp: "<b>3D printer</b>: máy in 3D.",
+        },
+        {
+          q: "A __________ on your wrist can monitor your heart rate, count your steps, and receive text messages.",
+          options: [
+            "smartwatch",
+            "camcorder",
+            "e-reader",
+            "portable music player",
+          ],
+          answer: 0,
+          exp: "<b>smartwatch</b>: đồng hồ thông minh.",
+        },
+        {
+          q: "Which material is most commonly used for electrical wiring due to its high conductivity?",
+          options: ["Rubber", "Copper", "Cardboard", "Plastic"],
+          answer: 1,
+          exp: "<b>Copper</b>: Đồng là kim loại dẫn điện rất tốt được dùng làm dây điện.",
+        },
+        {
+          q: "Choose the synonym of 'fashionable':",
+          options: ["Stylish", "Portable", "Virtual", "Essential"],
+          answer: 0,
+          exp: "<b>Stylish</b> đồng nghĩa với <i>fashionable</i> (thời trang, phong cách).",
+        },
+        {
+          q: "Choose the antonym of 'wired' (having cables):",
+          options: ["Wireless", "Portable", "Stylish", "Digital"],
+          answer: 0,
+          exp: "<b>Wireless</b> (không dây) trái nghĩa với <i>wired</i> (có dây).",
+        },
+        {
+          q: "Choose the antonym of 'real / physical':",
+          options: ["Virtual", "Portable", "Essential", "Stylish"],
+          answer: 0,
+          exp: "<b>Virtual</b> (ảo) trái nghĩa với <i>real/physical</i> (thực tế/vật lý).",
+        },
+        {
+          q: "Which of the following is an example of a paper document used for advertising or information?",
+          options: ["Leaflet", "Camcorder", "Window shade", "E-reader"],
+          answer: 0,
+          exp: "<b>Leaflet</b>: tờ rơi bằng giấy dùng để quảng cáo/thông tin.",
+        },
+        {
+          q: "Find the mistake in the following sentence: 'The robotic vacuum cleaner is very useful because it can suck up dirt and pull out window shade automatically.'",
+          options: ["robotic", "suck up", "window shade", "automatically"],
+          answer: 2,
+          exp: "Sửa 'window shade' thành <b>window shades</b> (hoặc <i>the window shade</i>) để chuẩn ngữ pháp.",
+        },
+        {
+          q: "Find the mistake in the following sentence: 'He painted a stunning self-portrait of his mother for her 50th birthday.'",
+          options: ["painted", "self-portrait", "mother", "birthday"],
+          answer: 1,
+          exp: "Sửa 'self-portrait' (chân dung tự họa bản thân) thành <b>portrait</b> (chân dung) vì đây là tranh vẽ người mẹ.",
+        },
+        {
+          q: "Find the mistake in the following sentence: 'To read digital books comfortable at night, you should buy an e-reader with a warm backlight.'",
+          options: ["digital", "comfortable", "e-reader", "backlight"],
+          answer: 1,
+          exp: "Sửa tính từ 'comfortable' thành trạng từ <b>comfortably</b> để bổ nghĩa cho động từ <i>read</i>.",
+        },
+        {
+          q: "Which object is designed to control the amount of light entering a room through glass?",
+          options: ["Window shade", "Touchscreen", "Leaflet", "3D printer"],
+          answer: 0,
+          exp: "<b>Window shade</b>: màn che cửa sổ dùng để điều chỉnh ánh sáng vào phòng.",
+        },
+      ];
+
+      function renderQuiz() {
+        const container = document.getElementById("quiz-container");
+        container.innerHTML = quizData
+          .map(
+            (item, index) => `
+        <div class="quiz-card" id="card-${index}">
+            <div class="question-num">Câu ${index + 1}</div>
+            <div class="question-text">${item.q}</div>
+            <div class="options-grid">
+                ${item.options
+                  .map(
+                    (opt, optIdx) => `
+                    <button class="btn-option" onclick="checkAnswer(${index}, ${optIdx})">
+                        ${String.fromCharCode(65 + optIdx)}. ${opt}
+                    </button>
+                `,
+                  )
+                  .join("")}
+            </div>
+            <div class="explanation" id="exp-${index}"></div>
+        </div>
+    `,
+          )
+          .join("");
+      }
+
+      function checkAnswer(qIdx, selectedIdx) {
+        const card = document.getElementById(`card-${qIdx}`);
+        const buttons = card.querySelectorAll(".btn-option");
+        const expDiv = document.getElementById(`exp-${qIdx}`);
+        const currentQ = quizData[qIdx];
+
+        buttons.forEach((btn) => (btn.disabled = true));
+
+        if (selectedIdx === currentQ.answer) {
+          buttons[selectedIdx].classList.add("correct");
+          expDiv.className = "explanation visible correct-exp";
+          expDiv.innerHTML = `<strong>Chính xác!</strong><br>${currentQ.exp}`;
+        } else {
+          buttons[selectedIdx].classList.add("wrong");
+          buttons[currentQ.answer].classList.add("correct");
+          expDiv.className = "explanation visible wrong-exp";
+          expDiv.innerHTML = `<strong>Rất tiếc, sai rồi!</strong><br>${currentQ.exp}`;
+        }
+      }
+
+      renderQuiz();
+    </script>
+  </body>
+</html>

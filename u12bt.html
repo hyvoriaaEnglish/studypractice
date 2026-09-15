@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trắc Nghiệm Từ Vựng Tiếng Anh - Pink Theme</title>
+    <style>
+      :root {
+        --primary: #ec4899;
+        --primary-hover: #db2777;
+        --bg-gradient: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+        --card-bg: #ffffff;
+        --text-main: #831843;
+        --text-muted: #9d174d;
+        --correct-bg: #dcfce7;
+        --correct-border: #22c55e;
+        --correct-text: #15803d;
+        --wrong-bg: #ffe4e6;
+        --wrong-border: #f43f5e;
+        --wrong-text: #be123c;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: var(--bg-gradient);
+        color: var(--text-main);
+        margin: 0;
+        padding: 20px;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 30px;
+        background: var(--card-bg);
+        padding: 25px;
+        border-radius: 16px;
+        box-shadow: 0 10px 25px -5px rgba(236, 72, 153, 0.2);
+      }
+
+      h1 {
+        color: var(--primary);
+        margin: 0 0 10px 0;
+        font-size: 1.8rem;
+      }
+
+      p.subtitle {
+        color: var(--text-muted);
+        margin: 0;
+        font-size: 0.95rem;
+      }
+
+      .quiz-card {
+        background: var(--card-bg);
+        border-radius: 16px;
+        padding: 24px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      .quiz-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(236, 72, 153, 0.15);
+      }
+
+      .question-num {
+        font-weight: 700;
+        color: var(--primary);
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 8px;
+      }
+
+      .question-text {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 16px;
+        line-height: 1.5;
+      }
+
+      .options-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 12px;
+      }
+
+      .btn-option {
+        background: #fdf2f8;
+        border: 2px solid #fce7f3;
+        border-radius: 10px;
+        padding: 12px 16px;
+        text-align: left;
+        font-size: 0.95rem;
+        color: var(--text-main);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-weight: 500;
+      }
+
+      .btn-option:hover:not(:disabled) {
+        border-color: var(--primary);
+        background: #fce7f3;
+        color: var(--primary-hover);
+      }
+
+      .btn-option:disabled {
+        cursor: not-allowed;
+      }
+
+      .btn-option.correct {
+        background: var(--correct-bg) !important;
+        border-color: var(--correct-border) !important;
+        color: var(--correct-text) !important;
+        font-weight: 700;
+      }
+
+      .btn-option.wrong {
+        background: var(--wrong-bg) !important;
+        border-color: var(--wrong-border) !important;
+        color: var(--wrong-text) !important;
+      }
+
+      .explanation {
+        margin-top: 16px;
+        padding: 14px;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        line-height: 1.4;
+        display: none;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .explanation.visible {
+        display: block;
+      }
+
+      .explanation.correct-exp {
+        background: #f0fdf4;
+        border-left: 4px solid var(--correct-border);
+        color: var(--correct-text);
+      }
+
+      .explanation.wrong-exp {
+        background: #fff1f2;
+        border-left: 4px solid var(--wrong-border);
+        color: var(--wrong-text);
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-5px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Ôn Tập Từ Vựng Tiếng Anh</h1>
+        <p class="subtitle">
+          28 Câu Trắc Nghiệm - Chọn đáp án để kiểm tra kết quả và xem giải thích
+        </p>
+      </header>
+
+      <div id="quiz-container"></div>
+    </div>
+
+    <script>
+      const quizData = [
+        {
+          q: "Someone who designs and builds programs, apps, and computer systems is a ________.",
+          options: [
+            "software engineer",
+            "assembly worker",
+            "mechanic",
+            "bartender",
+          ],
+          answer: 0,
+          exp: "<b>software engineer</b>: kỹ sư phần mềm.",
+        },
+        {
+          q: "As an ________, he spends his day putting together machine components on a factory conveyor belt.",
+          options: [
+            "agriculture engineering",
+            "assembly worker",
+            "surgeon",
+            "e-reader",
+          ],
+          answer: 1,
+          exp: "<b>assembly worker</b>: công nhân lắp ráp dây chuyền.",
+        },
+        {
+          q: "The mixologist served cold drinks to customers from behind the bar as a professional ________.",
+          options: ["mechanic", "cashier", "bartender", "garment worker"],
+          answer: 2,
+          exp: "<b>bartender</b>: nhân viên pha chế.",
+        },
+        {
+          q: "She ringed up every item at the checkout counter and gave me the receipt in her role as a ________.",
+          options: ["cashier", "surgeon", "bartender", "software engineer"],
+          answer: 0,
+          exp: "<b>cashier</b>: thu ngân.",
+        },
+        {
+          q: "Choosing a future ________ requires understanding your personal skills, values, and interests.",
+          options: ["fabric", "career", "orientation", "knowledge"],
+          answer: 1,
+          exp: "<b>career</b>: sự nghiệp/nghề nghiệp.",
+        },
+        {
+          q: "A good leader needs to be ________ and able to make firm decisions quickly under pressure.",
+          options: ["repetitive", "decisive", "hands-on", "inquiring"],
+          answer: 1,
+          exp: "<b>decisive</b>: quả quyết, quyết đoán.",
+        },
+        {
+          q: "Being a doctor is a very ________ job that requires long hours and intense dedication.",
+          options: ["demanding", "vocational", "well-paid", "repetitive"],
+          answer: 0,
+          exp: "<b>demanding</b>: đòi hỏi khắt khe, áp lực cao.",
+        },
+        {
+          q: "Tailors use high-quality cotton ________ to make durable summer clothing.",
+          options: ["fabric", "landform", "orientation", "pesticide"],
+          answer: 0,
+          exp: "<b>fabric</b>: vải vóc.",
+        },
+        {
+          q: "A ________ works in a textile factory sewing shirts, pants, and other apparel.",
+          options: ["garment worker", "mechanic", "surgeon", "bartender"],
+          answer: 0,
+          exp: "<b>garment worker</b>: công nhân may mặc.",
+        },
+        {
+          q: "Playing video games or doing surgery requires excellent ________ to control precise hand movements.",
+          options: [
+            "career",
+            "orientation",
+            "hand-eye coordination",
+            "knowledge",
+          ],
+          answer: 2,
+          exp: "<b>hand-eye coordination</b>: sự phối hợp giữa tay và mắt.",
+        },
+        {
+          q: "She prefers a ________ job where she can build and fix physical objects rather than sitting at a desk.",
+          options: ["hands-on", "demanding", "virtual", "decisive"],
+          answer: 0,
+          exp: "<b>hands-on</b>: thực hành, làm việc thực tế.",
+        },
+        {
+          q: "Children have an ________ mind, constantly asking questions about how the world works.",
+          options: ["inquiring", "repetitive", "well-paid", "vocational"],
+          answer: 0,
+          exp: "<b>inquiring</b>: ham học hỏi, thích tìm tòi.",
+        },
+        {
+          q: "Continuous reading and practice help you gain broad ________ in your field.",
+          options: ["orientation", "knowledge", "career", "fabric"],
+          answer: 1,
+          exp: "<b>knowledge</b>: kiến thức, sự hiểu biết.",
+        },
+        {
+          q: "If your car breaks down on the highway, you need a skilled ________ to fix the engine.",
+          options: [
+            "assembly worker",
+            "mechanic",
+            "surgeon",
+            "software engineer",
+          ],
+          answer: 1,
+          exp: "<b>mechanic</b>: thợ cơ khí/thợ sửa máy.",
+        },
+        {
+          q: "Doing the same task over and over all day can become very ________ and boring.",
+          options: ["repetitive", "rewarding", "decisive", "demanding"],
+          answer: 0,
+          exp: "<b>repetitive</b>: lặp đi lặp lại.",
+        },
+        {
+          q: "Helping patients recover from illness makes healthcare a deeply ________ profession.",
+          options: ["rewarding", "repetitive", "demanding", "hands-on"],
+          answer: 0,
+          exp: "<b>rewarding</b>: bổ ích, mang lại cảm giác thỏa mãn/xứng đáng.",
+        },
+        {
+          q: "You need to ________ the buttons onto the shirt using a needle and thread.",
+          options: ["sew", "affect", "orbit", "observe"],
+          answer: 0,
+          exp: "<b>sew</b>: may, khâu.",
+        },
+        {
+          q: "The highly trained ________ performed a delicate four-hour heart operation.",
+          options: ["surgeon", "mechanic", "cashier", "assembly worker"],
+          answer: 0,
+          exp: "<b>surgeon</b>: bác sĩ phẫu thuật.",
+        },
+        {
+          q: "High schools often provide ________ training programs for students interested in carpentry or plumbing.",
+          options: ["vocational", "virtual", "repetitive", "inquiring"],
+          answer: 0,
+          exp: "<b>vocational</b>: hướng nghiệp/học nghề.",
+        },
+        {
+          q: "Software engineers and doctors usually hold ________ positions with excellent salaries.",
+          options: ["well-paid", "repetitive", "demanding", "hands-on"],
+          answer: 0,
+          exp: "<b>well-paid</b>: được trả lương cao.",
+        },
+        {
+          q: "New employees must attend an ________ session on their first day to learn company policies.",
+          options: ["orientation", "career", "knowledge", "fabric"],
+          answer: 0,
+          exp: "<b>orientation</b>: buổi định hướng/buổi giới thiệu.",
+        },
+        {
+          q: "Innovations in ________ help farmers automate irrigation and improve crop production.",
+          options: [
+            "agriculture engineering",
+            "software engineer",
+            "garment worker",
+            "nature reserve",
+          ],
+          answer: 0,
+          exp: "<b>agriculture engineering</b>: kỹ thuật nông nghiệp.",
+        },
+        {
+          q: "Which word is a SYNONYM of 'determined / resolute'?",
+          options: ["Decisive", "Repetitive", "Demanding", "Vocational"],
+          answer: 0,
+          exp: "<b>Decisive</b> (quyết đoán) đồng nghĩa với <i>determined / resolute</i>.",
+        },
+        {
+          q: "Which word refers to practical, real-world work experience?",
+          options: ["Hands-on", "Virtual", "Repetitive", "Inquiring"],
+          answer: 0,
+          exp: "<b>Hands-on</b>: kinh nghiệm thực tế, xắn tay vào làm.",
+        },
+        {
+          q: "Find the mistake in the sentence: 'The garment worker uses a machine to sew the fabric together quickly.'",
+          options: ["garment worker", "uses", "to sew", "No mistake"],
+          answer: 3,
+          exp: "Câu chuẩn ngữ pháp và từ vựng, chọn <b>No mistake</b>.",
+        },
+        {
+          q: "A surgeon needs high levels of __________ and focus during complex operations.",
+          options: ["hand-eye coordination", "orientation", "fabric", "career"],
+          answer: 0,
+          exp: "<b>hand-eye coordination</b>: sự phối hợp giữa tay và mắt.",
+        },
+        {
+          q: "Working as a mechanic can be both physically __________ and mentally challenging.",
+          options: ["demanding", "virtual", "repetitive", "inquiring"],
+          answer: 0,
+          exp: "<b>demanding</b>: đòi hỏi nhiều sức lực/yêu cầu cao.",
+        },
+        {
+          q: "Vocational schools help students gain practical __________ for immediate employment.",
+          options: ["knowledge", "orientation", "fabric", "career"],
+          answer: 0,
+          exp: "<b>knowledge</b>: kiến thức thực tế.",
+        },
+      ];
+
+      function renderQuiz() {
+        const container = document.getElementById("quiz-container");
+        container.innerHTML = quizData
+          .map(
+            (item, index) => `
+        <div class="quiz-card" id="card-${index}">
+            <div class="question-num">Câu ${index + 1}</div>
+            <div class="question-text">${item.q}</div>
+            <div class="options-grid">
+                ${item.options
+                  .map(
+                    (opt, optIdx) => `
+                    <button class="btn-option" onclick="checkAnswer(${index}, ${optIdx})">
+                        ${String.fromCharCode(65 + optIdx)}. ${opt}
+                    </button>
+                `,
+                  )
+                  .join("")}
+            </div>
+            <div class="explanation" id="exp-${index}"></div>
+        </div>
+    `,
+          )
+          .join("");
+      }
+
+      function checkAnswer(qIdx, selectedIdx) {
+        const card = document.getElementById(`card-${qIdx}`);
+        const buttons = card.querySelectorAll(".btn-option");
+        const expDiv = document.getElementById(`exp-${qIdx}`);
+        const currentQ = quizData[qIdx];
+
+        buttons.forEach((btn) => (btn.disabled = true));
+
+        if (selectedIdx === currentQ.answer) {
+          buttons[selectedIdx].classList.add("correct");
+          expDiv.className = "explanation visible correct-exp";
+          expDiv.innerHTML = `<strong>Chính xác!</strong><br>${currentQ.exp}`;
+        } else {
+          buttons[selectedIdx].classList.add("wrong");
+          buttons[currentQ.answer].classList.add("correct");
+          expDiv.className = "explanation visible wrong-exp";
+          expDiv.innerHTML = `<strong>Rất tiếc, sai rồi!</strong><br>${currentQ.exp}`;
+        }
+      }
+
+      renderQuiz();
+    </script>
+  </body>
+</html>

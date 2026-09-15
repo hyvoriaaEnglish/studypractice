@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trắc Nghiệm Từ Vựng Tiếng Anh</title>
+    <style>
+      :root {
+        --primary: #0284c7;
+        --primary-hover: #0369a1;
+        --bg-gradient: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+        --card-bg: #ffffff;
+        --text-main: #0f172a;
+        --text-muted: #475569;
+        --correct-bg: #dcfce7;
+        --correct-border: #22c55e;
+        --correct-text: #15803d;
+        --wrong-bg: #ffe4e6;
+        --wrong-border: #f43f5e;
+        --wrong-text: #be123c;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: var(--bg-gradient);
+        color: var(--text-main);
+        margin: 0;
+        padding: 20px;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 30px;
+        background: var(--card-bg);
+        padding: 25px;
+        border-radius: 16px;
+        box-shadow: 0 10px 25px -5px rgba(2, 132, 199, 0.15);
+      }
+
+      h1 {
+        color: var(--primary);
+        margin: 0 0 10px 0;
+        font-size: 1.8rem;
+      }
+
+      p.subtitle {
+        color: var(--text-muted);
+        margin: 0;
+        font-size: 0.95rem;
+      }
+
+      .quiz-card {
+        background: var(--card-bg);
+        border-radius: 16px;
+        padding: 24px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      .quiz-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(2, 132, 199, 0.1);
+      }
+
+      .question-num {
+        font-weight: 700;
+        color: var(--primary);
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 8px;
+      }
+
+      .question-text {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 16px;
+        line-height: 1.5;
+      }
+
+      .options-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 12px;
+      }
+
+      .btn-option {
+        background: #f8fafc;
+        border: 2px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 12px 16px;
+        text-align: left;
+        font-size: 0.95rem;
+        color: var(--text-main);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-weight: 500;
+      }
+
+      .btn-option:hover:not(:disabled) {
+        border-color: var(--primary);
+        background: #f0f9ff;
+        color: var(--primary);
+      }
+
+      .btn-option:disabled {
+        cursor: not-allowed;
+      }
+
+      .btn-option.correct {
+        background: var(--correct-bg) !important;
+        border-color: var(--correct-border) !important;
+        color: var(--correct-text) !important;
+        font-weight: 700;
+      }
+
+      .btn-option.wrong {
+        background: var(--wrong-bg) !important;
+        border-color: var(--wrong-border) !important;
+        color: var(--wrong-text) !important;
+      }
+
+      .explanation {
+        margin-top: 16px;
+        padding: 14px;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        line-height: 1.4;
+        display: none;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .explanation.visible {
+        display: block;
+      }
+
+      .explanation.correct-exp {
+        background: #f0fdf4;
+        border-left: 4px solid var(--correct-border);
+        color: var(--correct-text);
+      }
+
+      .explanation.wrong-exp {
+        background: #fff1f2;
+        border-left: 4px solid var(--wrong-border);
+        color: var(--wrong-text);
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-5px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Ôn Tập Từ Vựng Tiếng Anh</h1>
+        <p class="subtitle">
+          28 Câu Trắc Nghiệm - Chọn đáp án để kiểm tra kết quả và xem giải thích
+        </p>
+      </header>
+
+      <div id="quiz-container"></div>
+    </div>
+
+    <script>
+      const quizData = [
+        {
+          q: "Carbon dioxide emissions contribute heavily to __________, causing global temperatures to rise.",
+          options: [
+            "grassland",
+            "climate change",
+            "landform",
+            "nature reserve",
+          ],
+          answer: 1,
+          exp: "<b>climate change</b> (biến đổi khí hậu): Khí thải CO2 góp phần lớn vào biến đổi khí hậu khiến nhiệt độ toàn cầu tăng.",
+        },
+        {
+          q: "Scientists use satellite images to __________ changes in the Amazon rainforest.",
+          options: ["affect", "observe", "orbit", "pose"],
+          answer: 1,
+          exp: "<b>observe</b> (quan sát/theo dõi): Các nhà khoa học dùng ảnh vệ tinh để theo dõi sự thay đổi của rừng Amazon.",
+        },
+        {
+          q: "Protecting the environment is __________ for the survival of future generations.",
+          options: ["essential", "outer space", "droppings", "pesticide"],
+          answer: 0,
+          exp: "<b>essential</b> (thiết yếu/cần thiết): Bảo vệ môi trường là điều thiết yếu cho sự tồn tại của thế hệ tương lai.",
+        },
+        {
+          q: "The satellite was launched into __________ to study distant galaxies.",
+          options: [
+            "grassland",
+            "outer space",
+            "food chain",
+            "ecological balance",
+          ],
+          answer: 1,
+          exp: "<b>outer space</b> (ngoài vũ trụ): Vệ tinh được phóng vào vũ trụ để nghiên cứu các thiên hà xa xôi.",
+        },
+        {
+          q: "Toxic chemicals from factories can cause serious __________ to marine ecosystems.",
+          options: ["fertilizer", "nature reserve", "harm", "orbit"],
+          answer: 2,
+          exp: "<b>harm</b> (sự gây hại/tổn hại): Hóa chất độc hại từ nhà máy gây hại nghiêm trọng cho hệ sinh thái biển.",
+        },
+        {
+          q: "The African __________ is home to large herds of elephants and zebras.",
+          options: ["landform", "grassland", "climate change", "pesticide"],
+          answer: 1,
+          exp: "<b>grassland</b> (đồng cỏ): Đồng cỏ châu Phi là nơi sinh sống của các đàn voi và ngựa vằn.",
+        },
+        {
+          q: "Plastic pollution __________ a serious danger to ocean species.",
+          options: ["poses", "preserves", "affects", "observes"],
+          answer: 0,
+          exp: "<b>poses</b> (pose a danger/threat: đặt ra/đe dọa): Ô nhiễm nhựa gây ra mối đe dọa nghiêm trọng cho các loài sinh vật biển.",
+        },
+        {
+          q: "Sunlight, water, and soil are __________ ingredients for plant growth.",
+          options: ["fascinating", "vital", "droppings", "outer space"],
+          answer: 1,
+          exp: "<b>vital</b> (sống còn/rất quan trọng): Ánh sáng, nước và đất là các yếu tố sống còn cho cây phát triển.",
+        },
+        {
+          q: "It takes 365 days for the Earth to __________ around the Sun.",
+          options: ["affect", "orbit", "harm", "preserve"],
+          answer: 1,
+          exp: "<b>orbit</b> (quay quanh quỹ đạo): Trái Đất mất 365 ngày để quay quanh Mặt Trời.",
+        },
+        {
+          q: "The biological diversity of this forest is truly __________ to researchers.",
+          options: ["fascinating", "vital", "essential", "ecological balance"],
+          answer: 0,
+          exp: "<b>fascinating</b> (lôi cuốn/thú vị): Sự đa dạng sinh học của khu rừng này thật sự lôi cuốn đối với các nhà nghiên cứu.",
+        },
+        {
+          q: "Excessive use of chemical __________ can kill beneficial insects in the garden.",
+          options: ["pesticide", "food chain", "landform", "nature reserve"],
+          answer: 0,
+          exp: "<b>pesticide</b> (thuốc trừ sâu): Việc sử dụng quá nhiều thuốc trừ sâu hóa học có thể diệt cả côn trùng có lợi.",
+        },
+        {
+          q: "Farmers spread natural __________ on their crops to enrich the soil.",
+          options: ["droppings", "fertilizer", "threat", "habitat"],
+          answer: 1,
+          exp: "<b>fertilizer</b> (phân bón): Nông dân bón phân tự nhiên cho cây trồng để làm giàu độ dỡ cho đất.",
+        },
+        {
+          q: "Deforestation destroys the natural __________ of countless wild animals.",
+          options: ["habitat", "outer space", "food chain", "climate change"],
+          answer: 0,
+          exp: "<b>habitat</b> (môi trường sống): Nạn phá rừng phá hủy môi trường sống tự nhiên của vô số động vật hoang dã.",
+        },
+        {
+          q: "When one species goes extinct, it disrupts the entire biological __________.",
+          options: ["food chain", "landform", "fertilizer", "pesticide"],
+          answer: 0,
+          exp: "<b>food chain</b> (chuỗi thức ăn): Khi một loài tuyệt chủng, nó làm gián đoạn toàn bộ chuỗi thức ăn sinh học.",
+        },
+        {
+          q: "Maintaining a healthy __________ prevents any single species from overpopulating.",
+          options: [
+            "ecological balance",
+            "nature reserve",
+            "grassland",
+            "climate change",
+          ],
+          answer: 0,
+          exp: "<b>ecological balance</b> (cân bằng sinh thái): Duy trì cân bằng sinh thái giúp ngăn một loài phát triển quá mức.",
+        },
+        {
+          q: "I really __________ your efforts to reduce plastic waste in our school.",
+          options: ["affect", "appreciate", "harm", "pose"],
+          answer: 1,
+          exp: "<b>appreciate</b> (trân trọng/đánh giá cao): Tôi rất trân trọng những nỗ lực của bạn trong việc giảm rác thải nhựa.",
+        },
+        {
+          q: "Hunters and poachers represent a major __________ to endangered rhinos.",
+          options: ["threat", "landform", "fertilizer", "grassland"],
+          answer: 0,
+          exp: "<b>threat</b> (mối đe dọa): Thợ săn bắt trái phép là mối đe dọa lớn đối với loài tê giác đang gặp nguy hiểm.",
+        },
+        {
+          q: "A plateau is a high, flat __________ formed by geological forces over millions of years.",
+          options: ["nature reserve", "landform", "food chain", "habitat"],
+          answer: 1,
+          exp: "<b>landform</b> (địa hình): Cao nguyên là một dạng địa hình cao và bằng phẳng được hình thành qua hàng triệu năm.",
+        },
+        {
+          q: "Wild animal __________ found on the trail indicated that bears were nearby.",
+          options: ["droppings", "pesticides", "fertilizers", "grasslands"],
+          answer: 0,
+          exp: "<b>droppings</b> (phân động vật): Phân động vật hoang dã tìm thấy trên đường đi cho thấy có gấu ở gần.",
+        },
+        {
+          q: "Government laws help __________ ancient forests from commercial logging.",
+          options: ["preserve", "affect", "pose", "harm"],
+          answer: 0,
+          exp: "<b>preserve</b> (bảo tồn/gìn giữ): Luật pháp chính phủ giúp bảo tồn các khu rừng nguyên sinh khỏi việc khai thác gỗ.",
+        },
+        {
+          q: "The national park serves as a protected __________ for rare species.",
+          options: [
+            "nature reserve",
+            "climate change",
+            "outer space",
+            "food chain",
+          ],
+          answer: 0,
+          exp: "<b>nature reserve</b> (khu bảo tồn thiên nhiên): Vườn quốc gia đóng vai trò là khu bảo tồn thiên nhiên được bảo vệ.",
+        },
+        {
+          q: "Extreme weather conditions can negatively __________ crop yields this year.",
+          options: ["affect", "orbit", "observe", "preserve"],
+          answer: 0,
+          exp: "<b>affect</b> (ảnh hưởng/tác động): Thời tiết cực đoan có thể ảnh hưởng tiêu cực đến sản lượng mùa màng.",
+        },
+        {
+          q: "Coral reefs are a __________ part of marine biodiversity.",
+          options: ["vital", "fascinating", "harmful", "distant"],
+          answer: 0,
+          exp: "<b>vital</b> (sống còn/quan trọng): Rạn san hô là một phần quan trọng đối với sự đa dạng sinh học biển.",
+        },
+        {
+          q: "Using natural compost instead of synthetic __________ improves soil health.",
+          options: ["fertilizer", "pesticide", "habitat", "landform"],
+          answer: 0,
+          exp: "<b>fertilizer</b> (phân bón): Dùng phân hữu cơ tự nhiên thay vì phân bón tổng hợp giúp cải thiện đất.",
+        },
+        {
+          q: "The path of an object as it revolves around another body in space is its __________.",
+          options: ["orbit", "outer space", "grassland", "threat"],
+          answer: 0,
+          exp: "<b>orbit</b> (quỹ đạo): Quỹ đạo là đường đi của một vật thể khi nó quay quanh một vật thể khác trong không gian.",
+        },
+        {
+          q: "Rising sea levels present a severe __________ to coastal communities.",
+          options: ["threat", "landform", "droppings", "fertilizer"],
+          answer: 0,
+          exp: "<b>threat</b> (mối đe dọa): Mực nước biển dâng cao đặt ra mối đe dọa nghiêm trọng cho cộng đồng ven biển.",
+        },
+        {
+          q: "Field biologists use camera traps to __________ nocturnal animals.",
+          options: ["observe", "harm", "affect", "pose"],
+          answer: 0,
+          exp: "<b>observe</b> (quan sát): Các nhà sinh vật học dùng bẫy ảnh để quan sát động vật hoạt động ban đêm.",
+        },
+        {
+          q: "Local volunteers gathered to help __________ the clean water source.",
+          options: ["preserve", "affect", "pose", "harm"],
+          answer: 0,
+          exp: "<b>preserve</b> (bảo vệ/gìn giữ): Tình nguyện viên địa phương tập hợp để giúp bảo vệ nguồn nước sạch.",
+        },
+      ];
+
+      function renderQuiz() {
+        const container = document.getElementById("quiz-container");
+        container.innerHTML = quizData
+          .map(
+            (item, index) => `
+        <div class="quiz-card" id="card-${index}">
+            <div class="question-num">Câu ${index + 1}</div>
+            <div class="question-text">${item.q}</div>
+            <div class="options-grid">
+                ${item.options
+                  .map(
+                    (opt, optIdx) => `
+                    <button class="btn-option" onclick="checkAnswer(${index}, ${optIdx})">
+                        ${String.fromCharCode(65 + optIdx)}. ${opt}
+                    </button>
+                `,
+                  )
+                  .join("")}
+            </div>
+            <div class="explanation" id="exp-${index}"></div>
+        </div>
+    `,
+          )
+          .join("");
+      }
+
+      function checkAnswer(qIdx, selectedIdx) {
+        const card = document.getElementById(`card-${qIdx}`);
+        const buttons = card.querySelectorAll(".btn-option");
+        const expDiv = document.getElementById(`exp-${qIdx}`);
+        const currentQ = quizData[qIdx];
+
+        buttons.forEach((btn) => (btn.disabled = true));
+
+        if (selectedIdx === currentQ.answer) {
+          buttons[selectedIdx].classList.add("correct");
+          expDiv.className = "explanation visible correct-exp";
+          expDiv.innerHTML = `<strong>Chính xác!</strong><br>${currentQ.exp}`;
+        } else {
+          buttons[selectedIdx].classList.add("wrong");
+          buttons[currentQ.answer].classList.add("correct");
+          expDiv.className = "explanation visible wrong-exp";
+          expDiv.innerHTML = `<strong>Rất tiếc, sai rồi!</strong><br>${currentQ.exp}`;
+        }
+      }
+
+      renderQuiz();
+    </script>
+  </body>
+</html>
