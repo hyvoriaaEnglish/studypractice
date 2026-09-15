@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Psychology Reading & Quiz - Cognitive Dissonance</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=Nunito:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg-color: #f7f3ee;
+        --card-bg: #ffffff;
+        --text-main: #4a3b32;
+        --text-muted: #8a7360;
+        --primary: #9b7254;
+        --primary-hover: #7a5840;
+        --border-color: #eaddd0;
+        --accent-bg: #fdfaf7;
+        --correct-bg: #e2f0d9;
+        --correct-text: #2e6b27;
+        --incorrect-bg: #fce4d6;
+        --incorrect-text: #c00000;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Nunito", sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-main);
+        line-height: 1.6;
+        padding: 30px 20px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      header h1 {
+        font-family: "Lora", serif;
+        color: var(--primary-hover);
+        font-size: 2.2rem;
+        margin-bottom: 8px;
+      }
+
+      header p {
+        color: var(--text-muted);
+        font-size: 1rem;
+      }
+
+      /* Layout Grid */
+      .content-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        align-items: start;
+      }
+
+      /* Reading Passage Box */
+      .passage-box {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 16px;
+        padding: 28px;
+        box-shadow: 0 4px 12px rgba(138, 115, 96, 0.05);
+        position: sticky;
+        top: 20px;
+        max-height: calc(100vh - 40px);
+        overflow-y: auto;
+      }
+
+      .passage-box h2 {
+        font-family: "Lora", serif;
+        color: var(--primary);
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        border-bottom: 2px solid var(--border-color);
+        padding-bottom: 8px;
+      }
+
+      .passage-box p {
+        margin-bottom: 15px;
+        font-size: 1rem;
+        text-align: justify;
+      }
+
+      /* Quiz Box */
+      .quiz-box {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 16px;
+        padding: 28px;
+        box-shadow: 0 4px 12px rgba(138, 115, 96, 0.05);
+      }
+
+      .question-item {
+        margin-bottom: 25px;
+        padding-bottom: 20px;
+        border-bottom: 1px dashed var(--border-color);
+      }
+
+      .question-item:last-child {
+        border-bottom: none;
+      }
+
+      .q-title {
+        font-weight: 700;
+        font-size: 1.05rem;
+        color: var(--primary-hover);
+        margin-bottom: 12px;
+      }
+
+      .options {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .option-btn {
+        background: var(--accent-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 10px 14px;
+        text-align: left;
+        font-family: "Nunito", sans-serif;
+        font-size: 0.95rem;
+        color: var(--text-main);
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .option-btn:hover:not(:disabled) {
+        background: var(--primary);
+        color: #fff;
+        border-color: var(--primary);
+      }
+
+      .option-btn.correct {
+        background-color: var(--correct-bg) !important;
+        color: var(--correct-text) !important;
+        border-color: #a9d18e !important;
+        font-weight: 700;
+      }
+
+      .option-btn.incorrect {
+        background-color: var(--incorrect-bg) !important;
+        color: var(--incorrect-text) !important;
+        border-color: #f4b183 !important;
+      }
+
+      .explanation {
+        margin-top: 10px;
+        padding: 10px 12px;
+        border-radius: 6px;
+        background-color: var(--accent-bg);
+        font-size: 0.88rem;
+        color: var(--text-muted);
+        display: none;
+      }
+
+      /* Score Banner */
+      .score-banner {
+        background: var(--primary);
+        color: #fff;
+        padding: 15px;
+        border-radius: 12px;
+        text-align: center;
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        display: none;
+      }
+
+      @media (max-width: 900px) {
+        .content-grid {
+          grid-template-columns: 1fr;
+        }
+        .passage-box {
+          position: static;
+          max-height: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Psychology Reading & Quiz</h1>
+        <p>
+          Đọc bài khóa về "Bất hòa nhận thức" và làm 10 câu hỏi trắc nghiệm bên
+          dưới
+        </p>
+      </header>
+
+      <div class="content-grid">
+        <!-- Cột trái: Bài đọc -->
+        <div class="passage-box">
+          <h2>The Power of Cognitive Dissonance</h2>
+          <p>
+            Cognitive dissonance is one of the most influential concepts in
+            social psychology. First introduced by Leon Festinger in 1957, the
+            theory describes the psychological discomfort a person feels when
+            holding two or more contradictory beliefs, ideas, or values
+            simultaneously, or when performing an action that contradicts their
+            personal beliefs.
+          </p>
+          <p>
+            According to Festinger, humans have an innate drive to maintain
+            internal consistency. When we experience cognitive dissonance, the
+            resulting discomfort motivates us to reduce or eliminate the
+            inconsistency. For example, a person who smokes cigarettes knows
+            that smoking causes severe health risks. The contradiction between
+            the behavior (smoking) and the belief (smoking is harmful) creates a
+            state of dissonance.
+          </p>
+          <p>
+            To alleviate this discomfort, individuals typically adopt one of
+            several coping mechanisms. First, they may change their behavior,
+            such as quitting smoking altogether. Second, they might alter their
+            belief to justify the behavior, concluding that the health risks are
+            exaggerated. Third, they may seek out new information that supports
+            their action, such as focusing on stories of long-term smokers who
+            lived healthy lives.
+          </p>
+          <p>
+            Understanding cognitive dissonance helps explain why people often
+            rationalize bad habits, resist new evidence, or remain committed to
+            poor decisions. Recognizing this mental phenomenon allows
+            individuals to cultivate greater self-awareness and make more
+            rational choices in their daily lives.
+          </p>
+        </div>
+
+        <!-- Cột phải: Câu hỏi trắc nghiệm -->
+        <div class="quiz-box">
+          <div id="scoreBanner" class="score-banner"></div>
+          <div id="quizContainer"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const quizData = [
+        {
+          q: "1. What is the primary focus of the passage?",
+          options: [
+            "A. The historical biography of Leon Festinger",
+            "B. The biological effects of smoking on the human body",
+            "C. The psychological concept of cognitive dissonance and how people reduce it",
+            "D. Methods for overcoming long-term addictions",
+          ],
+          answer: 2,
+          exp: "Bài đọc tập trung giải thích khái niệm bất hòa nhận thức (cognitive dissonance) và các cách con người xoa dịu nó.",
+        },
+        {
+          q: "2. According to the text, cognitive dissonance occurs when a person:",
+          options: [
+            "A. Learns a new language easily",
+            "B. Holds contradictory beliefs or acts against their values",
+            "C. Agrees completely with popular public opinion",
+            "D. Experiences severe physical fatigue",
+          ],
+          answer: 1,
+          exp: "Đoạn 1 nêu rõ bất hòa nhận thức xảy ra khi giữ các niềm tin mâu thuẫn hoặc hành động trái ngược với niềm tin.",
+        },
+        {
+          q: "3. The word 'innate' in paragraph 2 is closest in meaning to:",
+          options: [
+            "A. Learned",
+            "B. Temporary",
+            "C. Inborn / Natural",
+            "D. Artificial",
+          ],
+          answer: 2,
+          exp: "'Innate' nghĩa là bẩm sinh, tự nhiên (= Inborn / Natural).",
+        },
+        {
+          q: "4. Why does the author mention smoking in paragraph 2?",
+          options: [
+            "A. To illustrate a real-world example of cognitive dissonance",
+            "B. To warn readers about the dangers of tobacco use",
+            "C. To prove that Festinger was a heavy smoker",
+            "D. To argue that quitting smoking is impossible",
+          ],
+          answer: 0,
+          exp: "Tác giả đưa ví dụ việc hút thuốc để minh họa cho trạng thái bất hòa nhận thức trong thực tế.",
+        },
+        {
+          q: "5. Which of the following is NOT mentioned as a way to reduce cognitive dissonance?",
+          options: [
+            "A. Changing one's behavior",
+            "B. Changing one's underlying belief",
+            "C. Seeking out information that justifies the action",
+            "D. Blaming other people for one's actions",
+          ],
+          answer: 3,
+          exp: "Đoạn 3 đưa ra 3 cách giải quyết (đổi hành vi, đổi niềm tin, tìm thông tin hỗ trợ); việc 'đổ lỗi cho người khác' không được nhắc tới.",
+        },
+        {
+          q: "6. The word 'alleviate' in paragraph 3 could best be replaced by:",
+          options: [
+            "A. Increase",
+            "B. Relieve / Reduce",
+            "C. Ignore",
+            "D. Measure",
+          ],
+          answer: 1,
+          exp: "'Alleviate' nghĩa là giảm bớt, xoa dịu (= Relieve / Reduce).",
+        },
+        {
+          q: "7. According to paragraph 3, a smoker experiencing dissonance might justify their habit by:",
+          options: [
+            "A. Believing that health warnings are exaggerated",
+            "B. Exercising more frequently",
+            "C. Admitting that smoking will shorten their lifespan",
+            "D. Encouraging their friends to quit smoking",
+          ],
+          answer: 0,
+          exp: "Đoạn 3 ghi rõ: người hút thuốc có thể tự bào chữa bằng cách cho rằng các cảnh báo sức khỏe bị phóng đại.",
+        },
+        {
+          q: "8. What human tendency motivates people to resolve cognitive dissonance?",
+          options: [
+            "A. The desire to gain financial wealth",
+            "B. The drive to maintain internal consistency",
+            "C. The need to impress peers and family",
+            "D. The fear of physical danger",
+          ],
+          answer: 1,
+          exp: "Đoạn 2 khẳng định con người có động lực bẩm sinh là duy trì sự nhất quán nội tâm (internal consistency).",
+        },
+        {
+          q: "9. According to the conclusion, recognizing cognitive dissonance helps people to:",
+          options: [
+            "A. Eliminate all negative emotions permanently",
+            "B. Become more self-aware and make rational decisions",
+            "C. Force others to change their beliefs",
+            "D. Memorize psychological terms faster",
+          ],
+          answer: 1,
+          exp: "Đoạn cuối kết luận việc nhận biết hiện tượng này giúp phát triển sự tự nhận thức (self-awareness) và đưa ra quyết định hợp lý hơn.",
+        },
+        {
+          q: "10. What can be inferred about human decision-making from the passage?",
+          options: [
+            "A. People always make purely logical choices based on evidence.",
+            "B. Humans often rationalize contradictory actions to feel comfortable.",
+            "C. Psychological comfort is less important than physical health.",
+            "D. Cognitive dissonance only affects people with mental health disorders.",
+          ],
+          answer: 1,
+          exp: "Suy luận từ bài đọc: con người thường hợp lý hóa các hành động mâu thuẫn để cảm thấy thoải mái về mặt tâm lý.",
+        },
+      ];
+
+      let score = 0;
+      let answeredCount = 0;
+
+      function renderQuiz() {
+        const container = document.getElementById("quizContainer");
+        container.innerHTML = quizData
+          .map(
+            (item, qIndex) => `
+        <div class="question-item" id="q-${qIndex}">
+            <div class="q-title">${item.q}</div>
+            <div class="options">
+                ${item.options
+                  .map(
+                    (opt, oIndex) => `
+                    <button class="option-btn" onclick="checkAnswer(${qIndex}, ${oIndex}, this)">${opt}</button>
+                `,
+                  )
+                  .join("")}
+            </div>
+            <div class="explanation" id="exp-${qIndex}">
+                <strong>Giải thích:</strong> ${item.exp}
+            </div>
+        </div>
+    `,
+          )
+          .join("");
+      }
+
+      function checkAnswer(qIndex, selectedIndex, btn) {
+        const qData = quizData[qIndex];
+        const parent = document.getElementById(`q-${qIndex}`);
+        const buttons = parent.querySelectorAll(".option-btn");
+        const expBox = document.getElementById(`exp-${qIndex}`);
+
+        // Vô hiệu hóa các nút sau khi đã chọn
+        buttons.forEach((b) => (b.disabled = true));
+
+        if (selectedIndex === qData.answer) {
+          btn.classList.add("correct");
+          score++;
+        } else {
+          btn.classList.add("incorrect");
+          buttons[qData.answer].classList.add("correct");
+        }
+
+        expBox.style.display = "block";
+        answeredCount++;
+
+        if (answeredCount === quizData.length) {
+          showScore();
+        }
+      }
+
+      function showScore() {
+        const banner = document.getElementById("scoreBanner");
+        banner.innerText = `Hoàn thành! Kết quả của bạn: ${score}/${quizData.length} điểm`;
+        banner.style.display = "block";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      // Khởi tạo hiển thị bài tập
+      renderQuiz();
+    </script>
+  </body>
+</html>

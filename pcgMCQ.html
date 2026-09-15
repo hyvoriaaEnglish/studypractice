@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>25 Câu Trắc Nghiệm Tâm Lý Học - Psychology Quiz</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=Nunito:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg-color: #f7f3ee;
+        --card-bg: #ffffff;
+        --text-main: #4a3b32;
+        --text-muted: #8a7360;
+        --primary: #9b7254;
+        --primary-hover: #7a5840;
+        --border-color: #eaddd0;
+        --accent-bg: #fdfaf7;
+        --correct-bg: #e2f0d9;
+        --correct-text: #2e6b27;
+        --incorrect-bg: #fce4d6;
+        --incorrect-text: #c00000;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Nunito", sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-main);
+        line-height: 1.6;
+        padding: 30px 20px;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 25px;
+      }
+
+      header h1 {
+        font-family: "Lora", serif;
+        color: var(--primary-hover);
+        font-size: 2.2rem;
+        margin-bottom: 8px;
+      }
+
+      header p {
+        color: var(--text-muted);
+        font-size: 1rem;
+      }
+
+      /* Progress Bar */
+      .progress-container {
+        background-color: var(--border-color);
+        border-radius: 10px;
+        height: 10px;
+        width: 100%;
+        margin-bottom: 25px;
+        overflow: hidden;
+      }
+
+      .progress-bar {
+        background-color: var(--primary);
+        height: 100%;
+        width: 0%;
+        transition: width 0.3s ease;
+      }
+
+      /* Score Banner */
+      .score-banner {
+        background: var(--primary);
+        color: #fff;
+        padding: 16px;
+        border-radius: 12px;
+        text-align: center;
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-bottom: 25px;
+        display: none;
+        box-shadow: 0 4px 12px rgba(138, 115, 96, 0.15);
+      }
+
+      /* Quiz Box */
+      .quiz-box {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 16px;
+        padding: 28px;
+        box-shadow: 0 4px 16px rgba(138, 115, 96, 0.06);
+      }
+
+      .question-item {
+        margin-bottom: 25px;
+        padding-bottom: 20px;
+        border-bottom: 1px dashed var(--border-color);
+      }
+
+      .question-item:last-child {
+        border-bottom: none;
+      }
+
+      .q-title {
+        font-weight: 700;
+        font-size: 1.05rem;
+        color: var(--primary-hover);
+        margin-bottom: 12px;
+      }
+
+      .options {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .option-btn {
+        background: var(--accent-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 12px 16px;
+        text-align: left;
+        font-family: "Nunito", sans-serif;
+        font-size: 0.95rem;
+        color: var(--text-main);
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .option-btn:hover:not(:disabled) {
+        background: var(--primary);
+        color: #fff;
+        border-color: var(--primary);
+      }
+
+      .option-btn.correct {
+        background-color: var(--correct-bg) !important;
+        color: var(--correct-text) !important;
+        border-color: #a9d18e !important;
+        font-weight: 700;
+      }
+
+      .option-btn.incorrect {
+        background-color: var(--incorrect-bg) !important;
+        color: var(--incorrect-text) !important;
+        border-color: #f4b183 !important;
+      }
+
+      .explanation {
+        margin-top: 10px;
+        padding: 12px 14px;
+        border-radius: 8px;
+        background-color: var(--accent-bg);
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        display: none;
+        border-left: 4px solid var(--primary);
+      }
+
+      @media (max-width: 600px) {
+        body {
+          padding: 15px 10px;
+        }
+        .quiz-box {
+          padding: 18px;
+        }
+        header h1 {
+          font-size: 1.8rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Psychology General Quiz</h1>
+        <p>25 Câu hỏi Trắc nghiệm Tổng hợp về Tâm lý học</p>
+      </header>
+
+      <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+
+      <div id="scoreBanner" class="score-banner"></div>
+
+      <div class="quiz-box">
+        <div id="quizContainer"></div>
+      </div>
+    </div>
+
+    <script>
+      const quizData = [
+        {
+          q: "1. What is the main subject of study in psychology?",
+          options: [
+            "A. Human bones and muscles",
+            "B. Mind and behavior",
+            "C. Economic markets",
+            "D. Chemical elements",
+          ],
+          answer: 1,
+          exp: "Psychology là ngành khoa học nghiên cứu tâm trí (mind) và hành vi (behavior).",
+        },
+        {
+          q: "2. Who is known as the 'Father of Modern Psychology' for opening the first psychology lab in 1879?",
+          options: [
+            "A. Sigmund Freud",
+            "B. B.F. Skinner",
+            "C. Wilhelm Wundt",
+            "D. Carl Rogers",
+          ],
+          answer: 2,
+          exp: "Wilhelm Wundt mở phòng thí nghiệm tâm lý đầu tiên năm 1879 tại Đức.",
+        },
+        {
+          q: "3. Which perspective in psychology focuses on unconscious desires and childhood experiences?",
+          options: [
+            "A. Behavioral perspective",
+            "B. Psychodynamic perspective",
+            "C. Cognitive perspective",
+            "D. Humanistic perspective",
+          ],
+          answer: 1,
+          exp: "Trường phái Tâm động học (Psychodynamic) của Freud tập trung vào vô thức và tuổi thơ.",
+        },
+        {
+          q: "4. The temporary storage system that holds a limited amount of information for a short duration is called:",
+          options: [
+            "A. Long-term memory",
+            "B. Short-term memory",
+            "C. Sensory memory",
+            "D. Flashbulb memory",
+          ],
+          answer: 1,
+          exp: "Trí nhớ ngắn hạn (Short-term memory) lưu giữ thông tin trong thời gian ngắn.",
+        },
+        {
+          q: "5. Classical conditioning was famously demonstrated by Ivan Pavlov using which animal?",
+          options: ["A. Pigeons", "B. Rats", "C. Dogs", "D. Cats"],
+          answer: 2,
+          exp: "Ivan Pavlov nghiên cứu phản xạ có điều kiện trên loài chó.",
+        },
+        {
+          q: "6. What term describes the tendency to search for information that confirms one's preexisting beliefs?",
+          options: [
+            "A. Hindsight bias",
+            "B. Confirmation bias",
+            "C. Cognitive dissonance",
+            "D. Placebo effect",
+          ],
+          answer: 1,
+          exp: "Thiên kiến xác nhận (Confirmation bias) là xu hướng chỉ tìm bằng chứng ủng hộ niềm tin sẵn có.",
+        },
+        {
+          q: "7. Which personality trait in the Big Five model measures a person's level of emotional stability?",
+          options: [
+            "A. Extraversion",
+            "B. Neuroticism",
+            "C. Agreeableness",
+            "D. Openness",
+          ],
+          answer: 1,
+          exp: "Neuroticism (Yếu tố tâm thần) đo lường độ ổn định cảm xúc trong mô hình Big Five.",
+        },
+        {
+          q: "8. An individual who feels energized by spending time alone is best described as an:",
+          options: [
+            "A. Extrovert",
+            "B. Introvert",
+            "C. Ambivert",
+            "D. Narcissist",
+          ],
+          answer: 1,
+          exp: "Người hướng nội (Introvert) nạp lại năng lượng khi ở một mình.",
+        },
+        {
+          q: "9. What state occurs when a person holds two contradictory beliefs at the same time?",
+          options: [
+            "A. Cognitive dissonance",
+            "B. Learned helplessness",
+            "C. Groupthink",
+            "D. Catharsis",
+          ],
+          answer: 0,
+          exp: "Bất hòa nhận thức (Cognitive dissonance) xảy ra khi có 2 niềm tin mâu thuẫn.",
+        },
+        {
+          q: "10. B.F. Skinner is best known for his research on which learning theory?",
+          options: [
+            "A. Classical conditioning",
+            "B. Operant conditioning",
+            "C. Social learning theory",
+            "D. Insight learning",
+          ],
+          answer: 1,
+          exp: "B.F. Skinner là nhà tư tưởng hàng đầu về Thuyết điều kiện hóa vận hành (Operant conditioning).",
+        },
+        {
+          q: "11. An irrational, persistent, and intense fear of a specific object or situation is called a:",
+          options: [
+            "A. Delusion",
+            "B. Phobia",
+            "C. Obsession",
+            "D. Compulsion",
+          ],
+          answer: 1,
+          exp: "Phobia là chứng sợ hãi vô lý và dai dẳng về một đối tượng cụ thể.",
+        },
+        {
+          q: "12. Which mental health condition is characterized by persistent feelings of sadness and a loss of interest in activities?",
+          options: [
+            "A. Bipolar disorder",
+            "B. Major depressive disorder",
+            "C. Schizophrenia",
+            "D. Obsessive-compulsive disorder",
+          ],
+          answer: 1,
+          exp: "Major depressive disorder là bệnh rối loạn trầm cảm nặng.",
+        },
+        {
+          q: "13. False beliefs that are firmly maintained despite clear evidence to the contrary are known as:",
+          options: [
+            "A. Hallucinations",
+            "B. Delusions",
+            "C. Heuristics",
+            "D. Biases",
+          ],
+          answer: 1,
+          exp: "Hoang tưởng (Delusions) là niềm tin sai lệch cố hữu dù có bằng chứng ngược lại.",
+        },
+        {
+          q: "14. Seeing or hearing things that are not physically present is an example of a:",
+          options: [
+            "A. Delusion",
+            "B. Hallucination",
+            "C. Projection",
+            "D. Repression",
+          ],
+          answer: 1,
+          exp: "Ảo giác (Hallucination) là cảm nhận giác quan không có thật trong thực tế.",
+        },
+        {
+          q: "15. What defense mechanism involves pushing uncomfortable thoughts out of conscious awareness?",
+          options: [
+            "A. Rationalization",
+            "B. Repression",
+            "C. Projection",
+            "D. Sublimation",
+          ],
+          answer: 1,
+          exp: "Repression (Dồn nén) là cơ chế đẩy ký ức tiêu cực vào vô thức.",
+        },
+        {
+          q: "16. Which therapy type focuses on changing unhealthy thinking patterns and negative behaviors?",
+          options: [
+            "A. Psychoanalysis",
+            "B. Cognitive Behavioral Therapy (CBT)",
+            "C. Electroconvulsive therapy",
+            "D. Client-centered therapy",
+          ],
+          answer: 1,
+          exp: "CBT (Liệu pháp nhận thức - hành vi) điều chỉnh suy nghĩ và hành vi tiêu cực.",
+        },
+        {
+          q: "17. What phenomenon describes people offering less help in an emergency when other bystanders are present?",
+          options: [
+            "A. Bystander effect",
+            "B. Social facilitation",
+            "C. Group polarization",
+            "D. Fundamental attribution error",
+          ],
+          answer: 0,
+          exp: "Hiệu ứng người đứng nhìn (Bystander effect): đông người thì càng ít người ra tay giúp đỡ.",
+        },
+        {
+          q: "18. The desire to perform an activity for its own internal satisfaction rather than external rewards is:",
+          options: [
+            "A. Extrinsic motivation",
+            "B. Intrinsic motivation",
+            "C. Primary reinforcement",
+            "D. Secondary reinforcement",
+          ],
+          answer: 1,
+          exp: "Động lực nội tại (Intrinsic motivation) đến từ sự thỏa mãn bên trong.",
+        },
+        {
+          q: "19. According to Abraham Maslow, what is at the top of the Hierarchy of Needs?",
+          options: [
+            "A. Safety needs",
+            "B. Belongingness and love",
+            "C. Self-actualization",
+            "D. Esteem needs",
+          ],
+          answer: 2,
+          exp: "Đỉnh tháp nhu cầu Maslow là Thể hiện bản thân (Self-actualization).",
+        },
+        {
+          q: "20. What is the body's natural physiological reaction to a perceived threat?",
+          options: [
+            "A. Rest and digest",
+            "B. Fight-or-flight response",
+            "C. Placebo response",
+            "D. Habituation",
+          ],
+          answer: 1,
+          exp: "Phản ứng 'chiến hay biến' (Fight-or-flight) xuất hiện khi gặp đe dọa.",
+        },
+        {
+          q: "21. A placebo effect occurs when a patient experiences real improvement due to:",
+          options: [
+            "A. Active medical treatment",
+            "B. Their belief in the effectiveness of a fake treatment",
+            "C. Surgical intervention",
+            "D. Genetic predisposition",
+          ],
+          answer: 1,
+          exp: "Hiệu ứng giả dược (Placebo) đến từ niềm tin của bệnh nhân vào liều thuốc giả.",
+        },
+        {
+          q: "22. Which term describes the ability to understand and share the feelings of another person?",
+          options: ["A. Sympathy", "B. Empathy", "C. Apathy", "D. Antipathy"],
+          answer: 1,
+          exp: "Empathy là sự đồng cảm (thấu hiểu và cảm nhận được cảm xúc người khác).",
+        },
+        {
+          q: "23. The famous Stanford Prison Experiment was conducted by which psychologist?",
+          options: [
+            "A. Stanley Milgram",
+            "B. Philip Zimbardo",
+            "C. Albert Bandura",
+            "D. Solomon Asch",
+          ],
+          answer: 1,
+          exp: "Philip Zimbardo thực hiện Thí nghiệm Nhà tù Stanford nổi tiếng năm 1971.",
+        },
+        {
+          q: "24. Albert Bandura's 'Bobo Doll' experiment demonstrated the importance of:",
+          options: [
+            "A. Observational learning",
+            "B. Operant conditioning",
+            "C. Chemical imbalances",
+            "D. Biological instincts",
+          ],
+          answer: 0,
+          exp: "Thí nghiệm búp bê Bobo chứng minh việc học qua quan sát (Observational learning).",
+        },
+        {
+          q: "25. The ability of the brain to change, adapt, and reorganize its structure throughout life is known as:",
+          options: [
+            "A. Neurogenesis",
+            "B. Neuroplasticity",
+            "C. Synaptic pruning",
+            "D. Lateralization",
+          ],
+          answer: 1,
+          exp: "Neuroplasticity (Độ mềm dẻo thần kinh) là khả năng tái cấu trúc của bộ não.",
+        },
+      ];
+
+      let score = 0;
+      let answeredCount = 0;
+
+      function renderQuiz() {
+        const container = document.getElementById("quizContainer");
+        container.innerHTML = quizData
+          .map(
+            (item, qIndex) => `
+        <div class="question-item" id="q-${qIndex}">
+            <div class="q-title">${item.q}</div>
+            <div class="options">
+                ${item.options
+                  .map(
+                    (opt, oIndex) => `
+                    <button class="option-btn" onclick="checkAnswer(${qIndex}, ${oIndex}, this)">${opt}</button>
+                `,
+                  )
+                  .join("")}
+            </div>
+            <div class="explanation" id="exp-${qIndex}">
+                <strong>Giải thích:</strong> ${item.exp}
+            </div>
+        </div>
+    `,
+          )
+          .join("");
+      }
+
+      function checkAnswer(qIndex, selectedIndex, btn) {
+        const qData = quizData[qIndex];
+        const parent = document.getElementById(`q-${qIndex}`);
+        const buttons = parent.querySelectorAll(".option-btn");
+        const expBox = document.getElementById(`exp-${qIndex}`);
+
+        buttons.forEach((b) => (b.disabled = true));
+
+        if (selectedIndex === qData.answer) {
+          btn.classList.add("correct");
+          score++;
+        } else {
+          btn.classList.add("incorrect");
+          buttons[qData.answer].classList.add("correct");
+        }
+
+        expBox.style.display = "block";
+        answeredCount++;
+
+        // Cập nhật thanh tiến trình
+        const progressPercent = (answeredCount / quizData.length) * 100;
+        document.getElementById("progressBar").style.width =
+          `${progressPercent}%`;
+
+        if (answeredCount === quizData.length) {
+          showScore();
+        }
+      }
+
+      function showScore() {
+        const banner = document.getElementById("scoreBanner");
+        banner.innerText = `Hoàn thành bài tập! Điểm số của bạn: ${score}/${quizData.length}`;
+        banner.style.display = "block";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      renderQuiz();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Economics Multiple Choice Quiz - Part 2</title>
+    <style>
+      :root {
+        --primary: #0284c7;
+        --primary-hover: #0369a1;
+        --primary-light: #e0f2fe;
+        --bg-body: #f0f9ff;
+        --card-bg: #ffffff;
+        --text-main: #0c4a6e;
+        --text-muted: #475569;
+        --border-color: #bae6fd;
+        --correct-bg: #dcfce7;
+        --correct-border: #22c55e;
+        --correct-text: #15803d;
+        --wrong-bg: #ffe4e6;
+        --wrong-border: #f43f5e;
+        --wrong-text: #be123c;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: var(--bg-body);
+        color: var(--text-main);
+        padding: 24px 16px;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 24px;
+        background: var(--card-bg);
+        padding: 24px 20px;
+        border-radius: 16px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        border: 1px solid var(--border-color);
+      }
+
+      h1 {
+        color: var(--primary);
+        font-size: 1.8rem;
+        margin-bottom: 8px;
+      }
+
+      .subtitle {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+      }
+
+      .score-board {
+        margin-top: 14px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: var(--primary);
+      }
+
+      .quiz-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .quiz-card {
+        background: var(--card-bg);
+        border-radius: 16px;
+        padding: 20px 24px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        border: 1px solid var(--border-color);
+      }
+
+      .question-num {
+        font-weight: 700;
+        color: var(--primary);
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 6px;
+      }
+
+      .question-text {
+        font-size: 1.05rem;
+        font-weight: 600;
+        margin-bottom: 14px;
+      }
+
+      .options-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .btn-option {
+        background: #ffffff;
+        border: 1.5px solid var(--border-color);
+        border-radius: 8px;
+        padding: 12px 16px;
+        text-align: left;
+        font-size: 0.95rem;
+        color: var(--text-main);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-weight: 500;
+      }
+
+      .btn-option:hover:not(:disabled) {
+        border-color: var(--primary);
+        background: var(--primary-light);
+        color: var(--primary-hover);
+      }
+
+      .btn-option:disabled {
+        cursor: not-allowed;
+      }
+
+      .btn-option.correct {
+        background: var(--correct-bg) !important;
+        border-color: var(--correct-border) !important;
+        color: var(--correct-text) !important;
+        font-weight: 700;
+      }
+
+      .btn-option.wrong {
+        background: var(--wrong-bg) !important;
+        border-color: var(--wrong-border) !important;
+        color: var(--wrong-text) !important;
+      }
+
+      .explanation {
+        margin-top: 14px;
+        padding: 12px 14px;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        display: none;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .explanation.visible {
+        display: block;
+      }
+
+      .explanation.correct-exp {
+        background: #f0fdf4;
+        border-left: 4px solid var(--correct-border);
+        color: var(--correct-text);
+      }
+
+      .explanation.wrong-exp {
+        background: #fff1f2;
+        border-left: 4px solid var(--wrong-border);
+        color: var(--wrong-text);
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-4px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Economics Multiple Choice Quiz (Part 2)</h1>
+        <p class="subtitle">
+          Thử thách 20 câu hỏi trắc nghiệm Kinh tế học tiếp theo
+        </p>
+        <div class="score-board" id="scoreBoard">Điểm số: 0 / 20</div>
+      </header>
+
+      <div class="quiz-list" id="quizContainer"></div>
+    </div>
+
+    <script>
+      const quizData = [
+        {
+          q: "A line showing all possible combinations of two goods that a consumer can buy with a given income and prices is called a(n):",
+          options: [
+            "Indifference Curve",
+            "Budget Line",
+            "Production Possibility Frontier (PPF)",
+            "Isoquant Curve",
+          ],
+          answer: 1,
+          exp: "<b>Đáp án B:</b> Đường ngân sách (Budget Line) thể hiện tất cả các kết hợp hàng hóa mà người tiêu dùng có thể mua với mức thu nhập và giá cả cho trước.",
+        },
+        {
+          q: "If the price of Coffee increases and the demand for Tea increases as a result, Coffee and Tea are:",
+          options: [
+            "Substitute goods",
+            "Complementary goods",
+            "Inferior goods",
+            "Unrelated goods",
+          ],
+          answer: 0,
+          exp: "<b>Đáp án A:</b> Khi giá cà phê tăng làm lượng cầu về trà tăng, Cà phê và Trà là hai hàng hóa thay thế (Substitute goods).",
+        },
+        {
+          q: "When the Price Elasticity of Demand (Ed) for a product is perfectly inelastic (Ed = 0), the demand curve is:",
+          options: [
+            "Perfectly horizontal",
+            "Perfectly vertical",
+            "Downward sloping at 45 degrees",
+            "Upward sloping",
+          ],
+          answer: 1,
+          exp: "<b>Đáp án B:</b> Cầu hoàn toàn không co giãn (Ed = 0) có dạng đường thẳng đứng song song với trục giá.",
+        },
+        {
+          q: 'The "Law of Diminishing Marginal Utility" states that as a person consumes more units of a good:',
+          options: [
+            "Total utility decreases continuously",
+            "Marginal utility derived from each additional unit decreases",
+            "Marginal cost becomes zero",
+            "Total expenditure doubles with every unit",
+          ],
+          answer: 1,
+          exp: "<b>Đáp án B:</b> Quy luật lợi ích biên giảm dần: Lợi ích tăng thêm (Marginal utility) từ mỗi đơn vị tiêu dùng tiếp theo sẽ giảm dần.",
+        },
+        {
+          q: "In a perfectly competitive market in the long run, firms earn:",
+          options: [
+            "Massive economic profit",
+            "Zero economic profit (normal profit)",
+            "Negative accounting profit",
+            "Monopoly rent",
+          ],
+          answer: 1,
+          exp: "<b>Đáp án B:</b> Trong dài hạn, các doanh nghiệp trong thị trường cạnh tranh hoàn hảo chỉ thu được lợi nhuận kinh tế bằng 0 (Zero economic profit).",
+        },
+        {
+          q: "The short-run rule for a firm to minimize losses and avoid immediate shutdown is to continue operating as long as Price (P) covers:",
+          options: [
+            "Average Total Cost (ATC)",
+            "Average Variable Cost (AVC)",
+            "Marginal Revenue (MR)",
+            "Fixed Cost (FC)",
+          ],
+          answer: 1,
+          exp: "<b>Đáp án B:</b> Trong ngắn hạn, doanh nghiệp tiếp tục sản xuất nếu Giá (P) còn bù đắp được Chi phí biến đổi trung bình (AVC).",
+        },
+        {
+          q: "Which component is NOT directly included in the expenditure approach to calculating GDP (GDP = C + I + G + NX)?",
+          options: [
+            "Personal Consumption Expenditure (C)",
+            "Gross Private Domestic Investment (I)",
+            "Transfer Payments (e.g., social security benefits)",
+            "Net Exports (NX)",
+          ],
+          answer: 2,
+          exp: "<b>Đáp án C:</b> Chi chuyển nhượng (Transfer payments như trợ cấp xã hội) không bao gồm trong GDP vì không tạo ra hàng hóa/dịch vụ mới.",
+        },
+        {
+          q: "The unemployment rate caused by time spent searching for a new job or transitioning between jobs is called:",
+          options: [
+            "Cyclical unemployment",
+            "Structural unemployment",
+            "Frictional unemployment",
+            "Seasonal unemployment",
+          ],
+          answer: 2,
+          exp: "<b>Đáp án C:</b> Thất nghiệp ma sát (Frictional unemployment) xảy ra do thời gian người lao động tìm kiếm hoặc chuyển sang công việc mới.",
+        },
+        {
+          q: "When actual GDP is below potential GDP, creating an economic gap, it is known as a(n):",
+          options: [
+            "Inflationary gap",
+            "Recessionary gap",
+            "Trade surplus",
+            "Liquidity trap",
+          ],
+          answer: 1,
+          exp: "<b>Đáp án B:</b> Khoảng trống suy thoái (Recessionary gap) xuất hiện khi GDP thực tế thấp hơn GDP tiềm năng.",
+        },
+        {
+          q: 'The concept of the "Marginal Propensity to Consume" (MPC) measures:',
+          options: [
+            "The total percentage of income spent on imports",
+            "The proportion of an aggregate raise in pay that a consumer spends on goods and services",
+            "The ratio of corporate savings to total national debt",
+            "The rate at which inflation reduces currency value",
+          ],
+          answer: 1,
+          exp: "<b>Đáp án B:</b> Khuynh hướng tiêu dùng biên (MPC) đo lường tỷ lệ gia tăng tiêu dùng khi thu nhập tăng thêm một đơn vị.",
+        },
+        {
+          q: "According to the Phillips Curve in the short run, there is an inverse (trade-off) relationship between:",
+          options: [
+            "Inflation and Unemployment",
+            "Interest Rates and Money Supply",
+            "Economic Growth and Imports",
+            "Tariffs and Foreign Direct Investment",
+          ],
+          answer: 0,
+          exp: "<b>Đáp án A:</b> Đường Phillips ngắn hạn thể hiện mối quan hệ tỷ lệ nghịch giữa Lạm phát và Thất nghiệp.",
+        },
+        {
+          q: 'The "Kuznets Curve" hypothesizes a relationship between economic development and:',
+          options: [
+            "Foreign trade volume",
+            "Income inequality",
+            "Exchange rate volatility",
+            "Bank reserve ratios",
+          ],
+          answer: 1,
+          exp: "<b>Đáp án B:</b> Đường Kuznets giả định mối quan hệ hình U ngược giữa Phát triển kinh tế và Bất bình đẳng thu nhập.",
+        },
+        {
+          q: 'What is the main characteristic of a "Giffen Good"?',
+          options: [
+            "Demand falls as income increases",
+            "Demand rises as its price increases due to a strong income effect",
+            "Supply drops when taxes are removed",
+            "Price elasticity of supply is infinite",
+          ],
+          answer: 1,
+          exp: "<b>Đáp án B:</b> Hàng hóa Giffen là trường hợp ngoại lệ: Khi giá tăng thì lượng cầu lại tăng do tác động thu nhập mạnh hơn tác động thay thế.",
+        },
+        {
+          q: "A situation where one party in a transaction has more or better information than the other is known as:",
+          options: [
+            "Asymmetric Information",
+            "Moral Hazard",
+            "Adverse Selection",
+            "Free-Market Equilibrium",
+          ],
+          answer: 0,
+          exp: "<b>Đáp án A:</b> Thông tin bất cân xứng (Asymmetric Information) xảy ra khi một bên trong giao dịch có nhiều thông tin hơn bên còn lại.",
+        },
+        {
+          q: "Insurance policyholders taking greater risks because they know they are financially protected is an example of:",
+          options: [
+            "Adverse Selection",
+            "Moral Hazard",
+            "Comparative Advantage",
+            "Deadweight Loss",
+          ],
+          answer: 1,
+          exp: "<b>Đáp án B:</b> Rủi ro đạo đức (Moral Hazard) xảy ra khi một bên chấp nhận rủi ro cao hơn vì biết đã được bảo vệ (ví dụ: có bảo hiểm).",
+        },
+        {
+          q: "What term describes the total loss of economic efficiency when the market equilibrium for a good or service is not achieved?",
+          options: [
+            "Consumer Surplus",
+            "Producer Surplus",
+            "Deadweight Loss",
+            "Marginal Revenue Product",
+          ],
+          answer: 2,
+          exp: "<b>Đáp án C:</b> Tổn thất vô ích (Deadweight Loss) là phần mất đi của tổng thặng dư xã hội khi thị trường không đạt cân bằng tối ưu.",
+        },
+        {
+          q: 'The "Fisher Effect" equation (r = n - π) states that the Real Interest Rate (r) equals:',
+          options: [
+            "Nominal Interest Rate minus Inflation Rate",
+            "Nominal Interest Rate plus Inflation Rate",
+            "Real GDP divided by Nominal GDP",
+            "Bank Reserve Ratio multiplied by Money Supply",
+          ],
+          answer: 0,
+          exp: "<b>Đáp án A:</b> Hiệu ứng Fisher: Lãi suất thực tế (r) = Lãi suất danh nghĩa (n) - Tỷ lệ lạm phát (π).",
+        },
+        {
+          q: "What is the primary purpose of a country imposing an Import Quota?",
+          options: [
+            "To generate tax revenue for the federal budget",
+            "To set a physical limit on the quantity of a good that can be imported",
+            "To subsidize domestic exporters",
+            "To artificially devalue the domestic currency",
+          ],
+          answer: 1,
+          exp: "<b>Đáp án B:</b> Hạn ngạch nhập khẩu (Import Quota) quy định giới hạn số lượng tối đa một mặt hàng được nhập khẩu.",
+        },
+        {
+          q: 'In international economics, a "Current Account Deficit" means a country:',
+          options: [
+            "Exports more goods and services than it imports",
+            "Imports more goods, services, and transfers than it exports",
+            "Has zero national debt",
+            "Collects more tax revenue than it spends",
+          ],
+          answer: 1,
+          exp: "<b>Đáp án B:</b> Thâm hụt cán cân thanh toán hiện tại (Current Account Deficit) xảy ra khi giá trị nhập khẩu hàng hóa, dịch vụ lớn hơn xuất khẩu.",
+        },
+        {
+          q: 'The "Velocity of Money" in the Quantity Theory of Money (M × V = P × Y) represents:',
+          options: [
+            "The speed at which interest rates change",
+            "The rate at which money changes hands/circulates in the economy",
+            "The growth rate of stock market indexes",
+            "The percentage of cash held in reserve by central banks",
+          ],
+          answer: 1,
+          exp: "<b>Đáp án B:</b> Tốc độ lưu thông tiền tệ (Velocity of Money) đo lường số lần trung bình một đơn vị tiền tệ được sử dụng để thanh toán trong một kỳ.",
+        },
+      ];
+
+      let totalScore = 0;
+
+      function renderQuiz() {
+        const container = document.getElementById("quizContainer");
+        container.innerHTML = quizData
+          .map(
+            (item, index) => `
+        <div class="quiz-card" id="card-${index}">
+            <div class="question-num">Câu ${index + 1} / 20</div>
+            <div class="question-text">${item.q}</div>
+            <div class="options-grid">
+                ${item.options
+                  .map(
+                    (opt, optIdx) => `
+                    <button class="btn-option" onclick="checkAnswer(${index}, ${optIdx})">
+                        ${String.fromCharCode(65 + optIdx)}. ${opt}
+                    </button>
+                `,
+                  )
+                  .join("")}
+            </div>
+            <div class="explanation" id="exp-${index}"></div>
+        </div>
+    `,
+          )
+          .join("");
+      }
+
+      function checkAnswer(qIdx, selectedIdx) {
+        const card = document.getElementById(`card-${qIdx}`);
+        const buttons = card.querySelectorAll(".btn-option");
+        const expDiv = document.getElementById(`exp-${qIdx}`);
+        const currentQ = quizData[qIdx];
+
+        buttons.forEach((btn) => (btn.disabled = true));
+
+        if (selectedIdx === currentQ.answer) {
+          buttons[selectedIdx].classList.add("correct");
+          expDiv.className = "explanation visible correct-exp";
+          expDiv.innerHTML = `<strong>Chính xác!</strong><br>${currentQ.exp}`;
+          totalScore++;
+        } else {
+          buttons[selectedIdx].classList.add("wrong");
+          buttons[currentQ.answer].classList.add("correct");
+          expDiv.className = "explanation visible wrong-exp";
+          expDiv.innerHTML = `<strong>Rất tiếc, sai rồi!</strong><br>${currentQ.exp}`;
+        }
+
+        document.getElementById("scoreBoard").innerText =
+          `Điểm số: ${totalScore} / 20`;
+      }
+
+      renderQuiz();
+    </script>
+  </body>
+</html>

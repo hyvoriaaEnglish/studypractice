@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bài Đọc Hiểu & Trắc Nghiệm Kinh Tế</title>
+    <style>
+      :root {
+        --primary: #0284c7;
+        --primary-hover: #0369a1;
+        --primary-light: #e0f2fe;
+        --bg-body: #f8fafc;
+        --card-bg: #ffffff;
+        --text-main: #0f172a;
+        --text-muted: #475569;
+        --border-color: #e2e8f0;
+        --correct-bg: #dcfce7;
+        --correct-border: #22c55e;
+        --correct-text: #15803d;
+        --wrong-bg: #ffe4e6;
+        --wrong-border: #f43f5e;
+        --wrong-text: #be123c;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: var(--bg-body);
+        color: var(--text-main);
+        padding: 24px 16px;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 24px;
+        background: var(--card-bg);
+        padding: 20px;
+        border-radius: 16px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        border: 1px solid var(--border-color);
+      }
+
+      h1 {
+        color: var(--primary);
+        font-size: 1.8rem;
+        margin-bottom: 6px;
+      }
+
+      .subtitle {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        align-items: start;
+      }
+
+      @media (max-width: 900px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Passage Styling */
+      .passage-card {
+        background: var(--card-bg);
+        border-radius: 16px;
+        padding: 24px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        border: 1px solid var(--border-color);
+        position: sticky;
+        top: 24px;
+        max-height: 85vh;
+        overflow-y: auto;
+      }
+
+      .passage-card h2 {
+        color: var(--primary);
+        font-size: 1.25rem;
+        margin-bottom: 16px;
+        padding-bottom: 8px;
+        border-bottom: 2px solid var(--primary-light);
+      }
+
+      .passage-card p {
+        margin-bottom: 14px;
+        text-align: justify;
+        font-size: 0.98rem;
+      }
+
+      /* Quiz Styling */
+      .quiz-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .quiz-card {
+        background: var(--card-bg);
+        border-radius: 16px;
+        padding: 20px 24px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        border: 1px solid var(--border-color);
+      }
+
+      .question-num {
+        font-weight: 700;
+        color: var(--primary);
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 6px;
+      }
+
+      .question-text {
+        font-size: 1.05rem;
+        font-weight: 600;
+        margin-bottom: 14px;
+      }
+
+      .options-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .btn-option {
+        background: #f8fafc;
+        border: 1.5px solid var(--border-color);
+        border-radius: 8px;
+        padding: 10px 14px;
+        text-align: left;
+        font-size: 0.95rem;
+        color: var(--text-main);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-weight: 500;
+      }
+
+      .btn-option:hover:not(:disabled) {
+        border-color: var(--primary);
+        background: var(--primary-light);
+        color: var(--primary-hover);
+      }
+
+      .btn-option:disabled {
+        cursor: not-allowed;
+      }
+
+      .btn-option.correct {
+        background: var(--correct-bg) !important;
+        border-color: var(--correct-border) !important;
+        color: var(--correct-text) !important;
+        font-weight: 700;
+      }
+
+      .btn-option.wrong {
+        background: var(--wrong-bg) !important;
+        border-color: var(--wrong-border) !important;
+        color: var(--wrong-text) !important;
+      }
+
+      .explanation {
+        margin-top: 14px;
+        padding: 12px 14px;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        line-height: 1.4;
+        display: none;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .explanation.visible {
+        display: block;
+      }
+
+      .explanation.correct-exp {
+        background: #f0fdf4;
+        border-left: 4px solid var(--correct-border);
+        color: var(--correct-text);
+      }
+
+      .explanation.wrong-exp {
+        background: #fff1f2;
+        border-left: 4px solid var(--wrong-border);
+        color: var(--wrong-text);
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-4px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Reading Comprehension: Navigating Economic Challenges</h1>
+        <p class="subtitle">
+          Đọc đoạn văn bên trái và chọn đáp án cho 10 câu hỏi bên phải để kiểm
+          tra kết quả
+        </p>
+      </header>
+
+      <div class="layout">
+        <!-- READING PASSAGE -->
+        <div class="passage-card">
+          <h2>Reading Passage</h2>
+          <p>
+            In recent years, the global economy has faced significant
+            uncertainty. Central banks around the world have had to adjust their
+            <b>monetary policy</b> frequently to combat rising <b>inflation</b>.
+            When consumer prices surge, the <b>purchasing power</b> of everyday
+            citizens declines, making the <b>cost of living</b> a major concern.
+            To slow down rapid price increases, policy makers often raise the
+            <b>interest rate</b>, though this decision can sometimes cool down
+            <b>economic growth</b> and increase the <b>unemployment rate</b>.
+          </p>
+
+          <p>
+            For businesses, staying competitive in a volatile market requires
+            careful planning. Companies must manage their <b>assets</b> and
+            <b>liabilities</b> wisely to maintain high <b>liquidity</b> during
+            difficult times. When a country enters a <b>recession</b>, consumer
+            <b>demand</b> drops sharply, causing corporate <b>revenue</b> and
+            <b>profit</b> to shrink. In severe cases, poor financial management
+            or overwhelming <b>debt</b> can lead a firm directly into
+            <b>bankruptcy</b>.
+          </p>
+
+          <p>
+            International trade also plays a crucial role in shaping a nation’s
+            <b>GDP</b>. Governments use <b>fiscal policy</b>, including taxes
+            and <b>subsidies</b>, to protect domestic industries. However, when
+            a government imposes high <b>tariffs</b> or other
+            <b>trade barriers</b> on imported goods, it can trigger trade
+            tensions with foreign partners. While protecting local production
+            may secure jobs for a while, it can also disrupt the global
+            <b>supply</b> chain and limit access to key <b>commodities</b>.
+          </p>
+
+          <p>
+            Ultimately, achieving market <b>equilibrium</b> is a complex
+            balancing act. Whether dealing with <b>scarcity</b> of raw materials
+            or shifting market trends, understanding these core economic
+            principles helps both policy makers and investors make informed
+            decisions for long-term prosperity.
+          </p>
+        </div>
+
+        <!-- QUIZ QUESTIONS -->
+        <div class="quiz-list" id="quizContainer"></div>
+      </div>
+    </div>
+
+    <script>
+      const quizData = [
+        {
+          q: "What is the main purpose of raising interest rates according to the passage?",
+          options: [
+            "To increase corporate profits",
+            "To combat rising inflation",
+            "To encourage international imports",
+            "To reduce government subsidies",
+          ],
+          answer: 1,
+          exp: "<b>Đáp án đúng: B.</b> Đoạn 1 nêu rõ: <i>'To slow down rapid price increases [inflation], policy makers often raise the interest rate...'</i>",
+        },
+        {
+          q: "What happens to consumers when inflation rises?",
+          options: [
+            "Their purchasing power declines.",
+            "Their net income automatically doubles.",
+            "Their cost of living decreases.",
+            "Their demand for luxury goods spikes.",
+          ],
+          answer: 0,
+          exp: "<b>Đáp án đúng: A.</b> Đoạn 1 có ghi: <i>'When consumer prices surge, the purchasing power of everyday citizens declines...'</i>",
+        },
+        {
+          q: "Why is high liquidity important for businesses during uncertain times?",
+          options: [
+            "It eliminates the need for paying tariffs.",
+            "It helps them manage assets and liabilities wisely.",
+            "It guarantees a monopoly in the market.",
+            "It prevents the central bank from raising taxes.",
+          ],
+          answer: 1,
+          exp: "<b>Đáp án đúng: B.</b> Đoạn 2 ghi: <i>'Companies must manage their assets and liabilities wisely to maintain high liquidity during difficult times.'</i>",
+        },
+        {
+          q: "According to paragraph 2, what can happen to a company with bad financial management during a recession?",
+          options: [
+            "It will automatically gain more market share.",
+            "It may suffer from a drop in revenue and end up in bankruptcy.",
+            "It will receive higher interest rates from banks.",
+            "It will increase its exports immediately.",
+          ],
+          answer: 1,
+          exp: "<b>Đáp án đúng: B.</b> Đoạn 2 giải thích khi suy thoái, doanh thu giảm và <i>'poor financial management or overwhelming debt can lead a firm directly into bankruptcy.'</i>",
+        },
+        {
+          q: 'The word "surge" in paragraph 1 is closest in meaning to:',
+          options: [
+            "fall sharply",
+            "stay constant",
+            "increase rapidly",
+            "disappear slowly",
+          ],
+          answer: 2,
+          exp: "<b>Đáp án đúng: C.</b> Từ <b>surge</b> nghĩa là tăng nhanh, tăng mạnh (tương đương với <i>increase rapidly</i>).",
+        },
+        {
+          q: "How do tariffs affect international trade according to the text?",
+          options: [
+            "They lower the overall cost of living.",
+            "They make foreign goods completely free.",
+            "They can trigger trade tensions and disrupt global supply chains.",
+            "They guarantee immediate market equilibrium.",
+          ],
+          answer: 2,
+          exp: "<b>Đáp án đúng: C.</b> Đoạn 3 nêu: <i>'...imposes high tariffs... can trigger trade tensions... disrupt the global supply chain...'</i>",
+        },
+        {
+          q: "Which of the following is an example of fiscal policy mentioned in the passage?",
+          options: [
+            "Raising the interest rate",
+            "Adjusting currency exchange rates",
+            "Providing subsidies and managing taxes",
+            "Printing more paper money",
+          ],
+          answer: 2,
+          exp: "<b>Đáp án đúng: C.</b> Đoạn 3 đề cập: <i>'Governments use fiscal policy, including taxes and subsidies, to protect domestic industries.'</i>",
+        },
+        {
+          q: "What causes consumer demand to drop sharply in paragraph 2?",
+          options: [
+            "A country entering a recession",
+            "A sudden increase in exports",
+            "A decrease in the unemployment rate",
+            "A surplus of raw commodities",
+          ],
+          answer: 0,
+          exp: "<b>Đáp án đúng: A.</b> Đoạn 2 khẳng định: <i>'When a country enters a recession, consumer demand drops sharply...'</i>",
+        },
+        {
+          q: 'The word "it" in paragraph 3 refers to:',
+          options: [
+            "Foreign partner",
+            "Imposing high tariffs",
+            "Domestic industry",
+            "Global market",
+          ],
+          answer: 1,
+          exp: "<b>Đáp án đúng: B.</b> 'It' trong câu <i>'when a government imposes high tariffs... it can trigger trade tensions'</i> thay thế cho hành động áp thuế quan cao.",
+        },
+        {
+          q: "What is the overall tone/message of the conclusion?",
+          options: [
+            "Economic principles are irrelevant to modern investors.",
+            "Achieving market equilibrium is simple and quick.",
+            "Understanding economic concepts is essential for making sound decisions.",
+            "Governments should avoid all international trade.",
+          ],
+          answer: 2,
+          exp: "<b>Đáp án đúng: C.</b> Đoạn kết luận nhấn mạnh: <i>'...understanding these core economic principles helps both policy makers and investors make informed decisions...'</i>",
+        },
+      ];
+
+      function renderQuiz() {
+        const container = document.getElementById("quizContainer");
+        container.innerHTML = quizData
+          .map(
+            (item, index) => `
+        <div class="quiz-card" id="card-${index}">
+            <div class="question-num">Câu ${index + 1}</div>
+            <div class="question-text">${item.q}</div>
+            <div class="options-grid">
+                ${item.options
+                  .map(
+                    (opt, optIdx) => `
+                    <button class="btn-option" onclick="checkAnswer(${index}, ${optIdx})">
+                        ${String.fromCharCode(65 + optIdx)}. ${opt}
+                    </button>
+                `,
+                  )
+                  .join("")}
+            </div>
+            <div class="explanation" id="exp-${index}"></div>
+        </div>
+    `,
+          )
+          .join("");
+      }
+
+      function checkAnswer(qIdx, selectedIdx) {
+        const card = document.getElementById(`card-${qIdx}`);
+        const buttons = card.querySelectorAll(".btn-option");
+        const expDiv = document.getElementById(`exp-${qIdx}`);
+        const currentQ = quizData[qIdx];
+
+        buttons.forEach((btn) => (btn.disabled = true));
+
+        if (selectedIdx === currentQ.answer) {
+          buttons[selectedIdx].classList.add("correct");
+          expDiv.className = "explanation visible correct-exp";
+          expDiv.innerHTML = `<strong>Chính xác!</strong><br>${currentQ.exp}`;
+        } else {
+          buttons[selectedIdx].classList.add("wrong");
+          buttons[currentQ.answer].classList.add("correct");
+          expDiv.className = "explanation visible wrong-exp";
+          expDiv.innerHTML = `<strong>Rất tiếc, sai rồi!</strong><br>${currentQ.exp}`;
+        }
+      }
+
+      renderQuiz();
+    </script>
+  </body>
+</html>

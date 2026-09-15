@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Psychology Reading & Quiz - Childhood Environment</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg-color: #f0f6fa;
+        --card-bg: #ffffff;
+        --text-main: #1b2a3a;
+        --text-muted: #5a738e;
+        --primary: #1e6091;
+        --primary-hover: #184e77;
+        --accent-bg: #eaf2f8;
+        --border-color: #d0e1fd;
+        --correct-bg: #e6f4ea;
+        --correct-text: #137333;
+        --incorrect-bg: #fce8e6;
+        --incorrect-text: #c5221f;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-main);
+        line-height: 1.6;
+        padding: 30px 20px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      header h1 {
+        font-family: "Merriweather", serif;
+        color: var(--primary-hover);
+        font-size: 2.2rem;
+        margin-bottom: 8px;
+      }
+
+      header p {
+        color: var(--text-muted);
+        font-size: 1rem;
+      }
+
+      /* Grid Layout */
+      .content-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        align-items: start;
+      }
+
+      /* Cột trái: Bài đọc */
+      .passage-box {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 16px;
+        padding: 28px;
+        box-shadow: 0 4px 16px rgba(30, 96, 145, 0.08);
+        position: sticky;
+        top: 20px;
+        max-height: calc(100vh - 40px);
+        overflow-y: auto;
+      }
+
+      .passage-box h2 {
+        font-family: "Merriweather", serif;
+        color: var(--primary);
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+        border-bottom: 2px solid var(--border-color);
+        padding-bottom: 8px;
+      }
+
+      .passage-box p {
+        margin-bottom: 15px;
+        font-size: 0.98rem;
+        text-align: justify;
+      }
+
+      /* Cột phải: Quiz */
+      .quiz-box {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 16px;
+        padding: 28px;
+        box-shadow: 0 4px 16px rgba(30, 96, 145, 0.08);
+      }
+
+      .question-item {
+        margin-bottom: 25px;
+        padding-bottom: 20px;
+        border-bottom: 1px dashed var(--border-color);
+      }
+
+      .question-item:last-child {
+        border-bottom: none;
+      }
+
+      .q-title {
+        font-weight: 700;
+        font-size: 1.02rem;
+        color: var(--primary-hover);
+        margin-bottom: 12px;
+      }
+
+      .options {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .option-btn {
+        background: var(--accent-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 10px 14px;
+        text-align: left;
+        font-family: "Plus Jakarta Sans", sans-serif;
+        font-size: 0.92rem;
+        color: var(--text-main);
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .option-btn:hover:not(:disabled) {
+        background: var(--primary);
+        color: #fff;
+        border-color: var(--primary);
+      }
+
+      .option-btn.correct {
+        background-color: var(--correct-bg) !important;
+        color: var(--correct-text) !important;
+        border-color: #a8dab5 !important;
+        font-weight: 700;
+      }
+
+      .option-btn.incorrect {
+        background-color: var(--incorrect-bg) !important;
+        color: var(--incorrect-text) !important;
+        border-color: #f5c6cb !important;
+      }
+
+      .explanation {
+        margin-top: 10px;
+        padding: 10px 12px;
+        border-radius: 6px;
+        background-color: var(--accent-bg);
+        font-size: 0.88rem;
+        color: var(--text-muted);
+        display: none;
+      }
+
+      .score-banner {
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-hover)
+        );
+        color: #fff;
+        padding: 16px;
+        border-radius: 12px;
+        text-align: center;
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        display: none;
+        box-shadow: 0 4px 12px rgba(24, 78, 119, 0.2);
+      }
+
+      @media (max-width: 900px) {
+        .content-grid {
+          grid-template-columns: 1fr;
+        }
+        .passage-box {
+          position: static;
+          max-height: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Childhood Environment Psychology</h1>
+        <p>
+          Đọc bài khóa về ảnh hưởng của môi trường gia đình và trả lời 10 câu
+          hỏi trắc nghiệm
+        </p>
+      </header>
+
+      <div class="content-grid">
+        <!-- Cột trái: Bài đọc -->
+        <div class="passage-box">
+          <h2>The Invisible Echoes of Childhood Environment</h2>
+          <p>
+            Psychological research consistently demonstrates that a child’s
+            early home environment leaves a profound mark on their adult
+            personality, emotional regulation, and interpersonal relationships.
+            While no family is completely immune to conflict, the contrast
+            between growing up in a supportive, harmonious home and an unstable,
+            high-conflict household shapes individuals in fundamentally
+            different ways.
+          </p>
+          <p>
+            Children raised in functional, emotionally supportive families
+            generally develop what psychologists call a
+            <strong>secure attachment style</strong>. Because their primary
+            caregivers were responsive and consistent, these individuals grow up
+            viewing the world as relatively safe and reliable. In adulthood,
+            they tend to exhibit higher emotional resilience, healthy
+            self-esteem, and greater capacity for empathy. When facing stress or
+            failure, they are more likely to seek constructive support and
+            utilize adaptive coping mechanisms rather than falling into
+            self-criticism or avoidance.
+          </p>
+          <p>
+            Conversely, individuals who grow up in high-conflict, toxic, or
+            neglectful environments often develop an
+            <strong>insecure attachment style</strong> (either anxious or
+            avoidant). Constant exposure to parental discord, unpredictable
+            emotional outbursts, or emotional absence forces the developing
+            brain to remain in a state of hyper-vigilance. As adults, these
+            individuals may struggle with deep-seated trust issues, emotional
+            dysregulation, and an intense fear of rejection or abandonment. They
+            often internalize early instability, leading to chronic anxiety or
+            low self-worth.
+          </p>
+          <p>
+            However, psychological destiny is not entirely set in stone. Through
+            conscious self-awareness, therapy, and supportive adult
+            relationships, individuals from troubled backgrounds can achieve
+            <strong>earned security</strong>. By identifying and reprocessing
+            childhood patterns, they can rewire their emotional responses and
+            break the cycle of intergenerational trauma.
+          </p>
+        </div>
+
+        <!-- Cột phải: Quiz -->
+        <div class="quiz-box">
+          <div id="scoreBanner" class="score-banner"></div>
+          <div id="quizContainer"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const quizData = [
+        {
+          q: "1. What is the main idea of the passage?",
+          options: [
+            "A. Why physical punishment should be banned in every family",
+            "B. How childhood home environments influence adult psychology and attachment styles",
+            "C. Methods for resolving marital arguments without involving children",
+            "D. The genetic factors that determine adult intelligence",
+          ],
+          answer: 1,
+          exp: "Bài đọc tổng quát về ảnh hưởng của môi trường gia đình lúc nhỏ tới tâm lý và kiểu gắn bó khi trưởng thành.",
+        },
+        {
+          q: "2. According to paragraph 2, adults from supportive families usually develop a:",
+          options: [
+            "A. Anxious attachment style",
+            "B. Secure attachment style",
+            "C. Avoidant attachment style",
+            "D. Hyper-vigilant mindset",
+          ],
+          answer: 1,
+          exp: "Đoạn 2 nêu rõ trẻ em lớn lên trong gia đình hỗ trợ sẽ phát triển secure attachment style (kiểu gắn bó an toàn).",
+        },
+        {
+          q: "3. The word 'resilience' in paragraph 2 is closest in meaning to:",
+          options: [
+            "A. Ability to recover quickly from hardship",
+            "B. Tendency to avoid social interaction",
+            "C. Fear of taking financial risks",
+            "D. Inability to express real emotions",
+          ],
+          answer: 0,
+          exp: "'Resilience' nghĩa là khả năng phục hồi, kiên cường vượt qua khó khăn.",
+        },
+        {
+          q: "4. According to paragraph 2, how do individuals from functional families usually handle stress?",
+          options: [
+            "A. By blaming their parents for their failures",
+            "B. By seeking constructive support and using adaptive mechanisms",
+            "C. By completely isolating themselves from friends",
+            "D. By engaging in self-destructive habits",
+          ],
+          answer: 1,
+          exp: "Đoạn 2 ghi nhận họ đối mặt căng thẳng bằng cách tìm sự hỗ trợ tích cực và cơ chế ứng phó thích nghi.",
+        },
+        {
+          q: "5. Why does growing up in a high-conflict home cause hyper-vigilance in children?",
+          options: [
+            "A. Children are required to study longer hours.",
+            "B. The brain adapts to constant emotional instability and conflict.",
+            "C. Parents encourage their children to participate in competitive sports.",
+            "D. Children learn to copy their parents' physical habits.",
+          ],
+          answer: 1,
+          exp: "Đoạn 3 giải thích việc liên tục tiếp xúc với xung đột khiến bộ não trẻ luôn trong trạng thái cảnh giác cao độ (hyper-vigilance).",
+        },
+        {
+          q: "6. The word 'Conversely' in paragraph 3 serves to:",
+          options: [
+            "A. Add extra details supporting the previous idea",
+            "B. Introduce a contrasting point of view or situation",
+            "C. Provide a statistical proof for the study",
+            "D. Conclude the main argument of the text",
+          ],
+          answer: 1,
+          exp: "'Conversely' (Ngược lại) dùng để chuyển sang ý đối lập với đoạn trước.",
+        },
+        {
+          q: "7. Which of the following is NOT mentioned as a challenge faced by adults from troubled families?",
+          options: [
+            "A. Deep-seated trust issues",
+            "B. Emotional dysregulation",
+            "C. Chronic fear of abandonment",
+            "D. Inability to learn new academic skills",
+          ],
+          answer: 3,
+          exp: "Bài đọc đề cập đến khó khăn về niềm tin, cảm xúc, nỗi sợ bị bỏ rơi; không nhắc đến 'khả năng học kiến thức mới'.",
+        },
+        {
+          q: "8. The term 'earned security' in paragraph 4 refers to:",
+          options: [
+            "A. Achieving financial independence early in life",
+            "B. Overcoming early insecure attachment through self-awareness and healing",
+            "C. Receiving inheritance from wealthy family members",
+            "D. Buying a home in a safe neighborhood",
+          ],
+          answer: 1,
+          exp: "Đoạn 4 định nghĩa 'earned security' là việc đạt được sự an toàn tâm lý nhờ tự nhận thức và trị liệu dù từng có quá khứ bất ổn.",
+        },
+        {
+          q: "9. What does the author imply about intergenerational trauma in the conclusion?",
+          options: [
+            "A. It is impossible to break once it starts in a family line.",
+            "B. It can be interrupted through self-awareness and active therapeutic efforts.",
+            "C. It only affects individuals who refuse to go to university.",
+            "D. It is entirely harmless to future generations.",
+          ],
+          answer: 1,
+          exp: "Tác giả khẳng định chu kỳ chấn thương liên thế hệ có thể bị chấm dứt nhờ nỗ lực chữa lành chủ động.",
+        },
+        {
+          q: "10. What tone does the author take toward individuals from high-conflict backgrounds?",
+          options: [
+            "A. Critical and dismissive",
+            "B. Hopeful and empathetic",
+            "C. Sarcastic and indifferent",
+            "D. Highly aggressive",
+          ],
+          answer: 1,
+          exp: "Tác giả thể hiện thái độ thấu hiểu và hy vọng (đưa ra giải pháp chữa lành ở đoạn cuối).",
+        },
+      ];
+
+      let score = 0;
+      let answeredCount = 0;
+
+      function renderQuiz() {
+        const container = document.getElementById("quizContainer");
+        container.innerHTML = quizData
+          .map(
+            (item, qIndex) => `
+        <div class="question-item" id="q-${qIndex}">
+            <div class="q-title">${item.q}</div>
+            <div class="options">
+                ${item.options
+                  .map(
+                    (opt, oIndex) => `
+                    <button class="option-btn" onclick="checkAnswer(${qIndex}, ${oIndex}, this)">${opt}</button>
+                `,
+                  )
+                  .join("")}
+            </div>
+            <div class="explanation" id="exp-${qIndex}">
+                <strong>Giải thích:</strong> ${item.exp}
+            </div>
+        </div>
+    `,
+          )
+          .join("");
+      }
+
+      function checkAnswer(qIndex, selectedIndex, btn) {
+        const qData = quizData[qIndex];
+        const parent = document.getElementById(`q-${qIndex}`);
+        const buttons = parent.querySelectorAll(".option-btn");
+        const expBox = document.getElementById(`exp-${qIndex}`);
+
+        buttons.forEach((b) => (b.disabled = true));
+
+        if (selectedIndex === qData.answer) {
+          btn.classList.add("correct");
+          score++;
+        } else {
+          btn.classList.add("incorrect");
+          buttons[qData.answer].classList.add("correct");
+        }
+
+        expBox.style.display = "block";
+        answeredCount++;
+
+        if (answeredCount === quizData.length) {
+          showScore();
+        }
+      }
+
+      function showScore() {
+        const banner = document.getElementById("scoreBanner");
+        banner.innerText = `Hoàn thành! Kết quả của bạn: ${score}/${quizData.length} điểm`;
+        banner.style.display = "block";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      renderQuiz();
+    </script>
+  </body>
+</html>

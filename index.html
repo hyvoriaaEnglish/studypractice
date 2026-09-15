@@ -5,10 +5,9 @@
     <!-- Google tag (gtag.js) -->
     <script
       async
-      src="https://www.googletagmanager.com/gtag/js?id=G-KPVH86TY3X"
+      src="[https://www.googletagmanager.com/gtag/js?id=G-KPVH86TY3X](https://www.googletagmanager.com/gtag/js?id=G-KPVH86TY3X)"
     ></script>
 
-    ```
     <script>
       window.dataLayer = window.dataLayer || [];
 
@@ -22,7 +21,6 @@
     </script>
 
     <meta charset="UTF-8" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Hyvoria English - English Learning Website</title>
@@ -39,9 +37,8 @@
 
     <style>
       /* =====================================================
-     RESET
-  ===================================================== */
-
+      RESET
+      ===================================================== */
       * {
         margin: 0;
         padding: 0;
@@ -49,14 +46,11 @@
       }
 
       /* =====================================================
-     BODY
-  ===================================================== */
-
+      BODY
+      ===================================================== */
       body {
         min-height: 100vh;
-
         font-family: "Segoe UI", Arial, sans-serif;
-
         background:
           radial-gradient(
             circle at 10% 10%,
@@ -69,113 +63,82 @@
             transparent 25%
           ),
           #fff8fa;
-
         display: flex;
-
         justify-content: center;
-
         align-items: center;
-
         position: relative;
-
-        overflow: hidden;
-
+        overflow-x: hidden;
         color: #211c1e;
+        padding: 40px 20px;
       }
 
       /* =====================================================
-     DECORATIVE BACKGROUND
-  ===================================================== */
-
+      DECORATIVE BACKGROUND
+      ===================================================== */
       body::before {
         content: "";
-
         position: fixed;
-
         width: 650px;
         height: 650px;
-
         border-radius: 50%;
-
         background: linear-gradient(135deg, #f7c5d3, #fce4eb);
-
         left: -350px;
         bottom: -350px;
-
         opacity: 0.8;
-
         z-index: 0;
       }
 
       body::after {
         content: "";
-
         position: fixed;
-
         width: 450px;
         height: 450px;
-
         border-radius: 50%;
-
         background: linear-gradient(135deg, #fce3eb, #f7c5d3);
-
         right: -250px;
         top: -250px;
-
         opacity: 0.6;
-
         z-index: 0;
       }
 
       /* =====================================================
-     DECORATIVE STARS
-  ===================================================== */
-
+      DECORATIVE STARS
+      ===================================================== */
       .decorations {
         position: fixed;
-
         inset: 0;
-
         pointer-events: none;
-
         z-index: 1;
       }
 
       .star {
         position: absolute;
-
         color: #e98ca5;
-
         opacity: 0.45;
-
         animation: floating 4s ease-in-out infinite;
       }
 
       .star:nth-child(1) {
         top: 15%;
         left: 12%;
-
         font-size: 25px;
       }
 
       .star:nth-child(2) {
         top: 25%;
         right: 15%;
-
         font-size: 18px;
       }
 
       .star:nth-child(3) {
         bottom: 20%;
         left: 18%;
-
         font-size: 20px;
       }
 
       .star:nth-child(4) {
         bottom: 15%;
         right: 12%;
-
         font-size: 30px;
       }
 
@@ -183,171 +146,117 @@
         0% {
           transform: translateY(0px) rotate(0deg);
         }
-
         50% {
           transform: translateY(-8px) rotate(8deg);
         }
-
         100% {
           transform: translateY(0px) rotate(0deg);
         }
       }
 
       /* =====================================================
-     SHOPPING
-  ===================================================== */
-
+      SHOPPING
+      ===================================================== */
       .shopping {
         position: absolute;
-
         top: 28px;
         left: 35px;
-
         z-index: 10;
-
         text-decoration: none;
-
         color: #211c1e;
-
         font-size: 15px;
-
         font-weight: 600;
-
         padding: 10px 18px;
-
         border-radius: 30px;
-
         background: rgba(255, 255, 255, 0.7);
-
         border: 1px solid rgba(33, 28, 30, 0.15);
-
         transition: all 0.3s ease;
       }
 
       .shopping:hover {
         background: #211c1e;
-
         color: #f7c5d3;
-
         transform: translateY(-3px);
-
         box-shadow: 0 8px 20px rgba(33, 28, 30, 0.15);
       }
 
       /* =====================================================
-     ACCOUNT MENU
-  ===================================================== */
-
+      ACCOUNT MENU
+      ===================================================== */
       .account-menu {
         position: absolute;
-
         top: 25px;
         right: 30px;
-
         z-index: 10;
-
         display: flex;
-
         align-items: center;
-
         gap: 10px;
       }
 
       .account-btn {
         text-decoration: none;
-
         padding: 10px 18px;
-
         border-radius: 30px;
-
         font-size: 14px;
-
         font-weight: 600;
-
         white-space: nowrap;
-
         transition: all 0.3s ease;
       }
 
-      /* ACCOUNT */
-
       .account-page-btn {
         color: #211c1e;
-
         background: #f9d9e2;
-
         border: 1px solid #f0b8c8;
       }
 
-      /* LOGIN */
-
       .login-btn {
         color: #211c1e;
-
         background: rgba(255, 255, 255, 0.8);
-
         border: 1px solid #211c1e;
       }
 
-      /* REGISTER */
-
       .register-btn {
         color: white;
-
         background: #211c1e;
-
         border: 1px solid #211c1e;
       }
 
       .account-btn:hover {
         transform: translateY(-3px);
-
         box-shadow: 0 8px 20px rgba(33, 28, 30, 0.15);
       }
 
       .register-btn:hover {
         background: #e98ca5;
-
         border-color: #e98ca5;
-
         color: white;
       }
 
       /* =====================================================
-     MAIN
-  ===================================================== */
-
+      MAIN
+      ===================================================== */
       .main {
         position: relative;
-
         z-index: 5;
-
         display: flex;
-
         flex-direction: column;
-
         align-items: center;
-
         gap: 35px;
+        margin-top: 50px;
       }
 
       /* =====================================================
-     LOGO / TITLE
-  ===================================================== */
-
+      LOGO / TITLE
+      ===================================================== */
       .logo {
         text-align: center;
-
         margin-bottom: 5px;
       }
 
       .logo h1 {
         font-size: clamp(42px, 7vw, 68px);
-
         font-weight: 800;
-
         letter-spacing: -2px;
-
         color: #211c1e;
       }
 
@@ -357,81 +266,62 @@
 
       .logo p {
         margin-top: 5px;
-
         color: #806c73;
-
         font-size: 16px;
-
         font-weight: 500;
       }
 
       /* =====================================================
-     COURSE MENU
-  ===================================================== */
-
+      COURSE MENU
+      ===================================================== */
       .menu {
         display: flex;
-
         flex-direction: column;
-
         gap: 20px;
-
         align-items: center;
       }
 
-      /* =====================================================
-     COURSE BUTTON
-  ===================================================== */
+      /* Wrapper dành riêng cho mục Tiếng Anh theo chủ đề + Info box */
+      .theme-item-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        position: relative;
+      }
 
+      /* =====================================================
+      COURSE BUTTON
+      ===================================================== */
       .btn {
         width: 370px;
-
         min-height: 72px;
-
         display: flex;
-
         justify-content: center;
-
         align-items: center;
-
         text-decoration: none;
-
         font-size: 24px;
-
         font-weight: 700;
-
         border-radius: 18px;
-
         transition: all 0.3s ease;
-
         position: relative;
-
         overflow: hidden;
-
         border: 2px solid transparent;
       }
 
       .btn::before {
         content: "";
-
         position: absolute;
-
         width: 100px;
         height: 100px;
-
         border-radius: 50%;
-
         background: rgba(255, 255, 255, 0.12);
-
         top: -50px;
         right: -30px;
-
         transition: transform 0.3s ease;
       }
 
       .btn:hover {
         transform: translateY(-6px) scale(1.02);
-
         box-shadow: 0 15px 30px rgba(33, 28, 30, 0.15);
       }
 
@@ -440,14 +330,65 @@
       }
 
       /* =====================================================
-     DARK BUTTON
-  ===================================================== */
+      BADGE "NEW" MÀU VÀNG
+      ===================================================== */
+      .badge-new {
+        position: absolute;
+        top: 8px;
+        right: 12px;
+        background: #ffd166;
+        color: #211c1e;
+        font-size: 11px;
+        font-weight: 800;
+        padding: 3px 8px;
+        border-radius: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+        z-index: 2;
+        animation: pulse 2s infinite;
+      }
 
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.08);
+        }
+      }
+
+      /* =====================================================
+      THẺ GIỚI THIỆU (INFO BOX)
+      ===================================================== */
+      .info-box {
+        width: 260px;
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(8px);
+        border: 1.5px solid #f7c5d3;
+        border-radius: 16px;
+        padding: 12px 16px;
+        font-size: 13px;
+        color: #554449;
+        line-height: 1.45;
+        box-shadow: 0 6px 16px rgba(33, 28, 30, 0.05);
+        position: relative;
+      }
+
+      .info-box strong {
+        color: #e98ca5;
+        display: block;
+        margin-bottom: 4px;
+        font-size: 14px;
+      }
+
+      /* =====================================================
+      BUTTON STYLES
+      ===================================================== */
       .btn-dark {
         background: #211c1e;
-
         color: #f7c5d3;
-
         border-color: #211c1e;
       }
 
@@ -455,15 +396,9 @@
         background: #30282b;
       }
 
-      /* =====================================================
-     LIGHT BUTTON
-  ===================================================== */
-
       .btn-light {
         background: #f4e8eb;
-
         color: #211c1e;
-
         border-color: #ead2d9;
       }
 
@@ -471,15 +406,9 @@
         background: #f8dce4;
       }
 
-      /* =====================================================
-     PINK BUTTON
-  ===================================================== */
-
       .btn-pink {
         background: #f7c5d3;
-
         color: #211c1e;
-
         border-color: #efadbf;
       }
 
@@ -488,10 +417,9 @@
       }
 
       /* =====================================================
-     MOBILE
-  ===================================================== */
-
-      @media (max-width: 700px) {
+      RESPONSIVE MOBILE
+      ===================================================== */
+      @media (max-width: 768px) {
         body {
           padding: 100px 20px 40px;
         }
@@ -499,33 +427,27 @@
         .shopping {
           top: 15px;
           left: 15px;
-
           padding: 8px 12px;
-
           font-size: 12px;
         }
 
         .account-menu {
           top: 60px;
-
           right: 15px;
           left: 15px;
-
           justify-content: center;
-
           gap: 6px;
         }
 
         .account-btn {
           padding: 8px 11px;
-
           font-size: 12px;
         }
 
         .main {
           width: 100%;
-
           gap: 25px;
+          margin-top: 0;
         }
 
         .logo h1 {
@@ -538,24 +460,28 @@
 
         .menu {
           width: 100%;
-
           gap: 16px;
+        }
+
+        /* Chuyển ô giới thiệu xuống bên dưới nút khi xem trên điện thoại */
+        .theme-item-wrapper {
+          flex-direction: column;
+          width: 100%;
+          align-items: center;
         }
 
         .btn {
           width: min(330px, 100%);
-
           min-height: 65px;
-
           font-size: 21px;
-
           border-radius: 15px;
         }
-      }
 
-      /* =====================================================
-     SMALL MOBILE
-  ===================================================== */
+        .info-box {
+          width: min(330px, 100%);
+          text-align: center;
+        }
+      }
 
       @media (max-width: 400px) {
         .logo h1 {
@@ -568,7 +494,6 @@
 
         .account-btn {
           font-size: 11px;
-
           padding: 7px 9px;
         }
 
@@ -577,15 +502,12 @@
         }
       }
     </style>
-    ```
   </head>
 
   <body>
-    ```
     <!-- =====================================================
-     DECORATIONS
-===================================================== -->
-
+    DECORATIONS
+    ===================================================== -->
     <div class="decorations">
       <div class="star">★</div>
       <div class="star">★</div>
@@ -594,11 +516,10 @@
     </div>
 
     <!-- =====================================================
-     SHOPPING
-===================================================== -->
-
+    SHOPPING
+    ===================================================== -->
     <a
-      href="https://s.shopee.vn/30mSiPlHXm"
+      href="[https://s.shopee.vn/30mSiPlHXm](https://s.shopee.vn/30mSiPlHXm)"
       target="_blank"
       rel="noopener noreferrer"
       class="shopping"
@@ -607,37 +528,45 @@
     </a>
 
     <!-- =====================================================
-     ACCOUNT / LOGIN / REGISTER
-===================================================== -->
-
+    ACCOUNT / LOGIN / REGISTER
+    ===================================================== -->
     <div class="account-menu">
       <a href="account.html" class="account-btn account-page-btn"> Account </a>
-
       <a href="login.html" class="account-btn login-btn"> Đăng nhập </a>
-
       <a href="register.html" class="account-btn register-btn"> Đăng ký </a>
     </div>
 
     <!-- =====================================================
-     MAIN CONTENT
-===================================================== -->
-
+    MAIN CONTENT
+    ===================================================== -->
     <main class="main">
       <!-- LOGO -->
-
       <div class="logo">
         <h1>
           Hyvoria
           <span>English</span>
         </h1>
-
         <p>Learn English. Practice. Improve.</p>
       </div>
 
       <!-- COURSE MENU -->
-
       <div class="menu">
         <a href="mainn/hi.html" class="btn btn-dark"> Tiếng Anh Chuyên </a>
+
+        <!-- Nút Tiếng Anh Theo Chủ Đề + Badge NEW & Thẻ Giới Thiệu -->
+        <div class="theme-item-wrapper">
+          <a href="mainn/themeEng.html" class="btn btn-dark">
+            <span class="badge-new">NEW</span>
+            Tiếng Anh theo chủ đề
+          </a>
+
+          <div class="info-box">
+            <strong>Học theo chủ đề chuyên sâu</strong>
+            Khám phá các bài đọc &amp; từ vựng thuộc ngành yêu thích (Economics,
+            Psychology,...), giúp mở rộng kiến thức thực tế và nâng cao trình độ
+            Tiếng Anh.
+          </div>
+        </div>
 
         <a href="mainn/hello.html" class="btn btn-light"> Tiếng Anh Đại Trà </a>
 
@@ -648,10 +577,8 @@
     </main>
 
     <!-- =====================================================
-     STUDY TRACKER
-===================================================== -->
-
+    STUDY TRACKER
+    ===================================================== -->
     <script src="/study-tracker.js"></script>
-    ```
   </body>
 </html>

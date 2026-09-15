@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reading Comprehension - The Stock Market</title>
+    <style>
+      :root {
+        --primary: #d97706;
+        --primary-hover: #b45309;
+        --primary-light: #fef3c7;
+        --bg-body: #fffbeb;
+        --card-bg: #ffffff;
+        --text-main: #1f2937;
+        --text-muted: #4b5563;
+        --border-color: #fde68a;
+        --correct-bg: #dcfce7;
+        --correct-border: #22c55e;
+        --correct-text: #15803d;
+        --wrong-bg: #ffe4e6;
+        --wrong-border: #f43f5e;
+        --wrong-text: #be123c;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: var(--bg-body);
+        color: var(--text-main);
+        padding: 24px 16px;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 24px;
+        background: var(--card-bg);
+        padding: 20px;
+        border-radius: 16px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        border: 1px solid var(--border-color);
+      }
+
+      h1 {
+        color: var(--primary);
+        font-size: 1.8rem;
+        margin-bottom: 6px;
+      }
+
+      .subtitle {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        align-items: start;
+      }
+
+      @media (max-width: 900px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Passage Styling */
+      .passage-card {
+        background: var(--card-bg);
+        border-radius: 16px;
+        padding: 24px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        border: 1px solid var(--border-color);
+        position: sticky;
+        top: 24px;
+        max-height: 85vh;
+        overflow-y: auto;
+      }
+
+      .passage-card h2 {
+        color: var(--primary);
+        font-size: 1.25rem;
+        margin-bottom: 16px;
+        padding-bottom: 8px;
+        border-bottom: 2px solid var(--primary-light);
+      }
+
+      .passage-card p {
+        margin-bottom: 14px;
+        text-align: justify;
+        font-size: 0.98rem;
+      }
+
+      /* Quiz Styling */
+      .quiz-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .quiz-card {
+        background: var(--card-bg);
+        border-radius: 16px;
+        padding: 20px 24px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        border: 1px solid var(--border-color);
+      }
+
+      .question-num {
+        font-weight: 700;
+        color: var(--primary);
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 6px;
+      }
+
+      .question-text {
+        font-size: 1.05rem;
+        font-weight: 600;
+        margin-bottom: 14px;
+      }
+
+      .options-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .btn-option {
+        background: #fffdf5;
+        border: 1.5px solid var(--border-color);
+        border-radius: 8px;
+        padding: 10px 14px;
+        text-align: left;
+        font-size: 0.95rem;
+        color: var(--text-main);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-weight: 500;
+      }
+
+      .btn-option:hover:not(:disabled) {
+        border-color: var(--primary);
+        background: var(--primary-light);
+        color: var(--primary-hover);
+      }
+
+      .btn-option:disabled {
+        cursor: not-allowed;
+      }
+
+      .btn-option.correct {
+        background: var(--correct-bg) !important;
+        border-color: var(--correct-border) !important;
+        color: var(--correct-text) !important;
+        font-weight: 700;
+      }
+
+      .btn-option.wrong {
+        background: var(--wrong-bg) !important;
+        border-color: var(--wrong-border) !important;
+        color: var(--wrong-text) !important;
+      }
+
+      .explanation {
+        margin-top: 14px;
+        padding: 12px 14px;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        line-height: 1.4;
+        display: none;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .explanation.visible {
+        display: block;
+      }
+
+      .explanation.correct-exp {
+        background: #f0fdf4;
+        border-left: 4px solid var(--correct-border);
+        color: var(--correct-text);
+      }
+
+      .explanation.wrong-exp {
+        background: #fff1f2;
+        border-left: 4px solid var(--wrong-border);
+        color: var(--wrong-text);
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-4px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Reading Comprehension: The Stock Market</h1>
+        <p class="subtitle">
+          Đọc đoạn văn bên trái và chọn đáp án cho 10 câu hỏi bên phải để kiểm
+          tra kết quả
+        </p>
+      </header>
+
+      <div class="layout">
+        <!-- READING PASSAGE -->
+        <div class="passage-card">
+          <h2>Understanding the Stock Market</h2>
+          <p>
+            For decades, the <b>stock market</b> has served as one of the most
+            dynamic engines of modern financial systems. At its core, the stock
+            market is a public marketplace where investors buy and sell shares
+            of publicly traded companies. When an individual purchases a share,
+            they acquire a small portion of <b>equity</b> in that firm,
+            effectively becoming a shareholder. Companies issue shares during an
+            initial public offering (IPO) to raise financial <b>capital</b>,
+            which they can then reinvest into expanding operations, funding
+            research, or launching new products.
+          </p>
+
+          <p>
+            Investing in the stock market offers two primary ways to earn a
+            return. First, shareholders may receive regular
+            <b>dividend</b> payouts if the company generates consistent
+            <b>profit</b> and decides to share its earnings with investors.
+            Second, investors can benefit from capital appreciation—selling
+            their shares at a higher price than what they originally paid.
+            However, stock prices are rarely stable. They fluctuate continuously
+            based on the law of <b>supply</b> and <b>demand</b>, broader
+            economic indicators, corporate performance reports, and overall
+            investor sentiment.
+          </p>
+
+          <p>
+            The market environment is often described using two distinct terms:
+            a "bull market" and a "bear market." A bull market occurs during
+            periods of economic optimism, characterized by rising stock prices,
+            high investor confidence, and strong <b>economic growth</b>.
+            Conversely, a bear market is marked by falling prices, widespread
+            pessimism, and sometimes an impending <b>recession</b>.
+          </p>
+
+          <p>
+            While the stock market provides opportunities for long-term wealth
+            accumulation, it also carries inherent risks. Extreme market
+            volatility can be driven by market <b>speculation</b>, where traders
+            buy assets hoping for quick gains rather than analyzing underlying
+            financial fundamentals. Furthermore, unexpected geopolitical events
+            or sudden shifts in central bank <b>monetary policy</b>—such as
+            rapid <b>interest rate</b> hikes—can trigger sharp market downturns.
+            To mitigate these risks, experienced investors emphasize
+            diversification, spreading their investments across various sectors
+            and <b>asset</b> classes to protect their total portfolio value
+            against unexpected downturns in any single company.
+          </p>
+        </div>
+
+        <!-- QUIZ QUESTIONS -->
+        <div class="quiz-list" id="quizContainer"></div>
+      </div>
+    </div>
+
+    <script>
+      const quizData = [
+        {
+          q: "What is the primary purpose of a company issuing shares during an IPO?",
+          options: [
+            "To guarantee dividend payouts to all citizens",
+            "To raise financial capital for expanding business operations",
+            "To force the central bank to lower interest rates",
+            "To convert private liabilities into government bonds",
+          ],
+          answer: 1,
+          exp: "<b>Đáp án đúng: B.</b> Đoạn 1 nêu rõ: <i>'Companies issue shares during an initial public offering (IPO) to raise financial capital...'</i>",
+        },
+        {
+          q: 'According to paragraph 2, how can investors earn returns through "capital appreciation"?',
+          options: [
+            "By receiving weekly interest rate payments",
+            "By acquiring subsidies from the government",
+            "By selling their shares at a higher price than the purchase price",
+            "By filing for corporate bankruptcy during a recession",
+          ],
+          answer: 2,
+          exp: "<b>Đáp án đúng: C.</b> Đoạn 2 giải thích: <i>'capital appreciation—selling their shares at a higher price than what they originally paid.'</i>",
+        },
+        {
+          q: "What primarily drives continuous fluctuations in stock prices?",
+          options: [
+            "The physical weight of the company's products",
+            "Supply and demand, economic indicators, and investor sentiment",
+            "The number of employees working in assembly lines",
+            "Direct price limits set by the government",
+          ],
+          answer: 1,
+          exp: "<b>Đáp án đúng: B.</b> Đoạn 2 ghi: <i>'They fluctuate continuously based on the law of supply and demand, broader economic indicators... and overall investor sentiment.'</i>",
+        },
+        {
+          q: 'How is a "bear market" described in the passage?',
+          options: [
+            "A period of rising stock prices and strong investor optimism",
+            "A market phase marked by falling prices, pessimism, and potential recession",
+            "A market where only agricultural commodities are traded",
+            "A stable market with zero volatility and fixed dividends",
+          ],
+          answer: 1,
+          exp: "<b>Đáp án đúng: B.</b> Đoạn 3 nêu: <i>'...a bear market is marked by falling prices, widespread pessimism, and sometimes an impending recession.'</i>",
+        },
+        {
+          q: 'The word "fluctuate" in paragraph 2 is closest in meaning to:',
+          options: [
+            "remain unchanged",
+            "increase steadily without stopping",
+            "change or vary continuously",
+            "drop to zero instantly",
+          ],
+          answer: 2,
+          exp: "<b>Đáp án đúng: C.</b> Từ <b>fluctuate</b> nghĩa là biến động, thay đổi liên tục (tương đương với <i>change or vary continuously</i>).",
+        },
+        {
+          q: 'What is "market speculation" as defined in paragraph 4?',
+          options: [
+            "Buying assets hoping for quick gains without analyzing fundamentals",
+            "Diversifying investments across multiple international industries",
+            "Long-term saving in low-risk government bank accounts",
+            "Calculating the exact net income of a firm after taxes",
+          ],
+          answer: 0,
+          exp: "<b>Đáp án đúng: A.</b> Đoạn 4 nêu: <i>'market speculation, where traders buy assets hoping for quick gains rather than analyzing underlying financial fundamentals.'</i>",
+        },
+        {
+          q: "How can central bank monetary policies impact the stock market?",
+          options: [
+            "They prevent all companies from experiencing losses.",
+            "Rapid interest rate hikes can trigger sharp market downturns.",
+            "They automatically double shareholder dividends each year.",
+            "They eliminate the law of supply and demand entirely.",
+          ],
+          answer: 1,
+          exp: "<b>Đáp án đúng: B.</b> Đoạn 4 chỉ ra: <i>'...sudden shifts in central bank monetary policy—such as rapid interest rate hikes—can trigger sharp market downturns.'</i>",
+        },
+        {
+          q: "According to the text, what strategy do experienced investors use to mitigate market risks?",
+          options: [
+            "Investing all their funds into a single high-performing stock",
+            "Avoiding the stock market and keeping only physical commodities",
+            "Diversifying their investments across various sectors and asset classes",
+            "Selling all assets immediately whenever a bull market begins",
+          ],
+          answer: 2,
+          exp: "<b>Đáp án đúng: C.</b> Đoạn 4 có câu: <i>'...experienced investors emphasize diversification, spreading their investments across various sectors and asset classes...'</i>",
+        },
+        {
+          q: "What does a shareholder actually own after buying a company's stock?",
+          options: [
+            "The entire physical headquarters of the firm",
+            "A small portion of equity in that company",
+            "A direct loan backed by the central bank",
+            "The right to set the prices of the company's goods",
+          ],
+          answer: 1,
+          exp: "<b>Đáp án đúng: B.</b> Đoạn 1 nêu: <i>'When an individual purchases a share, they acquire a small portion of equity in that firm...'</i>",
+        },
+        {
+          q: "The main idea of the passage is to:",
+          options: [
+            "Explain how the stock market functions, its earning methods, market conditions, and risks",
+            "Argue that market speculation is the safest way to build long-term wealth",
+            "Prove that bear markets are caused exclusively by high tariffs",
+            "Advise readers to avoid investing in publicly traded companies",
+          ],
+          answer: 0,
+          exp: "<b>Đáp án đúng: A.</b> Bài viết tổng quan về cách vận hành thị trường chứng khoán, hai cách tạo thu nhập, phân biệt bull/bear market và rủi ro/cách phòng ngừa.",
+        },
+      ];
+
+      function renderQuiz() {
+        const container = document.getElementById("quizContainer");
+        container.innerHTML = quizData
+          .map(
+            (item, index) => `
+        <div class="quiz-card" id="card-${index}">
+            <div class="question-num">Câu ${index + 1}</div>
+            <div class="question-text">${item.q}</div>
+            <div class="options-grid">
+                ${item.options
+                  .map(
+                    (opt, optIdx) => `
+                    <button class="btn-option" onclick="checkAnswer(${index}, ${optIdx})">
+                        ${String.fromCharCode(65 + optIdx)}. ${opt}
+                    </button>
+                `,
+                  )
+                  .join("")}
+            </div>
+            <div class="explanation" id="exp-${index}"></div>
+        </div>
+    `,
+          )
+          .join("");
+      }
+
+      function checkAnswer(qIdx, selectedIdx) {
+        const card = document.getElementById(`card-${qIdx}`);
+        const buttons = card.querySelectorAll(".btn-option");
+        const expDiv = document.getElementById(`exp-${qIdx}`);
+        const currentQ = quizData[qIdx];
+
+        buttons.forEach((btn) => (btn.disabled = true));
+
+        if (selectedIdx === currentQ.answer) {
+          buttons[selectedIdx].classList.add("correct");
+          expDiv.className = "explanation visible correct-exp";
+          expDiv.innerHTML = `<strong>Chính xác!</strong><br>${currentQ.exp}`;
+        } else {
+          buttons[selectedIdx].classList.add("wrong");
+          buttons[currentQ.answer].classList.add("correct");
+          expDiv.className = "explanation visible wrong-exp";
+          expDiv.innerHTML = `<strong>Rất tiếc, sai rồi!</strong><br>${currentQ.exp}`;
+        }
+      }
+
+      renderQuiz();
+    </script>
+  </body>
+</html>

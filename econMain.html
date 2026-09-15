@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tài Liệu Tiếng Anh - Kinh Tế Học</title>
+    <!-- Sử dụng Font chữ Google Fonts cho đẹp hơn -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=Nunito:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        /* Bảng màu Nâu - Be (Brown & Beige Palette) */
+        --bg-color: #f7f3ee; /* Nền trang: Be nhạt */
+        --card-bg: #ffffff; /* Nền thẻ: Trắng */
+        --text-main: #4a3b32; /* Chữ chính: Nâu đậm */
+        --text-muted: #8a7360; /* Chữ phụ: Nâu nhạt */
+        --primary: #9b7254; /* Màu chủ đạo: Nâu gỗ */
+        --primary-hover: #7a5840; /* Màu hover: Nâu gỗ đậm */
+        --border-color: #eaddd0; /* Viền: Be đậm */
+        --link-bg: #fdfaf7; /* Nền nút link: Trắng kem */
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Nunito", sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-main);
+        line-height: 1.6;
+        padding: 40px 20px;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      /* Header Styles */
+      .page-header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .page-header h1 {
+        font-family: "Lora", serif;
+        color: var(--primary-hover);
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+      }
+
+      .page-header p {
+        color: var(--text-muted);
+        font-size: 1.1rem;
+      }
+
+      /* Card Styles */
+      .section-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 16px;
+        padding: 30px;
+        margin-bottom: 24px;
+        box-shadow: 0 8px 24px rgba(138, 115, 96, 0.08);
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+
+      .section-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 28px rgba(138, 115, 96, 0.12);
+      }
+
+      .section-title {
+        font-family: "Lora", serif;
+        color: var(--primary);
+        font-size: 1.4rem;
+        border-bottom: 2px dashed var(--border-color);
+        padding-bottom: 12px;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      /* Link/Menu Items */
+      .link-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .nav-link {
+        display: flex;
+        align-items: center;
+        background-color: var(--link-bg);
+        border: 1px solid var(--border-color);
+        color: var(--text-main);
+        text-decoration: none;
+        padding: 16px 20px;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 1.05rem;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .nav-link::before {
+        content: "→";
+        position: absolute;
+        right: 20px;
+        color: var(--primary);
+        opacity: 0;
+        transform: translateX(-10px);
+        transition: all 0.3s ease;
+      }
+
+      .nav-link:hover {
+        background-color: var(--primary);
+        color: #ffffff;
+        border-color: var(--primary);
+        padding-left: 24px;
+      }
+
+      .nav-link:hover::before {
+        opacity: 1;
+        transform: translateX(0);
+        color: #ffffff;
+      }
+
+      /* Responsive */
+      @media (min-width: 600px) {
+        .link-grid {
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+      }
+
+      @media (max-width: 600px) {
+        .page-header h1 {
+          font-size: 2rem;
+        }
+        .section-card {
+          padding: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Tiêu đề chung -->
+      <header class="page-header">
+        <h1>Tài Liệu Tiếng Anh Kinh Tế</h1>
+        <p>Hệ thống tự học Từ vựng, Đọc hiểu và Trắc nghiệm</p>
+      </header>
+
+      <!-- Phần Từ vựng -->
+      <div class="section-card">
+        <h2 class="section-title">📚 Phần từ vựng chủ đề Kinh tế</h2>
+        <div class="link-grid">
+          <a href="/econVocab.html" class="nav-link">50 từ phổ biến nhất</a>
+        </div>
+      </div>
+
+      <!-- Phần Bài đọc -->
+      <div class="section-card">
+        <h2 class="section-title">📖 Bài đọc chủ đề Kinh tế học</h2>
+        <div class="link-grid">
+          <a href="/econR1.html" class="nav-link"
+            >Bài 1: Navigating Economic Challenges</a
+          >
+          <a href="/econR2.html" class="nav-link">Bài 2: The Stock Market</a>
+          <a href="/econR3.html" class="nav-link"
+            >Bài 3: How Psychology Shapes Consumer Behavior</a
+          >
+        </div>
+      </div>
+
+      <!-- Phần Trắc nghiệm -->
+      <div class="section-card">
+        <h2 class="section-title">✍️ Phần trắc nghiệm về Kinh Tế Học</h2>
+        <div class="link-grid">
+          <a href="/econMCQ.html" class="nav-link"
+            >Phần 1: Bài tập tổng hợp (25 Câu)</a
+          >
+          <a href="/econMCQ2.html" class="nav-link"
+            >Phần 2: Bài tập nâng cao (20 Câu)</a
+          >
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

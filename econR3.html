@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reading Comprehension - Consumer Psychology</title>
+    <style>
+      :root {
+        --primary: #ea580c;
+        --primary-hover: #c2410c;
+        --primary-light: #ffedd5;
+        --bg-body: #fff7ed;
+        --card-bg: #ffffff;
+        --text-main: #1c1917;
+        --text-muted: #57534e;
+        --border-color: #fed7aa;
+        --correct-bg: #dcfce7;
+        --correct-border: #22c55e;
+        --correct-text: #15803d;
+        --wrong-bg: #ffe4e6;
+        --wrong-border: #f43f5e;
+        --wrong-text: #be123c;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: var(--bg-body);
+        color: var(--text-main);
+        padding: 24px 16px;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 24px;
+        background: var(--card-bg);
+        padding: 20px;
+        border-radius: 16px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        border: 1px solid var(--border-color);
+      }
+
+      h1 {
+        color: var(--primary);
+        font-size: 1.8rem;
+        margin-bottom: 6px;
+      }
+
+      .subtitle {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        align-items: start;
+      }
+
+      @media (max-width: 900px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Passage Styling */
+      .passage-card {
+        background: var(--card-bg);
+        border-radius: 16px;
+        padding: 24px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        border: 1px solid var(--border-color);
+        position: sticky;
+        top: 24px;
+        max-height: 85vh;
+        overflow-y: auto;
+      }
+
+      .passage-card h2 {
+        color: var(--primary);
+        font-size: 1.25rem;
+        margin-bottom: 16px;
+        padding-bottom: 8px;
+        border-bottom: 2px solid var(--primary-light);
+      }
+
+      .passage-card p {
+        margin-bottom: 14px;
+        text-align: justify;
+        font-size: 0.98rem;
+      }
+
+      /* Quiz Styling */
+      .quiz-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .quiz-card {
+        background: var(--card-bg);
+        border-radius: 16px;
+        padding: 20px 24px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        border: 1px solid var(--border-color);
+      }
+
+      .question-num {
+        font-weight: 700;
+        color: var(--primary);
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 6px;
+      }
+
+      .question-text {
+        font-size: 1.05rem;
+        font-weight: 600;
+        margin-bottom: 14px;
+      }
+
+      .options-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .btn-option {
+        background: #fffcf8;
+        border: 1.5px solid var(--border-color);
+        border-radius: 8px;
+        padding: 10px 14px;
+        text-align: left;
+        font-size: 0.95rem;
+        color: var(--text-main);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-weight: 500;
+      }
+
+      .btn-option:hover:not(:disabled) {
+        border-color: var(--primary);
+        background: var(--primary-light);
+        color: var(--primary-hover);
+      }
+
+      .btn-option:disabled {
+        cursor: not-allowed;
+      }
+
+      .btn-option.correct {
+        background: var(--correct-bg) !important;
+        border-color: var(--correct-border) !important;
+        color: var(--correct-text) !important;
+        font-weight: 700;
+      }
+
+      .btn-option.wrong {
+        background: var(--wrong-bg) !important;
+        border-color: var(--wrong-border) !important;
+        color: var(--wrong-text) !important;
+      }
+
+      .explanation {
+        margin-top: 14px;
+        padding: 12px 14px;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        line-height: 1.4;
+        display: none;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .explanation.visible {
+        display: block;
+      }
+
+      .explanation.correct-exp {
+        background: #f0fdf4;
+        border-left: 4px solid var(--correct-border);
+        color: var(--correct-text);
+      }
+
+      .explanation.wrong-exp {
+        background: #fff1f2;
+        border-left: 4px solid var(--wrong-border);
+        color: var(--wrong-text);
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-4px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Reading Comprehension: Consumer Psychology</h1>
+        <p class="subtitle">
+          Đọc đoạn văn bên trái và chọn đáp án cho 10 câu hỏi bên phải để kiểm
+          tra kết quả
+        </p>
+      </header>
+
+      <div class="layout">
+        <!-- READING PASSAGE -->
+        <div class="passage-card">
+          <h2>How Psychology Shapes Consumer Behavior</h2>
+          <p>
+            In the modern economic landscape, understanding human psychology has
+            become as crucial as analyzing financial data. Businesses no longer
+            rely solely on basic market <b>supply</b> and <b>demand</b> to set
+            prices and drive sales. Instead, they leverage principles of
+            consumer psychology to influence purchasing decisions, shape brand
+            perception, and maximize corporate <b>revenue</b>.
+          </p>
+
+          <p>
+            One of the most powerful psychological phenomena used in marketing
+            is the concept of <b>scarcity</b>. When consumers believe a product
+            is in limited supply or available for a short time, its perceived
+            value increases dramatically. Marketers trigger a fear of missing
+            out (FOMO), driving immediate sales even if the product's actual
+            utility remains unchanged. Similarly, pricing strategies often
+            exploit cognitive biases. For instance, psychological pricing—such
+            as setting a price at $9.99 instead of $10.00—creates an illusion of
+            a significantly lower cost, directly boosting consumer
+            <b>demand</b>.
+          </p>
+
+          <p>
+            Another key psychological factor is social proof. Individuals
+            frequently look to the behavior of others to guide <b>their</b> own
+            choices, especially when facing product uncertainty. Positive online
+            reviews, influencer endorsements, and high <b>market share</b> serve
+            as subtle signals of quality and trust. As a result, consumers feel
+            more confident spending their discretionary <b>gross income</b> on
+            products endorsed by peers or celebrities.
+          </p>
+
+          <p>
+            However, psychological manipulation in commerce also raises ethical
+            questions. Irrational spending driven by emotional triggers can lead
+            household consumers into overwhelming individual <b>debt</b>. During
+            times of economic instability or high <b>inflation</b>, emotional
+            marketing can further erode a household's <b>purchasing power</b>,
+            forcing individuals to sacrifice long-term financial security for
+            short-term gratification. Ultimately, while psychology offers
+            businesses powerful tools to stimulate <b>economic growth</b>,
+            educated consumers must remain vigilant. Recognizing these
+            psychological triggers allows buyers to make rational choices, align
+            their spending with their budget, and avoid unnecessary financial
+            stress.
+          </p>
+        </div>
+
+        <!-- QUIZ QUESTIONS -->
+        <div class="quiz-list" id="quizContainer"></div>
+      </div>
+    </div>
+
+    <script>
+      const quizData = [
+        {
+          q: "What shift in business strategy is highlighted in the first paragraph?",
+          options: [
+            "Businesses now ignore financial data entirely.",
+            "Companies rely strictly on central bank monetary policy.",
+            "Businesses leverage psychology alongside financial analysis to drive sales.",
+            "Companies only produce goods with zero scarcity.",
+          ],
+          answer: 2,
+          exp: "<b>Đáp án đúng: C.</b> Đoạn 1 nêu rõ: Doanh nghiệp không chỉ dựa vào cung/cầu đơn thuần mà kết hợp khai thác tâm lý tiêu dùng để thúc đẩy doanh số.",
+        },
+        {
+          q: 'How does the concept of "scarcity" influence consumers?',
+          options: [
+            "It forces companies to lower prices to clear inventory.",
+            "It increases a product's perceived value by creating a fear of missing out.",
+            "It guarantees a permanent increase in net income for buyers.",
+            "It reduces consumer demand for luxury commodities.",
+          ],
+          answer: 1,
+          exp: "<b>Đáp án đúng: B.</b> Đoạn 2 giải thích: Sự khan hiếm làm tăng giá trị cảm nhận của sản phẩm bằng cách tạo tâm lý sợ bỏ lỡ (FOMO).",
+        },
+        {
+          q: "Setting a price at $9.99 instead of $10.00 is an example of:",
+          options: [
+            "Tariff imposition",
+            "Psychological pricing",
+            "Fiscal policy",
+            "Capital depreciation",
+          ],
+          answer: 1,
+          exp: "<b>Đáp án đúng: B.</b> Đoạn 2 nêu ví dụ trực tiếp: <i>'...psychological pricing—such as setting a price at $9.99 instead of $10.00...'</i>",
+        },
+        {
+          q: 'According to paragraph 3, what is "social proof"?',
+          options: [
+            "Official government approval of a company's balance sheet",
+            "The legal process of filing for corporate bankruptcy",
+            "Relying on others' behavior and reviews to guide purchasing choices",
+            "Calculating the exact trade deficit of a country",
+          ],
+          answer: 2,
+          exp: "<b>Đáp án đúng: C.</b> Đoạn 3 nêu: Social proof là việc <i>'Individuals frequently look to the behavior of others to guide their own choices...'</i>",
+        },
+        {
+          q: 'The word "leverage" in paragraph 1 is closest in meaning to:',
+          options: [
+            "abandon or ignore",
+            "use to advantage or exploit",
+            "reject completely",
+            "decrease gradually",
+          ],
+          answer: 1,
+          exp: "<b>Đáp án đúng: B.</b> Từ <b>leverage</b> nghĩa là tận dụng, khai thác (tương đương <i>use to advantage / exploit</i>).",
+        },
+        {
+          q: "What negative financial consequence can emotional marketing cause for consumers?",
+          options: [
+            "An immediate reduction in national tariffs",
+            "Overwhelming individual debt and eroded purchasing power",
+            "Automatic increases in bank interest rates",
+            "A sudden drop in global supply chains",
+          ],
+          answer: 1,
+          exp: "<b>Đáp án đúng: B.</b> Đoạn 4 chỉ ra rủi ro: <i>'...lead household consumers into overwhelming individual debt... erode a household's purchasing power...'</i>",
+        },
+        {
+          q: "According to the text, why do consumers feel more confident buying endorsed products?",
+          options: [
+            "Endorsements act as subtle signals of quality and trust.",
+            "Influencers always pay for the consumer's taxes.",
+            "Endorsed products are exempt from inflation.",
+            "It guarantees that the firm will never go into recession.",
+          ],
+          answer: 0,
+          exp: "<b>Đáp án đúng: A.</b> Đoạn 3 khẳng định: Đánh giá và sự bảo chứng đóng vai trò là <i>'subtle signals of quality and trust.'</i>",
+        },
+        {
+          q: "What does the passage suggest educated consumers should do?",
+          options: [
+            "Stop spending money on all goods and services",
+            "Rely solely on impulse buys during sales",
+            "Recognize psychological triggers to make rational spending choices",
+            "Invest all their savings into high-risk stock speculation",
+          ],
+          answer: 2,
+          exp: "<b>Đáp án đúng: C.</b> Đoạn kết khuyến nghị: Người tiêu dùng thông thái cần <i>'Recognizing these psychological triggers allows buyers to make rational choices...'</i>",
+        },
+        {
+          q: 'The word "their" in paragraph 3 refers to:',
+          options: ["Marketers", "Influencers", "Choices", "Individuals"],
+          answer: 3,
+          exp: "<b>Đáp án đúng: D.</b> Từ 'their' đứng sau <i>'Individuals frequently look to the behavior of others to guide...'</i> nên đại diện cho <b>Individuals</b>.",
+        },
+        {
+          q: "What is the primary purpose of this reading passage?",
+          options: [
+            "To explain how psychological tactics influence consumer choices and their potential risks",
+            "To argue that psychological pricing should be declared illegal by governments",
+            "To prove that social proof is the only factor determining market equilibrium",
+            "To encourage consumers to maximize their debt during inflation",
+          ],
+          answer: 0,
+          exp: "<b>Đáp án đúng: A.</b> Mục đích chính của bài là giải thích các thủ thuật tâm lý tác động đến quyết định tiêu dùng và những rủi ro tài chính kèm theo.",
+        },
+      ];
+
+      function renderQuiz() {
+        const container = document.getElementById("quizContainer");
+        container.innerHTML = quizData
+          .map(
+            (item, index) => `
+        <div class="quiz-card" id="card-${index}">
+            <div class="question-num">Câu ${index + 1}</div>
+            <div class="question-text">${item.q}</div>
+            <div class="options-grid">
+                ${item.options
+                  .map(
+                    (opt, optIdx) => `
+                    <button class="btn-option" onclick="checkAnswer(${index}, ${optIdx})">
+                        ${String.fromCharCode(65 + optIdx)}. ${opt}
+                    </button>
+                `,
+                  )
+                  .join("")}
+            </div>
+            <div class="explanation" id="exp-${index}"></div>
+        </div>
+    `,
+          )
+          .join("");
+      }
+
+      function checkAnswer(qIdx, selectedIdx) {
+        const card = document.getElementById(`card-${qIdx}`);
+        const buttons = card.querySelectorAll(".btn-option");
+        const expDiv = document.getElementById(`exp-${qIdx}`);
+        const currentQ = quizData[qIdx];
+
+        buttons.forEach((btn) => (btn.disabled = true));
+
+        if (selectedIdx === currentQ.answer) {
+          buttons[selectedIdx].classList.add("correct");
+          expDiv.className = "explanation visible correct-exp";
+          expDiv.innerHTML = `<strong>Chính xác!</strong><br>${currentQ.exp}`;
+        } else {
+          buttons[selectedIdx].classList.add("wrong");
+          buttons[currentQ.answer].classList.add("correct");
+          expDiv.className = "explanation visible wrong-exp";
+          expDiv.innerHTML = `<strong>Rất tiếc, sai rồi!</strong><br>${currentQ.exp}`;
+        }
+      }
+
+      renderQuiz();
+    </script>
+  </body>
+</html>

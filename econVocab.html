@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Học 50 Từ Vựng Kinh Tế (Economics)</title>
+    <style>
+      :root {
+        --primary: #f59e0b;
+        --primary-dark: #d97706;
+        --primary-light: #fef3c7;
+        --bg-gradient: linear-gradient(
+          135deg,
+          #fffbeb 0%,
+          #fef3c7 50%,
+          #fde68a 100%
+        );
+        --card-bg: #ffffff;
+        --text-main: #78350f;
+        --text-sub: #92400e;
+        --text-dark: #1f2937;
+        --text-muted: #6b7280;
+        --border-color: #fde68a;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family:
+          "Segoe UI",
+          -apple-system,
+          BlinkMacSystemFont,
+          Roboto,
+          sans-serif;
+        background: var(--bg-gradient);
+        color: var(--text-dark);
+        min-height: 100vh;
+        padding: 24px 16px;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 30px;
+        background: var(--card-bg);
+        padding: 28px 20px;
+        border-radius: 20px;
+        box-shadow: 0 10px 25px -5px rgba(217, 119, 6, 0.15);
+        border: 1px solid var(--border-color);
+      }
+
+      h1 {
+        color: var(--primary-dark);
+        font-size: 2rem;
+        margin-bottom: 8px;
+      }
+
+      p.subtitle {
+        color: var(--text-sub);
+        font-size: 1rem;
+      }
+
+      .search-box {
+        margin-top: 20px;
+        position: relative;
+      }
+
+      .search-box input {
+        width: 100%;
+        padding: 12px 20px;
+        border: 2px solid var(--border-color);
+        border-radius: 12px;
+        font-size: 1rem;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+
+      .search-box input:focus {
+        border-color: var(--primary-dark);
+      }
+
+      .vocab-list {
+        display: grid;
+        gap: 16px;
+      }
+
+      .vocab-card {
+        background: var(--card-bg);
+        border-radius: 16px;
+        padding: 20px 24px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        border: 1px solid var(--border-color); /* Đã sửa lỗi mã màu Hex */
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      .vocab-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px -3px rgba(217, 119, 6, 0.15);
+      }
+
+      .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .word-group {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .word {
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--primary-dark);
+      }
+
+      .pos {
+        font-size: 0.85rem;
+        font-weight: 600;
+        font-style: italic;
+        color: #b45309;
+        background: var(--primary-light);
+        padding: 2px 8px;
+        border-radius: 6px;
+      }
+
+      .btn-audio {
+        background: var(--primary-light);
+        border: 1px solid #fde68a;
+        color: var(--primary-dark);
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+      }
+
+      .btn-audio:hover {
+        background: var(--primary);
+        color: #ffffff;
+        transform: scale(1.08);
+      }
+
+      .btn-audio svg {
+        width: 20px;
+        height: 20px;
+        fill: currentColor;
+      }
+
+      .meaning {
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin-bottom: 12px;
+      }
+
+      .example-box {
+        background: #fffbeb;
+        border-left: 4px solid var(--primary);
+        padding: 10px 14px;
+        border-radius: 0 8px 8px 0;
+        font-size: 0.95rem;
+        line-height: 1.5;
+      }
+
+      .example-en {
+        color: #451a03;
+        margin-bottom: 4px;
+      }
+
+      .example-vi {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+      }
+
+      @media (max-width: 600px) {
+        body {
+          padding: 12px 8px;
+        }
+        .vocab-card {
+          padding: 16px;
+        }
+        .word {
+          font-size: 1.15rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>50 Từ Vựng Kinh Tế (Economics)</h1>
+        <p class="subtitle">
+          Bấm vào biểu tượng loa để nghe phát âm từ vựng và câu ví dụ
+        </p>
+        <div class="search-box">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Tìm kiếm từ vựng hoặc nghĩa tiếng Việt..."
+            onkeyup="filterVocab()"
+          />
+        </div>
+      </header>
+
+      <div class="vocab-list" id="vocabContainer"></div>
+    </div>
+
+    <script>
+      const vocabData = [
+        {
+          word: "GDP (Gross Domestic Product)",
+          pos: "n",
+          meaning: "Tổng sản phẩm quốc nội",
+          en: "Strong economic policies helped boost the country's GDP.",
+          vi: "Chính sách kinh tế tốt đã giúp thúc đẩy GDP của đất nước.",
+        },
+        {
+          word: "Inflation",
+          pos: "n",
+          meaning: "Sự lạm phát",
+          en: "High inflation reduces the purchasing power of consumers.",
+          vi: "Lạm phát cao làm giảm sức mua của người tiêu dùng.",
+        },
+        {
+          word: "Deflation",
+          pos: "n",
+          meaning: "Sự giảm phát",
+          en: "Deflation can cause businesses to lower their prices.",
+          vi: "Giảm phát có thể khiến các doanh nghiệp phải hạ giá thành.",
+        },
+        {
+          word: "Interest rate",
+          pos: "n",
+          meaning: "Lãi suất",
+          en: "The central bank decided to raise the interest rate.",
+          vi: "Ngân hàng trung ương đã quyết định tăng lãi suất.",
+        },
+        {
+          word: "Unemployment rate",
+          pos: "n",
+          meaning: "Tỷ lệ thất nghiệp",
+          en: "The unemployment rate dropped to 4% this quarter.",
+          vi: "Tỷ lệ thất nghiệp đã giảm xuống 4% trong quý này.",
+        },
+        {
+          word: "Recession",
+          pos: "n",
+          meaning: "Suy thoái kinh tế",
+          en: "Many companies laid off workers during the recession.",
+          vi: "Nhiều công ty đã sa thải nhân viên trong đợt suy thoái.",
+        },
+        {
+          word: "Economic growth",
+          pos: "n",
+          meaning: "Sự tăng trưởng kinh tế",
+          en: "Technology is a major driver of economic growth.",
+          vi: "Công nghệ là động lực chính của sự tăng trưởng kinh tế.",
+        },
+        {
+          word: "Fiscal policy",
+          pos: "n",
+          meaning: "Chính sách tài khóa",
+          en: "The government adjusted its fiscal policy to reduce debt.",
+          vi: "Chính phủ đã điều chỉnh chính sách tài khóa để giảm nợ.",
+        },
+        {
+          word: "Monetary policy",
+          pos: "n",
+          meaning: "Chính sách tiền tệ",
+          en: "Monetary policy controls the supply of money in an economy.",
+          vi: "Chính sách tiền tệ kiểm soát lượng cung tiền trong nền kinh tế.",
+        },
+        {
+          word: "Exchange rate",
+          pos: "n",
+          meaning: "Tỷ giá hối đoái",
+          en: "Fluctuations in the exchange rate affect international trade.",
+          vi: "Sự biến động của tỷ giá hối đoái ảnh hưởng đến thương mại quốc tế.",
+        },
+        {
+          word: "Supply",
+          pos: "n/v",
+          meaning: "Cung / Lượng cung ứng",
+          en: "The supply of oil increased this month.",
+          vi: "Nguồn cung dầu mỏ đã tăng trong tháng này.",
+        },
+        {
+          word: "Demand",
+          pos: "n/v",
+          meaning: "Cầu / Nhu cầu",
+          en: "Consumer demand for electric cars is rising rapidly.",
+          vi: "Nhu cầu tiêu dùng đối với xe điện đang tăng nhanh.",
+        },
+        {
+          word: "Equilibrium",
+          pos: "n",
+          meaning: "Sự cân bằng thị trường",
+          en: "Price equilibrium occurs when supply equals demand.",
+          vi: "Giá cân bằng xuất hiện khi cung bằng cầu.",
+        },
+        {
+          word: "Scarcity",
+          pos: "n",
+          meaning: "Sự khan hiếm",
+          en: "Scarcity of raw materials led to higher production costs.",
+          vi: "Sự khan hiếm nguyên liệu thô đã dẫn đến chi phí sản xuất cao hơn.",
+        },
+        {
+          word: "Opportunity cost",
+          pos: "n",
+          meaning: "Chi phí cơ hội",
+          en: "Choosing one option always involves an opportunity cost.",
+          vi: "Việc lựa chọn một phương án luôn đi kèm với chi phí cơ hội.",
+        },
+        {
+          q: "",
+          word: "Surplus",
+          pos: "n",
+          meaning: "Thặng dư / Số dư",
+          en: "Good weather resulted in a surplus of wheat.",
+          vi: "Thời tiết thuận lợi đã tạo ra sự thặng dư lúa mì.",
+        },
+        {
+          word: "Deficit",
+          pos: "n",
+          meaning: "Thâm hụt",
+          en: "The trade deficit expanded due to heavy imports.",
+          vi: "Thâm hụt thương mại mở rộng do nhập khẩu quá nhiều.",
+        },
+        {
+          word: "Monopoly",
+          pos: "n",
+          meaning: "Sự độc quyền",
+          en: "The government prevents any company from having a monopoly.",
+          vi: "Chính phủ ngăn chặn bất kỳ công ty nào có sự độc quyền.",
+        },
+        {
+          word: "Competition",
+          pos: "n",
+          meaning: "Sự cạnh tranh",
+          en: "Healthy competition lowers prices for consumers.",
+          vi: "Sự cạnh tranh lành mạnh giúp hạ giá thành cho người tiêu dùng.",
+        },
+        {
+          word: "Commodity",
+          pos: "n",
+          meaning: "Hàng hóa / Thương phẩm",
+          en: "Gold is a valuable commodity traded worldwide.",
+          vi: "Vàng là một hàng hóa có giá trị được giao dịch trên toàn thế giới.",
+        },
+        {
+          word: "Capital",
+          pos: "n",
+          meaning: "Vốn đầu tư / Vốn kinh doanh",
+          en: "They need more capital to expand their business.",
+          vi: "Họ cần thêm vốn để mở rộng việc kinh doanh.",
+        },
+        {
+          word: "Investment",
+          pos: "n",
+          meaning: "Sự đầu tư",
+          en: "Education is a long-term investment in human potential.",
+          vi: "Giáo dục là khoản đầu tư dài hạn vào tiềm năng con người.",
+        },
+        {
+          word: "Asset",
+          pos: "n",
+          meaning: "Tài sản",
+          en: "Real estate is considered a stable asset.",
+          vi: "Bất động sản được coi là một tài sản ổn định.",
+        },
+        {
+          word: "Liability",
+          pos: "n",
+          meaning: "Nợ phải trả / Nghĩa vụ tài chính",
+          en: "Unpaid loans are listed as liabilities on the balance sheet.",
+          vi: "Các khoản vay chưa trả được kê khai là nợ phải trả trên bảng cân đối kế toán.",
+        },
+        {
+          word: "Equity",
+          pos: "n",
+          meaning: "Vốn chủ sở hữu / Giá trị ròng",
+          en: "The founders retain majority equity in the company.",
+          vi: "Các nhà sáng lập giữ phần lớn vốn chủ sở hữu trong công ty.",
+        },
+        {
+          word: "Stock market",
+          pos: "n",
+          meaning: "Thị trường chứng khoán",
+          en: "Investors closely watch the stock market every day.",
+          vi: "Nhà đầu tư theo dõi sát sao thị trường chứng khoán mỗi ngày.",
+        },
+        {
+          word: "Bond",
+          pos: "n",
+          meaning: "Trái phiếu",
+          en: "Government bonds are usually low-risk investments.",
+          vi: "Trái phiếu chính phủ thường là khoản đầu tư rủi ro thấp.",
+        },
+        {
+          word: "Dividend",
+          pos: "n",
+          meaning: "Cổ tức",
+          en: "Shareholders received a quarterly dividend payout.",
+          vi: "Các cổ đông đã nhận được khoản chi trả cổ tức hàng quý.",
+        },
+        {
+          word: "Liquidity",
+          pos: "n",
+          meaning: "Tính thanh khoản",
+          en: "Cash has the highest liquidity among all assets.",
+          vi: "Tiền mặt có tính thanh khoản cao nhất trong tất cả tài sản.",
+        },
+        {
+          word: "Speculation",
+          pos: "n",
+          meaning: "Sự đầu cơ",
+          en: "Property speculation drove housing prices to extreme levels.",
+          vi: "Sự đầu cơ bất động sản đã đẩy giá nhà lên mức cực cao.",
+        },
+        {
+          word: "Import",
+          pos: "n/v",
+          meaning: "Nhập khẩu",
+          en: "The country imports most of its crude oil.",
+          vi: "Quốc gia này nhập khẩu phần lớn dầu thô.",
+        },
+        {
+          word: "Export",
+          pos: "n/v",
+          meaning: "Xuất khẩu",
+          en: "Vietnam is a leading exporter of coffee and rice.",
+          vi: "Việt Nam là nước xuất khẩu cà phê và gạo hàng đầu.",
+        },
+        {
+          word: "Trade barrier",
+          pos: "n",
+          meaning: "Rào cản thương mại",
+          en: "Lowering trade barriers encourages international commerce.",
+          vi: "Hạ thấp rào cản thương mại khuyến khích thương mại quốc tế.",
+        },
+        {
+          word: "Tariff",
+          pos: "n",
+          meaning: "Thuế quan",
+          en: "The government placed a tariff on imported steel.",
+          vi: "Chính phủ đã đánh thuế quan lên thép nhập khẩu.",
+        },
+        {
+          word: "Subsidy",
+          pos: "n",
+          meaning: "Tiền trợ cấp",
+          en: "Farmers receive a government subsidy for green technology.",
+          vi: "Nông dân nhận được tiền trợ cấp của chính phủ cho công nghệ xanh.",
+        },
+        {
+          word: "Revenue",
+          pos: "n",
+          meaning: "Doanh thu",
+          en: "The company reported record revenue this quarter.",
+          vi: "Công ty báo cáo doanh thu kỷ lục trong quý này.",
+        },
+        {
+          word: "Profit",
+          pos: "n",
+          meaning: "Lợi nhuận",
+          en: "Net profit increased by 15% year-over-year.",
+          vi: "Lợi nhuận ròng tăng 15% so với cùng kỳ năm ngoái.",
+        },
+        {
+          word: "Loss",
+          pos: "n",
+          meaning: "Khoản thua lỗ",
+          en: "The firm suffered a financial loss due to bad management.",
+          vi: "Công ty gánh chịu khoản thua lỗ tài chính do quản lý kém.",
+        },
+        {
+          word: "Cost of living",
+          pos: "n",
+          meaning: "Chi phí sinh hoạt",
+          en: "The cost of living in big cities is very high.",
+          vi: "Chi phí sinh hoạt ở các thành phố lớn rất cao.",
+        },
+        {
+          word: "Market share",
+          pos: "n",
+          meaning: "Thị phần",
+          en: "The brand expanded its market share in Asia.",
+          vi: "Thương hiệu đã mở rộng thị phần của mình tại Châu Á.",
+        },
+        {
+          word: "Taxation",
+          pos: "n",
+          meaning: "Hệ thống thuế / Việc đánh thuế",
+          en: "Fair taxation funds public infrastructure and schools.",
+          vi: "Hệ thống thuế công bằng tài trợ cho cơ sở hạ tầng và trường học.",
+        },
+        {
+          word: "Consumer",
+          pos: "n",
+          meaning: "Người tiêu dùng",
+          en: "Consumer confidence influences economic spending.",
+          vi: "Niềm tin của người tiêu dùng ảnh hưởng đến chi tiêu kinh tế.",
+        },
+        {
+          word: "Purchasing power",
+          pos: "n",
+          meaning: "Sức mua của tiền tệ",
+          en: "Inflation erodes the purchasing power of savings.",
+          vi: "Lạm phát bào mòn sức mua của tiền tiết kiệm.",
+        },
+        {
+          word: "Gross Income",
+          pos: "n",
+          meaning: "Thu nhập gộp (trước thuế)",
+          en: "His gross income includes his salary and bonuses.",
+          vi: "Thu nhập gộp của anh ấy bao gồm lương và tiền thưởng.",
+        },
+        {
+          word: "Net Income",
+          pos: "n",
+          meaning: "Thu nhập ròng (sau thuế)",
+          en: "Net income is the actual money you take home after taxes.",
+          vi: "Thu nhập ròng là số tiền thực tế bạn cầm về sau thuế.",
+        },
+        {
+          word: "Debt",
+          pos: "n",
+          meaning: "Khoản nợ",
+          en: "He worked hard to pay off all his national debt.",
+          vi: "Anh ấy đã làm việc chăm chỉ để trả hết khoản nợ của mình.",
+        },
+        {
+          word: "Bankruptcy",
+          pos: "n",
+          meaning: "Sự phá sản",
+          en: "Poor financial planning led the business to bankruptcy.",
+          vi: "Kế hoạch tài chính kém đã dẫn doanh nghiệp đến sự phá sản.",
+        },
+        {
+          word: "Depreciation",
+          pos: "n",
+          meaning: "Sự khấu hao / Giảm giá trị",
+          en: "Car depreciation starts the moment you drive it away.",
+          vi: "Sự khấu hao của xe hơi bắt đầu ngay khi bạn lái nó đi.",
+        },
+        {
+          word: "Globalization",
+          pos: "n",
+          meaning: "Toàn cầu hóa",
+          en: "Globalization facilitates trade across international borders.",
+          vi: "Toàn cầu hóa tạo điều kiện thuận lợi cho thương mại qua biên giới.",
+        },
+        {
+          word: "Microeconomics",
+          pos: "n",
+          meaning: "Kinh tế vi mô",
+          en: "Microeconomics studies individual consumer decisions.",
+          vi: "Kinh tế vi mô nghiên cứu các quyết định của cá nhân người tiêu dùng.",
+        },
+      ];
+
+      function renderVocab(data) {
+        const container = document.getElementById("vocabContainer");
+        container.innerHTML = data
+          .map(
+            (item, index) => `
+        <div class="vocab-card">
+            <div class="card-header">
+                <div class="word-group">
+                    <span class="word">${item.word}</span>
+                    <span class="pos">${item.pos}</span>
+                </div>
+                <button class="btn-audio" onclick="speakText('${item.word.replace(/'/g, "\\'")}')" title="Nghe phát âm từ">
+                    <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+                </button>
+            </div>
+            <div class="meaning">👉 ${item.meaning}</div>
+            <div class="example-box">
+                <div class="example-en">💬 <i>"${item.en}"</i></div>
+                <div class="example-vi">💡 ${item.vi}</div>
+            </div>
+        </div>
+    `,
+          )
+          .join("");
+      }
+
+      function speakText(text) {
+        if ("speechSynthesis" in window) {
+          window.speechSynthesis.cancel(); // Stop any ongoing speech
+          const cleanText = text.replace(/\s*\(.*?\)\s*/g, ""); // Bỏ ngoặc đơn khi đọc
+          const utterance = new SpeechSynthesisUtterance(cleanText);
+          utterance.lang = "en-US";
+          utterance.rate = 0.9; // Tốc độ đọc vừa phải
+          window.speechSynthesis.speak(utterance);
+        } else {
+          alert("Trình duyệt của bạn không hỗ trợ tính năng phát âm.");
+        }
+      }
+
+      function filterVocab() {
+        const keyword = document
+          .getElementById("searchInput")
+          .value.toLowerCase()
+          .trim();
+        const filtered = vocabData.filter(
+          (item) =>
+            item.word.toLowerCase().includes(keyword) ||
+            item.meaning.toLowerCase().includes(keyword) ||
+            item.en.toLowerCase().includes(keyword),
+        );
+        renderVocab(filtered);
+      }
+
+      // Initial render
+      renderVocab(vocabData);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Economics Multiple Choice Quiz - 25 Questions</title>
+    <style>
+      :root {
+        --primary: #2563eb;
+        --primary-hover: #1d4ed8;
+        --primary-light: #dbeafe;
+        --bg-body: #f8fafc;
+        --card-bg: #ffffff;
+        --text-main: #0f172a;
+        --text-muted: #64748b;
+        --border-color: #cbd5e1;
+        --correct-bg: #dcfce7;
+        --correct-border: #22c55e;
+        --correct-text: #15803d;
+        --wrong-bg: #ffe4e6;
+        --wrong-border: #f43f5e;
+        --wrong-text: #be123c;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: var(--bg-body);
+        color: var(--text-main);
+        padding: 24px 16px;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 24px;
+        background: var(--card-bg);
+        padding: 24px 20px;
+        border-radius: 16px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        border: 1px solid var(--border-color);
+      }
+
+      h1 {
+        color: var(--primary);
+        font-size: 1.8rem;
+        margin-bottom: 8px;
+      }
+
+      .subtitle {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+      }
+
+      .score-board {
+        margin-top: 14px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: var(--primary);
+      }
+
+      .quiz-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .quiz-card {
+        background: var(--card-bg);
+        border-radius: 16px;
+        padding: 20px 24px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        border: 1px solid var(--border-color);
+      }
+
+      .question-num {
+        font-weight: 700;
+        color: var(--primary);
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 6px;
+      }
+
+      .question-text {
+        font-size: 1.05rem;
+        font-weight: 600;
+        margin-bottom: 14px;
+      }
+
+      .options-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .btn-option {
+        background: #ffffff;
+        border: 1.5px solid var(--border-color);
+        border-radius: 8px;
+        padding: 12px 16px;
+        text-align: left;
+        font-size: 0.95rem;
+        color: var(--text-main);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-weight: 500;
+      }
+
+      .btn-option:hover:not(:disabled) {
+        border-color: var(--primary);
+        background: var(--primary-light);
+        color: var(--primary-hover);
+      }
+
+      .btn-option:disabled {
+        cursor: not-allowed;
+      }
+
+      .btn-option.correct {
+        background: var(--correct-bg) !important;
+        border-color: var(--correct-border) !important;
+        color: var(--correct-text) !important;
+        font-weight: 700;
+      }
+
+      .btn-option.wrong {
+        background: var(--wrong-bg) !important;
+        border-color: var(--wrong-border) !important;
+        color: var(--wrong-text) !important;
+      }
+
+      .explanation {
+        margin-top: 14px;
+        padding: 12px 14px;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        display: none;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .explanation.visible {
+        display: block;
+      }
+
+      .explanation.correct-exp {
+        background: #f0fdf4;
+        border-left: 4px solid var(--correct-border);
+        color: var(--correct-text);
+      }
+
+      .explanation.wrong-exp {
+        background: #fff1f2;
+        border-left: 4px solid var(--wrong-border);
+        color: var(--wrong-text);
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-4px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Economics Multiple Choice Quiz</h1>
+        <p class="subtitle">
+          Thử thách 25 câu hỏi trắc nghiệm Kinh tế học (Vi mô, Vĩ mô, Tài chính
+          & Thương mại)
+        </p>
+        <div class="score-board" id="scoreBoard">Điểm số: 0 / 25</div>
+      </header>
+
+      <div class="quiz-list" id="quizContainer"></div>
+    </div>
+
+    <script>
+      const quizData = [
+        {
+          q: 'Which of the following is the best example of "Opportunity Cost"?',
+          options: [
+            "The cash price paid when buying a new smartphone",
+            "The interest earned from a high-yield savings account",
+            "The foregone salary an individual gives up to attend university full-time",
+            "The tax penalty assessed for submitting corporate reports late",
+          ],
+          answer: 2,
+          exp: "<b>Đáp án C:</b> Chi phí cơ hội là giá trị của phương án tốt nhất bị bỏ qua (ở đây là mức lương bị mất khi đi học đại học toàn thời gian).",
+        },
+        {
+          q: "According to the Law of Demand, holding all other factors constant:",
+          options: [
+            "As price rises, quantity demanded increases",
+            "As price falls, quantity demanded increases",
+            "As income rises, price decreases",
+            "As supply increases, price rises",
+          ],
+          answer: 1,
+          exp: "<b>Đáp án B:</b> Quy luật cầu quy định rằng trong điều kiện các yếu tố khác không đổi, khi giá giảm thì lượng cầu sẽ tăng.",
+        },
+        {
+          q: "What occurs when the market price is set ABOVE the equilibrium price?",
+          options: [
+            "Market shortage",
+            "Market equilibrium",
+            "Market surplus",
+            "Immediate price drop to zero",
+          ],
+          answer: 2,
+          exp: "<b>Đáp án C:</b> Khi giá cao hơn giá cân bằng, lượng cung vượt quá lượng cầu dẫn đến hiện tượng dư thừa hàng hóa (Surplus).",
+        },
+        {
+          q: "A good with an Income Elasticity of Demand greater than 1 (Ei > 1) is classified as a:",
+          options: [
+            "Inferior good",
+            "Necessity good",
+            "Luxury good",
+            "Giffen good",
+          ],
+          answer: 2,
+          exp: "<b>Đáp án C:</b> Độ co giãn của cầu theo thu nhập Ei > 1 đại diện cho Hàng hóa cao cấp (Luxury good).",
+        },
+        {
+          q: "Gross Domestic Product (GDP) measures:",
+          options: [
+            "The total wealth owned by all citizens in a country",
+            "The total market value of all final goods and services produced within a country in a given period",
+            "The total net profit of foreign-owned enterprises operating abroad",
+            "The total money supply circulating in private commercial banks",
+          ],
+          answer: 1,
+          exp: "<b>Đáp án B:</b> GDP đo lường tổng giá trị thị trường của tất cả hàng hóa và dịch vụ cuối cùng được sản xuất trong phạm vi lãnh thổ một quốc gia trong một khoảng thời gian.",
+        },
+        {
+          q: "Which metric measures the average change over time in prices paid by urban consumers for a basket of consumer goods?",
+          options: [
+            "Producer Price Index (PPI)",
+            "Consumer Price Index (CPI)",
+            "Gross National Product (GNP)",
+            "Purchasing Power Parity (PPP)",
+          ],
+          answer: 1,
+          exp: "<b>Đáp án B:</b> Chỉ số giá tiêu dùng CPI (Consumer Price Index) đo lường mức giá trung bình của một giỏ hàng hóa và dịch vụ tiêu dùng.",
+        },
+        {
+          q: "When an economy experiences stagnant economic growth alongside high inflation and high unemployment, it is called:",
+          options: ["Hyperinflation", "Stagflation", "Deflation", "Recession"],
+          answer: 1,
+          exp: "<b>Đáp án B:</b> Stagflation (Đình phát) là hiện tượng nền kinh tế vừa đình trệ (tăng trưởng kém, thất nghiệp cao) vừa lạm phát cao.",
+        },
+        {
+          q: "Which central bank decision is an example of EXPANSIONARY monetary policy?",
+          options: [
+            "Raising the benchmark interest rate",
+            "Selling government bonds in the open market",
+            "Lowering the reserve requirement ratio for commercial banks",
+            "Increasing taxes on corporate income",
+          ],
+          answer: 2,
+          exp: "<b>Đáp án C:</b> Giảm tỷ lệ dự trữ bắt buộc giúp các ngân hàng thương mại có nhiều tiền hơn để cho vay, mở rộng tiền tệ ra nền kinh tế.",
+        },
+        {
+          q: "Fiscal policy refers to decisions made by the government regarding:",
+          options: [
+            "Bank interest rates and money supply",
+            "Foreign exchange reserves and gold holdings",
+            "Government spending and taxation",
+            "Minimum wage legislation and labor union rules",
+          ],
+          answer: 2,
+          exp: "<b>Đáp án C:</b> Chính sách tài khóa (Fiscal Policy) do chính phủ điều hành thông qua Chi tiêu công và Thuế.",
+        },
+        {
+          q: "What type of market structure is characterized by a single seller dominating the entire supply of a good or service?",
+          options: [
+            "Perfect Competition",
+            "Monopolistic Competition",
+            "Oligopoly",
+            "Monopoly",
+          ],
+          answer: 3,
+          exp: "<b>Đáp án D:</b> Monopoly (Độc quyền bán) là cấu trúc thị trường chỉ có duy nhất một người bán kiểm soát toàn bộ nguồn cung.",
+        },
+        {
+          q: 'An example of an "Oligopoly" industry is:',
+          options: [
+            "Local wheat farming",
+            "Commercial aircraft manufacturing (e.g., Boeing and Airbus)",
+            "Municipal tap water distribution",
+            "Street food vendors in a city",
+          ],
+          answer: 1,
+          exp: "<b>Đáp án B:</b> Oligopoly (Thị trường độc quyền nhóm) là thị trường bị chi phối bởi một vài doanh nghiệp lớn (như Boeing và Airbus trong sản xuất máy bay).",
+        },
+        {
+          q: "When a factory emits pollution into a local river, affecting downstream fisheries without compensation, this is known as a:",
+          options: [
+            "Positive externality",
+            "Negative externality",
+            "Public good",
+            "Free-rider problem",
+          ],
+          answer: 1,
+          exp: "<b>Đáp án B:</b> Tác động tiêu cực lên bên thứ ba không tham gia vào giao dịch được gọi là Ngoại ứng tiêu cực (Negative externality).",
+        },
+        {
+          q: "Public goods (like street lighting or national defense) are characterized as:",
+          options: [
+            "Excludable and Rivalrous",
+            "Non-excludable and Non-rivalrous",
+            "Excludable and Non-rivalrous",
+            "Non-excludable and Rivalrous",
+          ],
+          answer: 1,
+          exp: "<b>Đáp án B:</b> Hàng hóa công cộng có hai đặc tính: Không thể loại trừ (Non-excludable) và Không cạnh tranh trong tiêu dùng (Non-rivalrous).",
+        },
+        {
+          q: 'The principle of "Comparative Advantage" demonstrates that trade benefits two nations if they:',
+          options: [
+            "Produce goods with equal absolute efficiency",
+            "Specialize in producing goods where they have a lower opportunity cost",
+            "Eliminate all domestic wage taxes",
+            "Maintain identical currency exchange rates",
+          ],
+          answer: 1,
+          exp: "<b>Đáp án B:</b> Nguyên lý Lợi thế so sánh khẳng định thương mại mang lại lợi ích khi các quốc gia chuyên môn hóa sản xuất mặt hàng có Chi phí cơ hội thấp hơn.",
+        },
+        {
+          q: "A tax imposed specifically on imported goods and services is called a:",
+          options: ["Quota", "Subsidy", "Tariff", "Excise tax"],
+          answer: 2,
+          exp: "<b>Đáp án C:</b> Tariff là thuế quan đánh vào hàng hóa và dịch vụ nhập khẩu.",
+        },
+        {
+          q: 'In the stock market, what does "Equity" represent?',
+          options: [
+            "A fixed loan that must be repaid with interest",
+            "Ownership interest in a company represented by shares",
+            "The physical cash stored in corporate vaults",
+            "A guarantee against market loss issued by the central bank",
+          ],
+          answer: 1,
+          exp: "<b>Đáp án B:</b> Equity (Vốn chủ sở hữu) thể hiện quyền sở hữu đối với một phần công ty thông qua cổ phiếu.",
+        },
+        {
+          q: "What happens to bond prices when market interest rates RISE?",
+          options: [
+            "Bond prices rise",
+            "Bond prices fall",
+            "Bond prices remain completely unaffected",
+            "Bond yields fall to zero",
+          ],
+          answer: 1,
+          exp: "<b>Đáp án B:</b> Giá trái phiếu và Lãi suất thị trường luôn biến động ngược chiều: Lãi suất tăng làm giá trái phiếu giảm.",
+        },
+        {
+          q: 'What does "Liquidity" refer to in finance?',
+          options: [
+            "The total debt obligation of a corporation",
+            "The ease with which an asset can be converted into cash without affecting its market price",
+            "The interest rate charged on mortgage loans",
+            "The risk of inflation eroding savings",
+          ],
+          answer: 1,
+          exp: "<b>Đáp án B:</b> Tính thanh khoản (Liquidity) là khả năng chuyển đổi tài sản thành tiền mặt một cách nhanh chóng mà không làm mất giá trị.",
+        },
+        {
+          q: 'What is a "Bull Market"?',
+          options: [
+            "A market characterized by falling stock prices and pessimism",
+            "A market characterized by rising stock prices and investor optimism",
+            "A period where economic growth is zero",
+            "A market dominated exclusively by government bonds",
+          ],
+          answer: 1,
+          exp: "<b>Đáp án B:</b> Bull Market (Thị trường giá lên) là thị trường chứng khoán trong trạng thái tăng giá liên tục cùng sự lạc quan của nhà đầu tư.",
+        },
+        {
+          q: "Which term describes the gradual decrease in the economic value of a physical asset over time due to wear and tear?",
+          options: [
+            "Appreciation",
+            "Amortization",
+            "Depreciation",
+            "Speculation",
+          ],
+          answer: 2,
+          exp: "<b>Đáp án C:</b> Depreciation là sự khấu hao/giảm giá trị kinh tế của tài sản cố định do hao mòn tự nhiên qua thời gian.",
+        },
+        {
+          q: "When a central bank buys government securities on the open market, it aims to:",
+          options: [
+            "Reduce liquidity and raise interest rates",
+            "Inject liquidity into the banking system and lower interest rates",
+            "Increase corporate income tax rates",
+            "Reduce national debt immediately",
+          ],
+          answer: 1,
+          exp: "<b>Đáp án B:</b> Mua trái phiếu trên thị trường mở giúp Ngân hàng Trung ương bơm thanh khoản (tiền mặt) vào hệ thống ngân hàng và làm giảm lãi suất.",
+        },
+        {
+          q: "Real GDP differs from Nominal GDP because Real GDP is adjusted for:",
+          options: [
+            "Population growth",
+            "Income inequality",
+            "Inflation/Deflation",
+            "Government budget deficits",
+          ],
+          answer: 2,
+          exp: "<b>Đáp án C:</b> Real GDP (GDP thực tế) đã được điều chỉnh loại bỏ biến động giá cả (Lạm phát hoặc Giảm phát) so với Nominal GDP (GDP danh nghĩa).",
+        },
+        {
+          q: 'The "Lorenz Curve" and the "Gini Coefficient" are economic tools used to measure:',
+          options: [
+            "Foreign exchange volatility",
+            "Income or wealth inequality within a population",
+            "Elasticity of supply for commodities",
+            "The velocity of money in circulation",
+          ],
+          answer: 1,
+          exp: "<b>Đáp án B:</b> Đường Lorenz và Hệ số Gini là các công cụ đo lường mức độ bất bình đẳng về thu nhập hoặc tài sản trong xã hội.",
+        },
+        {
+          q: "The phenomenon where an increase in government borrowing leads to higher interest rates, reducing private investment spending, is called the:",
+          options: [
+            "Multiplier Effect",
+            "Crowding-Out Effect",
+            "Substitution Effect",
+            "Liquidity Trap",
+          ],
+          answer: 1,
+          exp: "<b>Đáp án B:</b> Hiệu ứng chèn ép/thoái lui (Crowding-Out Effect) xảy ra khi chính phủ tăng vay nợ làm lãi suất tăng, ép hoạt động đầu tư tư nhân giảm xuống.",
+        },
+        {
+          q: "In foreign exchange markets, if the US Dollar (USD) appreciates relative to the Euro (EUR):",
+          options: [
+            "European goods become more expensive for US consumers",
+            "US goods become more expensive for European consumers",
+            "US exports to Europe will naturally increase",
+            "The exchange rate remains completely unchanged",
+          ],
+          answer: 1,
+          exp: "<b>Đáp án B:</b> Khi đồng USD tăng giá (appreciates), hàng hóa Mỹ đổi sang EUR sẽ đắt đỏ hơn đối với người tiêu dùng Châu Âu.",
+        },
+      ];
+
+      let totalScore = 0;
+
+      function renderQuiz() {
+        const container = document.getElementById("quizContainer");
+        container.innerHTML = quizData
+          .map(
+            (item, index) => `
+        <div class="quiz-card" id="card-${index}">
+            <div class="question-num">Câu ${index + 1} / 25</div>
+            <div class="question-text">${item.q}</div>
+            <div class="options-grid">
+                ${item.options
+                  .map(
+                    (opt, optIdx) => `
+                    <button class="btn-option" onclick="checkAnswer(${index}, ${optIdx})">
+                        ${String.fromCharCode(65 + optIdx)}. ${opt}
+                    </button>
+                `,
+                  )
+                  .join("")}
+            </div>
+            <div class="explanation" id="exp-${index}"></div>
+        </div>
+    `,
+          )
+          .join("");
+      }
+
+      function checkAnswer(qIdx, selectedIdx) {
+        const card = document.getElementById(`card-${qIdx}`);
+        const buttons = card.querySelectorAll(".btn-option");
+        const expDiv = document.getElementById(`exp-${qIdx}`);
+        const currentQ = quizData[qIdx];
+
+        buttons.forEach((btn) => (btn.disabled = true));
+
+        if (selectedIdx === currentQ.answer) {
+          buttons[selectedIdx].classList.add("correct");
+          expDiv.className = "explanation visible correct-exp";
+          expDiv.innerHTML = `<strong>Chính xác!</strong><br>${currentQ.exp}`;
+          totalScore++;
+        } else {
+          buttons[selectedIdx].classList.add("wrong");
+          buttons[currentQ.answer].classList.add("correct");
+          expDiv.className = "explanation visible wrong-exp";
+          expDiv.innerHTML = `<strong>Rất tiếc, sai rồi!</strong><br>${currentQ.exp}`;
+        }
+
+        document.getElementById("scoreBoard").innerText =
+          `Điểm số: ${totalScore} / 25`;
+      }
+
+      renderQuiz();
+    </script>
+  </body>
+</html>

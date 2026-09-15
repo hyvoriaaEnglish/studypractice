@@ -1,0 +1,749 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>50 Từ Vựng Tâm Lý Học - Psychology Vocabulary</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=Nunito:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg-color: #f7f3ee;
+        --card-bg: #ffffff;
+        --text-main: #4a3b32;
+        --text-muted: #8a7360;
+        --primary: #9b7254;
+        --primary-hover: #7a5840;
+        --border-color: #eaddd0;
+        --link-bg: #fdfaf7;
+        --accent-bg: #f4ece1;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Nunito", sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-main);
+        line-height: 1.6;
+        padding: 40px 20px;
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      header h1 {
+        font-family: "Lora", serif;
+        color: var(--primary-hover);
+        font-size: 2.2rem;
+        margin-bottom: 8px;
+      }
+
+      header p {
+        color: var(--text-muted);
+        font-size: 1rem;
+      }
+
+      /* Control Panel: Search & Filter */
+      .controls {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 16px;
+        padding: 20px;
+        margin-bottom: 30px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 12px rgba(138, 115, 96, 0.05);
+      }
+
+      .search-box {
+        flex: 1;
+        min-width: 250px;
+      }
+
+      .search-box input {
+        width: 100%;
+        padding: 12px 16px;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        font-family: "Nunito", sans-serif;
+        font-size: 0.95rem;
+        outline: none;
+        background-color: var(--link-bg);
+        color: var(--text-main);
+      }
+
+      .search-box input:focus {
+        border-color: var(--primary);
+        background-color: #fff;
+      }
+
+      .filter-tags {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .tag-btn {
+        background: var(--link-bg);
+        border: 1px solid var(--border-color);
+        color: var(--text-main);
+        padding: 8px 14px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .tag-btn:hover,
+      .tag-btn.active {
+        background: var(--primary);
+        color: #fff;
+        border-color: var(--primary);
+      }
+
+      /* Vocabulary Cards Grid */
+      .vocab-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+      }
+
+      /* Flashcard Container */
+      .card-container {
+        perspective: 1000px;
+        height: 220px;
+      }
+
+      .flashcard {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transform-style: preserve-3d;
+        transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+        cursor: pointer;
+      }
+
+      .flashcard.flipped {
+        transform: rotateY(180deg);
+      }
+
+      .card-front,
+      .card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        border-radius: 14px;
+        border: 1px solid var(--border-color);
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: 0 4px 12px rgba(138, 115, 96, 0.06);
+      }
+
+      .card-front {
+        background-color: var(--card-bg);
+      }
+
+      .card-back {
+        background-color: var(--accent-bg);
+        transform: rotateY(180deg);
+      }
+
+      .category-badge {
+        font-size: 0.75rem;
+        color: var(--primary);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-weight: 700;
+      }
+
+      .word-title {
+        font-family: "Lora", serif;
+        font-size: 1.5rem;
+        color: var(--primary-hover);
+        margin-top: 5px;
+      }
+
+      .phonetic {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        font-style: italic;
+      }
+
+      .audio-btn {
+        align-self: flex-start;
+        background: var(--link-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+
+      .audio-btn:hover {
+        background: var(--primary);
+        color: #fff;
+      }
+
+      .meaning {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--text-main);
+        margin-bottom: 8px;
+      }
+
+      .type-tag {
+        font-size: 0.8rem;
+        font-style: italic;
+        color: var(--text-muted);
+      }
+
+      .hint-text {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        text-align: right;
+      }
+
+      .back-nav {
+        margin-bottom: 20px;
+      }
+
+      .back-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 700;
+        transition: color 0.2s;
+      }
+
+      .back-btn:hover {
+        color: var(--primary-hover);
+      }
+
+      @media (max-width: 600px) {
+        .controls {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .filter-tags {
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="back-nav">
+        <a href="/" class="back-btn">← Quay lại trang chủ</a>
+      </div>
+
+      <header>
+        <h1>Psychology Vocabulary</h1>
+        <p>50 Từ vựng Tâm lý học thông dụng (Chạm vào thẻ để xem nghĩa)</p>
+      </header>
+
+      <!-- Thanh tìm kiếm & lọc -->
+      <div class="controls">
+        <div class="search-box">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Tìm kiếm từ vựng (Anh / Việt)..."
+            onkeyup="filterWords()"
+          />
+        </div>
+        <div class="filter-tags">
+          <button class="tag-btn active" onclick="setCategory('all', this)">
+            Tất cả
+          </button>
+          <button class="tag-btn" onclick="setCategory('Basics', this)">
+            Nhận thức
+          </button>
+          <button class="tag-btn" onclick="setCategory('Personality', this)">
+            Tính cách
+          </button>
+          <button class="tag-btn" onclick="setCategory('Phenomena', this)">
+            Hiện tượng
+          </button>
+          <button class="tag-btn" onclick="setCategory('Disorders', this)">
+            Rối loạn
+          </button>
+          <button class="tag-btn" onclick="setCategory('Therapy', this)">
+            Trị liệu
+          </button>
+        </div>
+      </div>
+
+      <!-- Danh sách thẻ từ vựng -->
+      <div class="vocab-grid" id="vocabGrid"></div>
+    </div>
+
+    <script>
+      const vocabulary = [
+        // 1. Nhận thức & Cơ bản
+        {
+          word: "Psychology",
+          phonetic: "/saɪˈkɒlədʒi/",
+          pos: "n",
+          meaning: "Tâm lý học",
+          category: "Basics",
+        },
+        {
+          word: "Cognition",
+          phonetic: "/kɒɡˈnɪʃn/",
+          pos: "n",
+          meaning: "Nhận thức, quá trình tư duy",
+          category: "Basics",
+        },
+        {
+          word: "Perception",
+          phonetic: "/pəˈsepʃn/",
+          pos: "n",
+          meaning: "Sự tri giác, cảm nhận",
+          category: "Basics",
+        },
+        {
+          word: "Consciousness",
+          phonetic: "/ˈkɒnʃəsnəs/",
+          pos: "n",
+          meaning: "Ý thức",
+          category: "Basics",
+        },
+        {
+          word: "Subconscious",
+          phonetic: "/ˌsʌbˈkɒnʃəs/",
+          pos: "adj/n",
+          meaning: "Tiềm thức",
+          category: "Basics",
+        },
+        {
+          word: "Unconscious",
+          phonetic: "/ʌnˈkɒnʃəs/",
+          pos: "adj/n",
+          meaning: "Vô thức",
+          category: "Basics",
+        },
+        {
+          word: "Behavior",
+          phonetic: "/bɪˈheɪvjə/",
+          pos: "n",
+          meaning: "Hành vi",
+          category: "Basics",
+        },
+        {
+          word: "Emotion",
+          phonetic: "/ɪˈməʊʃn/",
+          pos: "n",
+          meaning: "Cảm xúc",
+          category: "Basics",
+        },
+        {
+          word: "Stimulus",
+          phonetic: "/ˈstɪmjələs/",
+          pos: "n",
+          meaning: "Tác nhân kích thích",
+          category: "Basics",
+        },
+        {
+          word: "Response",
+          phonetic: "/rɪˈspɒns/",
+          pos: "n",
+          meaning: "Phản ứng, phản hồi",
+          category: "Basics",
+        },
+
+        // 2. Tính cách & Động lực
+        {
+          word: "Personality",
+          phonetic: "/ˌpɜːsəˈnæləti/",
+          pos: "n",
+          meaning: "Tính cách, nhân cách",
+          category: "Personality",
+        },
+        {
+          word: "Introvert",
+          phonetic: "/ˈɪntrəvɜːt/",
+          pos: "n",
+          meaning: "Người hướng nội",
+          category: "Personality",
+        },
+        {
+          word: "Extrovert",
+          phonetic: "/ˈekstrəvɜːt/",
+          pos: "n",
+          meaning: "Người hướng ngoại",
+          category: "Personality",
+        },
+        {
+          word: "Motivation",
+          phonetic: "/ˌməʊtɪˈveɪʃn/",
+          pos: "n",
+          meaning: "Động lực",
+          category: "Personality",
+        },
+        {
+          word: "Empathy",
+          phonetic: "/ˈempəθi/",
+          pos: "n",
+          meaning: "Sự đồng cảm",
+          category: "Personality",
+        },
+        {
+          word: "Sympathy",
+          phonetic: "/ˈsɪmpəθi/",
+          pos: "n",
+          meaning: "Sự thông cảm, chia sẻ",
+          category: "Personality",
+        },
+        {
+          word: "Self-esteem",
+          phonetic: "/ˌself ɪˈstiːm/",
+          pos: "n",
+          meaning: "Lòng tự trọng, sự tự tin",
+          category: "Personality",
+        },
+        {
+          word: "Attitude",
+          phonetic: "/ˈætɪtjuːd/",
+          pos: "n",
+          meaning: "Thái độ",
+          category: "Personality",
+        },
+        {
+          word: "Temperament",
+          phonetic: "/ˈtemprəmənt/",
+          pos: "n",
+          meaning: "Khí chất, tính khí",
+          category: "Personality",
+        },
+        {
+          word: "Self-awareness",
+          phonetic: "/ˌself əˈweənəs/",
+          pos: "n",
+          meaning: "Sự tự nhận thức bản thân",
+          category: "Personality",
+        },
+
+        // 3. Hiện tượng tâm lý
+        {
+          word: "Conditioning",
+          phonetic: "/kənˈdɪʃənɪŋ/",
+          pos: "n",
+          meaning: "Sự tạo phản xạ điều kiện",
+          category: "Phenomena",
+        },
+        {
+          word: "Bias",
+          phonetic: "/ˈbaɪəs/",
+          pos: "n",
+          meaning: "Thiên kiến, định kiến",
+          category: "Phenomena",
+        },
+        {
+          word: "Projection",
+          phonetic: "/prəˈdʒekʃn/",
+          pos: "n",
+          meaning: "Cơ chế phóng chiếu tâm lý",
+          category: "Phenomena",
+        },
+        {
+          word: "Rationalization",
+          phonetic: "/ˌræʃnəlaɪˈzeɪʃn/",
+          pos: "n",
+          meaning: "Sự hợp lý hóa (bào chữa)",
+          category: "Phenomena",
+        },
+        {
+          word: "Repression",
+          phonetic: "/rɪˈpreʃn/",
+          pos: "n",
+          meaning: "Sự dồn nén tâm lý",
+          category: "Phenomena",
+        },
+        {
+          word: "Placebo effect",
+          phonetic: "/pləˈsiːbəʊ ɪˈfekt/",
+          pos: "n",
+          meaning: "Hiệu ứng giả dược",
+          category: "Phenomena",
+        },
+        {
+          word: "Cognitive Dissonance",
+          phonetic: "/ˈkɒɡnətɪv ˈdɪsənəns/",
+          pos: "n",
+          meaning: "Bất hòa nhận thức",
+          category: "Phenomena",
+        },
+        {
+          word: "Heuristic",
+          phonetic: "/hjuəˈrɪstɪk/",
+          pos: "n",
+          meaning: "Lối tắt tư duy",
+          category: "Phenomena",
+        },
+        {
+          word: "Resilience",
+          phonetic: "/rɪˈzɪliəns/",
+          pos: "n",
+          meaning: "Khả năng phục hồi tâm lý",
+          category: "Phenomena",
+        },
+        {
+          word: "Mindfulness",
+          phonetic: "/ˈmaɪndflnəs/",
+          pos: "n",
+          meaning: "Chánh niệm, sự chú tâm",
+          category: "Phenomena",
+        },
+
+        // 4. Rối loạn & Sức khỏe tâm thần
+        {
+          word: "Anxiety",
+          phonetic: "/æŋˈzaɪəti/",
+          pos: "n",
+          meaning: "Sự lo âu, rối loạn lo âu",
+          category: "Disorders",
+        },
+        {
+          word: "Depression",
+          phonetic: "/dɪˈpreʃn/",
+          pos: "n",
+          meaning: "Bệnh trầm cảm",
+          category: "Disorders",
+        },
+        {
+          word: "Trauma",
+          phonetic: "/ˈtrɔːmə/",
+          pos: "n",
+          meaning: "Sang chấn tâm lý",
+          category: "Disorders",
+        },
+        {
+          word: "Phobia",
+          phonetic: "/ˈfəʊbiə/",
+          pos: "n",
+          meaning: "Nỗi sợ hãi vô lý, chứng sợ",
+          category: "Disorders",
+        },
+        {
+          word: "Obsession",
+          phonetic: "/əbˈseʃn/",
+          pos: "n",
+          meaning: "Sự ám ảnh",
+          category: "Disorders",
+        },
+        {
+          word: "Compulsion",
+          phonetic: "/kəmˈpʌlʃn/",
+          pos: "n",
+          meaning: "Hành vi cưỡng chế",
+          category: "Disorders",
+        },
+        {
+          word: "Delusion",
+          phonetic: "/dɪˈluːʒn/",
+          pos: "n",
+          meaning: "Hoang tưởng",
+          category: "Disorders",
+        },
+        {
+          word: "Hallucination",
+          phonetic: "/həˌluːsɪˈneɪʃn/",
+          pos: "n",
+          meaning: "Ảo giác",
+          category: "Disorders",
+        },
+        {
+          word: "Neurosis",
+          phonetic: "/njʊəˈrəʊsɪs/",
+          pos: "n",
+          meaning: "Rối loạn thần kinh chức năng",
+          category: "Disorders",
+        },
+        {
+          word: "Psychosis",
+          phonetic: "/saɪˈkəʊsɪs/",
+          pos: "n",
+          meaning: "Rối loạn tâm thần nặng",
+          category: "Disorders",
+        },
+
+        // 5. Trị liệu & Chẩn đoán
+        {
+          word: "Psychotherapy",
+          phonetic: "/ˌsaɪkəʊˈθerəpi/",
+          pos: "n",
+          meaning: "Liệu pháp tâm lý",
+          category: "Therapy",
+        },
+        {
+          word: "Counseling",
+          phonetic: "/ˈkaʊnsəlɪŋ/",
+          pos: "n",
+          meaning: "Tư vấn tâm lý",
+          category: "Therapy",
+        },
+        {
+          word: "Psychiatrist",
+          phonetic: "/saɪˈkaɪətrɪst/",
+          pos: "n",
+          meaning: "Bác sĩ tâm thần",
+          category: "Therapy",
+        },
+        {
+          word: "Psychologist",
+          phonetic: "/saɪˈkɒlədʒɪst/",
+          pos: "n",
+          meaning: "Nhà tâm lý học",
+          category: "Therapy",
+        },
+        {
+          word: "Diagnosis",
+          phonetic: "/ˌdaɪəɡˈnəʊsɪs/",
+          pos: "n",
+          meaning: "Sự chẩn đoán",
+          category: "Therapy",
+        },
+        {
+          word: "Intervention",
+          phonetic: "/ˌɪntəˈvenʃn/",
+          pos: "n",
+          meaning: "Sự can thiệp tâm lý",
+          category: "Therapy",
+        },
+        {
+          word: "Catharsis",
+          phonetic: "/kəˈθɑːsɪs/",
+          pos: "n",
+          meaning: "Sự giải tỏa cảm xúc",
+          category: "Therapy",
+        },
+        {
+          word: "Coping Mechanism",
+          phonetic: "/ˈkəʊpɪŋ ˈmekənɪzəm/",
+          pos: "n",
+          meaning: "Cơ chế ứng phó",
+          category: "Therapy",
+        },
+        {
+          word: "CBT",
+          phonetic: "/ˌsiː.biːˈtiː/",
+          pos: "n",
+          meaning: "Liệu pháp nhận thức - hành vi",
+          category: "Therapy",
+        },
+        {
+          word: "Remission",
+          phonetic: "/rɪˈmɪʃn/",
+          pos: "n",
+          meaning: "Sự thuyên giảm bệnh",
+          category: "Therapy",
+        },
+      ];
+
+      let currentCategory = "all";
+
+      function renderCards(data) {
+        const grid = document.getElementById("vocabGrid");
+        grid.innerHTML = data
+          .map(
+            (item, index) => `
+        <div class="card-container">
+            <div class="flashcard" onclick="flipCard(this)">
+                <!-- Mặt trước thẻ -->
+                <div class="card-front">
+                    <div>
+                        <span class="category-badge">${item.category}</span>
+                        <div class="word-title">${item.word}</div>
+                        <div class="phonetic">${item.phonetic}</div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <button class="audio-btn" onclick="speakWord(event, '${item.word}')" title="Phát âm">🔊</button>
+                        <span class="hint-text">Nhấp để xem nghĩa ↻</span>
+                    </div>
+                </div>
+                <!-- Mặt sau thẻ -->
+                <div class="card-back">
+                    <div>
+                        <span class="category-badge">${item.category}</span>
+                        <div class="meaning">${item.meaning}</div>
+                        <span class="type-tag">Loại từ: (${item.pos})</span>
+                    </div>
+                    <div class="hint-text">Nhấp để lật lại ↻</div>
+                </div>
+            </div>
+        </div>
+    `,
+          )
+          .join("");
+      }
+
+      function flipCard(card) {
+        card.classList.toggle("flipped");
+      }
+
+      function speakWord(event, word) {
+        event.stopPropagation(); // Ngăn lật thẻ khi bấm nút âm thanh
+        if ("speechSynthesis" in window) {
+          const utterance = new SpeechSynthesisUtterance(word);
+          utterance.lang = "en-US";
+          window.speechSynthesis.speak(utterance);
+        }
+      }
+
+      function setCategory(cat, btn) {
+        currentCategory = cat;
+        document
+          .querySelectorAll(".tag-btn")
+          .forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        filterWords();
+      }
+
+      function filterWords() {
+        const query = document
+          .getElementById("searchInput")
+          .value.toLowerCase();
+        const filtered = vocabulary.filter((item) => {
+          const matchesCat =
+            currentCategory === "all" || item.category === currentCategory;
+          const matchesQuery =
+            item.word.toLowerCase().includes(query) ||
+            item.meaning.toLowerCase().includes(query);
+          return matchesCat && matchesQuery;
+        });
+        renderCards(filtered);
+      }
+
+      // Khởi tạo hiển thị ban đầu
+      renderCards(vocabulary);
+    </script>
+  </body>
+</html>
