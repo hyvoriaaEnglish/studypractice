@@ -1,0 +1,573 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bài Tập Trắc Nghiệm Từ Vựng Tiếng Anh</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        /* Bảng màu Vintage Nâu & Nâu Cam */
+        --bg-color: #f7f1e5;
+        --card-bg: #fffcf7;
+        --primary-color: #c86b27;
+        --primary-hover: #faedd9;
+        --text-dark: #432818;
+        --text-muted: #855835;
+        --border-color: #e7d7c1;
+
+        /* Trạng thái Đúng / Sai kiểu Vintage */
+        --success-color: #43766c;
+        --success-bg: #e8f3f1;
+        --success-text: #22423d;
+        --error-color: #b85042;
+        --error-bg: #fbebe8;
+        --error-text: #6b251a;
+
+        --shadow-sm: 0 4px 20px rgba(67, 40, 24, 0.05);
+        --shadow-md: 0 10px 25px rgba(67, 40, 24, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-dark);
+        font-family: "Plus Jakarta Sans", sans-serif;
+        line-height: 1.6;
+        padding: 40px 20px;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 35px;
+        padding: 35px 25px;
+        background: var(--card-bg);
+        border-radius: 16px;
+        box-shadow: var(--shadow-sm);
+        border: 2px solid var(--border-color);
+      }
+
+      header h1 {
+        font-family: "Lora", serif;
+        color: var(--primary-color);
+        font-size: 2.2rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+        letter-spacing: -0.5px;
+      }
+
+      header p {
+        color: var(--text-muted);
+        font-size: 0.98rem;
+        font-weight: 500;
+      }
+
+      .question-card {
+        background: var(--card-bg);
+        border-radius: 16px;
+        padding: 28px;
+        margin-bottom: 24px;
+        box-shadow: var(--shadow-sm);
+        border: 1px solid var(--border-color);
+        transition: all 0.25s ease;
+      }
+
+      .question-card:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+        border-color: var(--primary-color);
+      }
+
+      .question-title {
+        font-family: "Lora", serif;
+        font-size: 1.15rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: var(--text-dark);
+        line-height: 1.6;
+      }
+
+      .options-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 12px;
+      }
+
+      .option-btn {
+        background: #ffffff;
+        border: 1.5px solid var(--border-color);
+        border-radius: 10px;
+        padding: 14px 18px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        text-align: left;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        outline: none;
+      }
+
+      .option-btn:hover:not([disabled]) {
+        border-color: var(--primary-color);
+        background: var(--primary-hover);
+        color: var(--primary-color);
+      }
+
+      .option-btn.correct {
+        background-color: var(--success-bg) !important;
+        border-color: var(--success-color) !important;
+        color: var(--success-text) !important;
+        font-weight: 700;
+      }
+
+      .option-btn.wrong {
+        background-color: var(--error-bg) !important;
+        border-color: var(--error-color) !important;
+        color: var(--error-text) !important;
+      }
+
+      .option-btn[disabled] {
+        cursor: default;
+        opacity: 0.85;
+      }
+
+      .explanation {
+        display: none;
+        margin-top: 20px;
+        padding: 16px 20px;
+        border-radius: 10px;
+        font-size: 0.95rem;
+        animation: fadeIn 0.3s ease;
+        line-height: 1.6;
+      }
+
+      .explanation.show {
+        display: block;
+      }
+
+      .explanation.correct-exp {
+        background-color: var(--success-bg);
+        border-left: 5px solid var(--success-color);
+        color: var(--success-text);
+      }
+
+      .explanation.wrong-exp {
+        background-color: var(--error-bg);
+        border-left: 5px solid var(--error-color);
+        color: var(--error-text);
+      }
+
+      .explanation strong {
+        font-size: 0.98rem;
+        display: inline-block;
+        margin-bottom: 4px;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-6px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 640px) {
+        body {
+          padding: 20px 12px;
+        }
+        header h1 {
+          font-size: 1.75rem;
+        }
+        .options-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Bài Tập Trắc Nghiệm Từ Vựng</h1>
+        <p>
+          Chọn đáp án đúng cho mỗi câu để xem kết quả và giải thích chi tiết.
+        </p>
+      </header>
+
+      <div id="quiz-container"></div>
+    </div>
+
+    <script>
+      const quizData = [
+        {
+          q: "1. The group became increasingly ________ in their demands, organizing aggressive protests across the capital.",
+          options: [
+            "A. militant",
+            "B. flawless",
+            "C. impressionable",
+            "D. philosophical",
+          ],
+          answer: 0,
+          explain:
+            "<b>Militant:</b> Chiến đấu, hung hăng, dùng đến biện pháp mạnh để đạt mục đích.",
+        },
+        {
+          q: "2. He is so ________ that he never listens to anyone else's point of view during team meetings.",
+          options: [
+            "A. philosophical",
+            "B. opinionated",
+            "C. indestructible",
+            "D. telegenic",
+          ],
+          answer: 1,
+          explain:
+            "<b>Opinionated:</b> Bảo thủ, khăng khăng giữ ý kiến cá nhân.",
+        },
+        {
+          q: "3. Her ________ focus on winning the championship left her with little time for a social life.",
+          options: [
+            "A. single-minded",
+            "B. impressionable",
+            "C. outright",
+            "D. preliminary",
+          ],
+          answer: 0,
+          explain:
+            "<b>Single-minded:</b> Chuyên tâm, chỉ tập trung vào một mục tiêu duy nhất.",
+        },
+        {
+          q: "4. When the fire alarm went off, she completely lost her ________ and began running around in panic.",
+          options: ["A. mind", "B. head", "C. brain", "D. heart"],
+          answer: 1,
+          explain:
+            "<b>Lose one’s head:</b> Hoảng loạn, mất trí, không giữ được bình tĩnh.",
+        },
+        {
+          q: "5. After years of hard work, he finally managed to ________ his dream of becoming a published author.",
+          options: ["A. realize", "B. envision", "C. warrant", "D. sidestep"],
+          answer: 0,
+          explain:
+            "<b>Realise one’s ambition:</b> Thực hiện/đạt được hoài bão, ước mơ.",
+        },
+        {
+          q: "6. We didn't ________ on such a sudden change in market prices when we prepared the budget.",
+          options: ["A. factor", "B. count", "C. depend", "D. rely"],
+          answer: 0,
+          explain:
+            "<b>Factor on:</b> Tính đến, cân nhắc đến điều gì khi lập kế hoạch.",
+        },
+        {
+          q: "7. The project took much longer than expected because we didn't ________ on bad weather conditions.",
+          options: ["A. bargain", "B. rely", "C. account", "D. figure"],
+          answer: 0,
+          explain:
+            "<b>Bargain on:</b> Dự tính trước, lường trước điều gì sẽ xảy ra.",
+        },
+        {
+          q: "8. We should hurry up; it is getting on ________ 10 o'clock and the train leaves soon.",
+          options: ["A. for", "B. to", "C. at", "D. in"],
+          answer: 0,
+          explain: "<b>Get on for:</b> Sắp đến/gần tới (thời gian, độ tuổi).",
+        },
+        {
+          q: "9. The scientific data collected during the experiment bears ________ his original hypothesis.",
+          options: ["A. out", "B. up", "C. on", "D. with"],
+          answer: 0,
+          explain: "<b>Bear out:</b> Xác nhận, chứng minh điều gì là đúng.",
+        },
+        {
+          q: "10. This old laptop is on its last ________; the battery barely holds a charge for twenty minutes.",
+          options: ["A. legs", "B. feet", "C. leg", "D. breath"],
+          answer: 2,
+          explain:
+            "<b>On its last leg:</b> Sắp hỏng, rệu rã, không còn hoạt động tốt nữa.",
+        },
+        {
+          q: "11. Everyone thoroughly enjoyed ________ at the annual company gala dinner last night.",
+          options: ["A. them", "B. themselves", "C. oneself", "D. self"],
+          answer: 1,
+          explain:
+            "<b>Thoroughly enjoy oneself:</b> Rất vui vẻ, tận hưởng thời gian tuyệt vời.",
+        },
+        {
+          q: "12. Filling out endless administrative paperwork every single day is a real pain in the ________.",
+          options: ["A. back", "B. head", "C. neck", "D. shoulder"],
+          answer: 2,
+          explain:
+            "<b>A real pain in the neck:</b> Thứ gì đó rất phiền phức, gây khó chịu.",
+        },
+        {
+          q: "13. Having lived in Madrid for five years, she has an excellent ________ of Spanish.",
+          options: ["A. command", "B. control", "C. grasp", "D. mastery"],
+          answer: 0,
+          explain:
+            "<b>Have an excellent command of:</b> Thành thạo, có khả năng sử dụng ngôn ngữ/kỹ năng xuất sắc.",
+        },
+        {
+          q: "14. From a young age, he showed that he had a ________ for creative writing and storytelling.",
+          options: ["A. flair", "B. gift", "C. taste", "D. skill"],
+          answer: 0,
+          explain: "<b>Have a flair for:</b> Có tài năng thiên bẩm về cái gì.",
+        },
+        {
+          q: "15. She was over the ________ when she found out she was accepted into her top-choice university.",
+          options: ["A. sky", "B. moon", "C. clouds", "D. stars"],
+          answer: 1,
+          explain: "<b>Over the moon:</b> Cực kỳ vui mừng, sung sướng.",
+        },
+        {
+          q: "16. The minor infraction was not serious enough to ________ a full internal investigation.",
+          options: ["A. warrant", "B. envision", "C. demand", "D. guarantee"],
+          answer: 0,
+          explain:
+            "<b>Warrant:</b> Đòi hỏi, xứng đáng với, bào chữa cho điều gì.",
+        },
+        {
+          q: "17. The CEO presented a bold strategy that envisioned ________ into several new European markets.",
+          options: [
+            "A. expanding",
+            "B. expand",
+            "C. expansion",
+            "D. to expand",
+          ],
+          answer: 0,
+          explain:
+            "<b>Envision:</b> Hình dung, múc tiêu hướng tới (thường đi với V-ing/N).",
+        },
+        {
+          q: "18. The pianist delivered a ________ performance, leaving the audience utterly spellbound.",
+          options: ["A. flawless", "B. flaw", "C. flawed", "D. flawlessness"],
+          answer: 0,
+          explain: "<b>Flawless:</b> Hoàn hảo, không có vết nhược điểm nào.",
+        },
+        {
+          q: "19. The celebrity sued the newspaper for ________ after they published untrue personal rumors.",
+          options: [
+            "A. defamation",
+            "B. defense",
+            "C. instruction",
+            "D. declaration",
+          ],
+          answer: 0,
+          explain: "<b>Defamation:</b> Sự bôi nhọ, phỉ báng danh dự.",
+        },
+        {
+          q: "20. The fishermen set sail at ________ to catch the fresh early morning haul.",
+          options: ["A. daybreak", "B. daylight", "C. daytime", "D. days"],
+          answer: 0,
+          explain: "<b>Daybreak:</b> Rạng đông, bình minh.",
+        },
+        {
+          q: "21. The museum features an exceptional collection of historical artifacts and rare ________.",
+          options: ["A. rarities", "B. rareness", "C. rarely", "D. rare"],
+          answer: 0,
+          explain: "<b>Rarities:</b> Những vật quý hiếm, của hiếm.",
+        },
+        {
+          q: "22. Reading fantasy novels provides a welcome form of ________ from everyday academic stress.",
+          options: ["A. escapism", "B. escape", "C. escapist", "D. escaping"],
+          answer: 0,
+          explain:
+            "<b>Escapism:</b> Khuynh hướng thoát khỏi thực tế (qua giải trí, sách báo...).",
+        },
+        {
+          q: "23. The company issued an ________ denial regarding the allegations of financial fraud.",
+          options: [
+            "A. outright",
+            "B. outgoing",
+            "C. outstanding",
+            "D. outrageous",
+          ],
+          answer: 0,
+          explain: "<b>Outright:</b> Dứt khoát, thẳng thừng, toàn bộ.",
+        },
+        {
+          q: "24. Heavy military tanks are built with reinforced armor to make them almost ________.",
+          options: [
+            "A. indestructible",
+            "B. destruction",
+            "C. destructive",
+            "D. destroyable",
+          ],
+          answer: 0,
+          explain: "<b>Indestructible:</b> Không thể phá hủy, cực kỳ bền chắc.",
+        },
+        {
+          q: "25. The rural region underwent rapid modernization following the successful ________ of its villages.",
+          options: [
+            "A. electrification",
+            "B. electricity",
+            "C. electric",
+            "D. electrify",
+          ],
+          answer: 0,
+          explain:
+            "<b>Electrification:</b> Sự điện khí hóa, đưa điện về làng xã.",
+        },
+        {
+          q: "26. The veteran sports ________ gave an energetic play-by-play analysis during the final match.",
+          options: [
+            "A. commentator",
+            "B. commentary",
+            "C. comment",
+            "D. commentating",
+          ],
+          answer: 0,
+          explain: "<b>Commentator:</b> Bình luận viên (thể thao, tin tức).",
+        },
+        {
+          q: "27. Young adolescents are highly ________ and can be easily influenced by content on social media.",
+          options: [
+            "A. impressionable",
+            "B. impressive",
+            "C. impression",
+            "D. impress",
+          ],
+          answer: 0,
+          explain: "<b>Impressionable:</b> Dễ bị ảnh hưởng, nhạy cảm.",
+        },
+        {
+          q: "28. Despite facing major delays, the project leader remained ________ and focused on solutions.",
+          options: [
+            "A. philosophical",
+            "B. philosophy",
+            "C. philosopher",
+            "D. philosophize",
+          ],
+          answer: 0,
+          explain:
+            "<b>Philosophical:</b> Thản nhiên, bình thản đối mặt với khó khăn.",
+        },
+        {
+          q: "29. The proposal was rejected ________ by the committee because it lacked financial feasibility.",
+          options: ["A. outright", "B. outside", "C. outraged", "D. outfit"],
+          answer: 0,
+          explain: "<b>Outright:</b> Ngay lập tức, hoàn toàn, thẳng thừng.",
+        },
+        {
+          q: "30. He was so passionate about his political views that people often considered him ________.",
+          options: [
+            "A. opinionated",
+            "B. opinion",
+            "C. optionally",
+            "D. opted",
+          ],
+          answer: 0,
+          explain: "<b>Opinionated:</b> Khăng khăng giữ ý kiến của mình.",
+        },
+        {
+          q: "31. The union members showed a ________ stance during the negotiations for better wages.",
+          options: [
+            "A. militant",
+            "B. military",
+            "C. militarize",
+            "D. mindful",
+          ],
+          answer: 0,
+          explain: "<b>Militant:</b> Quyết liệt, mang tính đấu tranh mạnh mẽ.",
+        },
+        {
+          q: "32. It is getting ________ for 11 o'clock, so we had better wrap up this meeting.",
+          options: ["A. on for", "B. in for", "C. out for", "D. up for"],
+          answer: 0,
+          explain: "<b>Get on for:</b> Tiến gần tới thời gian muộn hơn.",
+        },
+        {
+          q: "33. If you want to achieve your career goals, you must remain ________ about your development.",
+          options: [
+            "A. single-minded",
+            "B. open-minded",
+            "C. absent-minded",
+            "D. narrow-minded",
+          ],
+          answer: 0,
+          explain:
+            "<b>Single-minded:</b> Một lòng một dạ, tập trung cao độ vào 1 mục tiêu.",
+        },
+        {
+          q: "34. The testimony given by the eye witness failed to bear ________ the prosecution's claims.",
+          options: ["A. out", "B. in", "C. down", "D. up"],
+          answer: 0,
+          explain: "<b>Bear out:</b> Xác minh, chứng minh điều gì đó là đúng.",
+        },
+      ];
+
+      function renderQuiz() {
+        const container = document.getElementById("quiz-container");
+
+        quizData.forEach((item, qIndex) => {
+          const card = document.createElement("div");
+          card.className = "question-card";
+
+          const title = document.createElement("div");
+          title.className = "question-title";
+          title.innerHTML = item.q;
+          card.appendChild(title);
+
+          const optionsGrid = document.createElement("div");
+          optionsGrid.className = "options-grid";
+
+          item.options.forEach((opt, oIndex) => {
+            const btn = document.createElement("button");
+            btn.className = "option-btn";
+            btn.innerText = opt;
+            btn.onclick = () => checkAnswer(qIndex, oIndex);
+            optionsGrid.appendChild(btn);
+          });
+
+          card.appendChild(optionsGrid);
+
+          const exp = document.createElement("div");
+          exp.id = `exp-${qIndex}`;
+          exp.className = "explanation";
+          card.appendChild(exp);
+
+          container.appendChild(card);
+        });
+      }
+
+      function checkAnswer(questionIndex, selectedOption) {
+        const item = quizData[questionIndex];
+        const card = document.querySelectorAll(".question-card")[questionIndex];
+        const buttons = card.querySelectorAll(".option-btn");
+        const expBox = document.getElementById(`exp-${questionIndex}`);
+
+        buttons.forEach((btn, idx) => {
+          btn.disabled = true;
+          if (idx === item.answer) {
+            btn.classList.add("correct");
+          }
+        });
+
+        if (selectedOption === item.answer) {
+          expBox.className = "explanation show correct-exp";
+          expBox.innerHTML = `<strong> Chính xác!</strong><br>${item.explain}`;
+        } else {
+          buttons[selectedOption].classList.add("wrong");
+          expBox.className = "explanation show wrong-exp";
+          expBox.innerHTML = `<strong> Chưa chính xác!</strong><br>Đáp án đúng: <b>${item.options[item.answer]}</b><br>${item.explain}`;
+        }
+      }
+
+      renderQuiz();
+    </script>
+  </body>
+</html>

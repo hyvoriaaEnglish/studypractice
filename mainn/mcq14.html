@@ -1,0 +1,749 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luyện Tập Từ Vựng Tiếng Anh - Set 2</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --emerald-main: #00a86b;
+        --emerald-dark: #007a4d;
+        --emerald-soft: #e8f8f2;
+        --ocean-main: #0077b6;
+        --ocean-dark: #023e8a;
+        --ocean-soft: #e0f2fe;
+        --bg-grad-1: #e0f2fe;
+        --bg-grad-2: #e8f8f2;
+        --text-dark: #1e293b;
+        --text-muted: #64748b;
+        --correct-bg: #dcfce7;
+        --correct-border: #22c55e;
+        --correct-text: #15803d;
+        --incorrect-bg: #fee2e2;
+        --incorrect-border: #ef4444;
+        --incorrect-text: #b91c1c;
+        --card-shadow: 0 10px 30px rgba(0, 119, 182, 0.08);
+        --card-shadow-hover: 0 15px 35px rgba(0, 119, 182, 0.15);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Plus Jakarta Sans", sans-serif;
+      }
+
+      body {
+        background: linear-gradient(
+          135deg,
+          var(--bg-grad-1) 0%,
+          var(--bg-grad-2) 100%
+        );
+        background-attachment: fixed;
+        color: var(--text-dark);
+        padding: 40px 20px;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      header {
+        text-align: center;
+        background: #ffffff;
+        padding: 35px 25px;
+        border-radius: 24px;
+        box-shadow: var(--card-shadow);
+        border: 2px solid #bae6fd;
+        margin-bottom: 30px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 8px;
+        background: linear-gradient(
+          90deg,
+          var(--emerald-main),
+          var(--ocean-main)
+        );
+      }
+
+      h1 {
+        color: var(--ocean-dark);
+        font-size: 2rem;
+        font-weight: 800;
+        margin-bottom: 10px;
+        letter-spacing: -0.5px;
+      }
+
+      .subtitle {
+        color: var(--text-muted);
+        font-size: 1rem;
+        font-weight: 500;
+      }
+
+      .stats-bar {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background: #ffffff;
+        padding: 15px 25px;
+        border-radius: 16px;
+        margin-bottom: 30px;
+        box-shadow: var(--card-shadow);
+        border: 1px solid #a7f3d0;
+      }
+
+      .stat-item {
+        text-align: center;
+      }
+
+      .stat-value {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: var(--ocean-main);
+      }
+
+      .stat-label {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      .question-card {
+        background: #ffffff;
+        border-radius: 20px;
+        padding: 28px;
+        margin-bottom: 25px;
+        box-shadow: var(--card-shadow);
+        border: 2px solid #f0fdf4;
+        transition: all 0.3s ease;
+      }
+
+      .question-card:hover {
+        box-shadow: var(--card-shadow-hover);
+      }
+
+      .question-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 18px;
+      }
+
+      .question-number {
+        background: linear-gradient(
+          135deg,
+          var(--emerald-main),
+          var(--ocean-main)
+        );
+        color: #ffffff;
+        font-weight: 800;
+        font-size: 0.95rem;
+        padding: 6px 16px;
+        border-radius: 30px;
+        margin-right: 15px;
+        box-shadow: 0 4px 10px rgba(0, 168, 107, 0.25);
+      }
+
+      .question-text {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        flex: 1;
+      }
+
+      .options-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-top: 15px;
+      }
+
+      @media (min-width: 600px) {
+        .options-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      .option-btn {
+        background: #f8fafc;
+        border: 2px solid #e2e8f0;
+        border-radius: 14px;
+        padding: 14px 18px;
+        text-align: left;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+      }
+
+      .option-btn:hover:not([disabled]) {
+        border-color: var(--emerald-main);
+        background: var(--emerald-soft);
+        transform: translateY(-2px);
+      }
+
+      .option-btn .prefix {
+        display: inline-block;
+        width: 28px;
+        height: 28px;
+        line-height: 28px;
+        text-align: center;
+        background: #e2e8f0;
+        color: var(--text-muted);
+        border-radius: 50%;
+        margin-right: 12px;
+        font-weight: 700;
+        font-size: 0.85rem;
+        transition: all 0.2s ease;
+      }
+
+      .option-btn:hover:not([disabled]) .prefix {
+        background: var(--emerald-main);
+        color: #ffffff;
+      }
+
+      /* State Classes */
+      .option-btn.correct {
+        background: var(--correct-bg) !important;
+        border-color: var(--correct-border) !important;
+        color: var(--correct-text) !important;
+      }
+
+      .option-btn.correct .prefix {
+        background: var(--correct-border) !important;
+        color: #ffffff !important;
+      }
+
+      .option-btn.incorrect {
+        background: var(--incorrect-bg) !important;
+        border-color: var(--incorrect-border) !important;
+        color: var(--incorrect-text) !important;
+      }
+
+      .option-btn.incorrect .prefix {
+        background: var(--incorrect-border) !important;
+        color: #ffffff !important;
+      }
+
+      .option-btn[disabled] {
+        cursor: default;
+        opacity: 0.85;
+      }
+
+      /* Explanation Box */
+      .explanation {
+        display: none;
+        margin-top: 20px;
+        padding: 18px 20px;
+        border-radius: 14px;
+        background: var(--ocean-soft);
+        border-left: 5px solid var(--ocean-main);
+        box-shadow: 0 4px 12px rgba(0, 119, 182, 0.08);
+      }
+
+      .explanation.show {
+        display: block;
+        animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .explanation-title {
+        font-weight: 800;
+        font-size: 0.95rem;
+        margin-bottom: 6px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .explanation-title.correct-title {
+        color: var(--correct-text);
+      }
+
+      .explanation-title.incorrect-title {
+        color: var(--incorrect-text);
+      }
+
+      .explanation-text {
+        font-size: 0.95rem;
+        color: #334155;
+      }
+
+      .explanation-text strong {
+        color: var(--ocean-dark);
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      footer {
+        text-align: center;
+        padding: 30px 0;
+        color: var(--text-muted);
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Luyện Tập Từ Vựng Tiếng Anh - Set 2</h1>
+        <p class="subtitle">
+          35 Câu Trắc Nghiệm Tương Tác • Emerald & Ocean Theme
+        </p>
+      </header>
+
+      <div class="stats-bar">
+        <div class="stat-item">
+          <div class="stat-value" id="total-questions">35</div>
+          <div class="stat-label">Tổng số câu</div>
+        </div>
+        <div class="stat-item">
+          <div
+            class="stat-value"
+            id="answered-count"
+            style="color: var(--ocean-main)"
+          >
+            0
+          </div>
+          <div class="stat-label">Đã làm</div>
+        </div>
+        <div class="stat-item">
+          <div
+            class="stat-value"
+            id="score-count"
+            style="color: var(--emerald-main)"
+          >
+            0
+          </div>
+          <div class="stat-label">Đúng</div>
+        </div>
+      </div>
+
+      <div id="quiz-container">
+        <!-- Questions will be rendered here by JS -->
+      </div>
+
+      <footer>Chúc bạn học tập hiệu quả & đạt kết quả cao! 🌿🌊</footer>
+    </div>
+
+    <script>
+      const quizData = [
+        {
+          q: "The couple decided to seek marriage counseling because their relationship had been ________ for months.",
+          options: [
+            "under the onslaught of",
+            "on the rocks",
+            "go ex-directory",
+            "crowding-out effect",
+          ],
+          answer: 1,
+          explain:
+            "<strong>be on the rocks</strong>: gặp trục trặc, có nguy cơ đổ vỡ (quan hệ, hôn nhân).",
+        },
+        {
+          q: "Don't believe a word he says; his explanation about where the money went was complete ________.",
+          options: ["misnomer", "backup", "a pack of lies", "provision"],
+          answer: 2,
+          explain: "<strong>a pack of lies</strong>: toàn là dối trá, bịa đặt.",
+        },
+        {
+          q: "The proofreader seems to ________; she spotted even the smallest typos in the 300-page manuscript.",
+          options: [
+            "stand to reason",
+            "have eyes like a hawk",
+            "go ex-directory",
+            "stir up trouble",
+          ],
+          answer: 1,
+          explain:
+            "<strong>have eyes like a hawk</strong>: mắt tinh như diều hâu, quan sát rất tỉ mỉ.",
+        },
+        {
+          q: "Due to the severe storm damage, the company had to pay a ________ sum to repair the factory roof.",
+          options: ["hefty", "housebound", "subdued", "interspecies"],
+          answer: 0,
+          explain:
+            "<strong>hefty</strong>: rất lớn, nặng nề (thường chỉ số tiền hoặc chi phí).",
+        },
+        {
+          q: "The unexpected court ruling threatens to ________ years of established legal precedents.",
+          options: ["upend", "procure", "blurt out", "furrow"],
+          answer: 0,
+          explain: "<strong>upend</strong>: đảo ngược, làm đảo lộn.",
+        },
+        {
+          q: "Construction workers closed the main street, completely cutting off ________ to the residential block.",
+          options: [
+            "crowding-out effect",
+            "vehicular access",
+            "self-evaluation",
+            "anti-depressants",
+          ],
+          answer: 1,
+          explain:
+            "<strong>vehicular access</strong>: lối đi/quyền truy cập cho xe cộ.",
+        },
+        {
+          q: "The doctor prescribed ________ to help manage her chronic anxiety and mood disorders.",
+          options: ["syllabus", "anti-depressants", "misnomer", "knowhow"],
+          answer: 1,
+          explain: "<strong>anti-depressants</strong>: thuốc chống trầm cảm.",
+        },
+        {
+          q: "Due to his severe mobility issues, the elderly man became largely ________ and relied on home delivery services.",
+          options: ["housebound", "hefty", "subdued", "self-regulatory"],
+          answer: 0,
+          explain:
+            "<strong>housebound</strong>: không thể rời khỏi nhà (do ốm đau/già yếu).",
+        },
+        {
+          q: "The 20th century witnessed the rapid ________ of many nations across Africa and Asia as imperial powers withdrew.",
+          options: [
+            "metacognition",
+            "decolonization",
+            "provision",
+            "transaction",
+          ],
+          answer: 1,
+          explain:
+            "<strong>decolonization</strong>: sự phi thực dân hóa (trao trả độc lập).",
+        },
+        {
+          q: "To avoid receiving harassment calls from strangers, she decided to ________ with her telephone provider.",
+          options: ["stand to reason", "go ex-directory", "upend", "hold off"],
+          answer: 1,
+          explain:
+            "<strong>go ex-directory</strong>: rút tên khỏi danh bạ điện thoại công cộng.",
+        },
+        {
+          q: "While the local museum is great, researchers often have to travel ________ to find rare historical artifacts.",
+          options: [
+            "housebound",
+            "further afield",
+            "in full swing",
+            "on the rocks",
+          ],
+          answer: 1,
+          explain:
+            "<strong>further afield</strong>: ở xa hơn, phạm vi rộng hơn.",
+        },
+        {
+          q: "Calling this tiny apartment a 'luxury suite' is a complete ________; it barely fits a bed and a desk.",
+          options: ["misnomer", "backup", "syllabus", "transaction"],
+          answer: 0,
+          explain:
+            "<strong>misnomer</strong>: sự dùng từ sai / tên gọi không phản ánh đúng bản chất.",
+        },
+        {
+          q: "Scientists are studying ________ communication to understand how different animal species interact in the wild.",
+          options: ["interspecies", "self-regulatory", "housebound", "hefty"],
+          answer: 0,
+          explain: "<strong>interspecies</strong>: giữa các loài khác nhau.",
+        },
+        {
+          q: "Increased government borrowing led to high interest rates, causing a ________ that reduced private investment.",
+          options: [
+            "crowding-out effect",
+            "vehicular access",
+            "pecking order",
+            "pack of lies",
+          ],
+          answer: 0,
+          explain:
+            "<strong>crowding-out effect</strong>: hiệu ứng lấn gạt (trong kinh tế vĩ mô).",
+        },
+        {
+          q: "The band played their biggest hit as an encore, which proved to be an absolute ________.",
+          options: ["misnomer", "crowd-pleaser", "backup", "transaction"],
+          answer: 1,
+          explain:
+            "<strong>crowd-pleaser</strong>: điều/người làm hài lòng đám đông.",
+        },
+        {
+          q: "Before updating the operating system, make sure you create a full ________ of all your important files.",
+          options: ["syllabus", "backup", "provision", "knowhow"],
+          answer: 1,
+          explain: "<strong>backup</strong>: sự bản sao lưu dữ liệu.",
+        },
+        {
+          q: "The contract includes a emergency ________ that guarantees financial aid in case of natural disasters.",
+          options: ["provision", "metacognition", "misnomer", "transaction"],
+          answer: 0,
+          explain:
+            "<strong>provision</strong>: điều khoản quy định / sự cung ứng.",
+        },
+        {
+          q: "He was hired for the senior engineering position because he possessed the technical ________ needed for the project.",
+          options: [
+            "syllabus",
+            "knowhow",
+            "decolonization",
+            "anti-depressants",
+          ],
+          answer: 1,
+          explain:
+            "<strong>knowhow</strong>: bí quyết, kiến thức chuyên môn thực tế.",
+        },
+        {
+          q: "She is an ________ talented pianist who won international competitions at the age of twelve.",
+          options: ["brusquely", "exceptionally", "severally", "housebound"],
+          answer: 1,
+          explain:
+            "<strong>exceptionally</strong>: một cách đặc biệt, xuất chúng.",
+        },
+        {
+          q: "The financial industry is subject to both government oversight and strict ________ guidelines.",
+          options: [
+            "self-regulatory",
+            "interspecies",
+            "boisterous",
+            "obstreperous",
+          ],
+          answer: 0,
+          explain:
+            "<strong>self-regulatory</strong>: tự điều chỉnh, tự quản lý.",
+        },
+        {
+          q: "Developing ________ skills allows students to monitor and direct their own learning processes effectively.",
+          options: [
+            "metacognition",
+            "decolonization",
+            "transaction",
+            "provision",
+          ],
+          answer: 0,
+          explain:
+            "<strong>metacognition</strong>: siêu nhận thức (khả năng tư duy về chính tư duy của mình).",
+        },
+        {
+          q: "Reliance on passive ________ in the classroom can hinder students from developing critical thinking skills.",
+          options: [
+            "spoon-feeding",
+            "self-evaluation",
+            "crowding-out effect",
+            "vehicular access",
+          ],
+          answer: 0,
+          explain:
+            "<strong>spoon-feeding</strong>: phương pháp nhồi nhét / đút tận miệng.",
+        },
+        {
+          q: "Regular ________ helps employees reflect on their performance and identify areas for personal growth.",
+          options: ["misnomer", "self-evaluation", "backup", "knowhow"],
+          answer: 1,
+          explain: "<strong>self-evaluation</strong>: sự tự đánh giá bản thân.",
+        },
+        {
+          q: "It ________ that if you do not study for the exam, your chances of passing will be significantly lower.",
+          options: [
+            "stands to reason",
+            "goes ex-directory",
+            "holds off",
+            "stirs up trouble",
+          ],
+          answer: 0,
+          explain:
+            "<strong>stand to reason</strong>: là điều hợp logic, hiển nhiên.",
+        },
+        {
+          q: "On the first day of class, the professor handed out the course ________ outlining all reading assignments and test dates.",
+          options: ["syllabus", "transaction", "misnomer", "backup"],
+          answer: 0,
+          explain: "<strong>syllabus</strong>: đề cương môn học/khóa học.",
+        },
+        {
+          q: "School administrators met to review the academic ________ to ensure it meets updated state standards.",
+          options: [
+            "curriculum",
+            "metacognition",
+            "crowd-pleaser",
+            "provision",
+          ],
+          answer: 0,
+          explain:
+            "<strong>curriculum</strong>: chương trình giảng dạy tổng thể.",
+        },
+        {
+          q: "The doctors decided to pursue ________ to target the aggressive form of cancer immediately.",
+          options: [
+            "aggressive treatment",
+            "crowding-out effect",
+            "self-evaluation",
+            "vehicular access",
+          ],
+          answer: 0,
+          explain:
+            "<strong>aggressive treatment</strong>: phương pháp điều trị tích cực/mạnh tay.",
+        },
+        {
+          q: "The small coastal town was ________ severe winds and heavy rainfall during the typhoon.",
+          options: [
+            "on the rocks",
+            "under the onslaught of",
+            "further afield",
+            "in full swing",
+          ],
+          answer: 1,
+          explain:
+            "<strong>be under the onslaught of</strong>: chịu sự tấn công dữ dội của.",
+        },
+        {
+          q: "Every online bank ________ is encrypted to ensure that customer funds remain secure.",
+          options: ["transaction", "misnomer", "syllabus", "backup"],
+          answer: 0,
+          explain:
+            "<strong>transaction</strong>: giao dịch tài chính/ngân hàng.",
+        },
+        {
+          q: "After receiving the bad news, he remained strangely ________ throughout the rest of the meeting.",
+          options: ["subdued", "hefty", "conspicuous", "boisterous"],
+          answer: 0,
+          explain: "<strong>subdued</strong>: dịu lại, trầm lặng, buồn ủ rủ.",
+        },
+        {
+          q: "The patient had to remain ________ for three weeks following her major knee surgery.",
+          options: ["housebound", "interspecies", "prudent", "self-regulatory"],
+          answer: 0,
+          explain:
+            "<strong>housebound</strong>: phải ở trong nhà không đi đâu được.",
+        },
+        {
+          q: "The term 'koala bear' is a ________ because koalas are actually marsupials, not bears.",
+          options: ["misnomer", "provision", "backup", "knowhow"],
+          answer: 0,
+          explain:
+            "<strong>misnomer</strong>: danh xưng/tên gọi không chính xác.",
+        },
+        {
+          q: "Modern medical research increasingly explores ________ organ transplants to address human organ shortages.",
+          options: ["interspecies", "housebound", "subdued", "hefty"],
+          answer: 0,
+          explain:
+            "<strong>interspecies</strong>: giữa các loài (ghép tạng liên loài).",
+        },
+        {
+          q: "Good educational programs encourage independent problem-solving rather than mere ________ of information.",
+          options: [
+            "spoon-feeding",
+            "decolonization",
+            "metacognition",
+            "transaction",
+          ],
+          answer: 0,
+          explain:
+            "<strong>spoon-feeding</strong>: việc dạy kiểu nhồi nhét thụ động.",
+        },
+        {
+          q: "The mood at the dinner party became ________ after the host announced some tragic news.",
+          options: ["subdued", "boisterous", "conspicuous", "exceptionally"],
+          answer: 0,
+          explain:
+            "<strong>subdued</strong>: không khí lắng xuống, tĩnh lặng/trầm buồn.",
+        },
+      ];
+
+      let answeredCount = 0;
+      let scoreCount = 0;
+
+      const quizContainer = document.getElementById("quiz-container");
+
+      function renderQuiz() {
+        quizData.forEach((item, index) => {
+          const card = document.createElement("div");
+          card.className = "question-card";
+          card.id = `q-card-${index}`;
+
+          const prefixLabels = ["A", "B", "C", "D"];
+
+          let optionsHTML = "";
+          item.options.forEach((opt, optIdx) => {
+            optionsHTML += `
+                        <button class="option-btn" onclick="checkAnswer(${index}, ${optIdx})">
+                            <span class="prefix">${prefixLabels[optIdx]}</span>
+                            <span>${opt}</span>
+                        </button>
+                    `;
+          });
+
+          card.innerHTML = `
+                    <div class="question-header">
+                        <span class="question-number">Câu ${index + 1}</span>
+                        <div class="question-text">${item.q}</div>
+                    </div>
+                    <div class="options-grid">
+                        ${optionsHTML}
+                    </div>
+                    <div class="explanation" id="explain-${index}">
+                        <div class="explanation-title" id="explain-title-${index}"></div>
+                        <div class="explanation-text">${item.explain}</div>
+                    </div>
+                `;
+
+          quizContainer.appendChild(card);
+        });
+      }
+
+      function checkAnswer(qIdx, selectedOptIdx) {
+        const card = document.getElementById(`q-card-${qIdx}`);
+        const buttons = card.querySelectorAll(".option-btn");
+        const explainBox = document.getElementById(`explain-${qIdx}`);
+        const explainTitle = document.getElementById(`explain-title-${qIdx}`);
+        const correctOptIdx = quizData[qIdx].answer;
+
+        // Disable all buttons for this question
+        buttons.forEach((btn) => btn.setAttribute("disabled", "true"));
+
+        // Check correct or incorrect
+        if (selectedOptIdx === correctOptIdx) {
+          buttons[selectedOptIdx].classList.add("correct");
+          explainTitle.className = "explanation-title correct-title";
+          explainTitle.innerHTML = "✨ Chính xác!";
+          scoreCount++;
+        } else {
+          buttons[selectedOptIdx].classList.add("incorrect");
+          buttons[correctOptIdx].classList.add("correct");
+          explainTitle.className = "explanation-title incorrect-title";
+          explainTitle.innerHTML = "❌ Chưa chính xác!";
+        }
+
+        explainBox.classList.add("show");
+
+        // Update Stats
+        answeredCount++;
+        document.getElementById("answered-count").innerText = answeredCount;
+        document.getElementById("score-count").innerText = scoreCount;
+      }
+
+      // Initialize Quiz
+      renderQuiz();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,730 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luyện Tập Từ Vựng Tiếng Anh - 35 Câu Trắc Nghiệm</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --pink-main: #ff6b8b;
+        --pink-soft: #ffeef2;
+        --pink-light: #fff5f7;
+        --pink-dark: #d84365;
+        --yellow-main: #ffbe0b;
+        --yellow-soft: #fff9e6;
+        --yellow-border: #ffd000;
+        --bg-grad-1: #fff5f7;
+        --bg-grad-2: #fff9e6;
+        --text-dark: #2d3142;
+        --text-muted: #6c757d;
+        --correct-bg: #e8f5e9;
+        --correct-border: #4caf50;
+        --correct-text: #2e7d32;
+        --incorrect-bg: #ffebee;
+        --incorrect-border: #ef5350;
+        --incorrect-text: #c62828;
+        --card-shadow: 0 10px 30px rgba(255, 107, 139, 0.08);
+        --card-shadow-hover: 0 15px 35px rgba(255, 107, 139, 0.15);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Plus Jakarta Sans", sans-serif;
+      }
+
+      body {
+        background: linear-gradient(
+          135deg,
+          var(--bg-grad-1) 0%,
+          var(--bg-grad-2) 100%
+        );
+        background-attachment: fixed;
+        color: var(--text-dark);
+        padding: 40px 20px;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      header {
+        text-align: center;
+        background: #ffffff;
+        padding: 35px 25px;
+        border-radius: 24px;
+        box-shadow: var(--card-shadow);
+        border: 2px solid #ffe3ec;
+        margin-bottom: 30px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 8px;
+        background: linear-gradient(
+          90deg,
+          var(--pink-main),
+          var(--yellow-main)
+        );
+      }
+
+      h1 {
+        color: var(--pink-dark);
+        font-size: 2rem;
+        font-weight: 800;
+        margin-bottom: 10px;
+        letter-spacing: -0.5px;
+      }
+
+      .subtitle {
+        color: var(--text-muted);
+        font-size: 1rem;
+        font-weight: 500;
+      }
+
+      .stats-bar {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background: #ffffff;
+        padding: 15px 25px;
+        border-radius: 16px;
+        margin-bottom: 30px;
+        box-shadow: var(--card-shadow);
+        border: 1px solid #ffecb3;
+      }
+
+      .stat-item {
+        text-align: center;
+      }
+
+      .stat-value {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: var(--pink-main);
+      }
+
+      .stat-label {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      .question-card {
+        background: #ffffff;
+        border-radius: 20px;
+        padding: 28px;
+        margin-bottom: 25px;
+        box-shadow: var(--card-shadow);
+        border: 2px solid #fff0f3;
+        transition: all 0.3s ease;
+      }
+
+      .question-card:hover {
+        box-shadow: var(--card-shadow-hover);
+      }
+
+      .question-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 18px;
+      }
+
+      .question-number {
+        background: linear-gradient(135deg, var(--pink-main), #ff8ea5);
+        color: #ffffff;
+        font-weight: 800;
+        font-size: 0.95rem;
+        padding: 6px 16px;
+        border-radius: 30px;
+        margin-right: 15px;
+        box-shadow: 0 4px 10px rgba(255, 107, 139, 0.3);
+      }
+
+      .question-text {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        flex: 1;
+      }
+
+      .options-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-top: 15px;
+      }
+
+      @media (min-width: 600px) {
+        .options-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      .option-btn {
+        background: #fcfcfc;
+        border: 2px solid #f0f0f0;
+        border-radius: 14px;
+        padding: 14px 18px;
+        text-align: left;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+      }
+
+      .option-btn:hover:not([disabled]) {
+        border-color: var(--yellow-border);
+        background: var(--yellow-soft);
+        transform: translateY(-2px);
+      }
+
+      .option-btn .prefix {
+        display: inline-block;
+        width: 28px;
+        height: 28px;
+        line-height: 28px;
+        text-align: center;
+        background: #f0f0f0;
+        color: var(--text-muted);
+        border-radius: 50%;
+        margin-right: 12px;
+        font-weight: 700;
+        font-size: 0.85rem;
+        transition: all 0.2s ease;
+      }
+
+      .option-btn:hover:not([disabled]) .prefix {
+        background: var(--yellow-main);
+        color: #ffffff;
+      }
+
+      /* State Classes */
+      .option-btn.correct {
+        background: var(--correct-bg) !important;
+        border-color: var(--correct-border) !important;
+        color: var(--correct-text) !important;
+      }
+
+      .option-btn.correct .prefix {
+        background: var(--correct-border) !important;
+        color: #ffffff !important;
+      }
+
+      .option-btn.incorrect {
+        background: var(--incorrect-bg) !important;
+        border-color: var(--incorrect-border) !important;
+        color: var(--incorrect-text) !important;
+      }
+
+      .option-btn.incorrect .prefix {
+        background: var(--incorrect-border) !important;
+        color: #ffffff !important;
+      }
+
+      .option-btn[disabled] {
+        cursor: default;
+        opacity: 0.85;
+      }
+
+      /* Explanation Box */
+      .explanation {
+        display: none;
+        margin-top: 20px;
+        padding: 18px 20px;
+        border-radius: 14px;
+        background: #fffdf5;
+        border-left: 5px solid var(--yellow-main);
+        box-shadow: 0 4px 12px rgba(255, 190, 11, 0.1);
+      }
+
+      .explanation.show {
+        display: block;
+        animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .explanation-title {
+        font-weight: 800;
+        font-size: 0.95rem;
+        margin-bottom: 6px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .explanation-title.correct-title {
+        color: var(--correct-text);
+      }
+
+      .explanation-title.incorrect-title {
+        color: var(--incorrect-text);
+      }
+
+      .explanation-text {
+        font-size: 0.95rem;
+        color: #4a4a4a;
+      }
+
+      .explanation-text strong {
+        color: var(--pink-dark);
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      footer {
+        text-align: center;
+        padding: 30px 0;
+        color: var(--text-muted);
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Luyện Tập Từ Vựng Tiếng Anh</h1>
+        <p class="subtitle">35 Câu Trắc Nghiệm Tương Tác • Pink & Gold Theme</p>
+      </header>
+
+      <div class="stats-bar">
+        <div class="stat-item">
+          <div class="stat-value" id="total-questions">35</div>
+          <div class="stat-label">Tổng số câu</div>
+        </div>
+        <div class="stat-item">
+          <div
+            class="stat-value"
+            id="answered-count"
+            style="color: var(--yellow-main)"
+          >
+            0
+          </div>
+          <div class="stat-label">Đã làm</div>
+        </div>
+        <div class="stat-item">
+          <div
+            class="stat-value"
+            id="score-count"
+            style="color: var(--correct-border)"
+          >
+            0
+          </div>
+          <div class="stat-label">Đúng</div>
+        </div>
+      </div>
+
+      <div id="quiz-container">
+        <!-- Questions will be rendered here by JS -->
+      </div>
+
+      <footer>Chúc bạn học tập hiệu quả & đạt kết quả cao! ✨</footer>
+    </div>
+
+    <script>
+      const quizData = [
+        {
+          q: "The crowd of fans began to ________ around the hotel entrance, hoping to catch a glimpse of the pop star.",
+          options: [
+            "poke around",
+            "mill around",
+            "stir up trouble",
+            "hit the jackpot",
+          ],
+          answer: 1,
+          explain:
+            "<strong>mill around</strong>: đi loanh quanh, tụ tập đông đúc mà không có mục đích rõ ràng.",
+        },
+        {
+          q: "The company decided to ________ the release of their new product until market conditions improved.",
+          options: ["blurt out", "catch on", "hold off", "lap it up"],
+          answer: 2,
+          explain: "<strong>hold off</strong>: trì hoãn, hoãn lại.",
+        },
+        {
+          q: "She is a very ________ investor who never puts all her money into risky assets without doing thorough research.",
+          options: ["obstreperous", "boisterous", "prudent", "hefty"],
+          answer: 2,
+          explain: "<strong>prudent</strong>: thận trọng, khôn ngoan.",
+        },
+        {
+          q: "The teacher tried to calm down the ________ children who were shouting and running around the classroom.",
+          options: ["boisterous", "conspicuous", "prudent", "severely"],
+          answer: 0,
+          explain: "<strong>boisterous</strong>: huyên náo, ồn ào, hiếu động.",
+        },
+        {
+          q: "He spoke so ________ to the receptionist that she felt offended and refused to help him.",
+          options: ["righteousness", "brusquely", "several", "hefty"],
+          answer: 1,
+          explain: "<strong>brusquely</strong>: một cách cộc lốc, lỗ mãng.",
+        },
+        {
+          q: "I am currently ________ work, so I won't be able to join you for dinner tonight.",
+          options: [
+            "snowed under with",
+            "in full swing",
+            "on the rocks",
+            "caught on",
+          ],
+          answer: 0,
+          explain:
+            "<strong>be snowed under with</strong>: ngập đầu trong công việc.",
+        },
+        {
+          q: "The security guard seems to ________; nothing escapes her attention in the building.",
+          options: [
+            "lap it up",
+            "have eyes like a hawk",
+            "hit the jackpot",
+            "poke around",
+          ],
+          answer: 1,
+          explain:
+            "<strong>have eyes like a hawk</strong>: mắt tinh như diều hâu, quan sát rất tỉ mỉ.",
+        },
+        {
+          q: "It took a while, but the new fashion trend finally began to ________ among high school students.",
+          options: ["upend", "procure", "catch on", "blurt out"],
+          answer: 2,
+          explain:
+            "<strong>catch on</strong>: trở nên phổ biến, bắt kịp xu hướng.",
+        },
+        {
+          q: "After buying a single lottery ticket on a whim, he managed to ________ and win ten million dollars.",
+          options: [
+            "hit the jackpot",
+            "stir up trouble",
+            "hold off",
+            "poke around",
+          ],
+          answer: 0,
+          explain:
+            "<strong>hit the jackpot</strong>: trúng số lớn, vơ bẫm / phát tài.",
+        },
+        {
+          q: "The contract was full of legal ________ that nobody in the room could fully comprehend.",
+          options: [
+            "nook and cranny",
+            "pecking order",
+            "mumbo jumbo",
+            "laughing stock",
+          ],
+          answer: 2,
+          explain:
+            "<strong>mumbo jumbo</strong>: ngôn ngữ/thuật ngữ nhảm nhí, rắc rối, khó hiểu.",
+        },
+        {
+          q: "Standing at over six feet tall in a bright red jacket, he was extremely ________ in the crowd.",
+          options: ["obstreperous", "conspicuous", "prudent", "hefty"],
+          answer: 1,
+          explain: "<strong>conspicuous</strong>: dễ thấy, nổi bật, gây chú ý.",
+        },
+        {
+          q: "The detective decided to ________ the abandoned warehouse to look for any hidden evidence.",
+          options: ["blurt out", "lap it up", "poke around", "upend"],
+          answer: 2,
+          explain: "<strong>poke around</strong>: lục lọi, tìm tòi xung quanh.",
+        },
+        {
+          q: "She was fined ________ by the court for multiple violations of traffic safety regulations.",
+          options: ["brusquely", "severally", "boisterously", "conspicuously"],
+          answer: 1,
+          explain:
+            "<strong>severally</strong>: riêng rẽ, từng cá nhân một (thường dùng trong bối cảnh pháp lý).",
+        },
+        {
+          q: "The group of drunken patrons became so ________ that the manager had to call the police to escort them out.",
+          options: ["prudent", "obstreperous", "hefty", "conspicuous"],
+          answer: 1,
+          explain:
+            "<strong>obstreperous</strong>: ngổ ngáo, bất trị, gây rối ồn ào.",
+        },
+        {
+          q: "It was a mistake to trust him; his entire speech turned out to be ________.",
+          options: [
+            "a pack of lies",
+            "mumbo jumbo",
+            "in the pecking order",
+            "a laughing stock",
+          ],
+          answer: 0,
+          explain:
+            "<strong>a pack of lies</strong>: toàn là dối trá, dối lừa hoàn toàn.",
+        },
+        {
+          q: "The annual village festival was ________ by 8 PM, with music, dancing, and food stalls everywhere.",
+          options: [
+            "on the rocks",
+            "snowed under",
+            "in full swing",
+            "held off",
+          ],
+          answer: 2,
+          explain:
+            "<strong>be in full swing</strong>: diễn ra sôi nổi, ở thời điểm cao trào nhất.",
+        },
+        {
+          q: "He managed to ________ a rare copy of the book after searching through vintage shops for months.",
+          options: ["procure", "upend", "furrow", "blurt out"],
+          answer: 0,
+          explain:
+            "<strong>procure</strong>: kiếm được, thu mua được (vật khó kiếm).",
+        },
+        {
+          q: "Deep in thought, she began to ________ her brow as she pondered the difficult math problem.",
+          options: ["poke", "furrow", "upend", "stir"],
+          answer: 1,
+          explain:
+            "<strong>furrow (one's brow)</strong>: cau mày, nhăn trán suy nghĩ.",
+        },
+        {
+          q: "Excited by the news, he accidentally ________ the secret before he was supposed to share it.",
+          options: ["blurted out", "lap it up", "caught on", "held off"],
+          answer: 0,
+          explain:
+            "<strong>blurt out</strong>: thốt ra, buột miệng nói ra bí mật.",
+        },
+        {
+          q: "After making that ridiculous mistake during the presentation, he became the ________ of the whole department.",
+          options: [
+            "pecking order",
+            "laughing stock",
+            "mumbo jumbo",
+            "pack of lies",
+          ],
+          answer: 1,
+          explain: "<strong>laughing stock</strong>: trò cười cho thiên hạ.",
+        },
+        {
+          q: "Their marriage has been ________ for several months, and they are now considering a formal separation.",
+          options: [
+            "in full swing",
+            "on the rocks",
+            "snowed under",
+            "caught on",
+          ],
+          answer: 1,
+          explain:
+            "<strong>be on the rocks</strong>: gặp rắc rối nghiêm trọng, có nguy cơ đổ vỡ.",
+        },
+        {
+          q: "New employees quickly learn where they stand ________ within the corporate hierarchy.",
+          options: [
+            "in the pecking order",
+            "in full swing",
+            "on the rocks",
+            "as a laughing stock",
+          ],
+          answer: 0,
+          explain:
+            "<strong>in the pecking order</strong>: theo thứ bậc tôn ti xã hội / công ty.",
+        },
+        {
+          q: "The sudden change in economic policy threatens to ________ the entire financial market.",
+          options: ["procure", "upend", "furrow", "hold off"],
+          answer: 1,
+          explain: "<strong>upend</strong>: lật ngược, làm đảo lộn.",
+        },
+        {
+          q: "Cleaners searched every ________ of the ancient castle to make sure no dust was left behind.",
+          options: [
+            "pack of lies",
+            "mumbo jumbo",
+            "nook and cranny",
+            "pecking order",
+          ],
+          answer: 2,
+          explain: "<strong>nook and cranny</strong>: mọi ngóc ngách.",
+        },
+        {
+          q: "The audience loved his praise so much that they seemed to ________ every single compliment he paid them.",
+          options: [
+            "lap it up",
+            "blurt it out",
+            "catch on to it",
+            "hold it off",
+          ],
+          answer: 0,
+          explain:
+            "<strong>lap it up</strong>: hồ hởi đón nhận, tin sái cổ lời khen.",
+        },
+        {
+          q: "He received a ________ fine for speeding in a school zone during morning hours.",
+          options: ["boisterous", "hefty", "prudent", "obstreperous"],
+          answer: 1,
+          explain:
+            "<strong>hefty</strong>: lớn, nặng nề (thường đi với fine, sum of money).",
+        },
+        {
+          q: "He has a bad habit of spreading rumors just to ________ among his coworkers.",
+          options: [
+            "stir up trouble",
+            "hit the jackpot",
+            "poke around",
+            "catch on",
+          ],
+          answer: 0,
+          explain: "<strong>stir up trouble</strong>: xúi giục, gây rối rắm.",
+        },
+        {
+          q: "Driven by a strong sense of moral ________, she dedicated her life to helping the underprivileged.",
+          options: [
+            "righteousness",
+            "pecking order",
+            "mumbo jumbo",
+            "laughing stock",
+          ],
+          answer: 0,
+          explain: "<strong>righteousness</strong>: sự công chính, chính trực.",
+        },
+        {
+          q: "The toddler was so ________ during the party that he accidentally knocked over the birthday cake.",
+          options: ["prudent", "boisterous", "conspicuous", "several"],
+          answer: 1,
+          explain: "<strong>boisterous</strong>: hiếu động, quậy phá ồn ào.",
+        },
+        {
+          q: "The manager answered the customer's question ________ and walked away without offering further assistance.",
+          options: ["prudently", "brusquely", "righteousness", "conspicuously"],
+          answer: 1,
+          explain: "<strong>brusquely</strong>: cộc lốc, thô lỗ.",
+        },
+        {
+          q: "They had to ________ the construction project due to heavy rainfall and severe weather warnings.",
+          options: ["hold off", "catch on", "blurt out", "lap up"],
+          answer: 0,
+          explain: "<strong>hold off</strong>: hoãn lại.",
+        },
+        {
+          q: "The government attempted to ________ emergency medical supplies from international donors.",
+          options: ["furrow", "upend", "procure", "stir up"],
+          answer: 2,
+          explain: "<strong>procure</strong>: thu mua, tìm kiếm thu nạp.",
+        },
+        {
+          q: "A ________ person always considers potential consequences before making major life decisions.",
+          options: ["prudent", "obstreperous", "boisterous", "hefty"],
+          answer: 0,
+          explain: "<strong>prudent</strong>: khôn ngoan, thận trọng.",
+        },
+        {
+          q: "The scandal threatened to ________ years of progress made by the charitable foundation.",
+          options: ["upend", "procure", "catch on", "lap up"],
+          answer: 0,
+          explain: "<strong>upend</strong>: phá hỏng, làm đảo lộn hoàn toàn.",
+        },
+        {
+          q: "The customer became extremely ________ when told that his refund request had been denied.",
+          options: ["obstreperous", "prudent", "hefty", "righteousness"],
+          answer: 0,
+          explain:
+            "<strong>obstreperous</strong>: bất trị, ngổ ngáo, cãi bướng.",
+        },
+      ];
+
+      let answeredCount = 0;
+      let scoreCount = 0;
+
+      const quizContainer = document.getElementById("quiz-container");
+
+      function renderQuiz() {
+        quizData.forEach((item, index) => {
+          const card = document.createElement("div");
+          card.className = "question-card";
+          card.id = `q-card-${index}`;
+
+          const prefixLabels = ["A", "B", "C", "D"];
+
+          let optionsHTML = "";
+          item.options.forEach((opt, optIdx) => {
+            optionsHTML += `
+                        <button class="option-btn" onclick="checkAnswer(${index}, ${optIdx})">
+                            <span class="prefix">${prefixLabels[optIdx]}</span>
+                            <span>${opt}</span>
+                        </button>
+                    `;
+          });
+
+          card.innerHTML = `
+                    <div class="question-header">
+                        <span class="question-number">Câu ${index + 1}</span>
+                        <div class="question-text">${item.q}</div>
+                    </div>
+                    <div class="options-grid">
+                        ${optionsHTML}
+                    </div>
+                    <div class="explanation" id="explain-${index}">
+                        <div class="explanation-title" id="explain-title-${index}"></div>
+                        <div class="explanation-text">${item.explain}</div>
+                    </div>
+                `;
+
+          quizContainer.appendChild(card);
+        });
+      }
+
+      function checkAnswer(qIdx, selectedOptIdx) {
+        const card = document.getElementById(`q-card-${qIdx}`);
+        const buttons = card.querySelectorAll(".option-btn");
+        const explainBox = document.getElementById(`explain-${qIdx}`);
+        const explainTitle = document.getElementById(`explain-title-${qIdx}`);
+        const correctOptIdx = quizData[qIdx].answer;
+
+        // Disable all buttons for this question
+        buttons.forEach((btn) => btn.setAttribute("disabled", "true"));
+
+        // Check correct or incorrect
+        if (selectedOptIdx === correctOptIdx) {
+          buttons[selectedOptIdx].classList.add("correct");
+          explainTitle.className = "explanation-title correct-title";
+          explainTitle.innerHTML = "✨ Chính xác!";
+          scoreCount++;
+        } else {
+          buttons[selectedOptIdx].classList.add("incorrect");
+          buttons[correctOptIdx].classList.add("correct");
+          explainTitle.className = "explanation-title incorrect-title";
+          explainTitle.innerHTML = "❌ Chưa chính xác!";
+        }
+
+        explainBox.classList.add("show");
+
+        // Update Stats
+        answeredCount++;
+        document.getElementById("answered-count").innerText = answeredCount;
+        document.getElementById("score-count").innerText = scoreCount;
+      }
+
+      // Initialize Quiz
+      renderQuiz();
+    </script>
+  </body>
+</html>
