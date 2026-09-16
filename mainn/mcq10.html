@@ -4,32 +4,55 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bài Tập Trắc Nghiệm Từ Vựng Tiếng Anh</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <style>
       :root {
-        --primary-color: #4f46e5;
-        --primary-hover: #4338ca;
-        --bg-color: #f3f4f6;
-        --card-bg: #ffffff;
-        --text-color: #1f2937;
+        /* Bảng màu Tím - Hồng */
+        --primary-gradient: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+        --primary-color: #9333ea;
+        --primary-hover: #fae8ff;
+        --bg-gradient: linear-gradient(
+          135deg,
+          #f3e8ff 0%,
+          #fce7f3 50%,
+          #f3e8ff 100%
+        );
+        --card-bg: rgba(255, 255, 255, 0.95);
+        --text-dark: #1e1b4b;
+        --text-muted: #6b21a8;
+
+        /* Trạng thái Đúng / Sai */
         --success-color: #10b981;
         --success-bg: #d1fae5;
-        --error-color: #ef4444;
-        --error-bg: #fee2e2;
-        --border-color: #e5e7eb;
+        --success-text: #065f46;
+        --error-color: #f43f5e;
+        --error-bg: #ffe4e6;
+        --error-text: #9f1239;
+
+        --border-color: #f0abfc;
+        --shadow-sm: 0 10px 25px -5px rgba(168, 85, 247, 0.1);
+        --shadow-md: 0 20px 30px -10px rgba(168, 85, 247, 0.2);
       }
 
       * {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-family: "Plus Jakarta Sans", "Segoe UI", sans-serif;
       }
 
       body {
-        background-color: var(--bg-color);
-        color: var(--text-color);
+        background: var(--bg-gradient);
+        background-attachment: fixed;
+        color: var(--text-dark);
         line-height: 1.6;
-        padding: 20px;
+        padding: 40px 20px;
+        min-height: 100vh;
       }
 
       .container {
@@ -39,90 +62,113 @@
 
       header {
         text-align: center;
-        margin-bottom: 30px;
-        padding: 20px 0;
+        margin-bottom: 35px;
+        padding: 30px 20px;
+        background: var(--card-bg);
+        border-radius: 24px;
+        box-shadow: var(--shadow-sm);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(10px);
       }
 
       header h1 {
-        color: var(--primary-color);
-        font-size: 2rem;
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 2.2rem;
+        font-weight: 800;
         margin-bottom: 8px;
+        letter-spacing: -0.5px;
       }
 
       header p {
-        color: #6b7280;
+        color: var(--text-muted);
+        font-size: 1rem;
+        font-weight: 500;
       }
 
       .question-card {
         background: var(--card-bg);
-        border-radius: 12px;
-        padding: 24px;
-        margin-bottom: 20px;
-        box-shadow:
-          0 4px 6px -1px rgba(0, 0, 0, 0.1),
-          0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        transition: transform 0.2s ease;
+        border-radius: 20px;
+        padding: 28px;
+        margin-bottom: 24px;
+        box-shadow: var(--shadow-sm);
+        border: 1px solid rgba(240, 171, 252, 0.3);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        backdrop-filter: blur(10px);
+      }
+
+      .question-card:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-md);
+        border-color: rgba(216, 180, 254, 0.6);
       }
 
       .question-title {
-        font-size: 1.1rem;
-        font-weight: 600;
-        margin-bottom: 16px;
-      }
-
-      .question-title .q-num {
-        color: var(--primary-color);
-        margin-right: 6px;
+        font-size: 1.15rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: var(--text-dark);
+        line-height: 1.5;
       }
 
       .options-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: 12px;
       }
 
       .option-btn {
-        background: #f9fafb;
-        border: 2px solid var(--border-color);
-        border-radius: 8px;
-        padding: 12px 16px;
-        font-size: 1rem;
+        background: #ffffff;
+        border: 2px solid #f3e8ff;
+        border-radius: 12px;
+        padding: 14px 18px;
+        font-size: 0.98rem;
+        font-weight: 600;
+        color: var(--text-dark);
         text-align: left;
         cursor: pointer;
-        transition: all 0.2s ease;
+        transition: all 0.25s ease;
         outline: none;
+        display: flex;
+        align-items: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
       }
 
       .option-btn:hover:not([disabled]) {
-        border-color: var(--primary-color);
-        background: #eef2ff; /* Màu tím rất nhạt, khớp đẹp với var(--primary-color) */
+        border-color: #c084fc;
+        background: var(--primary-hover);
+        transform: translateY(-2px);
+        color: var(--primary-color);
       }
 
       .option-btn.correct {
         background-color: var(--success-bg) !important;
         border-color: var(--success-color) !important;
-        color: #065f46;
-        font-weight: 600;
+        color: var(--success-text) !important;
+        font-weight: 700;
       }
 
       .option-btn.wrong {
         background-color: var(--error-bg) !important;
         border-color: var(--error-color) !important;
-        color: #991b1b;
+        color: var(--error-text) !important;
       }
 
       .option-btn[disabled] {
         cursor: default;
-        opacity: 0.8;
+        opacity: 0.85;
       }
 
       .explanation {
         display: none;
-        margin-top: 16px;
-        padding: 14px 16px;
-        border-radius: 8px;
+        margin-top: 20px;
+        padding: 16px 20px;
+        border-radius: 14px;
         font-size: 0.95rem;
-        animation: fadeIn 0.3s ease-in-out;
+        animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        line-height: 1.6;
       }
 
       .explanation.show {
@@ -130,25 +176,45 @@
       }
 
       .explanation.correct-exp {
-        background-color: #ecfdf5;
-        border-left: 4px solid var(--success-color);
-        color: #065f46;
+        background-color: #f0fdf4;
+        border-left: 5px solid var(--success-color);
+        color: var(--success-text);
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.08);
       }
 
       .explanation.wrong-exp {
-        background-color: #fef2f2;
-        border-left: 4px solid var(--error-color);
-        color: #991b1b;
+        background-color: #fff1f2;
+        border-left: 5px solid var(--error-color);
+        color: var(--error-text);
+        box-shadow: 0 4px 12px rgba(244, 63, 94, 0.08);
+      }
+
+      .explanation strong {
+        font-size: 1rem;
+        display: inline-block;
+        margin-bottom: 4px;
       }
 
       @keyframes fadeIn {
         from {
           opacity: 0;
-          transform: translateY(-5px);
+          transform: translateY(-8px);
         }
         to {
           opacity: 1;
           transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 640px) {
+        body {
+          padding: 20px 12px;
+        }
+        header h1 {
+          font-size: 1.75rem;
+        }
+        .options-grid {
+          grid-template-columns: 1fr;
         }
       }
     </style>
@@ -479,11 +545,11 @@
 
         if (selectedOption === item.answer) {
           expBox.className = "explanation show correct-exp";
-          expBox.innerHTML = `<strong> Chính xác!</strong><br>${item.explain}`;
+          expBox.innerHTML = `<strong>✨ Chính xác!</strong><br>${item.explain}`;
         } else {
           buttons[selectedOption].classList.add("wrong");
           expBox.className = "explanation show wrong-exp";
-          expBox.innerHTML = `<strong> Chưa đúng!</strong> Đáp án chính xác là <strong>${item.options[item.answer]}</strong>.<br>${item.explain}`;
+          expBox.innerHTML = `<strong>❌ Chưa chính xác!</strong><br>Đáp án đúng: <b>${item.options[item.answer]}</b><br>${item.explain}`;
         }
       }
 
