@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bài Tập Trắc Nghiệm Từ Vựng Tiếng Anh</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        /* Bảng màu Hồng - Vàng - Cam */
+        --bg-color: #fffaf5;
+        --card-bg: #ffffff;
+        --primary-gradient: linear-gradient(
+          135deg,
+          #ff6b6b 0%,
+          #ff8e53 50%,
+          #feca57 100%
+        );
+        --primary-color: #ff6b6b;
+        --primary-hover-bg: #fff0eb;
+        --border-color: #ffe0d2;
+        --text-dark: #2d1810;
+        --text-muted: #8c6d62;
+
+        /* Trạng thái Đúng / Sai */
+        --success-color: #10b981;
+        --success-bg: #ecfdf5;
+        --success-text: #065f46;
+        --error-color: #ef4444;
+        --error-bg: #fef2f2;
+        --error-text: #991b1b;
+
+        --shadow-sm: 0 4px 15px rgba(255, 107, 107, 0.08);
+        --shadow-md: 0 10px 25px rgba(255, 107, 107, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-dark);
+        font-family: "Plus Jakarta Sans", sans-serif;
+        line-height: 1.6;
+        padding: 40px 20px;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 35px;
+        padding: 35px 25px;
+        background: var(--card-bg);
+        border-radius: 20px;
+        box-shadow: var(--shadow-sm);
+        border: 2px solid var(--border-color);
+      }
+
+      header h1 {
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 2.2rem;
+        font-weight: 800;
+        margin-bottom: 8px;
+        letter-spacing: -0.5px;
+      }
+
+      header p {
+        color: var(--text-muted);
+        font-size: 0.98rem;
+        font-weight: 500;
+      }
+
+      .question-card {
+        background: var(--card-bg);
+        border-radius: 18px;
+        padding: 28px;
+        margin-bottom: 24px;
+        box-shadow: var(--shadow-sm);
+        border: 1.5px solid var(--border-color);
+        transition: all 0.25s ease;
+      }
+
+      .question-card:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+        border-color: #ff8e53;
+      }
+
+      .question-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: var(--text-dark);
+        line-height: 1.6;
+      }
+
+      .options-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 12px;
+      }
+
+      .option-btn {
+        background: #ffffff;
+        border: 1.5px solid var(--border-color);
+        border-radius: 12px;
+        padding: 14px 18px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        text-align: left;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        outline: none;
+      }
+
+      .option-btn:hover:not([disabled]) {
+        border-color: #ff6b6b;
+        background: var(--primary-hover-bg);
+        color: #e04848;
+      }
+
+      .option-btn.correct {
+        background-color: var(--success-bg) !important;
+        border-color: var(--success-color) !important;
+        color: var(--success-text) !important;
+        font-weight: 700;
+      }
+
+      .option-btn.wrong {
+        background-color: var(--error-bg) !important;
+        border-color: var(--error-color) !important;
+        color: var(--error-text) !important;
+      }
+
+      .option-btn[disabled] {
+        cursor: default;
+        opacity: 0.85;
+      }
+
+      .explanation {
+        display: none;
+        margin-top: 20px;
+        padding: 16px 20px;
+        border-radius: 12px;
+        font-size: 0.95rem;
+        animation: fadeIn 0.3s ease;
+        line-height: 1.6;
+      }
+
+      .explanation.show {
+        display: block;
+      }
+
+      .explanation.correct-exp {
+        background-color: var(--success-bg);
+        border-left: 5px solid var(--success-color);
+        color: var(--success-text);
+      }
+
+      .explanation.wrong-exp {
+        background-color: var(--error-bg);
+        border-left: 5px solid var(--error-color);
+        color: var(--error-text);
+      }
+
+      .explanation strong {
+        font-size: 0.98rem;
+        display: inline-block;
+        margin-bottom: 4px;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-6px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 640px) {
+        body {
+          padding: 20px 12px;
+        }
+        header h1 {
+          font-size: 1.75rem;
+        }
+        .options-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Bài Tập Trắc Nghiệm Từ Vựng</h1>
+        <p>
+          Chọn đáp án đúng cho mỗi câu để xem kết quả và giải thích chi tiết.
+        </p>
+      </header>
+
+      <div id="quiz-container"></div>
+    </div>
+
+    <script>
+      const quizData = [
+        {
+          q: "1. After passing their final university exams, the students decided to go out and paint the town ________.",
+          options: ["A. red", "B. yellow", "C. pink", "D. orange"],
+          answer: 0,
+          explain:
+            "<b>Paint the town red:</b> Đi ra ngoài ăn mừng, vui chơi quẩy tới bến.",
+        },
+        {
+          q: "2. The manager's proposal was completely at ________ with the board's long-term strategic vision.",
+          options: ["A. odds", "B. terms", "C. variance", "D. conflict"],
+          answer: 0,
+          explain:
+            "<b>Be at odds with:</b> Mâu thuẫn, không ăn khớp, bất đồng với cái gì.",
+        },
+        {
+          q: "3. He was so wrapped up ________ his research project that he completely forgot about dinner.",
+          options: ["A. in", "B. with", "C. at", "D. on"],
+          answer: 0,
+          explain:
+            "<b>Be wrapped up in work:</b> Mải mê, chìm đắm hoàn toàn vào công việc.",
+        },
+        {
+          q: "4. Despite his remarkable achievements, he remained humble and frequently made ________ humor.",
+          options: [
+            "A. self-deprecating",
+            "B. self-confident",
+            "C. self-sufficient",
+            "D. self-centered",
+          ],
+          answer: 0,
+          explain:
+            "<b>Self-deprecating:</b> Tự hạ thấp bản thân, tự giễu nhại mình.",
+        },
+        {
+          q: "5. The university aims to produce well-________ graduates who excel both academically and socially.",
+          options: ["A. rounded", "B. balanced", "C. shaped", "D. founded"],
+          answer: 0,
+          explain:
+            "<b>Well-rounded:</b> Toàn diện (về kỹ năng, kiến thức và nhân cách).",
+        },
+        {
+          q: "6. The political party attempted to dissociate ________ from the controversial remarks made by its member.",
+          options: ["A. itself", "B. oneself", "C. himself", "D. them"],
+          answer: 0,
+          explain:
+            "<b>Dissociate oneself/itself from:</b> Tách rời, tự cách ly khỏi mối liên hệ với ai/cái gì.",
+        },
+        {
+          q: "7. It takes time for new immigrants to fully assimilate ________ the local culture and lifestyle.",
+          options: ["A. into", "B. with", "C. at", "D. toward"],
+          answer: 0,
+          explain:
+            "<b>Assimilate into:</b> Hòa nhập, đồng hóa vào một cộng đồng/văn hóa.",
+        },
+        {
+          q: "8. You should never ________ your team members' contributions if you want to maintain high morale.",
+          options: ["A. belittle", "B. elevate", "C. praise", "D. appreciate"],
+          answer: 0,
+          explain:
+            "<b>Belittle:</b> Xem nhẹ, coi thường, dèm pha giá trị của ai/cái gì.",
+        },
+        {
+          q: "9. The speaker was criticized for making ________ speeches that incited anger among the crowd.",
+          options: [
+            "A. inflammatory",
+            "B. calming",
+            "C. inspiring",
+            "D. neutral",
+          ],
+          answer: 0,
+          explain: "<b>Inflammatory:</b> Có tính kích động, dễ gây phẫn nộ.",
+        },
+        {
+          q: "10. The difference in chemical weight was so ________ that standard laboratory scales could not detect it.",
+          options: [
+            "A. infinitesimal",
+            "B. massive",
+            "C. considerable",
+            "D. substantial",
+          ],
+          answer: 0,
+          explain:
+            "<b>Infinitesimal:</b> Siêu nhỏ, cực kỳ bé nhỏ không đáng kể.",
+        },
+        {
+          q: "11. Archeologists discovered ancient pottery ________ buried deep beneath the historical site.",
+          options: [
+            "A. artifacts",
+            "B. disinfectant",
+            "C. anachronisms",
+            "D. eyesores",
+          ],
+          answer: 0,
+          explain: "<b>Artifacts:</b> Khảo cổ vật, cổ vật do con người tạo ra.",
+        },
+        {
+          q: "12. Hospital staff must use strong chemical ________ to clean surfaces and prevent infection.",
+          options: [
+            "A. disinfectant",
+            "B. artifact",
+            "C. discretion",
+            "D. anachronism",
+          ],
+          answer: 0,
+          explain: "<b>Disinfectant:</b> Chất tẩy rửa, thuốc sát trùng.",
+        },
+        {
+          q: "13. Please carefully ________ the manuscript for grammar mistakes before sending it to the printer.",
+          options: [
+            "A. proofread",
+            "B. reappraise",
+            "C. reaffirm",
+            "D. belittle",
+          ],
+          answer: 0,
+          explain: "<b>Proofread:</b> Đọc sửa lỗi chính tả/văn bản.",
+        },
+        {
+          q: "14. Several ________ organizations cooperated to provide emergency food relief across border regions.",
+          options: [
+            "A. intergovernmental",
+            "B. individual",
+            "C. domestic",
+            "D. internal",
+          ],
+          answer: 0,
+          explain: "<b>Intergovernmental:</b> Liên chính phủ.",
+        },
+        {
+          q: "15. Management decided to ________ the current investment plan following sudden shifts in the economy.",
+          options: [
+            "A. reappraise",
+            "B. belittle",
+            "C. assimilate",
+            "D. proofread",
+          ],
+          answer: 0,
+          explain: "<b>Reappraise:</b> Đánh giá lại, xem xét lại toàn bộ.",
+        },
+        {
+          q: "16. The official provided an ________ refusal when asked if the company would accept the buyout deal.",
+          options: [
+            "A. unequivocal",
+            "B. ambiguous",
+            "C. hesitant",
+            "D. uncertain",
+          ],
+          answer: 0,
+          explain:
+            "<b>Unequivocal:</b> Rõ ràng, dứt khoát, không thể nhầm lẫn.",
+        },
+        {
+          q: "17. The vast grassland regions are primarily dedicated to large-scale ________ operations.",
+          options: [
+            "A. cattle-raising",
+            "B. crop-planting",
+            "C. fish-farming",
+            "D. wood-cutting",
+          ],
+          answer: 0,
+          explain: "<b>Cattle-raising:</b> Chăn nuôi gia súc.",
+        },
+        {
+          q: "18. Microorganisms break down ________ organic material and enrich the soil with vital nutrients.",
+          options: [
+            "A. decomposing",
+            "B. blooming",
+            "C. freezing",
+            "D. growing",
+          ],
+          answer: 0,
+          explain: "<b>Decomposing:</b> Đang phân hủy, phân rã.",
+        },
+        {
+          q: "19. The world leaders met at the summit to ________ their commitment to environmental treaties.",
+          options: ["A. reaffirm", "B. belittle", "C. dissociate", "D. err"],
+          answer: 0,
+          explain: "<b>Reaffirm:</b> Tái xác nhận, khẳng định lại cam kết.",
+        },
+        {
+          q: "20. The committee reached complete ________ on the proposal after hours of constructive discussion.",
+          options: [
+            "A. unanimity",
+            "B. discretion",
+            "C. anachronism",
+            "D. eyesores",
+          ],
+          answer: 0,
+          explain: "<b>Unanimity:</b> Sự nhất trí, đồng lòng 100%.",
+        },
+        {
+          q: "21. Winning the prestigious trophy was great, but receiving a cash prize was the icing on the ________.",
+          options: ["A. cake", "B. pie", "C. bread", "D. cookie"],
+          answer: 0,
+          explain:
+            "<b>The icing on the cake:</b> Điểm cộng tuyệt vời làm mọi thứ vốn đã tốt lại càng thêm hoàn hảo.",
+        },
+        {
+          q: "22. When setting safety budgets, engineers always prefer to err on the side of ________.",
+          options: ["A. caution", "B. danger", "C. risk", "D. speed"],
+          answer: 0,
+          explain:
+            "<b>Err on the side of:</b> Thà chọn phương án an toàn/cẩn trọng hơn là mạo hiểm.",
+        },
+        {
+          q: "23. The abandoned dilapidated factories on the riverbank were regarded as urban ________ by residents.",
+          options: ["A. eyesores", "B. eyefuls", "C. rarities", "D. artifacts"],
+          answer: 0,
+          explain:
+            "<b>Eyesores:</b> Những chướng tai gai mắt, công trình xấu xí làm hỏng cảnh quan.",
+        },
+        {
+          q: "24. As the colorful parade marched down the street, spectators certainly got an ________ of spectacular costumes.",
+          options: ["A. eyeful", "B. eyesore", "C. outlook", "D. oversight"],
+          answer: 0,
+          explain:
+            "<b>An eyeful of sth:</b> Đã mắt, nhìn ngắm thỏa thích cái gì.",
+        },
+        {
+          q: "25. Asking senior staff members intrusive personal questions was considered extremely ________ behavior.",
+          options: [
+            "A. impertinent",
+            "B. polite",
+            "C. respectful",
+            "D. modest",
+          ],
+          answer: 0,
+          explain: "<b>Impertinent:</b> Xấc xược, vô lễ, xấc láo.",
+        },
+        {
+          q: "26. Police records indicated that the suspect had no steady employment and was of no fixed ________.",
+          options: ["A. abode", "B. place", "C. home", "D. house"],
+          answer: 0,
+          explain:
+            "<b>Of no fixed abode:</b> Không có nơi ở cố định, vô gia cư.",
+        },
+        {
+          q: "27. The proposed infrastructure project finally got the seal of ________ from the city council.",
+          options: [
+            "A. approval",
+            "B. rejection",
+            "C. review",
+            "D. discretion",
+          ],
+          answer: 0,
+          explain:
+            "<b>Get the seal of approval:</b> Nhận được sự phê chuẩn/chấp thuận chính thức.",
+        },
+        {
+          q: "28. Carrying a heavy pocket watch today feels like an ________ in the era of smartphones.",
+          options: [
+            "A. anachronism",
+            "B. artifact",
+            "C. eyesore",
+            "D. escapism",
+          ],
+          answer: 0,
+          explain: "<b>Anachronism:</b> Việc/vật lỗi thời, sai niên đại.",
+        },
+        {
+          q: "29. Officers must exercise professional ________ when handling sensitive security information.",
+          options: [
+            "A. discretion",
+            "B. unanimity",
+            "C. defamation",
+            "D. adversity",
+          ],
+          answer: 0,
+          explain:
+            "<b>Discretion:</b> Sự cẩn trọng, quyền tự do quyết định khôn khéo.",
+        },
+        {
+          q: "30. A heated legal dispute is likely to ________ if both parties refuse to compromise.",
+          options: ["A. ensue", "B. belittle", "C. proofread", "D. reappraise"],
+          answer: 0,
+          explain:
+            "<b>Ensue:</b> Kế tiếp, nảy sinh ngay sau đó (như một kết quả).",
+        },
+        {
+          q: "31. She enrolled in advanced night classes with a view to ________ her career prospects.",
+          options: [
+            "A. improving",
+            "B. improve",
+            "C. improved",
+            "D. be improved",
+          ],
+          answer: 0,
+          explain:
+            "<b>With a view to + V-ing:</b> Với mục đích / ý định làm gì.",
+        },
+        {
+          q: "32. Neither the head manager nor the office assistants ________ informed about the schedule change.",
+          options: ["A. were", "B. was", "C. is", "D. have"],
+          answer: 0,
+          explain:
+            "<b>Neither... nor...:</b> Động từ chia theo chủ ngữ gần nó nhất (assistants -> số nhiều 'were').",
+        },
+        {
+          q: "33. The new law got the seal of ________ after passing the parliamentary vote unanimously.",
+          options: ["A. approval", "B. approve", "C. approving", "D. approved"],
+          answer: 0,
+          explain:
+            "<b>Seal of approval:</b> Dấu xác nhận/sự chấp thuận chính thức.",
+        },
+        {
+          q: "34. Neither the director nor his secretaries ________ present at the emergency briefing yesterday.",
+          options: ["A. were", "B. was", "C. are", "D. be"],
+          answer: 0,
+          explain:
+            "<b>Cấu trúc Neither N1 nor N2 + V(N2):</b> Chia theo 'secretaries' (số nhiều quá khứ -> 'were').",
+        },
+      ];
+
+      function renderQuiz() {
+        const container = document.getElementById("quiz-container");
+
+        quizData.forEach((item, qIndex) => {
+          const card = document.createElement("div");
+          card.className = "question-card";
+
+          const title = document.createElement("div");
+          title.className = "question-title";
+          title.innerHTML = item.q;
+          card.appendChild(title);
+
+          const optionsGrid = document.createElement("div");
+          optionsGrid.className = "options-grid";
+
+          item.options.forEach((opt, oIndex) => {
+            const btn = document.createElement("button");
+            btn.className = "option-btn";
+            btn.innerText = opt;
+            btn.onclick = () => checkAnswer(qIndex, oIndex);
+            optionsGrid.appendChild(btn);
+          });
+
+          card.appendChild(optionsGrid);
+
+          const exp = document.createElement("div");
+          exp.id = `exp-${qIndex}`;
+          exp.className = "explanation";
+          card.appendChild(exp);
+
+          container.appendChild(card);
+        });
+      }
+
+      function checkAnswer(questionIndex, selectedOption) {
+        const item = quizData[questionIndex];
+        const card = document.querySelectorAll(".question-card")[questionIndex];
+        const buttons = card.querySelectorAll(".option-btn");
+        const expBox = document.getElementById(`exp-${questionIndex}`);
+
+        buttons.forEach((btn, idx) => {
+          btn.disabled = true;
+          if (idx === item.answer) {
+            btn.classList.add("correct");
+          }
+        });
+
+        if (selectedOption === item.answer) {
+          expBox.className = "explanation show correct-exp";
+          expBox.innerHTML = `<strong> Chính xác!</strong><br>${item.explain}`;
+        } else {
+          buttons[selectedOption].classList.add("wrong");
+          expBox.className = "explanation show wrong-exp";
+          expBox.innerHTML = `<strong> Chưa chính xác!</strong><br>Đáp án đúng: <b>${item.options[item.answer]}</b><br>${item.explain}`;
+        }
+      }
+
+      renderQuiz();
+    </script>
+  </body>
+</html>

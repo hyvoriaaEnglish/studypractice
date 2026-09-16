@@ -1,0 +1,576 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bài Tập Trắc Nghiệm Từ Vựng Tiếng Anh</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        /* Bảng màu Vintage Nâu & Nâu Cam */
+        --bg-color: #f7f1e5;
+        --card-bg: #fffcf7;
+        --primary-color: #c86b27;
+        --primary-hover: #faedd9;
+        --text-dark: #432818;
+        --text-muted: #855835;
+        --border-color: #e7d7c1;
+
+        /* Trạng thái Đúng / Sai kiểu Vintage */
+        --success-color: #43766c;
+        --success-bg: #e8f3f1;
+        --success-text: #22423d;
+        --error-color: #b85042;
+        --error-bg: #fbebe8;
+        --error-text: #6b251a;
+
+        --shadow-sm: 0 4px 20px rgba(67, 40, 24, 0.05);
+        --shadow-md: 0 10px 25px rgba(67, 40, 24, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-dark);
+        font-family: "Plus Jakarta Sans", sans-serif;
+        line-height: 1.6;
+        padding: 40px 20px;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 35px;
+        padding: 35px 25px;
+        background: var(--card-bg);
+        border-radius: 16px;
+        box-shadow: var(--shadow-sm);
+        border: 2px solid var(--border-color);
+      }
+
+      header h1 {
+        font-family: "Lora", serif;
+        color: var(--primary-color);
+        font-size: 2.2rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+        letter-spacing: -0.5px;
+      }
+
+      header p {
+        color: var(--text-muted);
+        font-size: 0.98rem;
+        font-weight: 500;
+      }
+
+      .question-card {
+        background: var(--card-bg);
+        border-radius: 16px;
+        padding: 28px;
+        margin-bottom: 24px;
+        box-shadow: var(--shadow-sm);
+        border: 1px solid var(--border-color);
+        transition: all 0.25s ease;
+      }
+
+      .question-card:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+        border-color: var(--primary-color);
+      }
+
+      .question-title {
+        font-family: "Lora", serif;
+        font-size: 1.15rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: var(--text-dark);
+        line-height: 1.6;
+      }
+
+      .options-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 12px;
+      }
+
+      .option-btn {
+        background: #ffffff;
+        border: 1.5px solid var(--border-color);
+        border-radius: 10px;
+        padding: 14px 18px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        text-align: left;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        outline: none;
+      }
+
+      .option-btn:hover:not([disabled]) {
+        border-color: var(--primary-color);
+        background: var(--primary-hover);
+        color: var(--primary-color);
+      }
+
+      .option-btn.correct {
+        background-color: var(--success-bg) !important;
+        border-color: var(--success-color) !important;
+        color: var(--success-text) !important;
+        font-weight: 700;
+      }
+
+      .option-btn.wrong {
+        background-color: var(--error-bg) !important;
+        border-color: var(--error-color) !important;
+        color: var(--error-text) !important;
+      }
+
+      .option-btn[disabled] {
+        cursor: default;
+        opacity: 0.85;
+      }
+
+      .explanation {
+        display: none;
+        margin-top: 20px;
+        padding: 16px 20px;
+        border-radius: 10px;
+        font-size: 0.95rem;
+        animation: fadeIn 0.3s ease;
+        line-height: 1.6;
+      }
+
+      .explanation.show {
+        display: block;
+      }
+
+      .explanation.correct-exp {
+        background-color: var(--success-bg);
+        border-left: 5px solid var(--success-color);
+        color: var(--success-text);
+      }
+
+      .explanation.wrong-exp {
+        background-color: var(--error-bg);
+        border-left: 5px solid var(--error-color);
+        color: var(--error-text);
+      }
+
+      .explanation strong {
+        font-size: 0.98rem;
+        display: inline-block;
+        margin-bottom: 4px;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-6px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 640px) {
+        body {
+          padding: 20px 12px;
+        }
+        header h1 {
+          font-size: 1.75rem;
+        }
+        .options-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Bài Tập Trắc Nghiệm Từ Vựng</h1>
+        <p>
+          Chọn đáp án đúng cho mỗi câu để xem kết quả và giải thích chi tiết.
+        </p>
+      </header>
+
+      <div id="quiz-container"></div>
+    </div>
+
+    <script>
+      const quizData = [
+        {
+          q: "1. The room was filled with ________ laughter as the children celebrated their team's victory.",
+          options: [
+            "A. exuberant",
+            "B. serene",
+            "C. haphazard",
+            "D. contagious",
+          ],
+          answer: 0,
+          explain:
+            "<b>Exuberant:</b> Cực kỳ hân hoan, tràn đầy năng lượng và sức sống.",
+        },
+        {
+          q: "2. It is the management's ________ to decide whether or not to offer end-of-year bonuses.",
+          options: [
+            "A. adversity",
+            "B. prerogative",
+            "C. hazard",
+            "D. escapism",
+          ],
+          answer: 1,
+          explain:
+            "<b>Prerogative:</b> Đặc quyền, quyền hạn riêng thuộc về vị trí hay cá nhân.",
+        },
+        {
+          q: "3. Her enthusiasm for the new charity project proved to be ________, quickly spreading to everyone in the room.",
+          options: [
+            "A. contagious",
+            "B. serene",
+            "C. adroitly",
+            "D. haphazard",
+          ],
+          answer: 0,
+          explain:
+            "<b>Contagious:</b> Có tính lây lan, dễ lan truyền (cảm xúc, tiếng cười, bệnh tật).",
+        },
+        {
+          q: "4. Surrounded by nature, the quiet mountain resort offers a ________ atmosphere for weary travelers.",
+          options: ["A. haphazard", "B. serene", "C. exuberant", "D. militant"],
+          answer: 1,
+          explain: "<b>Serene:</b> Thanh bình, yên bình, tĩnh lặng.",
+        },
+        {
+          q: "5. The diplomat ________ navigated the delicate negotiations and avoided a major international crisis.",
+          options: [
+            "A. haphazardly",
+            "B. adroitly",
+            "C. triumphantly",
+            "D. outright",
+          ],
+          answer: 1,
+          explain: "<b>Adroitly:</b> Một cách khéo léo, tháo vát, thành thạo.",
+        },
+        {
+          q: "6. She managed to overcome all the financial ________ she faced during her early student years.",
+          options: [
+            "A. adversities",
+            "B. hazards",
+            "C. rarities",
+            "D. prerogatives",
+          ],
+          answer: 0,
+          explain:
+            "<b>Adversities:</b> Những khó khăn, nghịch cảnh, biến cố chông gai.",
+        },
+        {
+          q: "7. The books were stacked on the shelves in a completely ________ manner with no clear order.",
+          options: [
+            "A. serene",
+            "B. haphazard",
+            "C. flawless",
+            "D. impressionable",
+          ],
+          answer: 1,
+          explain:
+            "<b>Haphazard:</b> Bừa bãi, lung tung, không có kế hoạch hay trật tự.",
+        },
+        {
+          q: "8. Icy mountain roads pose a severe ________ to drivers during the winter months.",
+          options: [
+            "A. hazard",
+            "B. prerogative",
+            "C. adversity",
+            "D. escapism",
+          ],
+          answer: 0,
+          explain: "<b>Hazard:</b> Mối nguy hiểm, rủi ro.",
+        },
+        {
+          q: "9. It is mandatory that every employee ________ the new security protocol before logging in.",
+          options: ["A. review", "B. reviewed", "C. reviews", "D. will review"],
+          answer: 0,
+          explain:
+            "<b>It is mandatory that S + (should) + V-bare:</b> Bắt buộc ai đó phải làm gì (thức giả định).",
+        },
+        {
+          q: "10. Only when the storm subsided ________ to leave their emergency shelters.",
+          options: [
+            "A. the villagers were able",
+            "B. were the villagers able",
+            "C. the villagers could",
+            "D. did the villagers able",
+          ],
+          answer: 1,
+          explain:
+            "<b>Only when + clause + Đảo ngữ:</b> Chỉ khi... thì mới (Mệnh đề chính dùng dạng đảo ngữ).",
+        },
+        {
+          q: "11. He was granted a full exemption from the test ________ he had already passed the advanced module.",
+          options: [
+            "A. nonetheless",
+            "B. inasmuch as",
+            "C. on second thoughts",
+            "D. apart from",
+          ],
+          answer: 1,
+          explain:
+            "<b>Inasmuch as:</b> Bởi vì, xét vì (bằng nghĩa với <i>since/because</i>).",
+        },
+        {
+          q: "12. The task was incredibly challenging; ________, the young team managed to complete it ahead of schedule.",
+          options: [
+            "A. inasmuch as",
+            "B. nonetheless",
+            "C. with a view to",
+            "D. in probability",
+          ],
+          answer: 1,
+          explain: "<b>Nonetheless:</b> Tuy nhiên, mặc dù vậy.",
+        },
+        {
+          q: "13. The twin sisters look so identical that even their close friends find it hard to tell them ________.",
+          options: ["A. apart", "B. off", "C. away", "D. out"],
+          answer: 0,
+          explain:
+            "<b>Tell sth/sb apart:</b> Phân biệt hai đối tượng/vật giống nhau.",
+        },
+        {
+          q: "14. She spent the entire weekend in the library swotting ________ her upcoming history examination.",
+          options: ["A. up on", "B. down on", "C. in on", "D. out for"],
+          answer: 0,
+          explain:
+            "<b>Swot up on:</b> Ôn tập cật lực, cày kiến thức trước kỳ thi.",
+        },
+        {
+          q: "15. The executive asked for a few days to ________ the proposal before signing the agreement.",
+          options: [
+            "A. mull over",
+            "B. puzzle out",
+            "C. pack in",
+            "D. settle up",
+          ],
+          answer: 0,
+          explain:
+            "<b>Mull over:</b> Suy ngẫm, cân nhắc kỹ lưỡng một quyết định.",
+        },
+        {
+          q: "16. After analyzing the encrypted code for hours, the technician finally managed to puzzle it ________.",
+          options: ["A. out", "B. over", "C. off", "D. through"],
+          answer: 0,
+          explain:
+            "<b>Puzzle out:</b> Tìm ra câu trả lời, giải mã được điều phức tạp.",
+        },
+        {
+          q: "17. It was an extremely challenging role, but the young actress managed to carry it ________ flawlessly.",
+          options: ["A. off", "B. in", "C. over", "D. out"],
+          answer: 0,
+          explain:
+            "<b>Carry off:</b> Thực hiện/xử lý thành công việc khó khăn.",
+        },
+        {
+          q: "18. The national team held the championship trophy ________ after winning the final match.",
+          options: [
+            "A. triumphantly",
+            "B. adroitly",
+            "C. haphazardly",
+            "D. opinionatedly",
+          ],
+          answer: 0,
+          explain:
+            "<b>Triumphantly:</b> Một cách chiến thắng, hân hoan rực rỡ.",
+        },
+        {
+          q: "19. A small temporary loan from his family was enough to tide him ________ until his next paycheck.",
+          options: ["A. over", "B. up", "C. off", "D. through"],
+          answer: 0,
+          explain:
+            "<b>Tide sb over:</b> Giúp ai đó vượt qua giai đoạn khó khăn (thường về tiền bạc).",
+        },
+        {
+          q: "20. The heavy rainfall showed no sign of letting ________, causing severe local flooding.",
+          options: ["A. up", "B. off", "C. down", "D. in"],
+          answer: 0,
+          explain: "<b>Let up:</b> Giảm bớt, yếu đi, tạnh (mưa, áp lực, bão).",
+        },
+        {
+          q: "21. If the main server fails, the backup systems will automatically fall ________ to prevent data loss.",
+          options: ["A. back on", "B. out with", "C. in with", "D. through to"],
+          answer: 0,
+          explain:
+            "<b>Fall back on:</b> Trông cậy/sử dụng đến phương án dự phòng.",
+        },
+        {
+          q: "22. Make sure there is enough food to go ________ for all the guests attending the party.",
+          options: ["A. around", "B. over", "C. off", "D. away"],
+          answer: 0,
+          explain: "<b>Go around:</b> Đủ chia cho tất cả mọi người.",
+        },
+        {
+          q: "23. The employees were kept in the ________ about the upcoming company restructuring until the last minute.",
+          options: ["A. dark", "B. shadow", "C. night", "D. fog"],
+          answer: 0,
+          explain:
+            "<b>Be kept in the dark:</b> Bị giấu giếm, không được cho biết tin tức.",
+        },
+        {
+          q: "24. Only top executives who are in the ________ were aware of the merger details beforehand.",
+          options: ["A. know", "B. light", "C. view", "D. mind"],
+          answer: 0,
+          explain:
+            "<b>Be in the know:</b> Được thông báo, biết rõ thông tin nội bộ.",
+        },
+        {
+          q: "25. She is very quick on the ________, understanding complex instructions almost instantly.",
+          options: ["A. uptake", "B. intake", "C. setup", "D. outlet"],
+          answer: 0,
+          explain:
+            "<b>Be quick on the uptake:</b> Sáng dạ, hiểu vấn đề rất nhanh.",
+        },
+        {
+          q: "26. In a sudden crisis, it is vital to have your ________ about you and stay completely calm.",
+          options: ["A. wits", "B. brains", "C. heads", "D. thoughts"],
+          answer: 0,
+          explain:
+            "<b>Have your wits about you:</b> Bình tĩnh, giữ được sự tỉnh táo để phản ứng kịp thời.",
+        },
+        {
+          q: "27. Years of severe financial mismanagement transformed the once-prosperous region into an economic ________.",
+          options: [
+            "A. basket case",
+            "B. pain in the neck",
+            "C. crest of a wave",
+            "D. last straw",
+          ],
+          answer: 0,
+          explain:
+            "<b>Basket case:</b> Quốc gia/tổ chức ở tình trạng suy sụp, kiệt quệ hoàn toàn.",
+        },
+        {
+          q: "28. Instead of focusing on the main project strategy, they spent hours splitting ________ over minor formatting details.",
+          options: ["A. hairs", "B. threads", "C. head", "D. papers"],
+          answer: 0,
+          explain:
+            "<b>Split hairs:</b> Bắt bẻ những chi tiết vặt vãnh, không quan trọng.",
+        },
+        {
+          q: "29. There is no need to ________ over small budget discrepancies when the overall figures are correct.",
+          options: ["A. niggle", "B. sidestep", "C. warrant", "D. elude"],
+          answer: 0,
+          explain:
+            "<b>Niggle over:</b> Bắt bẻ, miên man làm phiền về những điều nhỏ nhặt.",
+        },
+        {
+          q: "30. New evidence regarding the financial scandal began to come to ________ during the trial.",
+          options: ["A. light", "B. view", "C. mind", "D. day"],
+          answer: 0,
+          explain: "<b>Come to light:</b> Được đưa ra ánh sáng, bị phát giác.",
+        },
+        {
+          q: "31. It is mandatory that the manager ________ the safety report to the director immediately.",
+          options: ["A. submit", "B. submits", "C. submitted", "D. submitting"],
+          answer: 0,
+          explain:
+            "<b>Cấu trúc Giả định:</b> Mandatory that + S + V-bare (submit).",
+        },
+        {
+          q: "32. Only when she checked her bank statement ________ that she had lost her credit card.",
+          options: [
+            "A. did she realize",
+            "B. she realized",
+            "C. had she realized",
+            "D. she did realize",
+          ],
+          answer: 0,
+          explain:
+            "<b>Đảo ngữ với Only when:</b> Mệnh đề sau 'Only when + clause' phải đảo trợ động từ lên trước Chủ ngữ.",
+        },
+        {
+          q: "33. If you run short of money on your journey, these emergency funds will tide you ________.",
+          options: ["A. over", "B. in", "C. through", "D. away"],
+          answer: 0,
+          explain:
+            "<b>Tide sb over:</b> Giúp đỡ ai trang trải vượt qua khó khăn tạm thời.",
+        },
+      ];
+
+      function renderQuiz() {
+        const container = document.getElementById("quiz-container");
+
+        quizData.forEach((item, qIndex) => {
+          const card = document.createElement("div");
+          card.className = "question-card";
+
+          const title = document.createElement("div");
+          title.className = "question-title";
+          title.innerHTML = item.q;
+          card.appendChild(title);
+
+          const optionsGrid = document.createElement("div");
+          optionsGrid.className = "options-grid";
+
+          item.options.forEach((opt, oIndex) => {
+            const btn = document.createElement("button");
+            btn.className = "option-btn";
+            btn.innerText = opt;
+            btn.onclick = () => checkAnswer(qIndex, oIndex);
+            optionsGrid.appendChild(btn);
+          });
+
+          card.appendChild(optionsGrid);
+
+          const exp = document.createElement("div");
+          exp.id = `exp-${qIndex}`;
+          exp.className = "explanation";
+          card.appendChild(exp);
+
+          container.appendChild(card);
+        });
+      }
+
+      function checkAnswer(questionIndex, selectedOption) {
+        const item = quizData[questionIndex];
+        const card = document.querySelectorAll(".question-card")[questionIndex];
+        const buttons = card.querySelectorAll(".option-btn");
+        const expBox = document.getElementById(`exp-${questionIndex}`);
+
+        buttons.forEach((btn, idx) => {
+          btn.disabled = true;
+          if (idx === item.answer) {
+            btn.classList.add("correct");
+          }
+        });
+
+        if (selectedOption === item.answer) {
+          expBox.className = "explanation show correct-exp";
+          expBox.innerHTML = `<strong> Chính xác!</strong><br>${item.explain}`;
+        } else {
+          buttons[selectedOption].classList.add("wrong");
+          expBox.className = "explanation show wrong-exp";
+          expBox.innerHTML = `<strong> Chưa chính xác!</strong><br>Đáp án đúng: <b>${item.options[item.answer]}</b><br>${item.explain}`;
+        }
+      }
+
+      renderQuiz();
+    </script>
+  </body>
+</html>

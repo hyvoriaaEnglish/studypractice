@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bài Tập Trắc Nghiệm Từ Vựng Tiếng Anh</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        /* Bảng màu Hồng - Vàng - Cam */
+        --bg-color: #fffaf5;
+        --card-bg: #ffffff;
+        --primary-gradient: linear-gradient(
+          135deg,
+          #ff6b6b 0%,
+          #ff8e53 50%,
+          #feca57 100%
+        );
+        --primary-color: #ff6b6b;
+        --primary-hover-bg: #fff0eb;
+        --border-color: #ffe0d2;
+        --text-dark: #2d1810;
+        --text-muted: #8c6d62;
+
+        /* Trạng thái Đúng / Sai */
+        --success-color: #10b981;
+        --success-bg: #ecfdf5;
+        --success-text: #065f46;
+        --error-color: #ef4444;
+        --error-bg: #fef2f2;
+        --error-text: #991b1b;
+
+        --shadow-sm: 0 4px 15px rgba(255, 107, 107, 0.08);
+        --shadow-md: 0 10px 25px rgba(255, 107, 107, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-dark);
+        font-family: "Plus Jakarta Sans", sans-serif;
+        line-height: 1.6;
+        padding: 40px 20px;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 35px;
+        padding: 35px 25px;
+        background: var(--card-bg);
+        border-radius: 20px;
+        box-shadow: var(--shadow-sm);
+        border: 2px solid var(--border-color);
+      }
+
+      header h1 {
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 2.2rem;
+        font-weight: 800;
+        margin-bottom: 8px;
+        letter-spacing: -0.5px;
+      }
+
+      header p {
+        color: var(--text-muted);
+        font-size: 0.98rem;
+        font-weight: 500;
+      }
+
+      .question-card {
+        background: var(--card-bg);
+        border-radius: 18px;
+        padding: 28px;
+        margin-bottom: 24px;
+        box-shadow: var(--shadow-sm);
+        border: 1.5px solid var(--border-color);
+        transition: all 0.25s ease;
+      }
+
+      .question-card:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+        border-color: #ff8e53;
+      }
+
+      .question-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: var(--text-dark);
+        line-height: 1.6;
+      }
+
+      .options-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 12px;
+      }
+
+      .option-btn {
+        background: #ffffff;
+        border: 1.5px solid var(--border-color);
+        border-radius: 12px;
+        padding: 14px 18px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        text-align: left;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        outline: none;
+      }
+
+      .option-btn:hover:not([disabled]) {
+        border-color: #ff6b6b;
+        background: var(--primary-hover-bg);
+        color: #e04848;
+      }
+
+      .option-btn.correct {
+        background-color: var(--success-bg) !important;
+        border-color: var(--success-color) !important;
+        color: var(--success-text) !important;
+        font-weight: 700;
+      }
+
+      .option-btn.wrong {
+        background-color: var(--error-bg) !important;
+        border-color: var(--error-color) !important;
+        color: var(--error-text) !important;
+      }
+
+      .option-btn[disabled] {
+        cursor: default;
+        opacity: 0.85;
+      }
+
+      .explanation {
+        display: none;
+        margin-top: 20px;
+        padding: 16px 20px;
+        border-radius: 12px;
+        font-size: 0.95rem;
+        animation: fadeIn 0.3s ease;
+        line-height: 1.6;
+      }
+
+      .explanation.show {
+        display: block;
+      }
+
+      .explanation.correct-exp {
+        background-color: var(--success-bg);
+        border-left: 5px solid var(--success-color);
+        color: var(--success-text);
+      }
+
+      .explanation.wrong-exp {
+        background-color: var(--error-bg);
+        border-left: 5px solid var(--error-color);
+        color: var(--error-text);
+      }
+
+      .explanation strong {
+        font-size: 0.98rem;
+        display: inline-block;
+        margin-bottom: 4px;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-6px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 640px) {
+        body {
+          padding: 20px 12px;
+        }
+        header h1 {
+          font-size: 1.75rem;
+        }
+        .options-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Bài Tập Trắc Nghiệm Từ Vựng</h1>
+        <p>
+          Chọn đáp án đúng cho mỗi câu để xem kết quả và giải thích chi tiết.
+        </p>
+      </header>
+
+      <div id="quiz-container"></div>
+    </div>
+
+    <script>
+      const quizData = [
+        {
+          q: "1. Despite encountering severe bad weather, the mountaineers decided to press ________ toward the summit.",
+          options: ["A. on", "B. out", "C. over", "D. off"],
+          answer: 0,
+          explain:
+            "<b>Press on:</b> Tiếp tục tiến lên, kiên trì bước tiếp bất chấp khó khăn.",
+        },
+        {
+          q: "2. The shrewd negotiator tried to play the two rival suppliers ________ each other to get a better deal.",
+          options: [
+            "A. over with",
+            "B. off against",
+            "C. out to",
+            "D. down with",
+          ],
+          answer: 1,
+          explain:
+            "<b>Play sb off against sb:</b> Tọa sơn quan hổ đấu, khích hai bên đấu nhau để mình hưởng lợi.",
+        },
+        {
+          q: "3. Wise financial advisors always suggest that people set ________ a portion of their income for emergencies.",
+          options: ["A. across", "B. side", "C. aside", "D. along"],
+          answer: 2,
+          explain:
+            "<b>Set aside (hoặc Put by):</b> Tiết kiệm, dành dụm tiền bạc cho tương lai.",
+        },
+        {
+          q: "4. The government's new tax scheme came in ________ harsh criticism from business leaders.",
+          options: ["A. with", "B. about", "C. to", "D. for"],
+          answer: 3,
+          explain:
+            "<b>Come in for criticism:</b> Hứng chịu, nhận lấy sự chỉ trích.",
+        },
+        {
+          q: "5. It is considered unprofessional to back ________ a signed business contract at the last minute.",
+          options: ["A. out of", "B. down to", "C. off from", "D. away with"],
+          answer: 0,
+          explain:
+            "<b>Back out of:</b> Rút lui, nuốt lời, không thực hiện thỏa thuận.",
+        },
+        {
+          q: "6. The young clerk finally owned up to ________ a mistake on the financial audit report.",
+          options: ["A. make", "B. making", "C. made", "D. have made"],
+          answer: 1,
+          explain: "<b>Own up to + V-ing:</b> Thú nhận, nhận lỗi đã làm gì.",
+        },
+        {
+          q: "7. When feeling overwhelmed by stress, it helps to vent ________ a trusted friend or therapist.",
+          options: ["A. at", "B. with", "C. to", "D. for"],
+          answer: 2,
+          explain:
+            "<b>Vent to sb:</b> Trút bầu tâm sự, bộc bạch nỗi niềm với ai.",
+        },
+        {
+          q: "8. Just because you had a bad day at work doesn't mean you should take it ________ your family.",
+          options: ["A. out of", "B. down on", "C. away from", "D. out on"],
+          answer: 3,
+          explain:
+            "<b>Take it out on sb:</b> Giận cá chém thớt, trút giận lên đầu ai.",
+        },
+        {
+          q: "9. During class discussions, shy students often hang ________ instead of sharing their thoughts.",
+          options: ["A. back", "B. off", "C. away", "D. over"],
+          answer: 0,
+          explain:
+            "<b>Hang back:</b> Do dự, e ấp, lùi lại phía sau không dám tiến lên.",
+        },
+        {
+          q: "10. Human rights activists strongly deplore ________ prisoners without giving them a fair trial.",
+          options: ["A. detained", "B. detaining", "C. to detain", "D. detain"],
+          answer: 1,
+          explain:
+            "<b>Deplore + V-ing:</b> Phẫn nộ, lên án gay gắt hành vi nào đó.",
+        },
+        {
+          q: "11. Instead of wringing their hands ________ the economic crisis, the board took decisive action.",
+          options: ["A. at", "B. for", "C. over", "D. with"],
+          answer: 2,
+          explain:
+            "<b>Wring hands over sth:</b> Lo hão, xoắn xít lo lắng mà không đưa ra giải pháp.",
+        },
+        {
+          q: "12. A kind passerby took pity ________ the abandoned puppy and decided to adopt it.",
+          options: ["A. at", "B. for", "C. with", "D. on"],
+          answer: 3,
+          explain:
+            "<b>Take pity on sb/sth:</b> Rủ lòng thương, thương hại ai/cái gì.",
+        },
+        {
+          q: "13. Modern glass skyscrapers are completely out of ________ with the town's historic architecture.",
+          options: ["A. harmony", "B. tune", "C. rhythm", "D. balance"],
+          answer: 0,
+          explain:
+            "<b>Be out of harmony with:</b> Không hòa hợp, chọi nhau, lệch tông với.",
+        },
+        {
+          q: "14. Due to mounting debts, the small family business was on the ________ of bankruptcy.",
+          options: ["A. side", "B. brink", "C. edgewards", "D. marginal"],
+          answer: 1,
+          explain:
+            "<b>On the brink of:</b> Trên bờ vực (phá sản, chiến tranh, sụp đổ).",
+        },
+        {
+          q: "15. The harsh critic poured ________ on the author's new romance novel in his weekly column.",
+          options: ["A. shame", "B. blame", "C. scorn", "D. anger"],
+          answer: 2,
+          explain:
+            "<b>Pour/Heap scorn on:</b> Dè bỉu, khinh bỉ, xỉa xói ai/cái gì.",
+        },
+        {
+          q: "16. Sensational media headlines served to stoke ________ public fears regarding the outbreak.",
+          options: ["A. in", "B. off", "C. out", "D. up"],
+          answer: 3,
+          explain:
+            "<b>Stoke up:</b> Thổi bùng, kích động (cảm xúc, nỗi sợ, căng thẳng).",
+        },
+        {
+          q: "17. ________ and large, the new workplace regulations have improved overall staff productivity.",
+          options: ["A. By", "B. In", "C. On", "D. At"],
+          answer: 0,
+          explain: "<b>By and large:</b> Nhìn chung, nói chung là.",
+        },
+        {
+          q: "18. Never sign a contract without reading every clause; you don't want to buy a pig in a ________.",
+          options: ["A. bag", "B. poke", "C. box", "D. sack"],
+          answer: 1,
+          explain:
+            "<b>Buy a pig in a poke:</b> Mua nhắm mua mò, mua món hàng mà chưa kiểm tra chất lượng.",
+        },
+        {
+          q: "19. The company offered additional stock options in ________ of a cash performance bonus.",
+          options: ["A. place", "B. stead", "C. lieu", "D. view"],
+          answer: 2,
+          explain:
+            "<b>In lieu of:</b> Thay cho, thay vì (thường dùng trong văn bản pháp lý, chính thức).",
+        },
+        {
+          q: "20. The political systemic reform aimed to end the widespread ________ of minority communities.",
+          options: [
+            "A. disengagement",
+            "B. disconnection",
+            "C. disadvantage",
+            "D. disenfranchisement",
+          ],
+          answer: 3,
+          explain:
+            "<b>Disenfranchisement:</b> Sự tước quyền công dân, tước quyền bầu cử.",
+        },
+        {
+          q: "21. Scientists worked in a ________ effort across international borders to develop the vaccine.",
+          options: [
+            "A. collaborative",
+            "B. individual",
+            "C. competitive",
+            "D. solitary",
+          ],
+          answer: 0,
+          explain: "<b>Collaborative:</b> Có tính hợp tác, cộng tác.",
+        },
+        {
+          q: "22. The beggar told a long ________ story in hopes of getting some spare change from tourists.",
+          options: [
+            "A. hard-work",
+            "B. hard-luck",
+            "C. bad-luck",
+            "D. sad-life",
+          ],
+          answer: 1,
+          explain:
+            "<b>A hard-luck story:</b> Câu chuyện kể khổ, chuyện hoàn cảnh thương tâm (để xin lòng xót thương).",
+        },
+        {
+          q: "23. The professor wrote an accessible handbook designed to ________ complex quantum physics concepts.",
+          options: [
+            "A. mystify",
+            "B. demystify",
+            "C. complicate",
+            "D. intensify",
+          ],
+          answer: 1,
+          explain:
+            "<b>Demystify:</b> Làm rõ ràng, giản dị hóa, tháo gỡ sự bí ẩn.",
+        },
+        {
+          q: "24. The doctor prescribed an ________ cream to reduce the swelling on his injured ankle.",
+          options: [
+            "A. inflammatory",
+            "B. non-flammable",
+            "C. anti-inflammatory",
+            "D. uninflamed",
+          ],
+          answer: 2,
+          explain: "<b>Anti-inflammatory:</b> Kháng viêm, chống sưng bầm.",
+        },
+        {
+          q: "25. Early screening allowed dermatologists to detect and remove ________ skin lesions safely.",
+          options: [
+            "A. cancerous",
+            "B. noncancerous",
+            "C. uncancerous",
+            "D. precancerous",
+          ],
+          answer: 3,
+          explain:
+            "<b>Precancerous:</b> Tiền ung thư (giai đoạn biến đổi trước khi thành ung thư).",
+        },
+        {
+          q: "26. After hearing the unexpected good news, she cast her eyes ________ in a silent prayer of gratitude.",
+          options: [
+            "A. heavenwards",
+            "B. skywards",
+            "C. homewards",
+            "D. downwards",
+          ],
+          answer: 0,
+          explain: "<b>Heavenwards:</b> Hướng về phía bầu trời/lên trời.",
+        },
+        {
+          q: "27. All newly hired high school teachers are required to complete an ________ training course.",
+          options: [
+            "A. out-of-service",
+            "B. in-service",
+            "C. pre-service",
+            "D. off-service",
+          ],
+          answer: 1,
+          explain:
+            "<b>In-service:</b> Bồi dưỡng tại chức, đào tạo khi đang làm nghề.",
+        },
+        {
+          q: "28. Forensic investigators analyzed the ancient ________ remains found inside the cave.",
+          options: [
+            "A. membered",
+            "B. disremembered",
+            "C. dismembered",
+            "D. unmembered",
+          ],
+          answer: 2,
+          explain: "<b>Dismembered:</b> Bị phân xác, bị cắt rời từng bộ phận.",
+        },
+        {
+          q: "29. Production costs experienced ________ growth, exceeding the original quarterly estimates.",
+          options: ["A. walkaway", "B. flyaway", "C. driveaway", "D. runaway"],
+          answer: 3,
+          explain:
+            "<b>Runaway:</b> Tăng nhanh mất kiểm soát, vượt tầm kiểm soát.",
+        },
+        {
+          q: "30. Delegates from over fifty countries gathered at the international climate ________.",
+          options: [
+            "A. conference",
+            "B. congregation",
+            "C. confrontation",
+            "D. configuration",
+          ],
+          answer: 0,
+          explain: "<b>Conference:</b> Hội nghị, cuộc họp khoáng đại.",
+        },
+        {
+          q: "31. Genetic testing revealed that he carried a clear ________ to cardiovascular diseases.",
+          options: [
+            "A. disposition",
+            "B. predisposition",
+            "C. position",
+            "D. imposition",
+          ],
+          answer: 1,
+          explain:
+            "<b>Predisposition:</b> Bẩm sinh dễ mắc bệnh gì, bẩm sinh có thiên hướng.",
+        },
+        {
+          q: "32. When the lead actor suddenly fell ill, his ________ had to step in and perform the role.",
+          options: [
+            "A. supervisor",
+            "B. predecessor",
+            "C. understudy",
+            "D. successor",
+          ],
+          answer: 2,
+          explain: "<b>Understudy:</b> Diễn viên đóng thế/diễn viên dự phòng.",
+        },
+        {
+          q: "33. Having saved a substantial sum over the years, she put ________ enough money to buy a cottage.",
+          options: ["A. out", "B. off", "C. away", "D. by"],
+          answer: 3,
+          explain: "<b>Put by:</b> Dành dụm, tiết kiệm tiền bạc.",
+        },
+        {
+          q: "34. The young officer chose to vent his frustrations ________ his direct supervisor during the review.",
+          options: ["A. to", "B. at", "C. on", "D. with"],
+          answer: 0,
+          explain:
+            "<b>Vent to sb:</b> Bộc bạch, trút nỗi niềm ức chế cho ai nghe.",
+        },
+      ];
+
+      function renderQuiz() {
+        const container = document.getElementById("quiz-container");
+
+        quizData.forEach((item, qIndex) => {
+          const card = document.createElement("div");
+          card.className = "question-card";
+
+          const title = document.createElement("div");
+          title.className = "question-title";
+          title.innerHTML = item.q;
+          card.appendChild(title);
+
+          const optionsGrid = document.createElement("div");
+          optionsGrid.className = "options-grid";
+
+          item.options.forEach((opt, oIndex) => {
+            const btn = document.createElement("button");
+            btn.className = "option-btn";
+            btn.innerText = opt;
+            btn.onclick = () => checkAnswer(qIndex, oIndex);
+            optionsGrid.appendChild(btn);
+          });
+
+          card.appendChild(optionsGrid);
+
+          const exp = document.createElement("div");
+          exp.id = `exp-${qIndex}`;
+          exp.className = "explanation";
+          card.appendChild(exp);
+
+          container.appendChild(card);
+        });
+      }
+
+      function checkAnswer(questionIndex, selectedOption) {
+        const item = quizData[questionIndex];
+        const card = document.querySelectorAll(".question-card")[questionIndex];
+        const buttons = card.querySelectorAll(".option-btn");
+        const expBox = document.getElementById(`exp-${questionIndex}`);
+
+        buttons.forEach((btn, idx) => {
+          btn.disabled = true;
+          if (idx === item.answer) {
+            btn.classList.add("correct");
+          }
+        });
+
+        if (selectedOption === item.answer) {
+          expBox.className = "explanation show correct-exp";
+          expBox.innerHTML = `<strong> Chính xác!</strong><br>${item.explain}`;
+        } else {
+          buttons[selectedOption].classList.add("wrong");
+          expBox.className = "explanation show wrong-exp";
+          expBox.innerHTML = `<strong> Chưa chính xác!</strong><br>Đáp án đúng: <b>${item.options[item.answer]}</b><br>${item.explain}`;
+        }
+      }
+
+      renderQuiz();
+    </script>
+  </body>
+</html>

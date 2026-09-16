@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bài Tập Trắc Nghiệm Từ Vựng Tiếng Anh</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        /* Bảng màu Hồng - Vàng - Cam */
+        --bg-color: #fffaf5;
+        --card-bg: #ffffff;
+        --primary-gradient: linear-gradient(
+          135deg,
+          #ff6b6b 0%,
+          #ff8e53 50%,
+          #feca57 100%
+        );
+        --primary-color: #ff6b6b;
+        --primary-hover-bg: #fff0eb;
+        --border-color: #ffe0d2;
+        --text-dark: #2d1810;
+        --text-muted: #8c6d62;
+
+        /* Trạng thái Đúng / Sai */
+        --success-color: #10b981;
+        --success-bg: #ecfdf5;
+        --success-text: #065f46;
+        --error-color: #ef4444;
+        --error-bg: #fef2f2;
+        --error-text: #991b1b;
+
+        --shadow-sm: 0 4px 15px rgba(255, 107, 107, 0.08);
+        --shadow-md: 0 10px 25px rgba(255, 107, 107, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-dark);
+        font-family: "Plus Jakarta Sans", sans-serif;
+        line-height: 1.6;
+        padding: 40px 20px;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 35px;
+        padding: 35px 25px;
+        background: var(--card-bg);
+        border-radius: 20px;
+        box-shadow: var(--shadow-sm);
+        border: 2px solid var(--border-color);
+      }
+
+      header h1 {
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 2.2rem;
+        font-weight: 800;
+        margin-bottom: 8px;
+        letter-spacing: -0.5px;
+      }
+
+      header p {
+        color: var(--text-muted);
+        font-size: 0.98rem;
+        font-weight: 500;
+      }
+
+      .question-card {
+        background: var(--card-bg);
+        border-radius: 18px;
+        padding: 28px;
+        margin-bottom: 24px;
+        box-shadow: var(--shadow-sm);
+        border: 1.5px solid var(--border-color);
+        transition: all 0.25s ease;
+      }
+
+      .question-card:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+        border-color: #ff8e53;
+      }
+
+      .question-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: var(--text-dark);
+        line-height: 1.6;
+      }
+
+      .options-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 12px;
+      }
+
+      .option-btn {
+        background: #ffffff;
+        border: 1.5px solid var(--border-color);
+        border-radius: 12px;
+        padding: 14px 18px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        text-align: left;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        outline: none;
+      }
+
+      .option-btn:hover:not([disabled]) {
+        border-color: #ff6b6b;
+        background: var(--primary-hover-bg);
+        color: #e04848;
+      }
+
+      .option-btn.correct {
+        background-color: var(--success-bg) !important;
+        border-color: var(--success-color) !important;
+        color: var(--success-text) !important;
+        font-weight: 700;
+      }
+
+      .option-btn.wrong {
+        background-color: var(--error-bg) !important;
+        border-color: var(--error-color) !important;
+        color: var(--error-text) !important;
+      }
+
+      .option-btn[disabled] {
+        cursor: default;
+        opacity: 0.85;
+      }
+
+      .explanation {
+        display: none;
+        margin-top: 20px;
+        padding: 16px 20px;
+        border-radius: 12px;
+        font-size: 0.95rem;
+        animation: fadeIn 0.3s ease;
+        line-height: 1.6;
+      }
+
+      .explanation.show {
+        display: block;
+      }
+
+      .explanation.correct-exp {
+        background-color: var(--success-bg);
+        border-left: 5px solid var(--success-color);
+        color: var(--success-text);
+      }
+
+      .explanation.wrong-exp {
+        background-color: var(--error-bg);
+        border-left: 5px solid var(--error-color);
+        color: var(--error-text);
+      }
+
+      .explanation strong {
+        font-size: 0.98rem;
+        display: inline-block;
+        margin-bottom: 4px;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-6px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 640px) {
+        body {
+          padding: 20px 12px;
+        }
+        header h1 {
+          font-size: 1.75rem;
+        }
+        .options-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Bài Tập Trắc Nghiệm Từ Vựng (36 Câu)</h1>
+        <p>
+          Chọn đáp án đúng cho mỗi câu để xem kết quả và giải thích chi tiết.
+        </p>
+      </header>
+
+      <div id="quiz-container"></div>
+    </div>
+
+    <script>
+      const quizData = [
+        {
+          q: "1. The bank was forced to accept a massive debt ________ after the borrower declared bankruptcy.",
+          options: [
+            "A. write-off",
+            "B. write-up",
+            "C. write-down",
+            "D. write-in",
+          ],
+          answer: 0,
+          explain:
+            "<b>Write-off:</b> Việc xóa nợ, sự hạch toán tổn thất/bỏ đi khoản nợ không thể thu hồi.",
+        },
+        {
+          q: "2. The government expressed deep concern over a growing group of ________ young voters.",
+          options: [
+            "A. disaffected",
+            "B. reaffected",
+            "C. unaffected",
+            "D. nonaffected",
+          ],
+          answer: 0,
+          explain:
+            "<b>Disaffected:</b> Bất mãn, nguội lạnh niềm tin (với chính quyền, tổ chức).",
+        },
+        {
+          q: "3. A special diplomatic committee was sent on a ________ mission to gather evidence on the crisis.",
+          options: [
+            "A. fact-finding",
+            "B. truth-seeking",
+            "C. point-making",
+            "D. detail-checking",
+          ],
+          answer: 0,
+          explain: "<b>Fact-finding:</b> Tìm hiểu sự thật, điều tra thực địa.",
+        },
+        {
+          q: "4. Constantly worrying about small mistakes proved to be a ________ habit that undermined her confidence.",
+          options: [
+            "A. self-defeating",
+            "B. self-reliant",
+            "C. self-catering",
+            "D. self-effacing",
+          ],
+          answer: 0,
+          explain:
+            "<b>Self-defeating:</b> Gậy ông đập lưng ông, tự đem lại gậy đập mình, phản tác dụng.",
+        },
+        {
+          q: "5. During times of high inflation, families often cut back spending on luxury goods and ________.",
+          options: [
+            "A. non-essentials",
+            "B. unessentials",
+            "C. disessentials",
+            "D. inessentials",
+          ],
+          answer: 0,
+          explain:
+            "<b>Non-essentials:</b> Những thứ yếu, mặt hàng không thiết yếu.",
+        },
+        {
+          q: "6. The money raised from the charity event was dedicated to the ________ of the local community.",
+          options: [
+            "A. betterment",
+            "B. advancement",
+            "C. enrichment",
+            "D. arrangement",
+          ],
+          answer: 0,
+          explain: "<b>Betterment:</b> Sự cải thiện, làm cho tốt đẹp hơn.",
+        },
+        {
+          q: "7. The editor added a footnote to ________ the ambiguous meaning of the technical term.",
+          options: [
+            "A. disambiguate",
+            "B. disambiguation",
+            "C. ambiguous",
+            "D. non-ambiguous",
+          ],
+          answer: 0,
+          explain: "<b>Disambiguate:</b> Làm rõ nghĩa, tháo gỡ sự mập mờ.",
+        },
+        {
+          q: "8. Severe droughts and pest attacks threatened to ________ the region's agricultural output.",
+          options: ["A. decimate", "B. dedicate", "C. evaluate", "D. nominate"],
+          answer: 0,
+          explain: "<b>Decimate:</b> Tàn phá nặng nề, tiêu diệt phần lớn.",
+        },
+        {
+          q: "9. Parliament recently passed groundbreaking ________ to protect consumer data privacy.",
+          options: [
+            "A. legislation",
+            "B. legislative",
+            "C. legislator",
+            "D. legislature",
+          ],
+          answer: 0,
+          explain:
+            "<b>Legislation:</b> Pháp luật, bộ luật, việc ban hành luật.",
+        },
+        {
+          q: "10. Environmental groups accused the powerful energy ________ of influencing national energy policy.",
+          options: [
+            "A. lobbying industry",
+            "B. working group",
+            "C. research sector",
+            "D. civil service",
+          ],
+          answer: 0,
+          explain:
+            "<b>Lobbying industry:</b> Ngành công nghiệp vận động hành lang.",
+        },
+        {
+          q: "11. The movement was characterized by strong ________ sentiment, opposing state interventions.",
+          options: [
+            "A. anti-government",
+            "B. non-government",
+            "C. pro-government",
+            "D. sub-government",
+          ],
+          answer: 0,
+          explain: "<b>Anti-government:</b> Chống đối chính phủ.",
+        },
+        {
+          q: "12. Free market competition is one of the foundational pillars of modern ________.",
+          options: [
+            "A. capitalism",
+            "B. socialist",
+            "C. feudalism",
+            "D. communism",
+          ],
+          answer: 0,
+          explain: "<b>Capitalism:</b> Chủ nghĩa tư bản.",
+        },
+        {
+          q: "13. Heavy commercial trucks frequently travel along the primary ________ highway system.",
+          options: [
+            "A. interstate",
+            "B. intrastate",
+            "C. understate",
+            "D. overstate",
+          ],
+          answer: 0,
+          explain: "<b>Interstate:</b> Liên bang, giữa các bang.",
+        },
+        {
+          q: "14. After the company collapsed, salvage operators swooped in to search for easy ________.",
+          options: [
+            "A. pickings",
+            "B. earnings",
+            "C. winnings",
+            "D. collections",
+          ],
+          answer: 0,
+          explain: "<b>Easy pickings:</b> Của hời, lợi lộc dễ kiếm.",
+        },
+        {
+          q: "15. The state-controlled media outlet was heavily accused of broadcasting political ________.",
+          options: [
+            "A. propaganda",
+            "B. public relations",
+            "C. publishing",
+            "D. advertisement",
+          ],
+          answer: 0,
+          explain:
+            "<b>Propaganda:</b> Tuyên truyền (thường mang tính định hướng/bóp méo).",
+        },
+        {
+          q: "16. Ever since I forgot her birthday, I feel like I've been in her ________ books.",
+          options: ["A. bad", "B. dark", "C. black", "D. cold"],
+          answer: 0,
+          explain: "<b>In one's bad books:</b> Bị ai ghét, không được lòng ai.",
+        },
+        {
+          q: "17. Artistic talent seems to run in her ________, as both her parents were renowned painters.",
+          options: ["A. blood", "B. veins", "C. heart", "D. gene"],
+          answer: 0,
+          explain:
+            "<b>Run in one's blood:</b> Thấm vào máu, di truyền trong gia đình.",
+        },
+        {
+          q: "18. She set her heart on ________ a top-tier medical school in the capital.",
+          options: ["A. entering", "B. enter", "C. entered", "D. to enter"],
+          answer: 0,
+          explain:
+            "<b>Set one's heart on + V-ing:</b> Quyết tâm, khao khát làm việc gì.",
+        },
+        {
+          q: "19. Fluent language skills and international exposure gave him an ________ over other job candidates.",
+          options: ["A. edge", "B. end", "C. arm", "D. aim"],
+          answer: 0,
+          explain:
+            "<b>Give sb an edge over sb:</b> Tạo cho ai thế mạnh/lợi thế vượt trội so với ai.",
+        },
+        {
+          q: "20. A trustworthy business partner will never go back on their ________ once an agreement is made.",
+          options: ["A. word", "B. promise", "C. speech", "D. talk"],
+          answer: 0,
+          explain: "<b>Go back on one's word:</b> Nuốt lời, thất hứa.",
+        },
+        {
+          q: "21. We decided to explore a quaint fishing village that was well off the beaten ________.",
+          options: ["A. track", "B. path", "C. road", "D. way"],
+          answer: 0,
+          explain:
+            "<b>Off the beaten track:</b> Xa xôi, hẻo lánh, ít người biết đến.",
+        },
+        {
+          q: "22. Their car broke down late at night, leaving them stranded right in the middle of ________.",
+          options: [
+            "A. nowhere",
+            "B. everywhere",
+            "C. anywhere",
+            "D. somewhere",
+          ],
+          answer: 0,
+          explain:
+            "<b>In the middle of nowhere:</b> Ở nơi khỉ ho cò gáy, nơi hẻo lánh.",
+        },
+        {
+          q: "23. The new candidate has a distinct advantage in that she ________ fluent in three major languages.",
+          options: ["A. is", "B. being", "C. be", "D. was"],
+          answer: 0,
+          explain: "<b>In that:</b> Ở chỗ, vì lẽ (xét trên khía cạnh rằng).",
+        },
+        {
+          q: "24. What ________ the heavy rain and terrible traffic, we arrived two hours late for the ceremony.",
+          options: ["A. with", "B. for", "C. about", "D. from"],
+          answer: 0,
+          explain:
+            "<b>What with...:</b> Xét đến / bởi vì hàng đống lý do (kết hợp nhiều nguyên nhân).",
+        },
+        {
+          q: "25. The plan involves immense risks; be that as it ________, we must push forward.",
+          options: ["A. may", "B. can", "C. might", "D. will"],
+          answer: 0,
+          explain: "<b>Be that as it may:</b> Dù cho có như thế đi chăng nữa.",
+        },
+        {
+          q: "26. Many a time ________ he warned his team about the potential security vulnerabilities.",
+          options: ["A. has", "B. have", "C. had", "D. is"],
+          answer: 0,
+          explain:
+            "<b>Many a time + đảo ngữ (has/had + S + V3):</b> Đã rất nhiều lần.",
+        },
+        {
+          q: "27. Digital remote work platforms were initially temporary, but now they are here to ________.",
+          options: ["A. stay", "B. last", "C. keep", "D. remain"],
+          answer: 0,
+          explain:
+            "<b>Here to stay:</b> Đã trở thành xu hướng lâu dài, được công nhận rộng rãi.",
+        },
+        {
+          q: "28. When his grandfather passed away, he came ________ a substantial fortune and property.",
+          options: ["A. into", "B. across", "C. by", "D. through"],
+          answer: 0,
+          explain: "<b>Come into:</b> Thừa kế (gia tài, tiền bạc).",
+        },
+        {
+          q: "29. It usually takes about twenty minutes for the painkiller medication to kick ________.",
+          options: ["A. in", "B. off", "C. out", "D. up"],
+          answer: 0,
+          explain: "<b>Kick in:</b> Bắt đầu có hiệu lực, phát huy tác dụng.",
+        },
+        {
+          q: "30. While walking through the downtown mall yesterday, I happened to bump ________ an old classmate.",
+          options: ["A. into", "B. across", "C. upon", "D. over"],
+          answer: 0,
+          explain: "<b>Bump into:</b> Tình cờ gặp lại ai.",
+        },
+        {
+          q: "31. She had to turn ________ the job offer because the location required too long a commute.",
+          options: ["A. down", "B. off", "C. out", "D. away"],
+          answer: 0,
+          explain: "<b>Turn down:</b> Từ chối (lời mời, công việc, đề nghị).",
+        },
+        {
+          q: "32. After running up five flights of stairs, he was completely out of ________.",
+          options: ["A. breath", "B. mind", "C. order", "D. sight"],
+          answer: 0,
+          explain: "<b>Out of breath:</b> Thở không ra hơi, hụt hơi.",
+        },
+        {
+          q: "33. I won't be able to join the morning hike today because I'm feeling a bit out of ________.",
+          options: ["A. sorts", "B. kinds", "C. orders", "D. bounds"],
+          answer: 0,
+          explain:
+            "<b>Out of sorts:</b> Cảm thấy mệt mỏi, khó chịu, không được khỏe.",
+        },
+        {
+          q: "34. The performance of the secondary team was on par ________ the main league standards.",
+          options: ["A. with", "B. to", "C. as", "D. at"],
+          answer: 0,
+          explain:
+            "<b>Be on par with:</b> Ngang hàng, ngang tầm chất lượng với.",
+        },
+        {
+          q: "35. If you go ________ your word again, nobody in this firm will ever trust you.",
+          options: ["A. back on", "B. away from", "C. out of", "D. off with"],
+          answer: 0,
+          explain: "<b>Go back on one's word:</b> Nuốt lời, thất hứa.",
+        },
+        {
+          q: "36. What ________ the cold weather and heavy rain, we decided to stay indoors all weekend.",
+          options: ["A. with", "B. for", "C. in", "D. of"],
+          answer: 0,
+          explain: "<b>What with:</b> Bởi vì/xét vì các lý do nêu ra.",
+        },
+      ];
+
+      // Hàm tráo đổi ngẫu nhiên mảng (Fisher-Yates Shuffle)
+      function shuffle(array) {
+        let currentIndex = array.length,
+          randomIndex;
+        while (currentIndex !== 0) {
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex--;
+          [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex],
+            array[currentIndex],
+          ];
+        }
+        return array;
+      }
+
+      // Đảo ngẫu nhiên các đáp án của từng câu hỏi
+      function prepareQuizData() {
+        return quizData.map((item) => {
+          const originalCorrectText = item.options[item.answer];
+          // Nhân bản mảng options để xáo trộn
+          const shuffledOptions = shuffle([...item.options]);
+          // Tìm chỉ số mới của đáp án đúng
+          const newAnswerIndex = shuffledOptions.findIndex(
+            (opt) => opt === originalCorrectText,
+          );
+
+          return {
+            ...item,
+            options: shuffledOptions,
+            answer: newAnswerIndex,
+          };
+        });
+      }
+
+      const preparedQuizData = prepareQuizData();
+
+      function renderQuiz() {
+        const container = document.getElementById("quiz-container");
+
+        preparedQuizData.forEach((item, qIndex) => {
+          const card = document.createElement("div");
+          card.className = "question-card";
+
+          const title = document.createElement("div");
+          title.className = "question-title";
+          title.innerHTML = item.q;
+          card.appendChild(title);
+
+          const optionsGrid = document.createElement("div");
+          optionsGrid.className = "options-grid";
+
+          item.options.forEach((opt, oIndex) => {
+            const btn = document.createElement("button");
+            btn.className = "option-btn";
+            btn.innerText = opt;
+            btn.onclick = () => checkAnswer(qIndex, oIndex);
+            optionsGrid.appendChild(btn);
+          });
+
+          card.appendChild(optionsGrid);
+
+          const exp = document.createElement("div");
+          exp.id = `exp-${qIndex}`;
+          exp.className = "explanation";
+          card.appendChild(exp);
+
+          container.appendChild(card);
+        });
+      }
+
+      function checkAnswer(questionIndex, selectedOption) {
+        const item = preparedQuizData[questionIndex];
+        const card = document.querySelectorAll(".question-card")[questionIndex];
+        const buttons = card.querySelectorAll(".option-btn");
+        const expBox = document.getElementById(`exp-${questionIndex}`);
+
+        buttons.forEach((btn, idx) => {
+          btn.disabled = true;
+          if (idx === item.answer) {
+            btn.classList.add("correct");
+          }
+        });
+
+        if (selectedOption === item.answer) {
+          expBox.className = "explanation show correct-exp";
+          expBox.innerHTML = `<strong> Chính xác!</strong><br>${item.explain}`;
+        } else {
+          buttons[selectedOption].classList.add("wrong");
+          expBox.className = "explanation show wrong-exp";
+          expBox.innerHTML = `<strong> Chưa chính xác!</strong><br>Đáp án đúng: <b>${item.options[item.answer]}</b><br>${item.explain}`;
+        }
+      }
+
+      renderQuiz();
+    </script>
+  </body>
+</html>
