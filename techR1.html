@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Reading Comprehension Quiz</title>
+    <style>
+      :root {
+        --primary: #1e40af;
+        --primary-light: #eff6ff;
+        --primary-hover: #1d4ed8;
+        --bg: #f0f9ff;
+        --card-bg: #ffffff;
+        --text-main: #0f172a;
+        --text-muted: #475569;
+        --border: #e2e8f0;
+        --correct: #16a34a;
+        --correct-bg: #f0fdf4;
+        --correct-border: #bbf7d0;
+        --wrong: #dc2626;
+        --wrong-bg: #fef2f2;
+        --wrong-border: #fecaca;
+        --shadow:
+          0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family:
+          "Segoe UI",
+          -apple-system,
+          BlinkMacSystemFont,
+          Roboto,
+          sans-serif;
+        background-color: var(--bg);
+        color: var(--text-main);
+        line-height: 1.6;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 30px;
+        padding: 20px;
+        background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+        color: white;
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+      }
+
+      header h1 {
+        font-size: 1.8rem;
+        margin-bottom: 8px;
+      }
+
+      header p {
+        font-size: 0.95rem;
+        opacity: 0.9;
+      }
+
+      .content-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      @media (min-width: 900px) {
+        .content-grid {
+          grid-template-columns: 1fr 1fr;
+          align-items: start;
+        }
+        .reading-passage {
+          position: sticky;
+          top: 20px;
+          max-height: calc(100vh - 40px);
+          overflow-y: auto;
+        }
+      }
+
+      .card {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 24px;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border);
+      }
+
+      .reading-passage h2 {
+        color: var(--primary);
+        font-size: 1.3rem;
+        margin-bottom: 16px;
+        border-bottom: 2px solid var(--primary-light);
+        padding-bottom: 8px;
+      }
+
+      .reading-passage p {
+        margin-bottom: 14px;
+        font-size: 0.95rem;
+        text-align: justify;
+        color: var(--text-main);
+      }
+
+      .quiz-container h2 {
+        color: var(--primary);
+        font-size: 1.3rem;
+        margin-bottom: 16px;
+        border-bottom: 2px solid var(--primary-light);
+        padding-bottom: 8px;
+      }
+
+      .question-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 18px;
+        margin-bottom: 20px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      }
+
+      .question-title {
+        font-weight: 600;
+        font-size: 1rem;
+        margin-bottom: 12px;
+        color: var(--text-main);
+      }
+
+      .options-list {
+        list-style: none;
+      }
+
+      .option-item {
+        margin-bottom: 8px;
+      }
+
+      .option-btn {
+        width: 100%;
+        text-align: left;
+        padding: 10px 14px;
+        background: #f8fafc;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        color: var(--text-main);
+        transition: all 0.2s ease;
+      }
+
+      .option-btn:hover:not(:disabled) {
+        background: var(--primary-light);
+        border-color: var(--primary);
+        color: var(--primary);
+      }
+
+      .option-btn:disabled {
+        cursor: default;
+      }
+
+      /* States after selection */
+      .option-btn.selected-correct {
+        background-color: var(--correct-bg) !important;
+        border-color: var(--correct) !important;
+        color: var(--correct) !important;
+        font-weight: bold;
+      }
+
+      .option-btn.selected-wrong {
+        background-color: var(--wrong-bg) !important;
+        border-color: var(--wrong) !important;
+        color: var(--wrong) !important;
+        font-weight: bold;
+      }
+
+      .option-btn.show-correct {
+        background-color: var(--correct-bg) !important;
+        border-color: var(--correct) !important;
+        color: var(--correct) !important;
+        font-weight: bold;
+      }
+
+      .explanation {
+        display: none;
+        margin-top: 12px;
+        padding: 10px 14px;
+        border-radius: 6px;
+        font-size: 0.88rem;
+        line-height: 1.5;
+      }
+
+      .explanation.correct {
+        display: block;
+        background-color: var(--correct-bg);
+        border-left: 4px solid var(--correct);
+        color: #14532d;
+      }
+
+      .explanation.wrong {
+        display: block;
+        background-color: var(--wrong-bg);
+        border-left: 4px solid var(--wrong);
+        color: #7f1d1d;
+      }
+
+      .explanation-title {
+        font-weight: bold;
+        margin-bottom: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Trí Tuệ Nhân Tạo (AI) - Reading & Quiz</h1>
+        <p>
+          Bài đọc hiểu tiếng Anh chuyên sâu & Bài tập trắc nghiệm chọn đáp án
+        </p>
+      </header>
+
+      <div class="content-grid">
+        <article class="card reading-passage">
+          <h2>The Evolution and Ethical Frontier of Artificial Intelligence</h2>
+          <p>
+            Artificial Intelligence (AI) has swiftly transitioned from a
+            theoretical concept in computer science to an indispensable force
+            driving modern civilization. At its core, AI refers to the
+            simulation of human intelligence in machines that are programmed to
+            think, learn, and solve problems. While early AI systems relied on
+            rigid, rule-based programming, recent breakthroughs in Machine
+            Learning (ML) and Deep Learning have enabled algorithms to process
+            vast datasets, recognize complex patterns, and make autonomous
+            decisions with unprecedented accuracy.
+          </p>
+          <p>
+            Today, AI applications span across virtually every major industry.
+            In healthcare, predictive algorithms analyze medical imaging to
+            detect diseases at their earliest stages, often outperforming human
+            diagnostics. In finance, automated trading systems execute
+            high-frequency transactions while advanced algorithms flag
+            fraudulent activities in real-time. Furthermore, the emergence of
+            Generative AI has revolutionized creative sectors, allowing machines
+            to produce human-like text, generate original artwork, and compose
+            music.
+          </p>
+          <p>
+            However, this rapid technological advancement brings significant
+            societal and ethical challenges. One major concern is algorithm
+            bias, where AI models inherit or amplify pre-existing human
+            prejudices present in their training data. For instance, biased
+            recruitment tools have been found to unfairly discriminate against
+            certain demographics. Additionally, the widespread automation of
+            routine tasks raises fears of mass workforce displacement,
+            threatening job security across traditional sectors.
+          </p>
+          <p>
+            To ensure AI serves as a force for good, experts advocate for robust
+            governance frameworks prioritizing transparency, accountability, and
+            ethical deployment. Establishing ethical guardrails is no longer
+            merely a precaution; it is an urgent necessity to align machine
+            capabilities with fundamental human values.
+          </p>
+        </article>
+
+        <section class="quiz-container">
+          <div class="card">
+            <h2>10 CÂU HỎI TRẮC NGHIỆM</h2>
+            <div id="quiz-list"></div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script>
+      const quizData = [
+        {
+          id: 1,
+          question: "1. What is the main idea of the passage?",
+          options: [
+            "A. The history of computer science before the invention of AI",
+            "B. The growth, applications, and ethical challenges of Artificial Intelligence",
+            "C. How Machine Learning completely replaced human doctors in healthcare",
+            "D. The financial benefits of automated trading systems",
+          ],
+          correct: 1,
+          explanation:
+            "Bài đọc trình bày tổng quan về sự phát triển, ứng dụng thực tế và các thách thức đạo đức của AI.",
+        },
+        {
+          id: 2,
+          question:
+            "2. According to paragraph 1, early AI systems differed from modern AI because they:",
+          options: [
+            "A. Relied on rigid, rule-based programming",
+            "B. Could create human-like text and artwork",
+            "C. Processed vast datasets instantly",
+            "D. Did not require computer science concepts",
+          ],
+          correct: 0,
+          explanation:
+            "Đoạn 1 nêu rõ: 'While early AI systems relied on rigid, rule-based programming...'",
+        },
+        {
+          id: 3,
+          question:
+            '3. The word "autonomously" in paragraph 1 is closest in meaning to:',
+          options: [
+            "A. Slowly",
+            "B. Independently",
+            "C. Carelessly",
+            "D. Manually",
+          ],
+          correct: 1,
+          explanation:
+            "'Autonomous' / 'Autonomously' nghĩa là tự chủ, độc lập (Independently).",
+        },
+        {
+          id: 4,
+          question:
+            "4. How is AI currently utilized in the healthcare industry?",
+          options: [
+            "A. By performing all surgical operations without human supervision",
+            "B. By replacing all medical staff in hospital administration",
+            "C. By analyzing medical imaging to detect early-stage diseases",
+            "D. By manufacturing pharmaceutical drugs automatically",
+          ],
+          correct: 2,
+          explanation:
+            "Đoạn 2 ghi nhận AI giúp phân tích hình ảnh y khoa để phát hiện bệnh sớm.",
+        },
+        {
+          id: 5,
+          question:
+            "5. Which technology has enabled machines to generate text, artwork, and music?",
+          options: [
+            "A. Predictive analytics",
+            "B. Generative AI",
+            "C. Rule-based programming",
+            "D. Optical character recognition",
+          ],
+          correct: 1,
+          explanation:
+            "Đoạn 2 khẳng định Generative AI tạo ra văn bản, tranh vẽ và âm nhạc.",
+        },
+        {
+          id: 6,
+          question: '6. The term "algorithm bias" in paragraph 3 refers to:',
+          options: [
+            "A. Technical glitches caused by hardware failure",
+            "B. AI models inheriting or amplifying human prejudices from training data",
+            "C. The high financial cost of training AI models",
+            "D. The inability of algorithms to process numerical data",
+          ],
+          correct: 1,
+          explanation:
+            "Đoạn 3 giải thích: 'algorithm bias, where AI models inherit or amplify pre-existing human prejudices...'",
+        },
+        {
+          id: 7,
+          question:
+            "7. Which of the following is cited as a negative consequence of job automation?",
+          options: [
+            "A. Threat to job security and workforce displacement",
+            "B. Increase in daily working hours for humans",
+            "C. Decrease in machine processing speed",
+            "D. Total loss of internet connectivity",
+          ],
+          correct: 0,
+          explanation:
+            "Đoạn 3 đề cập đến mối lo ngại đe dọa việc làm (workforce displacement).",
+        },
+        {
+          id: 8,
+          question:
+            "8. According to the text, why did some AI recruitment tools discriminate against certain demographics?",
+          options: [
+            "A. They lacked sufficient computing power",
+            "B. They were intentionally programmed to be hostile",
+            "C. They reflected prejudices present in their training data",
+            "D. They failed to connect to the cloud server",
+          ],
+          correct: 2,
+          explanation:
+            "Thiên kiến xuất phát từ dữ liệu huấn luyện (training data) chứa định kiến sẵn có của con người.",
+        },
+        {
+          id: 9,
+          question:
+            "9. What do experts recommend to ensure AI benefits society?",
+          options: [
+            "A. Halting all technological research permanently",
+            "B. Establishing governance frameworks focused on transparency and ethics",
+            "C. Allowing machines to make all political decisions",
+            "D. Ignoring ethical concerns until AI reaches full autonomy",
+          ],
+          correct: 1,
+          explanation:
+            "Đoạn cuối khuyến nghị tạo hành lang pháp lý & đạo đức (governance frameworks / ethical guardrails).",
+        },
+        {
+          id: 10,
+          question:
+            "10. What is the author's tone toward the future of AI development?",
+          options: [
+            "A. Completely dismissive and hostile",
+            "B. Overly optimistic without any caution",
+            "C. Balanced, acknowledging both benefits and the need for ethical boundaries",
+            "D. Indifferent and unconcerned",
+          ],
+          correct: 2,
+          explanation:
+            "Tác giả giữ thái độ khách quan: đánh giá cao lợi ích nhưng nhấn mạnh tầm quan trọng của quản trị đạo đức.",
+        },
+      ];
+
+      function renderQuiz() {
+        const quizList = document.getElementById("quiz-list");
+
+        quizData.forEach((q, qIndex) => {
+          const qCard = document.createElement("div");
+          qCard.className = "question-card";
+
+          let optionsHTML = "";
+          q.options.forEach((opt, oIndex) => {
+            optionsHTML += `
+                <li class="option-item">
+                    <button class="option-btn" onclick="checkAnswer(${qIndex}, ${oIndex})">
+                        ${opt}
+                    </button>
+                </li>
+            `;
+          });
+
+          qCard.innerHTML = `
+            <div class="question-title">${q.question}</div>
+            <ul class="options-list" id="options-${qIndex}">
+                ${optionsHTML}
+            </ul>
+            <div class="explanation" id="exp-${qIndex}"></div>
+        `;
+
+          quizList.appendChild(qCard);
+        });
+      }
+
+      function checkAnswer(qIndex, selectedIndex) {
+        const q = quizData[qIndex];
+        const optionsContainer = document.getElementById(`options-${qIndex}`);
+        const buttons = optionsContainer.querySelectorAll(".option-btn");
+        const expDiv = document.getElementById(`exp-${qIndex}`);
+
+        // Disable all buttons for this question
+        buttons.forEach((btn, index) => {
+          btn.disabled = true;
+          if (index === q.correct) {
+            btn.classList.add("show-correct");
+          }
+        });
+
+        if (selectedIndex === q.correct) {
+          buttons[selectedIndex].classList.add("selected-correct");
+          expDiv.className = "explanation correct";
+          expDiv.innerHTML = `<div class="explanation-title">Chính xác!</div>${q.explanation}`;
+        } else {
+          buttons[selectedIndex].classList.add("selected-wrong");
+          expDiv.className = "explanation wrong";
+          expDiv.innerHTML = `<div class="explanation-title">Chưa chính xác!</div>${q.explanation}`;
+        }
+      }
+
+      // Initialize quiz
+      document.addEventListener("DOMContentLoaded", renderQuiz);
+    </script>
+  </body>
+</html>

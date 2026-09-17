@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modern Technology & AI Quiz (28 Questions)</title>
+    <style>
+      :root {
+        --primary: #ea580c;
+        --primary-light: #ffedd5;
+        --primary-hover: #c2410c;
+        --bg: #fff7ed;
+        --card-bg: #ffffff;
+        --text-main: #431407;
+        --text-body: #1f2937;
+        --border: #fed7aa;
+        --correct: #16a34a;
+        --correct-bg: #f0fdf4;
+        --correct-border: #bbf7d0;
+        --wrong: #dc2626;
+        --wrong-bg: #fef2f2;
+        --wrong-border: #fecaca;
+        --shadow:
+          0 4px 15px -3px rgba(234, 88, 12, 0.12),
+          0 2px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family:
+          "Segoe UI",
+          -apple-system,
+          BlinkMacSystemFont,
+          Roboto,
+          sans-serif;
+        background-color: var(--bg);
+        color: var(--text-body);
+        line-height: 1.6;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 24px;
+        padding: 28px 20px;
+        background: linear-gradient(135deg, #f97316, #ea580c, #c2410c);
+        color: white;
+        border-radius: 16px;
+        box-shadow: 0 10px 20px -5px rgba(234, 88, 12, 0.3);
+      }
+
+      header h1 {
+        font-size: 1.8rem;
+        margin-bottom: 8px;
+        letter-spacing: -0.01em;
+      }
+
+      header p {
+        font-size: 0.95rem;
+        opacity: 0.95;
+        font-weight: 300;
+      }
+
+      .card {
+        background: var(--card-bg);
+        border-radius: 16px;
+        padding: 24px;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border);
+      }
+
+      .question-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+        transition: border-color 0.2s ease;
+      }
+
+      .question-title {
+        font-weight: 600;
+        font-size: 0.98rem;
+        margin-bottom: 14px;
+        color: var(--text-main);
+        line-height: 1.5;
+      }
+
+      .options-list {
+        list-style: none;
+      }
+
+      .option-item {
+        margin-bottom: 8px;
+      }
+
+      .option-btn {
+        width: 100%;
+        text-align: left;
+        padding: 11px 16px;
+        background: #fffaf5;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        color: #374151;
+        transition: all 0.2s ease;
+      }
+
+      .option-btn:hover:not(:disabled) {
+        background: var(--primary-light);
+        border-color: var(--primary);
+        color: var(--primary-hover);
+      }
+
+      .option-btn:disabled {
+        cursor: default;
+      }
+
+      .option-btn.selected-correct {
+        background-color: var(--correct-bg) !important;
+        border-color: var(--correct) !important;
+        color: var(--correct) !important;
+        font-weight: 600;
+      }
+
+      .option-btn.selected-wrong {
+        background-color: var(--wrong-bg) !important;
+        border-color: var(--wrong) !important;
+        color: var(--wrong) !important;
+        font-weight: 600;
+      }
+
+      .option-btn.show-correct {
+        background-color: var(--correct-bg) !important;
+        border-color: var(--correct) !important;
+        color: var(--correct) !important;
+        font-weight: 600;
+      }
+
+      .explanation {
+        display: none;
+        margin-top: 14px;
+        padding: 12px 16px;
+        border-radius: 8px;
+        font-size: 0.88rem;
+        line-height: 1.5;
+      }
+
+      .explanation.correct {
+        display: block;
+        background-color: var(--correct-bg);
+        border-left: 4px solid var(--correct);
+        color: #14532d;
+      }
+
+      .explanation.wrong {
+        display: block;
+        background-color: var(--wrong-bg);
+        border-left: 4px solid var(--wrong);
+        color: #7f1d1d;
+      }
+
+      .explanation-title {
+        font-weight: bold;
+        margin-bottom: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Modern Technology & AI Quiz</h1>
+        <p>28 Multiple-Choice Questions (B2–C1 English)</p>
+      </header>
+
+      <main class="card">
+        <div id="quiz-list"></div>
+      </main>
+    </div>
+
+    <script>
+      const quizData = [
+        {
+          id: 1,
+          question:
+            "1. The software engineers implemented a new algorithm to __________ network latency during peak usage hours.",
+          options: ["A. mitigate", "B. amplify", "C. compile", "D. foster"],
+          correct: 0,
+          explanation:
+            "<b>Mitigate</b> (giảm thiểu): <i>Mitigate network latency</i> = giảm độ trễ mạng.",
+        },
+        {
+          id: 2,
+          question:
+            "2. Deep learning models require immense datasets to __________ accurate predictions.",
+          options: [
+            "A. generate",
+            "B. initiate",
+            "C. obstruct",
+            "D. deteriorate",
+          ],
+          correct: 0,
+          explanation:
+            "<b>Generate</b> (tạo ra/xuất ra): <i>Generate predictions</i> = đưa ra dự đoán.",
+        },
+        {
+          id: 3,
+          question:
+            "3. Quantum computing promises to perform calculations __________ faster than traditional silicon processors.",
+          options: [
+            "A. marginally",
+            "B. exponentially",
+            "C. trivially",
+            "D. shallowly",
+          ],
+          correct: 1,
+          explanation:
+            "<b>Exponentially</b> (theo cấp số nhân): Diễn tả tốc độ tăng trưởng cực kỳ nhanh.",
+        },
+        {
+          id: 4,
+          question:
+            "4. Companies must ensure their automated tools comply with privacy regulations to protect user __________ sovereignty.",
+          options: [
+            "A. metadata",
+            "B. infrastructure",
+            "C. data",
+            "D. hardware",
+          ],
+          correct: 2,
+          explanation:
+            "<b>Data sovereignty</b> (chủ quyền dữ liệu): Thuật ngữ chỉ quyền kiểm soát thông tin cá nhân.",
+        },
+        {
+          id: 5,
+          question:
+            "5. Due to the opacity of some AI decision-making models, critics often refer to them as __________ systems.",
+          options: [
+            "A. open-source",
+            "B. black-box",
+            "C. user-friendly",
+            "D. plug-and-play",
+          ],
+          correct: 1,
+          explanation:
+            "<b>Black-box system</b> (hệ thống hộp đen): Chỉ hệ thống AI thiếu minh bạch, khó biết bên trong xử lý thế nào.",
+        },
+        {
+          id: 6,
+          question:
+            "6. Cybersecurity experts recommend using two-factor authentication to prevent __________ breaches.",
+          options: ["A. authorized", "B. security", "C. manual", "D. offline"],
+          correct: 1,
+          explanation:
+            "<b>Security breach</b> (lỗ hổng/sự cố bảo mật): Cụm từ cố định trong an ninh mạng.",
+        },
+        {
+          id: 7,
+          question:
+            "7. Modern smartphones are packed with __________ computational power that exceeds early supercomputers.",
+          options: [
+            "A. obsolete",
+            "B. unprecedented",
+            "C. transient",
+            "D. primitive",
+          ],
+          correct: 1,
+          explanation:
+            "<b>Unprecedented</b> (chưa từng có): Sức mạnh tính toán chưa từng xuất hiện trước đây.",
+        },
+        {
+          id: 8,
+          question:
+            "8. Social media platforms utilize behavioral __________ to encourage users to stay online longer.",
+          options: ["A. nudging", "B. stalling", "C. auditing", "D. archiving"],
+          correct: 0,
+          explanation:
+            "<b>Behavioral nudging</b> (thúc đẩy hành vi): Kỹ thuật dùng thiết kế giao diện để dẫn dắt hành vi người dùng.",
+        },
+        {
+          id: 9,
+          question:
+            "9. The company decided to __________ its legacy software after releasing the cloud-native version.",
+          options: ["A. launch", "B. phase out", "C. scale up", "D. roll in"],
+          correct: 1,
+          explanation:
+            "<b>Phase out</b> (loại bỏ dần): Khái niệm dừng hỗ trợ/ngưng sử dụng phần mềm cũ.",
+        },
+        {
+          id: 10,
+          question:
+            "10. When machine learning models ingest biased historical data, they risk __________ existing social inequalities.",
+          options: [
+            "A. neutralizing",
+            "B. perpetuating",
+            "C. eradicating",
+            "D. dismantling",
+          ],
+          correct: 1,
+          explanation:
+            "<b>Perpetuate</b> (làm kéo dài/duy trì): <i>Perpetuate social inequalities</i> = duy trì bất bình đẳng xã hội.",
+        },
+        {
+          id: 11,
+          question:
+            "11. An automated system that operates without human intervention is described as __________. ",
+          options: ["A. manual", "B. peripheral", "C. autonomous", "D. analog"],
+          correct: 2,
+          explanation:
+            "<b>Autonomous</b> (tự chủ/tự động): Hoạt động không cần con người can thiệp.",
+        },
+        {
+          id: 12,
+          question:
+            "12. Developers must regularly issue software __________ to fix security vulnerabilities.",
+          options: [
+            "A. patches",
+            "B. blueprints",
+            "C. firewalls",
+            "D. hyper-links",
+          ],
+          correct: 0,
+          explanation:
+            "<b>Software patches</b> (bản vá phần mềm): Đoạn mã sửa lỗi bảo mật.",
+        },
+        {
+          id: 13,
+          question:
+            "13. Cloud computing allows startups to __________ their infrastructure rapidly as traffic grows.",
+          options: ["A. stagnate", "B. scale", "C. fragment", "D. corrupt"],
+          correct: 1,
+          explanation:
+            "<b>Scale</b> (mở rộng): <i>Scale infrastructure</i> = mở rộng hạ tầng hệ thống.",
+        },
+        {
+          id: 14,
+          question:
+            "14. Algorithms designed to predict consumer choices often create echo __________ on social platforms.",
+          options: ["A. chambers", "B. signals", "C. waves", "D. barriers"],
+          correct: 0,
+          explanation:
+            "<b>Echo chambers</b> (phòng dội âm/bong bóng thông tin): Hiện tượng người dùng chỉ thấy quan điểm giống mình.",
+        },
+        {
+          id: 15,
+          question:
+            "15. Natural Language Processing enables computers to __________ human speech with high accuracy.",
+          options: ["A. alienate", "B. decipher", "C. suppress", "D. impede"],
+          correct: 1,
+          explanation:
+            "<b>Decipher</b> (giải mã/hiểu): <i>Decipher human speech</i> = giải mã tiếng nói con người.",
+        },
+        {
+          id: 16,
+          question:
+            "16. Tech regulators are debating whether platform operators should be held __________ for harmful online content.",
+          options: [
+            "A. immune",
+            "B. accountable",
+            "C. compatible",
+            "D. indifferent",
+          ],
+          correct: 1,
+          explanation:
+            "<b>Hold accountable</b> (chịu trách nhiệm): <i>Hold somebody accountable for something</i>.",
+        },
+        {
+          id: 17,
+          question:
+            "17. Blockchain architecture relies on a decentralized __________ to record transparent transactions.",
+          options: ["A. server", "B. ledger", "C. interface", "D. driver"],
+          correct: 1,
+          explanation:
+            "<b>Decentralized ledger</b> (sổ cái phân tán): Thuật ngữ cốt lõi của công nghệ Blockchain.",
+        },
+        {
+          id: 18,
+          question:
+            '18. The word "ubiquitous" in tech literature refers to technology that is __________.',
+          options: [
+            "A. extremely rare",
+            "B. present everywhere",
+            "C. highly illegal",
+            "D. hardware-free",
+          ],
+          correct: 1,
+          explanation:
+            "<b>Ubiquitous</b> (phổ biến khắp nơi): Có mặt ở mọi nơi trong đời sống.",
+        },
+        {
+          id: 19,
+          question:
+            "19. Virtual Reality headsets aim to create a fully __________ environment for gamers.",
+          options: ["A. immersive", "B. detached", "C. abstract", "D. static"],
+          correct: 0,
+          explanation:
+            "<b>Immersive</b> (chìm đắm/chân thực): Môi trường thực tế ảo mang lại trải nghiệm sống động.",
+        },
+        {
+          id: 20,
+          question:
+            "20. The startup failed because its main product became __________ after a major technological breakthrough by competitors.",
+          options: [
+            "A. state-of-the-art",
+            "B. cutting-edge",
+            "C. obsolete",
+            "D. persistent",
+          ],
+          correct: 2,
+          explanation:
+            "<b>Obsolete</b> (lỗi thời/bị thay thế): Không còn được sử dụng do có công nghệ mới hơn.",
+        },
+        {
+          id: 21,
+          question:
+            "21. Not only __________ consumer behavior, but smart algorithms also influence financial markets.",
+          options: [
+            "A. tech companies shape",
+            "B. do tech companies shape",
+            "C. tech companies do shape",
+            "D. shaped tech companies",
+          ],
+          correct: 1,
+          explanation:
+            '<b>Đảo ngữ với "Not only"</b>: <i>Not only + trợ động từ (do) + chủ ngữ + động từ nguyên thể</i>.',
+        },
+        {
+          id: 22,
+          question:
+            "22. Had the developers conducted rigorous edge-case testing, the bug __________ into production.",
+          options: [
+            "A. would not slip",
+            "B. will not slip",
+            "C. would not have slipped",
+            "D. had not slipped",
+          ],
+          correct: 2,
+          explanation:
+            "<b>Câu điều kiện ẩn dạng đảo (Condition 3)</b>: <i>Had + S + V3, S + would not have + V3</i>.",
+        },
+        {
+          id: 23,
+          question:
+            "23. Many tech platforms are moving toward end-to-end encryption __________ user communications from unauthorized interception.",
+          options: [
+            "A. so that safeguarding",
+            "B. in order to safeguard",
+            "C. despite safeguarding",
+            "D. owing to safeguard",
+          ],
+          correct: 1,
+          explanation:
+            "<b>In order to + V-bare</b>: Dùng để chỉ mục đích (để bảo vệ thông tin...).",
+        },
+        {
+          id: 24,
+          question:
+            "24. The new operating system runs __________ smoother than its predecessor on low-end hardware.",
+          options: [
+            "A. significantly",
+            "B. insignificantly",
+            "C. sparsely",
+            "D. heavily",
+          ],
+          correct: 0,
+          explanation:
+            "<b>Significantly</b> (đáng kể): Dùng để nhấn mạnh so sánh hơn (<i>significantly smoother</i>).",
+        },
+        {
+          id: 25,
+          question:
+            "25. Scientists are on the __________ of a major breakthrough in nuclear fusion energy technology.",
+          options: ["A. border", "B. brink", "C. margin", "D. perimeter"],
+          correct: 1,
+          explanation:
+            "<b>On the brink of</b> (trên bờ vực / sắp sửa): <i>On the brink of a major breakthrough</i> = sắp đạt bước tiến lớn.",
+        },
+        {
+          id: 26,
+          question:
+            "26. To protect against hardware failure, cloud architectures always include redundant backup __________.",
+          options: ["A. nodes", "B. codes", "C. prompts", "D. pixels"],
+          correct: 0,
+          explanation:
+            "<b>Backup nodes</b> (nút/máy chủ dự phòng): Thuật ngữ mạng và lưu trữ đám mây.",
+        },
+        {
+          id: 27,
+          question:
+            "27. The rapid integration of AI across sectors has brought ethical concerns to the __________.",
+          options: [
+            "A. background",
+            "B. forefront",
+            "C. underground",
+            "D. hinterland",
+          ],
+          correct: 1,
+          explanation:
+            "<b>Bring to the forefront</b> (đưa lên hàng đầu/chú ý trung tâm): Cụm từ cố định (<i>idiom</i>).",
+        },
+        {
+          id: 28,
+          question:
+            "28. Reclaiming human agency requires establishing clear boundaries __________ automated decision-making.",
+          options: ["A. on", "B. at", "C. into", "D. toward"],
+          correct: 0,
+          explanation:
+            "Giới từ đi với <b>bound/boundary</b>: <i>Boundaries ON automated decision-making</i>.",
+        },
+      ];
+
+      function renderQuiz() {
+        const quizList = document.getElementById("quiz-list");
+
+        quizData.forEach((q, qIndex) => {
+          const qCard = document.createElement("div");
+          qCard.className = "question-card";
+
+          let optionsHTML = "";
+          q.options.forEach((opt, oIndex) => {
+            optionsHTML += `
+                <li class="option-item">
+                    <button class="option-btn" onclick="checkAnswer(${qIndex}, ${oIndex})">
+                        ${opt}
+                    </button>
+                </li>
+            `;
+          });
+
+          qCard.innerHTML = `
+            <div class="question-title">${q.question}</div>
+            <ul class="options-list" id="options-${qIndex}">
+                ${optionsHTML}
+            </ul>
+            <div class="explanation" id="exp-${qIndex}"></div>
+        `;
+
+          quizList.appendChild(qCard);
+        });
+      }
+
+      function checkAnswer(qIndex, selectedIndex) {
+        const q = quizData[qIndex];
+        const optionsContainer = document.getElementById(`options-${qIndex}`);
+        const buttons = optionsContainer.querySelectorAll(".option-btn");
+        const expDiv = document.getElementById(`exp-${qIndex}`);
+
+        buttons.forEach((btn, index) => {
+          btn.disabled = true;
+          if (index === q.correct) {
+            btn.classList.add("show-correct");
+          }
+        });
+
+        if (selectedIndex === q.correct) {
+          buttons[selectedIndex].classList.add("selected-correct");
+          expDiv.className = "explanation correct";
+          expDiv.innerHTML = `<div class="explanation-title">✓ Chính xác!</div>${q.explanation}`;
+        } else {
+          buttons[selectedIndex].classList.add("selected-wrong");
+          expDiv.className = "explanation wrong";
+          expDiv.innerHTML = `<div class="explanation-title">✗ Chưa chính xác!</div>${q.explanation}`;
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", renderQuiz);
+    </script>
+  </body>
+</html>

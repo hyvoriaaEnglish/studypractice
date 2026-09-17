@@ -1,0 +1,765 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>50 Từ Vựng Công Nghệ - Tech Vocabulary Portal</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Lora:ital,wght@0,500;0,600;1,400&family=Nunito:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg-color: #fdfbf7;
+        --card-bg: #ffffff;
+        --text-main: #4a3e3d;
+        --text-muted: #8c7a6b;
+        --primary: #d97736;
+        --primary-hover: #b85b1e;
+        --border-color: #f3e5d8;
+        --accent-yellow: #fff3c4;
+        --accent-bg: #fdf6ed;
+        --shadow: 0 8px 20px rgba(184, 91, 30, 0.06);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Nunito", sans-serif;
+        background-color: var(--bg-color);
+        background-image: radial-gradient(#e5d3be 0.75px, transparent 0.75px);
+        background-size: 16px 16px;
+        color: var(--text-main);
+        line-height: 1.6;
+        padding: 40px 20px;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      .back-nav {
+        margin-bottom: 20px;
+      }
+
+      .back-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 700;
+        transition: color 0.2s;
+      }
+
+      .back-btn:hover {
+        color: var(--primary-hover);
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      header .sub-title {
+        font-family: "Caveat", cursive;
+        font-size: 1.6rem;
+        color: var(--primary);
+        margin-bottom: 4px;
+      }
+
+      header h1 {
+        font-family: "Lora", serif;
+        color: var(--text-main);
+        font-size: 2.2rem;
+        margin-bottom: 8px;
+        font-weight: 600;
+      }
+
+      header p {
+        color: var(--text-muted);
+        font-size: 1rem;
+      }
+
+      /* Control Panel: Search & Filter */
+      .controls {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        padding: 20px 24px;
+        margin-bottom: 30px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: var(--shadow);
+      }
+
+      .search-box {
+        flex: 1;
+        min-width: 250px;
+      }
+
+      .search-box input {
+        width: 100%;
+        padding: 12px 16px;
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        font-family: "Nunito", sans-serif;
+        font-size: 0.95rem;
+        outline: none;
+        background-color: var(--bg-color);
+        color: var(--text-main);
+      }
+
+      .search-box input:focus {
+        border-color: var(--primary);
+        background-color: #fff;
+      }
+
+      .filter-tags {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .tag-btn {
+        background: var(--bg-color);
+        border: 1px solid var(--border-color);
+        color: var(--text-main);
+        padding: 8px 14px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .tag-btn:hover,
+      .tag-btn.active {
+        background: var(--primary);
+        color: #fff;
+        border-color: var(--primary);
+      }
+
+      /* Grid Cards */
+      .vocab-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+      }
+
+      /* Flashcard Container */
+      .card-container {
+        perspective: 1000px;
+        height: 220px;
+      }
+
+      .flashcard {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transform-style: preserve-3d;
+        transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+        cursor: pointer;
+      }
+
+      .flashcard.flipped {
+        transform: rotateY(180deg);
+      }
+
+      .card-front,
+      .card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        border-radius: 18px;
+        border: 1px solid var(--border-color);
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: var(--shadow);
+      }
+
+      .card-front {
+        background-color: var(--card-bg);
+      }
+
+      .card-back {
+        background-color: var(--accent-bg);
+        transform: rotateY(180deg);
+      }
+
+      .category-badge {
+        font-size: 0.75rem;
+        color: var(--primary);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-weight: 700;
+      }
+
+      .word-title {
+        font-family: "Lora", serif;
+        font-size: 1.4rem;
+        color: var(--primary-hover);
+        margin-top: 5px;
+        font-weight: 600;
+      }
+
+      .phonetic {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        font-style: italic;
+      }
+
+      .audio-btn {
+        align-self: flex-start;
+        background: var(--bg-color);
+        border: 1px solid var(--border-color);
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .audio-btn:hover {
+        background: var(--primary);
+        color: #fff;
+      }
+
+      .meaning {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--text-main);
+        margin-bottom: 8px;
+      }
+
+      .type-tag {
+        font-size: 0.8rem;
+        font-style: italic;
+        color: var(--text-muted);
+      }
+
+      .hint-text {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        text-align: right;
+      }
+
+      @media (max-width: 600px) {
+        .controls {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .filter-tags {
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="back-nav">
+        <a href="/" class="back-btn">← Quay lại trang chủ</a>
+      </div>
+
+      <header>
+        <div class="sub-title">💻 Tech Vocabulary 💻</div>
+        <h1>Technology Vocabulary</h1>
+        <p>
+          50 Từ vựng Công nghệ thông tin phổ biến (Chạm vào thẻ để lật xem
+          nghĩa)
+        </p>
+      </header>
+
+      <!-- Thanh tìm kiếm & lọc -->
+      <div class="controls">
+        <div class="search-box">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Tìm kiếm từ vựng (Anh / Việt)..."
+            onkeyup="filterWords()"
+          />
+        </div>
+        <div class="filter-tags">
+          <button class="tag-btn active" onclick="setCategory('all', this)">
+            Tất cả
+          </button>
+          <button
+            class="tag-btn"
+            onclick="setCategory('Cơ bản & Phần cứng', this)"
+          >
+            Phần cứng
+          </button>
+          <button
+            class="tag-btn"
+            onclick="setCategory('Lập trình & Phát triển', this)"
+          >
+            Lập trình
+          </button>
+          <button class="tag-btn" onclick="setCategory('Mạng & Đám mây', this)">
+            Mạng & Cloud
+          </button>
+          <button class="tag-btn" onclick="setCategory('Dữ liệu & AI', this)">
+            AI & Data
+          </button>
+          <button
+            class="tag-btn"
+            onclick="setCategory('Bảo mật & Công nghệ mới', this)"
+          >
+            Bảo mật
+          </button>
+        </div>
+      </div>
+
+      <!-- Danh sách thẻ từ vựng -->
+      <div class="vocab-grid" id="vocabGrid"></div>
+    </div>
+
+    <script>
+      const vocabulary = [
+        {
+          word: "Algorithm",
+          phonetic: "/ˈælɡərɪðəm/",
+          pos: "n",
+          meaning: "Thuật toán",
+          category: "Cơ bản &amp; Phần cứng",
+        },
+        {
+          word: "Artificial Intelligence (AI)",
+          phonetic: "/ˌɑːtɪˈfɪʃl ɪnˈtelɪdʒəns/",
+          pos: "n",
+          meaning: "Trí tuệ nhân tạo",
+          category: "Cơ bản &amp; Phần cứng",
+        },
+        {
+          word: "Hardware",
+          phonetic: "/ˈhɑːdweə(r)/",
+          pos: "n",
+          meaning: "Phần cứng",
+          category: "Cơ bản &amp; Phần cứng",
+        },
+        {
+          word: "Software",
+          phonetic: "/ˈsɒftweə(r)/",
+          pos: "n",
+          meaning: "Phần mềm",
+          category: "Cơ bản &amp; Phần cứng",
+        },
+        {
+          word: "Processor (CPU)",
+          phonetic: "/ˈprəʊsesə(r)/",
+          pos: "n",
+          meaning: "Bộ xử lý trung tâm",
+          category: "Cơ bản &amp; Phần cứng",
+        },
+        {
+          word: "Memory (RAM)",
+          phonetic: "/ˈmeməri/",
+          pos: "n",
+          meaning: "Bộ nhớ truy cập ngẫu nhiên",
+          category: "Cơ bản &amp; Phần cứng",
+        },
+        {
+          word: "Bandwidth",
+          phonetic: "/ˈbændwɪdtθ/",
+          pos: "n",
+          meaning: "Băng thông",
+          category: "Cơ bản &amp; Phần cứng",
+        },
+        {
+          word: "Database",
+          phonetic: "/ˈdeɪtəbeɪs/",
+          pos: "n",
+          meaning: "Cơ sở dữ liệu",
+          category: "Cơ bản &amp; Phần cứng",
+        },
+        {
+          word: "Interface",
+          phonetic: "/ˈɪntəfeɪs/",
+          pos: "n",
+          meaning: "Giao diện",
+          category: "Cơ bản &amp; Phần cứng",
+        },
+        {
+          word: "Peripheral",
+          phonetic: "/pəˈrɪfərəl/",
+          pos: "n",
+          meaning: "Thiết bị ngoại vi (chuột, bàn phím...)",
+          category: "Cơ bản &amp; Phần cứng",
+        },
+        {
+          word: "Source Code",
+          phonetic: "/sɔːs kəʊd/",
+          pos: "n",
+          meaning: "Mã nguồn",
+          category: "Lập trình &amp; Phát triển",
+        },
+        {
+          word: "Compiler",
+          phonetic: "/kəmˈpaɪlə(r)/",
+          pos: "n",
+          meaning: "Trình biên dịch",
+          category: "Lập trình &amp; Phát triển",
+        },
+        {
+          word: "Debugging",
+          phonetic: "/ˌdiːˈbʌɡɪŋ/",
+          pos: "n",
+          meaning: "Sửa lỗi phần mềm",
+          category: "Lập trình &amp; Phát triển",
+        },
+        {
+          word: "Framework",
+          phonetic: "/ˈfreɪmwɜːk/",
+          pos: "n",
+          meaning: "Khung phát triển phần mềm",
+          category: "Lập trình &amp; Phát triển",
+        },
+        {
+          word: "API (Application Programming Interface)",
+          phonetic: "/ˌeɪ piː ˈaɪ/",
+          pos: "n",
+          meaning: "Giao diện lập trình ứng dụng",
+          category: "Lập trình &amp; Phát triển",
+        },
+        {
+          word: "Repository",
+          phonetic: "/rɪˈpɒzətri/",
+          pos: "n",
+          meaning: "Kho lưu trữ mã nguồn",
+          category: "Lập trình &amp; Phát triển",
+        },
+        {
+          word: "Deployment",
+          phonetic: "/dɪˈplɔɪmənt/",
+          pos: "n",
+          meaning: "Triển khai phần mềm",
+          category: "Lập trình &amp; Phát triển",
+        },
+        {
+          word: "Backend",
+          phonetic: "/ˈbæk.end/",
+          pos: "n",
+          meaning: "Xử lý phía máy chủ (Server)",
+          category: "Lập trình &amp; Phát triển",
+        },
+        {
+          word: "Frontend",
+          phonetic: "/ˈfrʌnt.end/",
+          pos: "n",
+          meaning: "Giao diện phía người dùng (Client)",
+          category: "Lập trình &amp; Phát triển",
+        },
+        {
+          word: "Optimization",
+          phonetic: "/ˌɒptɪmaɪˈzeɪʃn/",
+          pos: "n",
+          meaning: "Sự tối ưu hóa",
+          category: "Lập trình &amp; Phát triển",
+        },
+        {
+          word: "Cloud Computing",
+          phonetic: "/klaʊd kəmˈpjuːtɪŋ/",
+          pos: "n",
+          meaning: "Điện toán đám mây",
+          category: "Mạng &amp; Đám mây",
+        },
+        {
+          word: "Server",
+          phonetic: "/ˈsɜːvə(r)/",
+          pos: "n",
+          meaning: "Máy chủ",
+          category: "Mạng &amp; Đám mây",
+        },
+        {
+          word: "IP Address",
+          phonetic: "/ˌaɪ ˈpiː ədres/",
+          pos: "n",
+          meaning: "Địa chỉ IP",
+          category: "Mạng &amp; Đám mây",
+        },
+        {
+          word: "Protocol",
+          phonetic: "/ˈprəʊtəkɒl/",
+          pos: "n",
+          meaning: "Giao thức kết nối",
+          category: "Mạng &amp; Đám mây",
+        },
+        {
+          word: "Latency",
+          phonetic: "/ˈleɪtənsi/",
+          pos: "n",
+          meaning: "Độ trễ mạng",
+          category: "Mạng &amp; Đám mây",
+        },
+        {
+          word: "Virtualization",
+          phonetic: "/ˌvɜːtʃuəlaɪˈzeɪʃn/",
+          pos: "n",
+          meaning: "Công nghệ ảo hóa",
+          category: "Mạng &amp; Đám mây",
+        },
+        {
+          word: "Firewall",
+          phonetic: "/ˈfaɪəwɔːl/",
+          pos: "n",
+          meaning: "Tường lửa",
+          category: "Mạng &amp; Đám mây",
+        },
+        {
+          word: "Domain",
+          phonetic: "/dəˈmeɪn/",
+          pos: "n",
+          meaning: "Tên miền",
+          category: "Mạng &amp; Đám mây",
+        },
+        {
+          word: "SaaS (Software as a Service)",
+          phonetic: "/sæs/",
+          pos: "n",
+          meaning: "Phần mềm dạng dịch vụ",
+          category: "Mạng &amp; Đám mây",
+        },
+        {
+          word: "Load Balancing",
+          phonetic: "/ləʊd ˈbælənsɪŋ/",
+          pos: "n",
+          meaning: "Cân bằng tải",
+          category: "Mạng &amp; Đám mây",
+        },
+        {
+          word: "Machine Learning",
+          phonetic: "/məˈʃiːn ˈlɜːnɪŋ/",
+          pos: "n",
+          meaning: "Học máy",
+          category: "Dữ liệu &amp; AI",
+        },
+        {
+          word: "Deep Learning",
+          phonetic: "/diːp ˈlɜːnɪŋ/",
+          pos: "n",
+          meaning: "Học sâu",
+          category: "Dữ liệu &amp; AI",
+        },
+        {
+          word: "Big Data",
+          phonetic: "/ˌbɪɡ ˈdeɪtə/",
+          pos: "n",
+          meaning: "Dữ liệu lớn",
+          category: "Dữ liệu &amp; AI",
+        },
+        {
+          word: "Neural Network",
+          phonetic: "/ˈnjʊərəl ˈnetwɜːk/",
+          pos: "n",
+          meaning: "Mạng thần kinh nhân tạo",
+          category: "Dữ liệu &amp; AI",
+        },
+        {
+          word: "Data Mining",
+          phonetic: "/ˈdeɪtə ˈmaɪnɪŋ/",
+          pos: "n",
+          meaning: "Khai phá dữ liệu",
+          category: "Dữ liệu &amp; AI",
+        },
+        {
+          word: "Natural Language Processing (NLP)",
+          phonetic: "/ˈnætʃrəl ˈlæŋɡwɪdʒ ˈprəʊsesɪŋ/",
+          pos: "n",
+          meaning: "Xử lý ngôn ngữ tự nhiên",
+          category: "Dữ liệu &amp; AI",
+        },
+        {
+          word: "Predictive Analytics",
+          phonetic: "/prɪˈdɪktɪv ænəˈlɪtɪks/",
+          pos: "n",
+          meaning: "Phân tích dự đoán",
+          category: "Dữ liệu &amp; AI",
+        },
+        {
+          word: "Computer Vision",
+          phonetic: "/kəmˈpjuːtə ˈvɪʒn/",
+          pos: "n",
+          meaning: "Thị giác máy tính",
+          category: "Dữ liệu &amp; AI",
+        },
+        {
+          word: "Algorithm Bias",
+          phonetic: "/ˈælɡərɪðəm ˈbaɪəs/",
+          pos: "n",
+          meaning: "Thiên kiến thuật toán",
+          category: "Dữ liệu &amp; AI",
+        },
+        {
+          word: "Generative AI",
+          phonetic: "/ˈdʒenərətɪv eɪ aɪ/",
+          pos: "n",
+          meaning: "Trí tuệ nhân tạo tạo sinh",
+          category: "Dữ liệu &amp; AI",
+        },
+        {
+          word: "Cybersecurity",
+          phonetic: "/ˌsaɪbəsɪˈkjʊərəti/",
+          pos: "n",
+          meaning: "An ninh mạng",
+          category: "Bảo mật &amp; Công nghệ mới",
+        },
+        {
+          word: "Encryption",
+          phonetic: "/ɪnˈkrɪpʃn/",
+          pos: "n",
+          meaning: "Sự mã hóa dữ liệu",
+          category: "Bảo mật &amp; Công nghệ mới",
+        },
+        {
+          word: "Phishing",
+          phonetic: "/ˈfɪʃɪŋ/",
+          pos: "n",
+          meaning: "Lừa đảo qua mạng",
+          category: "Bảo mật &amp; Công nghệ mới",
+        },
+        {
+          word: "Vulnerability",
+          phonetic: "/ˌvʌlnərəˈbɪləti/",
+          pos: "n",
+          meaning: "Lỗ hổng bảo mật",
+          category: "Bảo mật &amp; Công nghệ mới",
+        },
+        {
+          word: "Blockchain",
+          phonetic: "/ˈblɒktʃeɪn/",
+          pos: "n",
+          meaning: "Công nghệ chuỗi - khối",
+          category: "Bảo mật &amp; Công nghệ mới",
+        },
+        {
+          word: "Internet of Things (IoT)",
+          phonetic: "/ˈɪntənet əv θɪŋz/",
+          pos: "n",
+          meaning: "Mạng lưới thiết bị kết nối Internet",
+          category: "Bảo mật &amp; Công nghệ mới",
+        },
+        {
+          word: "Augmented Reality (AR)",
+          phonetic: "/ɔːɡˌmentɪd riˈæləti/",
+          pos: "n",
+          meaning: "Thực tế tăng cường",
+          category: "Bảo mật &amp; Công nghệ mới",
+        },
+        {
+          word: "Virtual Reality (VR)",
+          phonetic: "/ˌvɜːtʃuəl riˈæləti/",
+          pos: "n",
+          meaning: "Thực tế ảo",
+          category: "Bảo mật &amp; Công nghệ mới",
+        },
+        {
+          word: "Biometrics",
+          phonetic: "/ˌbaɪəʊˈmetrɪks/",
+          pos: "n",
+          meaning: "Công nghệ sinh trắc học",
+          category: "Bảo mật &amp; Công nghệ mới",
+        },
+        {
+          word: "Quantum Computing",
+          phonetic: "/ˈkwɒntəm kəmˈpjuːtɪŋ/",
+          pos: "n",
+          meaning: "Điện toán lượng tử",
+          category: "Bảo mật &amp; Công nghệ mới",
+        },
+      ];
+
+      let currentCategory = "all";
+
+      function renderCards(data) {
+        const grid = document.getElementById("vocabGrid");
+        grid.innerHTML = data
+          .map(
+            (item) => `
+        <div class="card-container">
+            <div class="flashcard" onclick="flipCard(this)">
+                <!-- Mặt trước thẻ -->
+                <div class="card-front">
+                    <div>
+                        <span class="category-badge">${item.category}</span>
+                        <div class="word-title">${item.word}</div>
+                        <div class="phonetic">${item.phonetic}</div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <button class="audio-btn" onclick="speakWord(event, '${item.word}')" title="Phát âm">🔊</button>
+                        <span class="hint-text">Xem nghĩa ↻</span>
+                    </div>
+                </div>
+                <!-- Mặt sau thẻ -->
+                <div class="card-back">
+                    <div>
+                        <span class="category-badge">${item.category}</span>
+                        <div class="meaning">${item.meaning}</div>
+                        <span class="type-tag">Loại từ: (${item.pos})</span>
+                    </div>
+                    <div class="hint-text">Lật lại ↻</div>
+                </div>
+            </div>
+        </div>
+    `,
+          )
+          .join("");
+      }
+
+      function flipCard(card) {
+        card.classList.toggle("flipped");
+      }
+
+      function speakWord(event, word) {
+        event.stopPropagation();
+        if ("speechSynthesis" in window) {
+          const utterance = new SpeechSynthesisUtterance(word);
+          utterance.lang = "en-US";
+          window.speechSynthesis.speak(utterance);
+        }
+      }
+
+      function setCategory(cat, btn) {
+        currentCategory = cat;
+        document
+          .querySelectorAll(".tag-btn")
+          .forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        filterWords();
+      }
+
+      function filterWords() {
+        const query = document
+          .getElementById("searchInput")
+          .value.toLowerCase();
+        const filtered = vocabulary.filter((item) => {
+          const matchesCat =
+            currentCategory === "all" || item.category === currentCategory;
+          const matchesQuery =
+            item.word.toLowerCase().includes(query) ||
+            item.meaning.toLowerCase().includes(query);
+          return matchesCat && matchesQuery;
+        });
+        renderCards(filtered);
+      }
+
+      renderCards(vocabulary);
+    </script>
+  </body>
+</html>

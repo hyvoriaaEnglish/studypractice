@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>C1 Reading: Algorithmic Determinism & Human Agency</title>
+    <style>
+      :root {
+        --primary: #db2777;
+        --primary-light: #fce7f3;
+        --primary-hover: #be185d;
+        --bg: #fff1f2;
+        --card-bg: #ffffff;
+        --text-main: #4c0519;
+        --text-body: #1f2937;
+        --text-muted: #9d174d;
+        --border: #fbcfe8;
+        --correct: #16a34a;
+        --correct-bg: #f0fdf4;
+        --correct-border: #bbf7d0;
+        --wrong: #dc2626;
+        --wrong-bg: #fef2f2;
+        --wrong-border: #fecaca;
+        --shadow:
+          0 4px 15px -3px rgba(219, 39, 119, 0.08),
+          0 2px 6px -2px rgba(0, 0, 0, 0.04);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family:
+          "Segoe UI",
+          -apple-system,
+          BlinkMacSystemFont,
+          Roboto,
+          sans-serif;
+        background-color: var(--bg);
+        color: var(--text-body);
+        line-height: 1.6;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 24px;
+        padding: 24px 20px;
+        background: linear-gradient(135deg, #f43f5e, #db2777, #be185d);
+        color: white;
+        border-radius: 16px;
+        box-shadow: 0 10px 20px -5px rgba(219, 39, 119, 0.3);
+      }
+
+      header h1 {
+        font-size: 1.8rem;
+        margin-bottom: 8px;
+        letter-spacing: -0.02em;
+      }
+
+      header p {
+        font-size: 0.95rem;
+        opacity: 0.95;
+        font-weight: 300;
+      }
+
+      .content-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      @media (min-width: 900px) {
+        .content-grid {
+          grid-template-columns: 1fr 1fr;
+          align-items: start;
+        }
+        .reading-passage {
+          position: sticky;
+          top: 20px;
+          max-height: calc(100vh - 40px);
+          overflow-y: auto;
+        }
+      }
+
+      .card {
+        background: var(--card-bg);
+        border-radius: 16px;
+        padding: 24px;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border);
+      }
+
+      .reading-passage h2 {
+        color: var(--primary);
+        font-size: 1.25rem;
+        margin-bottom: 16px;
+        border-bottom: 2px solid var(--primary-light);
+        padding-bottom: 10px;
+        line-height: 1.4;
+      }
+
+      .reading-passage p {
+        margin-bottom: 14px;
+        font-size: 0.93rem;
+        text-align: justify;
+        color: #374151;
+      }
+
+      .reading-passage p strong {
+        color: var(--text-main);
+      }
+
+      .quiz-container h2 {
+        color: var(--primary);
+        font-size: 1.25rem;
+        margin-bottom: 16px;
+        border-bottom: 2px solid var(--primary-light);
+        padding-bottom: 10px;
+      }
+
+      .question-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 18px;
+        margin-bottom: 18px;
+        transition: border-color 0.2s ease;
+      }
+
+      .question-title {
+        font-weight: 600;
+        font-size: 0.95rem;
+        margin-bottom: 12px;
+        color: var(--text-main);
+        line-height: 1.5;
+      }
+
+      .options-list {
+        list-style: none;
+      }
+
+      .option-item {
+        margin-bottom: 8px;
+      }
+
+      .option-btn {
+        width: 100%;
+        text-align: left;
+        padding: 10px 14px;
+        background: #fff5f7;
+        border: 1px solid #fbcfe8;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 0.88rem;
+        color: #4b5563;
+        transition: all 0.2s ease;
+      }
+
+      .option-btn:hover:not(:disabled) {
+        background: var(--primary-light);
+        border-color: var(--primary);
+        color: var(--primary-hover);
+      }
+
+      .option-btn:disabled {
+        cursor: default;
+      }
+
+      .option-btn.selected-correct {
+        background-color: var(--correct-bg) !important;
+        border-color: var(--correct) !important;
+        color: var(--correct) !important;
+        font-weight: 600;
+      }
+
+      .option-btn.selected-wrong {
+        background-color: var(--wrong-bg) !important;
+        border-color: var(--wrong) !important;
+        color: var(--wrong) !important;
+        font-weight: 600;
+      }
+
+      .option-btn.show-correct {
+        background-color: var(--correct-bg) !important;
+        border-color: var(--correct) !important;
+        color: var(--correct) !important;
+        font-weight: 600;
+      }
+
+      .explanation {
+        display: none;
+        margin-top: 12px;
+        padding: 12px 14px;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        line-height: 1.5;
+      }
+
+      .explanation.correct {
+        display: block;
+        background-color: var(--correct-bg);
+        border-left: 4px solid var(--correct);
+        color: #14532d;
+      }
+
+      .explanation.wrong {
+        display: block;
+        background-color: var(--wrong-bg);
+        border-left: 4px solid var(--wrong);
+        color: #7f1d1d;
+      }
+
+      .explanation-title {
+        font-weight: bold;
+        margin-bottom: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>C1 English Reading Practice</h1>
+        <p>Topic: Technology, Algorithmic Determinism & Human Agency</p>
+      </header>
+
+      <div class="content-grid">
+        <!-- BÀI ĐỌC -->
+        <article class="card reading-passage">
+          <h2>
+            The Paradox of Technological Ubiquity: Algorithmic Determinism and
+            Human Agency
+          </h2>
+
+          <p>
+            <strong>Paragraph 1:</strong> The modern socio-technological
+            landscape is defined by the pervasive presence of algorithmic
+            systems. From predictive text engines to autonomous decision-making
+            in capital allocation, machine learning models have quietly migrated
+            from academic laboratories into the core infrastructure of daily
+            life. Proponents argue that this dynamic brings unprecedented
+            efficiency, eliminating human error and optimizing complex societal
+            operations. However, critical theorists suggest that this systemic
+            shift quietly undermines human agency, gradually substituting
+            spontaneous decision-making with algorithmic determinism—a framework
+            where choices are subtler, pre-filtered, and increasingly
+            predetermined by optimization metrics.
+          </p>
+
+          <p>
+            <strong>Paragraph 2:</strong> Central to this dynamic is the
+            mechanics of surveillance capitalism and behavioral nudging. Modern
+            digital platforms do not merely observe consumer behavior; they
+            actively shape it through predictive architecture. By processing
+            vast troves of telemetry data, algorithms construct
+            hyper-personalized feedback loops designed to sustain engagement.
+            While this creates a seamlessly convenient user experience, it
+            simultaneously commodifies human attention. Over time, individuals
+            are subtly guided along paths of least resistance, systematically
+            limiting their exposure to serendipitous encounters, conflicting
+            viewpoints, and uncurated digital spaces.
+          </p>
+
+          <p>
+            <strong>Paragraph 3:</strong> This cognitive narrowing becomes
+            particularly acute within automated governance and organizational
+            decision-making. As machine learning models absorb historical
+            datasets to forecast outcomes—such as credit risk, recidivism rates,
+            or job suitability—they inevitably ingest the systemic biases
+            embedded within those historical records. Rather than functioning as
+            neutral arbitrators, these algorithms often codify and amplify
+            existing social stratification under the guise of mathematical
+            objectivity. The opacity of these black-box systems further
+            compounds the issue, rendering automated decisions exceptionally
+            difficult to challenge, contest, or audit.
+          </p>
+
+          <p>
+            <strong>Paragraph 4:</strong> Mitigating these challenges requires
+            moving beyond mere technical adjustments to build comprehensive
+            regulatory frameworks. True governance demands algorithmic
+            transparency, robust data sovereignty, and a fundamental
+            reassessment of how efficiency is valued against human autonomy. As
+            artificial intelligence advances toward greater autonomy, society
+            faces a critical question: should technology adapt to human values,
+            or will human behavior continuously modify itself to fit the
+            structural imperatives of digital architecture? Reclaiming agency in
+            the digital age necessitates actively setting limits on automated
+            influence before invisible constraints become permanent norms.
+          </p>
+        </article>
+
+        <!-- CÂU HỎI TRẮC NGHIỆM -->
+        <section class="quiz-container">
+          <div class="card">
+            <h2>COMPREHENSION QUESTIONS (10)</h2>
+            <div id="quiz-list"></div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script>
+      const quizData = [
+        {
+          id: 1,
+          question: "1. What is the primary purpose of the passage?",
+          options: [
+            "A. To advocate for the complete abolition of predictive algorithms in governance",
+            "B. To evaluate the technical mechanisms behind neural network optimization",
+            "C. To examine how algorithmic systems undermine human agency and reinforce systemic issues",
+            "D. To contrast early academic machine learning models with modern industrial applications",
+          ],
+          correct: 2,
+          explanation:
+            "Bài đọc phân tích việc thuật toán ảnh hưởng tiêu cực đến tính tự chủ (human agency) và tái diễn các định kiến xã hội.",
+        },
+        {
+          id: 2,
+          question:
+            '2. According to Paragraph 1, what is "algorithmic determinism"?',
+          options: [
+            "A. A technical flaw that causes machine learning models to fail unexpectedly",
+            "B. A phenomenon where human choices are subtly filtered and constrained by optimization logic",
+            "C. A philosophical belief that computers will eventually develop self-awareness",
+            "D. An open-source programming methodology used to standardize code execution",
+          ],
+          correct: 1,
+          explanation:
+            "Dựa vào đoạn 1: '...substituting spontaneous decision-making with algorithmic determinism—a framework where choices are subtler, pre-filtered, and increasingly predetermined...'",
+        },
+        {
+          id: 3,
+          question:
+            '3. The word "pervasive" in Paragraph 1 is closest in meaning to:',
+          options: [
+            "A. Subdued",
+            "B. Widespread",
+            "C. Transient",
+            "D. Obsolete",
+          ],
+          correct: 1,
+          explanation:
+            "'Pervasive' có nghĩa là lan tỏa, có mặt ở khắp mọi nơi (Widespread).",
+        },
+        {
+          id: 4,
+          question:
+            "4. According to Paragraph 2, how do digital platforms sustain user engagement?",
+          options: [
+            "A. By imposing financial penalties on inactive accounts",
+            "B. By providing raw, uncurated data feeds directly to the user",
+            "C. By utilizing telemetry data to construct personalized feedback loops",
+            "D. By forcing users to interact with opposing political viewpoints",
+          ],
+          correct: 2,
+          explanation:
+            "Dựa vào đoạn 2: 'By processing vast troves of telemetry data, algorithms construct hyper-personalized feedback loops designed to sustain engagement.'",
+        },
+        {
+          id: 5,
+          question:
+            "5. What consequence of digital curation is highlighted in Paragraph 2?",
+          options: [
+            "A. Increased exposure to unexpected and diverse perspective",
+            "B. A reduction in serendipitous encounters and uncurated experiences",
+            "C. The total elimination of targeted advertising on social media",
+            "D. A significant decline in digital transaction efficiency",
+          ],
+          correct: 1,
+          explanation:
+            "Dựa vào đoạn 2: '...systematically limiting their exposure to serendipitous encounters, conflicting viewpoints, and uncurated digital spaces.'",
+        },
+        {
+          id: 6,
+          question:
+            '6. The author uses the phrase "black-box systems" in Paragraph 3 to emphasize:',
+          options: [
+            "A. The extreme physical durability of modern server infrastructure",
+            "B. The complete financial viability of automated risk assessment software",
+            "C. The lack of transparency in how algorithms arrive at their decisions",
+            "D. The hardware components required to run high-speed calculations",
+          ],
+          correct: 2,
+          explanation:
+            "Thuật ngữ 'black-box' (hộp đen) chỉ sự thiếu minh bạch, khó hiểu được bên trong hoạt động ra sao (opacity / lack of transparency).",
+        },
+        {
+          id: 7,
+          question:
+            "7. Which of the following best summarizes the author's critique of automated governance in Paragraph 3?",
+          options: [
+            "A. Historical datasets are too small to yield statistically reliable predictions.",
+            "B. Machine learning models correct historical human errors through objective metrics.",
+            "C. Algorithms often institutionalize historical prejudices under the illusion of objectivity.",
+            "D. Automated systems are inherently faster but far too costly for government adoption.",
+          ],
+          correct: 2,
+          explanation:
+            "Dựa vào đoạn 3: 'Rather than functioning as neutral arbitrators, these algorithms often codify and amplify existing social stratification under the guise of mathematical objectivity.'",
+        },
+        {
+          id: 8,
+          question:
+            '8. The word "opacity" in Paragraph 3 is opposite in meaning to:',
+          options: [
+            "A. Clarity",
+            "B. Density",
+            "C. Ambiguity",
+            "D. Complexity",
+          ],
+          correct: 0,
+          explanation:
+            "'Opacity' nghĩa là sự đục/thiếu minh bạch. TỪ TRÁI NGHĨA là 'Clarity' (Sự rõ ràng, minh bạch).",
+        },
+        {
+          id: 9,
+          question:
+            "9. What can be inferred about the author's attitude toward technological efficiency in Paragraph 4?",
+          options: [
+            "A. Efficiency should be prioritized above all other societal values.",
+            "B. Efficiency should be balanced against considerations of human autonomy.",
+            "C. Efficiency is a completely meaningless metric in modern computer science.",
+            "D. Efficiency can only be achieved through total algorithmic control.",
+          ],
+          correct: 1,
+          explanation:
+            "Dựa vào đoạn 4: '...a fundamental reassessment of how efficiency is valued against human autonomy.'",
+        },
+        {
+          id: 10,
+          question:
+            "10. Which statement aligns with the author's final recommendation in Paragraph 4?",
+          options: [
+            "A. Regulators should focus strictly on software bug fixes rather than policy frameworks.",
+            "B. Society must establish proactive boundaries on automated systems to safeguard human agency.",
+            "C. Humans must continuously adapt their behavioral patterns to keep pace with AI tools.",
+            "D. Algorithmic development should be frozen until zero bias can be guaranteed.",
+          ],
+          correct: 1,
+          explanation:
+            "Dựa vào đoạn 4: 'Reclaiming agency in the digital age necessitates actively setting limits on automated influence...'",
+        },
+      ];
+
+      function renderQuiz() {
+        const quizList = document.getElementById("quiz-list");
+
+        quizData.forEach((q, qIndex) => {
+          const qCard = document.createElement("div");
+          qCard.className = "question-card";
+
+          let optionsHTML = "";
+          q.options.forEach((opt, oIndex) => {
+            optionsHTML += `
+                <li class="option-item">
+                    <button class="option-btn" onclick="checkAnswer(${qIndex}, ${oIndex})">
+                        ${opt}
+                    </button>
+                </li>
+            `;
+          });
+
+          qCard.innerHTML = `
+            <div class="question-title">${q.question}</div>
+            <ul class="options-list" id="options-${qIndex}">
+                ${optionsHTML}
+            </ul>
+            <div class="explanation" id="exp-${qIndex}"></div>
+        `;
+
+          quizList.appendChild(qCard);
+        });
+      }
+
+      function checkAnswer(qIndex, selectedIndex) {
+        const q = quizData[qIndex];
+        const optionsContainer = document.getElementById(`options-${qIndex}`);
+        const buttons = optionsContainer.querySelectorAll(".option-btn");
+        const expDiv = document.getElementById(`exp-${qIndex}`);
+
+        buttons.forEach((btn, index) => {
+          btn.disabled = true;
+          if (index === q.correct) {
+            btn.classList.add("show-correct");
+          }
+        });
+
+        if (selectedIndex === q.correct) {
+          buttons[selectedIndex].classList.add("selected-correct");
+          expDiv.className = "explanation correct";
+          expDiv.innerHTML = `<div class="explanation-title">✓ Chính xác!</div>${q.explanation}`;
+        } else {
+          buttons[selectedIndex].classList.add("selected-wrong");
+          expDiv.className = "explanation wrong";
+          expDiv.innerHTML = `<div class="explanation-title">✗ Chưa chính xác!</div>${q.explanation}`;
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", renderQuiz);
+    </script>
+  </body>
+</html>
