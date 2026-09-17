@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chủ đề Công Nghệ - Futuristic Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg-dark: #070b19;
+        --card-bg: rgba(13, 22, 48, 0.75);
+        --blue-neon: #00f0ff;
+        --blue-glow: rgba(0, 240, 255, 0.4);
+        --orange-neon: #ff6b00;
+        --orange-glow: rgba(255, 107, 0, 0.4);
+        --text-light: #e0f2fe;
+        --text-muted: #94a3b8;
+        --border-color: rgba(0, 240, 255, 0.2);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Rajdhani", sans-serif;
+        background-color: var(--bg-dark);
+        color: var(--text-light);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem 1rem;
+        background-image:
+          radial-gradient(
+            circle at 10% 20%,
+            rgba(0, 240, 255, 0.08) 0%,
+            transparent 40%
+          ),
+          radial-gradient(
+            circle at 90% 80%,
+            rgba(255, 107, 0, 0.08) 0%,
+            transparent 40%
+          ),
+          linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        background-size:
+          100% 100%,
+          100% 100%,
+          30px 30px,
+          30px 30px;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 800px;
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        padding: 2.5rem;
+        backdrop-filter: blur(12px);
+        box-shadow:
+          0 0 40px rgba(0, 0, 0, 0.8),
+          inset 0 0 15px rgba(0, 240, 255, 0.1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Viền trang trí góc phong cách Sci-Fi */
+      .container::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(
+          90deg,
+          var(--blue-neon),
+          var(--orange-neon)
+        );
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 2.5rem;
+      }
+
+      h1 {
+        font-family: "Orbitron", sans-serif;
+        font-size: 2.2rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+
+        /* Màu Gradient cho chữ */
+        background: linear-gradient(
+          135deg,
+          var(--blue-neon),
+          #ffffff,
+          var(--orange-neon)
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+
+        /* THAY TEXT-SHADOW BẰNG DROP-SHADOW */
+        filter: drop-shadow(0 0 15px rgba(0, 240, 255, 0.4));
+      }
+
+      .section-group {
+        margin-bottom: 2rem;
+      }
+
+      h2 {
+        font-family: "Orbitron", sans-serif;
+        font-size: 1.1rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .section-vocab h2 {
+        color: var(--blue-neon);
+      }
+      .section-reading h2 {
+        color: var(--orange-neon);
+      }
+      .section-mcq h2 {
+        color: var(--blue-neon);
+      }
+
+      h2::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .grid-links {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .nav-link {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 1.25rem;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 10px;
+        color: var(--text-light);
+        text-decoration: none;
+        font-size: 1.1rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .nav-link::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: transparent;
+        transition: all 0.3s ease;
+      }
+
+      /* Hover Effects cho từng loại */
+      .section-vocab .nav-link:hover {
+        background: rgba(0, 240, 255, 0.08);
+        border-color: var(--blue-neon);
+        box-shadow: 0 0 15px var(--blue-glow);
+        transform: translateX(6px);
+      }
+      .section-vocab .nav-link:hover::before {
+        background: var(--blue-neon);
+      }
+
+      .section-reading .nav-link:hover {
+        background: rgba(255, 107, 0, 0.08);
+        border-color: var(--orange-neon);
+        box-shadow: 0 0 15px var(--orange-glow);
+        transform: translateX(6px);
+      }
+      .section-reading .nav-link:hover::before {
+        background: var(--orange-neon);
+      }
+
+      .section-mcq .nav-link:hover {
+        background: rgba(0, 240, 255, 0.08);
+        border-color: var(--blue-neon);
+        box-shadow: 0 0 15px var(--blue-glow);
+        transform: translateX(6px);
+      }
+      .section-mcq .nav-link:hover::before {
+        background: var(--blue-neon);
+      }
+
+      .arrow-icon {
+        font-size: 1.2rem;
+        transition: transform 0.3s ease;
+      }
+
+      .nav-link:hover .arrow-icon {
+        transform: translateX(5px);
+      }
+
+      .badge {
+        font-family: "Orbitron", sans-serif;
+        font-size: 0.75rem;
+        padding: 4px 8px;
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--text-muted);
+        text-transform: uppercase;
+      }
+
+      @media (max-width: 600px) {
+        .container {
+          padding: 1.5rem;
+        }
+        h1 {
+          font-size: 1.6rem;
+        }
+        .nav-link {
+          font-size: 0.95rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Chủ Đề Công Nghệ</h1>
+      </header>
+
+      <!-- Từ vựng -->
+      <section class="section-group section-vocab">
+        <h2>Vocabulary</h2>
+        <div class="grid-links">
+          <a href="../techVocab.html" class="nav-link">
+            <span>50 Từ vựng phổ biến</span>
+            <span class="arrow-icon">➔</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- Reading -->
+      <section class="section-group section-reading">
+        <h2>Reading Passages</h2>
+        <div class="grid-links">
+          <a href="../techR1.html" class="nav-link">
+            <span
+              >Bài 1: The Evolution and Ethical Frontier of Artificial
+              Intelligence</span
+            >
+            <span class="arrow-icon">➔</span>
+          </a>
+          <a href="../techR2.html" class="nav-link">
+            <span>Bài 2: The Paradox of Technological Ubiquity</span>
+            <span class="arrow-icon">➔</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- Trắc nghiệm -->
+      <section class="section-group section-mcq">
+        <h2>Multiple Choice Quiz</h2>
+        <div class="grid-links">
+          <a href="../techMCQ.html" class="nav-link">
+            <span>Phần 1: 28 Câu hỏi trắc nghiệm</span>
+            <span class="badge">28 Questions</span>
+          </a>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

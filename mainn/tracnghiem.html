@@ -75,11 +75,12 @@
       }
 
       .quiz-card {
+        position: relative; /* Thêm position relative để định vị badge */
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        padding: 20px 15px;
+        padding: 24px 15px 18px;
         background: var(--btn-bg);
         border: 2px solid var(--btn-border);
         border-radius: var(--radius);
@@ -89,6 +90,7 @@
         font-size: 1.05rem;
         transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+        overflow: hidden; /* Bo góc mượt cho badge */
       }
 
       .quiz-card:hover {
@@ -102,6 +104,29 @@
       .quiz-card .icon {
         font-size: 1.5rem;
         margin-bottom: 8px;
+      }
+
+      /* Style cho Badge Recommend */
+      .badge-recommend {
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        background: linear-gradient(135deg, #f59e0b, #d97706);
+        color: #ffffff;
+        font-size: 0.65rem;
+        font-weight: 800;
+        padding: 3px 7px;
+        border-radius: 20px;
+        box-shadow: 0 2px 6px rgba(217, 119, 6, 0.3);
+        letter-spacing: 0.3px;
+        display: flex;
+        align-items: center;
+        gap: 2px;
+        line-height: 1;
+      }
+
+      .quiz-card.has-badge {
+        border-color: #f59e0b;
       }
 
       @media (max-width: 480px) {
@@ -151,7 +176,8 @@
           <span class="icon">📝</span>
           Bài 7
         </a>
-        <a href="mcq11.html" class="quiz-card">
+        <a href="mcq11.html" class="quiz-card has-badge">
+          <span class="badge-recommend">🔥 Rec</span>
           <span class="icon">📝</span>
           Bài 8
         </a>
@@ -159,14 +185,21 @@
           <span class="icon">📝</span>
           Bài 9
         </a>
-        <a href="mcq13.html" class="quiz-card">
+
+        <!-- Bài 10 có Recommend -->
+        <a href="mcq13.html" class="quiz-card has-badge">
+          <span class="badge-recommend">🔥 Rec</span>
           <span class="icon">📝</span>
           Bài 10
         </a>
-        <a href="mcq14.html" class="quiz-card">
+
+        <!-- Bài 11 có Recommend -->
+        <a href="mcq14.html" class="quiz-card has-badge">
+          <span class="badge-recommend">🔥 Rec</span>
           <span class="icon">📝</span>
           Bài 11
         </a>
+
         <a href="mcq15.html" class="quiz-card">
           <span class="icon">📝</span>
           Bài 12
