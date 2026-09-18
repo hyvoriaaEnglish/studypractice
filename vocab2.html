@@ -1,626 +1,1070 @@
 <!doctype html>
-< lang="en">
+<html lang="vi">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>C1–C2 Vocabulary Quiz (Part 1)</title>
+    <title>C1–C2 Vocabulary Quiz - Pink Edition</title>
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600;700&family=Quicksand:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
     <style>
+      :root {
+        --pink-primary: #ec4899;
+        --pink-hover: #db2777;
+        --pink-light: #fdf2f8;
+        --pink-border: #fbcfe8;
+        --pink-card-bg: #fff5f8;
+        --bg-main: #fcf4f6;
+        --text-main: #4a2834;
+        --text-muted: #835263;
+        --correct-bg: #d1fae5;
+        --correct-text: #065f46;
+        --correct-border: #6ee7b7;
+        --wrong-bg: #ffe4e6;
+        --wrong-text: #9f1239;
+        --wrong-border: #fca5a5;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
       body {
-        font-family: Arial, Helvetica, sans-serif;
-        background: #f4f6f9;
+        font-family: "Quicksand", sans-serif;
+        background-color: var(--bg-main);
+        background-image:
+          radial-gradient(#f472b6 0.5px, transparent 0.5px),
+          radial-gradient(#f472b6 0.5px, #fcf4f6 0.5px);
+        background-size: 20px 20px;
+        background-position:
+          0 0,
+          10px 10px;
+        color: var(--text-main);
         margin: 0;
-        padding: 30px;
+        padding: 40px 15px;
+        line-height: 1.6;
       }
 
       .container {
-        max-width: 900px;
-        margin: auto;
-        background: white;
-        padding: 30px;
-        border-radius: 12px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        max-width: 820px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 40px 30px;
+        border-radius: 28px;
+        box-shadow:
+          0 15px 35px rgba(236, 72, 153, 0.12),
+          0 5px 15px rgba(0, 0, 0, 0.04);
+        border: 2px solid #fce7f3;
       }
 
-      h1 {
+      .header {
         text-align: center;
-        color: #2c3e50;
+        margin-bottom: 35px;
       }
 
-      .question {
-        margin: 28px 0;
-        padding-bottom: 18px;
-        border-bottom: 1px solid #ddd;
-      }
-
-      .question h3 {
+      .badge {
+        display: inline-block;
+        padding: 6px 16px;
+        background: #fce7f3;
+        color: var(--pink-primary);
+        font-family: "Comfortaa", cursive;
+        font-weight: 700;
+        font-size: 13px;
+        border-radius: 50px;
         margin-bottom: 12px;
-        color: #34495e;
+        letter-spacing: 0.5px;
       }
 
-      label {
-        display: block;
-        padding: 8px;
-        margin: 4px 0;
-        border-radius: 6px;
-        cursor: pointer;
+      .header h1 {
+        font-family: "Comfortaa", cursive;
+        font-size: 30px;
+        font-weight: 700;
+        color: #9d174d;
+        margin: 0 0 10px 0;
       }
 
-      label:hover {
-        background: #eef5ff;
+      .header p {
+        color: var(--text-muted);
+        font-size: 15px;
+        margin: 0;
+        font-weight: 600;
       }
 
-      button {
-        display: block;
-        margin: 30px auto;
-        padding: 12px 30px;
+      .question-card {
+        background: #ffffff;
+        border: 2px solid var(--pink-border);
+        border-radius: 20px;
+        padding: 24px;
+        margin-bottom: 24px;
+        transition: all 0.25s ease;
+      }
+
+      .question-card:hover {
+        border-color: var(--pink-primary);
+        box-shadow: 0 8px 20px rgba(236, 72, 153, 0.08);
+      }
+
+      .question-card h3 {
         font-size: 16px;
-        background: #2c7be5;
-        color: white;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
+        font-weight: 700;
+        color: #831843;
+        margin: 0 0 16px 0;
+        line-height: 1.5;
       }
 
-      button:hover {
-        background: #1a68d1;
+      .options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .option-label {
+        display: flex;
+        align-items: center;
+        padding: 12px 18px;
+        border: 2px solid #fce7f3;
+        border-radius: 14px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-size: 15px;
+        color: #4a2834;
+        background-color: #fff;
+        font-weight: 600;
+      }
+
+      .option-label:hover {
+        background-color: var(--pink-light);
+        border-color: #fbcfe8;
+        transform: translateX(4px);
+      }
+
+      .option-label input[type="radio"] {
+        appearance: none;
+        -webkit-appearance: none;
+        width: 20px;
+        height: 20px;
+        border: 2px solid #f472b6;
+        border-radius: 50%;
+        margin-right: 14px;
+        outline: none;
+        transition: all 0.2s ease;
+        position: relative;
+        flex-shrink: 0;
+      }
+
+      .option-label input[type="radio"]:checked {
+        border-color: var(--pink-primary);
+        background-color: var(--pink-primary);
+      }
+
+      .option-label input[type="radio"]:checked::after {
+        content: "";
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        background-color: white;
+        border-radius: 50%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .option-label:has(input[type="radio"]:checked) {
+        border-color: var(--pink-primary);
+        background-color: var(--pink-light);
+        color: #831843;
+      }
+
+      .result-msg {
+        margin-top: 16px;
+        padding: 14px 18px;
+        border-radius: 14px;
+        font-size: 14.5px;
+        display: none;
+        animation: fadeIn 0.3s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-5px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .result-msg.correct {
+        display: block;
+        background-color: var(--correct-bg);
+        color: var(--correct-text);
+        border: 1.5px solid var(--correct-border);
+      }
+
+      .result-msg.wrong {
+        display: block;
+        background-color: var(--wrong-bg);
+        color: var(--wrong-text);
+        border: 1.5px solid var(--wrong-border);
+      }
+
+      .explanation {
+        margin-top: 6px;
+        font-weight: 600;
+        font-size: 13.5px;
+        opacity: 0.9;
+        display: block;
+        border-top: 1px dashed currentColor;
+        padding-top: 6px;
+      }
+
+      .submit-btn {
+        display: block;
+        width: 100%;
+        max-width: 320px;
+        margin: 35px auto 0;
+        padding: 16px 32px;
+        font-family: "Comfortaa", cursive;
+        font-size: 17px;
+        font-weight: 700;
+        color: white;
+        background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 8px 20px rgba(236, 72, 153, 0.35);
+        transition: all 0.25s ease;
+      }
+
+      .submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 25px rgba(236, 72, 153, 0.45);
+        background: linear-gradient(135deg, #f472b6 0%, #ec4899 100%);
+      }
+
+      .submit-btn:active {
+        transform: translateY(0);
       }
 
       #result {
         text-align: center;
-        font-size: 22px;
-        font-weight: bold;
-        margin-top: 25px;
+        margin-top: 35px;
+        padding: 25px;
+        border-radius: 20px;
+        background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+        font-size: 20px;
+        font-family: "Comfortaa", cursive;
+        font-weight: 700;
+        color: #831843;
+        display: none;
+        border: 2px dashed #f472b6;
       }
 
-      .correct {
-        color: green;
-        font-weight: bold;
-      }
-
-      .wrong {
-        color: red;
-        font-weight: bold;
+      @media (max-width: 640px) {
+        body {
+          padding: 15px 8px;
+        }
+        .container {
+          padding: 22px 16px;
+          border-radius: 20px;
+        }
+        .question-card {
+          padding: 18px 14px;
+        }
       }
     </style>
   </head>
 
-  <>
+  <body>
     <div class="container">
-      <h1>C1–C2 Vocabulary Quiz</h1>
+      <div class="header">
+        <span class="badge">🌸 Pink Special Edition</span>
+        <h1>C1–C2 Vocabulary Quiz</h1>
+        <p>Luyện tập 26 cụm thành ngữ nâng cao kèm giải thích chi tiết</p>
+      </div>
 
       <form id="quizForm">
-        <div class="question">
+        <div class="question-card">
           <h3>
             1. Although she works for a multinational company, she sees herself
             as just ________.
           </h3>
-
-          <label
-            ><input type="radio" name="q1" value="A" /> A. wet behind the
-            ears</label
-          >
-          <label
-            ><input type="radio" name="q1" value="B" /> B. a tiny cog in a vast
-            machine</label
-          >
-          <label
-            ><input type="radio" name="q1" value="C" /> C. at loggerheads</label
-          >
-          <label
-            ><input type="radio" name="q1" value="D" /> D. a bed of roses</label
-          >
-
-          <p id="r1"></p>
+          <div class="options">
+            <label class="option-label"
+              ><input type="radio" name="q1" value="A" /> A. wet behind the
+              ears</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q1" value="B" /> B. a tiny cog in a
+              vast machine</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q1" value="C" /> C. at
+              loggerheads</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q1" value="D" /> D. a bed of
+              roses</label
+            >
+          </div>
+          <div class="result-msg" id="r1"></div>
         </div>
 
-        <div class="question">
+        <div class="question-card">
           <h3>
             2. Don't ask Tom to negotiate the contract. He's still ________.
           </h3>
-
-          <label
-            ><input type="radio" name="q2" value="A" /> A. up in the air</label
-          >
-          <label
-            ><input type="radio" name="q2" value="B" /> B. wet behind the
-            ears</label
-          >
-          <label
-            ><input type="radio" name="q2" value="C" /> C. more than his job's
-            worth</label
-          >
-          <label
-            ><input type="radio" name="q2" value="D" /> D. out of the
-            ordinary</label
-          >
-
-          <p id="r2"></p>
+          <div class="options">
+            <label class="option-label"
+              ><input type="radio" name="q2" value="A" /> A. up in the
+              air</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q2" value="B" /> B. wet behind the
+              ears</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q2" value="C" /> C. more than his job's
+              worth</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q2" value="D" /> D. out of the
+              ordinary</label
+            >
+          </div>
+          <div class="result-msg" id="r2"></div>
         </div>
 
-        <div class="question">
+        <div class="question-card">
           <h3>3. We only remembered we needed passports at the ________.</h3>
-
-          <label
-            ><input type="radio" name="q3" value="A" /> A. dire straits</label
-          >
-          <label
-            ><input type="radio" name="q3" value="B" /> B. can of worms</label
-          >
-          <label
-            ><input type="radio" name="q3" value="C" /> C. eleventh hour</label
-          >
-          <label><input type="radio" name="q3" value="D" /> D. old score</label>
-
-          <p id="r3"></p>
+          <div class="options">
+            <label class="option-label"
+              ><input type="radio" name="q3" value="A" /> A. dire straits</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q3" value="B" /> B. can of worms</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q3" value="C" /> C. eleventh
+              hour</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q3" value="D" /> D. old score</label
+            >
+          </div>
+          <div class="result-msg" id="r3"></div>
         </div>
 
-        <div class="question">
+        <div class="question-card">
           <h3>
             4. Everyone ________ that attendance at meetings is compulsory.
           </h3>
-
-          <label
-            ><input type="radio" name="q4" value="A" /> A. goes with the
-            flow</label
-          >
-          <label
-            ><input type="radio" name="q4" value="B" /> B. packs a punch</label
-          >
-          <label
-            ><input type="radio" name="q4" value="C" /> C. takes it as
-            read</label
-          >
-          <label
-            ><input type="radio" name="q4" value="D" /> D. settles old
-            scores</label
-          >
-
-          <p id="r4"></p>
+          <div class="options">
+            <label class="option-label"
+              ><input type="radio" name="q4" value="A" /> A. goes with the
+              flow</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q4" value="B" /> B. packs a
+              punch</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q4" value="C" /> C. takes it as
+              read</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q4" value="D" /> D. settles old
+              scores</label
+            >
+          </div>
+          <div class="result-msg" id="r4"></div>
         </div>
 
-        <button type="button" onclick="checkAnswers()">Submit</button>
+        <div class="question-card">
+          <h3>
+            5. The tiny speaker may look unimpressive, but it really ________.
+          </h3>
+          <div class="options">
+            <label class="option-label"
+              ><input type="radio" name="q5" value="A" /> A. packs a
+              punch</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q5" value="B" /> B. opens up</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q5" value="C" /> C. falls on its
+              feet</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q5" value="D" /> D. runs a tight
+              ship</label
+            >
+          </div>
+          <div class="result-msg" id="r5"></div>
+        </div>
+
+        <div class="question-card">
+          <h3>6. My little sister is absolutely ________ Harry Potter.</h3>
+          <div class="options">
+            <label class="option-label"
+              ><input type="radio" name="q6" value="A" /> A. in dire
+              straits</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q6" value="B" /> B. nuts about</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q6" value="C" /> C. at loggerheads
+              with</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q6" value="D" /> D. given a rap over
+              the knuckles</label
+            >
+          </div>
+          <div class="result-msg" id="r6"></div>
+        </div>
+
+        <div class="question-card">
+          <h3>7. The horror film really ________ me.</h3>
+          <div class="options">
+            <label class="option-label"
+              ><input type="radio" name="q7" value="A" /> A. put the wind
+              up</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q7" value="B" /> B. hit the
+              books</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q7" value="C" /> C. kicked the can down
+              the road</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q7" value="D" /> D. went with the
+              flow</label
+            >
+          </div>
+          <div class="result-msg" id="r7"></div>
+        </div>
+
+        <div class="question-card">
+          <h3>8. The manager was ________ for arriving late again.</h3>
+          <div class="options">
+            <label class="option-label"
+              ><input type="radio" name="q8" value="A" /> A. given a rap over
+              the knuckles</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q8" value="B" /> B. taken his hat
+              off</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q8" value="C" /> C. set out his
+              stall</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q8" value="D" /> D. up in the
+              air</label
+            >
+          </div>
+          <div class="result-msg" id="r8"></div>
+        </div>
+
+        <div class="question-card">
+          <h3>
+            9. The newspaper keeps predicting economic collapse. It's all
+            ________.
+          </h3>
+          <div class="options">
+            <label class="option-label"
+              ><input type="radio" name="q9" value="A" /> A. a bed of
+              roses</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q9" value="B" /> B. doom and
+              gloom</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q9" value="C" /> C. more than one's
+              job's worth</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q9" value="D" /> D. open up</label
+            >
+          </div>
+          <div class="result-msg" id="r9"></div>
+        </div>
+
+        <div class="question-card">
+          <h3>
+            10. If you want to pass IELTS with Band 8, you'd better ________.
+          </h3>
+          <div class="options">
+            <label class="option-label"
+              ><input type="radio" name="q10" value="A" /> A. go with the
+              flow</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q10" value="B" /> B. hit the
+              books</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q10" value="C" /> C. settle old
+              scores</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q10" value="D" /> D. blot your
+              copybook</label
+            >
+          </div>
+          <div class="result-msg" id="r10"></div>
+        </div>
+
+        <div class="question-card">
+          <h3>
+            11. After losing his job, he somehow ________ and found an even
+            better one.
+          </h3>
+          <div class="options">
+            <label class="option-label"
+              ><input type="radio" name="q11" value="A" /> A. went off
+              half-cocked</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q11" value="B" /> B. fell on his
+              feet</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q11" value="C" /> C. packed a
+              punch</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q11" value="D" /> D. opened up</label
+            >
+          </div>
+          <div class="result-msg" id="r11"></div>
+        </div>
+
+        <div class="question-card">
+          <h3>
+            12. I'm not going to criticize the CEO publicly. That's ________.
+          </h3>
+          <div class="options">
+            <label class="option-label"
+              ><input type="radio" name="q12" value="A" /> A. more than my job's
+              worth</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q12" value="B" /> B. wet behind the
+              ears</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q12" value="C" /> C. a bed of
+              roses</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q12" value="D" /> D. at the eleventh
+              hour</label
+            >
+          </div>
+          <div class="result-msg" id="r12"></div>
+        </div>
+
+        <div class="question-card">
+          <h3>13. Life as a professional athlete isn't exactly ________.</h3>
+          <div class="options">
+            <label class="option-label"
+              ><input type="radio" name="q13" value="A" /> A. a tiny cog in a
+              vast machine</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q13" value="B" /> B. a bed of
+              roses</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q13" value="C" /> C. up in the
+              air</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q13" value="D" /> D. doom and
+              gloom</label
+            >
+          </div>
+          <div class="result-msg" id="r13"></div>
+        </div>
+
+        <div class="question-card">
+          <h3>
+            14. I really ________ all the volunteers who helped after the flood.
+          </h3>
+          <div class="options">
+            <label class="option-label"
+              ><input type="radio" name="q14" value="A" /> A. take my hat off
+              to</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q14" value="B" /> B. kick the can down
+              the road</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q14" value="C" /> C. go with the
+              flow</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q14" value="D" /> D. blot my
+              copybook</label
+            >
+          </div>
+          <div class="result-msg" id="r14"></div>
+        </div>
+
+        <div class="question-card">
+          <h3>
+            15. His solution was completely ________ and impressed everyone.
+          </h3>
+          <div class="options">
+            <label class="option-label"
+              ><input type="radio" name="q15" value="A" /> A. out of the
+              ordinary</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q15" value="B" /> B. wet behind the
+              ears</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q15" value="C" /> C. nuts about</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q15" value="D" /> D. up in the
+              air</label
+            >
+          </div>
+          <div class="result-msg" id="r15"></div>
+        </div>
+
+        <div class="question-card">
+          <h3>16. Without financial support, the company is now ________.</h3>
+          <div class="options">
+            <label class="option-label"
+              ><input type="radio" name="q16" value="A" /> A. at
+              loggerheads</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q16" value="B" /> B. in dire
+              straits</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q16" value="C" /> C. more than its
+              job's worth</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q16" value="D" /> D. given a rap over
+              the knuckles</label
+            >
+          </div>
+          <div class="result-msg" id="r16"></div>
+        </div>
+
+        <div class="question-card">
+          <h3>17. The candidate ________ clearly during the first debate.</h3>
+          <div class="options">
+            <label class="option-label"
+              ><input type="radio" name="q17" value="A" /> A. settled old
+              scores</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q17" value="B" /> B. set out his
+              stall</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q17" value="C" /> C. hit the
+              books</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q17" value="D" /> D. opened up a can of
+              worms</label
+            >
+          </div>
+          <div class="result-msg" id="r17"></div>
+        </div>
+
+        <div class="question-card">
+          <h3>
+            18. He ________ and accused everyone before hearing the full story.
+          </h3>
+          <div class="options">
+            <label class="option-label"
+              ><input type="radio" name="q18" value="A" /> A. went off
+              half-cocked</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q18" value="B" /> B. took it as
+              read</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q18" value="C" /> C. packed a
+              punch</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q18" value="D" /> D. fell on his
+              feet</label
+            >
+          </div>
+          <div class="result-msg" id="r18"></div>
+        </div>
+
+        <div class="question-card">
+          <h3>19. The two brothers are constantly ________ over money.</h3>
+          <div class="options">
+            <label class="option-label"
+              ><input type="radio" name="q19" value="A" /> A. at
+              loggerheads</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q19" value="B" /> B. nuts about</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q19" value="C" /> C. in dire
+              straits</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q19" value="D" /> D. wet behind the
+              ears</label
+            >
+          </div>
+          <div class="result-msg" id="r19"></div>
+        </div>
+
+        <div class="question-card">
+          <h3>20. Whether the concert will go ahead is still ________.</h3>
+          <div class="options">
+            <label class="option-label"
+              ><input type="radio" name="q20" value="A" /> A. more than my job's
+              worth</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q20" value="B" /> B. up in the
+              air</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q20" value="C" /> C. a bed of
+              roses</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q20" value="D" /> D. at the eleventh
+              hour</label
+            >
+          </div>
+          <div class="result-msg" id="r20"></div>
+        </div>
+
+        <div class="question-card">
+          <h3>
+            21. The captain ________, so everyone knew exactly what to do.
+          </h3>
+          <div class="options">
+            <label class="option-label"
+              ><input type="radio" name="q21" value="A" /> A. ran a tight
+              ship</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q21" value="B" /> B. settled old
+              scores</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q21" value="C" /> C. opened up</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q21" value="D" /> D. put the wind
+              up</label
+            >
+          </div>
+          <div class="result-msg" id="r21"></div>
+        </div>
+
+        <div class="question-card">
+          <h3>22. If we investigate that issue, we'll ________.</h3>
+          <div class="options">
+            <label class="option-label"
+              ><input type="radio" name="q22" value="A" /> A. take it for
+              granted</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q22" value="B" /> B. open up a can of
+              worms</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q22" value="C" /> C. fall on our
+              feet</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q22" value="D" /> D. be nuts about
+              it</label
+            >
+          </div>
+          <div class="result-msg" id="r22"></div>
+        </div>
+
+        <div class="question-card">
+          <h3>
+            23. Instead of solving the housing crisis, the government simply
+            ________.
+          </h3>
+          <div class="options">
+            <label class="option-label"
+              ><input type="radio" name="q23" value="A" /> A. took its hat
+              off</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q23" value="B" /> B. kicked the can
+              down the road</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q23" value="C" /> C. packed a
+              punch</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q23" value="D" /> D. hit the
+              books</label
+            >
+          </div>
+          <div class="result-msg" id="r23"></div>
+        </div>
+
+        <div class="question-card">
+          <h3>24. The two politicians used the TV debate to ________.</h3>
+          <div class="options">
+            <label class="option-label"
+              ><input type="radio" name="q24" value="A" /> A. settle old
+              scores</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q24" value="B" /> B. go with the
+              flow</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q24" value="C" /> C. fall on their
+              feet</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q24" value="D" /> D. be given a rap
+              over the knuckles</label
+            >
+          </div>
+          <div class="result-msg" id="r24"></div>
+        </div>
+
+        <div class="question-card">
+          <h3>25. By cheating in the exam, he really ________.</h3>
+          <div class="options">
+            <label class="option-label"
+              ><input type="radio" name="q25" value="A" /> A. blotted his
+              copybook</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q25" value="B" /> B. ran a tight
+              ship</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q25" value="C" /> C. packed a
+              punch</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q25" value="D" /> D. took it as
+              read</label
+            >
+          </div>
+          <div class="result-msg" id="r25"></div>
+        </div>
+
+        <div class="question-card">
+          <h3>
+            26. (Bonus) Rather than arguing with everyone, she decided to
+            ________.
+          </h3>
+          <div class="options">
+            <label class="option-label"
+              ><input type="radio" name="q26" value="A" /> A. go with the
+              flow</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q26" value="B" /> B. put the wind
+              up</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q26" value="C" /> C. run a tight
+              ship</label
+            >
+            <label class="option-label"
+              ><input type="radio" name="q26" value="D" /> D. set out her
+              stall</label
+            >
+          </div>
+          <div class="result-msg" id="r26"></div>
+        </div>
+
+        <button type="button" class="submit-btn" onclick="checkAnswers()">
+          💖 Nộp Bài & Xem Điểm
+        </button>
       </form>
 
       <div id="result"></div>
     </div>
 
     <script>
-      const answers = {
-        q1: "B",
-        q2: "B",
-        q3: "C",
-        q4: "C",
-
-        q5: "A",
-        q6: "B",
-        q7: "A",
-        q8: "A",
-        q9: "B",
-        q10: "B",
-        q11: "B",
-        q12: "A",
-        q13: "B",
-        q14: "A",
-        q15: "A",
-        q16: "B",
-        q17: "B",
-        q18: "A",
-        q19: "A",
-        q20: "B",
-        q21: "A",
-        q22: "B",
-        q23: "B",
-        q24: "A",
-        q25: "A",
-        q26: "A",
+      // Danh sách đáp án đúng & Giải thích ngữ nghĩa
+      const quizData = {
+        q1: {
+          ans: "B",
+          exp: "<b>a tiny cog in a vast machine:</b> Một phần nhỏ bé, không quan trọng trong hệ thống lớn.",
+        },
+        q2: {
+          ans: "B",
+          exp: "<b>wet behind the ears:</b> Còn non nớt, chưa có kinh nghiệm.",
+        },
+        q3: {
+          ans: "C",
+          exp: "<b>at the eleventh hour:</b> Vào phút chót, giây phút cuối cùng.",
+        },
+        q4: {
+          ans: "C",
+          exp: "<b>take it as read:</b> Mặc nhiên công nhận / Cho là điều hiển nhiên.",
+        },
+        q5: {
+          ans: "A",
+          exp: "<b>pack a punch:</b> Có sức ảnh hưởng lớn, uy lực mạnh mẽ.",
+        },
+        q6: {
+          ans: "B",
+          exp: "<b>nuts about:</b> Cực kỳ mê mẩn, phát cuồng vì cái gì.",
+        },
+        q7: {
+          ans: "A",
+          exp: "<b>put the wind up someone:</b> Làm ai đó hoảng sợ, lo lắng.",
+        },
+        q8: {
+          ans: "A",
+          exp: "<b>give someone a rap over the knuckles:</b> Phê bình, khiển trách ai đó.",
+        },
+        q9: { ans: "B", exp: "<b>doom and gloom:</b> Cảm giác bi quan, u ám." },
+        q10: {
+          ans: "B",
+          exp: "<b>hit the books:</b> Lao vào học tập chăm chỉ.",
+        },
+        q11: {
+          ans: "B",
+          exp: "<b>fall on one's feet:</b> Vượt qua khó khăn một cách may mắn.",
+        },
+        q12: {
+          ans: "A",
+          exp: "<b>more than one's job's worth:</b> Hành động quá mạo hiểm (có thể mất việc nếu làm).",
+        },
+        q13: {
+          ans: "B",
+          exp: "<b>a bed of roses:</b> Cuộc sống dễ dàng, trải đầy hoa hồng.",
+        },
+        q14: {
+          ans: "A",
+          exp: "<b>take one's hat off to:</b> Thán phục, ngả mũ kính trọng ai đó.",
+        },
+        q15: {
+          ans: "A",
+          exp: "<b>out of the ordinary:</b> Phi thường, khác biệt, đặc biệt.",
+        },
+        q16: {
+          ans: "B",
+          exp: "<b>in dire straits:</b> Trong tình cảnh vô cùng khó khăn, nguy cấp.",
+        },
+        q17: {
+          ans: "B",
+          exp: "<b>set out one's stall:</b> Bày tỏ rõ ràng quan điểm / kế hoạch của mình.",
+        },
+        q18: {
+          ans: "A",
+          exp: "<b>go off half-cocked:</b> Hành động hấp tấp khi chưa chuẩn bị kĩ.",
+        },
+        q19: {
+          ans: "A",
+          exp: "<b>at loggerheads:</b> Mất hòa khí, bất đồng gay gắt với ai.",
+        },
+        q20: {
+          ans: "B",
+          exp: "<b>up in the air:</b> Chưa chắc chắn, vẫn còn bỏ ngỏ.",
+        },
+        q21: {
+          ans: "A",
+          exp: "<b>run a tight ship:</b> Quản lý tổ chức một cách nghiêm túc, kỉ luật.",
+        },
+        q22: {
+          ans: "B",
+          exp: "<b>open up a can of worms:</b> Gây ra rắc rối phức tạp không lường trước.",
+        },
+        q23: {
+          ans: "B",
+          exp: "<b>kick the can down the road:</b> Trì hoãn việc giải quyết vấn đề.",
+        },
+        q24: {
+          ans: "A",
+          exp: "<b>settle old scores:</b> Giải quyết mối hận/mâu thuẫn cũ.",
+        },
+        q25: {
+          ans: "A",
+          exp: "<b>blot one's copybook:</b> Làm hoen ố lý lịch / danh tiếng của mình.",
+        },
+        q26: {
+          ans: "A",
+          exp: "<b>go with the flow:</b> Làm theo số đông, thuận theo tự nhiên.",
+        },
       };
 
       function checkAnswers() {
         let score = 0;
+        let totalQuestions = Object.keys(quizData).length;
 
-        for (let key in answers) {
+        for (let key in quizData) {
           let choice = document.querySelector(`input[name="${key}"]:checked`);
+          let resultElem = document.getElementById("r" + key.substring(1));
 
-          if (document.getElementById("r" + key.substring(1))) {
-            if (choice) {
-              if (choice.value === answers[key]) {
-                score++;
-                document.getElementById("r" + key.substring(1)).innerHTML =
-                  '<span class="correct">✔ Correct</span>';
-              } else {
-                document.getElementById("r" + key.substring(1)).innerHTML =
-                  '<span class="wrong">✘ Correct answer: ' +
-                  answers[key] +
-                  "</span>";
-              }
+          if (resultElem) {
+            let item = quizData[key];
+            if (choice && choice.value === item.ans) {
+              score++;
+              resultElem.className = "result-msg correct";
+              resultElem.innerHTML = `🎉 <b>Chính xác!</b><br><span class="explanation">💡 <b>Giải nghĩa:</b> ${item.exp}</span>`;
             } else {
-              document.getElementById("r" + key.substring(1)).innerHTML =
-                '<span class="wrong">✘ Correct answer: ' +
-                answers[key] +
-                "</span>";
+              resultElem.className = "result-msg wrong";
+              let userSelected = choice ? choice.value : "Chưa chọn";
+              resultElem.innerHTML = `❌ <b>Chưa đúng!</b> (Bạn chọn: ${userSelected}) — Đáp án đúng là <b>${item.ans}</b>.<br><span class="explanation">💡 <b>Giải nghĩa:</b> ${item.exp}</span>`;
             }
           }
         }
 
-        document.getElementById("result").innerHTML =
-          "You scored " + score + " / 4";
+        const resultDiv = document.getElementById("result");
+        resultDiv.style.display = "block";
+        let percent = Math.round((score / totalQuestions) * 100);
+
+        let evaluation = "";
+        if (percent === 100) evaluation = "🏆 Tuyệt vời! Bạn là cao thủ C1-C2!";
+        else if (percent >= 80)
+          evaluation = "🌟 Rất tốt! Vốn từ vựng của bạn rất vững!";
+        else if (percent >= 50)
+          evaluation = "👍 Khá lắm! Hãy ôn lại các câu sai nhé!";
+        else
+          evaluation =
+            "💪 Cố gắng lên! Hãy học thuộc các cụm idiom ở phần giải thích!";
+
+        resultDiv.innerHTML = `✨ KẾT QUẢ CỦA BẠN ✨<br><br><span style="font-size:26px; color:#ec4899;">${score} / ${totalQuestions}</span> (${percent}%)<br><span style="font-size:15px; font-weight:600; color:#4a2834; display:block; margin-top:8px;">${evaluation}</span>`;
+
+        resultDiv.scrollIntoView({ behavior: "smooth" });
       }
     </script>
-    <div class="question">
-      <h3>
-        5. The tiny speaker may look unimpressive, but it really ________.
-      </h3>
-
-      <label><input type="radio" name="q5" value="A" /> A. packs a punch</label>
-      <label><input type="radio" name="q5" value="B" /> B. opens up</label>
-      <label
-        ><input type="radio" name="q5" value="C" /> C. falls on its feet</label
-      >
-      <label
-        ><input type="radio" name="q5" value="D" /> D. runs a tight ship</label
-      >
-
-      <p id="r5"></p>
-    </div>
-
-    <div class="question">
-      <h3>6. My little sister is absolutely ________ Harry Potter.</h3>
-
-      <label
-        ><input type="radio" name="q6" value="A" /> A. in dire straits</label
-      >
-      <label><input type="radio" name="q6" value="B" /> B. nuts about</label>
-      <label
-        ><input type="radio" name="q6" value="C" /> C. at loggerheads
-        with</label
-      >
-      <label
-        ><input type="radio" name="q6" value="D" /> D. given a rap over the
-        knuckles</label
-      >
-
-      <p id="r6"></p>
-    </div>
-
-    <div class="question">
-      <h3>7. The horror film really ________ me.</h3>
-
-      <label
-        ><input type="radio" name="q7" value="A" /> A. put the wind up</label
-      >
-      <label><input type="radio" name="q7" value="B" /> B. hit the books</label>
-      <label
-        ><input type="radio" name="q7" value="C" /> C. kicked the can down the
-        road</label
-      >
-      <label
-        ><input type="radio" name="q7" value="D" /> D. went with the flow</label
-      >
-
-      <p id="r7"></p>
-    </div>
-
-    <div class="question">
-      <h3>8. The manager was ________ for arriving late again.</h3>
-
-      <label
-        ><input type="radio" name="q8" value="A" /> A. given a rap over the
-        knuckles</label
-      >
-      <label
-        ><input type="radio" name="q8" value="B" /> B. taken his hat off</label
-      >
-      <label
-        ><input type="radio" name="q8" value="C" /> C. set out his stall</label
-      >
-      <label><input type="radio" name="q8" value="D" /> D. up in the air</label>
-
-      <p id="r8"></p>
-    </div>
-
-    <div class="question">
-      <h3>
-        9. The newspaper keeps predicting economic collapse. It's all ________.
-      </h3>
-
-      <label
-        ><input type="radio" name="q9" value="A" /> A. a bed of roses</label
-      >
-      <label
-        ><input type="radio" name="q9" value="B" /> B. doom and gloom</label
-      >
-      <label
-        ><input type="radio" name="q9" value="C" /> C. more than one's job's
-        worth</label
-      >
-      <label><input type="radio" name="q9" value="D" /> D. open up</label>
-
-      <p id="r9"></p>
-    </div>
-    <div class="question">
-      <h3>10. If you want to pass IELTS with Band 8, you'd better ________.</h3>
-
-      <label
-        ><input type="radio" name="q10" value="A" /> A. go with the flow</label
-      >
-      <label
-        ><input type="radio" name="q10" value="B" /> B. hit the books</label
-      >
-      <label
-        ><input type="radio" name="q10" value="C" /> C. settle old scores</label
-      >
-      <label
-        ><input type="radio" name="q10" value="D" /> D. blot your
-        copybook</label
-      >
-
-      <p id="r10"></p>
-    </div>
-
-    <div class="question">
-      <h3>
-        11. After losing his job, he somehow ________ and found an even better
-        one.
-      </h3>
-
-      <label
-        ><input type="radio" name="q11" value="A" /> A. went off
-        half-cocked</label
-      >
-      <label
-        ><input type="radio" name="q11" value="B" /> B. fell on his feet</label
-      >
-      <label
-        ><input type="radio" name="q11" value="C" /> C. packed a punch</label
-      >
-      <label><input type="radio" name="q11" value="D" /> D. opened up</label>
-
-      <p id="r11"></p>
-    </div>
-
-    <div class="question">
-      <h3>12. I'm not going to criticize the CEO publicly. That's ________.</h3>
-
-      <label
-        ><input type="radio" name="q12" value="A" /> A. more than my job's
-        worth</label
-      >
-      <label
-        ><input type="radio" name="q12" value="B" /> B. wet behind the
-        ears</label
-      >
-      <label
-        ><input type="radio" name="q12" value="C" /> C. a bed of roses</label
-      >
-      <label
-        ><input type="radio" name="q12" value="D" /> D. at the eleventh
-        hour</label
-      >
-
-      <p id="r12"></p>
-    </div>
-
-    <div class="question">
-      <h3>13. Life as a professional athlete isn't exactly ________.</h3>
-
-      <label
-        ><input type="radio" name="q13" value="A" /> A. a tiny cog in a vast
-        machine</label
-      >
-      <label
-        ><input type="radio" name="q13" value="B" /> B. a bed of roses</label
-      >
-      <label
-        ><input type="radio" name="q13" value="C" /> C. up in the air</label
-      >
-      <label
-        ><input type="radio" name="q13" value="D" /> D. doom and gloom</label
-      >
-
-      <p id="r13"></p>
-    </div>
-
-    <div class="question">
-      <h3>
-        14. I really ________ all the volunteers who helped after the flood.
-      </h3>
-
-      <label
-        ><input type="radio" name="q14" value="A" /> A. take my hat off
-        to</label
-      >
-      <label
-        ><input type="radio" name="q14" value="B" /> B. kick the can down the
-        road</label
-      >
-      <label
-        ><input type="radio" name="q14" value="C" /> C. go with the flow</label
-      >
-      <label
-        ><input type="radio" name="q14" value="D" /> D. blot my copybook</label
-      >
-
-      <p id="r14"></p>
-    </div>
-
-    <div class="question">
-      <h3>15. His solution was completely ________ and impressed everyone.</h3>
-
-      <label
-        ><input type="radio" name="q15" value="A" /> A. out of the
-        ordinary</label
-      >
-      <label
-        ><input type="radio" name="q15" value="B" /> B. wet behind the
-        ears</label
-      >
-      <label><input type="radio" name="q15" value="C" /> C. nuts about</label>
-      <label
-        ><input type="radio" name="q15" value="D" /> D. up in the air</label
-      >
-
-      <p id="r15"></p>
-    </div>
-
-    <div class="question">
-      <h3>16. Without financial support, the company is now ________.</h3>
-
-      <label
-        ><input type="radio" name="q16" value="A" /> A. at loggerheads</label
-      >
-      <label
-        ><input type="radio" name="q16" value="B" /> B. in dire straits</label
-      >
-      <label
-        ><input type="radio" name="q16" value="C" /> C. more than its job's
-        worth</label
-      >
-      <label
-        ><input type="radio" name="q16" value="D" /> D. given a rap over the
-        knuckles</label
-      >
-
-      <p id="r16"></p>
-    </div>
-
-    <div class="question">
-      <h3>17. The candidate ________ clearly during the first debate.</h3>
-
-      <label
-        ><input type="radio" name="q17" value="A" /> A. settled old
-        scores</label
-      >
-      <label
-        ><input type="radio" name="q17" value="B" /> B. set out his stall</label
-      >
-      <label
-        ><input type="radio" name="q17" value="C" /> C. hit the books</label
-      >
-      <label
-        ><input type="radio" name="q17" value="D" /> D. opened up a can of
-        worms</label
-      >
-
-      <p id="r17"></p>
-    </div>
-
-    <div class="question">
-      <h3>
-        18. He ________ and accused everyone before hearing the full story.
-      </h3>
-
-      <label
-        ><input type="radio" name="q18" value="A" /> A. went off
-        half-cocked</label
-      >
-      <label
-        ><input type="radio" name="q18" value="B" /> B. took it as read</label
-      >
-      <label
-        ><input type="radio" name="q18" value="C" /> C. packed a punch</label
-      >
-      <label
-        ><input type="radio" name="q18" value="D" /> D. fell on his feet</label
-      >
-
-      <p id="r18"></p>
-    </div>
-    <div class="question">
-<h3>19. The two brothers are constantly ________ over money.</h3>
-
-<label><input type="radio" name="q19" value="A"> A. at loggerheads</label>
-<label><input type="radio" name="q19" value="B"> B. nuts about</label>
-<label><input type="radio" name="q19" value="C"> C. in dire straits</label>
-<label><input type="radio" name="q19" value="D"> D. wet behind the ears</label>
-
-<p id="r19"></p>
-</div>
-
-<div class="question">
-<h3>20. Whether the concert will go ahead is still ________.</h3>
-
-<label><input type="radio" name="q20" value="A"> A. more than my job's worth</label>
-<label><input type="radio" name="q20" value="B"> B. up in the air</label>
-<label><input type="radio" name="q20" value="C"> C. a bed of roses</label>
-<label><input type="radio" name="q20" value="D"> D. at the eleventh hour</label>
-
-<p id="r20"></p>
-</div>
-
-<div class="question">
-<h3>21. The captain ________, so everyone knew exactly what to do.</h3>
-
-<label><input type="radio" name="q21" value="A"> A. ran a tight ship</label>
-<label><input type="radio" name="q21" value="B"> B. settled old scores</label>
-<label><input type="radio" name="q21" value="C"> C. opened up</label>
-<label><input type="radio" name="q21" value="D"> D. put the wind up</label>
-
-<p id="r21"></p>
-</div>
-
-<div class="question">
-<h3>22. If we investigate that issue, we'll ________.</h3>
-
-<label><input type="radio" name="q22" value="A"> A. take it for granted</label>
-<label><input type="radio" name="q22" value="B"> B. open up a can of worms</label>
-<label><input type="radio" name="q22" value="C"> C. fall on our feet</label>
-<label><input type="radio" name="q22" value="D"> D. be nuts about it</label>
-
-<p id="r22"></p>
-</div>
-
-<div class="question">
-<h3>23. Instead of solving the housing crisis, the government simply ________.</h3>
-
-<label><input type="radio" name="q23" value="A"> A. took its hat off</label>
-<label><input type="radio" name="q23" value="B"> B. kicked the can down the road</label>
-<label><input type="radio" name="q23" value="C"> C. packed a punch</label>
-<label><input type="radio" name="q23" value="D"> D. hit the books</label>
-
-<p id="r23"></p>
-</div>
-
-<div class="question">
-<h3>24. The two politicians used the TV debate to ________.</h3>
-
-<label><input type="radio" name="q24" value="A"> A. settle old scores</label>
-<label><input type="radio" name="q24" value="B"> B. go with the flow</label>
-<label><input type="radio" name="q24" value="C"> C. fall on their feet</label>
-<label><input type="radio" name="q24" value="D"> D. be given a rap over the knuckles</label>
-
-<p id="r24"></p>
-</div>
-
-<div class="question">
-<h3>25. By cheating in the exam, he really ________.</h3>
-
-<label><input type="radio" name="q25" value="A"> A. blotted his copybook</label>
-<label><input type="radio" name="q25" value="B"> B. ran a tight ship</label>
-<label><input type="radio" name="q25" value="C"> C. packed a punch</label>
-<label><input type="radio" name="q25" value="D"> D. took it as read</label>
-
-<p id="r25"></p>
-</div>
-
-<div class="question">
-<h3>26. (Bonus) Rather than arguing with everyone, she decided to ________.</h3>
-
-<label><input type="radio" name="q26" value="A"> A. go with the flow</label>
-<label><input type="radio" name="q26" value="B"> B. put the wind up</label>
-<label><input type="radio" name="q26" value="C"> C. run a tight ship</label>
-<label><input type="radio" name="q26" value="D"> D. set out her stall</label>
-
-<p id="r26"></p>
-</div>
-
-<button type="button" onclick="checkAnswers()">Submit</button>
-
-</form>
-
-<div id="result"></div>
-
-</div>
-
-</body>
+    <script src="/study-tracker.js"></script>
+  </body>
 </html>
