@@ -2,494 +2,437 @@
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>Reading Practice</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
     <style>
       /* =====================================================
-         RESET
+         RESET & BASE STYLES
       ===================================================== */
-
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
       }
 
-      /* =====================================================
-         BODY
-      ===================================================== */
-
       body {
         min-height: 100vh;
-
-        background-color: white;
-
-        font-family: Arial, Helvetica, sans-serif;
-
+        background: linear-gradient(135deg, #fff5f6 0%, #ffeef1 100%);
+        font-family: "Plus Jakarta Sans", Arial, sans-serif;
+        color: #334155;
         overflow-x: hidden;
-
         position: relative;
+        padding-bottom: 60px;
       }
 
       /* =====================================================
-         NGÔI SAO
+         DECORATIVE BACKGROUND ELEMENTS
       ===================================================== */
-
       .stars {
         position: fixed;
-
         width: 100%;
         height: 100%;
-
         top: 0;
         left: 0;
-
         pointer-events: none;
-
         z-index: 1;
       }
 
       .star {
         position: absolute;
-
-        color: #f3a6b5;
-
-        opacity: 0.55;
-
+        color: #fca5a5;
+        opacity: 0.45;
         animation: floating 4s ease-in-out infinite;
+        filter: drop-shadow(0 2px 4px rgba(251, 113, 133, 0.2));
       }
 
       .star:nth-child(1) {
-        top: -15px;
-        left: 7%;
-        font-size: 45px;
-      }
-
-      .star:nth-child(2) {
-        top: 7%;
-        left: 25%;
-        font-size: 30px;
-      }
-
-      .star:nth-child(3) {
         top: 2%;
-        left: 47%;
-        font-size: 28px;
+        left: 5%;
+        font-size: 32px;
+        animation-delay: 0s;
       }
-
+      .star:nth-child(2) {
+        top: 8%;
+        left: 22%;
+        font-size: 20px;
+        animation-delay: 0.5s;
+      }
+      .star:nth-child(3) {
+        top: 3%;
+        left: 50%;
+        font-size: 24px;
+        animation-delay: 1s;
+      }
       .star:nth-child(4) {
         top: 7%;
-        right: 25%;
-        font-size: 30px;
+        right: 22%;
+        font-size: 22px;
+        animation-delay: 1.5s;
       }
-
       .star:nth-child(5) {
-        top: 15%;
+        top: 12%;
         right: 6%;
-        font-size: 38px;
+        font-size: 30px;
+        animation-delay: 2s;
       }
-
       .star:nth-child(6) {
-        top: 31%;
-        left: 20%;
-        font-size: 40px;
+        top: 35%;
+        left: 4%;
+        font-size: 28px;
+        animation-delay: 0.8s;
       }
-
       .star:nth-child(7) {
-        top: 33%;
-        right: 16%;
-        font-size: 28px;
+        top: 38%;
+        right: 5%;
+        font-size: 26px;
+        animation-delay: 1.8s;
       }
-
       .star:nth-child(8) {
-        top: 58%;
-        left: 2%;
-        font-size: 46px;
+        top: 60%;
+        left: 3%;
+        font-size: 32px;
+        animation-delay: 1.2s;
       }
-
       .star:nth-child(9) {
-        top: 64%;
-        right: 12%;
-        font-size: 43px;
+        top: 65%;
+        right: 4%;
+        font-size: 30px;
+        animation-delay: 0.3s;
       }
-
       .star:nth-child(10) {
-        bottom: 13%;
-        left: 30%;
-        font-size: 28px;
+        bottom: 12%;
+        left: 8%;
+        font-size: 22px;
+        animation-delay: 1.6s;
       }
-
       .star:nth-child(11) {
-        bottom: 3%;
-        left: 48%;
-        font-size: 40px;
+        bottom: 4%;
+        left: 45%;
+        font-size: 28px;
+        animation-delay: 2.2s;
       }
-
       .star:nth-child(12) {
-        bottom: 7%;
-        right: 24%;
-        font-size: 25px;
-      }
-
-      .star:nth-child(13) {
         bottom: 8%;
-        right: 8%;
-        font-size: 25px;
+        right: 20%;
+        font-size: 20px;
+        animation-delay: 0.7s;
       }
-
-      /* =====================================================
-         HIỆU ỨNG NGÔI SAO
-      ===================================================== */
+      .star:nth-child(13) {
+        bottom: 6%;
+        right: 6%;
+        font-size: 24px;
+        animation-delay: 1.4s;
+      }
 
       @keyframes floating {
-        0% {
-          transform: translateY(0);
-        }
-
-        50% {
-          transform: translateY(-7px);
-        }
-
+        0%,
         100% {
-          transform: translateY(0);
+          transform: translateY(0) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-10px) rotate(8deg);
         }
       }
 
       /* =====================================================
-         SHOPPING - GÓC TRÁI
+         HEADER & NAVIGATION BAR
       ===================================================== */
+      .top-bar {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(244, 114, 182, 0.15);
+        padding: 16px 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: #e11d48;
+        font-weight: 600;
+        font-size: 15px;
+        text-decoration: none;
+        padding: 8px 16px;
+        border-radius: 99px;
+        background-color: #ffe4e6;
+        transition: all 0.25s ease;
+      }
+
+      .back-link:hover {
+        background-color: #fecdd3;
+        transform: translateX(-3px);
+      }
 
       .shopping-link {
-        position: fixed;
-
-        top: 25px;
-
-        left: 30px;
-
-        z-index: 100;
-
-        color: #d88999;
-
-        font-size: 18px;
-
-        font-weight: 500;
-
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: #db2777;
+        font-size: 15px;
+        font-weight: 600;
         text-decoration: none;
-
-        transition: all 0.3s ease;
+        padding: 8px 18px;
+        border-radius: 99px;
+        border: 1.5px solid #fbcfe8;
+        background-color: #ffffff;
+        box-shadow: 0 2px 6px rgba(219, 39, 119, 0.06);
+        transition: all 0.25s ease;
       }
-
-      /* Gạch chân khi di chuột */
 
       .shopping-link:hover {
-        color: #c45f76;
-
-        text-decoration: underline;
+        background-color: #fdf2f8;
+        border-color: #f472b6;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(219, 39, 119, 0.12);
       }
 
       /* =====================================================
-         KHU VỰC LINK CHÍNH
+         MAIN CONTAINER & GRID LAYOUT
       ===================================================== */
-
       .container {
         position: relative;
-
         z-index: 10;
-
-        min-height: 100vh;
-
-        width: 100%;
-
-        display: flex;
-
-        flex-direction: column;
-
-        align-items: center;
-
-        padding-top: 60px;
-
-        padding-bottom: 60px;
-
-        gap: 35px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 24px;
       }
 
-      /* =====================================================
-         CÁC Ô LINK
-      ===================================================== */
-
-      .link-box {
-        width: 260px;
-
-        min-height: 90px;
-
-        padding: 20px;
-
-        background-color: #f8c8cc;
-
-        display: flex;
-
-        align-items: center;
-
-        justify-content: center;
-
+      .header-title {
         text-align: center;
+        margin-bottom: 36px;
+      }
 
-        text-decoration: none;
+      .header-title h1 {
+        font-size: 32px;
+        font-weight: 700;
+        color: #881337;
+        letter-spacing: -0.5px;
+        margin-bottom: 8px;
+      }
 
-        color: #222222;
+      .header-title p {
+        font-size: 15px;
+        color: #9f1239;
+        opacity: 0.8;
+      }
 
-        font-size: 25px;
-
-        font-weight: 400;
-
-        transition: all 0.3s ease;
+      .link-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
       }
 
       /* =====================================================
-         HIỆU ỨNG HOVER
+         LINK CARDS
       ===================================================== */
+      .link-box {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 100px;
+        padding: 20px 24px;
+        background: #ffffff;
+        border-radius: 16px;
+        border: 1px solid rgba(251, 113, 133, 0.15);
+        box-shadow: 0 4px 15px rgba(244, 63, 94, 0.05);
+        text-decoration: none;
+        color: #1e293b;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 1.4;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow: hidden;
+      }
+
+      .link-box::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: linear-gradient(180deg, #fb7185, #f43f5e);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
 
       .link-box:hover {
-        transform: scale(1.05);
+        transform: translateY(-4px);
+        box-shadow: 0 12px 25px rgba(244, 63, 94, 0.12);
+        border-color: rgba(251, 113, 133, 0.4);
+      }
 
-        background-color: #f5b9c0;
-
-        box-shadow: 0 8px 20px rgba(240, 150, 165, 0.25);
+      .link-box:hover::before {
+        opacity: 1;
       }
 
       /* =====================================================
-         RESPONSIVE - ĐIỆN THOẠI
+         RESPONSIVE DESIGN
       ===================================================== */
+      @media (max-width: 768px) {
+        .top-bar {
+          padding: 12px 16px;
+        }
 
-      @media (max-width: 600px) {
-        .container {
-          padding-top: 80px;
+        .header-title h1 {
+          font-size: 26px;
+        }
 
-          gap: 25px;
+        .link-grid {
+          grid-template-columns: 1fr;
+          gap: 14px;
         }
 
         .link-box {
-          width: 230px;
-
-          min-height: 75px;
-
-          font-size: 22px;
-        }
-
-        .shopping-link {
-          top: 20px;
-
-          left: 20px;
-
-          font-size: 16px;
-        }
-
-        .star {
-          transform: scale(0.8);
+          min-height: 80px;
+          padding: 16px 20px;
+          font-size: 15px;
         }
       }
     </style>
   </head>
 
   <body>
-    <!-- =====================================================
-         SHOPPING HERE
-         NẰM RIÊNG Ở GÓC TRÁI
-    ===================================================== -->
+    <!-- Top Bar Navigation -->
+    <header class="top-bar">
+      <a href="hi.html" class="back-link"> <span>←</span> Trang trước </a>
+      <a
+        href="https://s.shopee.vn/30mSiPlHXm"
+        target="_blank"
+        class="shopping-link"
+      >
+        🛍️ Shopping here
+      </a>
+    </header>
 
-    <a
-      href="https://s.shopee.vn/30mSiPlHXm"
-      target="_blank"
-      class="shopping-link"
-    >
-      Shopping here
-    </a>
-
-    <!-- =====================================================
-         NGÔI SAO TRANG TRÍ
-    ===================================================== -->
-
+    <!-- Ngôi sao trang trí -->
     <div class="stars">
       <div class="star">★</div>
-
       <div class="star">★</div>
-
       <div class="star">★</div>
-
       <div class="star">★</div>
-
       <div class="star">★</div>
-
       <div class="star">★</div>
-
       <div class="star">★</div>
-
       <div class="star">★</div>
-
       <div class="star">★</div>
-
       <div class="star">★</div>
-
       <div class="star">★</div>
-
       <div class="star">★</div>
-
       <div class="star">★</div>
     </div>
 
-    <!-- =====================================================
-         CÁC Ô LINK
-    ===================================================== -->
-
+    <!-- Main Content -->
     <main class="container">
-      <!-- QUAY LẠI -->
-
-      <a href="hi.html" class="link-box"> Quay lại trang trước </a>
-
-      <!-- READING 3 -->
-
-      <a href="../read2.html" class="link-box"> Reading 3 </a>
-
-      <!-- READING 4 -->
-
-      <a href="../read4.html" class="link-box"> Reading 4 </a>
-
-      <!-- READING 5 -->
-
-      <a href="../read5.html" class="link-box"> Reading 5 </a>
-
-      <!-- READING 6 -->
-
-      <a href="../read6.html" class="link-box"> Reading 6 </a>
-
-      <!-- READING 7 -->
-
-      <a href="../read7.html" class="link-box"> Reading 7 </a>
-
-      <!-- READING 8 -->
-
-      <a href="../read8.html" class="link-box"> Reading 8 </a>
-
-      <!-- READING 9 -->
-
-      <a href="../read9.html" class="link-box"> Reading 9 </a>
-
-      <!-- READING 10 -->
-
-      <a href="../read10.html" class="link-box"> Reading 10 </a>
-
-      <!-- READING 11 -->
-
-      <a href="../read11.html" class="link-box"> Reading 11 </a>
-
-      <!-- READING 12 -->
-
-      <a href="../read12.html" class="link-box"> Reading 12 </a>
-
-      <!-- READING 13 -->
-
-      <a href="../read13.html" class="link-box"> Reading 13 </a>
-
-      <!-- READING 14 -->
-
-      <a href="../read14.html" class="link-box"> Reading 14 </a>
-
-      <!-- READING 15 -->
-
-      <a href="../read15.html" class="link-box"> Reading 15 </a>
-
-      <!-- READING 16 -->
-
-      <a href="../read16.html" class="link-box"> Reading 16 </a>
-
-      <!-- READING 17 -->
-
-      <a href="../read17.html" class="link-box"> Reading 17 </a>
-
-      <!-- READING 18 -->
-
-      <a href="../read18.html" class="link-box"> Reading 18 </a>
-
-      <!-- READING 19 -->
-
-      <a href="../read19.html" class="link-box"> Reading 19 </a>
-
-      <!-- READING 20 -->
-
-      <a href="../read20.html" class="link-box"> Reading 20 </a>
-
-      <!-- READING 21 -->
-
-      <a href="../read21.html" class="link-box"> Reading 21 </a>
-
-      <!-- READING 22 -->
-
-      <a href="../read22.html" class="link-box"> Reading 22 </a>
-
-      <!-- READING 23 -->
-
-      <a href="../read23.html" class="link-box"> Reading 23 </a>
-
-      <!-- READING 24 -->
-
-      <a href="../read24.html" class="link-box"> Reading 24 </a>
-
-      <!-- READING 25 -->
-
-      <a href="../read25.html" class="link-box"> Reading 25 </a>
-
-      <!-- READING 26 -->
-
-      <a href="../read26.html" class="link-box"> Reading 26 </a>
-
-      <!-- READING 27 -->
-
-      <a href="../Read27.html" class="link-box"> Reading 27 </a>
-
-      <!-- READING 28 -->
-
-      <a href="../read28.html" class="link-box"> Reading 28 </a>
-
-      <!-- READING 29 -->
-
-      <a href="../read29.html" class="link-box"> Reading 29 </a>
-
-      <!-- READING 30 -->
-
-      <a href="../read30.html" class="link-box"> Reading 30 </a>
-
-      <!-- READING 31 -->
-
-      <a href="../read31.html" class="link-box"> Reading 31 </a>
-
-      <!-- READING 32 -->
-
-      <a href="../read32.html" class="link-box"> Reading 32 </a>
-
-      <!-- READING 33 -->
-
-      <a href="../read33.html" class="link-box"> Reading 33 </a>
-
-      <!-- READING 34 -->
-
-      <a href="../read34.html" class="link-box"> Reading 34 </a>
-      <!-- READING 35 and 36 -->
-
-      <a href="../re3536.html" class="link-box"> Reading 35 and Reading 36 </a>
-      <!-- READING 37 and 38 -->
-
-      <a href="../re3738.html" class="link-box"> Reading 37 and Reading 38 </a>
-      <!-- READING 39 -->
-
-      <a href="../read39.html" class="link-box"> Reading 39 </a>
-      <!-- READING 40 -->
-
-      <a href="../read40.html" class="link-box"> Reading 40 </a>
-      <a href="../read41.html" class="link-box">Reading 41</a>
-      <a href="../read42.html" class="link-box">Reading 42</a>
+      <div class="header-title">
+        <h1>Reading Practice</h1>
+        <p>Chọn bài đọc để bắt đầu rèn luyện kỹ năng</p>
+      </div>
+
+      <div class="link-grid">
+        <a href="../read2.html" class="link-box">Reading 3: The stock market</a>
+        <a href="../read4.html" class="link-box">Reading 4: Dinosaurs</a>
+        <a href="../read5.html" class="link-box"
+          >Reading 5: Behavioral psychology</a
+        >
+        <a href="../read6.html" class="link-box"
+          >Reading 6: Attention span in the modern generation</a
+        >
+        <a href="../read7.html" class="link-box">Reading 7: Opportunity cost</a>
+        <a href="../read8.html" class="link-box">Reading 8: Entrepreneurship</a>
+        <a href="../read9.html" class="link-box">Reading 9: Greenwashing</a>
+        <a href="../read10.html" class="link-box"
+          >Reading 10: Existential Crisis</a
+        >
+        <a href="../read11.html" class="link-box">Reading 11: Photobooths</a>
+        <a href="../read12.html" class="link-box"
+          >Reading 12: Following Celebrities</a
+        >
+        <a href="../read13.html" class="link-box"
+          >Reading 13: Beauty Standard</a
+        >
+        <a href="../read14.html" class="link-box">Reading 14: Resilience</a>
+        <a href="../read15.html" class="link-box">Reading 15: Water</a>
+        <a href="../read16.html" class="link-box">Reading 16: Pajamas</a>
+        <a href="../read17.html" class="link-box">Reading 17: Automobiles</a>
+        <a href="../read18.html" class="link-box">Reading 18: Success</a>
+        <a href="../read19.html" class="link-box"
+          >Reading 19: Light Refraction</a
+        >
+        <a href="../read20.html" class="link-box"
+          >Reading 20: Superhero Action Figures</a
+        >
+        <a href="../read21.html" class="link-box"
+          >Reading 21: The Psychology of Achieving a Long-Awaited Dream</a
+        >
+        <a href="../read22.html" class="link-box">Reading 22: Jealousy</a>
+        <a href="../read23.html" class="link-box"
+          >Reading 23: First Love in Adolescence</a
+        >
+        <a href="../read24.html" class="link-box">Reading 24: Popcorn Brain</a>
+        <a href="../read25.html" class="link-box"
+          >Reading 25: The Ambivert Advantage</a
+        >
+        <a href="../read26.html" class="link-box"
+          >Reading 26: Why Football Remains the World's Most Popular Sport</a
+        >
+        <a href="../Read27.html" class="link-box"
+          >Reading 27: Market Segmentation in Business</a
+        >
+        <a href="../read28.html" class="link-box"
+          >Reading 28: Why Some People Behave Toxicly Toward Others</a
+        >
+        <a href="../read29.html" class="link-box"
+          >Reading 29: The Influence of Beauty Standards</a
+        >
+        <a href="../read30.html" class="link-box"
+          >Reading 30: The Invention of Paper</a
+        >
+        <a href="../read31.html" class="link-box"
+          >Reading 31: Human Evolution: A Long Journey</a
+        >
+        <a href="../read32.html" class="link-box"
+          >Reading 32: The Enduring Appeal of Stuffed Animals</a
+        >
+        <a href="../read33.html" class="link-box"
+          >Reading 33: The Lasting Impact of Bullying</a
+        >
+        <a href="../read34.html" class="link-box"
+          >Reading 34: The Power of Self-Discipline</a
+        >
+        <a href="../re3536.html" class="link-box"
+          >Reading 35 & 36: The Origins of Herbal Tea // The Significance of
+          Birthdays</a
+        >
+        <a href="../re3738.html" class="link-box"
+          >Reading 37 & 38: Zebras // The Global Popularity of K-Dramas</a
+        >
+        <a href="../read39.html" class="link-box">Reading 39: Road Safety</a>
+        <a href="../read40.html" class="link-box"
+          >Reading 40: The Psychology of Impulse Purchases</a
+        >
+        <a href="../read41.html" class="link-box"
+          >Reading 41: Cheating in Examinations</a
+        >
+        <a href="../read42.html" class="link-box"
+          >Reading 42: The Benefits and Challenges of Self-Studying</a
+        >
+      </div>
     </main>
 
     <script src="/study-tracker.js"></script>
