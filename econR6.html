@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bài Đọc Phillips & Kuznets Curve - Trắc Nghiệm</title>
+    <style>
+      :root {
+        --primary: #2563eb;
+        --primary-hover: #1d4ed8;
+        --bg-body: #f8fafc;
+        --bg-card: #ffffff;
+        --text-main: #0f172a;
+        --text-sub: #475569;
+        --correct-bg: #dcfce7;
+        --correct-border: #22c55e;
+        --correct-text: #15803d;
+        --wrong-bg: #fee2e2;
+        --wrong-border: #ef4444;
+        --wrong-text: #b91c1c;
+        --border-color: #e2e8f0;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+          Arial, sans-serif;
+      }
+
+      body {
+        background-color: var(--bg-body);
+        color: var(--text-main);
+        line-height: 1.6;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+
+      @media (max-width: 900px) {
+        .container {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .card {
+        background: var(--bg-card);
+        border-radius: 12px;
+        padding: 24px;
+        box-shadow:
+          0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        border: 1px solid var(--border-color);
+      }
+
+      .reading-section {
+        position: sticky;
+        top: 20px;
+        max-height: calc(100vh - 40px);
+        overflow-y: auto;
+      }
+
+      h1,
+      h2 {
+        color: #1e293b;
+        margin-bottom: 16px;
+      }
+
+      h1 {
+        font-size: 1.4rem;
+        border-bottom: 2px solid var(--primary);
+        padding-bottom: 8px;
+      }
+
+      .reading-text p {
+        margin-bottom: 16px;
+        text-align: justify;
+      }
+
+      .quiz-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 12px;
+        border-bottom: 2px solid var(--border-color);
+      }
+
+      .score-board {
+        font-size: 1.1rem;
+        font-weight: 600;
+        background: #e0f2fe;
+        color: #0369a1;
+        padding: 6px 16px;
+        border-radius: 20px;
+      }
+
+      .question-item {
+        margin-bottom: 28px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .question-item:last-child {
+        border-bottom: none;
+      }
+
+      .question-text {
+        font-weight: 600;
+        font-size: 1.05rem;
+        margin-bottom: 12px;
+      }
+
+      .options-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .option-btn {
+        background: #fff;
+        border: 1.5px solid var(--border-color);
+        border-radius: 8px;
+        padding: 12px 16px;
+        text-align: left;
+        cursor: pointer;
+        font-size: 0.95rem;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: flex-start;
+        width: 100%;
+      }
+
+      .option-btn:hover:not([disabled]) {
+        border-color: var(--primary);
+        background-color: #f0f6ff;
+      }
+
+      .option-btn.correct {
+        background-color: var(--correct-bg) !important;
+        border-color: var(--correct-border) !important;
+        color: var(--correct-text);
+        font-weight: 600;
+      }
+
+      .option-btn.wrong {
+        background-color: var(--wrong-bg) !important;
+        border-color: var(--wrong-border) !important;
+        color: var(--wrong-text);
+      }
+
+      .option-btn[disabled] {
+        cursor: default;
+      }
+
+      .explanation {
+        margin-top: 12px;
+        padding: 12px;
+        border-radius: 6px;
+        background-color: #f8fafc;
+        border-left: 4px solid var(--primary);
+        font-size: 0.9rem;
+        display: none;
+      }
+
+      .explanation.show {
+        display: block;
+      }
+
+      .reset-btn {
+        background-color: var(--primary);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 6px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+
+      .reset-btn:hover {
+        background-color: var(--primary-hover);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- CỘT TRÁI: BÀI ĐỌC TIẾNG ANH -->
+      <div class="card reading-section">
+        <h1>
+          Reading Passage: Understanding the Phillips Curve and Kuznets Curve
+        </h1>
+        <div class="reading-text" style="margin-top: 15px">
+          <p>
+            In macroeconomics and development economics, graphical models are
+            essential tools for understanding complex relationships between key
+            economic variables. Two famous foundational frameworks are the
+            <strong>Phillips Curve</strong> and the
+            <strong>Kuznets Curve</strong>, both of which offer critical
+            insights for national policy decisions.
+          </p>
+
+          <p>
+            Introduced by economist A.W. Phillips in 1958, the original Phillips
+            Curve illustrates an inverse relationship between inflation and
+            unemployment. The theoretical foundation suggests that when an
+            economy experiences strong growth, demand for labor increases,
+            driving up wages and consumer spending, which subsequently leads to
+            higher inflation. Conversely, during economic downturns,
+            unemployment rises while inflationary pressures decline. However,
+            the stagflation crisis of the 1970s—characterized by simultaneously
+            high inflation and high unemployment—challenged this short-run
+            model. Modern economists now distinguish between the short-run
+            Phillips Curve and the long-run Phillips Curve, which is vertical at
+            the natural rate of unemployment, implying that monetary policy
+            cannot permanently lower unemployment below its natural baseline
+            without causing accelerating inflation.
+          </p>
+
+          <p>
+            While the Phillips Curve addresses macroeconomic stability, the
+            Kuznets Curve, proposed by Simon Kuznets in 1955, focuses on
+            economic development and income distribution. The hypothesis
+            presents an inverted U-shaped relationship between economic growth
+            (measured as GDP per capita) and income inequality. According to
+            Kuznets, as a developing nation undergoes industrialization,
+            economic inequality initially increases because capital and wealth
+            accumulate rapidly in urban industrial sectors while rural areas lag
+            behind. However, as the economy matures into an advanced
+            service-oriented state, democratic institutions expand, social
+            safety nets strengthen, and education becomes broadly accessible,
+            causing income inequality to gradually diminish.
+          </p>
+
+          <p>
+            A variation known as the Environmental Kuznets Curve (EKC) applies
+            this logic to environmental degradation, proposing that pollution
+            worsens during early economic growth but decreases once a nation
+            achieves sufficient wealth to afford clean technology and strict
+            regulations. In summary, both the Phillips Curve and the Kuznets
+            Curve highlight trade-offs that governments must navigate when
+            balancing growth, stability, and equity.
+          </p>
+        </div>
+      </div>
+
+      <!-- CỘT PHẢI: TRẮC NGHIỆM -->
+      <div class="card">
+        <div class="quiz-header">
+          <h2>Multiple-Choice Questions</h2>
+          <div class="score-board">Điểm: <span id="score">0</span> / 10</div>
+        </div>
+
+        <div id="quiz-container">
+          <!-- Render câu hỏi bằng JS -->
+        </div>
+
+        <div style="text-align: right; margin-top: 20px">
+          <button class="reset-btn" onclick="resetQuiz()">
+            Làm lại từ đầu
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const quizData = [
+        {
+          id: 1,
+          question:
+            "1. What primary relationship does the original Phillips Curve describe?",
+          options: [
+            "A) Economic growth and environmental degradation",
+            "B) Inflation and unemployment",
+            "C) GDP per capita and income inequality",
+            "D) Tax rates and government revenue",
+          ],
+          correct: 1,
+          explanation:
+            "<b>Đáp án đúng: B.</b> Đường Phillips thể hiện mối quan hệ nghịch giữa lạm phát (inflation) và thất nghiệp (unemployment).",
+        },
+        {
+          id: 2,
+          question:
+            "2. According to the short-run Phillips Curve, what typically happens when unemployment falls?",
+          options: [
+            "A) Inflation decreases",
+            "B) Inflation increases",
+            "C) Economic output shrinks",
+            "D) Income inequality reaches zero",
+          ],
+          correct: 1,
+          explanation:
+            "<b>Đáp án đúng: B.</b> Theo đường Phillips ngắn hạn, khi thất nghiệp giảm thì cầu lao động tăng làm tăng tiền lương và giá cả, dẫn đến lạm phát tăng.",
+        },
+        {
+          id: 3,
+          question:
+            "3. What historical economic event challenged the validity of the simple short-run Phillips Curve?",
+          options: [
+            "A) The Great Depression of the 1930s",
+            "B) The Asian Financial Crisis of 1997",
+            "C) The stagflation of the 1970s",
+            "D) The dot-com bubble of 2000",
+          ],
+          correct: 2,
+          explanation:
+            "<b>Đáp án đúng: C.</b> Hiện tượng đình lạm (stagflation) thập niên 1970 (vừa lạm phát cao vừa thất nghiệp cao) đã làm lung lay tính đúng đắn của mô hình ngắn hạn.",
+        },
+        {
+          id: 4,
+          question:
+            "4. Why is the long-run Phillips Curve considered vertical?",
+          options: [
+            "A) Inflation always remains at zero in the long run.",
+            "B) Monetary policy cannot permanently push unemployment below its natural rate.",
+            "C) Unemployment rises indefinitely over time.",
+            "D) Economic growth is independent of capital investment.",
+          ],
+          correct: 1,
+          explanation:
+            "<b>Đáp án đúng: B.</b> Trong dài hạn, chính sách tiền tệ không thể hạ thất nghiệp xuống dưới mức tự nhiên mà không gây ra lạm phát gia tăng.",
+        },
+        {
+          id: 5,
+          question:
+            "5. What shape represents the classic Kuznets Curve relationship?",
+          options: [
+            "A) A straight vertical line",
+            "B) A U-shaped curve",
+            "C) An inverted U-shaped curve",
+            "D) A downward sloping straight line",
+          ],
+          correct: 2,
+          explanation:
+            "<b>Đáp án đúng: C.</b> Đường Kuznets có dạng hình chữ U ngược (Inverted U-shaped curve).",
+        },
+        {
+          id: 6,
+          question:
+            "6. According to Simon Kuznets, what happens to income inequality in the early stages of industrialization?",
+          options: [
+            "A) It rapidly disappears.",
+            "B) It increases.",
+            "C) It remains strictly constant.",
+            "D) It causes hyperinflation.",
+          ],
+          correct: 1,
+          explanation:
+            "<b>Đáp án đúng: B.</b> Ở giai đoạn đầu của quá trình công nghiệp hóa, bất bình đẳng thu nhập có xu hướng tăng lên do của cải tập trung ở đô thị.",
+        },
+        {
+          id: 7,
+          question:
+            "7. Which factor helps reduce income inequality as an economy becomes mature, according to the Kuznets framework?",
+          options: [
+            "A) Complete elimination of foreign trade",
+            "B) Expansion of social safety nets and education",
+            "C) A total shutdown of industrial manufacturing",
+            "D) Uncontrolled inflation rates",
+          ],
+          correct: 1,
+          explanation:
+            "<b>Đáp án đúng: B.</b> Khi nền kinh tế phát triển cao, mạng lưới an sinh xã hội và giáo dục tiếp cận rộng rãi hơn sẽ giúp giảm bất bình đẳng.",
+        },
+        {
+          id: 8,
+          question:
+            "8. What does the Environmental Kuznets Curve (EKC) measure on its vertical axis relative to GDP growth?",
+          options: [
+            "A) Unemployment levels",
+            "B) Environmental degradation/pollution",
+            "C) Government tax revenues",
+            "D) Wage rate adjustments",
+          ],
+          correct: 1,
+          explanation:
+            "<b>Đáp án đúng: B.</b> Đường Kuznets môi trường (EKC) đo lường mức độ suy thoái môi trường/ô nhiễm (Environmental degradation) so với tăng trưởng GDP.",
+        },
+        {
+          id: 9,
+          question:
+            "9. In what way are both the Phillips Curve and Kuznets Curve similar conceptually?",
+          options: [
+            "A) Both predict that inflation will always harm developing nations.",
+            "B) Both illustrate dynamic trade-offs that policymakers must manage.",
+            "C) Both were developed in the early 19th century.",
+            "D) Both argue that government spending has no effect on GDP.",
+          ],
+          correct: 1,
+          explanation:
+            "<b>Đáp án đúng: B.</b> Cả hai mô hình đều minh họa các sự đánh đổi (trade-offs) động mà các nhà quản lý chính sách phải cân nhắc.",
+        },
+        {
+          id: 10,
+          question:
+            '10. The word "diminish" in paragraph 3 is closest in meaning to:',
+          options: [
+            "A) Increase",
+            "B) Stabilize",
+            "C) Decrease",
+            "D) Transform",
+          ],
+          correct: 2,
+          explanation:
+            '<b>Đáp án đúng: C.</b> Từ "diminish" có nghĩa là giảm bớt, đồng nghĩa với "decrease".',
+        },
+      ];
+
+      let score = 0;
+
+      function renderQuiz() {
+        const quizContainer = document.getElementById("quiz-container");
+        quizContainer.innerHTML = "";
+
+        quizData.forEach((q, qIndex) => {
+          const questionEl = document.createElement("div");
+          questionEl.className = "question-item";
+
+          let optionsHTML = "";
+          q.options.forEach((opt, optIndex) => {
+            optionsHTML += `
+                    <button class="option-btn" 
+                            id="q${qIndex}-opt${optIndex}" 
+                            onclick="checkAnswer(${qIndex}, ${optIndex})">
+                        ${opt}
+                    </button>
+                `;
+          });
+
+          questionEl.innerHTML = `
+                <div class="question-text">${q.question}</div>
+                <div class="options-list">
+                    ${optionsHTML}
+                </div>
+                <div class="explanation" id="explain-${qIndex}">
+                    ${q.explanation}
+                </div>
+            `;
+          quizContainer.appendChild(questionEl);
+        });
+      }
+
+      function checkAnswer(questionIndex, selectedOption) {
+        const q = quizData[questionIndex];
+        const explainEl = document.getElementById(`explain-${questionIndex}`);
+
+        // Disable các nút của câu này
+        q.options.forEach((_, optIndex) => {
+          const btn = document.getElementById(
+            `q${questionIndex}-opt${optIndex}`,
+          );
+          btn.disabled = true;
+
+          if (optIndex === q.correct) {
+            btn.classList.add("correct");
+          }
+        });
+
+        if (selectedOption !== q.correct) {
+          const selectedBtn = document.getElementById(
+            `q${questionIndex}-opt${selectedOption}`,
+          );
+          selectedBtn.classList.add("wrong");
+        } else {
+          score++;
+          document.getElementById("score").innerText = score;
+        }
+
+        explainEl.classList.add("show");
+      }
+
+      function resetQuiz() {
+        score = 0;
+        document.getElementById("score").innerText = score;
+        renderQuiz();
+      }
+
+      window.onload = renderQuiz;
+    </script>
+  </body>
+</html>

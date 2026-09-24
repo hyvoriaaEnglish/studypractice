@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bài Đọc GDP & Kiểm Tra Đọc Hiểu</title>
+    <!-- MathJax để hiển thị công thức toán đẹp mắt -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
+    <style>
+      :root {
+        --primary: #2563eb;
+        --primary-hover: #1d4ed8;
+        --bg-body: #f8fafc;
+        --bg-card: #ffffff;
+        --text-main: #0f172a;
+        --text-sub: #475569;
+        --correct-bg: #dcfce7;
+        --correct-border: #22c55e;
+        --correct-text: #15803d;
+        --wrong-bg: #fee2e2;
+        --wrong-border: #ef4444;
+        --wrong-text: #b91c1c;
+        --border-color: #e2e8f0;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+          Arial, sans-serif;
+      }
+
+      body {
+        background-color: var(--bg-body);
+        color: var(--text-main);
+        line-height: 1.6;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+
+      @media (max-width: 900px) {
+        .container {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .card {
+        background: var(--bg-card);
+        border-radius: 12px;
+        padding: 24px;
+        box-shadow:
+          0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        border: 1px solid var(--border-color);
+      }
+
+      .reading-section {
+        position: sticky;
+        top: 20px;
+        max-height: calc(100vh - 40px);
+        overflow-y: auto;
+      }
+
+      h1,
+      h2 {
+        color: #1e293b;
+        margin-bottom: 16px;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+        border-bottom: 2px solid var(--primary);
+        padding-bottom: 8px;
+      }
+
+      .reading-text p {
+        margin-bottom: 16px;
+        text-align: justify;
+      }
+
+      .quiz-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 12px;
+        border-bottom: 2px solid var(--border-color);
+      }
+
+      .score-board {
+        font-size: 1.1rem;
+        font-weight: 600;
+        background: #e0f2fe;
+        color: #0369a1;
+        padding: 6px 16px;
+        border-radius: 20px;
+      }
+
+      .question-item {
+        margin-bottom: 28px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .question-item:last-child {
+        border-bottom: none;
+      }
+
+      .question-text {
+        font-weight: 600;
+        font-size: 1.05rem;
+        margin-bottom: 12px;
+      }
+
+      .options-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .option-btn {
+        background: #fff;
+        border: 1.5px solid var(--border-color);
+        border-radius: 8px;
+        padding: 12px 16px;
+        text-align: left;
+        cursor: pointer;
+        font-size: 0.95rem;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: flex-start;
+      }
+
+      .option-btn:hover:not([disabled]) {
+        border-color: var(--primary);
+        background-color: #f0f6ff;
+      }
+
+      .option-btn.correct {
+        background-color: var(--correct-bg) !important;
+        border-color: var(--correct-border) !important;
+        color: var(--correct-text);
+        font-weight: 600;
+      }
+
+      .option-btn.wrong {
+        background-color: var(--wrong-bg) !important;
+        border-color: var(--wrong-border) !important;
+        color: var(--wrong-text);
+      }
+
+      .option-btn[disabled] {
+        cursor: default;
+      }
+
+      .explanation {
+        margin-top: 12px;
+        padding: 12px;
+        border-radius: 6px;
+        background-color: #f8fafc;
+        border-left: 4px solid var(--primary);
+        font-size: 0.9rem;
+        display: none;
+      }
+
+      .explanation.show {
+        display: block;
+      }
+
+      .reset-btn {
+        background-color: var(--primary);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 6px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+
+      .reset-btn:hover {
+        background-color: var(--primary-hover);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- CỘT TRÁI: BÀI ĐỌC TIẾNG ANH -->
+      <div class="card reading-section">
+        <h1>Reading Passage: Understanding Gross Domestic Product (GDP)</h1>
+        <div class="reading-text">
+          <p>
+            <strong>Gross Domestic Product (GDP)</strong> is one of the most
+            vital indicators used to measure the economic health of a nation. It
+            represents the total monetary value of all final goods and services
+            produced within a country’s borders over a specific period.
+          </p>
+
+          <p>
+            Economists commonly calculate GDP using the expenditure approach,
+            summarized by the famous formula:
+          </p>
+
+          <p style="text-align: center; font-size: 1.1em">
+            $$\text{GDP} = C + I + G + NX$$
+          </p>
+
+          <p>
+            In this equation, $C$ stands for personal consumption expenditures
+            by households, $I$ represents gross private domestic investment made
+            by businesses, $G$ refers to government consumption expenditures,
+            and $NX$ represents net exports (exports minus imports).
+          </p>
+
+          <p>
+            However, not all government disbursements count toward GDP.
+            <strong>Transfer payments</strong>, such as welfare benefits,
+            unemployment compensation, and social security payments, are
+            explicitly excluded from GDP calculations. These transactions
+            represent a redistribution of income rather than a payment for newly
+            produced goods or services. Since no new wealth or production is
+            created when a government issues a welfare check, adding transfer
+            payments to GDP would lead to double counting and distort the true
+            measure of economic output.
+          </p>
+
+          <p>
+            Another essential concept in macroeconomics is
+            <strong>potential GDP versus actual GDP</strong>. Potential GDP
+            reflects the maximum sustainable level of output an economy can
+            produce when its resources—such as labor and capital—are fully
+            employed. When real GDP falls below potential GDP, a
+            <strong>recessionary gap</strong> emerges. This gap signifies
+            underutilized resources, higher unemployment rates, and sluggish
+            economic activity. Policymakers often respond to a recessionary gap
+            by implementing expansionary fiscal or monetary policies, aiming to
+            boost aggregate demand and restore actual output back to its
+            potential level. Understanding these dynamics helps analysts assess
+            where an economy stands in the business cycle.
+          </p>
+        </div>
+      </div>
+
+      <!-- CỘT PHẢI: TRẮC NGHIỆM -->
+      <div class="card">
+        <div class="quiz-header">
+          <h2>Multiple-Choice Questions</h2>
+          <div class="score-board">Điểm: <span id="score">0</span> / 10</div>
+        </div>
+
+        <div id="quiz-container">
+          <!-- Câu hỏi sẽ được render bằng JS bên dưới -->
+        </div>
+
+        <div style="text-align: right; margin-top: 20px">
+          <button class="reset-btn" onclick="resetQuiz()">
+            Làm lại từ đầu
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const quizData = [
+        {
+          id: 1,
+          question: "1. What does Gross Domestic Product (GDP) measure?",
+          options: [
+            "A) The total wealth owned by private citizens.",
+            "B) The monetary value of all final goods and services produced within a country.",
+            "C) The total amount of money spent on foreign imports.",
+            "D) The sum of all government transfer payments in a year.",
+          ],
+          correct: 1,
+          explanation:
+            "Đáp án đúng: B (Đo lường tổng giá trị tiền tệ của tất cả hàng hóa/dịch vụ cuối cùng được sản xuất trong một quốc gia).",
+        },
+        {
+          id: 2,
+          question:
+            '2. In the GDP expenditure formula GDP = C + I + G + NX, what does "I" stand for?',
+          options: [
+            "A) Inflation rate",
+            "B) Income tax",
+            "C) Gross private domestic investment",
+            "D) International trade balance",
+          ],
+          correct: 2,
+          explanation:
+            "Đáp án đúng: C (Gross private domestic investment - Đầu tư tư nhân trong nước).",
+        },
+        {
+          id: 3,
+          question:
+            "3. How is Net Exports (NX) calculated in the GDP equation?",
+          options: [
+            "A) Exports plus Imports",
+            "B) Exports minus Imports",
+            "C) Imports minus Exports",
+            "D) Total Output minus Government Spending",
+          ],
+          correct: 1,
+          explanation:
+            "Đáp án đúng: B (Net Exports = Exports minus Imports: Xuất khẩu trừ đi nhập khẩu).",
+        },
+        {
+          id: 4,
+          question:
+            "4. Which of the following is considered a transfer payment?",
+          options: [
+            "A) Government spending on building new highways",
+            "B) Salary paid to a public school teacher",
+            "C) Social security benefits paid to retirees",
+            "D) Business purchases of new equipment",
+          ],
+          correct: 2,
+          explanation:
+            "Đáp án đúng: C (Trợ cấp an sinh xã hội cho người nghỉ hưu là khoản thanh toán chuyển giao).",
+        },
+        {
+          id: 5,
+          question:
+            "5. Why are transfer payments excluded from GDP calculations?",
+          options: [
+            "A) They are paid in foreign currencies.",
+            "B) They do not correspond to the production of new goods or services.",
+            "C) They represent private household investments.",
+            "D) They are too small to impact economic output.",
+          ],
+          correct: 1,
+          explanation:
+            "Đáp án đúng: B (Chúng chỉ là tái phân phối thu nhập, không tạo ra hàng hóa hoặc dịch vụ mới).",
+        },
+        {
+          id: 6,
+          question: "6. What happens if transfer payments are included in GDP?",
+          options: [
+            "A) The GDP would accurately reflect national income.",
+            "B) It would cause double counting and distort economic measurements.",
+            "C) The recessionary gap would instantly disappear.",
+            "D) Net exports would become negative.",
+          ],
+          correct: 1,
+          explanation:
+            "Đáp án đúng: B (Nếu tính vào sẽ gây ra tính trùng / tính hai lần và làm sai lệch chỉ số).",
+        },
+        {
+          id: 7,
+          question: '7. What is "Potential GDP"?',
+          options: [
+            "A) The lowest possible output an economy can produce during a crisis.",
+            "B) The maximum output an economy can sustain at full employment.",
+            "C) The exact value of GDP after subtracting taxes and inflation.",
+            "D) The amount of goods imported from other countries.",
+          ],
+          correct: 1,
+          explanation:
+            "Đáp án đúng: B (Mức sản lượng tối đa bền vững khi nền kinh tế sử dụng đầy đủ nhân công/nguồn lực).",
+        },
+        {
+          id: 8,
+          question: "8. A recessionary gap occurs when:",
+          options: [
+            "A) Actual real GDP exceeds potential GDP.",
+            "B) Actual real GDP is lower than potential GDP.",
+            "C) Net exports equal zero.",
+            "D) Government spending exceeds total consumption.",
+          ],
+          correct: 1,
+          explanation:
+            "Đáp án đúng: B (Xảy ra khoảng suy thoái khi GDP thực tế thấp hơn GDP tiềm năng).",
+        },
+        {
+          id: 9,
+          question:
+            "9. Which economic condition is typically associated with a recessionary gap?",
+          options: [
+            "A) Overheated production and hyperinflation",
+            "B) Unusually low unemployment rates",
+            "C) Underutilized resources and rising unemployment",
+            "D) A rapid decrease in government debt",
+          ],
+          correct: 2,
+          explanation:
+            "Đáp án đúng: C (Tài nguyên chưa được sử dụng hết và tỷ lệ thất nghiệp tăng cao).",
+        },
+        {
+          id: 10,
+          question:
+            "10. How do policymakers typically attempt to close a recessionary gap?",
+          options: [
+            "A) By reducing total consumption to zero",
+            "B) By implementing expansionary fiscal or monetary policies",
+            "C) By banning all international trade",
+            "D) By increasing taxes on exports",
+          ],
+          correct: 1,
+          explanation:
+            "Đáp án đúng: B (Thực hiện các chính sách tài khóa hoặc tiền tệ mở rộng để thúc đẩy tổng cầu).",
+        },
+      ];
+
+      let score = 0;
+      let answeredCount = 0;
+
+      function renderQuiz() {
+        const quizContainer = document.getElementById("quiz-container");
+        quizContainer.innerHTML = "";
+
+        quizData.forEach((q, qIndex) => {
+          const questionEl = document.createElement("div");
+          questionEl.className = "question-item";
+
+          let optionsHTML = "";
+          q.options.forEach((opt, optIndex) => {
+            optionsHTML += `
+                    <button class="option-btn" 
+                            id="q${qIndex}-opt${optIndex}" 
+                            onclick="checkAnswer(${qIndex}, ${optIndex})">
+                        ${opt}
+                    </button>
+                `;
+          });
+
+          questionEl.innerHTML = `
+                <div class="question-text">${q.question}</div>
+                <div class="options-list">
+                    ${optionsHTML}
+                </div>
+                <div class="explanation" id="explain-${qIndex}">
+                    ${q.explanation}
+                </div>
+            `;
+          quizContainer.appendChild(questionEl);
+        });
+      }
+
+      function checkAnswer(questionIndex, selectedOption) {
+        const q = quizData[questionIndex];
+        const explainEl = document.getElementById(`explain-${questionIndex}`);
+
+        // Vô hiệu hóa tất cả các nút của câu hỏi này sau khi đã bấm
+        q.options.forEach((_, optIndex) => {
+          const btn = document.getElementById(
+            `q${questionIndex}-opt${optIndex}`,
+          );
+          btn.disabled = true;
+
+          // Highlight đáp án đúng
+          if (optIndex === q.correct) {
+            btn.classList.add("correct");
+          }
+        });
+
+        // Nếu người dùng chọn sai, highlight lựa chọn sai đó
+        if (selectedOption !== q.correct) {
+          const selectedBtn = document.getElementById(
+            `q${questionIndex}-opt${selectedOption}`,
+          );
+          selectedBtn.classList.add("wrong");
+        } else {
+          score++;
+          document.getElementById("score").innerText = score;
+        }
+
+        // Hiện giải thích
+        explainEl.classList.add("show");
+      }
+
+      function resetQuiz() {
+        score = 0;
+        document.getElementById("score").innerText = score;
+        renderQuiz();
+      }
+
+      // Khởi tạo bài trắc nghiệm khi tải trang
+      window.onload = renderQuiz;
+    </script>
+  </body>
+</html>
