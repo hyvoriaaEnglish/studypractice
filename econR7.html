@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Opportunity Cost - Reading & Quiz</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- MathJax for rendering math formulas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
+  </head>
+  <body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen">
+    <!-- Header -->
+    <header class="bg-indigo-700 text-white shadow-md sticky top-0 z-50">
+      <div
+        class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center"
+      >
+        <h1 class="text-xl md:text-2xl font-bold flex items-center gap-2">
+          📖 Economics: Opportunity Cost
+        </h1>
+        <div
+          id="score-display"
+          class="bg-indigo-900/60 px-4 py-1.5 rounded-full text-sm font-semibold border border-indigo-400/30"
+        >
+          Score: <span id="score" class="text-emerald-300">0</span> / 10
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-4 py-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        <!-- Left Column: Reading Passage -->
+        <section
+          class="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-slate-200 lg:sticky lg:top-24 max-h-[85vh] overflow-y-auto"
+        >
+          <h2 class="text-2xl font-bold text-slate-900 border-b pb-3 mb-4">
+            Reading Passage
+          </h2>
+
+          <div
+            class="prose prose-slate max-w-none space-y-4 text-slate-700 leading-relaxed text-sm md:text-base"
+          >
+            <p>
+              In economics, <strong>opportunity cost</strong> (chi phí cơ hội)
+              is one of the most fundamental principles driving human behavior
+              and financial decision-making. At its core, opportunity cost
+              represents the potential benefit that an individual, investor, or
+              business misses out on when choosing one alternative over another.
+              Because resources such as time, money, labor, and raw materials
+              are finite, every choice to allocate resources toward a specific
+              option inherently requires sacrificing the next best alternative.
+            </p>
+
+            <p>
+              To evaluate opportunity costs accurately, economists look at the
+              return of the chosen option compared to the return of the best
+              foregone option. Mathematically, the basic formula is expressed
+              as:
+            </p>
+
+            <div
+              class="bg-indigo-50/70 p-4 rounded-lg border border-indigo-100 text-center my-3"
+            >
+              $$\text{Opportunity Cost} = \text{FO} - \text{CO}$$
+            </div>
+
+            <p class="text-sm">
+              <em>Where:</em><br />
+              • <strong>FO (Foregone Option):</strong> The expected return or
+              value of the best alternative option that was not chosen.<br />
+              • <strong>CO (Chosen Option):</strong> The expected return or
+              value of the selected option.
+            </p>
+
+            <p>
+              In production contexts, opportunity cost can also be expressed in
+              terms of trade-offs between two outputs:
+            </p>
+
+            <div
+              class="bg-indigo-50/70 p-4 rounded-lg border border-indigo-100 text-center my-3"
+            >
+              $$\text{Opportunity Cost of Good A} = \frac{\text{Loss in Good
+              B}}{\text{Gain in Good A}}$$
+            </div>
+
+            <p>
+              Consider a practical financial example: suppose you have $10,000
+              to invest. You can choose Option A, investing in a corporate bond
+              with a guaranteed annual return of 6% ($600/year), or Option B,
+              investing in the stock market with an expected return of 9%
+              ($900/year). If you decide to play it safe and select Option A,
+              your explicit gain is $600. However, your opportunity cost is the
+              $900 you could have earned minus the $600 you actually earned,
+              resulting in a net foregone value of $300.
+            </p>
+
+            <p>
+              Beyond pure financial figures, opportunity cost plays a pivotal
+              role in daily personal decisions. If a university student decides
+              to spend two hours watching a movie instead of studying for an
+              upcoming economics exam, the explicit cost is the ticket price.
+              The opportunity cost, however, includes the two hours of study
+              time lost and the potential drop in grade performance.
+            </p>
+
+            <p>
+              Understanding opportunity cost enables businesses to optimize
+              capital allocation and helps individuals weigh trade-offs before
+              making significant life decisions. While explicit costs appear
+              directly on balance sheets, implicit opportunity costs remain
+              invisible yet crucial for long-term efficiency.
+            </p>
+          </div>
+        </section>
+
+        <!-- Right Column: Interactive Quiz -->
+        <section
+          class="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-slate-200"
+        >
+          <div class="flex justify-between items-center border-b pb-3 mb-6">
+            <h2 class="text-2xl font-bold text-slate-900">
+              Multiple-Choice Quiz
+            </h2>
+            <button
+              onclick="resetQuiz()"
+              class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-md transition font-medium"
+            >
+              🔄 Reset Quiz
+            </button>
+          </div>
+
+          <div id="quiz-container" class="space-y-8">
+            <!-- Questions will be injected dynamically by JavaScript -->
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- JavaScript logic -->
+    <script>
+      const questionsData = [
+        {
+          id: 1,
+          question:
+            "According to the text, what is the core definition of opportunity cost?",
+          options: [
+            "The total financial expense required to start a new business project.",
+            "The loss incurred when an investment performs poorly in the stock market.",
+            "The potential benefit missed out on when choosing one alternative over another.",
+            "The fixed operational cost recorded on a company's financial balance sheet.",
+          ],
+          correct: 2,
+          explanation:
+            "<strong>Đúng!</strong> Theo bài đọc: 'opportunity cost represents the potential benefit that an individual, investor, or business misses out on when choosing one alternative over another'.",
+        },
+        {
+          id: 2,
+          question:
+            "Why does every resource allocation decision involve an opportunity cost?",
+          options: [
+            "Because financial markets are volatile and unpredictable.",
+            "Because economic resources such as time, money, and labor are finite.",
+            "Because interest rates on corporate bonds continuously change over time.",
+            "Because explicit costs always exceed expected investment returns.",
+          ],
+          correct: 1,
+          explanation:
+            "<strong>Đúng!</strong> Bài đọc nêu rõ: 'Because resources such as time, money, labor, and raw materials are finite, every choice... inherently requires sacrificing the next best alternative'.",
+        },
+        {
+          id: 3,
+          question:
+            "How do implicit opportunity costs differ from explicit costs in business?",
+          options: [
+            "Implicit costs appear directly on balance sheets, whereas explicit costs are invisible.",
+            "Implicit costs represent foregone opportunities and are invisible, while explicit costs appear directly on balance sheets.",
+            "Implicit costs apply only to personal time, while explicit costs apply only to investments.",
+            "Implicit costs are guaranteed by corporate bonds, while explicit costs are linked to stock markets.",
+          ],
+          correct: 1,
+          explanation:
+            "<strong>Đúng!</strong> Đoạn cuối cùng khẳng định: 'While explicit costs appear directly on balance sheets, implicit opportunity costs remain invisible yet crucial...'.",
+        },
+        {
+          id: 4,
+          question:
+            "What is the mathematical formula used to calculate opportunity cost as presented in the text?",
+          options: [
+            "\\(\\text{Opportunity Cost} = \\text{Chosen Option (CO)} + \\text{Foregone Option (FO)}\\)",
+            "\\(\\text{Opportunity Cost} = \\text{Foregone Option (FO)} - \\text{Chosen Option (CO)}\\)",
+            "\\(\\text{Opportunity Cost} = \\text{Chosen Option (CO)} \\div \\text{Foregone Option (FO)}\\)",
+            "\\(\\text{Opportunity Cost} = \\text{Foregone Option (FO)} \\times \\text{Gain in Output}\\)",
+          ],
+          correct: 1,
+          explanation:
+            "<strong>Đúng!</strong> Công thức được ghi rõ trong bài là: <em>Opportunity Cost = FO - CO</em>.",
+        },
+        {
+          id: 5,
+          question:
+            "An investor chooses a project yielding $1,200 instead of an alternative project expected to yield $1,800. What is the opportunity cost?",
+          options: ["$600", "$1,200", "$1,800", "$3,000"],
+          correct: 0,
+          explanation:
+            "<strong>Đúng!</strong> Áp dụng công thức: \\(\\text{Opportunity Cost} = \\text{FO} - \\text{CO} = \\$1,800 - \\$1,200 = \\$600\\).",
+        },
+        {
+          id: 6,
+          question:
+            "A factory can produce either 50 chairs or 10 tables using its limited resources. What is the opportunity cost of producing 1 table in terms of chairs?",
+          options: ["0.2 chairs", "5 chairs", "10 chairs", "40 chairs"],
+          correct: 1,
+          explanation:
+            "<strong>Đúng!</strong> Áp dụng công thức sản xuất: \\(\\text{Opportunity Cost of 1 Table} = \\frac{\\text{Loss in Chairs}}{\\text{Gain in Tables}} = \\frac{50}{10} = 5 \\text{ chairs}\\).",
+        },
+        {
+          id: 7,
+          question:
+            "In the student example from the text, what represents the implicit opportunity cost of watching a movie?",
+          options: [
+            "The price paid for the movie ticket.",
+            "The transportation fee to get to the theater.",
+            "The snacks purchased during the movie.",
+            "The lost study time and potential drop in grade performance.",
+          ],
+          correct: 3,
+          explanation:
+            "<strong>Đúng!</strong> Tiền vé là chi phí hiển ngôn (explicit cost). Thời gian học bị mất và rủi ro giảm điểm mới là chi phí cơ hội ẩn (implicit opportunity cost).",
+        },
+        {
+          id: 8,
+          question:
+            "How does analyzing opportunity cost assist business managers in capital allocation?",
+          options: [
+            "It completely removes financial risks associated with investments.",
+            "It allows businesses to record higher explicit revenue on balance sheets.",
+            "It helps weigh the trade-offs between alternative strategic choices to optimize efficiency.",
+            "It guarantees that all chosen projects will yield at least a 9% return.",
+          ],
+          correct: 2,
+          explanation:
+            "<strong>Đúng!</strong> Bài đọc nêu: 'Understanding opportunity cost enables businesses to optimize capital allocation and helps individuals weigh trade-offs before making significant life decisions'.",
+        },
+        {
+          id: 9,
+          question:
+            "Is it possible for a choice involving scarce resources to have an opportunity cost of zero?",
+          options: [
+            "Yes, whenever the chosen option yields a positive cash return.",
+            "Yes, if the decision is made by an individual rather than a business.",
+            "No, because scarce resources always require giving up the next best alternative.",
+            "No, because explicit costs are always greater than foregone options.",
+          ],
+          correct: 2,
+          explanation:
+            "<strong>Đúng!</strong> Khi tài nguyên có hạn (scarce), mọi lựa chọn phân bổ đều bắt buộc phải đánh đổi lựa chọn tốt kế tiếp, do đó chi phí cơ hội không bao giờ bằng 0.",
+        },
+        {
+          id: 10,
+          question:
+            "An investor has three mutually exclusive choices: Option X ($500), Option Y ($800), and Option Z ($1,000). What is the opportunity cost of selecting Option Y?",
+          options: ["$200", "$300", "$500", "$1,000"],
+          correct: 0,
+          explanation:
+            "<strong>Đúng!</strong> Lựa chọn tốt nhất bị bỏ qua (FO) trong các phương án còn lại (X và Z) là Option Z ($1,000). Lựa chọn đã chọn (CO) là Option Y ($800). Chi phí cơ hội = \\(\\$1,000 - \\$800 = \\$200\\).",
+        },
+      ];
+
+      let answeredState = {};
+
+      function renderQuiz() {
+        const container = document.getElementById("quiz-container");
+        container.innerHTML = "";
+
+        questionsData.forEach((q, index) => {
+          const qCard = document.createElement("div");
+          qCard.className =
+            "p-5 rounded-lg border border-slate-200 bg-slate-50/50 space-y-3";
+
+          let optionsHTML = q.options
+            .map(
+              (opt, optIndex) => `
+                    <button 
+                        id="q${q.id}-opt${optIndex}" 
+                        onclick="handleSelect(${q.id}, ${optIndex})"
+                        class="w-full text-left p-3 rounded-md border border-slate-200 bg-white hover:bg-slate-100 transition text-sm flex items-start gap-3 cursor-pointer">
+                        <span class="font-bold text-slate-500 uppercase">${String.fromCharCode(65 + optIndex)}.</span>
+                        <span class="flex-1">${opt}</span>
+                    </button>
+                `,
+            )
+            .join("");
+
+          qCard.innerHTML = `
+                    <div class="font-semibold text-slate-900 text-base flex gap-2">
+                        <span>${index + 1}.</span>
+                        <span>${q.question}</span>
+                    </div>
+                    <div class="space-y-2 mt-2">
+                        ${optionsHTML}
+                    </div>
+                    <div id="explanation-${q.id}" class="hidden p-3.5 rounded-md text-sm mt-3 border">
+                    </div>
+                `;
+          container.appendChild(qCard);
+        });
+
+        if (window.MathJax) {
+          MathJax.typesetPromise();
+        }
+      }
+
+      function handleSelect(questionId, selectedIdx) {
+        if (answeredState[questionId] !== undefined) return; // Disallow changing answer
+
+        const q = questionsData.find((item) => item.id === questionId);
+        answeredState[questionId] = selectedIdx;
+
+        const isCorrect = selectedIdx === q.correct;
+        const expBox = document.getElementById(`explanation-${questionId}`);
+
+        // Highlight selected button
+        const selectedBtn = document.getElementById(
+          `q${questionId}-opt${selectedIdx}`,
+        );
+        if (isCorrect) {
+          selectedBtn.className =
+            "w-full text-left p-3 rounded-md border-2 border-emerald-500 bg-emerald-50 text-emerald-900 font-medium text-sm flex items-start gap-3";
+          expBox.className =
+            "p-3.5 rounded-md text-sm mt-3 bg-emerald-50 border-emerald-200 text-emerald-800";
+          expBox.innerHTML = `✅ ${q.explanation}`;
+        } else {
+          selectedBtn.className =
+            "w-full text-left p-3 rounded-md border-2 border-rose-500 bg-rose-50 text-rose-900 text-sm flex items-start gap-3";
+
+          // Highlight correct button as well
+          const correctBtn = document.getElementById(
+            `q${questionId}-opt${q.correct}`,
+          );
+          correctBtn.className =
+            "w-full text-left p-3 rounded-md border-2 border-emerald-500 bg-emerald-50/60 text-emerald-900 text-sm flex items-start gap-3 font-medium";
+
+          expBox.className =
+            "p-3.5 rounded-md text-sm mt-3 bg-rose-50 border-rose-200 text-rose-800";
+          expBox.innerHTML = `❌ <strong>Chưa chính xác!</strong><br>${q.explanation}`;
+        }
+
+        // Disable all buttons for this question
+        q.options.forEach((_, idx) => {
+          const btn = document.getElementById(`q${questionId}-opt${idx}`);
+          btn.style.pointerEvents = "none";
+        });
+
+        expBox.classList.remove("hidden");
+        updateScore();
+
+        if (window.MathJax) {
+          MathJax.typesetPromise();
+        }
+      }
+
+      function updateScore() {
+        let score = 0;
+        Object.keys(answeredState).forEach((qId) => {
+          const q = questionsData.find((item) => item.id == qId);
+          if (answeredState[qId] === q.correct) {
+            score++;
+          }
+        });
+        document.getElementById("score").innerText = score;
+      }
+
+      function resetQuiz() {
+        answeredState = {};
+        document.getElementById("score").innerText = "0";
+        renderQuiz();
+      }
+
+      // Initialize quiz on page load
+      document.addEventListener("DOMContentLoaded", renderQuiz);
+    </script>
+  </body>
+</html>

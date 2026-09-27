@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Economics: Multiplier Effects Quiz</title>
+    <!-- Tailwind CSS for modern layout -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- MathJax for rendering equations -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
+  </head>
+  <body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen">
+    <!-- Header -->
+    <header class="bg-indigo-700 text-white shadow-md sticky top-0 z-50">
+      <div
+        class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center"
+      >
+        <h1 class="text-xl md:text-2xl font-bold flex items-center gap-2">
+          📊 Economics: Multiplier Effects
+        </h1>
+        <div
+          id="score-display"
+          class="bg-indigo-900/60 px-4 py-1.5 rounded-full text-sm font-semibold border border-indigo-400/30"
+        >
+          Score: <span id="score" class="text-emerald-300">0</span> / 10
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-4 py-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        <!-- Left Column: Reading Passage -->
+        <section
+          class="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-slate-200 lg:sticky lg:top-24 max-h-[85vh] overflow-y-auto"
+        >
+          <h2 class="text-2xl font-bold text-slate-900 border-b pb-3 mb-4">
+            Reading Passage
+          </h2>
+
+          <div
+            class="prose prose-slate max-w-none space-y-4 text-slate-700 leading-relaxed text-sm md:text-base"
+          >
+            <p>
+              In Keynesian macroeconomics, any change in fiscal policy—whether
+              through government spending or taxation—causes a magnified impact
+              on a nation's total output and aggregate demand. This phenomenon
+              is known as the <strong>multiplier effect</strong>.
+            </p>
+
+            <p>
+              To understand how the multiplier works, one must first examine the
+              <strong>Marginal Propensity to Consume (MPC)</strong>. The MPC
+              measures the proportion of an aggregate raise in pay that a
+              consumer spends on goods and services rather than saving it. Its
+              counterpart, the
+              <strong>Marginal Propensity to Save (MPS)</strong>, satisfies the
+              relationship:
+            </p>
+
+            <div
+              class="bg-indigo-50/70 p-4 rounded-lg border border-indigo-100 text-center my-3"
+            >
+              $$\text{MPC} + \text{MPS} = 1$$
+            </div>
+
+            <p>
+              When the government directly changes its spending (\(G\)), the
+              <strong>Expenditure Multiplier (\(M_E\))</strong> dictates the
+              final change in national income (\(Y\)):
+            </p>
+
+            <div
+              class="bg-indigo-50/70 p-4 rounded-lg border border-indigo-100 text-center my-3"
+            >
+              $$M_E = \frac{1}{1 - \text{MPC}} = \frac{1}{\text{MPS}}$$
+            </div>
+
+            <p>
+              However, when the government changes taxation (\(T\)), the
+              mechanism works indirectly. A tax change first alters disposable
+              income (\(Y_d = Y - T\)). Because households save a fraction
+              (\(\text{MPS}\)) of any change in disposable income, the initial
+              shift in aggregate spending is smaller than the tax change itself.
+              Consequently, the <strong>Tax Multiplier (\(M_T\))</strong> is
+              always smaller in magnitude than the spending multiplier and
+              carries a negative sign:
+            </p>
+
+            <div
+              class="bg-indigo-50/70 p-4 rounded-lg border border-indigo-100 text-center my-3"
+            >
+              $$M_T = -\frac{\text{MPC}}{1 - \text{MPC}} =
+              -\frac{\text{MPC}}{\text{MPS}}$$
+            </div>
+
+            <p>
+              For example, assume an economy has an \(\text{MPC} = 0.75\)
+              (\(\text{MPS} = 0.25\)).
+            </p>
+            <ul class="list-disc pl-5 space-y-2">
+              <li>
+                The Expenditure Multiplier is \(\frac{1}{0.25} = 4\). If
+                government spending increases by $60 billion, national income
+                increases by \(\$60\text{ billion} \times 4 = +\$240\text{
+                billion}\).
+              </li>
+              <li>
+                The Tax Multiplier is \(-\frac{0.75}{0.25} = -3\). If government
+                taxation increases by $60 billion, national income changes by
+                \(\$60\text{ billion} \times (-3) = -\$180\text{ billion}\).
+              </li>
+            </ul>
+
+            <p>
+              Notice that spending $60 billion expands the economy more than
+              taxing $60 billion contracts it. If the government increases
+              spending and taxes by the exact same amount simultaneously, the
+              net economic impact is governed by the
+              <strong>Balanced Budget Multiplier</strong>, which always equals
+              exactly \(+1\).
+            </p>
+          </div>
+        </section>
+
+        <!-- Right Column: Interactive Quiz -->
+        <section
+          class="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-slate-200"
+        >
+          <div class="flex justify-between items-center border-b pb-3 mb-6">
+            <h2 class="text-2xl font-bold text-slate-900">
+              Multiple-Choice Quiz
+            </h2>
+            <button
+              onclick="resetQuiz()"
+              class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-md transition font-medium"
+            >
+              🔄 Reset Quiz
+            </button>
+          </div>
+
+          <div id="quiz-container" class="space-y-8">
+            <!-- Questions injected by JavaScript -->
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Quiz Logic & Data -->
+    <script>
+      const questionsData = [
+        {
+          id: 1,
+          question:
+            "What does the Marginal Propensity to Consume (MPC) measure?",
+          options: [
+            "The total percentage of income that households save each year.",
+            "The proportion of additional income that consumers spend on goods and services.",
+            "The ratio of total national income to total government taxation.",
+            "The increase in government investment relative to total exports.",
+          ],
+          correct: 1,
+          explanation:
+            "<strong>Đúng!</strong> Theo bài đọc, MPC đo lường tỷ lệ thu nhập gia tăng mà người tiêu dùng dùng để chi tiêu cho hàng hóa và dịch vụ.",
+        },
+        {
+          id: 2,
+          question:
+            "If an economy has an MPC of 0.8, what is its Marginal Propensity to Save (MPS)?",
+          options: ["0.2", "0.8", "1.25", "5.0"],
+          correct: 0,
+          explanation:
+            "<strong>Đúng!</strong> Vì \\(\\text{MPC} + \\text{MPS} = 1\\), nên \\(\\text{MPS} = 1 - 0.8 = 0.2\\).",
+        },
+        {
+          id: 3,
+          question:
+            "Assuming MPC = 0.75, if government taxation increases by $60 billion, national income will:",
+          options: [
+            "Increase by $240 billion.",
+            "Decrease by $240 billion.",
+            "Increase by $180 billion.",
+            "Decrease by $180 billion.",
+          ],
+          correct: 3,
+          explanation:
+            "<strong>Đúng!</strong> Hệ số nhân thuế \\(M_T = -\\frac{0.75}{1 - 0.75} = -3\\). Thay đổi thu nhập \\(\\Delta Y = -3 \\times \\$60\\text{B} = -\\$180\\text{ billion}\\) (giảm $180 tỷ).",
+        },
+        {
+          id: 4,
+          question:
+            "Why is the absolute value of the Tax Multiplier smaller than the Expenditure Multiplier?",
+          options: [
+            "Because taxes only apply to corporate profits, not households.",
+            "Because households absorb part of a tax change by adjusting their savings rather than consumption alone.",
+            "Because government spending is always inefficient compared to private spending.",
+            "Because the government must pay interest on national debt when raising taxes.",
+          ],
+          correct: 1,
+          explanation:
+            "<strong>Đúng!</strong> Thuế ảnh hưởng trực tiếp đến thu nhập khả dụng. Hộ gia đình sẽ điều chỉnh cả tiết kiệm (MPS) lẫn tiêu dùng, làm giảm bớt tác động ban đầu.",
+        },
+        {
+          id: 5,
+          question:
+            "What is the Spending/Expenditure Multiplier formula in terms of MPC?",
+          options: [
+            "\\(\\frac{1}{\\text{MPC}}\\)",
+            "\\(-\\frac{\\text{MPC}}{1 - \\text{MPC}}\\)",
+            "\\(\\frac{1}{1 - \\text{MPC}}\\)",
+            "\\(1 - \\text{MPC}\\)",
+          ],
+          correct: 2,
+          explanation:
+            "<strong>Đúng!</strong> Công thức hệ số nhân chi tiêu chính phủ là \\(M_E = \\frac{1}{1 - \\text{MPC}}\\).",
+        },
+        {
+          id: 6,
+          question:
+            "If MPC = 0.8, what are the Expenditure Multiplier (M_E) and Tax Multiplier (M_T) respectively?",
+          options: [
+            "\\(M_E = 5; M_T = -4\\)",
+            "\\(M_E = 4; M_T = -3\\)",
+            "\\(M_E = 5; M_T = -5\\)",
+            "\\(M_E = 1.25; M_T = -0.8\\)",
+          ],
+          correct: 0,
+          explanation:
+            "<strong>Đúng!</strong> \\(M_E = \\frac{1}{1 - 0.8} = 5\\) và \\(M_T = -\\frac{0.8}{1 - 0.8} = -4\\).",
+        },
+        {
+          id: 7,
+          question:
+            "If the government increases both spending and taxes by $100 billion simultaneously in an economy with MPC = 0.9, what will happen to national income?",
+          options: [
+            "It will remain completely unchanged ($0 change).",
+            "It will increase by $100 billion.",
+            "It will decrease by $100 billion.",
+            "It will increase by $900 billion.",
+          ],
+          correct: 1,
+          explanation:
+            "<strong>Đúng!</strong> Theo Hệ số nhân Ngân sách Cân bằng (Balanced Budget Multiplier = +1), khi G và T tăng cùng 1 lượng ($100B), thu nhập quốc dân sẽ tăng đúng bằng lượng đó (\\(1 \\times \\$100\\text{B} = +\\$100\\text{B}\\)).",
+        },
+        {
+          id: 8,
+          question:
+            "If government spending increases by $50 billion and causes national income to rise by $200 billion, what is the economy's MPC?",
+          options: ["0.25", "0.50", "0.75", "0.80"],
+          correct: 2,
+          explanation:
+            "<strong>Đúng!</strong> Hệ số nhân \\(M_E = \\frac{\\$200}{\\$50} = 4\\). Ta có \\(\\frac{1}{1 - \\text{MPC}} = 4 \\implies 1 - \\text{MPC} = 0.25 \\implies \\text{MPC} = 0.75\\).",
+        },
+        {
+          id: 9,
+          question:
+            "If the government cuts taxes by $40 billion in an economy with an MPC of 0.6, national income will:",
+          options: [
+            "Increase by $60 billion.",
+            "Decrease by $60 billion.",
+            "Increase by $100 billion.",
+            "Decrease by $40 billion.",
+          ],
+          correct: 0,
+          explanation:
+            "<strong>Đúng!</strong> \\(M_T = -\\frac{0.6}{1 - 0.6} = -1.5\\). Giảm thuế (\\(\\Delta T = -40\\)) nên \\(\\Delta Y = -1.5 \\times (-40) = +\\$60\\text{ billion}\\) (tăng $60 tỷ).",
+        },
+        {
+          id: 10,
+          question:
+            "Which multiplier concept states that an equal increase in government spending and taxes expands aggregate demand by the exact amount of the spending increase?",
+          options: [
+            "Autonomous Multiplier",
+            "Balanced Budget Multiplier",
+            "Money Creation Multiplier",
+            "Tax Elasticity Multiplier",
+          ],
+          correct: 1,
+          explanation:
+            "<strong>Đúng!</strong> Khái niệm này gọi là <em>Balanced Budget Multiplier</em> (Hệ số nhân ngân sách cân bằng).",
+        },
+      ];
+
+      let answeredState = {};
+
+      function renderQuiz() {
+        const container = document.getElementById("quiz-container");
+        container.innerHTML = "";
+
+        questionsData.forEach((q, index) => {
+          const qCard = document.createElement("div");
+          qCard.className =
+            "p-5 rounded-lg border border-slate-200 bg-slate-50/50 space-y-3";
+
+          let optionsHTML = q.options
+            .map(
+              (opt, optIndex) => `
+                    <button 
+                        id="q${q.id}-opt${optIndex}" 
+                        onclick="handleSelect(${q.id}, ${optIndex})"
+                        class="w-full text-left p-3 rounded-md border border-slate-200 bg-white hover:bg-slate-100 transition text-sm flex items-start gap-3 cursor-pointer">
+                        <span class="font-bold text-slate-500 uppercase">${String.fromCharCode(65 + optIndex)}.</span>
+                        <span class="flex-1">${opt}</span>
+                    </button>
+                `,
+            )
+            .join("");
+
+          qCard.innerHTML = `
+                    <div class="font-semibold text-slate-900 text-base flex gap-2">
+                        <span>${index + 1}.</span>
+                        <span>${q.question}</span>
+                    </div>
+                    <div class="space-y-2 mt-2">
+                        ${optionsHTML}
+                    </div>
+                    <div id="explanation-${q.id}" class="hidden p-3.5 rounded-md text-sm mt-3 border">
+                    </div>
+                `;
+          container.appendChild(qCard);
+        });
+
+        if (window.MathJax) {
+          MathJax.typesetPromise();
+        }
+      }
+
+      function handleSelect(questionId, selectedIdx) {
+        if (answeredState[questionId] !== undefined) return;
+
+        const q = questionsData.find((item) => item.id === questionId);
+        answeredState[questionId] = selectedIdx;
+
+        const isCorrect = selectedIdx === q.correct;
+        const expBox = document.getElementById(`explanation-${questionId}`);
+
+        const selectedBtn = document.getElementById(
+          `q${questionId}-opt${selectedIdx}`,
+        );
+        if (isCorrect) {
+          selectedBtn.className =
+            "w-full text-left p-3 rounded-md border-2 border-emerald-500 bg-emerald-50 text-emerald-900 font-medium text-sm flex items-start gap-3";
+          expBox.className =
+            "p-3.5 rounded-md text-sm mt-3 bg-emerald-50 border-emerald-200 text-emerald-800";
+          expBox.innerHTML = `✅ ${q.explanation}`;
+        } else {
+          selectedBtn.className =
+            "w-full text-left p-3 rounded-md border-2 border-rose-500 bg-rose-50 text-rose-900 text-sm flex items-start gap-3";
+
+          const correctBtn = document.getElementById(
+            `q${questionId}-opt${q.correct}`,
+          );
+          correctBtn.className =
+            "w-full text-left p-3 rounded-md border-2 border-emerald-500 bg-emerald-50/60 text-emerald-900 text-sm flex items-start gap-3 font-medium";
+
+          expBox.className =
+            "p-3.5 rounded-md text-sm mt-3 bg-rose-50 border-rose-200 text-rose-800";
+          expBox.innerHTML = `❌ <strong>Chưa chính xác!</strong><br>${q.explanation}`;
+        }
+
+        q.options.forEach((_, idx) => {
+          const btn = document.getElementById(`q${questionId}-opt${idx}`);
+          btn.style.pointerEvents = "none";
+        });
+
+        expBox.classList.remove("hidden");
+        updateScore();
+
+        if (window.MathJax) {
+          MathJax.typesetPromise();
+        }
+      }
+
+      function updateScore() {
+        let score = 0;
+        Object.keys(answeredState).forEach((qId) => {
+          const q = questionsData.find((item) => item.id == qId);
+          if (answeredState[qId] === q.correct) {
+            score++;
+          }
+        });
+        document.getElementById("score").innerText = score;
+      }
+
+      function resetQuiz() {
+        answeredState = {};
+        document.getElementById("score").innerText = "0";
+        renderQuiz();
+      }
+
+      document.addEventListener("DOMContentLoaded", renderQuiz);
+    </script>
+  </body>
+</html>
